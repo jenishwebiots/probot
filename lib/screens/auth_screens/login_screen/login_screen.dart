@@ -1,4 +1,3 @@
-import 'package:probot/widgets/button_common.dart';
 import '../../../config.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -50,20 +49,11 @@ class LoginScreen extends StatelessWidget {
                   .textHeight(1.3)),
           const VSpace(Sizes.s40),
           Row(children: [
-            Expanded(child: ButtonCommon(title: appFonts.signUp)),
+            Expanded(child: ButtonCommon(title: appFonts.signUp,onTap: ()=> Get.toNamed(routeName.signUpScreen))),
             const HSpace(Sizes.s15),
-            Expanded(child: ButtonCommon(title: appFonts.signIn,onTap: ()=> Get.toNamed(routeName.signInScreen),))
+            Expanded(child: ButtonCommon(title: appFonts.signIn,onTap: ()=> Get.toNamed(routeName.signInScreen)))
           ]),
-          SizedBox(
-              width: Sizes.s90,
-              child: Row(children: [
-                const Expanded(child: Divider(height: 1, thickness: 2)),
-                Text(appFonts.or,
-                        style: AppCss.outfitMedium14
-                            .textColor(appCtrl.appTheme.lightText))
-                    .paddingSymmetric(horizontal: Insets.i5),
-                const Expanded(child: Divider(height: 1, thickness: 2))
-              ])).paddingSymmetric(vertical: Insets.i20),
+          const OrLayout(),
           Text(appFonts.continueAsAGuest,
               style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary))
         ]).paddingSymmetric(horizontal: Insets.i20)

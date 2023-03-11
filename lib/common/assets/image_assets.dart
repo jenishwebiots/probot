@@ -13,5 +13,11 @@ class ImageAssets {
 
   // Icons
   final String google = "assets/images/icons/Google.png";
+  final String english = "assets/images/icons/english.png";
+  final String french = "assets/images/icons/french.png";
+  final String german = "assets/images/icons/german.png";
+  final String indian = "assets/images/icons/indian.png";
+  final String italian = "assets/images/icons/italian.png";
+  final String japanese = "assets/images/icons/japanese.png";
 
 }

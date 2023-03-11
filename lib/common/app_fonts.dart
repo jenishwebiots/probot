@@ -25,9 +25,32 @@ class AppFonts {
   String password = "Password";
   String enterPassword = "Enter password";
   String resetPassword = "Reset Password";
-  String dontHaveAnAccount = "Don’t have an account ? ";
+  String dontHaveAnAccount = "Don’t have an account ?  ";
   String continueWithGoogle = "Continue With Google";
   String simplyUseThis = "Simply use this ProBot to obtain assistance around-the-clock.";
+  String enterYourMailOr = "Enter your mail id or phone no.";
+
+  String changePassword = "Change Password";
+  String dontUseOneOf = "Don’t use one of your old password";
+  String newPassword = "New Password";
+  String confirmPassword = "Confirm Password";
+  String reEnterPassword = "Re-enter password";
+  String updatePassword = "Update Password";
+  String alreadyHaveAnAccount = "Already have an account ?  ";
+  String createANewAccount = "Create a New Account";
+
+  String selectLanguage = "Select Language";
+  String youCanChangeIt = "You can change it later from setting";
+  String english = "English";
+  String french = "French";
+  String italian = "Italian";
+  String japanese = "Japanese";
+  String german = "German";
+  String hindi = "Hindi";
+  String continues = "Continue";
+
+
+
 
 
 

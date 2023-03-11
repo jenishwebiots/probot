@@ -20,5 +20,32 @@ class AppArray {
     }
   ];
 
+// Languages list
+var languagesList = [
+  {
+    "image":eImageAssets.english,
+    "title":appFonts.english
+  },
+  {
+    "image":eImageAssets.indian,
+    "title":appFonts.hindi
+  },
+  {
+    "image":eImageAssets.french,
+    "title":appFonts.french
+  },
+  {
+    "image":eImageAssets.italian,
+    "title":appFonts.italian
+  },
+  {
+    "image":eImageAssets.german,
+    "title":appFonts.german
+  },
+  {
+    "image":eImageAssets.japanese,
+    "title":appFonts.japanese
+  },
 
+];
 }

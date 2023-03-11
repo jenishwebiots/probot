@@ -1,7 +1,7 @@
 import '../../../config.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SignInScreen extends StatelessWidget {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(appFonts.welcomeBack,
+                                  Text(appFonts.createANewAccount,
                                       style: AppCss.outfitSemiBold22
                                           .textColor(appCtrl.appTheme.txt)),
                                   const VSpace(Sizes.s10),
@@ -43,48 +43,35 @@ class SignInScreen extends StatelessWidget {
                                   const VSpace(Sizes.s10),
                                   TextFieldCommon(
                                       hintText: appFonts.enterPassword),
-                                  const VSpace(Sizes.s10),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(appFonts.resetPassword,
-                                                style: AppCss.outfitMedium14
-                                                    .textColor(appCtrl
-                                                        .appTheme.primary))
-                                            .inkWell(
-                                                onTap: () => Get.toNamed(
-                                                    routeName
-                                                        .restPasswordScreen))
-                                      ]),
-                                  const VSpace(Sizes.s40),
-                                  ButtonCommon(title: appFonts.signIn,onTap: ()=> Get.toNamed(routeName.selectLanguageScreen)),
                                   const VSpace(Sizes.s15),
-                                  Column(children: [
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          RichText(
-                                              text: TextSpan(
-                                                  text: appFonts
-                                                      .dontHaveAnAccount,
+                                  Text(appFonts.confirmPassword,
+                                      style: AppCss.outfitMedium16
+                                          .textColor(appCtrl.appTheme.txt)),
+                                  const VSpace(Sizes.s10),
+                                  TextFieldCommon(
+                                      hintText: appFonts.reEnterPassword),
+                                  const VSpace(Sizes.s40),
+                                  ButtonCommon(title: appFonts.signUp,onTap: ()=> Get.toNamed(routeName.selectLanguageScreen)),
+                                  const VSpace(Sizes.s15),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        RichText(
+                                            text: TextSpan(
+                                                text: appFonts
+                                                    .alreadyHaveAnAccount,
+                                                style: AppCss.outfitMedium16
+                                                    .textColor(appCtrl
+                                                        .appTheme.lightText),
+                                                children: [
+                                              TextSpan(
+                                                  text: appFonts.signIn,
                                                   style: AppCss.outfitMedium16
-                                                      .textColor(appCtrl
-                                                          .appTheme.lightText),
-                                                  children: [
-                                                TextSpan(
-                                                    text: appFonts.signUp,
-                                                    style: AppCss.outfitMedium16
-                                                        .textColor(appCtrl
-                                                            .appTheme.txt))
-                                              ]))
-                                        ]),
-                                    const OrLayout()
-                                  ]),
-                                  ButtonCommon(
-                                      title: appFonts.continueWithGoogle,
-                                      icon: Image.asset(eImageAssets.google,
-                                          height: 20, width: 20))
+                                                      .textColor(
+                                                          appCtrl.appTheme.txt))
+                                            ])).inkWell(onTap: ()=> Get.toNamed(routeName.signInScreen))
+                                      ])
                                 ]).paddingSymmetric(
                                 horizontal: Insets.i20, vertical: Insets.i25))
                         .authBoxExtension()
