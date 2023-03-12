@@ -7,5 +7,6 @@ class RouteName {
   final String changePasswordScreen = "/changePasswordScreen";
   final String signUpScreen = "/signUpScreen";
   final String selectLanguageScreen = "/selectLanguageScreen";
-
+  final String selectCharacterScreen = "/selectCharacterScreen";
+  final String addFingerprintScreen = "/addFingerprintScreen";
 }
