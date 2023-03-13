@@ -1,6 +1,6 @@
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../config.dart';
 import '../../widgets/scaffold_messenger.dart';
 
@@ -9,17 +9,21 @@ class SignInController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
+  String? userNameGoogle = "";
+  String? userName = "";
 
   // SignIn With Google Method
   Future<UserCredential> signInWithGoogle() async {
+    log("message");
     isLoading = true;
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    log("googleUser $googleUser");
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
-
+      log("googleAuth  $googleAuth");
     final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-
+    log("credential $credential");
     /* userEmail = googleUser.email;
     userName = googleUser.displayName;
     userPhoto = googleUser.photoUrl;
@@ -28,10 +32,12 @@ class SignInController extends GetxController {
       "userData": googleUser,
       "type":"google"
     };*/
+    userNameGoogle = googleUser.displayName;
     isLoading = false;
     /* appCtrl.storage.write("name", userName);
     appCtrl.storage.write("email", userEmail);
     appCtrl.storage.write("photo", userPhoto);*/
+    appCtrl.storage.write("userName", userNameGoogle);
     Get.offAllNamed(routeName.selectLanguageScreen);
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
@@ -45,11 +51,11 @@ class SignInController extends GetxController {
             email: emailController.text.toString(),
             password: passwordController.text.toString());
 
-        //var signIn = FirebaseAuth.instance.currentUser;
-        // userName = signIn!.email;
+        var signIn = FirebaseAuth.instance.currentUser;
+         userName = signIn!.email;
         update();
         isLoading = false;
-        //appCtrl.storage.write("name", userName);
+        appCtrl.storage.write("name", userName);
         Get.offAllNamed(routeName.selectLanguageScreen);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {

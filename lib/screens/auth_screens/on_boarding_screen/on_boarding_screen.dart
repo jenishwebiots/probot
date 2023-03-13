@@ -19,6 +19,8 @@ class OnBoardingScreen extends StatelessWidget {
               backgroundColor: appCtrl.appTheme.bg1,
               body: PageView(
                   onPageChanged: (index) {
+                    appCtrl.isOnboard = true;
+                    appCtrl.storage.write("isOnboard", appCtrl.isOnboard);
                     onBoardingCtrl.selectIndex = index;
                     onBoardingCtrl.update();
                   },
@@ -28,7 +30,7 @@ class OnBoardingScreen extends StatelessWidget {
                       .entries
                       .map((e) => PageViewCommon(
                             image: e.value["image"],
-                            title: e.value['title'],
+                            title: e.value['title'].toString().tr,
                             subtitle: e.value["subtitle"],
                             onTap: () {
                               if (onBoardingCtrl.selectIndex == 2) {
@@ -37,6 +39,8 @@ class OnBoardingScreen extends StatelessWidget {
                                 onBoardingCtrl.pageCtrl.nextPage(
                                     duration: const Duration(microseconds: 500),
                                     curve: Curves.bounceInOut);
+                                appCtrl.isOnboard = true;
+                                appCtrl.storage.write("isOnboard", appCtrl.isOnboard);
                               }
                             },
                           ))

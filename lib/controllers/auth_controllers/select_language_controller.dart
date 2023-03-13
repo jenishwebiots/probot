@@ -10,7 +10,10 @@ class SelectLanguageController extends GetxController {
   }
 
   @override
-  void onReady() {
+  void onReady() async{
+
+    var index = await appCtrl.storage.read("index") ?? 0;
+    selectIndex = index;
     selectLanguageLists = appArray.languagesList
         .map((e) => SelectLanguageModel.fromJson(e))
         .toList();

@@ -8,6 +8,7 @@ class ButtonCommon extends StatelessWidget {
   final Color? color, fontColor;
   final Widget? icon;
   final FontWeight? fontWeight;
+  final bool isGradient;
 
   const ButtonCommon(
       {Key? key,
@@ -23,6 +24,7 @@ class ButtonCommon extends StatelessWidget {
       this.fontColor,
       this.icon,
       this.width,
+        this.isGradient = true,
       this.fontWeight = FontWeight.w700})
       : super(key: key);
 
@@ -33,11 +35,11 @@ class ButtonCommon extends StatelessWidget {
         height: height,
         margin: EdgeInsets.symmetric(horizontal: margin!),
         decoration: BoxDecoration(
-            gradient: const LinearGradient(colors: [
+            gradient: isGradient ? const LinearGradient(colors: [
               Color(0xff35AAFF),
               Color(0xff35E7FF),
               Color(0xff35C1FF),
-            ], begin: Alignment(9, 2), end: Alignment(-2, -2)),
+            ], begin: Alignment(9, 2), end: Alignment(-2, -2)) : null,
             color: color ?? appCtrl.appTheme.primary,
             borderRadius: BorderRadius.circular(radius!)),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [

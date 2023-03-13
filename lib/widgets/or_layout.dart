@@ -9,7 +9,7 @@ class OrLayout extends StatelessWidget {
         width: Sizes.s90,
         child: Row(children: [
           const Expanded(child: Divider(height: 1, thickness: 2)),
-          Text(appFonts.or,
+          Text(appFonts.or.tr,
                   style: AppCss.outfitMedium14
                       .textColor(appCtrl.appTheme.lightText))
               .paddingSymmetric(horizontal: Insets.i5),

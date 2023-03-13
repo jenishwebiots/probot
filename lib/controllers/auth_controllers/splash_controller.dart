@@ -1,13 +1,61 @@
+import 'dart:developer';
+
 import 'package:probot/config.dart';
 
 
 class SplashController extends GetxController {
 @override
-  void onReady() {
+  void onReady() async{
+
+  // Language Save
+  Locale? locale = const Locale("en", "US");
+
+  var language =
+      await appCtrl.storage.read("locale") ?? const Locale("en", "US");
+  if (language != null) {
+    if (language == "en") {
+      locale = const Locale("en", "US");
+    } else if (language == "hi") {
+      locale = const Locale("hi", "IN");
+    } else if (language == "it") {
+      locale = const Locale("it", "IT");
+    } else if (language == "fr") {
+      locale = const Locale("fr", "CA");
+    } else if (language == "ge") {
+      locale = const Locale("ge", "GE");
+    } else if (language == "ja") {
+      locale = const Locale("ja", "JP");
+    }
+  } else {
+    locale = const Locale("en", "US");
+  }
+
+  Get.updateLocale(locale);
+  appCtrl.update();
+  Get.forceAppUpdate();
+
+  bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
+  var name = appCtrl.storage.read("name");
+  log("name: $name");
+  var userName = appCtrl.storage.read("userName");
+  log("userName: $userName");
+  var firebaseUser = appCtrl.storage.read("firebaseUser");
+  log("firebaseUser: $firebaseUser");
+  log("condition: ${name != null || userName != null || firebaseUser != null}");
+   appCtrl.isOnboard = onBoard;
   Future.delayed(const Duration(seconds: 3),() {
-    Get.toNamed(routeName.onBoardingScreen);
+    if(onBoard) {
+     if (name != null || userName != null || firebaseUser != null) {
+      Get.toNamed(routeName.selectLanguageScreen);
+    } else {
+       Get.toNamed(routeName.loginScreen);
+     }
+    }else {
+      Get.toNamed(routeName.onBoardingScreen);
+    }
     update();
   });
+  update();
     // TODO: implement onReady
     super.onReady();
   }

@@ -1,7 +1,10 @@
+import 'package:flutter/services.dart';
+
 import '../config.dart';
 
 class AppBarCommon extends StatelessWidget with PreferredSizeWidget {
-  const AppBarCommon({Key? key}) : super(key: key);
+  final bool isArrow,isSystemNavigate;
+  const AppBarCommon({Key? key,this.isArrow = true,this.isSystemNavigate = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,8 +12,10 @@ class AppBarCommon extends StatelessWidget with PreferredSizeWidget {
         centerTitle: true,
         backgroundColor: appCtrl.appTheme.bg1,
         elevation: 0,
-        leading: SvgPicture.asset(eSvgAssets.leftArrow, fit: BoxFit.scaleDown)
-            .inkWell(onTap: () => Get.back()),
+        leading: isArrow ? SvgPicture.asset(eSvgAssets.leftArrow, fit: BoxFit.scaleDown)
+            .inkWell(onTap: isSystemNavigate ? () => Get.back() : () {
+              SystemNavigator.pop();
+        }) : null,
         title: Image.asset(eImageAssets.proBot,
             height: Sizes.s38, width: Sizes.s130));
   }

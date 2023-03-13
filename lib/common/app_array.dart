@@ -22,12 +22,33 @@ class AppArray {
 
 // Languages list
   var languagesList = [
-    {"image": eImageAssets.english, "title": appFonts.english},
-    {"image": eImageAssets.indian, "title": appFonts.hindi},
-    {"image": eImageAssets.french, "title": appFonts.french},
-    {"image": eImageAssets.italian, "title": appFonts.italian},
-    {"image": eImageAssets.german, "title": appFonts.german},
-    {"image": eImageAssets.japanese, "title": appFonts.japanese},
+    {
+      "image": eImageAssets.english,
+      "title": appFonts.english,
+      'locale': const Locale('en', 'US'),
+      "code": "en"
+    },
+    {"image": eImageAssets.indian, "title": appFonts.hindi,
+      'locale': const Locale('hi', 'IN'),
+      "code": "hi"
+    },
+    {"image": eImageAssets.french, "title": appFonts.french,
+      'locale': const Locale('fr', 'CA'),
+      "code": "fr"
+    },
+    {"image": eImageAssets.italian, "title": appFonts.italian,
+      'locale': const Locale('it', 'IT'),
+      "code": "it"
+    },
+    {"image": eImageAssets.german, "title": appFonts.german,
+      'locale': const Locale('ge', 'GE'),
+      "code": "ge"
+    },
+    {
+      "image": eImageAssets.japanese, "title": appFonts.japanese,
+      'locale': const Locale('ja', 'JP'),
+      "code": "ja"
+    },
   ];
 
 //Select character list

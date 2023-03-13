@@ -24,7 +24,7 @@ class RadioButtonLayout extends StatelessWidget {
                 spreadRadius: 3)
           ], shape: BoxShape.circle),
           const HSpace(Sizes.s12),
-          Text(data!.title!,
+          Text(data!.title!.toString().tr,
               style: AppCss.outfitMedium18.textColor(appCtrl.appTheme.txt))
         ]),
         Stack(alignment: Alignment.center, children: [

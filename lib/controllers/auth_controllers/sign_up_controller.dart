@@ -9,6 +9,8 @@ class SignUpController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   GlobalKey<FormState> signUpGlobalKey = GlobalKey<FormState>();
+
+  String? firebaseUser = '';
   // Firebase Register With Email & Password
   signUpMethod() async {
     if (signUpGlobalKey.currentState!.validate()) {
@@ -18,12 +20,12 @@ class SignUpController extends GetxController {
             email: emailController.text.toString(),
             password: passwordController.text.toString());
         var user = FirebaseAuth.instance.currentUser;
-        /*firebaseUser = user?.email;*/
+        firebaseUser = user?.email;
         update();
         isLoading = false;
         emailController.text = "";
         passwordController.text = "";
-        /*appCtrl.storage.write("name", firebaseUser);*/
+        appCtrl.storage.write("firebaseUser", firebaseUser);
         Get.offAllNamed(routeName.selectLanguageScreen);
       } on FirebaseAuthException catch (e) {
         if (e.code == "email-already-in-use") {

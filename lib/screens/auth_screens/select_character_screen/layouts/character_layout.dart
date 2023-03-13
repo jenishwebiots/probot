@@ -25,7 +25,7 @@ class CharacterLayout extends StatelessWidget {
           ])
       ]),
       const VSpace(Sizes.s8),
-      Text(data["title"],
+      Text(data["title"].toString().tr,
           style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText))
     ]).inkWell(onTap: onTap);
   }

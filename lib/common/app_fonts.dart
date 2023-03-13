@@ -1,79 +1,73 @@
 class AppFonts {
 // On boarding page fonts
-  String chatGpt = "Chat GPT";
-  String skip = "Skip";
-  String chatWith = "Chat with chat GPT";
-  String openAiChatGpt =
-      "OpenAI Chat GPT is a powerful artificial intelligence platform that uses state-of-the-art AI.";
-  String easilyGenerateImage = "Easily generate Image";
-  String toReceiveTheFinest =
-      "To receive the finest results and a time-saving tool, simply input the image you desire and its size.";
-  String quickCreation = "Quick creation of content";
-  String enterTheTitle =
-      "Enter the title you desire material for to obtain the best outcome without copies, and you may adjust it.";
+  String chatGpt = "chatGpt";
+  String skip = "skip";
+  String chatWith = "chatWith";
+  String openAiChatGpt = "openAiChatGpt";
+  String easilyGenerateImage = "easilyGenerateImage";
+  String toReceiveTheFinest = "toReceiveTheFinest";
+  String quickCreation = "quickCreation";
+  String enterTheTitle = "enterTheTitle";
 
-  String quickAnswerFor = "Quick Answer for anything you want";
-  String aBuddyWhoAvailable =
-      "A buddy who is available to you at all times for conversation or utilization as a p.a.";
-  String signIn = "Sign in";
-  String signUp = "Sign up";
+  String quickAnswerFor = "quickAnswerFor";
+  String aBuddyWhoAvailable = "aBuddyWhoAvailable";
+  String signIn = "signIn";
+  String signUp = "signUp";
   String or = "or";
-  String continueAsAGuest = "Continue as a guest";
-  String proBot = "ProBot";
-  String fastResponse = "Fast Response for everything you need";
+  String continueAsAGuest = "continueAsAGuest";
+  String proBot = "proBot";
+  String fastResponse = "fastResponse";
 
-  String welcomeBack = "Welcome Back !!";
-  String fillTheBelow = "Fill the below form";
-  String email = "Email/phone";
-  String enterEmail = "Enter mail id/phone no.";
-  String password = "Password";
-  String enterPassword = "Enter password";
-  String resetPassword = "Reset Password";
-  String dontHaveAnAccount = "Don’t have an account ?  ";
-  String continueWithGoogle = "Continue With Google";
-  String simplyUseThis =
-      "Simply use this ProBot to obtain assistance around-the-clock.";
-  String enterYourMailOr = "Enter your mail id or phone no.";
+  String welcomeBack = "welcomeBack";
+  String fillTheBelow = "fillTheBelow";
+  String email = "email";
+  String enterEmail = "enterEmail";
+  String password = "password";
+  String enterPassword = "enterPassword";
+  String resetPassword = "resetPassword";
+  String dontHaveAnAccount = "dontHaveAnAccount";
+  String continueWithGoogle = "continueWithGoogle";
+  String simplyUseThis = "simplyUseThis";
+  String enterYourMailOr = "enterYourMailOr";
 
-  String changePassword = "Change Password";
-  String dontUseOneOf = "Don’t use one of your old password";
-  String newPassword = "New Password";
-  String confirmPassword = "Confirm Password";
-  String reEnterPassword = "Re-enter password";
-  String updatePassword = "Update Password";
-  String alreadyHaveAnAccount = "Already have an account ?  ";
-  String createANewAccount = "Create a New Account";
-  String emailAlreadyUse = "Email Already In Use";
-  String unknownError = "Unknown Error";
-  String pleaseEnterEmail = "Please Enter Email";
-  String pleaseEnterValid = "Please Enter Valid Email";
-  String pleaseEnterPassword = "Please Enter Password";
-  String passwordMustBe = "Password Must Be 8 Character";
-  String passwordNotSame = "Password Not Same As Your Password";
-  String wrongPassword = "Wrong Password";
-  String userNotFound = "User Not Found 🫤";
-  String emailSend = "Email Send Successfully";
+  String changePassword = "changePassword";
+  String dontUseOneOf = "dontUseOneOf";
+  String newPassword = "newPassword";
+  String confirmPassword = "confirmPassword";
+  String reEnterPassword = "reEnterPassword";
+  String updatePassword = "updatePassword";
+  String alreadyHaveAnAccount = "alreadyHaveAnAccount";
+  String createANewAccount = "createANewAccount";
+  String emailAlreadyUse = "emailAlreadyUse";
+  String unknownError = "unknownError";
+  String pleaseEnterEmail = "pleaseEnterEmail";
+  String pleaseEnterValid = "pleaseEnterValid";
+  String pleaseEnterPassword = "pleaseEnterPassword";
+  String passwordMustBe = "passwordMustBe";
+  String passwordNotSame = "passwordNotSame";
+  String wrongPassword = "wrongPassword";
+  String userNotFound = "userNotFound";
+  String emailSend = "emailSend";
 
-  String selectLanguage = "Select Language";
-  String youCanChangeIt = "You can change it later from setting";
-  String english = "English";
-  String french = "French";
-  String italian = "Italian";
-  String japanese = "Japanese";
-  String german = "German";
-  String hindi = "Hindi";
-  String continues = "Continue";
+  String selectLanguage = "selectLanguage";
+  String youCanChangeIt = "youCanChangeIt";
+  String english = "english";
+  String french = "french";
+  String italian = "italian";
+  String japanese = "japanese";
+  String german = "german";
+  String hindi = "hindi";
+  String continues = "continues";
 
-  String selectCharacter = "Select Character";
-  String dino = "Dino";
-  String king = "King";
-  String dolly = "Dolly";
-  String kettie = "Kettie";
-  String marvel = "Marvel";
-  String henny = "Henny";
-  String slophie = "Slophie";
-  String setupAFingerprint =
-      "Setup a fingerprint scanner to increase the security of your application.";
-  String addNow = "Add Now";
-  String doItLater = "Do It Later";
+  String selectCharacter = "selectCharacter";
+  String dino = "dino";
+  String king = "king";
+  String dolly = "dolly";
+  String kettie = "kettie";
+  String marvel = "marvel";
+  String henny = "henny";
+  String slophie = "slophie";
+  String setupAFingerprint = "setupAFingerprint";
+  String addNow = "addNow";
+  String doItLater = "doItLater";
 }

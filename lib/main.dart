@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 
+import 'common/languages/index.dart';
 import 'config.dart';
 
 void main() async {
@@ -19,11 +20,12 @@ class MyApp extends StatelessWidget {
         /* themeMode: ThemeService().theme,
         theme: AppTheme.fromType(ThemeType.light).themeData,
         darkTheme: AppTheme.fromType(ThemeType.dark).themeData,
+       */
         locale: const Locale('en', 'US'),
-        translations: Language(),*/
-        // fallbackLocale: const Locale('en', 'US'),
+        translations: Language(),
+        fallbackLocale: const Locale('en', 'US'),
         home: SplashScreen(),
-        title: appFonts.chatGpt.tr,
+        title: appFonts.proBot.tr,
         getPages: appRoute.getPages,
         debugShowCheckedModeBanner: false);
   }

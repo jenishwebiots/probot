@@ -20,11 +20,11 @@ class SelectCharacterScreen extends StatelessWidget {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(appFonts.selectCharacter,
+                                Text(appFonts.selectCharacter.tr,
                                     style: AppCss.outfitSemiBold22
                                         .textColor(appCtrl.appTheme.txt)),
                                 const VSpace(Sizes.s10),
-                                Text(appFonts.youCanChangeIt,
+                                Text(appFonts.youCanChangeIt.tr,
                                     style: AppCss.outfitMedium16
                                         .textColor(appCtrl.appTheme.lightText)),
                                 const DottedLines()
