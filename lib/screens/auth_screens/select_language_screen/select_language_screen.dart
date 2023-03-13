@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../../../config.dart';
 
 class SelectLanguageScreen extends StatelessWidget {
@@ -36,7 +34,6 @@ class SelectLanguageScreen extends StatelessWidget {
                             selectIndex: languageCtrl.selectIndex,
                             index: e.key,
                             onTap: () async{
-                              log("languageCtrl.selectIndex : ${languageCtrl.selectIndex}");
                               languageCtrl.selectIndex = e.key;
                               if (e.value.code == "en") {
                                 appCtrl.languageVal = "en";
@@ -62,7 +59,6 @@ class SelectLanguageScreen extends StatelessWidget {
                               appCtrl.update();
                               Get.updateLocale(e.value.locale);
                               Get.forceAppUpdate();
-
                             }))
                         .toList(),
 

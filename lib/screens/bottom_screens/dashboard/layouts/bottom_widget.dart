@@ -12,7 +12,7 @@ class BottomWidget{
     decoration: BoxDecoration(
         color: isSelected
             ? appCtrl.appTheme.primary
-            : appCtrl.appTheme.lightText),
+            : appCtrl.appTheme.white),
   );
 
   //icon widget

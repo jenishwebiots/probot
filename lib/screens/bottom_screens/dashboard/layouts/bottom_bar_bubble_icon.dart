@@ -54,7 +54,7 @@ class BottomBarBubbleIconState extends State<BottomBarBubbleIcon>
       decoration: BoxDecoration(
           color: appCtrl.appTheme.white,
           border: Border(
-              top: BorderSide(color: appCtrl.appTheme.primary))),
+              top: BorderSide(color: appCtrl.appTheme.white))),
       child: Column(children: [
         BottomWidget().indicator(widget.isSelected),
         Stack(children: [

@@ -15,7 +15,7 @@ class BottomNavBarLayout extends StatelessWidget {
                 .asMap()
                 .entries
                 .map((e) => BottomBarItem(
-              iconData: SvgPicture.asset(e.value["icon"],
+              iconData: SvgPicture.asset(dashboardCtrl.selectedIndex == e.key ? e.value["iconSelected"] :e.value["icon"],
                   color: dashboardCtrl.selectedIndex == e.key
                       ? appCtrl.appTheme.primary
                       : appCtrl.appTheme.lightText),

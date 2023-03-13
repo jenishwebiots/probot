@@ -6,7 +6,6 @@ class RadioButtonLayout extends StatelessWidget {
   final SelectLanguageModel? data;
   final int? index, selectIndex;
   final GestureTapCallback? onTap;
-
   const RadioButtonLayout(
       {Key? key, this.data, this.selectIndex, this.index, this.onTap})
       : super(key: key);
@@ -28,17 +27,14 @@ class RadioButtonLayout extends StatelessWidget {
           Text(data!.title!.toString().tr,
               style: AppCss.outfitMedium18.textColor(appCtrl.appTheme.txt))
         ]),
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Icon(CupertinoIcons.circle,
-                color: selectIndex == index
-                    ? appCtrl.appTheme.primary
-                    : appCtrl.appTheme.lightText),
-            if (selectIndex == index)
-              Icon(Icons.circle, color: appCtrl.appTheme.primary, size: 9)
-          ],
-        )
+        Stack(alignment: Alignment.center, children: [
+          Icon(CupertinoIcons.circle,
+              color: selectIndex == index
+                  ? appCtrl.appTheme.primary
+                  : appCtrl.appTheme.lightText),
+          if (selectIndex == index)
+            Icon(Icons.circle, color: appCtrl.appTheme.primary, size: 9)
+        ])
       ]).inkWell(onTap: onTap),
       if (index != 5) const VSpace(Sizes.s20),
       if (index != 5) const Divider(height: 1, thickness: 1)

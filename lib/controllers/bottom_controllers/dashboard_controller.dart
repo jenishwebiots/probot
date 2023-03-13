@@ -1,5 +1,6 @@
 import 'package:probot/config.dart';
 import 'package:probot/screens/bottom_screens/dashboard/layouts/bottom_bar_bubble_icon.dart';
+import 'package:probot/screens/bottom_screens/home/home.dart';
 
 class DashboardController extends GetxController{
   int selectedIndex = 0;
@@ -14,7 +15,7 @@ class DashboardController extends GetxController{
 
 //list of bottommost page
   List<Widget> widgetOptions = <Widget>[
-    Text("Home"),
+    Home(),
     Text("Chat"),
     Text("Image"),
     Text("Content"),
