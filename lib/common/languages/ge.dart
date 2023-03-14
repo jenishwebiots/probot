@@ -55,6 +55,16 @@ final dynamic ge = {
   'hindi': "Hindi",
   'continues': "Weitermachen",
   'selectCharacter': "Charakter auswählen",
+  'dino': "Dino",
+  'king': "König",
+  'dolly': "Puppe",
+  'kettie': "Kettie",
+  'marvel': "Wunder",
+  'henny': "Henny",
+  'slophie': "Slophie",
+  'setupAFingerprint': "Richten Sie einen Fingerabdruckscanner ein, um die Sicherheit Ihrer Anwendung zu erhöhen.",
+  'addNow': "Jetzt hinzufügen",
+  'doItLater': "Mach es später",
 
 
 };

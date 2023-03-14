@@ -14,7 +14,7 @@ class PageViewCommon extends StatelessWidget {
       return Column(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
           onBoardingCtrl.selectIndex != 2
-              ? Text(appFonts.skip,
+              ? Text(appFonts.skip.tr,
                       style: AppCss.outfitMedium16
                           .textColor(appCtrl.appTheme.lightText))
                   .inkWell(onTap: () => onBoardingCtrl.pageCtrl.jumpToPage(2))
@@ -62,7 +62,7 @@ class PageViewCommon extends StatelessWidget {
                           width: double.infinity),
                       Column(
                         children: [
-                          Text(title!,
+                          Text(title!.toString().tr,
                               style: AppCss.outfitMedium22
                                   .textColor(appCtrl.appTheme.txt)),
                           const VSpace(Sizes.s5),
@@ -74,8 +74,8 @@ class PageViewCommon extends StatelessWidget {
                               indent: 180),
                           const VSpace(Sizes.s10),
                           SizedBox(
-                              width: 292,
-                              child: Text(subtitle!,
+                              width: Sizes.s292,
+                              child: Text(subtitle!.toString().tr,
                                   textAlign: TextAlign.center,
                                   style: AppCss.outfitMedium16
                                       .textColor(appCtrl.appTheme.lightText)

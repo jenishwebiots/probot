@@ -22,17 +22,17 @@ class RestPasswordScreen extends StatelessWidget {
                               crossAxisAlignment:
                                   CrossAxisAlignment.start,
                               children: [
-                                Text(appFonts.resetPassword,
+                                Text(appFonts.resetPassword.tr,
                                     style: AppCss.outfitSemiBold22
                                         .textColor(appCtrl.appTheme.txt)),
                                 const VSpace(Sizes.s10),
-                                Text(appFonts.enterYourMailOr,
+                                Text(appFonts.enterYourMailOr.tr,
                                     style: AppCss.outfitMedium16
                                         .textColor(
                                             appCtrl.appTheme.lightText)),
                                 const DottedLines().paddingOnly(
                                     top: Insets.i20, bottom: Insets.i15),
-                                Text(appFonts.email,
+                                Text(appFonts.email.tr,
                                     style: AppCss.outfitMedium16
                                         .textColor(appCtrl.appTheme.txt)),
                                 const VSpace(Sizes.s10),
@@ -41,7 +41,7 @@ class RestPasswordScreen extends StatelessWidget {
                                         .emailValidation(email),
                                     controller:
                                         resetPasswordCtrl.emailController,
-                                    hintText: appFonts.enterEmail),
+                                    hintText: appFonts.enterEmail.tr),
                                 const VSpace(Sizes.s40),
                                 ButtonCommon(
                                     title: appFonts.resetPassword,
@@ -51,7 +51,7 @@ class RestPasswordScreen extends StatelessWidget {
                               horizontal: Insets.i20,
                               vertical: Insets.i25))
                       .authBoxExtension()),
-              Text(appFonts.simplyUseThis,
+              Text(appFonts.simplyUseThis.tr,
                   textAlign: TextAlign.center,
                   style: AppCss.outfitMedium16
                       .textColor(appCtrl.appTheme.lightText)

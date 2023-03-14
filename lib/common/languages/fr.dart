@@ -57,6 +57,15 @@ final dynamic fr = {
   'hindi': "hindi",
   'continues': "Continuer",
   'selectCharacter': "Sélectionnez le personnage",
-
+  'dino': "dinosaure",
+  'king': "Roi",
+  'dolly': "Chariot",
+  'kettie': "Ketti",
+  'marvel': "merveille",
+  'henny': "Henny",
+  'slophie': "Slophie",
+  'setupAFingerprint': "Configurez un scanner d'empreintes digitales pour augmenter la sécurité de votre application.",
+  'addNow': "Ajouter maintenant",
+  'doItLater': "Fais-le plus tard",
 
 };

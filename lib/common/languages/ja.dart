@@ -55,6 +55,16 @@ final dynamic ja = {
   'hindi': "ヒンディー語",
   'continues': "続く",
   'selectCharacter': "キャラクター選択",
+  'dino': "ディノ",
+  'king': "王",
+  'dolly': "ドリー",
+  'kettie': "ケティ",
+  'marvel': "マーベル",
+  'henny': "ヘニー",
+  'slophie': "スローフィー",
+  'setupAFingerprint': "指紋スキャナーをセットアップして、アプリケーションのセキュリティを強化します。",
+  'addNow': "今すぐ追加",
+  'doItLater': "後で行う",
 
 
 };

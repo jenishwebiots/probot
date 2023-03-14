@@ -7,9 +7,9 @@ class Validation {
   // Email Validation
   emailValidation(email) {
     if (email.isEmpty) {
-      return appFonts.pleaseEnterEmail;
+      return appFonts.pleaseEnterEmail.tr;
     } else if (!digitRegex.hasMatch(email)) {
-      return appFonts.pleaseEnterValid;
+      return appFonts.pleaseEnterValid.tr;
     }
     return null;
   }
@@ -17,10 +17,10 @@ class Validation {
   // Password Validation
   passValidation(password) {
     if (password.isEmpty) {
-      return appFonts.pleaseEnterPassword;
+      return appFonts.pleaseEnterPassword.tr;
     }
     if (password.length < 8) {
-      return appFonts.passwordMustBe;
+      return appFonts.passwordMustBe.tr;
     }
     return null;
   }

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../config.dart';
 import '../../widgets/scaffold_messenger.dart';
 
@@ -16,11 +15,11 @@ class ResetPasswordController extends GetxController {
         FirebaseAuth.instance
             .sendPasswordResetEmail(email: emailController.text.toString());
         isLoading = false;
-        snackBarMessengers(message: appFonts.emailSend);
+        snackBarMessengers(message: appFonts.emailSend.tr);
         Get.offAllNamed(routeName.signInScreen);
       } catch (e) {
         isLoading = false;
-        snackBarMessengers(message: appFonts.unknownError);
+        snackBarMessengers(message: appFonts.unknownError.tr);
       }
     }
   }

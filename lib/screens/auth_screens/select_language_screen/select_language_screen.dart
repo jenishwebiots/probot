@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import '../../../config.dart';
 
 class SelectLanguageScreen extends StatelessWidget {
@@ -7,12 +8,15 @@ class SelectLanguageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SelectLanguageController>(builder: (_) {
-      return Scaffold(
-        backgroundColor: appCtrl.appTheme.bg1,
-        appBar: const AppBarCommon(isSystemNavigate: false),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      return WillPopScope(
+        onWillPop: () async{
+          SystemNavigator.pop();
+          return true;
+        },
+        child: Scaffold(
+          backgroundColor: appCtrl.appTheme.bg1,
+          appBar: const AppBarCommon(isSystemNavigate: false),
+          body: ListView(
             children: [
               Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,18 +64,18 @@ class SelectLanguageScreen extends StatelessWidget {
                               Get.updateLocale(e.value.locale);
                               Get.forceAppUpdate();
                             }))
-                        .toList(),
+                        .toList()
 
                   ]).paddingSymmetric(
                   horizontal: Insets.i20, vertical: Insets.i25)
                   .authBoxExtension(),
               ButtonCommon(
                   title: appFonts.continues,
-                  onTap: () => Get.toNamed(routeName.selectCharacterScreen))
-            ],
+                  onTap: () =>languageCtrl.onContinue()).paddingSymmetric(vertical: Insets.i20)
+            ]
           ).paddingSymmetric(
-              horizontal: Insets.i20, vertical: Insets.i15),
-        ),
+              horizontal: Insets.i20, vertical: Insets.i15)
+        )
       );
     });
   }

@@ -8,6 +8,8 @@ class AppController extends GetxController {
   String priceSymbol = "\$";
   bool isTheme = false;
   bool isRTL = false;
+  bool isLanguage = false;
+  bool isCharacter = false;
   String languageVal = "in";
   final storage = GetStorage();
  // double currencyVal = double.parse(appArray.language[0]["INR"].toString());

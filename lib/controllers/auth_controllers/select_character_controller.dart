@@ -9,6 +9,14 @@ class SelectCharacterController extends GetxController {
     update();
   }
 
+  onContinue() async{
+    appCtrl.isCharacter = true;
+    await appCtrl.storage.write("isCharacter", appCtrl.isCharacter);
+    Get.toNamed(routeName.addFingerprintScreen);
+    update();
+  }
+
+
   @override
   void onReady() {
     selectCharacterLists = appArray.selectCharacterList;

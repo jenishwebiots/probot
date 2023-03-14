@@ -9,6 +9,13 @@ class SelectLanguageController extends GetxController {
     update();
   }
 
+  onContinue() async{
+    appCtrl.isLanguage = true;
+    await appCtrl.storage.write("isLanguage", appCtrl.isLanguage);
+    Get.toNamed(routeName.selectCharacterScreen);
+    update();
+  }
+
   @override
   void onReady() async{
 

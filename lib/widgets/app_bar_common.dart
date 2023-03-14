@@ -9,6 +9,7 @@ class AppBarCommon extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: appCtrl.appTheme.bg1,
         elevation: 0,

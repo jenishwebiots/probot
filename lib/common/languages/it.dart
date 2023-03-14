@@ -54,5 +54,15 @@ final dynamic it  = {
   'hindi': "hindi",
   'continues': "Continua",
   'selectCharacter': "Seleziona Personaggio",
+  'dino': "Dino",
+  'king': "Re",
+  'dolly': "Dolly",
+  'kettie': "Kettie",
+  'marvel': "meraviglia",
+  'henny': "Henny",
+  'slophie': "Slophie",
+  'setupAFingerprint': "Imposta uno scanner di impronte digitali per aumentare la sicurezza della tua applicazione.",
+  'addNow': "Aggiungi ora",
+  'doItLater': "Fallo più tardi",
 
 };

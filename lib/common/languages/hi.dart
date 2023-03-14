@@ -55,5 +55,15 @@ final dynamic hi = {
   'hindi': "हिंदी",
   'continues': "जारी रखना",
   'selectCharacter': "चरित्र का चयन करें",
+  'dino': "डिनो",
+  'king': "राजा",
+  'dolly': "नादान",
+  'kettie': "केटी",
+  'marvel': "चमत्कार",
+  'henny': "हेनी",
+  'slophie': "स्लोफी",
+  'setupAFingerprint': "अपने एप्लिकेशन की सुरक्षा बढ़ाने के लिए फ़िंगरप्रिंट स्कैनर सेटअप करें।",
+  'addNow': "अभी जोड़ें",
+  'doItLater': "इसे बाद में करें",
 
 };

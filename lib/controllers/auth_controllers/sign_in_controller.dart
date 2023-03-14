@@ -11,6 +11,12 @@ class SignInController extends GetxController {
   GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
   String? userNameGoogle = "";
   String? userName = "";
+  bool obscureText = true;
+
+  onObscure() {
+    obscureText = !obscureText;
+    update();
+  }
 
   // SignIn With Google Method
   Future<UserCredential> signInWithGoogle() async {
@@ -60,15 +66,22 @@ class SignInController extends GetxController {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
           isLoading = false;
-          snackBarMessengers(message: appFonts.wrongPassword);
+          snackBarMessengers(message: appFonts.wrongPassword.tr);
         } else if (e.code == 'user-not-found') {
           isLoading = false;
-          snackBarMessengers(message: appFonts.userNotFound);
+          snackBarMessengers(message: appFonts.userNotFound.tr);
         }
       } catch (e) {
         isLoading = false;
-        snackBarMessengers(message: appFonts.unknownError);
+        snackBarMessengers(message: appFonts.unknownError.tr);
       }
     }
+  }
+
+  @override
+  void onClose() {
+    signInGlobalKey.currentState;
+    // TODO: implement onClose
+    super.onClose();
   }
 }

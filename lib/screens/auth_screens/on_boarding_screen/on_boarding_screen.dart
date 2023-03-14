@@ -30,7 +30,7 @@ class OnBoardingScreen extends StatelessWidget {
                       .entries
                       .map((e) => PageViewCommon(
                             image: e.value["image"],
-                            title: e.value['title'].toString().tr,
+                            title: e.value['title'],
                             subtitle: e.value["subtitle"],
                             onTap: () {
                               if (onBoardingCtrl.selectIndex == 2) {
