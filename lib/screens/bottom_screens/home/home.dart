@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
               actions: [
                 SvgPicture.asset(
                   eSvgAssets.bell,
-                ).paddingSymmetric(horizontal: Insets.i20)
+                ).inkWell(onTap: ()=> Get.toNamed(routeName.notificationScreen)).paddingSymmetric(horizontal: Insets.i20)
               ],
               flexibleSpace: Container(
                 padding: const EdgeInsets.only(top: Insets.i100),

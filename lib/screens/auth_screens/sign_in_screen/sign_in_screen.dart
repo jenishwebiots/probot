@@ -16,6 +16,7 @@ class SignInScreen extends StatelessWidget {
           return true;
         },
         child: Scaffold(
+          backgroundColor: appCtrl.appTheme.bg1,
             appBar: const AppBarCommon(isArrow: false),
             body: ListView( children: [
               const VSpace(Sizes.s5),
@@ -114,7 +115,7 @@ class SignInScreen extends StatelessWidget {
                           const OrLayout().alignment(Alignment.center),
                           ButtonCommon(
                               isGradient: false,
-                              color: appCtrl.appTheme.boxBg,
+                              color: appCtrl.appTheme.bg,
                               style: AppCss.outfitMedium16
                                   .textColor(appCtrl.appTheme.txt),
                               onTap: () =>

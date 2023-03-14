@@ -20,6 +20,9 @@ class ImageAssets {
   final String addFinger = "assets/images/addFinger.png";
   final String logo1 = "assets/images/logo1.png";
   final String homeAppBar = "assets/images/homeAppBar.png";
+  final String fingerprint = "assets/images/fingerprint.png";
+  final String lock = "assets/images/lock.png";
+  final String notification = "assets/images/notification.png";
 
   // Icons
   final String google = "assets/images/icons/Google.png";
