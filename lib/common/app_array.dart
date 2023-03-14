@@ -106,4 +106,14 @@ class AppArray {
     {"title": "option2", "icon": eSvgAssets.galleryColor, "desc": "desc2"},
     {"title": "option3", "icon": eSvgAssets.contentColor, "desc": "desc3"}
   ];
+
+  //drawer list
+  var drawerList = [
+    {"title": "proBot", "icon": eSvgAssets.chat},
+    {"title": "option2", "icon": eSvgAssets.gallery},
+    {"title": "option3", "icon": eSvgAssets.content},
+    {"title": "setting", "icon": eSvgAssets.setting},
+    {"title": "language", "icon": eSvgAssets.translate},
+    {"title": "logout", "icon": eSvgAssets.logout},
+  ];
 }

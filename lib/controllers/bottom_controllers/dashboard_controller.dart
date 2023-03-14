@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:probot/config.dart';
 import 'package:probot/screens/bottom_screens/home/home.dart';
 
-class DashboardController extends GetxController with GetTickerProviderStateMixin{
+class DashboardController extends GetxController
+    with GetTickerProviderStateMixin {
   int selectedIndex = 0;
   List bottomList = [];
   TabController? con;
@@ -23,24 +26,17 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
     Text("Setting"),
   ];
 
-
   @override
-  void onReady()async {
+  void onReady() async {
     // TODO: implement onReady
-    con = TabController(
-        vsync: this,
-        length: 5,
-        initialIndex:  0
-            )
+    con = TabController(vsync: this, length: 5, initialIndex: 0)
       ..addListener(listener);
-    animationControllers = List.generate(
-        5,
-            (i) {
-          return AnimationController(
-              vsync: this,
-              duration: const Duration(milliseconds: 750),
-              reverseDuration: const Duration(milliseconds: 350));
-        });
+    animationControllers = List.generate(5, (i) {
+      return AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 750),
+          reverseDuration: const Duration(milliseconds: 350));
+    });
     bottomList = appArray.bottomList;
     update();
     super.onReady();
@@ -55,16 +51,11 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
     update();
   }
 
-  void onButtonPressed(int index) async{
-
-    selectedIndex = index;
-
-    update();
-  }
-
   //bottom nav bar tap
   onBottomTap(val) async {
     selectedIndex = val;
+    con!.index = val;
+    con!.addListener(listener);
     update();
   }
 
@@ -78,5 +69,4 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
       ac.dispose();
     }
   }
-
 }

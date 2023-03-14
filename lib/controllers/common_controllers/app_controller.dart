@@ -16,6 +16,7 @@ class AppController extends GetxController {
   bool isSwitched = false;
   bool isOnboard = false;
   dynamic currency;
+
   //update theme
   updateTheme(theme) {
     _appTheme = theme;

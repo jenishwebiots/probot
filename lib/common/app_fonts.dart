@@ -70,4 +70,7 @@ class AppFonts {
   String setupAFingerprint = "setupAFingerprint";
   String addNow = "addNow";
   String doItLater = "doItLater";
+
+  String chooseOption = "chooseOption";
+  String darkTheme = "darkTheme";
 }
