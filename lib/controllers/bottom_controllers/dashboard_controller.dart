@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:probot/config.dart';
+import 'package:probot/screens/bottom_screens/chat/chat.dart';
 import 'package:probot/screens/bottom_screens/home/home.dart';
 
 class DashboardController extends GetxController
@@ -20,7 +21,7 @@ class DashboardController extends GetxController
 //list of bottommost page
   List<Widget> widgetOptions = <Widget>[
     Home(),
-    Text("Chat"),
+    Chat(),
     Text("Image"),
     Text("Content"),
     Text("Setting"),

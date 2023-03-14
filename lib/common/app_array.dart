@@ -22,13 +22,13 @@ class AppArray {
 
 //Select character list
   var selectCharacterList = [
-    {"image": eImageAssets.sc1, "title": appFonts.dino},
-    {"image": eImageAssets.sc2, "title": appFonts.king},
-    {"image": eImageAssets.sc3, "title": appFonts.dolly},
-    {"image": eImageAssets.sc4, "title": appFonts.kettie},
-    {"image": eImageAssets.sc5, "title": appFonts.marvel},
-    {"image": eImageAssets.sc6, "title": appFonts.henny},
-    {"image": eImageAssets.sc7, "title": appFonts.slophie}
+    {"image": eImageAssets.sc1, "title": "dino"},
+    {"image": eImageAssets.sc2, "title": "king"},
+    {"image": eImageAssets.sc3, "title": "dolly"},
+    {"image": eImageAssets.sc4, "title": "kettie"},
+    {"image": eImageAssets.sc5, "title": "marvel"},
+    {"image": eImageAssets.sc6, "title": "henny"},
+    {"image": eImageAssets.sc7, "title": "slophie"}
   ];
 
 // Languages list
@@ -115,5 +115,54 @@ class AppArray {
     {"title": "setting", "icon": eSvgAssets.setting},
     {"title": "language", "icon": eSvgAssets.translate},
     {"title": "logout", "icon": eSvgAssets.logout},
+  ];
+
+  //chat list
+  var chatList = [
+    {
+      "dateTime": "Today, 5:30 am",
+      "chat": [
+        {
+          "isReceiver": true,
+          "message": "Hello, There ?",
+          "time": "5:30",
+        },
+        {
+          "isReceiver": false,
+          "message": "Hello !!",
+          "time": "5:31",
+        },
+        {
+          "isReceiver": true,
+          "message": "How are you ? 😄",
+          "time": "5:32",
+        },
+        {
+          "isReceiver": false,
+          "message": "I’m good ! what about you ?",
+          "time": "5:32",
+        },
+        {
+          "isReceiver": true,
+          "message": "Too good !\nWhere were you all this time ?",
+          "time": "5:32",
+        },
+        {
+          "isReceiver": true,
+          "message": "Have any problem ?",
+          "time": "5:32"
+        },
+        {
+          "isReceiver": false,
+          "message": "Yeah ! i’m not so good. 😐",
+          "time": "5:33"
+        },
+        {
+          "isReceiver": false,
+          "message": "I need just some time. 😇",
+          "time": "5:33",
+        }
+      ]
+    }
   ];
 }

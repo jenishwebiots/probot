@@ -16,8 +16,8 @@ class CommonDrawer extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(Insets.i20),
                 bottomRight: Radius.circular(Insets.i20))),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
             Column(
               children: [
@@ -42,7 +42,7 @@ class CommonDrawer extends StatelessWidget {
                               horizontal: Insets.i20, vertical: Insets.i5),
                           horizontalTitleGap: 0,
                           minVerticalPadding: 0,
-                          onTap: () => homeCtrl.onDrawerTap(e.key),
+                          onTap: () => appCtrl.onDrawerTap(e.key),
                           leading: SvgPicture.asset(e.value["icon"],
                               colorFilter: ColorFilter.mode(
                                   appCtrl.appTheme.txt, BlendMode.srcIn)),
@@ -54,6 +54,7 @@ class CommonDrawer extends StatelessWidget {
               ],
             ).paddingSymmetric(vertical: Insets.i30),
             Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 DottedLine(
                         direction: Axis.horizontal,
@@ -85,10 +86,10 @@ class CommonDrawer extends StatelessWidget {
                       },
                     ),
                   ],
-                ).marginOnly(
-                    left: Insets.i30, bottom: Insets.i50, right: Insets.i30)
+                )
               ],
-            )
+            ).marginOnly(
+                left: Insets.i30, bottom: Insets.i50, right: Insets.i30)
           ],
         ),
       );

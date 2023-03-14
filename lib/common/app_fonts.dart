@@ -73,4 +73,7 @@ class AppFonts {
 
   String chooseOption = "chooseOption";
   String darkTheme = "darkTheme";
+  String listCharacter = "listCharacter";
+  String tapCharacter = "tapCharacter";
+  String chatWithProBot = "chatWithProBot";
 }

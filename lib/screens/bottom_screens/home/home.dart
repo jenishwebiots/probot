@@ -1,5 +1,4 @@
 import 'package:probot/config.dart';
-import 'package:probot/screens/bottom_screens/drawer/drawer.dart';
 
 class Home extends StatelessWidget {
   final homeCtrl = Get.put(HomeController());
@@ -10,6 +9,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (_) {
       return Scaffold(
+        key: homeCtrl.scaffoldKey,
         drawer:const CommonDrawer(),
           backgroundColor: appCtrl.appTheme.bg1,
           body: NestedScrollView(

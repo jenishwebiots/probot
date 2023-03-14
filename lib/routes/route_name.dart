@@ -10,4 +10,5 @@ class RouteName {
   final String selectCharacterScreen = "/selectCharacterScreen";
   final String addFingerprintScreen = "/addFingerprintScreen";
   final String dashboard = "/dashboard";
+  final String chatLayout = "/chatLayout";
 }

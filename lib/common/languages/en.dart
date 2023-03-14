@@ -81,5 +81,8 @@ final dynamic en = {
   'setting': "Setting",
   'image': "Image",
   'darkTheme': "Dark Theme",
+  'listCharacter': "List of Character",
+  'tapCharacter': "Tap on character to chat with them",
+  'chatWithProBot': "Chat with ProBot",
 
 };
