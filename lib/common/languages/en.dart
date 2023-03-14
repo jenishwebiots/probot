@@ -67,5 +67,11 @@ final dynamic en = {
   'setupAFingerprint': "Setup a fingerprint scanner to increase the security of your application.",
   'addNow': "Add Now",
   'doItLater': "Do It Later",
+  'option1': "Chat with different probot",
+  'option2': "Image generator",
+  'option3': "Content writer",
+  'desc1': "Get a quick response to any query",
+  'desc2': "Finest results, a time-saving",
+  'desc3': "Best outcome without copies",
 
 };

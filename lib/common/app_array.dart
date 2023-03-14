@@ -20,37 +20,6 @@ class AppArray {
     }
   ];
 
-// Languages list
-  var languagesList = [
-    {
-      "image": eImageAssets.english,
-      "title": appFonts.english,
-      'locale': const Locale('en', 'US'),
-      "code": "en"
-    },
-    {"image": eImageAssets.indian, "title": appFonts.hindi,
-      'locale': const Locale('hi', 'IN'),
-      "code": "hi"
-    },
-    {"image": eImageAssets.french, "title": appFonts.french,
-      'locale': const Locale('fr', 'CA'),
-      "code": "fr"
-    },
-    {"image": eImageAssets.italian, "title": appFonts.italian,
-      'locale': const Locale('it', 'IT'),
-      "code": "it"
-    },
-    {"image": eImageAssets.german, "title": appFonts.german,
-      'locale': const Locale('ge', 'GE'),
-      "code": "ge"
-    },
-    {
-      "image": eImageAssets.japanese, "title": appFonts.japanese,
-      'locale': const Locale('ja', 'JP'),
-      "code": "ja"
-    },
-  ];
-
 //Select character list
   var selectCharacterList = [
     {"image": eImageAssets.sc1, "title": appFonts.dino},
@@ -60,5 +29,81 @@ class AppArray {
     {"image": eImageAssets.sc5, "title": appFonts.marvel},
     {"image": eImageAssets.sc6, "title": appFonts.henny},
     {"image": eImageAssets.sc7, "title": appFonts.slophie}
+  ];
+
+// Languages list
+  var languagesList = [
+    {
+      "image": eImageAssets.english,
+      "title": appFonts.english,
+      'locale': const Locale('en', 'US'),
+      "code": "en"
+    },
+    {
+      "image": eImageAssets.indian,
+      "title": appFonts.hindi,
+      'locale': const Locale('hi', 'IN'),
+      "code": "hi"
+    },
+    {
+      "image": eImageAssets.french,
+      "title": appFonts.french,
+      'locale': const Locale('fr', 'CA'),
+      "code": "fr"
+    },
+    {
+      "image": eImageAssets.italian,
+      "title": appFonts.italian,
+      'locale': const Locale('it', 'IT'),
+      "code": "it"
+    },
+    {
+      "image": eImageAssets.german,
+      "title": appFonts.german,
+      'locale': const Locale('ge', 'GE'),
+      "code": "ge"
+    },
+    {
+      "image": eImageAssets.japanese,
+      "title": appFonts.japanese,
+      'locale': const Locale('ja', 'JP'),
+      "code": "ja"
+    },
+  ];
+
+  // bottom list
+  var bottomList = [
+    {
+      "title": "home",
+      "icon": eSvgAssets.home,
+      "iconSelected": eSvgAssets.homeColor
+    },
+    {
+      "title": "chat",
+      "icon": eSvgAssets.chat,
+      "iconSelected": eSvgAssets.chatColor
+    },
+    {
+      "title": "image",
+      "icon": eSvgAssets.gallery,
+      "iconSelected": eSvgAssets.galleryColor
+    },
+    {
+      "title": "content",
+      "icon": eSvgAssets.content,
+      "iconSelected": eSvgAssets.contentColor
+    },
+    {
+      "title": "setting",
+      "icon": eSvgAssets.setting,
+      "iconSelected": eSvgAssets.settingColor
+    }
+  ];
+
+  // homeOption list
+  var homeOptionList = [
+    {"title": "option1", "icon": eSvgAssets.chatColor, "desc": "desc1"},
+    {"title": "option2", "icon": eSvgAssets.galleryColor, "desc": "desc2"},
+    {"title": "option3", "icon": eSvgAssets.contentColor, "desc": "desc3"}
   ];
 }

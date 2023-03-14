@@ -15,11 +15,14 @@ class ResetPasswordController extends GetxController {
         FirebaseAuth.instance
             .sendPasswordResetEmail(email: emailController.text.toString());
         isLoading = false;
-        snackBarMessengers(message: appFonts.emailSend.tr);
+        snackBarMessengers(message: appFonts.emailSend);
         Get.offAllNamed(routeName.signInScreen);
       } catch (e) {
         isLoading = false;
-        snackBarMessengers(message: appFonts.unknownError.tr);
+        snackBarMessengers(message: appFonts.unknownError);
+
+        snackBarMessengers(message: appFonts.emailSend.tr);
+        Get.offAllNamed(routeName.signInScreen);
       }
     }
   }

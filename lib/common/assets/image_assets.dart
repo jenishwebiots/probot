@@ -18,6 +18,8 @@ class ImageAssets {
   final String sc6 = "assets/images/sc6.png";
   final String sc7 = "assets/images/sc7.png";
   final String addFinger = "assets/images/addFinger.png";
+  final String logo1 = "assets/images/logo1.png";
+  final String homeAppBar = "assets/images/homeAppBar.png";
 
   // Icons
   final String google = "assets/images/icons/Google.png";

@@ -16,7 +16,6 @@ class SelectCharacterController extends GetxController {
     update();
   }
 
-
   @override
   void onReady() {
     selectCharacterLists = appArray.selectCharacterList;

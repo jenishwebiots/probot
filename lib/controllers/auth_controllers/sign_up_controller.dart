@@ -39,15 +39,18 @@ class SignUpController extends GetxController {
         emailController.text = "";
         passwordController.text = "";
         appCtrl.storage.write("firebaseUser", firebaseUser);
-        Get.offAllNamed(routeName.signInScreen);
+
+        Get.offAllNamed(routeName.selectLanguageScreen);
       } on FirebaseAuthException catch (e) {
         if (e.code == "email-already-in-use") {
           isLoading = false;
-          snackBarMessengers(message: appFonts.emailAlreadyUse.tr);
+          snackBarMessengers(message: appFonts.emailAlreadyUse);
         }
       } catch (e) {
         isLoading = false;
-        snackBarMessengers(message: appFonts.unknownError.tr);
+        snackBarMessengers(message: appFonts.unknownError);
+
+        Get.offAllNamed(routeName.signInScreen);
       }
     }
   }

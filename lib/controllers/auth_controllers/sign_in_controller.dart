@@ -66,14 +66,15 @@ class SignInController extends GetxController {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
           isLoading = false;
-          snackBarMessengers(message: appFonts.wrongPassword.tr);
+
+          snackBarMessengers(message: appFonts.wrongPassword);
         } else if (e.code == 'user-not-found') {
           isLoading = false;
-          snackBarMessengers(message: appFonts.userNotFound.tr);
+          snackBarMessengers(message: appFonts.userNotFound);
         }
       } catch (e) {
         isLoading = false;
-        snackBarMessengers(message: appFonts.unknownError.tr);
+        snackBarMessengers(message: appFonts.unknownError);
       }
     }
   }

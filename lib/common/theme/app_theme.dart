@@ -39,6 +39,7 @@ class AppTheme {
   Color dotted;
   Color distance;
   Color border;
+  Color borderColor;
   Color themeGradient;
   Color price;
   Color toggleSwitch;
@@ -77,6 +78,7 @@ class AppTheme {
     required this.dotted,
     required this.distance,
     required this.border,
+    required this.borderColor,
     required this.themeGradient,
     required this.price,
     required this.toggleSwitch,
@@ -119,6 +121,7 @@ class AppTheme {
           dotted: const Color(0xffEBEBEB),
           distance: const Color(0xff414449),
           border: const Color(0xff414449).withOpacity(0.5),
+          borderColor: const Color.fromRGBO(53, 193, 255, 0.08),
           themeGradient: const Color(0xffFFD3B0),
           price: const Color(0xff414449),
           toggleSwitch: const Color(0xffF5F5F5),
@@ -158,6 +161,7 @@ class AppTheme {
           dotted: const Color(0xff414449),
           distance: const Color(0xff8D8F91),
           border: const Color(0xff414449).withOpacity(0.5),
+          borderColor: const Color(0xFF323444),
           themeGradient: const Color(0xffFFD3B0),
           price: const Color(0xffFF8D2F),
           toggleSwitch: const Color(0xff2A2A2A),

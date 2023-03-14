@@ -8,7 +8,6 @@ class SelectLanguageController extends GetxController {
     selectIndex = index;
     update();
   }
-
   onContinue() async{
     appCtrl.isLanguage = true;
     await appCtrl.storage.write("isLanguage", appCtrl.isLanguage);

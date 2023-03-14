@@ -1,4 +1,8 @@
 import '../config.dart';
+import '../screens/auth_screens/select_character_screen/select_character_screen.dart';
+import '../screens/auth_screens/select_language_screen/select_language_screen.dart';
+import '../screens/auth_screens/sign_in_screen/sign_in_screen.dart';
+import '../screens/bottom_screens/dashboard/dashboard.dart';
 
 RouteName _routeName = RouteName();
 
@@ -23,5 +27,9 @@ class AppRoute {
     GetPage(
         name: _routeName.addFingerprintScreen,
         page: () => AddFingerprintScreen()),
+    GetPage(
+        name: _routeName.dashboard,
+        page: () => Dashboard()),
+
   ];
 }
