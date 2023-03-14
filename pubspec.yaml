@@ -40,7 +40,7 @@ dependencies:
   get: ^4.6.5  # Getx management
   get_storage: ^2.0.3  # store any value in local storage
   google_fonts: ^4.0.3
-  flutter_svg: ^2.0.1
+  flutter_svg: ^2.0.3
   dotted_line: ^3.1.0
   firebase_core: ^2.7.1
   firebase_auth: ^4.2.10

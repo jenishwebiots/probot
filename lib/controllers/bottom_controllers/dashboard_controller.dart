@@ -1,17 +1,18 @@
 import 'package:probot/config.dart';
-import 'package:probot/screens/bottom_screens/dashboard/layouts/bottom_bar_bubble_icon.dart';
 import 'package:probot/screens/bottom_screens/home/home.dart';
 
-class DashboardController extends GetxController{
+class DashboardController extends GetxController with GetTickerProviderStateMixin{
   int selectedIndex = 0;
   List bottomList = [];
-  List<GlobalKey<BottomBarBubbleIconState>> iconsKey = [];
+  TabController? con;
+
+  List<AnimationController>? animationControllers;
+  List<Animation>? animation;
   final duration = const Duration(milliseconds: 500);
   late int iconCount = 0;
   late int selectedIndexBottom;
   late AnimationController animationController;
   late Tween<double> colorTween;
-  late Animation<double?> animation;
 
 //list of bottommost page
   List<Widget> widgetOptions = <Widget>[
@@ -26,9 +27,32 @@ class DashboardController extends GetxController{
   @override
   void onReady()async {
     // TODO: implement onReady
+    con = TabController(
+        vsync: this,
+        length: 5,
+        initialIndex:  0
+            )
+      ..addListener(listener);
+    animationControllers = List.generate(
+        5,
+            (i) {
+          return AnimationController(
+              vsync: this,
+              duration: const Duration(milliseconds: 750),
+              reverseDuration: const Duration(milliseconds: 350));
+        });
     bottomList = appArray.bottomList;
     update();
     super.onReady();
+  }
+
+  void listener() {
+    if (con!.indexIsChanging) {
+      animationControllers![con!.previousIndex].reverse();
+    } else {
+      animationControllers![con!.index].forward();
+    }
+    update();
   }
 
   void onButtonPressed(int index) async{
@@ -40,55 +64,19 @@ class DashboardController extends GetxController{
 
   //bottom nav bar tap
   onBottomTap(val) async {
-
     selectedIndex = val;
     update();
-
   }
 
-  //on change bottom
-  Future onChangeIndex(int index) async {
-    if (index == selectedIndex) {
-      return;
-    }
-
-    iconsKey[selectedIndex].currentState?.updateSelect(false);
-    await Future.delayed(const Duration(milliseconds: 200));
-
-    if (animationController.status == AnimationStatus.completed) {
-      animationController.reverse();
-    } else {
-      animationController.forward();
-    }
-
-    selectedIndex = index;
-    update();
-
-    await Future.delayed(const Duration(milliseconds: 200));
-    iconsKey[selectedIndex].currentState?.updateSelect(true);
-  }
-
-  void handleTextChangeFromOutside(items) {
-    iconCount = items.length;
-
-    iconsKey.clear();
-    for (var i = 0; i < iconCount; i++) {
-      final key = GlobalKey<BottomBarBubbleIconState>();
-      iconsKey.add(key);
-    }
-
-    if (selectedIndex >= iconCount || selectedIndex < 0) {
-      throw RangeError('selectedIndex is out of range');
+  @override
+  void dispose() {
+    super.dispose();
+    con!
+      ..removeListener(listener)
+      ..dispose();
+    for (var ac in animationControllers!) {
+      ac.dispose();
     }
   }
 
-  onInitCall(con){
-    colorTween = Tween(begin: 0, end: 1);
-    animationController =
-        AnimationController(vsync: con, duration: duration);
-    animation =
-        colorTween.animate(animationController);
-
-    selectedIndex = selectedIndex;
-  }
 }

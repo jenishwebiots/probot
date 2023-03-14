@@ -1,7 +1,7 @@
-import 'package:probot/screens/bottom_screens/dashboard/layouts/bottom_bar.dart';
-
 import '../../../config.dart';
-import '../../../widgets/directionality_rtl.dart';
+
+
+
 
 class Dashboard extends StatelessWidget {
   final dashboardCtrl = Get.put(DashboardController());
@@ -13,7 +13,7 @@ class Dashboard extends StatelessWidget {
     return GetBuilder<DashboardController>(builder: (_) {
       return DirectionalityRtl(
         child: Scaffold(
-          backgroundColor: appCtrl.appTheme.white,
+          backgroundColor: appCtrl.appTheme.bg1,
           body: dashboardCtrl.widgetOptions
               .elementAt(dashboardCtrl.selectedIndex),
           bottomNavigationBar: dashboardCtrl.bottomList.isNotEmpty

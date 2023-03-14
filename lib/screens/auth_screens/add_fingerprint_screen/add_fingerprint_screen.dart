@@ -38,6 +38,7 @@ class AddFingerprintScreen extends StatelessWidget {
                   ButtonCommon(title: appFonts.addNow),
                   const VSpace(Sizes.s10),
                   ButtonCommon(
+                    onTap: ()=> Get.toNamed(routeName.dashboard),
                       style: AppCss.outfitMedium16
                           .textColor(appCtrl.appTheme.primary),
                       title: appFonts.doItLater,
