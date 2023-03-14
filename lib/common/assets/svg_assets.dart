@@ -13,4 +13,6 @@ class SvgAssets {
   final String setting = "assets/svg/setting.svg";
   final String menu = "assets/svg/menu.svg";
   final String bell = "assets/svg/bell.svg";
+  final String eye = "assets/svg/eye.svg";
+  final String eyeSlash = "assets/svg/eyeSlash.svg";
 }

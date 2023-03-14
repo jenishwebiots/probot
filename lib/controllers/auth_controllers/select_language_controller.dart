@@ -1,5 +1,4 @@
 import '../../config.dart';
-import '../../models/select_language_model.dart';
 
 class SelectLanguageController extends GetxController {
   List selectLanguageLists = [];
@@ -7,6 +6,12 @@ class SelectLanguageController extends GetxController {
 
   onLanguageChange(index) {
     selectIndex = index;
+    update();
+  }
+  onContinue() async{
+    appCtrl.isLanguage = true;
+    await appCtrl.storage.write("isLanguage", appCtrl.isLanguage);
+    Get.toNamed(routeName.selectCharacterScreen);
     update();
   }
 

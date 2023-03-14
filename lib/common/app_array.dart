@@ -32,7 +32,6 @@ class AppArray {
     {"image": eImageAssets.sc7, "title": appFonts.slophie}
   ];
 
-
 // Languages list
   var languagesList = [
     {

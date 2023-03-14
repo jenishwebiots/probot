@@ -1,12 +1,8 @@
 import '../config.dart';
-import '../screens/auth_screens/add_fingerprint_screen/add_fingerprint_screen.dart';
-import '../screens/auth_screens/change_password_screen/change_password_screen.dart';
-import '../screens/auth_screens/reset_password_screen/rest_password_screen.dart';
 import '../screens/auth_screens/select_character_screen/select_character_screen.dart';
 import '../screens/auth_screens/select_language_screen/select_language_screen.dart';
-import '../screens/auth_screens/sign_up_screen/sign_up_screen.dart';
+import '../screens/auth_screens/sign_in_screen/sign_in_screen.dart';
 import '../screens/bottom_screens/dashboard/dashboard.dart';
-
 
 RouteName _routeName = RouteName();
 
@@ -34,6 +30,6 @@ class AppRoute {
     GetPage(
         name: _routeName.dashboard,
         page: () => Dashboard()),
+
   ];
 }
-

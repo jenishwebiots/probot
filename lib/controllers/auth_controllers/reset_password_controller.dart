@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../config.dart';
 import '../../widgets/scaffold_messenger.dart';
 
@@ -21,6 +20,9 @@ class ResetPasswordController extends GetxController {
       } catch (e) {
         isLoading = false;
         snackBarMessengers(message: appFonts.unknownError);
+
+        snackBarMessengers(message: appFonts.emailSend.tr);
+        Get.offAllNamed(routeName.signInScreen);
       }
     }
   }

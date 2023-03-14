@@ -7,7 +7,10 @@ class OrLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: Sizes.s90,
-        child: Row(children: [
+        child: Row(
+
+          crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
           const Expanded(child: Divider(height: 1, thickness: 2)),
           Text(appFonts.or.tr,
                   style: AppCss.outfitMedium14

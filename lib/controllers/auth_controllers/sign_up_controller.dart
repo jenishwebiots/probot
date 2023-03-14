@@ -11,6 +11,19 @@ class SignUpController extends GetxController {
   GlobalKey<FormState> signUpGlobalKey = GlobalKey<FormState>();
 
   String? firebaseUser = '';
+
+  bool obscureText = true;
+  bool obscureText2 = true;
+
+  onObscure() {
+    obscureText = !obscureText;
+    update();
+  }
+  onObscure2() {
+    obscureText2 = !obscureText2;
+    update();
+  }
+
   // Firebase Register With Email & Password
   signUpMethod() async {
     if (signUpGlobalKey.currentState!.validate()) {
@@ -26,6 +39,7 @@ class SignUpController extends GetxController {
         emailController.text = "";
         passwordController.text = "";
         appCtrl.storage.write("firebaseUser", firebaseUser);
+
         Get.offAllNamed(routeName.selectLanguageScreen);
       } on FirebaseAuthException catch (e) {
         if (e.code == "email-already-in-use") {
@@ -35,6 +49,8 @@ class SignUpController extends GetxController {
       } catch (e) {
         isLoading = false;
         snackBarMessengers(message: appFonts.unknownError);
+
+        Get.offAllNamed(routeName.signInScreen);
       }
     }
   }

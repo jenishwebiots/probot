@@ -12,10 +12,9 @@ class SignUpScreen extends StatelessWidget {
           body: Stack(
         alignment: Alignment.center,
         children: [
-          SingleChildScrollView(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ListView(
                 children: [
+                  const VSpace(Sizes.s5),
                   SizedBox(
                       width: double.infinity,
                       child: Form(
@@ -47,6 +46,14 @@ class SignUpScreen extends StatelessWidget {
                                       .textColor(appCtrl.appTheme.txt)),
                               const VSpace(Sizes.s10),
                               TextFieldCommon(
+                                  suffixIcon: SvgPicture.asset(
+                                      signUpCtrl.obscureText
+                                          ? eSvgAssets.eyeSlash
+                                          : eSvgAssets.eye,fit: BoxFit.scaleDown)
+                                      .inkWell(
+                                      onTap: () =>
+                                          signUpCtrl.onObscure()),
+                                  obscureText: signUpCtrl.obscureText,
                                   validator: (password) =>
                                       Validation().passValidation(password),
                                   controller: signUpCtrl.passwordController,
@@ -57,6 +64,14 @@ class SignUpScreen extends StatelessWidget {
                                       .textColor(appCtrl.appTheme.txt)),
                               const VSpace(Sizes.s10),
                               TextFieldCommon(
+                                  suffixIcon: SvgPicture.asset(
+                                      signUpCtrl.obscureText2
+                                          ? eSvgAssets.eyeSlash
+                                          : eSvgAssets.eye,fit: BoxFit.scaleDown)
+                                      .inkWell(
+                                      onTap: () =>
+                                          signUpCtrl.onObscure2()),
+                                  obscureText: signUpCtrl.obscureText2,
                                   validator: (cfm) {
                                     if (signUpCtrl
                                             .passwordController.text !=
@@ -105,14 +120,14 @@ class SignUpScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: AppCss.outfitMedium16
                           .textColor(appCtrl.appTheme.lightText)
-                          .textHeight(1.3))
+                          .textHeight(1.3)).alignment(Alignment.bottomCenter).paddingSymmetric(vertical: Insets.i40,horizontal: Insets.i10),
+                  if (signUpCtrl.isLoading == true)
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    )
                 ]).paddingSymmetric(
                 horizontal: Insets.i20, vertical: Insets.i15),
-          ),
-          if (signUpCtrl.isLoading == true)
-            const Center(
-              child: CircularProgressIndicator(),
-            )
+
         ],
       ));
     });
