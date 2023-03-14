@@ -6,6 +6,7 @@ class TextFieldCommon extends StatelessWidget {
   final TextEditingController? controller;
   final Widget? suffixIcon, prefixIcon;
   final Color? fillColor;
+  final bool obscureText;
   final InputBorder? border;
   final TextInputType? keyboardType;
   final ValueChanged<String>? onChanged;
@@ -19,6 +20,7 @@ class TextFieldCommon extends StatelessWidget {
         this.suffixIcon,
         this.prefixIcon,
         this.border,
+        this.obscureText = false,
         this.fillColor,
         this.keyboardType,
         this.onChanged,
@@ -29,6 +31,7 @@ class TextFieldCommon extends StatelessWidget {
   Widget build(BuildContext context) {
     // Text field common
     return TextFormField(
+        obscureText: obscureText,
         keyboardType: keyboardType,
         validator: validator,
         controller: controller,

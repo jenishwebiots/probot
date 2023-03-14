@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "836888693669",
+    "project_id": "probot-9851d",
+    "storage_bucket": "probot-9851d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836888693669:android:dedf0f0a51b2633ac5364c",
+        "android_client_info": {
+          "package_name": "com.webiots.probot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "836888693669-25nh0vs19sfm0fnvikpe2eioi5d2nm95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXdS5fV5LO0VN2wjcjN_OIQxFEYP1QPrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "836888693669-25nh0vs19sfm0fnvikpe2eioi5d2nm95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
