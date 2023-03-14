@@ -28,7 +28,7 @@ class AppArray {
     {"image": eImageAssets.sc4, "title": appFonts.kettie},
     {"image": eImageAssets.sc5, "title": appFonts.marvel},
     {"image": eImageAssets.sc6, "title": appFonts.henny},
-    {"image": eImageAssets.sc7, "title": appFonts.slophie}
+    {"image": eImageAssets.sc7, "title": appFonts.sophie}
   ];
 
 // Languages list
@@ -71,6 +71,7 @@ class AppArray {
     },
   ];
 
+
   // bottom list
   var bottomList = [
     {
@@ -105,5 +106,40 @@ class AppArray {
     {"title": "option1", "icon": eSvgAssets.chatColor, "desc": "desc1"},
     {"title": "option2", "icon": eSvgAssets.galleryColor, "desc": "desc2"},
     {"title": "option3", "icon": eSvgAssets.contentColor, "desc": "desc3"}
+
   ];
+
+  // notification list
+var notificationList = [
+  {
+    "image": eImageAssets.sc6,
+    "title": appFonts.hennyHasSent,
+    "subtitle": appFonts.justNow,
+  },{
+    "image": eImageAssets.lock,
+    "title": appFonts.yourPasswordHasBeen,
+    "subtitle": appFonts.am12,
+  },{
+    "image": eImageAssets.sc7,
+    "title": appFonts.sophieHasWrite,
+    "subtitle": appFonts.am11,
+  },{
+    "image": eImageAssets.sc1,
+    "title": appFonts.dinoHasSent,
+    "subtitle": appFonts.am10,
+  },{
+    "image": eImageAssets.sc5,
+    "title": appFonts.marvelHasSent,
+    "subtitle": appFonts.am9,
+  },{
+    "image": eImageAssets.sc4,
+    "title": appFonts.kettieHasWrite,
+    "subtitle": appFonts.am9,
+  },{
+    "image": eImageAssets.sc2,
+    "title": appFonts.kingHasSend,
+    "subtitle": appFonts.am9,
+  },
+];
+
 }

@@ -35,16 +35,11 @@ class AppTheme {
   Color yellow;
   Color sameWhite;
   Color sameBlack;
-  Color darkRound;
-  Color dotted;
-  Color distance;
-  Color border;
   Color borderColor;
-  Color themeGradient;
-  Color price;
   Color toggleSwitch;
   Color trackActive;
   Color radialGradient;
+  Color bg;
 
   /// Default constructor
   AppTheme({
@@ -74,16 +69,11 @@ class AppTheme {
     required this.yellow,
     required this.sameWhite,
     required this.sameBlack,
-    required this.darkRound,
-    required this.dotted,
-    required this.distance,
-    required this.border,
     required this.borderColor,
-    required this.themeGradient,
-    required this.price,
     required this.toggleSwitch,
     required this.trackActive,
     required this.radialGradient,
+    required this.bg,
   });
 
   /// fromType factory constructor
@@ -105,7 +95,7 @@ class AppTheme {
           lightText: const Color(0xffAFB0B6),
           clickableText: const Color(0xff4D66FF),
           mainBg: const Color(0x00fff0e3),
-          boxBg: const Color(0xffF5F5F5),
+          boxBg:  Colors.white,
           white: Colors.white,
           linerGradiant: const Color(0xff848485),
           indicator: const Color(0xffDFDFDF),
@@ -117,16 +107,13 @@ class AppTheme {
           yellow: const Color(0xffFFB931),
           sameWhite: Colors.white,
           sameBlack: Colors.black,
-          darkRound: const Color(0xff414449),
-          dotted: const Color(0xffEBEBEB),
-          distance: const Color(0xff414449),
-          border: const Color(0xff414449).withOpacity(0.5),
+
           borderColor: const Color.fromRGBO(53, 193, 255, 0.08),
-          themeGradient: const Color(0xffFFD3B0),
-          price: const Color(0xff414449),
+
           toggleSwitch: const Color(0xffF5F5F5),
           trackActive: const Color(0xffFFF0E3),
           radialGradient: const Color(0xff179EEA),
+          bg: const Color(0xff4D4F5D),
         );
 
       case ThemeType.dark:
@@ -136,16 +123,16 @@ class AppTheme {
           primary: const Color(0xff35C1FF),
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
-          bg1: const Color(0xFF151A1E),
+          bg1: const Color(0xFF323444),
           surface: const Color(0xFF151A1E),
           error: const Color(0xFFd32f2f),
           icon: const Color(0xff3E9B0E),
           main: const Color(0xffFF8D2F),
           darkText: const Color(0xffF5F5F5),
-          lightText: const Color(0xff8D8F91),
+          lightText: const Color(0xffAFB0B6),
           clickableText: const Color(0xff4D66FF),
           mainBg: const Color(0x00fff0e3),
-          boxBg: const Color(0xff3C3C3C),
+          boxBg: const Color(0xff3E404F),
           white: const Color(0xff2A2A2A),
           linerGradiant: const Color(0xff848485),
           indicator: const Color(0xffDFDFDF),
@@ -157,16 +144,13 @@ class AppTheme {
           yellow: const Color(0xffFFB931),
           sameWhite: Colors.white,
           sameBlack: Colors.black,
-          darkRound: const Color(0xff414449),
-          dotted: const Color(0xff414449),
-          distance: const Color(0xff8D8F91),
-          border: const Color(0xff414449).withOpacity(0.5),
+
           borderColor: const Color(0xFF323444),
-          themeGradient: const Color(0xffFFD3B0),
-          price: const Color(0xffFF8D2F),
+
           toggleSwitch: const Color(0xff2A2A2A),
           trackActive: const Color(0xff4E3B2B),
           radialGradient: const Color(0xff179EEA),
+          bg: const Color(0xff4D4F5D),
         );
     }
   }

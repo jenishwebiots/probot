@@ -1,7 +1,12 @@
 import 'dart:developer';
 import 'package:probot/config.dart';
 
+import '../../common/theme/theme_service.dart';
+
+
+
 class SplashController extends GetxController {
+
 
   @override
   void onReady() async {
@@ -11,6 +16,12 @@ class SplashController extends GetxController {
     appCtrl.isLanguage = isLanguageSaved;
     // Language Save
     Locale? locale = const Locale("en", "US");
+
+  // Theme Save
+  bool isTheme = appCtrl.storage.read("isDarkMode") ?? false;
+  ThemeService().switchTheme(true);
+  appCtrl.isTheme = isTheme;
+
 
     var language =
         await appCtrl.storage.read("locale") ?? const Locale("en", "US");
@@ -45,14 +56,7 @@ class SplashController extends GetxController {
     log("firebaseUser: $firebaseUser");
     log("condition: ${name != null || userName != null || firebaseUser != null}");
     appCtrl.isOnboard = onBoard;
-    Future.delayed(const Duration(seconds: 3), () {
-      if (onBoard) {
-        if (name != null || userName != null || firebaseUser != null) {
-          Get.toNamed(routeName.selectLanguageScreen);
 
-          var userName = appCtrl.storage.read("userName");
-          var firebaseUser = appCtrl.storage.read("firebaseUser");
-          appCtrl.isOnboard = onBoard;
           Future.delayed(const Duration(seconds: 3), () {
             if (onBoard) {
               if (name != null || userName != null || firebaseUser != null) {
@@ -73,8 +77,5 @@ class SplashController extends GetxController {
             }
             update();
           });
-        }
-      }
-    });
   }
 }

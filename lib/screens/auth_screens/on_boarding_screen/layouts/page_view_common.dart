@@ -56,7 +56,7 @@ class PageViewCommon extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(alignment: Alignment.topCenter, children: [
-                      Image.asset(eImageAssets.container,
+                      Image.asset(eImageAssets.container,color: appCtrl.isTheme ? appCtrl.appTheme.bg : appCtrl.appTheme.white,
                           fit: BoxFit.fill,
                           height: 200,
                           width: double.infinity),
@@ -93,7 +93,7 @@ class PageViewCommon extends StatelessWidget {
               .decorated(
                   shape: BoxShape.circle,
                   gradient: RadialGradient(colors: [
-                    appCtrl.appTheme.primary.withOpacity(0.5),
+                    appCtrl.appTheme.secondary,
                     appCtrl.appTheme.primary
                   ], center: const Alignment(-0.9, -0.4)))
         ])

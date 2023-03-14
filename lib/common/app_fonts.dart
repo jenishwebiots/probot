@@ -66,8 +66,33 @@ class AppFonts {
   String kettie = "kettie";
   String marvel = "marvel";
   String henny = "henny";
-  String slophie = "slophie";
+  String sophie = "sophie";
   String setupAFingerprint = "setupAFingerprint";
   String addNow = "addNow";
   String doItLater = "doItLater";
+
+  String addFingerprint = "Add fingerprint";
+  String placeYourFinger = "Place your finger on the sensor";
+  String pressTheSensor = "Press the sensor and lift when you feel vibration";
+  String moveYourFinger = "Move your finger";
+  String tryRestingAnother = "Try resting another area of your finger on the sensor.";
+  String yourFingerprintHasBeen = "Your fingerprint has been added successfully.";
+  String done = "Done";
+
+
+  String notification = "Notification";
+  String hennyHasSent = "Henny has sent you images of “Surat”.";
+  String yourPasswordHasBeen = "Your password has been changed, wait for a while to reset it.";
+  String sophieHasWrite = "Sophie has write some content for your “UI/UX Design” topic.";
+  String dinoHasSent = "Dino has sent you message.";
+  String marvelHasSent = "Marvel has sent you an image.";
+  String kettieHasWrite = "Kettie has write content for your recently new topic “Development”";
+  String kingHasSend = "King has send message you about recent news.";
+  String justNow = "Just now";
+  String am12 = "12:30 am";
+  String am11 = "11:20 am";
+  String am10 = "10:15 am";
+  String am9 = "09:41 am";
+  String youDontHave = "You don't have any new notifications; reload it to get new one.";
+  String refresh = "Refresh";
 }

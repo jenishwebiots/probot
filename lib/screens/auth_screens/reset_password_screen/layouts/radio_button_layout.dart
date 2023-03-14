@@ -19,7 +19,7 @@ class RadioButtonLayout extends StatelessWidget {
           Image.asset(data!.image!, height: Sizes.s40, width: Sizes.s40)
               .decorated(boxShadow: [
             BoxShadow(
-                color: appCtrl.appTheme.lightText.withOpacity(0.2),
+                color: appCtrl.isTheme ? appCtrl.appTheme.trans : appCtrl.appTheme.lightText.withOpacity(0.2),
                 blurRadius: 3,
                 spreadRadius: 3)
           ], shape: BoxShape.circle),
@@ -40,7 +40,7 @@ class RadioButtonLayout extends StatelessWidget {
             Icons.circle,size: 10,
             color: selectIndex == index
                 ? appCtrl.appTheme.primary
-                : appCtrl.appTheme.white
+                : appCtrl.appTheme.trans
           )
         )
       ]).inkWell(onTap: onTap),
