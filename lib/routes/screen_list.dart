@@ -23,5 +23,7 @@ export 'package:probot/screens/auth_screens/sign_in_screen/sign_in_screen.dart';
 export 'package:probot/screens/auth_screens/scan_fingerprint_screen/scan_fingerprint_screen.dart';
 export '../screens/app_screens/notification_screen/notification_screen.dart';
 
+export '../screens/bottom_screens/dashboard/dashboard.dart';
+export '../screens/app_screens/chat_layout/chat_layout.dart';
 export 'package:probot/screens/app_screens/notification_screen/layouts/notification_layout.dart';
 

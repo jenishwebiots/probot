@@ -71,7 +71,6 @@ class AppArray {
     },
   ];
 
-
   // bottom list
   var bottomList = [
     {
@@ -106,7 +105,6 @@ class AppArray {
     {"title": "option1", "icon": eSvgAssets.chatColor, "desc": "desc1"},
     {"title": "option2", "icon": eSvgAssets.galleryColor, "desc": "desc2"},
     {"title": "option3", "icon": eSvgAssets.contentColor, "desc": "desc3"}
-
   ];
 
   //drawer list
@@ -137,7 +135,7 @@ class AppArray {
         {
           "isReceiver": true,
           "message": "How are you ? 😄",
-          "time": "5:32",
+          "time": "5:31",
         },
         {
           "isReceiver": false,
@@ -149,11 +147,7 @@ class AppArray {
           "message": "Too good !\nWhere were you all this time ?",
           "time": "5:32",
         },
-        {
-          "isReceiver": true,
-          "message": "Have any problem ?",
-          "time": "5:32"
-        },
+        {"isReceiver": true, "message": "Have any problem ?", "time": "5:32"},
         {
           "isReceiver": false,
           "message": "Yeah ! i’m not so good. 😐",
@@ -163,42 +157,52 @@ class AppArray {
           "isReceiver": false,
           "message": "I need just some time. 😇",
           "time": "5:33",
-        }
+        },
+        {
+          "isReceiver": true,
+          "message": "Too good",
+          "time": "5:34",
+        },
       ]
     }
   ];
 
   // notification list
-var notificationList = [
-  {
-    "image": eImageAssets.sc6,
-    "title": appFonts.hennyHasSent,
-    "subtitle": appFonts.justNow,
-  },{
-    "image": eImageAssets.lock,
-    "title": appFonts.yourPasswordHasBeen,
-    "subtitle": appFonts.am12,
-  },{
-    "image": eImageAssets.sc7,
-    "title": appFonts.sophieHasWrite,
-    "subtitle": appFonts.am11,
-  },{
-    "image": eImageAssets.sc1,
-    "title": appFonts.dinoHasSent,
-    "subtitle": appFonts.am10,
-  },{
-    "image": eImageAssets.sc5,
-    "title": appFonts.marvelHasSent,
-    "subtitle": appFonts.am9,
-  },{
-    "image": eImageAssets.sc4,
-    "title": appFonts.kettieHasWrite,
-    "subtitle": appFonts.am9,
-  },{
-    "image": eImageAssets.sc2,
-    "title": appFonts.kingHasSend,
-    "subtitle": appFonts.am9,
-  },
-];
-
+  var notificationList = [
+    {
+      "image": eImageAssets.sc6,
+      "title": appFonts.hennyHasSent,
+      "subtitle": appFonts.justNow,
+    },
+    {
+      "image": eImageAssets.lock,
+      "title": appFonts.yourPasswordHasBeen,
+      "subtitle": appFonts.am12,
+    },
+    {
+      "image": eImageAssets.sc7,
+      "title": appFonts.sophieHasWrite,
+      "subtitle": appFonts.am11,
+    },
+    {
+      "image": eImageAssets.sc1,
+      "title": appFonts.dinoHasSent,
+      "subtitle": appFonts.am10,
+    },
+    {
+      "image": eImageAssets.sc5,
+      "title": appFonts.marvelHasSent,
+      "subtitle": appFonts.am9,
+    },
+    {
+      "image": eImageAssets.sc4,
+      "title": appFonts.kettieHasWrite,
+      "subtitle": appFonts.am9,
+    },
+    {
+      "image": eImageAssets.sc2,
+      "title": appFonts.kingHasSend,
+      "subtitle": appFonts.am9,
+    },
+  ];
 }
