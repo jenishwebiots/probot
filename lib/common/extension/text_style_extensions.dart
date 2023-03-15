@@ -1,4 +1,5 @@
 library textstyle_extensions;
+
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,11 @@ extension TextStyleExtensions on TextStyle {
   TextStyle textFeatures(List<FontFeature> v) => copyWith(fontFeatures: v);
 
   /// Shortcut for decoration
-  TextStyle textDecoration(TextDecoration v, {Color? color, TextDecorationStyle? style, double thickness = 1}) =>
-      copyWith(decoration: v, decorationColor: color, decorationStyle: style, decorationThickness: thickness);
+  TextStyle textDecoration(TextDecoration v,
+          {Color? color, TextDecorationStyle? style, double thickness = 1}) =>
+      copyWith(
+          decoration: v,
+          decorationColor: color,
+          decorationStyle: style,
+          decorationThickness: thickness);
 }
