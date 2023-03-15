@@ -14,17 +14,17 @@ class TextFieldCommon extends StatelessWidget {
 
   const TextFieldCommon(
       {Key? key,
-        required this.hintText,
-        this.validator,
-        this.controller,
-        this.suffixIcon,
-        this.prefixIcon,
-        this.border,
-        this.obscureText = false,
-        this.fillColor,
-        this.keyboardType,
-        this.onChanged,
-        this.maxLength})
+      required this.hintText,
+      this.validator,
+      this.controller,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.border,
+      this.obscureText = false,
+      this.fillColor,
+      this.keyboardType,
+      this.onChanged,
+      this.maxLength})
       : super(key: key);
 
   @override
@@ -38,19 +38,19 @@ class TextFieldCommon extends StatelessWidget {
         onChanged: onChanged,
         maxLength: maxLength,
         decoration: InputDecoration(
-            fillColor: appCtrl.appTheme.bg,
+            fillColor: fillColor ?? appCtrl.appTheme.bg,
             filled: true,
-            border: const OutlineInputBorder(
-                borderRadius:
-                BorderRadius.all(Radius.circular(AppRadius.r8)),
-                borderSide:
-                BorderSide(width: 0, style: BorderStyle.none)),
+            border:
+                const OutlineInputBorder(
+                    borderRadius:
+                    BorderRadius.all(Radius.circular(AppRadius.r8)),
+                    borderSide: BorderSide(width: 0, style: BorderStyle.none)),
             contentPadding: const EdgeInsets.symmetric(
                 horizontal: Insets.i15, vertical: Insets.i10),
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,
-            hintStyle: AppCss.outfitMedium14
-                .textColor(appCtrl.appTheme.lightText),
-            hintText: hintText.tr));
+            hintStyle:
+            AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
+            hintText: hintText.tr)).authBoxExtension();
   }
 }

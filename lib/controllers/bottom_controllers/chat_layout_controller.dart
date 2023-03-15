@@ -32,8 +32,7 @@ class ChatLayoutController extends GetxController {
   }
 
   //check sender time
-  bool checkTime(givenTime,givenIndex) {
-    log("isCH : ${time == givenTime}");
+  bool checkTime(givenTime,givenIndex,length,chatIndex) {
     if (time == givenTime) {
       count++;
       lastIndex = givenIndex;
@@ -41,14 +40,23 @@ class ChatLayoutController extends GetxController {
     } else {
       count = 0;
       time = givenTime;
-      lastIndex = 0;
-      return false;
+      if(givenIndex < length -1) {
+        if (time == chatList[chatIndex].chat![givenIndex + 1].time) {
+          return true;
+        } else {
+
+          lastIndex = 0;
+          return false;
+        }
+      }else{
+        return false;
+      }
     }
   }
 
   //check receiver time
   bool checkReceiverTime(givenTime,givenIndex) {
-    log("isCH : ${receiverTime == givenTime}");
+
     if (receiverTime == givenTime) {
       receiverCount++;
       receiverLastIndex = givenIndex;

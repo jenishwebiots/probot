@@ -143,6 +143,11 @@ class AppArray {
           "time": "5:32",
         },
         {
+          "isReceiver": false,
+          "message": "I’m good ! what about you ?",
+          "time": "5:32",
+        },
+        {
           "isReceiver": true,
           "message": "Too good !\nWhere were you all this time ?",
           "time": "5:32",
@@ -160,8 +165,18 @@ class AppArray {
         },
         {
           "isReceiver": true,
-          "message": "Too good",
+          "message": "Too good !\nWhere were you all this time ?",
           "time": "5:34",
+        },
+        {
+          "isReceiver": true,
+          "message": "Too good !\nWhere were you all this time ?",
+          "time": "5:34",
+        },
+        {
+          "isReceiver": false,
+          "message": "I need just some time. 😇",
+          "time": "5:35",
         },
       ]
     }

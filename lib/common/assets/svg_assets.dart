@@ -9,6 +9,8 @@ class SvgAssets {
   final String settingColor = "assets/svg/settingColor.svg";
   final String home = "assets/svg/home.svg";
   final String chat = "assets/svg/chat.svg";
+  final String search = "assets/svg/search.svg";
+  final String more = "assets/svg/more.svg";
   final String gallery = "assets/svg/gallery.svg";
   final String content = "assets/svg/content.svg";
   final String setting = "assets/svg/setting.svg";
@@ -19,4 +21,7 @@ class SvgAssets {
   final String eye = "assets/svg/eye.svg";
   final String eyeSlash = "assets/svg/eyeSlash.svg";
   final String delete = "assets/svg/delete.svg";
+  final String smile = "assets/svg/smile.svg";
+  final String mic = "assets/svg/mic.svg";
+  final String send = "assets/svg/send.svg";
 }
