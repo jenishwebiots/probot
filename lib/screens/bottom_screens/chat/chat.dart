@@ -18,7 +18,7 @@ class Chat extends StatelessWidget {
           backgroundColor: appCtrl.appTheme.primary,
           title: Text(appFonts.chatWithProBot.tr,
               style:
-                  AppCss.outfitExtraBold22.textColor(appCtrl.appTheme.white)),
+                  AppCss.outfitExtraBold22.textColor(appCtrl.appTheme.sameWhite)),
         ),
         backgroundColor: appCtrl.appTheme.bg1,
         body: Container(

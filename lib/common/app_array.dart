@@ -135,7 +135,7 @@ class AppArray {
         {
           "isReceiver": true,
           "message": "How are you ? 😄",
-          "time": "5:32",
+          "time": "5:31",
         },
         {
           "isReceiver": false,
@@ -157,7 +157,12 @@ class AppArray {
           "isReceiver": false,
           "message": "I need just some time. 😇",
           "time": "5:33",
-        }
+        },
+        {
+          "isReceiver": true,
+          "message": "Too good",
+          "time": "5:34",
+        },
       ]
     }
   ];
@@ -201,6 +206,7 @@ class AppArray {
     },
   ];
 
+
 // image size list
   var imageSizeList = ["160*160", "250*250", "360*360"];
 
@@ -223,4 +229,5 @@ var imageGeneratorList = [
     "image": eImageAssets.ig6
   },
 ];
+
 }

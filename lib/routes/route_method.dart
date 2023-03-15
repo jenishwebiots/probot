@@ -1,10 +1,6 @@
-import 'package:probot/screens/bottom_screens/chat_layout/chat_layout.dart';
+
 
 import '../config.dart';
-import '../screens/auth_screens/select_character_screen/select_character_screen.dart';
-import '../screens/auth_screens/select_language_screen/select_language_screen.dart';
-import '../screens/auth_screens/sign_in_screen/sign_in_screen.dart';
-import '../screens/bottom_screens/dashboard/dashboard.dart';
 
 
 
@@ -14,13 +10,13 @@ class AppRoute {
   final List<GetPage> getPages = [
     GetPage(name: _routeName.splashScreen, page: () => SplashScreen()),
     GetPage(name: _routeName.onBoardingScreen, page: () => OnBoardingScreen()),
-    GetPage(name: _routeName.loginScreen, page: () => LoginScreen()),
+    GetPage(name: _routeName.loginScreen, page: () => const LoginScreen()),
     GetPage(name: _routeName.signInScreen, page: () => SignInScreen()),
     GetPage(
         name: _routeName.restPasswordScreen, page: () => RestPasswordScreen()),
     GetPage(
         name: _routeName.changePasswordScreen,
-        page: () => ChangePasswordScreen()),
+        page: () => const ChangePasswordScreen()),
     GetPage(name: _routeName.signUpScreen, page: () => SignUpScreen()),
     GetPage(
         name: _routeName.selectLanguageScreen,
@@ -31,7 +27,7 @@ class AppRoute {
 
     GetPage(
         name: _routeName.addFingerprintScreen,
-        page: () => AddFingerprintScreen()),
+        page: () => const AddFingerprintScreen()),
     GetPage(
         name: _routeName.dashboard,
         page: () => Dashboard()),
@@ -41,7 +37,7 @@ class AppRoute {
 
 
 
-    GetPage(name: _routeName.scanFingerprintScreen, page: () => ScanFingerprintScreen()),
+    GetPage(name: _routeName.scanFingerprintScreen, page: () => const ScanFingerprintScreen()),
     GetPage(name: _routeName.notificationScreen, page: () => NotificationScreen()),
 
   ];
