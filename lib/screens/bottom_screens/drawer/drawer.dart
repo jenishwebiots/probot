@@ -62,8 +62,7 @@ class CommonDrawer extends StatelessWidget {
                         lineThickness: 1,
                         dashLength: 3,
                         dashColor: appCtrl.appTheme.txt.withOpacity(.2))
-                    .marginSymmetric(
-                        horizontal: Insets.i20, vertical: Insets.i20),
+                    .marginSymmetric(vertical: Insets.i20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
