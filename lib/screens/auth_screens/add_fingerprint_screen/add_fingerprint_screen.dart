@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-
 import '../../../config.dart';
 
 class AddFingerprintScreen extends StatelessWidget {
@@ -8,6 +7,7 @@ class AddFingerprintScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+
       onWillPop:  () async{
         SystemNavigator.pop();
         return true;

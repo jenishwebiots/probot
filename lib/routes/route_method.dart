@@ -6,6 +6,8 @@ import '../screens/auth_screens/select_language_screen/select_language_screen.da
 import '../screens/auth_screens/sign_in_screen/sign_in_screen.dart';
 import '../screens/bottom_screens/dashboard/dashboard.dart';
 
+
+
 RouteName _routeName = RouteName();
 
 class AppRoute {
@@ -26,6 +28,7 @@ class AppRoute {
     GetPage(
         name: _routeName.selectCharacterScreen,
         page: () => SelectCharacterScreen()),
+
     GetPage(
         name: _routeName.addFingerprintScreen,
         page: () => AddFingerprintScreen()),
@@ -35,6 +38,11 @@ class AppRoute {
     GetPage(
         name: _routeName.chatLayout,
         page: () => ChatLayout()),
+
+
+
+    GetPage(name: _routeName.scanFingerprintScreen, page: () => ScanFingerprintScreen()),
+    GetPage(name: _routeName.notificationScreen, page: () => NotificationScreen()),
 
   ];
 }
