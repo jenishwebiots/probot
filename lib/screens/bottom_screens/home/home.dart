@@ -46,57 +46,7 @@ class Home extends StatelessWidget {
               ),
             )
           ],
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const DottedLines(),
-                const VSpace(Sizes.s20),
-                Column(
-                  children: [
-                    Text(
-                        "Choose one of the following to enjoy the greatest experience.",
-                        style: AppCss.outfitRegular16
-                            .textColor(appCtrl.appTheme.lightText)
-                            .textHeight(1.3)
-                            .letterSpace(.3)),
-                    const VSpace(Sizes.s20),
-                    ...homeCtrl.homeOptionList.asMap().entries.map((e) {
-                      return Row(
-                        children: [
-                          SvgPicture.asset(e.value.image.toString(),height: Sizes.s28,
-                                  colorFilter: ColorFilter.mode(
-                                      appCtrl.appTheme.white, BlendMode.srcIn))
-                              .paddingAll(Insets.i13)
-                              .decorated(
-                                  color: appCtrl.appTheme.primary,
-                                  borderRadius:
-                                      BorderRadius.circular(AppRadius.r8)),
-                          const HSpace(Sizes.s11),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(e.value.title.toString().tr,style: AppCss.outfitBold18.textColor(appCtrl.appTheme.txt),)
-                            ],
-                          )
-                        ],
-                      ).paddingSymmetric(horizontal:Insets.i15,vertical: Insets.i18).decorated(
-                          color: appCtrl.appTheme.white,
-                          borderRadius: BorderRadius.circular(AppRadius.r10),
-                          boxShadow: [const BoxShadow(
-                            color: Color.fromRGBO(53, 193, 255, 0.06),
-                            offset: Offset(0,2),
-                            blurRadius: 20
-                          )],
-                          border: Border.all(
-                              color: appCtrl.appTheme.borderColor,width: 1.5)).marginOnly(bottom: Insets.i15);
-                    }).toList()
-                  ],
-                ).marginSymmetric(horizontal: Sizes.s20)
-              ],
-            ),
-          ),
-        ),
-      );
+        ));
     });
   }
 }

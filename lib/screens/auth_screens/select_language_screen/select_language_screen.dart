@@ -10,7 +10,11 @@ class SelectLanguageScreen extends StatelessWidget {
     return GetBuilder<SelectLanguageController>(builder: (_) {
       return WillPopScope(
         onWillPop: () async{
-          SystemNavigator.pop();
+          if(languageCtrl.isBack){
+            Get.back();
+          }else {
+            SystemNavigator.pop();
+          }
           return true;
         },
         child: Scaffold(

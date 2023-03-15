@@ -73,5 +73,16 @@ final dynamic en = {
   'desc1': "Get a quick response to any query",
   'desc2': "Finest results, a time-saving",
   'desc3': "Best outcome without copies",
+  'chooseOption': "Choose one of the following to enjoy the greatest experience.",
+  'language': "Language",
+  'logout': "Logout",
+  'chat': "Chat",
+  'content': "Content",
+  'setting': "Setting",
+  'image': "Image",
+  'darkTheme': "Dark Theme",
+  'listCharacter': "List of Character",
+  'tapCharacter': "Tap on character to chat with them",
+  'chatWithProBot': "Chat with ProBot",
 
 };

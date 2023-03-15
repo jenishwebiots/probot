@@ -71,6 +71,12 @@ class AppFonts {
   String addNow = "addNow";
   String doItLater = "doItLater";
 
+  String chooseOption = "chooseOption";
+  String darkTheme = "darkTheme";
+  String listCharacter = "listCharacter";
+  String tapCharacter = "tapCharacter";
+  String chatWithProBot = "chatWithProBot";
+
   String addFingerprint = "Add fingerprint";
   String placeYourFinger = "Place your finger on the sensor";
   String pressTheSensor = "Press the sensor and lift when you feel vibration";
@@ -95,4 +101,5 @@ class AppFonts {
   String am9 = "09:41 am";
   String youDontHave = "You don't have any new notifications; reload it to get new one.";
   String refresh = "Refresh";
+
 }

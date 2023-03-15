@@ -33,4 +33,13 @@ class ImageAssets {
   final String italian = "assets/images/icons/italian.png";
   final String japanese = "assets/images/icons/japanese.png";
   final String tick = "assets/images/icons/tick.png";
+
+  // chat
+  final String chat1 = "assets/images/chat/chat1.png";
+  final String chat2 = "assets/images/chat/chat2.png";
+  final String chat3 = "assets/images/chat/chat3.png";
+  final String chat4 = "assets/images/chat/chat4.png";
+  final String chat5 = "assets/images/chat/chat5.png";
+  final String chat6 = "assets/images/chat/chat6.png";
+  final String chat7 = "assets/images/chat/chat7.png";
 }

@@ -1,3 +1,5 @@
+import 'package:probot/screens/bottom_screens/chat_layout/chat_layout.dart';
+
 import '../config.dart';
 import '../screens/auth_screens/select_character_screen/select_character_screen.dart';
 import '../screens/auth_screens/select_language_screen/select_language_screen.dart';
@@ -33,6 +35,9 @@ class AppRoute {
     GetPage(
         name: _routeName.dashboard,
         page: () => Dashboard()),
+    GetPage(
+        name: _routeName.chatLayout,
+        page: () => ChatLayout()),
 
 
 

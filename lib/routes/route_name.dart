@@ -12,6 +12,9 @@ class RouteName {
 
   final String dashboard = "/dashboard";
 
+  final String chatLayout = "/chatLayout";
+
+
   final String scanFingerprintScreen = "/scanFingerprintScreen";
   final String notificationScreen = "/notificationScreen";
 
