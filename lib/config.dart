@@ -37,9 +37,6 @@ export '../widgets/directionality_rtl.dart';
 export '../widgets/common_menu_icon.dart';
 export 'package:probot/widgets/auth_app_bar_common.dart';
 
-
-
-
 final appCtrl = Get.isRegistered<AppController>()
     ? Get.find<AppController>()
     : Get.put(AppController());
