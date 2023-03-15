@@ -9,44 +9,33 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (_) {
       return Scaffold(
-        backgroundColor: appCtrl.appTheme.bg1,
-        body: NestedScrollView(
-          headerSliverBuilder:
-              (BuildContext context, bool innerBoxIsScrolled) => [
-            SliverAppBar(
-              toolbarHeight: Sizes.s80,
-              leadingWidth: Sizes.s80,
-              automaticallyImplyLeading: false,
-              leading: SvgPicture.asset(eSvgAssets.menu)
-                  .paddingSymmetric(horizontal: Insets.i20),
-              pinned: true,
-              expandedHeight: Sizes.s340,
-              title: Image.asset(eImageAssets.logo1, width: Sizes.s106),
-              centerTitle: true,
-              actions: [
-                SvgPicture.asset(
-                  eSvgAssets.bell,
-                ).inkWell(onTap: ()=> Get.toNamed(routeName.notificationScreen)).paddingSymmetric(horizontal: Insets.i20)
+          key: homeCtrl.scaffoldKey,
+          drawer:const CommonDrawer(),
+          backgroundColor: appCtrl.appTheme.bg1,
+          body: NestedScrollView(
+              headerSliverBuilder: (BuildContext context,
+                  bool innerBoxIsScrolled) =>
+              [
+                const HomeSliverAppBar()
               ],
-              flexibleSpace: Container(
-                padding: const EdgeInsets.only(top: Insets.i100),
-                decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                        focalRadius: 1,
-                        radius: 1,
-                        center: const Alignment(-0.1, 0.1),
-                        colors: [
-                      appCtrl.appTheme.primary,
-                      appCtrl.appTheme.radialGradient
-                    ])),
-                child: Image.asset(
-                  eImageAssets.homeAppBar,
-                ).paddingSymmetric(
-                    vertical: Insets.i30, horizontal: Insets.i35),
-              ),
-            )
-          ],
-        ));
+              body: SingleChildScrollView(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    const DottedLines(),
+                    const VSpace(Sizes.s20),
+                    Column(mainAxisSize: MainAxisSize.min,crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(
+                          appFonts.chooseOption.tr,
+                          style: AppCss.outfitRegular16
+                              .textColor(appCtrl.appTheme.lightText)
+                              .textHeight(1.3)
+                              .letterSpace(.3)),
+                      const VSpace(Sizes.s20),
+                      ...homeCtrl.homeOptionList.asMap().entries.map((e) {
+                        return OptionCard(homeOptionModel: e.value)
+                            .inkWell(onTap: () => homeCtrl.onOptionTap(e.key));
+                      }).toList()
+                    ]).marginSymmetric(horizontal: Sizes.s20)
+                  ]))));
     });
   }
 }

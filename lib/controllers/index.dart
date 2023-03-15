@@ -13,4 +13,5 @@ export 'bottom_controllers/home_controller.dart';
 export 'bottom_controllers/chat_controller.dart';
 
 export 'app_pages_controllers/notification_controller.dart';
+export 'bottom_controllers/image_generator_controller.dart';
 

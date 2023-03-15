@@ -115,7 +115,7 @@ class SignInScreen extends StatelessWidget {
                           const OrLayout().alignment(Alignment.center),
                           ButtonCommon(
                               isGradient: false,
-                              color: appCtrl.appTheme.bg,
+                              color: appCtrl.appTheme.textField,
                               style: AppCss.outfitMedium16
                                   .textColor(appCtrl.appTheme.txt),
                               onTap: () =>

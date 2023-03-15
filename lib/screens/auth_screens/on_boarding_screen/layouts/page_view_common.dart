@@ -56,7 +56,7 @@ class PageViewCommon extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(alignment: Alignment.topCenter, children: [
-                      Image.asset(eImageAssets.container,color: appCtrl.isTheme ? appCtrl.appTheme.bg : appCtrl.appTheme.white,
+                      Image.asset(eImageAssets.container,color: appCtrl.isTheme ? appCtrl.appTheme.boxBg : appCtrl.appTheme.white,
                           fit: BoxFit.fill,
                           height: 200,
                           width: double.infinity),

@@ -71,7 +71,6 @@ class AppArray {
     },
   ];
 
-
   // bottom list
   var bottomList = [
     {
@@ -106,7 +105,6 @@ class AppArray {
     {"title": "option1", "icon": eSvgAssets.chatColor, "desc": "desc1"},
     {"title": "option2", "icon": eSvgAssets.galleryColor, "desc": "desc2"},
     {"title": "option3", "icon": eSvgAssets.contentColor, "desc": "desc3"}
-
   ];
 
   //drawer list
@@ -149,11 +147,7 @@ class AppArray {
           "message": "Too good !\nWhere were you all this time ?",
           "time": "5:32",
         },
-        {
-          "isReceiver": true,
-          "message": "Have any problem ?",
-          "time": "5:32"
-        },
+        {"isReceiver": true, "message": "Have any problem ?", "time": "5:32"},
         {
           "isReceiver": false,
           "message": "Yeah ! i’m not so good. 😐",
@@ -169,36 +163,64 @@ class AppArray {
   ];
 
   // notification list
-var notificationList = [
+  var notificationList = [
+    {
+      "image": eImageAssets.sc6,
+      "title": appFonts.hennyHasSent,
+      "subtitle": appFonts.justNow,
+    },
+    {
+      "image": eImageAssets.lock,
+      "title": appFonts.yourPasswordHasBeen,
+      "subtitle": appFonts.am12,
+    },
+    {
+      "image": eImageAssets.sc7,
+      "title": appFonts.sophieHasWrite,
+      "subtitle": appFonts.am11,
+    },
+    {
+      "image": eImageAssets.sc1,
+      "title": appFonts.dinoHasSent,
+      "subtitle": appFonts.am10,
+    },
+    {
+      "image": eImageAssets.sc5,
+      "title": appFonts.marvelHasSent,
+      "subtitle": appFonts.am9,
+    },
+    {
+      "image": eImageAssets.sc4,
+      "title": appFonts.kettieHasWrite,
+      "subtitle": appFonts.am9,
+    },
+    {
+      "image": eImageAssets.sc2,
+      "title": appFonts.kingHasSend,
+      "subtitle": appFonts.am9,
+    },
+  ];
+
+// image size list
+  var imageSizeList = ["160*160", "250*250", "360*360"];
+
+  // view type list
+  var viewTypeList = [appFonts.pageType, appFonts.gridType];
+
+  // images list of image generator
+var imageGeneratorList = [
   {
-    "image": eImageAssets.sc6,
-    "title": appFonts.hennyHasSent,
-    "subtitle": appFonts.justNow,
+    "image": eImageAssets.ig1
   },{
-    "image": eImageAssets.lock,
-    "title": appFonts.yourPasswordHasBeen,
-    "subtitle": appFonts.am12,
+    "image": eImageAssets.ig2
   },{
-    "image": eImageAssets.sc7,
-    "title": appFonts.sophieHasWrite,
-    "subtitle": appFonts.am11,
+    "image": eImageAssets.ig3
   },{
-    "image": eImageAssets.sc1,
-    "title": appFonts.dinoHasSent,
-    "subtitle": appFonts.am10,
+    "image": eImageAssets.ig4
   },{
-    "image": eImageAssets.sc5,
-    "title": appFonts.marvelHasSent,
-    "subtitle": appFonts.am9,
+    "image": eImageAssets.ig5
   },{
-    "image": eImageAssets.sc4,
-    "title": appFonts.kettieHasWrite,
-    "subtitle": appFonts.am9,
-  },{
-    "image": eImageAssets.sc2,
-    "title": appFonts.kingHasSend,
-    "subtitle": appFonts.am9,
+    "image": eImageAssets.ig6
   },
 ];
-
 }

@@ -19,4 +19,9 @@ class SvgAssets {
   final String eye = "assets/svg/eye.svg";
   final String eyeSlash = "assets/svg/eyeSlash.svg";
   final String delete = "assets/svg/delete.svg";
+  final String dropDown = "assets/svg/dropDown.svg";
+  final String filter = "assets/svg/filter.svg";
+  final String search = "assets/svg/search.svg";
+  final String download = "assets/svg/download.svg";
+
 }

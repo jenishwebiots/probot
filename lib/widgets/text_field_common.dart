@@ -38,7 +38,7 @@ class TextFieldCommon extends StatelessWidget {
         onChanged: onChanged,
         maxLength: maxLength,
         decoration: InputDecoration(
-            fillColor: appCtrl.appTheme.bg,
+            fillColor: fillColor ?? appCtrl.appTheme.textField,
             filled: true,
             border: const OutlineInputBorder(
                 borderRadius:
