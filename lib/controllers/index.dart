@@ -9,8 +9,8 @@ export 'auth_controllers/splash_controller.dart';
 export 'common_controllers/app_controller.dart';
 export 'bottom_controllers/dashboard_controller.dart';
 export 'bottom_controllers/home_controller.dart';
-
+export 'bottom_controllers/setting_controller.dart';
 export 'bottom_controllers/chat_controller.dart';
-
+export 'app_pages_controllers/chat_layout_controller.dart';
 export 'app_pages_controllers/notification_controller.dart';
 

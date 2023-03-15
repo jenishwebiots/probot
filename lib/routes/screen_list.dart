@@ -16,14 +16,18 @@ export '../screens/bottom_screens/drawer/drawer.dart';
 
 export '../screens/bottom_screens/home/layouts/sliver_app_bar.dart';
 
-export 'package:probot/screens/auth_screens/select_character_screen/select_character_screen.dart';
-export 'package:probot/screens/auth_screens/select_language_screen/select_language_screen.dart';
-export 'package:probot/screens/auth_screens/sign_in_screen/sign_in_screen.dart';
+export '../screens/auth_screens/select_character_screen/select_character_screen.dart';
+export '../screens/auth_screens/select_language_screen/select_language_screen.dart';
+export '../screens/auth_screens/sign_in_screen/sign_in_screen.dart';
 
-export 'package:probot/screens/auth_screens/scan_fingerprint_screen/scan_fingerprint_screen.dart';
+export '../screens/auth_screens/scan_fingerprint_screen/scan_fingerprint_screen.dart';
 export '../screens/app_screens/notification_screen/notification_screen.dart';
 
 export '../screens/bottom_screens/dashboard/dashboard.dart';
 export '../screens/app_screens/chat_layout/chat_layout.dart';
-export 'package:probot/screens/app_screens/notification_screen/layouts/notification_layout.dart';
+export '../screens/app_screens/chat_layout/layouts/more_option.dart';
+export '../screens/app_screens/notification_screen/layouts/notification_layout.dart';
 
+export '../screens/bottom_screens/chat/chat.dart';
+export '../screens/bottom_screens/home/home.dart';
+export '../screens/bottom_screens/setting/setting.dart';

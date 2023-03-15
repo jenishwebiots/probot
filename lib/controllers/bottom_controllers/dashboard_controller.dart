@@ -1,8 +1,5 @@
-import 'dart:developer';
 
 import 'package:probot/config.dart';
-import 'package:probot/screens/bottom_screens/chat/chat.dart';
-import 'package:probot/screens/bottom_screens/home/home.dart';
 
 class DashboardController extends GetxController
     with GetTickerProviderStateMixin {
@@ -24,7 +21,7 @@ class DashboardController extends GetxController
     Chat(),
     Text("Image"),
     Text("Content"),
-    Text("Setting"),
+    Setting(),
   ];
 
   @override

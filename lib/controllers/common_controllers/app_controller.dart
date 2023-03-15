@@ -11,7 +11,7 @@ class AppController extends GetxController {
   bool isRTL = false;
   bool isLanguage = false;
   bool isCharacter = false;
-  String languageVal = "in";
+  String languageVal = "en";
   final storage = GetStorage();
  // double currencyVal = double.parse(appArray.language[0]["INR"].toString());
   bool isSwitched = false;

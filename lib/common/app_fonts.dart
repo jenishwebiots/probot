@@ -101,5 +101,14 @@ class AppFonts {
   String am9 = "09:41 am";
   String youDontHave = "You don't have any new notifications; reload it to get new one.";
   String refresh = "Refresh";
+  String whatsapp = "whatsapp";
+  String insta = "insta";
+  String tele = "tele";
+  String fb = "fb";
+  String slack = "slack";
+  String shareToFriend = "shareToFriend";
+  String okay = "okay";
+  String deleteChat = "deleteChat";
+  String setting = "setting";
 
 }

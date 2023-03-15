@@ -220,4 +220,28 @@ class AppArray {
       "subtitle": appFonts.am9,
     },
   ];
+
+  //background list
+  var backgroundList = [
+    {"image": eImageAssets.background1},
+    {"image": eImageAssets.background2},
+    {"image": eImageAssets.background3},
+    {"image": eImageAssets.background4},
+    {"image": eImageAssets.background5},
+    {"image": eImageAssets.background6}
+  ];
+
+  //setting list
+  var settingList = [
+    {"icon": eSvgAssets.profile, "title": "myAccount"},
+    {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
+    {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
+    {"icon": eSvgAssets.lock, "title": "resetPassword"},
+    {"icon": eSvgAssets.bell2, "title": "notification"},
+    {"icon": eSvgAssets.translate, "title": "language"},
+    {"icon": eSvgAssets.sun, "title": "darkMode"},
+    {"icon": eSvgAssets.star, "title": "rateApp"},
+    {"icon": eSvgAssets.security, "title": "privacyTerm"},
+    {"icon": eSvgAssets.logout, "title": "logout"}
+  ];
 }
