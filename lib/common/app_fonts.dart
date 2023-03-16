@@ -127,6 +127,9 @@ class AppFonts {
   String blackWhite  = "Black & white";
   String pageType  = "Page type";
   String gridType  = "Grid type";
+  String imagePreview  = "Image preview";
+  String share  = "Share";
+  String download  = "Download";
 
 
 }

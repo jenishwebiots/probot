@@ -12,7 +12,7 @@ class ImageGeneratorController extends GetxController {
 
    @override
   void onReady() {
-     imageLists = appArray.imageGeneratorList.map((e) => ImageListModel.fromJson(e)).toList();
+     imageLists = appArray.imageGeneratorList;
       imageSizeLists = appArray.imageSizeList;
       viewTypeLists = appArray.viewTypeList;
       update();

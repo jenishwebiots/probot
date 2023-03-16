@@ -1,15 +1,24 @@
 import '../../../../config.dart';
 
 class ImageLayout extends StatelessWidget {
-  const ImageLayout({Key? key}) : super(key: key);
+  final dynamic data;
+  final double? height, width;
+  final GestureTapCallback? onTap;
+
+  const ImageLayout({Key? key, this.data, this.onTap, this.height, this.width})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.topRight, children: [
-      SizedBox(
-          width: Sizes.s160,
-          height: Sizes.s155,
-          child: Image.asset(eImageAssets.ig1, fit: BoxFit.fill)),
+      ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r8)),
+        child: SizedBox(
+                width: width ?? Sizes.s160,
+                height: height ?? Sizes.s155,
+                child: Image.asset(data["image"], fit: BoxFit.fill))
+
+      ),
       SizedBox(
               child:
                   SvgPicture.asset(eSvgAssets.download).paddingAll(Insets.i8))
@@ -18,6 +27,7 @@ class ImageLayout extends StatelessWidget {
               borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(AppRadius.r8),
                   topRight: Radius.circular(AppRadius.r8)))
+          .inkWell(onTap: onTap)
     ]);
   }
 }
