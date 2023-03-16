@@ -1,4 +1,4 @@
-enum ChatMessageType { user, bot }
+enum ChatMessageType { user, bot,loading }
 
 /*
 class ChatMessage {

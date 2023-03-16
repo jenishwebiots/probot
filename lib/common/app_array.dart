@@ -245,4 +245,13 @@ class AppArray {
     {"icon": eSvgAssets.security, "title": "privacyTerm"},
     {"icon": eSvgAssets.logout, "title": "logout"}
   ];
+
+  //content option List
+  var contentOptionList = [
+    "businessIdea",
+    "coverLetter",
+    "blogSection",
+    "marketingWriting",
+    "service"
+  ];
 }

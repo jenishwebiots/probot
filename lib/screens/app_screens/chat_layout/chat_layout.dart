@@ -21,33 +21,11 @@ class ChatLayout extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              controller: chatCtrl.scrollController,
-                              itemCount: chatCtrl.itemCount.value,
-                              itemBuilder: (context, index) {
-                                if (index == chatCtrl.itemCount.value) {
-                                  return Container(
-                                    height: 70,
-                                  );
-                                }
-                                return Column(children: [
-                                  Text(
-                                    DateFormat('dd/MM/yyyy').format(
-                                        DateTime.fromMillisecondsSinceEpoch(
-                                            int.parse(chatCtrl
-                                                .chatList.value[index].dateTime!
-                                                .toString()))),
-                                    style: AppCss.outfitMedium14
-                                        .textColor(appCtrl.appTheme.lightText),
-                                  ).marginSymmetric(vertical: Insets.i15),
-                                  ChatList(index: index)
-                                ]);
-                              }),
-                        ),
+                      Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),),
+                      const VSpace(Sizes.s13),
+
+                      const Expanded(
+                        child: ChatList(),
                       ),
                       Container(),
                       const ChatTextBox()
@@ -55,7 +33,7 @@ class ChatLayout extends StatelessWidget {
                   ).backgroundImage(DecorationImage(
                       image: AssetImage(
                           chatCtrl.selectedImage ?? eImageAssets.background2),
-                      fit: BoxFit.fill)),
+                      fit: BoxFit.fill)).marginOnly(top: Insets.i15),
                 )),
           )
           : Container();

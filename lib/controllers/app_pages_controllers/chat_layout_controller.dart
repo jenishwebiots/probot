@@ -19,6 +19,7 @@ class ChatLayoutController extends GetxController {
   final ScrollController scrollController = ScrollController();
   String? time;
   DateTime? receiverTime;
+
   int count = 0;
   int receiverCount = 0;
   int lastIndex = 0;
@@ -26,6 +27,7 @@ class ChatLayoutController extends GetxController {
   String? selectedImage;
 
   Rx<List<ChatMessage>> messages = Rx<List<ChatMessage>>([]);
+  Rx<bool> isLoading = Rx<bool>(false);
   final FlutterTts? flutterTts = FlutterTts();
   final _isSpeech = false.obs;
   List<String> shareMessages = ['--THIS IS CONVERSATION with ADBOT--\n\n'];
@@ -51,29 +53,6 @@ class ChatLayoutController extends GetxController {
     update();
     log("chatList : $chatList");
     super.onReady();
-  }
-
-  //check sender time
-  bool checkTime(givenTime, givenIndex, length, chatIndex) {
-    /*if (time == givenTime) {
-      count++;
-      lastIndex = givenIndex;
-      return true;
-    } else {
-      count = 0;
-      time = givenTime;
-      if (givenIndex < length - 1) {
-        if (time == chatList[chatIndex].chat![givenIndex + 1].time) {
-          return true;
-        } else {
-          lastIndex = 0;
-          return false;
-        }
-      } else {
-        return false;
-      }
-    }*/
-    return false;
   }
 
   speechMethod(String text, String language) async {
@@ -115,100 +94,60 @@ class ChatLayoutController extends GetxController {
     speechStopMethod();
     addTextCount();
 
-    if (chatList.value.isNotEmpty) {
-      chatList.value.asMap().entries.forEach((element) {
-        if (DateFormat("dd/MM/yyyy").format(DateTime.now()) ==
-            DateFormat('dd/MM/yyyy').format(
-                DateTime.fromMillisecondsSinceEpoch(
-                    int.parse(element.value.dateTime.toString())))) {
-          element.value.chat!.add(ChatMessage(
-              text: chatController.text,
-              chatMessageType: ChatMessageType.user,
-              time: DateTime.now().millisecondsSinceEpoch));
-        }
-      });
-    }else{
+    messages.value.add(
+      ChatMessage(
+          text: chatController.text,
+          chatMessageType: ChatMessageType.user,
+          time: DateTime.now().millisecondsSinceEpoch),
+    );
+    shareMessages.add("${chatController.text} - Myself\n");
+    itemCount.value = messages.value.length;
+    update();
+    Get.forceAppUpdate();
+    int i = messages.value.indexWhere(
+        (element) => element.chatMessageType == ChatMessageType.loading);
+
+    if (i < 0) {
+      Future.delayed(const Duration(milliseconds: 5));
+      log("i : $i");
       messages.value.add(
         ChatMessage(
-            text: chatController.text,
-            chatMessageType: ChatMessageType.user,
+            text: "",
+            chatMessageType: ChatMessageType.loading,
             time: DateTime.now().millisecondsSinceEpoch),
       );
-      chatList.value.add(ChatListDateWise(
-          dateTime: DateTime.now().millisecondsSinceEpoch,
-          chat: messages.value));
+      itemCount.value = messages.value.length;
+      update();
     }
-    shareMessages.add("${chatController.text} - Myself\n");
-    itemCount.value = chatList.value.length;
-    // isLoading.value = true;
-
-    var input = chatController.text;
     textInput.value = chatController.text;
 
     update();
 
-    Future.delayed(const Duration(milliseconds: 50)).then((_) => scrollDown());
+    scrollDown();
     update();
     ApiServices.chatCompeletionResponse(chatController.text).then((value) {
       // isLoading.value = false
+      messages.value.removeWhere(
+          (element) => element.chatMessageType == ChatMessageType.loading);
 
-      chatList.value.asMap().entries.forEach((element) {
-        log("AVAILABLE : ${DateFormat("dd/MM/yyyy").format(DateTime.now()) ==
-            DateFormat('dd/MM/yyyy').format(
-                DateTime.fromMillisecondsSinceEpoch(
-                    int.parse(element.value.dateTime.toString())))}");
-        if (DateFormat("dd/MM/yyyy").format(DateTime.now()) ==
-            DateFormat('dd/MM/yyyy').format(
-                DateTime.fromMillisecondsSinceEpoch(
-                    int.parse(element.value.dateTime.toString())))) {
-          element.value.chat!.add(ChatMessage(
-              text: value.replaceFirst("\n", " ").replaceFirst("\n", " "),
-              chatMessageType: ChatMessageType.bot,
-              time: DateTime.now().millisecondsSinceEpoch));
-          log("element.value : ${element.value.chat!.length}");
-        } else {
-          messages.value.add(
-            ChatMessage(
-                text: value.replaceFirst("\n", " ").replaceFirst("\n", " "),
-                chatMessageType: ChatMessageType.bot,
-                time: DateTime.now().millisecondsSinceEpoch),
-          );
-          chatList.value.add(ChatListDateWise(
-              dateTime: DateTime.now().millisecondsSinceEpoch,
-              chat: messages.value));
-
-          log("element.value : ${element.value.chat!.length}");
-        }
-      });
-      itemCount.value = chatList.value.length;
-      log("messagesmessages : ${itemCount.value}");
+      messages.value.add(
+        ChatMessage(
+            text: value.replaceFirst("\n", " ").replaceFirst("\n", " "),
+            chatMessageType: ChatMessageType.bot,
+            time: DateTime.now().millisecondsSinceEpoch),
+      );
+      itemCount.value = messages.value.length;
       update();
       shareMessages.add(
           "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By ADBOT\n");
 
-      Future.delayed(
-        const Duration(milliseconds: 50),
-      ).then((_) => scrollDown());
+      scrollDown();
+      isLoading.value = false;
+      update();
     });
     chatController.clear();
     Get.forceAppUpdate();
     update();
-  }
-
-  //check receiver time
-  bool checkReceiverTime(givenTime, givenIndex) {
-/*    log("isCH : ${receiverTime == givenTime}");
-    if (receiverTime == givenTime) {
-      receiverCount++;
-      receiverLastIndex = givenIndex;
-      return true;
-    } else {
-      receiverCount = 0;
-      receiverTime = givenTime;
-      receiverLastIndex = 0;
-      return false;
-    }*/
-    return false;
   }
 
   PopupMenuItem buildPopupMenuItem(

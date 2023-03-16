@@ -111,5 +111,9 @@ final dynamic en = {
   'exUiUx': "Ex. Ui/UX Design",
   'writeContent': "Write content",
   'description': "Description",
+  'coverLetter': "Cover letter",
+  'blogSection': "Blog section",
+  'marketingWriting': "Marketing writing",
+  'service': "Service",
 
 };

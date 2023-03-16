@@ -22,7 +22,7 @@ class ReceiverWidthText extends StatelessWidget {
           ],
           borderRadius:
           BorderRadius.circular(AppRadius.r6)),
-      child: Text(
+      child:  Text(
         text!,
         overflow: TextOverflow.clip,
         style: AppCss.outfitMedium14

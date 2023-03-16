@@ -8,14 +8,8 @@ import '../../../../models/message_model.dart';
 class Sender extends StatelessWidget {
   final ChatMessage? chatListModel;
   final int? dateWiseIndex, index;
-  final bool? isTimeShow;
 
-  const Sender(
-      {Key? key,
-      this.chatListModel,
-      this.index,
-      this.dateWiseIndex,
-      this.isTimeShow})
+  const Sender({Key? key, this.chatListModel, this.index, this.dateWiseIndex})
       : super(key: key);
 
   @override
@@ -29,33 +23,14 @@ class Sender extends StatelessWidget {
               chatListModel!.text!.length > 40
                   ? SenderWidthText(text: chatListModel!.text!)
                   : CommonContent(text: chatListModel!.text!),
-              !isTimeShow!
-                  ? Column(children: [
-                      const VSpace(Sizes.s3),
-                      Text(
-                        DateFormat('hh:mm a').format(
-                            DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                chatCtrl.chatList.value[dateWiseIndex!]
-                                    .chat![index!].time!
-                                    .toString()))),
-                        style: AppCss.outfitMedium12
-                            .textColor(appCtrl.appTheme.lightText),
-                      )
-                    ])
-                  : chatCtrl.lastIndex == index!
-                      ? Column(children: [
-                          const VSpace(Sizes.s3),
-                          Text(
-                            DateFormat('hh:mm a').format(
-                                DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                    chatCtrl.chatList.value[dateWiseIndex!]
-                                        .chat![chatCtrl.lastIndex].time!
-                                        .toString()))),
-                            style: AppCss.outfitMedium12
-                                .textColor(appCtrl.appTheme.lightText),
-                          )
-                        ])
-                      : Container(),
+              const VSpace(Sizes.s3),
+              Text(
+                DateFormat('hh:mm a').format(
+                    DateTime.fromMillisecondsSinceEpoch(
+                        int.parse(chatListModel!.time!.toString()))),
+                style: AppCss.outfitMedium12
+                    .textColor(appCtrl.appTheme.lightText),
+              ),
             ],
           ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5));
     });
