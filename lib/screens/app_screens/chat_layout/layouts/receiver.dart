@@ -1,12 +1,7 @@
-
-import 'package:probot/models/message_model.dart';
-import 'package:probot/screens/app_screens/chat_layout/layouts/receiver_content.dart';
-import 'package:probot/screens/app_screens/chat_layout/layouts/receiver_width_text.dart';
-
 import '../../../../config.dart';
 
 class Receiver extends StatelessWidget {
-  final ChatListModel? chatListModel;
+  final ChatMessage? chatListModel;
   final int? dateWiseIndex, index;
   final bool? isTimeShow;
 
@@ -24,53 +19,48 @@ class Receiver extends StatelessWidget {
       return Align(
           alignment: Alignment.centerLeft,
           child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: Sizes.s40,
-                width: Sizes.s40,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage(chatCtrl.data["image"]))),
-              ),
-              const HSpace(Sizes.s6),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                chatCtrl.chatList[dateWiseIndex!].chat![index!].message!
-                            .length >
-                        40
-                    ? ReceiverWidthText(text: chatListModel!.message!)
-                    : ReceiverContent(text: chatListModel!.message!),
-                !isTimeShow! &&
-                        chatListModel!.time! !=
-                            chatCtrl
-                                .chatList[dateWiseIndex!]
-                                .chat![index! + 1 <=
-                                        chatCtrl.chatList[dateWiseIndex!].chat!
-                                                .length -
-                                            1
-                                    ? index! + 1
-                                    : index! - 1]
-                                .time!
-                    ? Column(children: [
-                        const VSpace(Sizes.s3),
-                        Text(chatListModel!.time!,
-                            style: AppCss.outfitMedium12
-                                .textColor(appCtrl.appTheme.lightText))
-                      ])
-                    : chatCtrl.receiverLastIndex == index!
-                        ? Column(children: [
-                            const VSpace(Sizes.s3),
-                            Text(
-                                chatCtrl.chatList[dateWiseIndex!]
-                                    .chat![chatCtrl.receiverLastIndex].time!,
-                                style: AppCss.outfitMedium12
-                                    .textColor(appCtrl.appTheme.lightText))
-                          ])
-                        : Container()
-              ])
-            ],
-          ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5));
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ChatCommonWidget().userImage(chatCtrl.data["image"]),
+                const HSpace(Sizes.s6),
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  chatListModel!.text!.length > 40
+                      ? ReceiverWidthText(text: chatListModel!.text!)
+                      : ReceiverContent(text: chatListModel!.text!),
+                  !isTimeShow! &&
+                          chatListModel!.time! !=
+                              chatCtrl
+                                  .chatList
+                                  .value[dateWiseIndex!]
+                                  .chat![index! + 1 <=
+                                          chatCtrl
+                                                  .chatList
+                                                  .value[dateWiseIndex!]
+                                                  .chat!
+                                                  .length -
+                                              1
+                                      ? index! + 1
+                                      : index! - 1]
+                                  .time!
+                      ? Column(children: [
+                          const VSpace(Sizes.s3),
+                          ChatCommonWidget()
+                              .timeTextLayout(chatListModel!.time!.toString())
+                        ])
+                      : chatCtrl.receiverLastIndex == index!
+                          ? Column(children: [
+                              const VSpace(Sizes.s3),
+                              ChatCommonWidget().timeTextLayout(chatCtrl
+                                  .chatList
+                                  .value[dateWiseIndex!]
+                                  .chat![chatCtrl.receiverLastIndex]
+                                  .time!
+                                  .toString())
+                            ])
+                          : Container()
+                ])
+              ]).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5));
     });
   }
 }

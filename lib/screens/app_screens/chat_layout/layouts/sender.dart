@@ -1,13 +1,12 @@
-
+import 'package:intl/intl.dart';
 import 'package:probot/screens/app_screens/chat_layout/layouts/sender_content.dart';
 import 'package:probot/screens/app_screens/chat_layout/layouts/sender_width_text.dart';
-
 
 import '../../../../config.dart';
 import '../../../../models/message_model.dart';
 
 class Sender extends StatelessWidget {
-  final ChatListModel? chatListModel;
+  final ChatMessage? chatListModel;
   final int? dateWiseIndex, index;
   final bool? isTimeShow;
 
@@ -27,16 +26,18 @@ class Sender extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              chatCtrl.chatList[dateWiseIndex!].chat![index!].message!
-                  .length >
-                  40
-                  ? SenderWidthText(text: chatListModel!.message!)
-                  :  CommonContent(text: chatCtrl.chatList[dateWiseIndex!].chat![index!].message!),
+              chatListModel!.text!.length > 40
+                  ? SenderWidthText(text: chatListModel!.text!)
+                  : CommonContent(text: chatListModel!.text!),
               !isTimeShow!
                   ? Column(children: [
                       const VSpace(Sizes.s3),
                       Text(
-                        chatCtrl.chatList[dateWiseIndex!].chat![index!].time!,
+                        DateFormat('hh:mm a').format(
+                            DateTime.fromMillisecondsSinceEpoch(int.parse(
+                                chatCtrl.chatList.value[dateWiseIndex!]
+                                    .chat![index!].time!
+                                    .toString()))),
                         style: AppCss.outfitMedium12
                             .textColor(appCtrl.appTheme.lightText),
                       )
@@ -45,8 +46,11 @@ class Sender extends StatelessWidget {
                       ? Column(children: [
                           const VSpace(Sizes.s3),
                           Text(
-                            chatCtrl.chatList[dateWiseIndex!]
-                                .chat![chatCtrl.lastIndex].time!,
+                            DateFormat('hh:mm a').format(
+                                DateTime.fromMillisecondsSinceEpoch(int.parse(
+                                    chatCtrl.chatList.value[dateWiseIndex!]
+                                        .chat![chatCtrl.lastIndex].time!
+                                        .toString()))),
                             style: AppCss.outfitMedium12
                                 .textColor(appCtrl.appTheme.lightText),
                           )

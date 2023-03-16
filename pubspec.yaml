@@ -46,6 +46,8 @@ dependencies:
   firebase_auth: ^4.2.10
   google_sign_in: ^6.0.2
   flutter_switch: ^0.3.2
+  flutter_tts: ^3.6.3
+  intl: ^0.17.0
 
 
 dev_dependencies:

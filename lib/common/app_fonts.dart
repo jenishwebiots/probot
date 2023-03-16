@@ -110,5 +110,17 @@ class AppFonts {
   String okay = "okay";
   String deleteChat = "deleteChat";
   String setting = "setting";
+  String typeHere = "typeHere";
+  String rebuildResponse = "rebuildResponse";
+  String shareFriend = "shareFriend";
+  String downloadChat = "downloadChat";
+  String changeBackground = "changeBackground";
+  String clearChat = "clearChat";
+  String option3 = "option3";
+  String businessIdea = "businessIdea";
+  String topic = "topic";
+  String exUiUx = "exUiUx";
+  String writeContent = "writeContent";
+  String description = "description";
 
 }

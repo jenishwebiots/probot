@@ -234,6 +234,7 @@ class AppArray {
   //setting list
   var settingList = [
     {"icon": eSvgAssets.profile, "title": "myAccount"},
+    {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
     {"icon": eSvgAssets.lock, "title": "resetPassword"},

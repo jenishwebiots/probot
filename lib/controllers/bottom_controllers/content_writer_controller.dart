@@ -2,27 +2,13 @@ import 'dart:developer';
 
 import '../../config.dart';
 
-class SettingController extends GetxController {
+class ContentWriterController extends GetxController {
 
-  List drawerList = [];
-  List settingList = [];
-  String? name,userName,firebaseUser;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void onReady() {
     // TODO: implement onReady
-
-    drawerList = appArray.drawerList;
-    settingList = appArray.settingList;
-    name = appCtrl.storage.read("name");
-    log("name: $name");
-    userName = appCtrl.storage.read("userName");
-    log("userName: $userName");
-    firebaseUser = appCtrl.storage.read("firebaseUser");
-    log("firebaseUser: $firebaseUser");
-    update();
-
 
     super.onReady();
   }

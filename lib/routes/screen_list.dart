@@ -31,3 +31,17 @@ export '../screens/app_screens/notification_screen/layouts/notification_layout.d
 export '../screens/bottom_screens/chat/chat.dart';
 export '../screens/bottom_screens/home/home.dart';
 export '../screens/bottom_screens/setting/setting.dart';
+
+export '../screens/app_screens/chat_layout/layouts/chat_layout_common_widget.dart';
+export '../screens/app_screens/chat_layout/layouts/receiver_content.dart';
+export '../screens/app_screens/chat_layout/layouts/receiver_width_text.dart';
+export '../screens/app_screens/chat_layout/layouts/chat_screen_app_bar.dart';
+
+export '../screens/app_screens/chat_layout/layouts/receiver.dart';
+export '../screens/app_screens/chat_layout/layouts/sender.dart';
+export '../screens/app_screens/chat_layout/layouts/chat_list.dart';
+export '../screens/app_screens/chat_layout/layouts/chat_text_box.dart';
+export '../screens/bottom_screens/setting/layouts/common_switcher.dart';
+export '../screens/bottom_screens/setting/layouts/user_layout.dart';
+
+export '../screens/bottom_screens/setting/layouts/setting_list.dart';

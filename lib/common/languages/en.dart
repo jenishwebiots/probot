@@ -98,5 +98,18 @@ final dynamic en = {
   'darkMode': "Dark mode",
   'rateApp': "Rate app",
   'privacyTerm': "Privacy & term",
+  'typeHere': "Type here...",
+  'rebuildResponse': "Rebuild response",
+  'shareFriend': "Share to friend",
+  'downloadChat': "Download chat",
+  'changeBackground': "Change background",
+  'clearChat': "Clear chat",
+  'rtl': "RTL",
+  'chatWithProBot': "Chat with ProBot",
+  'businessIdea': "Business Idea",
+  'topic': "Topic",
+  'exUiUx': "Ex. Ui/UX Design",
+  'writeContent': "Write content",
+  'description': "Description",
 
 };

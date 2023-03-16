@@ -1,4 +1,6 @@
 
+import 'package:intl/intl.dart';
+
 import '../../../../config.dart';
 
 class ChatCommonWidget{
@@ -14,4 +16,22 @@ class ChatCommonWidget{
               .textDecoration(TextDecoration.none))
     ],
   );
+
+  //time text layout
+  Widget timeTextLayout(time) => Text(
+      DateFormat('hh:mm a').format(
+          DateTime.fromMillisecondsSinceEpoch(int.parse(
+              time))),
+      style: AppCss.outfitMedium12
+          .textColor(appCtrl.appTheme.lightText));
+
+  //user image
+  Widget userImage(image) => Container(
+      margin: const EdgeInsets.only(top: Insets.i5),
+      height: Sizes.s40,
+      width: Sizes.s40,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+              image: AssetImage(image))));
 }

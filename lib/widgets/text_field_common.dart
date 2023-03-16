@@ -10,7 +10,7 @@ class TextFieldCommon extends StatelessWidget {
   final InputBorder? border;
   final TextInputType? keyboardType;
   final ValueChanged<String>? onChanged;
-  final int? maxLength;
+  final int? maxLength,minLines;
 
   const TextFieldCommon(
       {Key? key,
@@ -24,7 +24,7 @@ class TextFieldCommon extends StatelessWidget {
       this.fillColor,
       this.keyboardType,
       this.onChanged,
-      this.maxLength})
+      this.maxLength,this.minLines})
       : super(key: key);
 
   @override
@@ -36,6 +36,7 @@ class TextFieldCommon extends StatelessWidget {
         validator: validator,
         controller: controller,
         onChanged: onChanged,
+        minLines: minLines,
         maxLength: maxLength,
         decoration: InputDecoration(
             fillColor: fillColor ?? appCtrl.appTheme.bg,

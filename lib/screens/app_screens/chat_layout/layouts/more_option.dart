@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import '../../../../config.dart';
 
 class MoreOption extends StatelessWidget {
@@ -39,11 +38,15 @@ class MoreOption extends StatelessWidget {
           ),
           itemBuilder: (ctx) => [
                 chatCtrl.buildPopupMenuItem(
-                    "Rebuild response", Icons.search, 0),
-                chatCtrl.buildPopupMenuItem("Share to friend", Icons.upload, 1),
-                chatCtrl.buildPopupMenuItem("Download chat", Icons.copy, 2),
-                chatCtrl.buildPopupMenuItem("Change background", Icons.copy, 3),
-                chatCtrl.buildPopupMenuItem("Clear chat", Icons.copy, 4),
+                    appFonts.rebuildResponse.tr, Icons.search, 0),
+                chatCtrl.buildPopupMenuItem(
+                    appFonts.shareFriend.tr, Icons.upload, 1),
+                chatCtrl.buildPopupMenuItem(
+                    appFonts.downloadChat.tr, Icons.copy, 2),
+                chatCtrl.buildPopupMenuItem(
+                    appFonts.changeBackground.tr, Icons.copy, 3),
+                chatCtrl.buildPopupMenuItem(
+                    appFonts.clearChat.tr, Icons.copy, 4),
               ]);
     });
   }
