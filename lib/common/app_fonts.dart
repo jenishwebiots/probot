@@ -125,11 +125,14 @@ class AppFonts {
   String angry  = "Angry";
   String color  = "Color";
   String blackWhite  = "Black & white";
+  String neon  = "Neon";
   String pageType  = "Page type";
   String gridType  = "Grid type";
   String imagePreview  = "Image preview";
   String share  = "Share";
   String download  = "Download";
+  String cancel  = "Cancel";
+  String apply  = "Apply";
 
 
 }

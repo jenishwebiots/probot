@@ -27,3 +27,6 @@ export '../screens/bottom_screens/dashboard/dashboard.dart';
 export '../screens/app_screens/chat_layout/chat_layout.dart';
 export '../screens/app_screens/notification_screen/layouts/notification_layout.dart';
 export '../screens/app_screens/image_preview/image_preview.dart';
+
+export '../screens/bottom_screens/image_generator/layout/drop_down_layout.dart';
+export '../screens/bottom_screens/image_generator/layout/image_layout.dart';

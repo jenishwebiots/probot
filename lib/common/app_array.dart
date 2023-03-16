@@ -230,4 +230,37 @@ var imageGeneratorList = [
   },
 ];
 
+// no. of images list
+var noOfImagesList = [
+    "5",
+    "10",
+    "15",
+    "20"
+];
+
+// image style list
+var imageStyleList = [
+  appFonts.defaults,
+  appFonts.abstract,
+  appFonts.anime,
+  appFonts.cartoon,
+  appFonts.comic
+];
+
+// mood list
+var moodList = [
+   appFonts.defaults,
+   appFonts.happy,
+   appFonts.sad,
+   appFonts.angry
+];
+
+// image color list
+var imageColorList = [
+  appFonts.defaults,
+  appFonts.color,
+  appFonts.blackWhite,
+  appFonts.neon
+];
+
 }
