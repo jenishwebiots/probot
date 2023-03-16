@@ -1,9 +1,9 @@
 import '../config.dart';
 
 class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
-  final GestureTapCallback? onTap;
+  final GestureTapCallback? actionOnTap,leadingOnTap;
   final String? title,actionIcon;
-  const AppAppBarCommon({Key? key,this.title,this.onTap,this.actionIcon}) : super(key: key);
+  const AppAppBarCommon({Key? key,this.title,this.actionOnTap,this.actionIcon,this.leadingOnTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
       toolbarHeight: 70,
       backgroundColor: appCtrl.appTheme.primary,
       actions: [
-        SvgPicture.asset(actionIcon!).paddingSymmetric(horizontal: Insets.i20).inkWell(onTap: onTap)
+        SvgPicture.asset(actionIcon!).paddingSymmetric(horizontal: Insets.i20).inkWell(onTap: actionOnTap)
       ],
       title: Row(
         children: [
@@ -21,7 +21,7 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
           SvgPicture.asset(eSvgAssets.leftArrow,
               fit: BoxFit.scaleDown,
               colorFilter:
-              ColorFilter.mode(appCtrl.isTheme ? appCtrl.appTheme.sameWhite : appCtrl.appTheme.white, BlendMode.srcIn)),
+              ColorFilter.mode(appCtrl.isTheme ? appCtrl.appTheme.sameWhite : appCtrl.appTheme.white, BlendMode.srcIn)).inkWell(onTap: leadingOnTap),
           const HSpace(Sizes.s17),
           Text(title!, style: AppCss.outfitSemiBold22.textColor(appCtrl.appTheme.sameWhite))
         ]

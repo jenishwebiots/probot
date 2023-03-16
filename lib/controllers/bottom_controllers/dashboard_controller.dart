@@ -4,8 +4,12 @@ import 'package:probot/config.dart';
 import 'package:probot/screens/bottom_screens/chat/chat.dart';
 import 'package:probot/screens/bottom_screens/home/home.dart';
 
-class DashboardController extends GetxController
-    with GetTickerProviderStateMixin {
+import '../../screens/bottom_screens/image_generator/image_generator.dart';
+
+
+
+class DashboardController extends GetxController with GetTickerProviderStateMixin{
+
   int selectedIndex = 0;
   List bottomList = [];
   TabController? con;
@@ -22,7 +26,7 @@ class DashboardController extends GetxController
   List<Widget> widgetOptions = <Widget>[
     Home(),
     Chat(),
-    Text("Image"),
+    ImageGenerator(),
     Text("Content"),
     Text("Setting"),
   ];

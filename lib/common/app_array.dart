@@ -205,4 +205,29 @@ class AppArray {
       "subtitle": appFonts.am9,
     },
   ];
+
+
+// image size list
+  var imageSizeList = ["160*160", "250*250", "360*360"];
+
+  // view type list
+  var viewTypeList = [appFonts.pageType, appFonts.gridType];
+
+  // images list of image generator
+var imageGeneratorList = [
+  {
+    "image": eImageAssets.ig1
+  },{
+    "image": eImageAssets.ig2
+  },{
+    "image": eImageAssets.ig3
+  },{
+    "image": eImageAssets.ig4
+  },{
+    "image": eImageAssets.ig5
+  },{
+    "image": eImageAssets.ig6
+  },
+];
+
 }

@@ -19,7 +19,7 @@ class SplashController extends GetxController {
 
   // Theme Save
   bool isTheme = appCtrl.storage.read("isDarkMode") ?? false;
-  ThemeService().switchTheme(true);
+  ThemeService().switchTheme(isTheme);
   appCtrl.isTheme = isTheme;
 
 

@@ -1,5 +1,3 @@
-
-
 import '../../../config.dart';
 
 
@@ -13,11 +11,11 @@ class NotificationScreen extends StatelessWidget {
       builder: (_) {
         return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
-          appBar: AppAppBarCommon(title: appFonts.notification,actionIcon: eSvgAssets.delete),
+          appBar: AppAppBarCommon(title: appFonts.notification,actionIcon: eSvgAssets.delete,leadingOnTap: ()=> Get.back()),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(),
+              const SizedBox(),
               Column(
                 children: [
                   Image.asset(eImageAssets.notification,height: Sizes.s180),
