@@ -1,6 +1,6 @@
 class ApiConfig {
   static String chatGPTkey =
-      "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";
+      "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";
 
   static bool isads = false;
 
