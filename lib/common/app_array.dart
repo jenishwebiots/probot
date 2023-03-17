@@ -221,6 +221,63 @@ class AppArray {
     },
   ];
 
+// image size list
+  var imageSizeList = ["160*160", "250*250", "360*360"];
+
+  // view type list
+  var viewTypeList = [appFonts.pageType, appFonts.gridType];
+
+  // images list of image generator
+var imageGeneratorList = [
+  {
+    "image": eImageAssets.ig1
+  },{
+    "image": eImageAssets.ig2
+  },{
+    "image": eImageAssets.ig3
+  },{
+    "image": eImageAssets.ig4
+  },{
+    "image": eImageAssets.ig5
+  },{
+    "image": eImageAssets.ig6
+  },
+];
+
+// no. of images list
+var noOfImagesList = [
+    "5",
+    "10",
+    "15",
+    "20"
+];
+
+// image style list
+var imageStyleList = [
+  appFonts.defaults,
+  appFonts.abstract,
+  appFonts.anime,
+  appFonts.cartoon,
+  appFonts.comic
+];
+
+// mood list
+var moodList = [
+   appFonts.defaults,
+   appFonts.happy,
+   appFonts.sad,
+   appFonts.angry
+];
+
+// image color list
+var imageColorList = [
+  appFonts.defaults,
+  appFonts.color,
+  appFonts.blackWhite,
+  appFonts.neon
+];
+
+=======
   //background list
   var backgroundList = [
     {"image": eImageAssets.background1},

@@ -123,4 +123,37 @@ class AppFonts {
   String writeContent = "writeContent";
   String description = "description";
 
+
+  String imageGenerator = "Image generator";
+  String search = "Search";
+  String imageSize = "Image size";
+  String viewType = "View type";
+  String selectSize = "Select size";
+  String selectType = "Select type";
+  String youHaveNotYet = "You have not yet searched for anything; begin your search now.";
+  String generateImage = "Generate image";
+  String noOfImages = "No. of images";
+  String imageStyle = "Image style";
+  String mood = "Mood";
+  String imageColor = "Image color";
+  String defaults  = "Default";
+  String abstract  = "Abstract";
+  String anime  = "Anime";
+  String cartoon  = "Cartoon";
+  String comic  = "Comic";
+  String happy  = "Happy";
+  String sad  = "Sad";
+  String angry  = "Angry";
+  String color  = "Color";
+  String blackWhite  = "Black & white";
+  String neon  = "Neon";
+  String pageType  = "Page type";
+  String gridType  = "Grid type";
+  String imagePreview  = "Image preview";
+  String share  = "Share";
+  String download  = "Download";
+  String cancel  = "Cancel";
+  String apply  = "Apply";
+
+
 }

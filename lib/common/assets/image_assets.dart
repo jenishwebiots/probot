@@ -23,6 +23,12 @@ class ImageAssets {
   final String fingerprint = "assets/images/fingerprint.png";
   final String lock = "assets/images/lock.png";
   final String notification = "assets/images/notification.png";
+  final String ig1 = "assets/images/ig1.png";
+  final String ig2 = "assets/images/ig2.png";
+  final String ig3 = "assets/images/ig3.png";
+  final String ig4 = "assets/images/ig4.png";
+  final String ig5 = "assets/images/ig5.png";
+  final String ig6 = "assets/images/ig6.png";
   final String success = "assets/images/success.png";
   final String settingBg = "assets/images/settingBg.png";
 
@@ -52,4 +58,5 @@ class ImageAssets {
   final String background4 = "assets/images/background/bg4.png";
   final String background5 = "assets/images/background/bg5.png";
   final String background6 = "assets/images/background/bg6.png";
+
 }

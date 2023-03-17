@@ -18,6 +18,8 @@ export '../common/extension/spacing.dart';
 export '../models/home_option_model.dart';
 export '../models/select_language_model.dart';
 export 'package:probot/models/notification_model.dart';
+export 'package:probot/models/image_list_model.dart';
+export '../../models/page_list_model.dart';
 export '../package_list.dart';
 export '../routes/index.dart';
 export '../routes/route_name.dart';

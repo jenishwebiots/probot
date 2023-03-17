@@ -40,6 +40,7 @@ class AppTheme {
   Color trackActive;
   Color radialGradient;
   Color bg;
+  Color textField;
 
   /// Default constructor
   AppTheme({
@@ -74,6 +75,7 @@ class AppTheme {
     required this.trackActive,
     required this.radialGradient,
     required this.bg,
+    required this.textField,
   });
 
   /// fromType factory constructor
@@ -114,6 +116,7 @@ class AppTheme {
           trackActive: const Color(0xffFFF0E3),
           radialGradient: const Color(0xff179EEA),
           bg: const Color(0xff4D4F5D),
+          textField: const Color(0xffF5F5F6)
         );
 
       case ThemeType.dark:
@@ -124,7 +127,9 @@ class AppTheme {
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
           bg1: const Color(0xFF323444),
-          surface: const Color(0xFF151A1E),
+
+          surface: const Color(0xFF4D4F5D),// add
+
           error: const Color(0xFFd32f2f),
           icon: const Color(0xff3E9B0E),
           main: const Color(0xffFF8D2F),
@@ -151,6 +156,7 @@ class AppTheme {
           trackActive: const Color(0xff4E3B2B),
           radialGradient: const Color(0xff179EEA),
           bg: const Color(0xff4D4F5D),
+            textField: const Color(0xff4D4F5D)
         );
     }
   }

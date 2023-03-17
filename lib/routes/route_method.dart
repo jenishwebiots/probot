@@ -1,9 +1,6 @@
 
-
 import 'package:probot/screens/app_screens/chat_layout/layouts/background_list.dart';
-
 import '../config.dart';
-
 
 
 RouteName _routeName = RouteName();
@@ -41,6 +38,7 @@ class AppRoute {
 
     GetPage(name: _routeName.scanFingerprintScreen, page: () => const ScanFingerprintScreen()),
     GetPage(name: _routeName.notificationScreen, page: () => NotificationScreen()),
+    GetPage(name: _routeName.imagePreview, page: () => ImagePreview()),
     GetPage(name: _routeName.backgroundList, page: () =>const BackgroundList()),
 
   ];
