@@ -1,5 +1,11 @@
-import '../../config.dart';
+import 'dart:convert';
+import 'dart:developer';
 
+import '../../bot_api/config.dart';
+import '../../config.dart';
+import 'package:http/http.dart' as http;
+
+import '../../models/image_model.dart';
 
 class ImageGeneratorController extends GetxController {
 
@@ -11,7 +17,7 @@ class ImageGeneratorController extends GetxController {
    List moodLists = [];
    List imageColorLists = [];
 
-   bool isFilter = false;
+   bool isFilter = false,isLoader = false;
 
    String? imageValue;
    String? viewValue;
@@ -19,10 +25,65 @@ class ImageGeneratorController extends GetxController {
    String? imageStyleValue;
    String? moodValue;
    String? imageColorValue;
+   ImageModel? imageGPTModel;
+   RxInt count = 0.obs;
+
+   var url = Uri.parse('https://api.openai.com/v1/images/generations');
+
+   final TextEditingController imageTextController = TextEditingController();
+
+   Future getGPTImage(
+       {required String imageText, String? size = "256x256"}) async {
+     log("imageText: $imageText");
+     try {
+       update();
+       var request = await http.post(
+         url,
+         headers: {
+           'Content-Type': 'application/json',
+           'Authorization': 'Bearer ${ApiConfig.chatGPTkey1}',
+         },
+         body: jsonEncode(
+           {
+             'prompt': imageText,
+             'n': 5,
+             "size": size,
+           },
+         ),
+       );
+       print(request.body);
+       if (request.statusCode == 200) {
+         addCountImage();
+         imageGPTModel = ImageModel.fromJson(jsonDecode(request.body));
+         update();
+         Get.forceAppUpdate();
+       } else {
+         debugPrint(jsonDecode(request.body));
+       }
+     } catch (e) {
+       debugPrint(e.toString());
+     }
+   }
+
+   addCountImage() async {
+     count.value++;
+     // LocalStorage.saveImageCount(count: count.value);
+   }
 
    onTapFilter () {
      isFilter = !isFilter;
      update();
+   }
+
+   // on tap method
+   onTabMethod() async {
+     isLoader = true;
+     FocusScope.of(Get.context!).unfocus();
+     await getGPTImage(
+         imageText: imageTextController.text.trim()
+     );
+     Get.snackbar('Generated', "Please wait for load image");
+     isLoader = false;
    }
 
    @override

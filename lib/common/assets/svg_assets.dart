@@ -9,7 +9,6 @@ class SvgAssets {
   final String settingColor = "assets/svg/settingColor.svg";
   final String home = "assets/svg/home.svg";
   final String chat = "assets/svg/chat.svg";
-  final String search = "assets/svg/search.svg";
   final String more = "assets/svg/more.svg";
   final String gallery = "assets/svg/gallery.svg";
   final String content = "assets/svg/content.svg";

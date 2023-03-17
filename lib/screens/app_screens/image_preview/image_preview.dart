@@ -15,7 +15,7 @@ class ImagePreview extends StatelessWidget {
           SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: Image.asset(imagePreviewCtrl.image, fit: BoxFit.cover)),
+              child: Image.network(imagePreviewCtrl.image, fit: BoxFit.cover)),
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(children: [
               SvgPicture.asset(eSvgAssets.leftArrow,

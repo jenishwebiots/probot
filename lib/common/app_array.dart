@@ -222,7 +222,7 @@ class AppArray {
   ];
 
 // image size list
-  var imageSizeList = ["160*160", "250*250", "360*360"];
+  var imageSizeList = ['256x256', '512x512', '1024x1024'];
 
   // view type list
   var viewTypeList = [appFonts.pageType, appFonts.gridType];
@@ -277,7 +277,7 @@ var imageColorList = [
   appFonts.neon
 ];
 
-=======
+
   //background list
   var backgroundList = [
     {"image": eImageAssets.background1},

@@ -130,7 +130,7 @@ class AppFonts {
   String viewType = "View type";
   String selectSize = "Select size";
   String selectType = "Select type";
-  String youHaveNotYet = "You have not yet searched for anything; begin your search now.";
+  String youHaveNotYet = "You have not yet searched for anything, begin your search now.";
   String generateImage = "Generate image";
   String noOfImages = "No. of images";
   String imageStyle = "Image style";
@@ -154,6 +154,8 @@ class AppFonts {
   String download  = "Download";
   String cancel  = "Cancel";
   String apply  = "Apply";
+  String loading  = "Loading...";
+
 
 
 }
