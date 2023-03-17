@@ -154,6 +154,10 @@ class AppFonts {
   String download  = "Download";
   String cancel  = "Cancel";
   String apply  = "Apply";
+  String generateContent  = "generateContent";
+  String subscriptionPlan  = "subscriptionPlan";
+  String payNow  = "payNow";
+  String changeCurrency  = "changeCurrency";
 
 
 }

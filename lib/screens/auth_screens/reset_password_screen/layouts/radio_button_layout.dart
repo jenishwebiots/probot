@@ -28,20 +28,20 @@ class RadioButtonLayout extends StatelessWidget {
               style: AppCss.outfitMedium18.textColor(appCtrl.appTheme.txt))
         ]),
         Container(
-          padding: const EdgeInsets.all(Insets.i3),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
+            padding: const EdgeInsets.all(Insets.i3),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    color: selectIndex == index
+                        ? appCtrl.appTheme.primary
+                        : appCtrl.appTheme.lightText
+                )),
+            child: Icon(
+                Icons.circle,size: 10,
                 color: selectIndex == index
                     ? appCtrl.appTheme.primary
-                    : appCtrl.appTheme.lightText
-              )),
-          child: Icon(
-            Icons.circle,size: 10,
-            color: selectIndex == index
-                ? appCtrl.appTheme.primary
-                : appCtrl.appTheme.trans
-          )
+                    : appCtrl.appTheme.trans
+            )
         )
       ]).inkWell(onTap: onTap),
       if (index != 5) const VSpace(Sizes.s20),

@@ -2,9 +2,9 @@ import 'dart:developer';
 import '../../common/theme/app_theme.dart';
 import '../../config.dart';
 
-
 class AppController extends GetxController {
   AppTheme _appTheme = AppTheme.fromType(ThemeType.light);
+
   AppTheme get appTheme => _appTheme;
   String priceSymbol = "\$";
   bool isTheme = false;
@@ -13,7 +13,7 @@ class AppController extends GetxController {
   bool isCharacter = false;
   String languageVal = "en";
   final storage = GetStorage();
- // double currencyVal = double.parse(appArray.language[0]["INR"].toString());
+  double currencyVal = double.parse(appArray.currencyList[0]["USD"].toString()).roundToDouble();
   bool isSwitched = false;
   bool isOnboard = false;
   dynamic currency;
@@ -35,12 +35,13 @@ class AppController extends GetxController {
       dashboardCtrl.onBottomTap(2);
     } else if (index == 2) {
       dashboardCtrl.onBottomTap(3);
-    } else if (index == 3){
+    } else if (index == 3) {
       dashboardCtrl.onBottomTap(4);
-    }else if (index == 4){
-      Get.toNamed(routeName.selectLanguageScreen,arguments: true);
+    } else if (index == 4) {
+      Get.toNamed(routeName.selectLanguageScreen, arguments: true);
     }
     dashboardCtrl.update();
   }
+
 
 }

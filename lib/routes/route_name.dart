@@ -15,4 +15,5 @@ class RouteName {
   final String notificationScreen = "/notificationScreen";
   final String imagePreview = "/imagePreview";
   final String backgroundList = "/backgroundList";
+  final String subscriptionPlan = "/subscriptionPlan";
 }

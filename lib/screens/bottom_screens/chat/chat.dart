@@ -12,7 +12,7 @@ class Chat extends StatelessWidget {
         key: chatCtrl.scaffoldKey,
         drawer:const CommonDrawer(),
         appBar: AppBar(
-          leadingWidth: Sizes.s80,
+          leadingWidth: Sizes.s70,
           leading: const CommonMenuIcon().inkWell(onTap: ()=> chatCtrl.scaffoldKey.currentState!.openDrawer()),
           automaticallyImplyLeading: false,
           backgroundColor: appCtrl.appTheme.primary,
