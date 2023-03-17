@@ -14,5 +14,5 @@ class RouteName {
   final String scanFingerprintScreen = "/scanFingerprintScreen";
   final String notificationScreen = "/notificationScreen";
   final String imagePreview = "/imagePreview";
-
+  final String backgroundList = "/backgroundList";
 }
