@@ -24,4 +24,16 @@ class Validation {
     }
     return null;
   }
+
+  // name validation
+  nameValidation(name) {
+    if (name.isEmpty) {
+      return appFonts.pleaseEnterValue.tr;
+    }
+    if (name.length < 6) {
+      return appFonts.enterAtLeast.tr;
+    }
+    return null;
+  }
+
 }

@@ -183,7 +183,7 @@ class AppArray {
   ];
 
   // notification list
-  var notificationList = [
+  var notificationsList = [
     {
       "image": eImageAssets.sc6,
       "title": appFonts.hennyHasSent,
@@ -311,4 +311,18 @@ var imageColorList = [
     "marketingWriting",
     "service"
   ];
+
+  // notification list
+var notificationList = [
+  {
+    "title": appFonts.newMessage,
+    "value": true,
+  },{
+    "title": appFonts.newUpdates,
+    "value": false,
+  },{
+    "title": appFonts.passwordChange,
+    "value": true,
+  },
+];
 }

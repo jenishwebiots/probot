@@ -43,4 +43,5 @@ class SvgAssets {
   final String bell2 = "assets/svg/bell2.svg";
   final String arrowRight1 = "assets/svg/arrowRight1.svg";
   final String rtl = "assets/svg/rtl.svg";
+  final String camera = "assets/svg/camera.svg";
 }

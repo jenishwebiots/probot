@@ -19,6 +19,7 @@ class AppCss {
 //Text Style outfit extra bold
   static TextStyle get outfitExtraBold65 => outfit.extraThickBold.size(FontSizes.f65);
   static TextStyle get outfitExtraBold60 => outfit.extraThickBold.size(FontSizes.f60);
+  static TextStyle get outfitExtraBold40 => outfit.extraThickBold.size(FontSizes.f40);
   static TextStyle get outfitExtraBold30 => outfit.extraThickBold.size(FontSizes.f30);
 
   //Text Style outfit bold
