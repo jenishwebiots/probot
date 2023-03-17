@@ -224,6 +224,7 @@ class Sizes {
   static const double s198 = 198 * scale;
   static const double s200 = 200 * scale;
   static const double s210 = 210 * scale;
+  static const double s215 = 215 * scale;
   static const double s216 = 216 * scale;
   static const double s223 = 223 * scale;
   static const double s230 = 230 * scale;

@@ -13,6 +13,7 @@ class Dashboard extends StatelessWidget {
     return GetBuilder<DashboardController>(builder: (_) {
       return DirectionalityRtl(
         child: Scaffold(
+
           backgroundColor: appCtrl.appTheme.bg1,
           body: dashboardCtrl.widgetOptions
               .elementAt(dashboardCtrl.selectedIndex),

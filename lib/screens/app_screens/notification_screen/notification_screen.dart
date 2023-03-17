@@ -13,7 +13,7 @@ class NotificationScreen extends StatelessWidget {
       builder: (_) {
         return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
-          appBar: AppAppBarCommon(title: appFonts.notification,actionIcon: eSvgAssets.delete),
+          appBar: AppAppBarCommon(title: appFonts.notification,actionIcon: eSvgAssets.delete,isActionShow: true,),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
