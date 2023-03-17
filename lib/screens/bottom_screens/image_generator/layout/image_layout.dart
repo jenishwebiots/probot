@@ -16,7 +16,17 @@ class ImageLayout extends StatelessWidget {
           child: SizedBox(
               width: width ?? Sizes.s160,
               height: height ?? Sizes.s155,
-              child: Image.network(data, fit: BoxFit.fill))),
+              child: Image.network(data, fit: BoxFit.fill, loadingBuilder:
+                  (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                    child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null));
+              }))),
       SizedBox(
               child:
                   SvgPicture.asset(eSvgAssets.download).paddingAll(Insets.i8))

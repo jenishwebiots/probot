@@ -65,6 +65,7 @@ class Insets {
   static const double i92 = 92 * scale;
   static const double i100 = 100 * scale;
   static const double i110 = 110 * scale;
+  static const double i120 = 120 * scale;
   static const double i150 = 150 * scale;
   static const double i160 = 160 * scale;
   static const double i170 = 170 * scale;
@@ -228,6 +229,7 @@ class Sizes {
   static const double s198 = 198 * scale;
   static const double s200 = 200 * scale;
   static const double s210 = 210 * scale;
+  static const double s215 = 215 * scale;
   static const double s216 = 216 * scale;
   static const double s223 = 223 * scale;
   static const double s230 = 230 * scale;

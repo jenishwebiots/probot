@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:probot/config.dart';
-import 'package:probot/controllers/bottom_controllers/chat_layout_controller.dart';
 import 'package:probot/screens/app_screens/chat_layout/chat_message_layout_widget.dart';
+import 'package:intl/intl.dart';
 
 class ChatLayout extends StatelessWidget {
   final chatCtrl = Get.put(ChatLayoutController());
@@ -26,8 +26,8 @@ class ChatLayout extends StatelessWidget {
               //     '${languageList[0]}-${languageList[1]}');
               // chatCtrl.voiceSelectedIndex.value = index;
             },
-            text: chatCtrl.messages.value[index].text,
-            chatMessageType: chatCtrl.messages.value[index].chatMessageType,
+            text: chatCtrl.messages.value[index].text!,
+            chatMessageType: chatCtrl.messages.value[index].chatMessageType!,
             index: index,
           );
         },
@@ -39,49 +39,38 @@ class ChatLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (_) {
       return chatCtrl.data != null
-          ? Scaffold(
-              backgroundColor: appCtrl.appTheme.bg1,
-              appBar: AppBar(
-                toolbarHeight: 70,
-                titleSpacing: 0,
-                leading: Hero(
-                  tag: "chat${chatCtrl.index}",
-                  child: SvgPicture.asset(eSvgAssets.leftArrow,
-                          fit: BoxFit.scaleDown,
-                          colorFilter: ColorFilter.mode(
-                              appCtrl.appTheme.sameWhite, BlendMode.srcIn))
-                      .inkWell(onTap: () => Get.back()),
-                ),
-                automaticallyImplyLeading: false,
-                backgroundColor: appCtrl.appTheme.primary,
-                title: Row(
-                  children: [
-                    Container(
-                      height: Sizes.s50,
-                      width: Sizes.s50,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage(
-                            chatCtrl.data["image"],
-                          ))),
-                    ),
-                    const HSpace(Sizes.s10),
-                    Text(chatCtrl.data["title"].toString().tr,
-                        style: AppCss.outfitExtraBold22
-                            .textColor(appCtrl.appTheme.sameWhite)),
-                  ],
-                ),
-              ),
-              body: Column(children: [
-                Expanded(
-                  flex: 1,
-                  child: _buildLayout(),
-                ),
-                const Text("Submit")
-                    .inkWell(onTap: () => chatCtrl.proccessChat()),
-                const VSpace(Sizes.s10),
-              ]))
+          ? DirectionalityRtl(
+              child: Scaffold(
+                  backgroundColor: appCtrl.appTheme.bg1,
+                  appBar: const ChatScreenAppBar(),
+                  body: NotificationListener<OverscrollIndicatorNotification>(
+                    onNotification:
+                        (OverscrollIndicatorNotification overscroll) {
+                      overscroll.disallowIndicator();
+                      return true;
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          "Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
+                          style: AppCss.outfitMedium14
+                              .textColor(appCtrl.appTheme.lightText),
+                        ),
+                        const VSpace(Sizes.s13),
+                        const Expanded(
+                          child: ChatList(),
+                        ),
+                        Container(),
+                        const ChatTextBox()
+                      ],
+                    )
+                        .backgroundImage(DecorationImage(
+                            image: AssetImage(chatCtrl.selectedImage ??
+                                eImageAssets.background2),
+                            fit: BoxFit.fill))
+                        .marginOnly(top: Insets.i15),
+                  )),
+            )
           : Container();
     });
   }

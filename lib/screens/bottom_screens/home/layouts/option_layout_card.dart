@@ -8,7 +8,7 @@ class OptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.centerRight,
+      alignment: appCtrl.isRTL || appCtrl.languageVal == "ar" ?Alignment.centerLeft : Alignment.centerRight,
       children: [
         Row(
           children: [
@@ -48,8 +48,9 @@ class OptionCard extends StatelessWidget {
                 border: Border.all(
                     color: appCtrl.appTheme.radialGradient.withOpacity(.08),
                     width: 1.5))
-            .marginOnly(right: Insets.i12),
-        SvgPicture.asset(eSvgAssets.rightArrow1, height: Sizes.s10)
+            .marginOnly(right:appCtrl.isRTL || appCtrl.languageVal == "ar"? 0: Insets.i12,left: appCtrl.isRTL || appCtrl.languageVal == "ar" ?Insets.i12:0),
+
+        SvgPicture.asset(appCtrl.isRTL || appCtrl.languageVal == "ar" ?eSvgAssets.leftArrow :  eSvgAssets.rightArrow1, height: Sizes.s10,colorFilter: ColorFilter.mode(appCtrl.appTheme.primary, BlendMode.srcIn),)
             .paddingAll(Insets.i12)
             .decorated(
                 color: appCtrl.appTheme.white,

@@ -46,6 +46,9 @@ dependencies:
   google_sign_in: ^6.0.2
   flutter_switch: ^0.3.2
   flutter_tts: ^3.6.3
+  intl: ^0.17.0
+  http: ^0.13.5
+
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +75,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/icons/
+    - assets/images/background/
     - assets/svg/
     - assets/gif/
 

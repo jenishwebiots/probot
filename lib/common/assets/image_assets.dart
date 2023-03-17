@@ -29,6 +29,9 @@ class ImageAssets {
   final String ig4 = "assets/images/ig4.png";
   final String ig5 = "assets/images/ig5.png";
   final String ig6 = "assets/images/ig6.png";
+  final String success = "assets/images/success.png";
+  final String settingBg = "assets/images/settingBg.png";
+  final String noSearch = "assets/images/noSearch.png";
 
   // Icons
   final String google = "assets/images/icons/Google.png";
@@ -49,6 +52,12 @@ class ImageAssets {
   final String chat6 = "assets/images/chat/chat6.png";
   final String chat7 = "assets/images/chat/chat7.png";
 
-
+  // background
+  final String background1 = "assets/images/background/bg1.png";
+  final String background2 = "assets/images/background/bg2.png";
+  final String background3 = "assets/images/background/bg3.png";
+  final String background4 = "assets/images/background/bg4.png";
+  final String background5 = "assets/images/background/bg5.png";
+  final String background6 = "assets/images/background/bg6.png";
 
 }

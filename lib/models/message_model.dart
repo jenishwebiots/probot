@@ -1,7 +1,9 @@
 
+import 'package:probot/models/chat_model.dart';
+
 class ChatListDateWise {
-  String? dateTime;
-  List<ChatListModel>? chat;
+  int? dateTime;
+  List<ChatMessage>? chat;
 
   ChatListDateWise(
       {
@@ -12,9 +14,9 @@ class ChatListDateWise {
   ChatListDateWise.fromJson(Map<String, dynamic> json) {
     dateTime = json['dateTime'];
     if (json['chat'] != null) {
-      chat = <ChatListModel>[];
+      chat = <ChatMessage>[];
       json['chat'].forEach((v) {
-        chat!.add(ChatListModel.fromJson(v));
+        chat!.add(ChatMessage.fromJson(v));
       });
     }
 
@@ -34,29 +36,28 @@ class ChatListDateWise {
 
 
 
-class ChatListModel {
-  String? message;
-  String? time;
-  bool? isReceiver;
+class ChatMessage {
+  String? text;
+  ChatMessageType? chatMessageType;
+  int? time;
 
-  ChatListModel(
+  ChatMessage(
       {
-        this.message,
-        this.isReceiver,
-        this.time,}
+        this.chatMessageType,
+        this.text,this.time}
        );
 
-  ChatListModel.fromJson(Map<String, dynamic> json) {
-    isReceiver = json['isReceiver'];
-    message = json['message'];
+  ChatMessage.fromJson(Map<String, dynamic> json) {
+    chatMessageType = json['chatMessageType'];
+    text = json['text'];
     time = json['time'];
 
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['isReceiver'] = isReceiver;
-    data["message"] = message;
+    data['chatMessageType'] = chatMessageType;
+    data["text"] = text;
     data['time'] = time;
 
     return data;

@@ -1,5 +1,6 @@
-enum ChatMessageType { user, bot }
+enum ChatMessageType { user, bot, loading }
 
+/*
 class ChatMessage {
   ChatMessage({
     required this.text,
@@ -9,3 +10,4 @@ class ChatMessage {
   final String text;
   final ChatMessageType chatMessageType;
 }
+*/

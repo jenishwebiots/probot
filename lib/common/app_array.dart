@@ -143,6 +143,11 @@ class AppArray {
           "time": "5:32",
         },
         {
+          "isReceiver": false,
+          "message": "I’m good ! what about you ?",
+          "time": "5:32",
+        },
+        {
           "isReceiver": true,
           "message": "Too good !\nWhere were you all this time ?",
           "time": "5:32",
@@ -160,8 +165,18 @@ class AppArray {
         },
         {
           "isReceiver": true,
-          "message": "Too good",
+          "message": "Too good !\nWhere were you all this time ?",
           "time": "5:34",
+        },
+        {
+          "isReceiver": true,
+          "message": "Too good !\nWhere were you all this time ?",
+          "time": "5:34",
+        },
+        {
+          "isReceiver": false,
+          "message": "I need just some time. 😇",
+          "time": "5:35",
         },
       ]
     }
@@ -206,9 +221,8 @@ class AppArray {
     },
   ];
 
-
 // image size list
-  var imageSizeList = ["160*160", "250*250", "360*360"];
+  var imageSizeList = ['256x256', '512x512', '1024x1024'];
 
   // view type list
   var viewTypeList = [appFonts.pageType, appFonts.gridType];
@@ -230,4 +244,71 @@ var imageGeneratorList = [
   },
 ];
 
+// no. of images list
+var noOfImagesList = [
+    "5",
+    "10",
+    "15",
+    "20"
+];
+
+// image style list
+var imageStyleList = [
+  appFonts.defaults,
+  appFonts.abstract,
+  appFonts.anime,
+  appFonts.cartoon,
+  appFonts.comic
+];
+
+// mood list
+var moodList = [
+   appFonts.defaults,
+   appFonts.happy,
+   appFonts.sad,
+   appFonts.angry
+];
+
+// image color list
+var imageColorList = [
+  appFonts.defaults,
+  appFonts.color,
+  appFonts.blackWhite,
+  appFonts.neon
+];
+
+
+  //background list
+  var backgroundList = [
+    {"image": eImageAssets.background1},
+    {"image": eImageAssets.background2},
+    {"image": eImageAssets.background3},
+    {"image": eImageAssets.background4},
+    {"image": eImageAssets.background5},
+    {"image": eImageAssets.background6}
+  ];
+
+  //setting list
+  var settingList = [
+    {"icon": eSvgAssets.profile, "title": "myAccount"},
+    {"icon": eSvgAssets.rtl, "title": "rtl"},
+    {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
+    {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
+    {"icon": eSvgAssets.lock, "title": "resetPassword"},
+    {"icon": eSvgAssets.bell2, "title": "notification"},
+    {"icon": eSvgAssets.translate, "title": "language"},
+    {"icon": eSvgAssets.sun, "title": "darkMode"},
+    {"icon": eSvgAssets.star, "title": "rateApp"},
+    {"icon": eSvgAssets.security, "title": "privacyTerm"},
+    {"icon": eSvgAssets.logout, "title": "logout"}
+  ];
+
+  //content option List
+  var contentOptionList = [
+    "businessIdea",
+    "coverLetter",
+    "blogSection",
+    "marketingWriting",
+    "service"
+  ];
 }

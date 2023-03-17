@@ -101,6 +101,27 @@ class AppFonts {
   String am9 = "09:41 am";
   String youDontHave = "You don't have any new notifications; reload it to get new one.";
   String refresh = "Refresh";
+  String whatsapp = "whatsapp";
+  String insta = "insta";
+  String tele = "tele";
+  String fb = "fb";
+  String slack = "slack";
+  String shareToFriend = "shareToFriend";
+  String okay = "okay";
+  String deleteChat = "deleteChat";
+  String setting = "setting";
+  String typeHere = "typeHere";
+  String rebuildResponse = "rebuildResponse";
+  String shareFriend = "shareFriend";
+  String downloadChat = "downloadChat";
+  String changeBackground = "changeBackground";
+  String clearChat = "clearChat";
+  String option3 = "option3";
+  String businessIdea = "businessIdea";
+  String topic = "topic";
+  String exUiUx = "exUiUx";
+  String writeContent = "writeContent";
+  String description = "description";
 
 
   String imageGenerator = "Image generator";
@@ -109,7 +130,7 @@ class AppFonts {
   String viewType = "View type";
   String selectSize = "Select size";
   String selectType = "Select type";
-  String youHaveNotYet = "You have not yet searched for anything; begin your search now.";
+  String youHaveNotYet = "You have not yet searched for anything, begin your search now.";
   String generateImage = "Generate image";
   String noOfImages = "No. of images";
   String imageStyle = "Image style";
@@ -125,11 +146,16 @@ class AppFonts {
   String angry  = "Angry";
   String color  = "Color";
   String blackWhite  = "Black & white";
+  String neon  = "Neon";
   String pageType  = "Page type";
   String gridType  = "Grid type";
   String imagePreview  = "Image preview";
   String share  = "Share";
   String download  = "Download";
+  String cancel  = "Cancel";
+  String apply  = "Apply";
+  String loading  = "Loading...";
+
 
 
 }
