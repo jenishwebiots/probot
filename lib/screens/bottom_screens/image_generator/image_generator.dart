@@ -99,7 +99,8 @@ class ImageGenerator extends StatelessWidget {
                               await imageGeneratorCtrl.getGPTImage(
                                   imageText: imageGeneratorCtrl
                                       .imageTextController.text
-                                      .trim());
+                                      .trim(),
+                                  size: val.toString());
                             }),
                         const HSpace(Sizes.s15),
                         DropDownLayout(
@@ -160,7 +161,7 @@ class ImageGenerator extends StatelessWidget {
                       : Text("null")
                 ]),
 
-                //   // ButtonCommon(title: appFonts.generateImage)
+                // ButtonCommon(title: appFonts.generateImage)
               ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i20),
         ),
       );

@@ -30,7 +30,8 @@ class ImageGeneratorController extends GetxController {
     super.onReady();
   }
 
-  Future getGPTImage({required String imageText}) async {
+  Future getGPTImage(
+      {required String imageText, String? size = "256x256"}) async {
     try {
       update();
       var request = await http.post(
@@ -40,7 +41,11 @@ class ImageGeneratorController extends GetxController {
           'Authorization': 'Bearer ${ApiConfig.chatGPTkey}',
         },
         body: jsonEncode(
-          {'prompt': imageText, 'n': 5, "size": "256x256"},
+          {
+            'prompt': imageText,
+            'n': 5,
+            "size": size,
+          },
         ),
       );
       print(request.body);
