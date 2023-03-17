@@ -7,7 +7,6 @@ import 'package:probot/bot_api/config.dart';
 
 class ApiServices {
   static var client = http.Client();
-
   static Future<String> textCompletionResponse(String prompt) async {
     var url = Uri.https("api.openai.com", "/v1/completions");
     final response = await http.post(
@@ -17,22 +16,19 @@ class ApiServices {
         "Authorization": "Bearer ${ApiConfig.chatGPTkey}"
       },
       body: json.encode({
-        "model": "text-davinci-003",
+        "model": "text-curie-001",
         "prompt": prompt,
         'temperature': 0,
-        'max_tokens': 2000,
+        'max_tokens': 1000,
         'top_p': 1,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0,
       }),
     );
-    // print(LocalStorage.getChatGptApiKey());
-    print("hello chat");
-    print(
-        "Chat respons   =======${jsonDecode(utf8.decode(response.bodyBytes))}");
-    // Do something with the response
+
     Map<String, dynamic> newresponse =
         jsonDecode(utf8.decode(response.bodyBytes));
+    log("Content respons   =======${newresponse['choices'][0]['text']}");
     return newresponse['choices'][0]['text'];
   }
 
@@ -47,7 +43,7 @@ class ApiServices {
       body: json.encode({
         "model": "gpt-3.5-turbo",
         'temperature': 0,
-        'max_tokens': 2000,
+        'max_tokens': 1000,
         'top_p': 1,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0,
@@ -56,7 +52,6 @@ class ApiServices {
         ]
       }),
     );
-    // print(LocalStorage.getChatGptApiKey());
     print("hello chat");
     print(
         "Chat respons   =======${jsonDecode(utf8.decode(response.bodyBytes))}");

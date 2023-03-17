@@ -33,10 +33,10 @@ class ContentWriter extends StatelessWidget {
                 const VSpace(Sizes.s8),
                 DropdownButtonHideUnderline(
                     child: ButtonTheme(
-                      colorScheme: ColorScheme.light(background: appCtrl.appTheme.sameWhite),
+                        colorScheme: ColorScheme.light(
+                            background: appCtrl.appTheme.sameWhite),
                         child: DropdownButton(
                             value: contentCtrl.selectedValue,
-
                             borderRadius: const BorderRadius.all(
                                 Radius.circular(AppRadius.r8)),
                             style: AppCss.outfitMedium14
@@ -49,23 +49,35 @@ class ContentWriter extends StatelessWidget {
                                 .asMap()
                                 .entries
                                 .map((e) => DropdownMenuItem(
-
-                                value: e.value, child: Text(e.value.toString().tr)))
+                                    value: e.value,
+                                    child: Text(e.value.toString().tr)))
                                 .toList(),
-                            onChanged: (val){})
-                    )),
+                            onChanged: (val) {}))),
                 const VSpace(Sizes.s15),
                 Text(appFonts.topic.tr,
                     style:
-                    AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
+                        AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
                 const VSpace(Sizes.s8),
                 TextFieldCommon(
-
-                    hintText: appFonts.exUiUx,
-                    fillColor: appCtrl.appTheme.surface,).authBoxExtension(),
+                  controller: contentCtrl.contentController,
+                  hintText: appFonts.exUiUx,
+                  fillColor: appCtrl.appTheme.surface,
+                ).authBoxExtension(),
                 const VSpace(Sizes.s10),
               ],
-            ).marginAll(Insets.i25)
+            ).marginAll(Insets.i25),
+            Text("Submit").inkWell(
+                onTap: () => {
+                      FocusScope.of(context).unfocus(),
+                      if (contentCtrl.contentController.text.isNotEmpty)
+                        {
+                          contentCtrl.proccessContentWrite(),
+                          Future.delayed(const Duration(milliseconds: 50))
+                              .then((_) => contentCtrl.scrollDown()),
+                        }
+                      else
+                        {print("writeSomethingg")}
+                    })
           ],
         ),
       );
