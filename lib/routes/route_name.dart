@@ -12,7 +12,9 @@ class RouteName {
   final String dashboard = "/dashboard";
   final String chatLayout = "/chatLayout";
   final String scanFingerprintScreen = "/scanFingerprintScreen";
-  final String notificationScreen = "/notificationScreen";
+  final String notificationsScreen = "/notificationsScreen";
   final String imagePreview = "/imagePreview";
   final String backgroundList = "/backgroundList";
+  final String myAccountScreen = "/myAccountScreen";
+  final String notificationScreen = "/notificationScreen";
 }

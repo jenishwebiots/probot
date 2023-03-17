@@ -55,6 +55,13 @@ class SettingList extends StatelessWidget {
                       : const Color.fromRGBO(50, 52, 68, 0.1))
               .marginSymmetric(vertical: Insets.i15)
       ],
-    );
+    ).inkWell(onTap: () {
+      if(data['title'] == "myAccount") {
+        Get.toNamed(routeName.myAccountScreen);
+      } else if (data['title'] == "notification") {
+        Get.toNamed(routeName.notificationScreen);
+      }
+      appCtrl.update();
+    });
   }
 }

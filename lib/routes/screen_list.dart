@@ -21,19 +21,19 @@ export '../screens/auth_screens/select_language_screen/select_language_screen.da
 export '../screens/auth_screens/sign_in_screen/sign_in_screen.dart';
 
 export '../screens/auth_screens/scan_fingerprint_screen/scan_fingerprint_screen.dart';
-export '../screens/app_screens/notification_screen/notification_screen.dart';
+export '../screens/app_screens/notifications_screen/notifications_screen.dart';
 
 export '../screens/bottom_screens/dashboard/dashboard.dart';
 export '../screens/app_screens/chat_layout/chat_layout.dart';
 
-export '../screens/app_screens/notification_screen/layouts/notification_layout.dart';
+export '../screens/app_screens/notifications_screen/layouts/notification_layout.dart';
 export '../screens/app_screens/image_preview/image_preview.dart';
 
 export '../screens/bottom_screens/image_generator/layout/drop_down_layout.dart';
 export '../screens/bottom_screens/image_generator/layout/image_layout.dart';
 
 export '../screens/app_screens/chat_layout/layouts/more_option.dart';
-export '../screens/app_screens/notification_screen/layouts/notification_layout.dart';
+export '../screens/app_screens/notifications_screen/layouts/notification_layout.dart';
 
 export '../screens/bottom_screens/chat/chat.dart';
 export '../screens/bottom_screens/home/home.dart';

@@ -33,6 +33,7 @@ class TextFieldCommon extends StatelessWidget {
   Widget build(BuildContext context) {
     // Text field common
     return TextFormField(
+      style: AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt),
       focusNode: focusNode,
         obscureText: obscureText,
         keyboardType: keyboardType,

@@ -156,6 +156,21 @@ class AppFonts {
   String apply  = "Apply";
   String loading  = "Loading...";
 
+  String myAccount  = "My account";
+  String firstName  = "First name";
+  String lastName  = "Last name";
+  String emailPhone  = "Email/phone";
+  String update  = "Update";
+  String enterFirstName  = "Enter First Name";
+  String enterLastName  = "Enter Last Name";
+  String enterEmailName  = "Enter Email Name";
+  String pleaseEnterValue  = "Please Enter Value";
+  String enterAtLeast  = "Enter At Least 6 Characters";
+
+  String newMessage  = "New message notification";
+  String newUpdates  = "New updates";
+  String passwordChange  = "Password changed";
+
 
 
 }
