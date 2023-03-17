@@ -52,4 +52,8 @@ class SvgAssets {
   final String euro = "assets/svg/euro.svg";
   final String inr = "assets/svg/inr.svg";
   final String pound = "assets/svg/pound.svg";
+  final String share = "assets/svg/share.svg";
+  final String trash = "assets/svg/trash.svg";
+  final String copy = "assets/svg/copy.svg";
+  final String edit = "assets/svg/edit.svg";
 }

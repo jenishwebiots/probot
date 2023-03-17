@@ -12,6 +12,7 @@ class AppTheme {
   bool isDark;
   Color txt;
   Color primary;
+  Color primaryLight;
   Color secondary;
   Color accentTxt;
   Color bg1;
@@ -41,12 +42,14 @@ class AppTheme {
   Color radialGradient;
   Color bg;
   Color textField;
+  Color greyLight;
 
   /// Default constructor
   AppTheme({
     required this.isDark,
     required this.txt,
     required this.primary,
+    required this.primaryLight,
     required this.secondary,
     required this.accentTxt,
     required this.bg1,
@@ -76,6 +79,7 @@ class AppTheme {
     required this.radialGradient,
     required this.bg,
     required this.textField,
+    required this.greyLight,
   });
 
   /// fromType factory constructor
@@ -86,6 +90,7 @@ class AppTheme {
           isDark: false,
           txt: const Color(0xFF323444),
           primary: const Color(0xff35C1FF),
+          primaryLight: const Color.fromRGBO(53, 193, 255, 0.1),
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
           bg1: const Color(0xffF8F9FC),
@@ -116,7 +121,8 @@ class AppTheme {
           trackActive: const Color(0xffFFF0E3),
           radialGradient: const Color(0xff179EEA),
           bg: const Color(0xff4D4F5D),
-          textField: const Color(0xffF5F5F6)
+          textField: const Color(0xffF5F5F6),
+          greyLight: const Color.fromRGBO(50, 52, 68, 0.1),
         );
 
       case ThemeType.dark:
@@ -124,6 +130,7 @@ class AppTheme {
           isDark: true,
           txt: Colors.white,
           primary: const Color(0xff35C1FF),
+            primaryLight: const Color.fromRGBO(53, 193, 255, 0.1),
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
           bg1: const Color(0xFF323444),
@@ -156,7 +163,8 @@ class AppTheme {
           trackActive: const Color(0xff4E3B2B),
           radialGradient: const Color(0xff179EEA),
           bg: const Color(0xff4D4F5D),
-            textField: const Color(0xff4D4F5D)
+            textField: const Color(0xff4D4F5D),
+          greyLight: const Color.fromRGBO(50, 52, 68, 0.1),
         );
     }
   }
