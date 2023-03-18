@@ -54,6 +54,7 @@ dependencies:
   permission_handler: ^10.2.0
   dio:
   flutter_widget_from_html: ^0.10.0
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class AppFonts {
 // On boarding page fonts
   String chatGpt = "chatGpt";
@@ -158,6 +160,9 @@ class AppFonts {
   String subscriptionPlan  = "subscriptionPlan";
   String payNow  = "payNow";
   String changeCurrency  = "changeCurrency";
+  String unlimitedChat  = "unlimitedChat";
+  String renewNow  = "renewNow";
+  String noOfDaysLeft(val) => "noOfDaysLeft".trParams({'daysLeft':val});
 
 
 }

@@ -13,6 +13,8 @@ class AppTheme {
   Color txt;
   Color primary;
   Color primaryLight;
+  Color primaryLight1;
+  Color primaryShadow;
   Color secondary;
   Color accentTxt;
   Color bg1;
@@ -43,6 +45,7 @@ class AppTheme {
   Color bg;
   Color textField;
   Color greyLight;
+  Color redColor;
 
   /// Default constructor
   AppTheme({
@@ -50,6 +53,8 @@ class AppTheme {
     required this.txt,
     required this.primary,
     required this.primaryLight,
+    required this.primaryLight1,
+    required this.primaryShadow,
     required this.secondary,
     required this.accentTxt,
     required this.bg1,
@@ -80,6 +85,7 @@ class AppTheme {
     required this.bg,
     required this.textField,
     required this.greyLight,
+    required this.redColor,
   });
 
   /// fromType factory constructor
@@ -91,6 +97,8 @@ class AppTheme {
           txt: const Color(0xFF323444),
           primary: const Color(0xff35C1FF),
           primaryLight: const Color.fromRGBO(53, 193, 255, 0.1),
+          primaryLight1: const Color.fromRGBO(53, 193, 255, 0.2),
+          primaryShadow: const Color.fromRGBO(53, 193, 255, 0.06),
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
           bg1: const Color(0xffF8F9FC),
@@ -102,7 +110,7 @@ class AppTheme {
           lightText: const Color(0xffAFB0B6),
           clickableText: const Color(0xff4D66FF),
           mainBg: const Color(0x00fff0e3),
-          boxBg:  Colors.white,
+          boxBg: Colors.white,
           white: Colors.white,
           linerGradiant: const Color(0xff848485),
           indicator: const Color(0xffDFDFDF),
@@ -114,15 +122,14 @@ class AppTheme {
           yellow: const Color(0xffFFB931),
           sameWhite: Colors.white,
           sameBlack: Colors.black,
-
           borderColor: const Color.fromRGBO(53, 193, 255, 0.08),
-
           toggleSwitch: const Color(0xffF5F5F5),
           trackActive: const Color(0xffFFF0E3),
           radialGradient: const Color(0xff179EEA),
           bg: const Color(0xff4D4F5D),
           textField: const Color(0xffF5F5F6),
           greyLight: const Color.fromRGBO(50, 52, 68, 0.1),
+          redColor: const Color(0XFFFE3D3D),
         );
 
       case ThemeType.dark:
@@ -130,12 +137,15 @@ class AppTheme {
           isDark: true,
           txt: Colors.white,
           primary: const Color(0xff35C1FF),
-            primaryLight: const Color.fromRGBO(53, 193, 255, 0.1),
+          primaryLight: const Color.fromRGBO(53, 193, 255, 0.1),
+          primaryLight1: const Color.fromRGBO(53, 193, 255, 0.2),
+          primaryShadow: const Color(0xFF323444),
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
           bg1: const Color(0xFF323444),
 
-          surface: const Color(0xFF4D4F5D),// add
+          surface: const Color(0xFF4D4F5D),
+          // add
 
           error: const Color(0xFFd32f2f),
           icon: const Color(0xff3E9B0E),
@@ -163,8 +173,9 @@ class AppTheme {
           trackActive: const Color(0xff4E3B2B),
           radialGradient: const Color(0xff179EEA),
           bg: const Color(0xff4D4F5D),
-            textField: const Color(0xff4D4F5D),
+          textField: const Color(0xff4D4F5D),
           greyLight: const Color.fromRGBO(50, 52, 68, 0.1),
+          redColor: const Color(0XFFFE3D3D),
         );
     }
   }

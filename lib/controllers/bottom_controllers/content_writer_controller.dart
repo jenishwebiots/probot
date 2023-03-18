@@ -1,7 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:probot/models/content_model.dart';
 
+import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
 class ContentWriterController extends GetxController {
@@ -10,55 +13,27 @@ class ContentWriterController extends GetxController {
   List contentOptionList = [];
   ScrollController scrollController =
       ScrollController(initialScrollOffset: 50.0);
+  Rx<List<ContentMessage>> messages = Rx<List<ContentMessage>>([]);
+  final contentController = TextEditingController();
+  RxString contentInput = ''.obs;
+  RxInt itemCount = 0.obs;
+  List<String> shareMessages = ['--THIS IS CONVERSATION with ADBOT--\n\n'];
+  RxInt contentCount = 0.obs;
+  final FlutterTts? flutterTts = FlutterTts();
+  final contentScrollController = ScrollController();
+  Rx<bool> isLoading = Rx<bool>(false);
+  final isSpeechLoading = false.obs;
+  final isSpeech = false.obs;
 
-  dynamic htmlData = r"""
-<dl>
-						   <dt>Definition list</dt>
-						   <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-						commodo consequat.</dd>
-						   <dt>Lorem ipsum dolor sit amet</dt>
-						   <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-						commodo consequat.</dd>
-						</dl>
-						<h1>HTML Ipsum Presents</h1>
 
-				<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-
-				<h2>Header Level 2</h2>
-
-				<ol>
-				   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-				   <li>Aliquam tincidunt mauris eu risus.</li>
-				</ol>
-
-				<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
-
-				<h3>Header Level 3</h3>
-
-				<ul>
-				   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-				   <li>Aliquam tincidunt mauris eu risus.</li>
-				</ul>
-
-				<pre><code>
-				#header h1 a {
-				  display: block;
-				  width: 300px;
-				  height: 80px;
-				}
-				</code></pre>
-""";
+  dynamic htmlData;
 
   @override
   void onReady() {
     // TODO: implement onReady
     contentOptionList = appArray.contentOptionList;
     update();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      scrollController.jumpTo(scrollController.position.maxScrollExtent);
-    });
+
     super.onReady();
   }
 
@@ -73,5 +48,54 @@ class ContentWriterController extends GetxController {
       dashboardCtrl.onBottomTap(3);
     }
     dashboardCtrl.update();
+  }
+
+  speechStopMethod() async {
+    isSpeech.value = false;
+    await flutterTts!.stop();
+    update();
+  }
+
+  void scrollDown() {
+    contentScrollController.animateTo(
+      contentScrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
+
+  addTextCount() async {
+    contentCount.value++;
+    // LocalStorage.saveTextCount(count: count.value);
+  }
+
+  void proccessContentWrite() async {
+    speechStopMethod();
+    addTextCount();
+    isLoading.value = true;
+    update();
+    messages.value.add(
+      ContentMessage(
+        text: contentController.text,
+        textMessageType: ContentMessageType.user,
+      ),
+    );
+
+    var input = contentController.text;
+    contentInput.value = contentController.text;
+    contentController.clear();
+    update();
+    log(":ISLOADING : #${isLoading.value}");
+
+    ApiServices.textCompletionResponse(input).then((value) {
+      log("value : $value");
+      htmlData = value;
+      update();
+
+      isLoading.value = false;
+      update();
+    });
+    contentController.clear();
+    update();
   }
 }

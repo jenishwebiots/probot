@@ -40,9 +40,9 @@ class OptionCard extends StatelessWidget {
                 color: appCtrl.appTheme.white,
                 borderRadius: BorderRadius.circular(AppRadius.r10),
                 boxShadow: [
-                  const BoxShadow(
-                      color: Color.fromRGBO(53, 193, 255, 0.06),
-                      offset: Offset(0, 2),
+                   BoxShadow(
+                      color: appCtrl.appTheme.primaryShadow,
+                      offset:const Offset(0, 2),
                       blurRadius: 20)
                 ],
                 border: Border.all(

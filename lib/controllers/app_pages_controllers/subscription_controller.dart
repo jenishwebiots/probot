@@ -15,7 +15,7 @@ class SubscriptionController extends GetxController {
   void onReady() {
     subscriptionLists = appArray.subscriptionPlan.map((e) => SubscribeModel.fromJson(e)).toList();
     currencyList = appArray.currencyList;
-    dynamic arg = appCtrl.storage.read("currency");
+    dynamic arg = appCtrl.storage.read("currency") ?? appArray.currencyList[0];
     if(arg["title"] == "dollar"){
       selectIndex = 0;
     }else if(arg["title"] == "euro"){

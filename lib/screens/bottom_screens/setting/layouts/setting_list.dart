@@ -58,7 +58,7 @@ class SettingList extends StatelessWidget {
     ).inkWell(
       onTap: (){
         if(data["title"] == appFonts.subscriptionPlan){
-          Get.toNamed(routeName.subscriptionPlan);
+          Get.toNamed(routeName.subscriptionPlanList  );
         }
       }
     );

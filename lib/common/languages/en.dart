@@ -140,6 +140,9 @@ final dynamic en = {
   'pound': "Pound",
   'cancel': "Cancel",
   'apply': "Apply",
+  'unlimitedChat': "Unlimited\nchat",
+  'noOfDaysLeft': "There are only @daysLeft days left in the cycle.",
+  'renewNow': "Renew now",
 
 
 };

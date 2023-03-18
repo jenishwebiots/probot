@@ -1,9 +1,5 @@
-
-import 'package:flutter/services.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:intl/intl.dart';
 import 'package:probot/config.dart';
-
+import 'package:probot/screens/bottom_screens/content_writer/layouts/content_description.dart';
 
 class ContentWriter extends StatelessWidget {
   final contentCtrl = Get.put(ContentWriterController());
@@ -12,7 +8,6 @@ class ContentWriter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GetBuilder<ContentWriterController>(builder: (_) {
       return Scaffold(
         backgroundColor: appCtrl.appTheme.bg1,
@@ -28,8 +23,12 @@ class ContentWriter extends StatelessWidget {
               style: AppCss.outfitExtraBold22
                   .textColor(appCtrl.appTheme.sameWhite)),
         ),
-        body: SingleChildScrollView(
-          child: Column(
+        body:  NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            overscroll.disallowIndicator();
+            return true;
+          },
+          child: contentCtrl.isLoading.value ?  Center(child: Image.asset(eGifAssets.loader,height: Sizes.s80,)) : ListView(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,59 +40,27 @@ class ContentWriter extends StatelessWidget {
                   ContentCommonWidget().commonText(appFonts.topic),
                   const VSpace(Sizes.s8),
                   TextFieldCommon(
-                    hintText: appFonts.exUiUx,
-                    fillColor: appCtrl.appTheme.surface,
-                  ).authBoxExtension(),
-                  ButtonCommon(title: appFonts.generateContent).marginSymmetric(vertical: Insets.i40)
+                    controller: contentCtrl.contentController,
+                          hintText: appFonts.exUiUx,
+                          fillColor: appCtrl.appTheme.surface)
+                      .authBoxExtension(),
+                  ButtonCommon(
+                      title: appFonts.generateContent,
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        if (contentCtrl.contentController.text.isNotEmpty) {
+                          contentCtrl.proccessContentWrite();
+
+                        } else {
+                          print("writeSomethingg");
+                        }
+                      }).marginSymmetric(vertical: Insets.i40)
                 ],
               ).marginAll(Insets.i25),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(appFonts.description.tr,style: AppCss.outfitSemiBold18.textColor(appCtrl.appTheme.primary)),
-                      Row(
-                        children: [
-                          SvgPicture.asset(eSvgAssets.share).descriptionOptionBg(),
-                          const HSpace(Sizes.s12),
-                          SvgPicture.asset(eSvgAssets.trash).descriptionOptionBg().inkWell(onTap: (){
-                            String parsedstring3 = Bidi.stripHtmlIfNeeded(contentCtrl.htmlData);
-                            print(parsedstring3);
-                          }),
-                          const HSpace(Sizes.s12),
-                          SvgPicture.asset(eSvgAssets.copy).descriptionOptionBg().inkWell(onTap: ()async{
-                            String parsedstring3 = Bidi.stripHtmlIfNeeded(contentCtrl.htmlData);
-                            print(parsedstring3);
-                            Clipboard.setData(ClipboardData(text:parsedstring3)).then((_){
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Email address copied to clipboard")));
-                            });
-                          }),
-                          const HSpace(Sizes.s12),
-                          SvgPicture.asset(eSvgAssets.edit).descriptionOptionBg(),
-                        ],
-                      )
-                    ],
-                  ),
-                  const   VSpace(Sizes.s15),
-                  RawScrollbar(
-                    controller: contentCtrl.scrollController,
-                    trackColor: appCtrl.appTheme.greyLight,
-                    thumbColor: appCtrl.appTheme.primary,
-                    radius:const Radius.circular(AppRadius.r4),
-                    thickness: 3,
-                    child:ListView(
-
-                      children: [
-                        HtmlWidget(
-                          contentCtrl.htmlData,
-
-                        ).paddingAll(Insets.i20).decorated(color: appCtrl.appTheme.bg1,borderRadius: BorderRadius.circular(AppRadius.r6)),
-                      ]
-                    ).height(Sizes.s350),
-                  )
-                ],
-              ).paddingAll(Insets.i20).decorated(color: appCtrl.appTheme.white,borderRadius: BorderRadius.circular(AppRadius.r8))
+              if(contentCtrl.htmlData != null)
+              const ContentDescription().paddingAll(Insets.i20).decorated(
+                  color: appCtrl.appTheme.white,
+                  borderRadius: BorderRadius.circular(AppRadius.r8))
             ],
           ),
         ),

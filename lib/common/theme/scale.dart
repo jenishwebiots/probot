@@ -99,6 +99,7 @@ class AppRadius {
   static const double r19 = 19 * scale;
   static const double r20 = 20 * scale;
   static const double r25 = 25 * scale;
+  static const double r28 = 28 * scale;
   static const double r30 = 30 * scale;
   static const double r32 = 32 * scale;
   static const double r35 = 35 * scale;

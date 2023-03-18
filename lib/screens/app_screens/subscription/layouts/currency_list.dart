@@ -1,6 +1,5 @@
-import 'dart:developer';
 
-import 'package:probot/screens/app_screens/subscription/layouts/currency_radio.dart';
+
 
 import '../../../../config.dart';
 
@@ -17,22 +16,7 @@ class CurrencyList extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(appFonts.changeCurrency.tr,
-                        style: AppCss.outfitblack20
-                            .textColor(appCtrl.appTheme.txt)
-                            .textDecoration(TextDecoration.none))
-                    .paddingSymmetric(horizontal: Insets.i20),
-                InkWell(
-                    onTap: () => Get.back(),
-                    child: SvgPicture.asset(
-                      eSvgAssets.cancel,
-                      height: Sizes.s24,
-                    ))
-              ],
-            ).paddingAll(Insets.i20),
+            CommonPopUpTitle(title: appFonts.changeCurrency),
             DottedLine(
                 direction: Axis.horizontal,
                 lineLength: double.infinity,
@@ -43,59 +27,7 @@ class CurrencyList extends StatelessWidget {
             ...appArray.currencyList
                 .asMap()
                 .entries
-                .map((e) => Column(
-                      children: [
-                        ListTile(
-                          trailing: CurrencyRadioButton(
-                              data: e.value,
-                              selectIndex: subscribeCtrl.selectIndex,
-                              index: e.key,
-                              onTap: () async {
-                                log(" e.value : ${ e.value}");
-                                appCtrl.priceSymbol =
-                                    e.value["symbol"].toString();
-                                subscribeCtrl.selectIndex = e.key;
-                                appCtrl.currency =
-                                    await appCtrl.storage.read("currency");
-                                await appCtrl.storage
-                                    .write("currency", e.value);
-                                if (appCtrl.currency != e.value) {
-                                  appCtrl.currencyVal = double.parse(appCtrl
-                                      .currency[e.value["code"]]
-                                      .toString());
-
-                                  await appCtrl.storage
-                                      .write("currencyCode", appCtrl.currency);
-
-                                  appCtrl.update();
-                                  subscribeCtrl.update();
-
-                                  Get.forceAppUpdate();
-                                }
-                                appCtrl.update();
-                                Get.forceAppUpdate();
-                              }),
-                          contentPadding: EdgeInsets.zero,
-                          title: Text(e.value["title"].toString().tr,
-                              style: AppCss.outfitMedium16
-                                  .textColor(appCtrl.appTheme.txt)),
-                          leading: SvgPicture.asset(e.value["icon"].toString())
-                              .paddingSymmetric(
-                                  vertical: Insets.i12, horizontal: Insets.i15)
-                              .decorated(
-                                  color:
-                                      const Color.fromRGBO(53, 193, 255, 0.1),
-                                  shape: BoxShape.circle)
-                              .height(Sizes.s40)
-                              .width(Sizes.s40),
-                        ),
-                        if (e.key != appArray.currencyList.length - 1)
-                          const Divider(
-                            color: Color.fromRGBO(50, 52, 68, 0.08),
-                            height: 0,
-                          ).marginSymmetric(vertical: Insets.i12),
-                      ],
-                    ).marginSymmetric(horizontal: Insets.i15))
+                .map((e) => CurrencyListCard(index: e.key,data: e.value,))
                 .toList(),
             const VSpace(Sizes.s35),
             Row(children: [
