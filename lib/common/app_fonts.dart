@@ -170,6 +170,13 @@ class AppFonts {
   String newMessage  = "New message notification";
   String newUpdates  = "New updates";
   String passwordChange  = "Password changed";
+  String fingerprintLock  = "Fingerprint lock & security";
+  String verify  = "Verify";
+  String successfullyVerify  = "Successfully Verify";
+  String yourFingerprintHasBeenVerify  = "Your fingerprint has been verify successfully.";
+  String fingerprintError  = "Fingerprint Error";
+  String sorryFingerprint  = "Sorry !!  Fingerprint verification failed, please try again..";
+  String tryAgain  = "Try again";
 
 
 

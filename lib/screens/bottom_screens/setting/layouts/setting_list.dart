@@ -60,6 +60,8 @@ class SettingList extends StatelessWidget {
         Get.toNamed(routeName.myAccountScreen);
       } else if (data['title'] == "notification") {
         Get.toNamed(routeName.notificationScreen);
+      } else if (data['title'] == "fingerprintLock") {
+        Get.toNamed(routeName.fingerprintAndLockSecurity);
       }
       appCtrl.update();
     });

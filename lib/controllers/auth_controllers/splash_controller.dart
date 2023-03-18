@@ -62,7 +62,7 @@ class SplashController extends GetxController {
               if (name != null || userName != null || firebaseUser != null) {
                 if (isLanguageSaved) {
                   if (isCharacterSaved) {
-                    Get.toNamed(routeName.addFingerprintScreen);
+                    Get.toNamed(routeName.dashboard);
                   } else {
                     Get.toNamed(routeName.selectCharacterScreen);
                   }

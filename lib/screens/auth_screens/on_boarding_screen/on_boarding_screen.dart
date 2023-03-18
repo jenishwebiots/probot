@@ -34,7 +34,7 @@ class OnBoardingScreen extends StatelessWidget {
                             subtitle: e.value["subtitle"],
                             onTap: () {
                               if (onBoardingCtrl.selectIndex == 2) {
-                                Get.toNamed(routeName.signInScreen);
+                                Get.toNamed(routeName.loginScreen);
                               } else {
                                 onBoardingCtrl.pageCtrl.nextPage(
                                     duration: const Duration(microseconds: 500),
