@@ -17,3 +17,4 @@ export 'app_pages_controllers/notification_controller.dart';
 export 'bottom_controllers/image_generator_controller.dart';
 
 export 'app_pages_controllers/image_preview_controller.dart';
+export 'app_pages_controllers/subscription_controller.dart';

@@ -1,5 +1,6 @@
 
-import 'package:probot/screens/app_screens/chat_layout/layouts/background_list.dart';
+import 'package:probot/screens/app_screens/subscription_plan/subscription_plan.dart';
+
 import '../config.dart';
 
 
@@ -40,6 +41,8 @@ class AppRoute {
     GetPage(name: _routeName.notificationScreen, page: () => NotificationScreen()),
     GetPage(name: _routeName.imagePreview, page: () => ImagePreview()),
     GetPage(name: _routeName.backgroundList, page: () =>const BackgroundList()),
+    GetPage(name: _routeName.subscriptionPlanList, page: () => Subscription()),
+    GetPage(name: _routeName.subscriptionPlan, page: () =>const  SubscriptionPlan()),
 
   ];
 }

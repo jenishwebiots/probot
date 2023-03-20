@@ -48,7 +48,13 @@ dependencies:
   flutter_switch: ^0.3.2
   flutter_tts: ^3.6.3
   intl: ^0.17.0
-
+  http: ^0.13.5
+  share_plus: ^6.3.0
+  device_info_plus: ^8.1.0
+  permission_handler: ^10.2.0
+  dio:
+  flutter_widget_from_html: ^0.10.0
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

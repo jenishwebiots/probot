@@ -228,56 +228,43 @@ class AppArray {
   var viewTypeList = [appFonts.pageType, appFonts.gridType];
 
   // images list of image generator
-var imageGeneratorList = [
-  {
-    "image": eImageAssets.ig1
-  },{
-    "image": eImageAssets.ig2
-  },{
-    "image": eImageAssets.ig3
-  },{
-    "image": eImageAssets.ig4
-  },{
-    "image": eImageAssets.ig5
-  },{
-    "image": eImageAssets.ig6
-  },
-];
+  var imageGeneratorList = [
+    {"image": eImageAssets.ig1},
+    {"image": eImageAssets.ig2},
+    {"image": eImageAssets.ig3},
+    {"image": eImageAssets.ig4},
+    {"image": eImageAssets.ig5},
+    {"image": eImageAssets.ig6},
+  ];
 
 // no. of images list
-var noOfImagesList = [
-    "5",
-    "10",
-    "15",
-    "20"
-];
+  var noOfImagesList = ["5", "10", "15", "20"];
 
 // image style list
-var imageStyleList = [
-  appFonts.defaults,
-  appFonts.abstract,
-  appFonts.anime,
-  appFonts.cartoon,
-  appFonts.comic
-];
+  var imageStyleList = [
+    appFonts.defaults,
+    appFonts.abstract,
+    appFonts.anime,
+    appFonts.cartoon,
+    appFonts.comic
+  ];
 
 // mood list
-var moodList = [
-   appFonts.defaults,
-   appFonts.happy,
-   appFonts.sad,
-   appFonts.angry
-];
+  var moodList = [
+    appFonts.defaults,
+    appFonts.happy,
+    appFonts.sad,
+    appFonts.angry
+  ];
 
 // image color list
-var imageColorList = [
-  appFonts.defaults,
-  appFonts.color,
-  appFonts.blackWhite,
-  appFonts.neon
-];
+  var imageColorList = [
+    appFonts.defaults,
+    appFonts.color,
+    appFonts.blackWhite,
+    appFonts.neon
+  ];
 
-=======
   //background list
   var backgroundList = [
     {"image": eImageAssets.background1},
@@ -310,5 +297,89 @@ var imageColorList = [
     "blogSection",
     "marketingWriting",
     "service"
+  ];
+
+  //subscription plan
+  var subscriptionPlan = [
+    {
+      "planName": "basicPlan",
+      "type": "weekly",
+      "price": 29.99,
+      "priceTpe": "week",
+      "icon": eSvgAssets.star1,
+      "benefits": [
+        "weekBenefit1",
+        "weekBenefit2",
+        "weekBenefit3",
+      ]
+    },
+    {
+      "planName": "advancePlan",
+      "type": "monthly",
+      "price": 59.99,
+      "priceTpe": "month",
+      "icon": eSvgAssets.crown,
+      "benefits": [
+        "weekBenefit1",
+        "monthBenefit1",
+        "monthBenefit2",
+      ]
+    },
+    {
+      "planName": "standardPlan",
+      "type": "yearly",
+      "price": 99.99,
+      "priceTpe": "year",
+      "icon": eSvgAssets.medal,
+      "benefits": [
+        "weekBenefit1",
+        "yearBenefit1",
+        "yearBenefit2",
+      ]
+    }
+  ];
+
+  //currency list
+  var currencyList = [
+    {
+      'title': "dollar",
+      "icon": eSvgAssets.dollar,
+      'code': 'USD',
+      'symbol': '\$',
+      'USD': 1,
+      'INR': 82.56,
+      'POU': 0.82,
+      'EUR': 0.94,
+    },
+    {
+      'title': "euro",
+      "icon": eSvgAssets.euro,
+      'code': 'EUR',
+      'symbol': '€',
+      'USD': 1.03,
+      'INR': 84.00,
+      'POU': 0.87,
+      'EUR': 1,
+    },
+    {
+      'title': "inr",
+      'code': 'INR',
+      "icon": eSvgAssets.inr,
+      'symbol': '₹',
+      'USD': 0.012,
+      'INR': 1,
+      'POU': 0.010,
+      'EUR': 0.011,
+    },
+    {
+      'title': "pound",
+      'icon': eSvgAssets.pound,
+      'code': 'POU',
+      'symbol': '£',
+      'USD': 1.18,
+      'INR': 96.70,
+      'POU': 1,
+      'EUR': 1.15,
+    },
   ];
 }

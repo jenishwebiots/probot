@@ -22,6 +22,13 @@ class SplashController extends GetxController {
   ThemeService().switchTheme(isTheme);
   appCtrl.isTheme = isTheme;
 
+// Currency Save
+    var currency = appCtrl.storage.read("currency") ?? appArray.currencyList[0];
+    var currencyCode =
+        appCtrl.storage.read("currencyCode") ?? appArray.currencyList[0];
+    appCtrl.priceSymbol = currency["symbol"];
+    appCtrl.currencyVal =
+        double.parse(currencyCode[currency["code"]].toString());
 
     var language =
         await appCtrl.storage.read("locale") ?? const Locale("en", "US");

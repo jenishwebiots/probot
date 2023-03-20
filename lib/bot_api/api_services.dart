@@ -14,13 +14,13 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer ${ApiConfig.chatGPTkey}"
+        "Authorization": "Bearer ${ApiConfig.chatGPTkey1}"
       },
       body: json.encode({
-        "model": "text-davinci-003",
+        "model": "text-curie-001",
         "prompt": prompt,
         'temperature': 0,
-        'max_tokens': 2000,
+        'max_tokens': 1000,
         'top_p': 1,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0,

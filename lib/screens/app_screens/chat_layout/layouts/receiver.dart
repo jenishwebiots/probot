@@ -27,10 +27,10 @@ class Receiver extends StatelessWidget {
                         horizontal: Insets.i10,),
                     decoration: BoxDecoration(
                         color: appCtrl.appTheme.boxBg,
-                        boxShadow: const [
+                        boxShadow:  [
                           BoxShadow(
-                              color: Color.fromRGBO(53, 193, 255, 0.06),
-                              offset: Offset(0, 10),
+                              color: appCtrl.appTheme.primaryShadow,
+                              offset:const Offset(0, 10),
                               blurRadius: 20)
                         ],
                         borderRadius:
