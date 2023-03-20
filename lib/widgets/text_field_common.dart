@@ -56,6 +56,6 @@ class TextFieldCommon extends StatelessWidget {
             prefixIcon: prefixIcon,
             hintStyle:
             AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
-            hintText: hintText.tr)).authBoxExtension();
+            hintText: hintText.tr));
   }
 }

@@ -4,6 +4,7 @@ import '../screens/app_screens/add_fingerprint_screen/add_fingerprint_screen.dar
 import '../screens/app_screens/fingerprint_and_lock_security/fingerprint_and_lock_security.dart';
 import '../screens/app_screens/my_account_screen/my_account_screen.dart';
 import '../screens/app_screens/notification_screen/notification_screen.dart';
+import '../screens/app_screens/privacy_policy_screen/privacy_policy_screen.dart';
 
 
 RouteName _routeName = RouteName();
@@ -43,6 +44,7 @@ class AppRoute {
     GetPage(name: _routeName.myAccountScreen, page: () => MyAccountScreen()),
     GetPage(name: _routeName.notificationScreen, page: () => NotificationScreen()),
     GetPage(name: _routeName.fingerprintAndLockSecurity, page: () => FingerprintAndLockSecurity()),
+    GetPage(name: _routeName.privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
 
   ];
 }

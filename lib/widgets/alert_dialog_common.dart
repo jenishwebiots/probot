@@ -4,7 +4,7 @@ import '../../config.dart';
 
 class AlertDialogCommon extends StatelessWidget {
   final String? image, title, subtext, bText1;
-  final GestureTapCallback? b1OnTap;
+  final GestureTapCallback? b1OnTap,crossOnTap;
 
   const AlertDialogCommon(
       {Key? key,
@@ -12,7 +12,8 @@ class AlertDialogCommon extends StatelessWidget {
         this.b1OnTap,
         this.bText1,
         this.image,
-        this.subtext
+        this.subtext,
+        this.crossOnTap
        })
       : super(key: key);
 
@@ -25,28 +26,43 @@ class AlertDialogCommon extends StatelessWidget {
         backgroundColor: appCtrl.appTheme.white,
         content: Stack(alignment: Alignment.topRight, children: [
           Column(mainAxisSize: MainAxisSize.min, children: [
+              const VSpace(Sizes.s55),
             // Gif
-            Image.asset(image!, height: Sizes.s230, width: Sizes.s230),
-            // Title
-            Text(title!.tr,
-                style:
-                AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt)),
+            Image.asset(image!, height: Sizes.s190),
+
             const VSpace(Sizes.s18),
             // Sub text
             Text(subtext!.tr,
                 textAlign: TextAlign.center,
-                style: AppCss.outfitMedium14
-                    .textColor(appCtrl.appTheme.lightText)
+                style: AppCss.outfitMedium16
+                    .textColor(appCtrl.appTheme.txt)
                     .textHeight(1.5))
-                .paddingSymmetric(horizontal: Insets.i10),
+                .paddingSymmetric(horizontal: Insets.i5),
             const VSpace(Sizes.s25),
-            ButtonCommon(onTap: b1OnTap, title: bText1!),
-
+            ButtonCommon(onTap: b1OnTap, title: bText1!)
           ]).paddingAll(Insets.i20),
-          IconButton(
-              onPressed: () => Get.back(),
-              icon: Icon(CupertinoIcons.multiply,
-                  size: Sizes.s20, color: appCtrl.appTheme.lightText))
+
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const VSpace(Sizes.s5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Title
+                  Text(title!.tr,
+                      style:
+                      AppCss.outfitSemiBold20.textColor(appCtrl.appTheme.txt)).paddingSymmetric(horizontal: Insets.i20),
+                  IconButton(
+                      onPressed: crossOnTap,
+                      icon: Icon(CupertinoIcons.multiply,
+                          size: Sizes.s20, color: appCtrl.appTheme.lightText)),
+                ],
+              ),
+              const VSpace(Sizes.s5),
+              const DottedLines()
+            ]
+          )
         ]));
   }
 }

@@ -177,6 +177,23 @@ class AppFonts {
   String fingerprintError  = "Fingerprint Error";
   String sorryFingerprint  = "Sorry !!  Fingerprint verification failed, please try again..";
   String tryAgain  = "Try again";
+  String deviceNotSupported  = "Device not supported or Add fingerprint to your device";
+  String youHaveNotVerify  = "You have not yet verify a fingerprint";
+
+
+  String privacyTerm  = "Privacy & term";
+  String interpretationDefinitions  = "Interpretation & Definitions";
+  String collecting  = "Collecting & Using Your Personal Data";
+  String retention  = "Retention of Your Personal Data";
+  String transfer  = "Transfer of Your Personal Data";
+  String deleteYour  = "Delete Your Personal Data";
+  String disclosure  = "Disclosure of Your Personal Data";
+  String childrenPrivacy  = "Children's Privacy";
+  String linksToOther  = "Links to Other Websites";
+  String changesToThis  = "Changes to this Privacy Policy";
+  String thisPrivacyPolicy  = "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.";
+
+
 
 
 

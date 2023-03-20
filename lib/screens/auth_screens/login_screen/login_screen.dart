@@ -62,7 +62,11 @@ class LoginScreen extends StatelessWidget {
             ]),
             const OrLayout(),
             Text(appFonts.continueAsAGuest.tr,
-                style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary))
+                style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary)).inkWell(onTap: (){
+                 appCtrl.isLogin = true;
+                  appCtrl.storage.write("isLogin", appCtrl.isLogin);
+                  Get.offAllNamed(routeName.dashboard);
+            })
           ]).paddingSymmetric(horizontal: Insets.i20)
         ]).paddingOnly(bottom: Insets.i10)
       ),

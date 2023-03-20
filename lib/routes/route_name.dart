@@ -18,4 +18,5 @@ class RouteName {
   final String myAccountScreen = "/myAccountScreen";
   final String notificationScreen = "/notificationScreen";
   final String fingerprintAndLockSecurity = "/fingerprintAndLockSecurity";
+  final String privacyPolicyScreen = "/privacyPolicyScreen";
 }
