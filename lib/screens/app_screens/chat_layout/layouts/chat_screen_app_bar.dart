@@ -13,16 +13,14 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
           toolbarHeight: 70,
           titleSpacing: 0,
 
-          leading: Hero(
-              tag: "chat${chatCtrl.index}",
-              child: SvgPicture.asset(eSvgAssets.leftArrow,
-                      fit: BoxFit.scaleDown,
-                      colorFilter: ColorFilter.mode(
-                          appCtrl.appTheme.sameWhite, BlendMode.srcIn))
-                  .inkWell(onTap: () => Get.back())),
+          leading: SvgPicture.asset(eSvgAssets.leftArrow,
+                  fit: BoxFit.scaleDown,
+                  colorFilter: ColorFilter.mode(
+                      appCtrl.appTheme.sameWhite, BlendMode.srcIn))
+              .inkWell(onTap: () => Get.back()),
           automaticallyImplyLeading: false,
           backgroundColor: appCtrl.appTheme.primary,
-          actions: [SvgPicture.asset(eSvgAssets.search), const MoreOption()],
+          actions: [SvgPicture.asset(eSvgAssets.search,colorFilter: ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),), const MoreOption()],
           title: Row(children: [
             Container(
               height: Sizes.s50,
@@ -30,10 +28,10 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: AssetImage(chatCtrl.data["image"]))),
+                      image: AssetImage(appCtrl.selectedCharacter["image"]))),
             ),
             const HSpace(Sizes.s10),
-            Text(chatCtrl.data["title"].toString().tr,
+            Text(appCtrl.selectedCharacter["title"].toString().tr,
                 style: AppCss.outfitExtraBold22
                     .textColor(appCtrl.appTheme.sameWhite))
           ]));

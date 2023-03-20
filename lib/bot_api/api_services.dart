@@ -14,7 +14,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer ${ApiConfig.chatGPTkey1}"
+        "Authorization": "Bearer ${ApiConfig.chatGPTkey}"
       },
       body: json.encode({
         "model": "text-curie-001",
@@ -43,7 +43,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer ${ApiConfig.chatGPTkey1}"
+        "Authorization": "Bearer ${ApiConfig.chatGPTkey}"
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",

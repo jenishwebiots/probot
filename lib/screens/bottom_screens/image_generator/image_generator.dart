@@ -21,7 +21,7 @@ class ImageGenerator extends StatelessWidget {
                 elevation: 0,
                 toolbarHeight: 70,
                 automaticallyImplyLeading: false,
-                title: Text(appFonts.imageGenerator,
+                title: Text(appFonts.imageGenerator.tr,
                     style: AppCss.outfitSemiBold22
                         .textColor(appCtrl.appTheme.sameWhite))),
             body: Stack(alignment: Alignment.center, children: [

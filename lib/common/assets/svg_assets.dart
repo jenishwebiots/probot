@@ -58,5 +58,6 @@ class SvgAssets {
   final String trash = "assets/svg/trash.svg";
   final String copy = "assets/svg/copy.svg";
   final String edit = "assets/svg/edit.svg";
+  final String search = "assets/svg/search.svg";
 
 }

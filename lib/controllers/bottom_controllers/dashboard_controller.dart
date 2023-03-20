@@ -19,11 +19,12 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
   late int selectedIndexBottom;
   late AnimationController animationController;
   late Tween<double> colorTween;
+  final chatLayoutCtrl = Get.isRegistered<ChatLayoutController>() ? Get.find<ChatLayoutController>(): Get.put(ChatLayoutController());
 
 //list of bottommost page
   List<Widget> widgetOptions = <Widget>[
     Home(),
-    Chat(),
+    ChatLayout(),
     ImageGenerator(),
     ContentWriter(),
     Setting(),
@@ -42,6 +43,8 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
     });
     bottomList = appArray.bottomList;
     update();
+    chatLayoutCtrl.onReady();
+    chatLayoutCtrl.update();
     super.onReady();
   }
 
@@ -60,6 +63,9 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
     con!.index = val;
     con!.addListener(listener);
     update();
+    if(selectedIndex == 1){
+      chatLayoutCtrl.    showInterstitialAd();
+    }
   }
 
   @override

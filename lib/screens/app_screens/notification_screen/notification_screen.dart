@@ -12,11 +12,6 @@ class NotificationScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppAppBarCommon(title: appFonts.notification,leadingOnTap: ()=> Get.back(),isAction: false),
           body:  Column(
-
-          backgroundColor: appCtrl.appTheme.bg1,
-          appBar: AppAppBarCommon(title: appFonts.notification,actionIcon: eSvgAssets.delete,leadingOnTap: ()=> Get.back(),isAction: true,),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
 
             ],

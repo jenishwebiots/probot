@@ -36,7 +36,7 @@ class Setting extends StatelessWidget {
                           ? settingCtrl.userName![0]
                           : settingCtrl.name != null
                               ? settingCtrl.name![0]
-                              : settingCtrl.firebaseUser![0],
+                              : "S",
                       style: AppCss.outfitExtraBold30
                           .textColor(appCtrl.appTheme.sameWhite))
                   .paddingSymmetric(

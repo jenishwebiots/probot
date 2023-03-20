@@ -12,7 +12,7 @@ class AddFingerprintController extends GetxController {
   LocalAuthentication auth = LocalAuthentication();
   String authorized = " not authorized";
   bool canCheckBiometric = false;
- List<BiometricType> availableBiometric = [];
+  List<BiometricType> availableBiometric = [];
 
 
   /*onBiometric() async {
@@ -101,7 +101,7 @@ class AddFingerprintController extends GetxController {
     } on PlatformException  {
       snackBarMessengers(message: appFonts.deviceNotSupported);
     }
-      update();
+    update();
 
   }
 
@@ -116,7 +116,7 @@ class AddFingerprintController extends GetxController {
     }
 
     if (!isClosed) return;
-      canCheckBiometric = canCheckBiometric;
+    canCheckBiometric = canCheckBiometric;
     update();
   }
 
@@ -129,7 +129,7 @@ class AddFingerprintController extends GetxController {
     } on PlatformException catch (e) {
       print("getAvailableBiometric: $e");
     }
-      availableBiometric = availableBiometric;
+    availableBiometric = availableBiometric;
     update();
   }
 
@@ -137,7 +137,7 @@ class AddFingerprintController extends GetxController {
 
   @override
   void onReady() async {
-   // onBiometric();
+    // onBiometric();
     checkBiometric();
     getAvailableBiometric();
     authenticate();

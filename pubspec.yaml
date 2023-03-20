@@ -57,6 +57,7 @@ dependencies:
   local_auth: ^2.1.6
   flutter_widget_from_html: ^0.10.0
   percent_indicator: ^4.2.3
+  google_mobile_ads: ^2.3.0
 
 
 dev_dependencies:

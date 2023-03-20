@@ -284,9 +284,9 @@ class AppArray {
     {"icon": eSvgAssets.lock, "title": "resetPassword"},
     {"icon": eSvgAssets.bell2, "title": "notification"},
     {"icon": eSvgAssets.translate, "title": "language"},
-    {"icon": eSvgAssets.sun, "title": "darkMode"},
-    {"icon": eSvgAssets.star, "title": "rateApp"},
-    {"icon": eSvgAssets.security, "title": "privacyTerm"},
+    {"icon": eSvgAssets.chat, "title": "selectCharacter"},
+    //{"icon": eSvgAssets.star, "title": "rateApp"},
+    //{"icon": eSvgAssets.security, "title": "privacyTerm"},
     {"icon": eSvgAssets.logout, "title": "logout"}
   ];
 

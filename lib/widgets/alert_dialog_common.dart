@@ -14,7 +14,7 @@ class AlertDialogCommon extends StatelessWidget {
         this.image,
         this.subtext,
         this.crossOnTap
-       })
+      })
       : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class AlertDialogCommon extends StatelessWidget {
         backgroundColor: appCtrl.appTheme.white,
         content: Stack(alignment: Alignment.topRight, children: [
           Column(mainAxisSize: MainAxisSize.min, children: [
-              const VSpace(Sizes.s55),
+            const VSpace(Sizes.s55),
             // Gif
             Image.asset(image!, height: Sizes.s190),
 
@@ -43,25 +43,26 @@ class AlertDialogCommon extends StatelessWidget {
           ]).paddingAll(Insets.i20),
 
           Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const VSpace(Sizes.s5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Title
-                  Text(title!.tr,
-                      style:
-                      AppCss.outfitSemiBold20.textColor(appCtrl.appTheme.txt)).paddingSymmetric(horizontal: Insets.i20),
-                  IconButton(
-                      onPressed: crossOnTap,
-                      icon: Icon(CupertinoIcons.multiply,
-                          size: Sizes.s20, color: appCtrl.appTheme.lightText)),
-                ],
-              ),
-              const VSpace(Sizes.s5),
-              const DottedLines()
-            ]
+            
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const VSpace(Sizes.s5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Title
+                    Text(title!.tr,
+                        style:
+                        AppCss.outfitSemiBold20.textColor(appCtrl.appTheme.txt)).paddingSymmetric(horizontal: Insets.i20),
+                    IconButton(
+                        onPressed: crossOnTap,
+                        icon: Icon(CupertinoIcons.multiply,
+                            size: Sizes.s20, color: appCtrl.appTheme.lightText)),
+                  ],
+                ),
+                const VSpace(Sizes.s5),
+                const DottedLines().width(MediaQuery.of(context).size.width)
+              ]
           )
         ]));
   }

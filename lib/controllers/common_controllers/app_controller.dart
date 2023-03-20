@@ -14,11 +14,13 @@ class AppController extends GetxController {
   bool isBiometric = false;
   bool isLogin = false;
   String languageVal = "en";
+  dynamic selectedCharacter;
   final storage = GetStorage();
   double currencyVal = double.parse(appArray.currencyList[0]["USD"].toString()).roundToDouble();
   bool isSwitched = false;
   bool isOnboard = false;
   dynamic currency;
+  int characterIndex= 3;
 
   //update theme
   updateTheme(theme) {

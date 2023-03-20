@@ -10,7 +10,7 @@ class DropDownLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(title!,
+      Text(title!.toString().tr,
           style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
       const VSpace(Sizes.s10),
       SizedBox(
@@ -30,7 +30,7 @@ class DropDownLayout extends StatelessWidget {
                           icon: SvgPicture.asset(eSvgAssets.dropDown),
                           isDense: true,
                           isExpanded: true,
-                          hint: Text(hintText!),
+                          hint: Text(hintText!.toString().tr),
                           items: dropDownList!,
                           onChanged: onChanged)
                     )))
