@@ -1,4 +1,10 @@
+
 import 'package:share_plus/share_plus.dart';
+
+
+
+import 'package:share_plus/share_plus.dart';
+
 import '../../../config.dart';
 
 class ImagePreview extends StatelessWidget {
@@ -40,6 +46,11 @@ class ImagePreview extends StatelessWidget {
                       title: appFonts.download,
                       onTap: () =>
                           imagePreviewCtrl.download(imagePreviewCtrl.image)))
+
+              Expanded(child: ButtonCommon(title: appFonts.share, onTap: () =>
+                  Share.share(imagePreviewCtrl.image, subject: "Probot image"))),
+              const HSpace(Sizes.s15),
+              Expanded(child: ButtonCommon(title: appFonts.download,  onTap: () => imagePreviewCtrl.download(imagePreviewCtrl.image)))
             ])
           ]).padding(
               horizontal: Insets.i20, top: Insets.i60, bottom: Insets.i40)

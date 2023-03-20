@@ -19,4 +19,8 @@ class RouteName {
   final String notificationScreen = "/notificationScreen";
   final String fingerprintAndLockSecurity = "/fingerprintAndLockSecurity";
   final String privacyPolicyScreen = "/privacyPolicyScreen";
+
+  final String subscriptionPlanList = "/subscriptionPlanList";
+  final String subscriptionPlan = "/subscriptionPlan";
+
 }

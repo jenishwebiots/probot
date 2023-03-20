@@ -52,7 +52,7 @@ class SettingList extends StatelessWidget {
                   dashLength: 3,
                   dashColor: appCtrl.isTheme
                       ? const Color.fromRGBO(255, 255, 255, 0.1)
-                      : const Color.fromRGBO(50, 52, 68, 0.1))
+                      : appCtrl.appTheme.greyLight)
               .marginSymmetric(vertical: Insets.i15)
       ],
     ).inkWell(onTap: () {
@@ -67,5 +67,6 @@ class SettingList extends StatelessWidget {
       }
       appCtrl.update();
     });
+ 
   }
 }

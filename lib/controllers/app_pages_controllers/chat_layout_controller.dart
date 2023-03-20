@@ -159,8 +159,8 @@ class ChatLayoutController extends GetxController {
               style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.txt)),
           const VSpace(Sizes.s15),
           if (position != 4)
-            const Divider(
-                height: 0, color: Color.fromRGBO(50, 52, 68, 0.1), thickness: 1)
+             Divider(
+                height: 0, color: appCtrl.appTheme.greyLight, thickness: 1)
         ]));
   }
 

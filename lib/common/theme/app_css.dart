@@ -79,6 +79,7 @@ class AppCss {
 
 
   static TextStyle get outfitLight16 => outfit.light.size(FontSizes.f16);
+  static TextStyle get outfitLight14 => outfit.light.size(FontSizes.f14);
   static TextStyle get outfitLight12 => outfit.light.size(FontSizes.f12);
 
   static TextStyle get londrinaMedium70 => londrinaSolid.medium.size(FontSizes.f70);

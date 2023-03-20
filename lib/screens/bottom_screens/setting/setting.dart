@@ -13,7 +13,7 @@ class Setting extends StatelessWidget {
         backgroundColor: appCtrl.appTheme.bg1,
         drawer: const CommonDrawer(),
         appBar: AppBar(
-            leadingWidth: Sizes.s80,
+            leadingWidth: Sizes.s70,
             leading: const CommonMenuIcon().inkWell(
                 onTap: () =>
                     settingCtrl.scaffoldKey.currentState!.openDrawer()),

@@ -1,4 +1,9 @@
+
 import 'package:probot/screens/app_screens/chat_layout/layouts/background_list.dart';
+
+
+import 'package:probot/screens/app_screens/subscription_plan/subscription_plan.dart';
+
 import '../config.dart';
 import '../screens/app_screens/add_fingerprint_screen/add_fingerprint_screen.dart';
 import '../screens/app_screens/fingerprint_and_lock_security/fingerprint_and_lock_security.dart';
@@ -41,10 +46,15 @@ class AppRoute {
     GetPage(name: _routeName.notificationsScreen, page: () => NotificationsScreen()),
     GetPage(name: _routeName.imagePreview, page: () => ImagePreview()),
     GetPage(name: _routeName.backgroundList, page: () =>const BackgroundList()),
+
     GetPage(name: _routeName.myAccountScreen, page: () => MyAccountScreen()),
     GetPage(name: _routeName.notificationScreen, page: () => NotificationScreen()),
     GetPage(name: _routeName.fingerprintAndLockSecurity, page: () => FingerprintAndLockSecurity()),
     GetPage(name: _routeName.privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
+
+    GetPage(name: _routeName.subscriptionPlanList, page: () => Subscription()),
+    GetPage(name: _routeName.subscriptionPlan, page: () =>const  SubscriptionPlan()),
+
 
   ];
 }

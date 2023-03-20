@@ -22,7 +22,6 @@ class SvgAssets {
   final String delete = "assets/svg/delete.svg";
   final String dropDown = "assets/svg/dropDown.svg";
   final String filter = "assets/svg/filter.svg";
-  final String search = "assets/svg/search.svg";
   final String download = "assets/svg/download.svg";
   final String smile = "assets/svg/smile.svg";
   final String mic = "assets/svg/mic.svg";
@@ -38,6 +37,7 @@ class SvgAssets {
   final String fingerLock = "assets/svg/fingerLock.svg";
   final String lock = "assets/svg/lock.svg";
   final String star = "assets/svg/star.svg";
+  final String star1 = "assets/svg/star1.svg";
   final String security = "assets/svg/security.svg";
   final String sun = "assets/svg/sun.svg";
   final String bell2 = "assets/svg/bell2.svg";
@@ -46,4 +46,17 @@ class SvgAssets {
   final String camera = "assets/svg/camera.svg";
   final String dropDownUp = "assets/svg/dropDownUp.svg";
   final String arrow = "assets/svg/arrow.svg";
+  final String downArrow = "assets/svg/downArrow.svg";
+  final String crown = "assets/svg/crown.svg";
+  final String medal = "assets/svg/medal.svg";
+  final String currency = "assets/svg/currency.svg";
+  final String dollar = "assets/svg/dollar.svg";
+  final String euro = "assets/svg/euro.svg";
+  final String inr = "assets/svg/inr.svg";
+  final String pound = "assets/svg/pound.svg";
+  final String share = "assets/svg/share.svg";
+  final String trash = "assets/svg/trash.svg";
+  final String copy = "assets/svg/copy.svg";
+  final String edit = "assets/svg/edit.svg";
+
 }

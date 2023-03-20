@@ -36,6 +36,7 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
                       ? appCtrl.appTheme.sameWhite
                       : appCtrl.appTheme.white,
                   BlendMode.srcIn))
+             
               .inkWell(onTap: leadingOnTap),
           const HSpace(Sizes.s17),
           Text(title!.tr,
