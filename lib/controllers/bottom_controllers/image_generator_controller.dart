@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import '../../models/image_model.dart';
 
 class ImageGeneratorController extends GetxController {
-
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
    List imageSizeLists = [];
    List viewTypeLists = [];
    List imageLists = [];

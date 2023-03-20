@@ -14,7 +14,7 @@ class SplashController extends GetxController {
     appCtrl.isBiometric = isBiometricSave;
     appCtrl.isLogin = isLoginSave;
     appCtrl.selectedCharacter = appCtrl.storage.read("selectedCharacter") ??
-        appCtrl.selectedCharacter[3];
+        appArray.selectCharacterList[3];
     appCtrl.characterIndex = appCtrl.storage.read("characterIndex") ?? 3;
     log("isBiometricSave: $isBiometricSave");
     log("isLoginSave: $isLoginSave");
@@ -27,9 +27,10 @@ class SplashController extends GetxController {
     appCtrl.isTheme = isTheme;
 
     var language =
-        await appCtrl.storage.read("locale") ?? const Locale("en", "US");
-    appCtrl.languageVal =language;
+        await appCtrl.storage.read("locale") ?? "en";
+  log("language ; $language");
     if (language != null) {
+      appCtrl.languageVal =language;
       if (language == "en") {
         locale = const Locale("en", "US");
       } else if (language == "hi") {
@@ -52,7 +53,7 @@ class SplashController extends GetxController {
     Get.forceAppUpdate();
 
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
-    var name = appCtrl.storage.read("name");
+    var name = appCtrl.storage.read("name") ;
     log("name: $name");
     var userName = appCtrl.storage.read("userName");
     log("userName: $userName");
@@ -72,14 +73,10 @@ class SplashController extends GetxController {
         } else {
           if (name != null || userName != null || firebaseUser != null) {
             if (isLanguageSaved) {
-              if (isCharacterSaved) {
-                if (isBiometricSave) {
-                  Get.offAllNamed(routeName.addFingerprintScreen);
-                } else {
-                  Get.toNamed(routeName.dashboard);
-                }
+              if (isBiometricSave) {
+                Get.offAllNamed(routeName.addFingerprintScreen);
               } else {
-                Get.toNamed(routeName.selectCharacterScreen);
+                Get.toNamed(routeName.dashboard);
               }
             } else {
               Get.toNamed(routeName.selectLanguageScreen);

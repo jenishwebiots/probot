@@ -15,11 +15,16 @@ class ImageGenerator extends StatelessWidget {
     return GetBuilder<ImageGeneratorController>(builder: (_) {
       return Stack(children: [
         Scaffold(
+            key: imageGeneratorCtrl.scaffoldKey,
+            drawer: const CommonDrawer(),
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
                 backgroundColor: appCtrl.appTheme.primary,
                 elevation: 0,
                 toolbarHeight: 70,
+                leadingWidth: Sizes.s70,
+                leading: const CommonMenuIcon().inkWell(
+                    onTap: () => imageGeneratorCtrl.scaffoldKey.currentState!.openDrawer()),
                 automaticallyImplyLeading: false,
                 title: Text(appFonts.imageGenerator.tr,
                     style: AppCss.outfitSemiBold22

@@ -13,6 +13,7 @@ class ChatLayout extends StatelessWidget {
               child: Scaffold(
                   key: chatCtrl.scaffoldKey,
                   drawer: const CommonDrawer(),
+
                   backgroundColor: appCtrl.appTheme.bg1,
                   appBar: const ChatScreenAppBar(),
                   body: NotificationListener<OverscrollIndicatorNotification>(

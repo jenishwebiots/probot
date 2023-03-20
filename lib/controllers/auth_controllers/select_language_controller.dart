@@ -18,7 +18,7 @@ class SelectLanguageController extends GetxController {
     if(isBack){
       Get.back();
     }else {
-      Get.toNamed(routeName.selectCharacterScreen);
+      Get.toNamed(routeName.dashboard);
     }
     update();
   }

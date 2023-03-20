@@ -48,7 +48,7 @@ class SelectCharacterScreen extends StatelessWidget {
                                             .onCharacterChange(index,selectCharacterCtrl
                                             .selectCharacterLists[index]),
                                         selectIndex:
-                                            selectCharacterCtrl.selectIndex,
+                                            appCtrl.characterIndex,
                                         index: index,
                                         data: selectCharacterCtrl
                                             .selectCharacterLists[index]);
