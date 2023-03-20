@@ -53,8 +53,11 @@ dependencies:
   device_info_plus: ^8.1.0
   permission_handler: ^10.2.0
   dio:
+  image_gallery_saver: ^1.7.1
+  local_auth: ^2.1.6
   flutter_widget_from_html: ^0.10.0
   percent_indicator: ^4.2.3
+
 
 dev_dependencies:
   flutter_test:

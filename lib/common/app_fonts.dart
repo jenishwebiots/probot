@@ -132,7 +132,7 @@ class AppFonts {
   String viewType = "View type";
   String selectSize = "Select size";
   String selectType = "Select type";
-  String youHaveNotYet = "You have not yet searched for anything; begin your search now.";
+  String youHaveNotYet = "You have not yet searched for anything, begin your search now.";
   String generateImage = "Generate image";
   String noOfImages = "No. of images";
   String imageStyle = "Image style";
@@ -156,6 +156,47 @@ class AppFonts {
   String download  = "Download";
   String cancel  = "Cancel";
   String apply  = "Apply";
+  String loading  = "Loading...";
+
+  String myAccount  = "My account";
+  String firstName  = "First name";
+  String lastName  = "Last name";
+  String emailPhone  = "Email/phone";
+  String update  = "Update";
+  String enterFirstName  = "Enter First Name";
+  String enterLastName  = "Enter Last Name";
+  String enterEmailName  = "Enter Email Name";
+  String pleaseEnterValue  = "Please Enter Value";
+  String enterAtLeast  = "Enter At Least 6 Characters";
+
+  String newMessage  = "New message notification";
+  String newUpdates  = "New updates";
+  String passwordChange  = "Password changed";
+  String fingerprintLock  = "Fingerprint lock & security";
+  String verify  = "Verify";
+  String successfullyVerify  = "Successfully Verify";
+  String yourFingerprintHasBeenVerify  = "Your fingerprint has been verify successfully.";
+  String fingerprintError  = "Fingerprint Error";
+  String sorryFingerprint  = "Sorry !!  Fingerprint verification failed, please try again..";
+  String tryAgain  = "Try again";
+  String deviceNotSupported  = "Device not supported or Add fingerprint to your device";
+  String youHaveNotVerify  = "You have not yet verify a fingerprint";
+
+
+  String privacyTerm  = "Privacy & term";
+  String interpretationDefinitions  = "Interpretation & Definitions";
+  String collecting  = "Collecting & Using Your Personal Data";
+  String retention  = "Retention of Your Personal Data";
+  String transfer  = "Transfer of Your Personal Data";
+  String deleteYour  = "Delete Your Personal Data";
+  String disclosure  = "Disclosure of Your Personal Data";
+  String childrenPrivacy  = "Children's Privacy";
+  String linksToOther  = "Links to Other Websites";
+  String changesToThis  = "Changes to this Privacy Policy";
+  String thisPrivacyPolicy  = "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.";
+
+
+
   String generateContent  = "generateContent";
   String subscriptionPlan  = "subscriptionPlan";
   String payNow  = "payNow";

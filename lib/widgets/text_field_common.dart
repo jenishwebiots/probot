@@ -9,6 +9,7 @@ class TextFieldCommon extends StatelessWidget {
   final bool obscureText;
   final InputBorder? border;
   final TextInputType? keyboardType;
+  final FocusNode? focusNode;
   final ValueChanged<String>? onChanged;
   final int? maxLength,minLines;
 
@@ -23,6 +24,7 @@ class TextFieldCommon extends StatelessWidget {
       this.obscureText = false,
       this.fillColor,
       this.keyboardType,
+      this.focusNode,
       this.onChanged,
       this.maxLength,this.minLines})
       : super(key: key);
@@ -31,6 +33,8 @@ class TextFieldCommon extends StatelessWidget {
   Widget build(BuildContext context) {
     // Text field common
     return TextFormField(
+      style: AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt),
+      focusNode: focusNode,
         obscureText: obscureText,
         keyboardType: keyboardType,
         validator: validator,
@@ -52,6 +56,6 @@ class TextFieldCommon extends StatelessWidget {
             prefixIcon: prefixIcon,
             hintStyle:
             AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
-            hintText: hintText.tr)).authBoxExtension();
+            hintText: hintText.tr));
   }
 }

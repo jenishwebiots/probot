@@ -12,7 +12,7 @@ class SelectCharacterController extends GetxController {
   onContinue() async{
     appCtrl.isCharacter = true;
     await appCtrl.storage.write("isCharacter", appCtrl.isCharacter);
-    Get.toNamed(routeName.addFingerprintScreen);
+    Get.toNamed(routeName.dashboard);
     update();
   }
 

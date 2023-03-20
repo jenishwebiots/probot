@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "836888693669",
-    "project_id": "probot-9851d",
-    "storage_bucket": "probot-9851d.appspot.com"
+    "project_number": "3921683177",
+    "project_id": "probot-38408",
+    "storage_bucket": "probot-38408.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:836888693669:android:dedf0f0a51b2633ac5364c",
+        "mobilesdk_app_id": "1:3921683177:android:122037ca485a1aa0e90678",
         "android_client_info": {
-          "package_name": "com.webiots.probot"
+          "package_name": "com.webiots.probotgpt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "836888693669-25nh0vs19sfm0fnvikpe2eioi5d2nm95.apps.googleusercontent.com",
+          "client_id": "3921683177-9f7o0dcr3uj3tbn9i0ogvkj6tb0b8jla.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAXdS5fV5LO0VN2wjcjN_OIQxFEYP1QPrI"
+          "current_key": "AIzaSyAa0zM3Leh_AANprimLYSZhQXzQRbaYhSo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "836888693669-25nh0vs19sfm0fnvikpe2eioi5d2nm95.apps.googleusercontent.com",
+              "client_id": "3921683177-9f7o0dcr3uj3tbn9i0ogvkj6tb0b8jla.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

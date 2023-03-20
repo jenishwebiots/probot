@@ -55,12 +55,18 @@ class SettingList extends StatelessWidget {
                       : appCtrl.appTheme.greyLight)
               .marginSymmetric(vertical: Insets.i15)
       ],
-    ).inkWell(
-      onTap: (){
-        if(data["title"] == appFonts.subscriptionPlan){
-          Get.toNamed(routeName.subscriptionPlanList  );
-        }
+    ).inkWell(onTap: () {
+      if(data['title'] == "myAccount") {
+        Get.toNamed(routeName.myAccountScreen);
+      } else if (data['title'] == "notification") {
+        Get.toNamed(routeName.notificationScreen);
+      } else if (data['title'] == "fingerprintLock") {
+        Get.toNamed(routeName.fingerprintAndLockSecurity);
+      } else if (data['title'] == "privacyTerm") {
+        Get.toNamed(routeName.privacyPolicyScreen);
       }
-    );
+      appCtrl.update();
+    });
+ 
   }
 }

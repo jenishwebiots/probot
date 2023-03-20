@@ -9,7 +9,6 @@ class SvgAssets {
   final String settingColor = "assets/svg/settingColor.svg";
   final String home = "assets/svg/home.svg";
   final String chat = "assets/svg/chat.svg";
-  final String search = "assets/svg/search.svg";
   final String more = "assets/svg/more.svg";
   final String gallery = "assets/svg/gallery.svg";
   final String content = "assets/svg/content.svg";
@@ -44,6 +43,9 @@ class SvgAssets {
   final String bell2 = "assets/svg/bell2.svg";
   final String arrowRight1 = "assets/svg/arrowRight1.svg";
   final String rtl = "assets/svg/rtl.svg";
+  final String camera = "assets/svg/camera.svg";
+  final String dropDownUp = "assets/svg/dropDownUp.svg";
+  final String arrow = "assets/svg/arrow.svg";
   final String downArrow = "assets/svg/downArrow.svg";
   final String crown = "assets/svg/crown.svg";
   final String medal = "assets/svg/medal.svg";
@@ -56,4 +58,5 @@ class SvgAssets {
   final String trash = "assets/svg/trash.svg";
   final String copy = "assets/svg/copy.svg";
   final String edit = "assets/svg/edit.svg";
+
 }

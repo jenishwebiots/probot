@@ -7,11 +7,11 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
 
   const AppAppBarCommon(
       {Key? key,
-      this.title,
-      this.actionOnTap,
-      this.actionIcon,
-      this.leadingOnTap,
-      this.isAction = false})
+        this.title,
+        this.actionOnTap,
+        this.actionIcon,
+        this.leadingOnTap,
+        this.isAction = false})
       : super(key: key);
 
   @override
@@ -30,17 +30,18 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
         title: Row(children: [
           const HSpace(Sizes.s10),
           SvgPicture.asset(eSvgAssets.leftArrow,
-                  fit: BoxFit.scaleDown,
-                  colorFilter: ColorFilter.mode(
-                      appCtrl.isTheme
-                          ? appCtrl.appTheme.sameWhite
-                          : appCtrl.appTheme.white,
-                      BlendMode.srcIn))
+              fit: BoxFit.scaleDown,
+              colorFilter: ColorFilter.mode(
+                  appCtrl.isTheme
+                      ? appCtrl.appTheme.sameWhite
+                      : appCtrl.appTheme.white,
+                  BlendMode.srcIn))
+             
               .inkWell(onTap: leadingOnTap),
           const HSpace(Sizes.s17),
           Text(title!.tr,
               style:
-                  AppCss.outfitSemiBold22.textColor(appCtrl.appTheme.sameWhite))
+              AppCss.outfitSemiBold22.textColor(appCtrl.appTheme.sameWhite))
         ]));
   }
 

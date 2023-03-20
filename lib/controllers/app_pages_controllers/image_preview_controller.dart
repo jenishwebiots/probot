@@ -1,55 +1,69 @@
-import 'dart:developer';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../config.dart';
 
-
 class ImagePreviewController extends GetxController {
-  dynamic image;
+ dynamic image;
+ bool isLoading = false;
 
+ download(String url) async {
+ final androidInfo = await DeviceInfoPlugin().androidInfo;
+ late final Map<Permission, PermissionStatus> status;
 
+ if (Platform.isAndroid) {
+ if (androidInfo.version.sdkInt <= 32) {
+ status = await [Permission.storage].request();
+ } else {
+ status = await [Permission.photos].request();
+ }
+ } else {
+ status = await [Permission.photosAddOnly].request();
+ }
 
-  @override
-  void onReady() {
-    var data = Get.arguments;
-    image = data ?? "";
-    update();
-    // TODO: implement onReady
-    super.onReady();
-  }
+ var allAccept = true;
+ status.forEach((permission, status) {
+ if (status != PermissionStatus.granted) {
+ allAccept = false;
+ }
+ });
 
-  //download image
-  download(String url) async {
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
-    late final Map<Permission, PermissionStatus> status;
+ if (allAccept) {
+ isLoading = true;
+ update();
+ var response = await Dio()
+ .get(url, options: Options(responseType: ResponseType.bytes));
+ final result = await ImageGallerySaver.saveImage(
+ Uint8List.fromList(response.data),
+ quality: 60,
+ name: "probot");
+ isLoading = false;
+ Get.snackbar('Success', "Image Downloaded Successfully",
+ backgroundColor: appCtrl.appTheme.icon,
+ colorText: appCtrl.appTheme.sameWhite);
+ print(result);
+ update();
+ } else {
+ isLoading = false;
+ Get.snackbar('Alert!', "Something Went Wrong",
+ backgroundColor: appCtrl.appTheme.error,
+ colorText: appCtrl.appTheme.sameWhite);
+ update();
+ }
+ }
 
-    if (Platform.isAndroid) {
-      if (androidInfo.version.sdkInt <= 32) {
-        status = await [Permission.storage].request();
-      } else {
-        status = await [Permission.photos].request();
-      }
-    } else {
-      status = await [Permission.photosAddOnly].request();
-    }
-
-    var allAccept = true;
-    status.forEach((permission, status) {
-      if (status != PermissionStatus.granted) {
-        allAccept = false;
-      }
-    });
-
-    if (allAccept) {
-      await Dio().get(
-        url,
-        options: Options(responseType: ResponseType.bytes),
-      );
-      url.substring(url.length - 20);
-    } else {}
-  }
+ @override
+ void onReady() {
+ print(isLoading);
+ var data = Get.arguments;
+ image = data ?? "";
+ update();
+ // TODO: implement onReady
+ super.onReady();
+ }
 }

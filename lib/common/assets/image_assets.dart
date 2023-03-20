@@ -31,6 +31,7 @@ class ImageAssets {
   final String ig6 = "assets/images/ig6.png";
   final String success = "assets/images/success.png";
   final String settingBg = "assets/images/settingBg.png";
+  final String noSearch = "assets/images/noSearch.png";
 
   // Icons
   final String google = "assets/images/icons/Google.png";

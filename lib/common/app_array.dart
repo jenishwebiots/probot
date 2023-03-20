@@ -183,7 +183,7 @@ class AppArray {
   ];
 
   // notification list
-  var notificationList = [
+  var notificationsList = [
     {
       "image": eImageAssets.sc6,
       "title": appFonts.hennyHasSent,
@@ -222,7 +222,7 @@ class AppArray {
   ];
 
 // image size list
-  var imageSizeList = ["160*160", "250*250", "360*360"];
+  var imageSizeList = ['256x256', '512x512', '1024x1024'];
 
   // view type list
   var viewTypeList = [appFonts.pageType, appFonts.gridType];
@@ -299,6 +299,19 @@ class AppArray {
     "service"
   ];
 
+  // notification list
+var notificationList = [
+  {
+    "title": appFonts.newMessage,
+    "value": true,
+  },{
+    "title": appFonts.newUpdates,
+    "value": false,
+  },{
+    "title": appFonts.passwordChange,
+    "value": true,
+  },
+];
   //subscription plan
   var subscriptionPlan = [
     {

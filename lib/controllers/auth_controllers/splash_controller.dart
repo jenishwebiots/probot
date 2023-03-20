@@ -1,8 +1,6 @@
 import 'dart:developer';
 import 'package:probot/config.dart';
-
 import '../../common/theme/theme_service.dart';
-
 
 
 class SplashController extends GetxController {
@@ -10,10 +8,18 @@ class SplashController extends GetxController {
 
   @override
   void onReady() async {
+
+    bool isLoginSave = appCtrl.storage.read("isLogin") ?? false;
+    bool isBiometricSave = appCtrl.storage.read("isBiometric") ?? false;
     bool isLanguageSaved = appCtrl.storage.read("isLanguage") ?? false;
     bool isCharacterSaved = appCtrl.storage.read("isCharacter") ?? false;
     appCtrl.isCharacter = isCharacterSaved;
     appCtrl.isLanguage = isLanguageSaved;
+    appCtrl.isBiometric = isBiometricSave;
+    appCtrl.isLogin = isLoginSave;
+
+    log("isBiometricSave: $isBiometricSave");
+    log("isLoginSave: $isLoginSave");
     // Language Save
     Locale? locale = const Locale("en", "US");
 
@@ -66,18 +72,26 @@ class SplashController extends GetxController {
 
           Future.delayed(const Duration(seconds: 3), () {
             if (onBoard) {
-              if (name != null || userName != null || firebaseUser != null) {
-                if (isLanguageSaved) {
-                  if (isCharacterSaved) {
-                    Get.toNamed(routeName.addFingerprintScreen);
+              if (isLoginSave) {
+                Get.offAllNamed(routeName.dashboard);
+              } else {
+                if (name != null || userName != null || firebaseUser != null) {
+                  if (isLanguageSaved) {
+                    if (isCharacterSaved) {
+                      if (isBiometricSave) {
+                        Get.offAllNamed(routeName.addFingerprintScreen);
+                      } else {
+                        Get.toNamed(routeName.dashboard);
+                      }
+                    } else {
+                      Get.toNamed(routeName.selectCharacterScreen);
+                    }
                   } else {
-                    Get.toNamed(routeName.selectCharacterScreen);
+                    Get.toNamed(routeName.selectLanguageScreen);
                   }
                 } else {
-                  Get.toNamed(routeName.selectLanguageScreen);
+                  Get.toNamed(routeName.loginScreen);
                 }
-              } else {
-                Get.toNamed(routeName.loginScreen);
               }
             } else {
               Get.toNamed(routeName.onBoardingScreen);

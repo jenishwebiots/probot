@@ -8,13 +8,19 @@ class RouteName {
   final String signUpScreen = "/signUpScreen";
   final String selectLanguageScreen = "/selectLanguageScreen";
   final String selectCharacterScreen = "/selectCharacterScreen";
-  final String addFingerprintScreen = "/addFingerprintScreen";
+
   final String dashboard = "/dashboard";
   final String chatLayout = "/chatLayout";
-  final String scanFingerprintScreen = "/scanFingerprintScreen";
-  final String notificationScreen = "/notificationScreen";
+  final String addFingerprintScreen = "/addFingerprintScreen";
+  final String notificationsScreen = "/notificationsScreen";
   final String imagePreview = "/imagePreview";
   final String backgroundList = "/backgroundList";
+  final String myAccountScreen = "/myAccountScreen";
+  final String notificationScreen = "/notificationScreen";
+  final String fingerprintAndLockSecurity = "/fingerprintAndLockSecurity";
+  final String privacyPolicyScreen = "/privacyPolicyScreen";
+
   final String subscriptionPlanList = "/subscriptionPlanList";
   final String subscriptionPlan = "/subscriptionPlan";
+
 }
