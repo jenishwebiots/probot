@@ -1,7 +1,7 @@
 class SubscribeModel {
   String? planName;
   String? type;
-  double? price;
+  int? price;
   String? priceTpe;
   String? icon;
   List<String>? benefits;
