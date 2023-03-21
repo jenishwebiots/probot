@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-
 import '../../../../config.dart';
 
 class CurrencyListCard extends StatelessWidget {
@@ -18,28 +16,8 @@ class CurrencyListCard extends StatelessWidget {
               trailing: CurrencyRadioButton(
                   data: data,
                   selectIndex: subscribeCtrl.selectIndex,
-                  index: index,
-                  onTap: () async {
-                    log(" data : $data");
-                    appCtrl.priceSymbol = data["symbol"].toString();
-                    subscribeCtrl.selectIndex = index!;
-                    appCtrl.currency = await appCtrl.storage.read("currency");
-                    await appCtrl.storage.write("currency", data);
-                    if (appCtrl.currency != data) {
-                      appCtrl.currencyVal = double.parse(
-                          appCtrl.currency[data["code"]].toString());
-
-                      await appCtrl.storage
-                          .write("currencyCode", appCtrl.currency);
-
-                      appCtrl.update();
-                      subscribeCtrl.update();
-
-                      Get.forceAppUpdate();
-                    }
-                    appCtrl.update();
-                    Get.forceAppUpdate();
-                  }),
+                  index: index
+                 ),
               contentPadding: EdgeInsets.zero,
               title: Text(data["title"].toString().tr,
                   style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
@@ -50,11 +28,31 @@ class CurrencyListCard extends StatelessWidget {
                       color: const Color.fromRGBO(53, 193, 255, 0.1),
                       shape: BoxShape.circle)
                   .height(Sizes.s40)
-                  .width(Sizes.s40)),
+                  .width(Sizes.s40), onTap: () async {
+            log(" data : $data");
+            appCtrl.priceSymbol = data["symbol"].toString();
+            subscribeCtrl.selectIndex = index!;
+            appCtrl.currency = await appCtrl.storage.read("currency");
+            await appCtrl.storage.write("currency", data);
+            if (appCtrl.currency != data) {
+              appCtrl.currencyVal = double.parse(
+                  appCtrl.currency[data["code"]].toString());
+
+              await appCtrl.storage
+                  .write("currencyCode", appCtrl.currency);
+
+              appCtrl.update();
+              subscribeCtrl.update();
+
+              Get.forceAppUpdate();
+            }
+            appCtrl.update();
+            Get.forceAppUpdate();
+          }),
           if (index != appArray.currencyList.length - 1)
             const Divider(color: Color.fromRGBO(50, 52, 68, 0.08), height: 0)
-                .marginSymmetric(vertical: Insets.i12),
-        ],
+                .marginSymmetric(vertical: Insets.i12)
+        ]
       ).marginSymmetric(horizontal: Insets.i15);
     });
   }

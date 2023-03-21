@@ -22,9 +22,9 @@ class Subscription extends StatelessWidget {
                 ...subscribeCtrl.subscriptionLists
                     .asMap()
                     .entries
-                    .map((e) => SubscriptionList(subscribeModel: e.value,)
+                    .map((e) => SubscriptionList(subscribeModel: e.value,onTap: ()=> subscribeCtrl.paymentDialog(e.value.price.toString()))
                 .subscribeExtension()
-                    .marginOnly(bottom: Insets.i20).inkWell(onTap: ()=>Get.toNamed(routeName.subscriptionPlan)))
+                    .marginOnly(bottom: Insets.i20).inkWell(onTap: () {}))
                     .toList()
               ],
             ).marginSymmetric(vertical: Insets.i25, horizontal: Insets.i20),

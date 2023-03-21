@@ -317,7 +317,7 @@ var notificationList = [
     {
       "planName": "basicPlan",
       "type": "weekly",
-      "price": 29.99,
+      "price": 9,
       "priceTpe": "week",
       "icon": eSvgAssets.star1,
       "benefits": [
@@ -329,7 +329,7 @@ var notificationList = [
     {
       "planName": "advancePlan",
       "type": "monthly",
-      "price": 59.99,
+      "price": 19,
       "priceTpe": "month",
       "icon": eSvgAssets.crown,
       "benefits": [
@@ -341,7 +341,7 @@ var notificationList = [
     {
       "planName": "standardPlan",
       "type": "yearly",
-      "price": 99.99,
+      "price": 29,
       "priceTpe": "year",
       "icon": eSvgAssets.medal,
       "benefits": [
@@ -395,4 +395,16 @@ var notificationList = [
       'EUR': 1.15,
     },
   ];
+
+  // payment method
+var paymentMethodList = [
+  {
+    "icon": eImageAssets.paypal,
+    "title": appFonts.payPal,
+  },
+  {
+    "icon": eImageAssets.stripe,
+    "title": appFonts.stripe,
+  },
+];
 }

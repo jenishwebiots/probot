@@ -205,5 +205,14 @@ class AppFonts {
   String renewNow  = "renewNow";
   String noOfDaysLeft(val) => "noOfDaysLeft".trParams({'daysLeft':val});
 
+  String paymentSuccess  = "Payment Success";
+  String paymentFailed = "Payment Failed";
+  String congratulation = "Congratulations !! Your payment was completed successfully.";
+  String oppsDueTo = "Oops !!  Due to a technical issue, payment was failed. Please try again.";
+  String payMoneyFrom = "Pay Money From";
+  String payPal = "Pay pal";
+  String stripe = "Stripe";
+  String pay = "Pay";
+
 
 }
