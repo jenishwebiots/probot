@@ -1,14 +1,12 @@
-
 import 'package:probot/config.dart';
 import 'package:probot/screens/bottom_screens/content_writer/content_writer.dart';
 
 import '../../screens/bottom_screens/image_generator/image_generator.dart';
 
-
-
-class DashboardController extends GetxController with GetTickerProviderStateMixin{
-
+class DashboardController extends GetxController
+    with GetTickerProviderStateMixin {
   int selectedIndex = 0;
+  int lastSelectedIndex = 0;
   List bottomList = [];
   TabController? con;
 
@@ -19,12 +17,14 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
   late int selectedIndexBottom;
   late AnimationController animationController;
   late Tween<double> colorTween;
-  final chatLayoutCtrl = Get.isRegistered<ChatLayoutController>() ? Get.find<ChatLayoutController>(): Get.put(ChatLayoutController());
+  final chatLayoutCtrl = Get.isRegistered<ChatLayoutController>()
+      ? Get.find<ChatLayoutController>()
+      : Get.put(ChatLayoutController());
 
 //list of bottommost page
   List<Widget> widgetOptions = <Widget>[
     Home(),
-    ChatLayout(),
+    const Text("CHAT"),
     ImageGenerator(),
     ContentWriter(),
     Setting(),
@@ -59,13 +59,37 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
 
   //bottom nav bar tap
   onBottomTap(val) async {
+    lastSelectedIndex = selectedIndex;
     selectedIndex = val;
     con!.index = val;
     con!.addListener(listener);
     update();
-    if(selectedIndex == 1){
-      chatLayoutCtrl.    showInterstitialAd();
+    if (selectedIndex == 1) {
+      chatLayoutCtrl.showInterstitialAd();
+      Navigator.of(Get.context!).push(createRoute()).then((value) {
+        selectedIndex = lastSelectedIndex;
+        con!.index = selectedIndex;
+        update();
+        Get.forceAppUpdate();
+      });
     }
+  }
+
+  //filter page route
+  Route createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => ChatLayout(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(position: animation.drive(tween), child: child);
+      },
+    );
   }
 
   @override

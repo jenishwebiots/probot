@@ -1,7 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import '../../widgets/scaffold_messenger.dart';
 
 class SignInController extends GetxController {
@@ -26,7 +31,7 @@ class SignInController extends GetxController {
     log("googleUser $googleUser");
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
-      log("googleAuth  $googleAuth");
+    log("googleAuth  $googleAuth");
     final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
     log("credential $credential");
@@ -58,7 +63,7 @@ class SignInController extends GetxController {
             password: passwordController.text.toString());
 
         var signIn = FirebaseAuth.instance.currentUser;
-         userName = signIn!.email;
+        userName = signIn!.email;
         update();
         isLoading = false;
         appCtrl.storage.write("name", userName);
@@ -77,6 +82,20 @@ class SignInController extends GetxController {
         snackBarMessengers(message: appFonts.unknownError);
       }
     }
+  }
+
+  signInWithApple() async {
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+
+    log("CRED : $credential");
+    //https://docs.parseplatform.org/parse-server/guide/#apple-authdata
+    //According to the documentation, we must send a Map with user authentication data.
+    //Make sign in with Apple
   }
 
   @override

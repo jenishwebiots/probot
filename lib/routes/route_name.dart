@@ -8,6 +8,7 @@ class RouteName {
   final String signUpScreen = "/signUpScreen";
   final String selectLanguageScreen = "/selectLanguageScreen";
   final String selectCharacterScreen = "/selectCharacterScreen";
+  final String mobileLogin = "/mobileLogin";
 
   final String dashboard = "/dashboard";
   final String chatLayout = "/chatLayout";
