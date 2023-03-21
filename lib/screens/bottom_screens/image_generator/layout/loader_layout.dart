@@ -14,7 +14,7 @@ class LoaderLayout extends StatelessWidget {
             children: [
               Image.asset(eGifAssets.loader, height: Sizes.s80),
               const VSpace(Sizes.s5),
-              Text(appFonts.loading,
+              Text(appFonts.loading.tr,
                       style: AppCss.outfitSemiBold14
                           .textColor(appCtrl.appTheme.txt))
                   .padding(bottom: MediaQuery.of(context).size.height * 0.038)

@@ -19,7 +19,7 @@ class Receiver extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ChatCommonWidget().userImage(chatCtrl.data["image"]),
+                ChatCommonWidget().userImage(appCtrl.selectedCharacter["image"]),
                 const HSpace(Sizes.s6),
                 chatListModel!.chatMessageType == ChatMessageType.loading ?
                 Container(

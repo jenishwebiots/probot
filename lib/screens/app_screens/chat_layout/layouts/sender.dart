@@ -1,9 +1,6 @@
 import 'package:intl/intl.dart';
-import 'package:probot/screens/app_screens/chat_layout/layouts/sender_content.dart';
-import 'package:probot/screens/app_screens/chat_layout/layouts/sender_width_text.dart';
 
 import '../../../../config.dart';
-import '../../../../models/message_model.dart';
 
 class Sender extends StatelessWidget {
   final ChatMessage? chatListModel;

@@ -1,17 +1,18 @@
 import 'dart:developer';
+import 'dart:io';
 
-import 'package:intl/intl.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/bot_api/api_services.dart';
-import 'package:probot/models/chat_model.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:probot/screens/app_screens/chat_layout/layouts/clear_chat_success.dart';
 
 import '../../config.dart';
-import '../../models/message_model.dart';
 import '../../screens/app_screens/chat_layout/layouts/share_layout.dart';
 
 class ChatLayoutController extends GetxController {
   dynamic data;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   int index = 0;
   List backgroundList = [];
   Rx<List<ChatListDateWise>> chatList = Rx<List<ChatListDateWise>>([]);
@@ -19,6 +20,11 @@ class ChatLayoutController extends GetxController {
   final ScrollController scrollController = ScrollController();
   String? time;
   DateTime? receiverTime;
+  static const AdRequest request = AdRequest(
+    keywords: <String>['foo', 'bar'],
+    contentUrl: 'http://foo.com/bar.html',
+    nonPersonalizedAds: true,
+  );
 
   int count = 0;
   int receiverCount = 0;
@@ -37,22 +43,86 @@ class ChatLayoutController extends GetxController {
 
   RxInt chatCount = 0.obs;
 
+  static const interstitialButtonText = 'InterstitialAd';
+  static const rewardedButtonText = 'RewardedAd';
+  static const rewardedInterstitialButtonText = 'RewardedInterstitialAd';
+  static const fluidButtonText = 'Fluid';
+  static const inlineAdaptiveButtonText = 'Inline adaptive';
+  static const anchoredAdaptiveButtonText = 'Anchored adaptive';
+  static const nativeTemplateButtonText = 'Native template';
+
+  final String _adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-1426383974713305/2555623337'
+      : 'ca-app-pub-3940256099942544/2934735716';
+
+  InterstitialAd? _interstitialAd;
+  int _numInterstitialLoadAttempts = 0;
+
+
   @override
   void onReady() {
     // TODO: implement onReady
-    var arg = Get.arguments;
-    if (arg != null) {
-      data = arg["data"];
-      index = arg["index"];
-    }
+    data = appCtrl.storage.read("selectedCharacter");
     backgroundList = appArray.backgroundList;
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
     /* chatList =
         appArray.chatList.map((e) => ChatListDateWise.fromJson(e)).toList();*/
     update();
-    log("chatList : $chatList");
+    log("chatList : $data");
+    _createInterstitialAd();
     super.onReady();
+  }
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: Platform.isAndroid
+            ? 'ca-app-pub-3940256099942544/1033173712'
+            : 'ca-app-pub-3940256099942544/4411468910',
+        request: request,
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            log('$ad loaded');
+            _interstitialAd = ad;
+            _numInterstitialLoadAttempts = 0;
+            _interstitialAd!.setImmersiveMode(true);
+            update();
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            log('InterstitialAd failed to load: $error.');
+            _numInterstitialLoadAttempts += 1;
+            _interstitialAd = null;
+            if (_numInterstitialLoadAttempts < 3) {
+              _createInterstitialAd();
+            }
+          },
+        ));
+    update();
+
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      log('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          log('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        log('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        log('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+    update();
   }
 
   speechMethod(String text, String language) async {
@@ -159,8 +229,7 @@ class ChatLayoutController extends GetxController {
               style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.txt)),
           const VSpace(Sizes.s15),
           if (position != 4)
-             Divider(
-                height: 0, color: appCtrl.appTheme.greyLight, thickness: 1)
+            Divider(height: 0, color: appCtrl.appTheme.greyLight, thickness: 1)
         ]));
   }
 

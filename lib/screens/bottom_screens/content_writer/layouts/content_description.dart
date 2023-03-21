@@ -12,6 +12,7 @@ class ContentDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ContentWriterController>(builder: (contentCtrl) {
+      log("LENGTH : ${contentCtrl.htmlData}");
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -22,7 +23,10 @@ class ContentDescription extends StatelessWidget {
             Row(children: [
               SvgPicture.asset(eSvgAssets.share).descriptionOptionBg(),
               const HSpace(Sizes.s12),
-              SvgPicture.asset(eSvgAssets.trash).descriptionOptionBg(),
+              SvgPicture.asset(eSvgAssets.trash).descriptionOptionBg().inkWell(onTap: (){
+                contentCtrl.htmlData = null;
+                contentCtrl.update();
+              }),
               const HSpace(Sizes.s12),
               SvgPicture.asset(eSvgAssets.copy).descriptionOptionBg().inkWell(
                   onTap: () async {
@@ -42,8 +46,8 @@ class ContentDescription extends StatelessWidget {
             thumbColor: appCtrl.appTheme.primary,
             radius: const Radius.circular(AppRadius.r4),
             thickness: 3,
-            child: ListView(    controller: contentCtrl.scrollController,children: [
-              HtmlWidget(contentCtrl.htmlData).paddingAll(Insets.i20).decorated(
+            child: ListView( controller: contentCtrl.scrollController,padding: EdgeInsets.zero,children: [
+              HtmlWidget(contentCtrl.htmlData,textStyle: AppCss.outfitMedium14.textColor(appCtrl.appTheme.txt).textHeight(1.5),).paddingAll(Insets.i20).decorated(
                   color: appCtrl.appTheme.bg1,
                   borderRadius: BorderRadius.circular(AppRadius.r6)),
             ]).height(contentCtrl.htmlData.length > 350 ? Sizes.s350: contentCtrl.htmlData.length > 200 ?Sizes.s180 : Sizes.s120),

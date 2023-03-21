@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import '../../models/image_model.dart';
 
 class ImageGeneratorController extends GetxController {
-
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
    List imageSizeLists = [];
    List viewTypeLists = [];
    List imageLists = [];
@@ -41,7 +41,7 @@ class ImageGeneratorController extends GetxController {
          url,
          headers: {
            'Content-Type': 'application/json',
-           'Authorization': 'Bearer ${ApiConfig.chatGPTkey1}',
+           'Authorization': 'Bearer ${ApiConfig.chatGPTkey}',
          },
          body: jsonEncode(
            {

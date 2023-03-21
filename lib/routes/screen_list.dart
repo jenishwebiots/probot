@@ -35,8 +35,6 @@ export '../screens/app_screens/chat_layout/layouts/more_option.dart';
 
 export '../screens/bottom_screens/content_writer/layouts/content_widget.dart';
 
-
-export '../screens/bottom_screens/chat/chat.dart';
 export '../screens/bottom_screens/home/home.dart';
 export '../screens/bottom_screens/setting/setting.dart';
 
@@ -59,3 +57,7 @@ export '../screens/app_screens/subscription/subscription.dart';
 export '../screens/app_screens/subscription/layouts/subscription_list.dart';
 export '../screens/app_screens/subscription/layouts/currency_radio.dart';
 export '../screens/app_screens/subscription/layouts/currency_list_card.dart';
+export '../screens/bottom_screens/content_writer/layouts/content_description.dart';
+
+export '../screens/app_screens/chat_layout/layouts/sender_content.dart';
+export '../screens/app_screens/chat_layout/layouts/sender_width_text.dart';

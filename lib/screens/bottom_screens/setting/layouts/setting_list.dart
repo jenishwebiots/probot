@@ -31,7 +31,7 @@ class SettingList extends StatelessWidget {
                 style:
                     AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
               ).marginSymmetric(horizontal: Insets.i15),
-            (index == 1 || index == 7)
+            (index == 1)
                 ? CommonSwitcher(index: index)
                 : data["title"] != "logout"
                     ? SvgPicture.asset(
@@ -64,6 +64,10 @@ class SettingList extends StatelessWidget {
         Get.toNamed(routeName.fingerprintAndLockSecurity);
       } else if (data['title'] == "privacyTerm") {
         Get.toNamed(routeName.privacyPolicyScreen);
+      }else if (data['title'] == "language") {
+        Get.toNamed(routeName.selectLanguageScreen,arguments: true);
+      }else if (data['title'] == "selectCharacter") {
+        Get.toNamed(routeName.selectCharacterScreen,arguments: true);
       }
       appCtrl.update();
     });

@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:probot/config.dart';
-import 'package:probot/screens/bottom_screens/content_writer/layouts/content_description.dart';
+
 
 class ContentWriter extends StatelessWidget {
   final contentCtrl = Get.put(ContentWriterController());
@@ -52,7 +54,8 @@ class ContentWriter extends StatelessWidget {
                           contentCtrl.proccessContentWrite();
 
                         } else {
-                          print("writeSomethingg");
+
+                          log("write something");
                         }
                       }).marginSymmetric(vertical: Insets.i40)
                 ],

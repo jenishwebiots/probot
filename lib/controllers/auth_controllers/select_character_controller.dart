@@ -4,15 +4,21 @@ class SelectCharacterController extends GetxController {
   List selectCharacterLists = [];
   int selectIndex = 1;
 
-  onCharacterChange(index) {
+  onCharacterChange(index,data) async{
     selectIndex = index;
+    appCtrl.selectedCharacter = data;
+    appCtrl.characterIndex = index;
+    await appCtrl.storage.write("selectedCharacter", data);
+    await appCtrl.storage.write("characterIndex", index);
+    await appCtrl.storage.write("character", index);
+    await appCtrl.storage.write("isCharacter", appCtrl.isCharacter);
     update();
   }
 
   onContinue() async{
     appCtrl.isCharacter = true;
     await appCtrl.storage.write("isCharacter", appCtrl.isCharacter);
-    Get.toNamed(routeName.dashboard);
+   Get.back();
     update();
   }
 
