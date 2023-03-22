@@ -1,12 +1,9 @@
 import 'dart:developer';
-import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import '../../utils/general_utils.dart';
 import '../../widgets/scaffold_messenger.dart';
 
 class SignInController extends GetxController {
@@ -84,18 +81,57 @@ class SignInController extends GetxController {
     }
   }
 
+  //sign in with apple
   signInWithApple() async {
-    final credential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-    );
+    isLoading = true;
+    update();
+    try {
+      final rawNonce = generateNonces();
+      final nonce = sha256ofString(rawNonce);
 
-    log("CRED : $credential");
-    //https://docs.parseplatform.org/parse-server/guide/#apple-authdata
-    //According to the documentation, we must send a Map with user authentication data.
-    //Make sign in with Apple
+      // Request credential for the currently signed in Apple account.
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        nonce: nonce,
+      );
+
+      log("CRED : $appleCredential");
+      // Create an `OAuthCredential` from the credential returned by Apple.
+      final oauthCredential = OAuthProvider("apple.com").credential(
+          idToken: appleCredential.identityToken,
+          rawNonce: rawNonce,
+          accessToken: appleCredential.authorizationCode);
+
+      log("AUTH : $oauthCredential");
+      update();
+      // Sign in the user with Firebase. If the nonce we generated earlier does
+      // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+      await FirebaseAuth.instance
+          .signInWithCredential(oauthCredential)
+          .then((value) {
+        var signIn = FirebaseAuth.instance.currentUser;
+        userName = signIn!.email;
+        isLoading = false;
+        update();
+
+        appCtrl.storage.write("name", userName);
+        Get.offAllNamed(routeName.selectLanguageScreen);
+      });
+      update();
+    } on FirebaseAuthException catch (e) {
+      isLoading = false;
+      update();
+
+      snackBarMessengers(message: e.code);
+    } catch (e) {
+      isLoading = false;
+      update();
+
+      log("ERROR CATHC ; $e");
+    }
   }
 
   @override
