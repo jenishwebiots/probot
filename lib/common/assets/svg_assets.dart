@@ -60,5 +60,10 @@ class SvgAssets {
   final String edit = "assets/svg/edit.svg";
   final String search = "assets/svg/search.svg";
 
+  //NEW
+  final String mobile = "assets/svg/mobile.svg";
+  final String google = "assets/svg/google.svg";
+  final String apple = "assets/svg/apple.svg";
+
 
 }

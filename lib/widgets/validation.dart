@@ -36,4 +36,13 @@ class Validation {
     return null;
   }
 
+
+  // phone validation
+  phoneValidation(phone) {
+    if (phone.isEmpty) {
+      return appFonts.pleaseEnterValue.tr;
+    }
+    return null;
+  }
+
 }

@@ -61,3 +61,10 @@ export '../screens/bottom_screens/content_writer/layouts/content_description.dar
 
 export '../screens/app_screens/chat_layout/layouts/sender_content.dart';
 export '../screens/app_screens/chat_layout/layouts/sender_width_text.dart';
+
+export '../screens/app_screens/subscription_plan/subscription_plan.dart';
+export '../screens/auth_screens/mobile_login/mobile_login.dart';
+export '../screens/app_screens/add_fingerprint_screen/add_fingerprint_screen.dart';
+export '../screens/app_screens/fingerprint_and_lock_security/fingerprint_and_lock_security.dart';
+export '../screens/app_screens/my_account_screen/my_account_screen.dart';
+export '../screens/app_screens/privacy_policy_screen/privacy_policy_screen.dart';

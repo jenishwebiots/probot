@@ -1,7 +1,9 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
+import '../../utils/general_utils.dart';
 import '../../widgets/scaffold_messenger.dart';
 
 class SignInController extends GetxController {
@@ -26,7 +28,7 @@ class SignInController extends GetxController {
     log("googleUser $googleUser");
     final GoogleSignInAuthentication googleAuth =
         await googleUser!.authentication;
-      log("googleAuth  $googleAuth");
+    log("googleAuth  $googleAuth");
     final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
     log("credential $credential");
@@ -58,7 +60,7 @@ class SignInController extends GetxController {
             password: passwordController.text.toString());
 
         var signIn = FirebaseAuth.instance.currentUser;
-         userName = signIn!.email;
+        userName = signIn!.email;
         update();
         isLoading = false;
         appCtrl.storage.write("name", userName);
@@ -76,6 +78,59 @@ class SignInController extends GetxController {
         isLoading = false;
         snackBarMessengers(message: appFonts.unknownError);
       }
+    }
+  }
+
+  //sign in with apple
+  signInWithApple() async {
+    isLoading = true;
+    update();
+    try {
+      final rawNonce = generateNonces();
+      final nonce = sha256ofString(rawNonce);
+
+      // Request credential for the currently signed in Apple account.
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        nonce: nonce,
+      );
+
+      log("CRED : $appleCredential");
+      // Create an `OAuthCredential` from the credential returned by Apple.
+      final oauthCredential = OAuthProvider("apple.com").credential(
+          idToken: appleCredential.identityToken,
+          rawNonce: rawNonce,
+          accessToken: appleCredential.authorizationCode);
+
+      log("AUTH : $oauthCredential");
+      update();
+      // Sign in the user with Firebase. If the nonce we generated earlier does
+      // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+      await FirebaseAuth.instance
+          .signInWithCredential(oauthCredential)
+          .then((value) {
+        var signIn = FirebaseAuth.instance.currentUser;
+        userName = signIn!.email;
+        isLoading = false;
+        update();
+
+        appCtrl.storage.write("name", userName);
+        Get.offAllNamed(routeName.selectLanguageScreen);
+      });
+      update();
+    } on FirebaseAuthException catch (e) {
+      isLoading = false;
+      update();
+
+      snackBarMessengers(message: e.code);
+    } catch (e) {
+      isLoading = false;
+      update();
+
+      log("ERROR CATHC ; $e");
     }
   }
 
