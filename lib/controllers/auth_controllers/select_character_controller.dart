@@ -4,6 +4,7 @@ class SelectCharacterController extends GetxController {
   List selectCharacterLists = [];
   int selectIndex = 1;
 
+  //on character tap
   onCharacterChange(index,data) async{
     selectIndex = index;
     appCtrl.selectedCharacter = data;
@@ -15,6 +16,7 @@ class SelectCharacterController extends GetxController {
     update();
   }
 
+  //continue tap
   onContinue() async{
     appCtrl.isCharacter = true;
     await appCtrl.storage.write("isCharacter", appCtrl.isCharacter);

@@ -4,10 +4,7 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/bot_api/api_services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:probot/screens/app_screens/chat_layout/layouts/clear_chat_success.dart';
-
 import '../../config.dart';
-import '../../screens/app_screens/chat_layout/layouts/share_layout.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class ChatLayoutController extends GetxController {
@@ -57,10 +54,6 @@ class ChatLayoutController extends GetxController {
   static const inlineAdaptiveButtonText = 'Inline adaptive';
   static const anchoredAdaptiveButtonText = 'Anchored adaptive';
   static const nativeTemplateButtonText = 'Native template';
-
-  final String _adUnitId = Platform.isAndroid
-      ? 'ca-app-pub-1426383974713305/2555623337'
-      : 'ca-app-pub-3940256099942544/2934735716';
 
   InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;

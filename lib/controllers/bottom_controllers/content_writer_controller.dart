@@ -1,9 +1,5 @@
 import 'dart:developer';
-
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:probot/models/content_model.dart';
-
 import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
@@ -49,12 +45,14 @@ class ContentWriterController extends GetxController {
     dashboardCtrl.update();
   }
 
+  //stop speech method
   speechStopMethod() async {
     isSpeech.value = false;
     await flutterTts!.stop();
     update();
   }
 
+  //listview scroll down
   void scrollDown() {
     contentScrollController.animateTo(
       contentScrollController.position.maxScrollExtent,
@@ -63,12 +61,13 @@ class ContentWriterController extends GetxController {
     );
   }
 
+  //add text count
   addTextCount() async {
     contentCount.value++;
     // LocalStorage.saveTextCount(count: count.value);
   }
 
-  void proccessContentWrite() async {
+  void  processContentWrite() async {
     speechStopMethod();
     addTextCount();
     isLoading.value = true;
@@ -84,7 +83,7 @@ class ContentWriterController extends GetxController {
     contentInput.value = contentController.text;
     contentController.clear();
     update();
-    log(":ISLOADING : #${isLoading.value}");
+    log(":IS LOADING : #${isLoading.value}");
 
     ApiServices.chatCompeletionResponse(input).then((value) {
       log("value : $value");

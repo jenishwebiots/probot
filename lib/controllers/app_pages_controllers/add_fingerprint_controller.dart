@@ -1,61 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/services.dart';
-
 import 'package:local_auth/local_auth.dart';
-
 import '../../config.dart';
-import '../../widgets/alert_dialog_common.dart';
-import '../../widgets/scaffold_messenger.dart';
 
 class AddFingerprintController extends GetxController {
   LocalAuthentication auth = LocalAuthentication();
   String authorized = " not authorized";
   bool canCheckBiometric = false;
   List<BiometricType> availableBiometric = [];
-
-
-  /*onBiometric() async {
-    final bool isBiometricsAvailable = await auth.isDeviceSupported();
-    if (isBiometricsAvailable) {
-      try {
-        return await auth
-            .authenticate(
-                localizedReason: 'Scan Fingerprint To Enter Vault',
-                options: const AuthenticationOptions(
-                    useErrorDialogs: true, stickyAuth: true))
-            .then((value) => showDialog(
-          barrierDismissible: false,
-                      context: Get.context!,
-          builder: (context) {
-            return  AlertDialogCommon(
-                image: eImageAssets.success,
-                bText1: appFonts.done,
-                title: appFonts.successfullyVerify,
-                subtext: appFonts.yourFingerprintHasBeenVerify,
-              b1OnTap: ()=> Get.offAllNamed(routeName.dashboard),
-              crossOnTap: ()=> Get.offAllNamed(routeName.dashboard)
-                );
-               }
-            ));
-      } on PlatformException {
-        showDialog(
-            barrierDismissible: false,
-            context: Get.context!, builder: (context) {
-         return AlertDialogCommon(
-              image: eImageAssets.noSearch,
-              bText1: appFonts.tryAgain,
-              title: appFonts.fingerprintError,
-              subtext: appFonts.sorryFingerprint,
-           b1OnTap: ()=> Get.offAllNamed(routeName.fingerprintAndLockSecurity),
-           crossOnTap: ()=> Get.offAllNamed(routeName.fingerprintAndLockSecurity)
-          );
-        });
-      }
-    } else {
-      snackBarMessengers(message: appFonts.deviceNotSupported);
-    }
-  }*/
 
 
   Future<void> authenticate() async {
@@ -112,7 +65,7 @@ class AddFingerprintController extends GetxController {
       canCheckBiometric = await auth.canCheckBiometrics;
       update();
     } on PlatformException catch (e) {
-      print("checkBiometric: $e");
+      log("checkBiometric: $e");
     }
 
     if (!isClosed) return;
@@ -127,7 +80,7 @@ class AddFingerprintController extends GetxController {
       availableBiometric = await auth.getAvailableBiometrics();
       update();
     } on PlatformException catch (e) {
-      print("getAvailableBiometric: $e");
+      log("getAvailableBiometric: $e");
     }
     availableBiometric = availableBiometric;
     update();
@@ -137,7 +90,6 @@ class AddFingerprintController extends GetxController {
 
   @override
   void onReady() async {
-    // onBiometric();
     checkBiometric();
     getAvailableBiometric();
     authenticate();
