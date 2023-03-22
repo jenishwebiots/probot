@@ -32,6 +32,8 @@ class ImageAssets {
   final String success = "assets/images/success.png";
   final String settingBg = "assets/images/settingBg.png";
   final String noSearch = "assets/images/noSearch.png";
+  final String paymentFailed = "assets/images/paymentFailed.png";
+  final String paymentSuccess = "assets/images/paymentSuccess.png";
 
   // Icons
   final String google = "assets/images/icons/Google.png";
@@ -42,6 +44,8 @@ class ImageAssets {
   final String italian = "assets/images/icons/italian.png";
   final String japanese = "assets/images/icons/japanese.png";
   final String tick = "assets/images/icons/tick.png";
+  final String stripe = "assets/images/icons/stripe.png";
+  final String paypal = "assets/images/icons/paypal.png";
 
   // chat
   final String chat1 = "assets/images/chat/chat1.png";

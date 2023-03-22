@@ -4,9 +4,9 @@ import '../../../../config.dart';
 class CurrencyRadioButton extends StatelessWidget {
   final dynamic data;
   final int? index, selectIndex;
-  final GestureTapCallback? onTap;
+
   const CurrencyRadioButton(
-      {Key? key, this.data, this.selectIndex, this.index, this.onTap})
+      {Key? key, this.data, this.selectIndex, this.index})
       : super(key: key);
 
   @override
@@ -26,6 +26,6 @@ class CurrencyRadioButton extends StatelessWidget {
                 ? appCtrl.appTheme.primary
                 : appCtrl.appTheme.trans
         )
-    ).inkWell(onTap: onTap);
+    );
   }
 }

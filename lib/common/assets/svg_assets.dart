@@ -65,4 +65,5 @@ class SvgAssets {
   final String google = "assets/svg/google.svg";
   final String apple = "assets/svg/apple.svg";
 
+
 }

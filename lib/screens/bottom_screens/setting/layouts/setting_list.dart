@@ -68,6 +68,8 @@ class SettingList extends StatelessWidget {
         Get.toNamed(routeName.selectLanguageScreen,arguments: true);
       }else if (data['title'] == "selectCharacter") {
         Get.toNamed(routeName.selectCharacterScreen,arguments: true);
+      } else if (data['title'] == "subscriptionPlan") {
+        Get.toNamed(routeName.subscriptionPlanList);
       }
       appCtrl.update();
     });

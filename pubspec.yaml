@@ -61,6 +61,10 @@ dependencies:
   google_mobile_ads: ^2.3.0
   crypto: ^3.0.2
 
+  flutter_stripe: ^9.0.0+1
+  http_auth: ^1.0.1
+  webview_flutter: ^4.0.7
+
 
 dev_dependencies:
   flutter_test:

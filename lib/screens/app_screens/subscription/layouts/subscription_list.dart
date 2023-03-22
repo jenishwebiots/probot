@@ -5,8 +5,9 @@ import '../../../../config.dart';
 
 class SubscriptionList extends StatelessWidget {
   final SubscribeModel? subscribeModel;
+  final GestureTapCallback? onTap;
 
-  const SubscriptionList({Key? key, this.subscribeModel}) : super(key: key);
+  const SubscriptionList({Key? key, this.subscribeModel,this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class SubscriptionList extends StatelessWidget {
             SvgPicture.asset(eSvgAssets.rightArrow,
                 colorFilter:
                     ColorFilter.mode(appCtrl.appTheme.primary, BlendMode.srcIn))
-          ])
+          ]).inkWell(onTap: onTap)
         ]).marginSymmetric(horizontal: Insets.i15),
         const VSpace(Sizes.s20)
       ],

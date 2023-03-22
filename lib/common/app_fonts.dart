@@ -143,6 +143,7 @@ class AppFonts {
   String imageStyle = "Image style";
   String mood = "Mood";
   String imageColor = "Image color";
+
   String defaults = "Default";
   String abstract = "Abstract";
   String anime = "Anime";
@@ -221,4 +222,14 @@ class AppFonts {
   String loginWithPhone = "loginWithPhone";
   String google = "google";
   String apple = "apple";
+
+  String paymentSuccess  = "Payment Success";
+  String paymentFailed = "Payment Failed";
+  String congratulation = "Congratulations !! Your payment was completed successfully.";
+  String oppsDueTo = "Oops !!  Due to a technical issue, payment was failed. Please try again.";
+  String payMoneyFrom = "Pay Money From";
+  String payPal = "Pay pal";
+  String stripe = "Stripe";
+  String pay = "Pay";
+
 }
