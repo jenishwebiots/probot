@@ -17,7 +17,7 @@ class ContentWriterController extends GetxController {
   final contentController = TextEditingController();
   RxString contentInput = ''.obs;
   RxInt itemCount = 0.obs;
-  List<String> shareMessages = ['--THIS IS CONVERSATION with ADBOT--\n\n'];
+  List<String> shareMessages = ['--THIS IS CONVERSATION with PROBOT--\n\n'];
   RxInt contentCount = 0.obs;
   final FlutterTts? flutterTts = FlutterTts();
   final contentScrollController = ScrollController();

@@ -34,4 +34,11 @@ class ChatCommonWidget{
           shape: BoxShape.circle,
           image: DecorationImage(
               image: AssetImage(image))));
+
+  // common svg icon
+  Widget commonSvgIcon(icon,{GestureTapCallback? onTap}) =>  SvgPicture.asset(
+    icon,
+    colorFilter:
+    ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),
+  ).inkWell(onTap: onTap);
 }

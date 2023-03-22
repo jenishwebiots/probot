@@ -1,5 +1,5 @@
-
-
+import 'package:flutter/services.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../config.dart';
 
@@ -12,11 +12,53 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
       return AppBar(
           toolbarHeight: 70,
           titleSpacing: 0,
-
-          leading:  SvgPicture.asset(eSvgAssets.leftArrow, fit: BoxFit.scaleDown,colorFilter: ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),).inkWell(onTap: ()=> Get.back()),
+          leading: SvgPicture.asset(
+            eSvgAssets.leftArrow,
+            fit: BoxFit.scaleDown,
+            colorFilter:
+                ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),
+          ).inkWell(onTap: () {
+            Get.back();
+            chatCtrl.clearData();
+          }),
           automaticallyImplyLeading: false,
           backgroundColor: appCtrl.appTheme.primary,
-          actions: [SvgPicture.asset(eSvgAssets.search,colorFilter: ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),), const MoreOption()],
+          actions: [
+            chatCtrl.isLongPress
+                ? Row(
+                    children: [
+                      chatCtrl.selectedIndex.length > 1
+                          ? Container()
+                          : ChatCommonWidget()
+                              .commonSvgIcon(eSvgAssets.rotate)
+                              .inkWell(onTap: () {
+                              chatCtrl.chatController.text =
+                                  chatCtrl.selectedData[0];
+                              chatCtrl.processChat();
+                            }),
+                      const HSpace(Sizes.s17),
+                      ChatCommonWidget().commonSvgIcon(eSvgAssets.copy).inkWell(
+                          onTap: () {
+                        Clipboard.setData(ClipboardData(
+                            text: chatCtrl.selectedData.toString()));
+                      }),
+                      const HSpace(Sizes.s17),
+                      ChatCommonWidget()
+                          .commonSvgIcon(eSvgAssets.share)
+                          .inkWell(onTap: () {
+                        Share.share(chatCtrl.selectedData.toString(),
+                            subject: "I'm sharing Conversation with PROBOT");
+                      }),
+                      const HSpace(Sizes.s17),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      ChatCommonWidget().commonSvgIcon(eSvgAssets.search),
+                      const MoreOption(),
+                    ],
+                  )
+          ],
           title: Row(children: [
             Container(
               height: Sizes.s50,

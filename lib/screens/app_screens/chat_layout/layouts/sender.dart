@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:intl/intl.dart';
 
 import '../../../../config.dart';
@@ -18,8 +20,8 @@ class Sender extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               chatListModel!.text!.length > 40
-                  ? SenderWidthText(text: chatListModel!.text!)
-                  : CommonContent(text: chatListModel!.text!),
+                  ? SenderWidthText(text: chatListModel!.text!,index: index,)
+                  : CommonContent(text: chatListModel!.text!,index: index,),
               const VSpace(Sizes.s3),
               Text(
                 DateFormat('hh:mm a').format(
@@ -29,7 +31,18 @@ class Sender extends StatelessWidget {
                     AppCss.outfitMedium12.textColor(appCtrl.appTheme.lightText),
               ),
             ],
-          ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5));
+          ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5)).decorated(
+          color: chatCtrl.selectedIndex.contains(index)
+              ? appCtrl.appTheme.primaryLight
+              : appCtrl.appTheme.bg1).onLongPressTap(onLongPress: () {
+
+        chatCtrl.isLongPress = true;
+        if (!chatCtrl.selectedIndex.contains(index)) {
+          chatCtrl.selectedIndex.add(index);
+          chatCtrl.selectedData.add(chatCtrl.selectedMessages[index!]);
+          chatCtrl.update();
+        }
+      });
     });
   }
 }

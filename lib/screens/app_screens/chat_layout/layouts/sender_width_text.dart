@@ -2,7 +2,9 @@ import '../../../../config.dart';
 
 class SenderWidthText extends StatelessWidget {
   final String? text;
-  const SenderWidthText({Key? key, this.text}) : super(key: key);
+  final int? index;
+
+  const SenderWidthText({Key? key, this.text, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,27 @@ class SenderWidthText extends StatelessWidget {
               .textColor(appCtrl.appTheme.txt)
               .textHeight(1.2),
         ),
-      ).inkWell(
-          onTap: () =>
-              {chatCtrl.chatController.text = text!, chatCtrl.proccessChat()});
+      ).inkWell(onTap: () {
+        if (chatCtrl.isLongPress) {
+          if (!chatCtrl.selectedIndex.contains(index)) {
+            chatCtrl.selectedIndex.add(index);
+            chatCtrl.selectedData.add(chatCtrl.selectedMessages[index!]);
+            chatCtrl.update();
+          }else{
+            if (chatCtrl.selectedIndex.contains(index)) {
+              chatCtrl.selectedIndex.remove(index);
+              chatCtrl.selectedData.remove(chatCtrl.selectedMessages[index!]);
+              chatCtrl.update();
+            }
+          }
+        } else {
+          if (chatCtrl.selectedIndex.contains(index)) {
+            chatCtrl.selectedIndex.remove(index);
+            chatCtrl.selectedData.remove(chatCtrl.selectedMessages[index!]);
+            chatCtrl.update();
+          }
+        }
+      });
     });
   }
 }

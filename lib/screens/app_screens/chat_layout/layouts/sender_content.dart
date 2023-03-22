@@ -2,7 +2,8 @@ import '../../../../config.dart';
 
 class CommonContent extends StatelessWidget {
   final String? text;
-  const CommonContent({Key? key, this.text}) : super(key: key);
+  final int? index;
+  const CommonContent({Key? key, this.text,this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,27 @@ class CommonContent extends StatelessWidget {
           style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.sameWhite),
         ),
       ).inkWell(
-          onTap: () =>
-              {chatCtrl.chatController.text = text!, chatCtrl.proccessChat()});
+          onTap: () {
+            if (chatCtrl.isLongPress) {
+              if (!chatCtrl.selectedIndex.contains(index)) {
+                chatCtrl.selectedIndex.add(index);
+                chatCtrl.selectedData.add(chatCtrl.selectedMessages[index!]);
+                chatCtrl.update();
+              }else{
+                if (chatCtrl.selectedIndex.contains(index)) {
+                  chatCtrl.selectedIndex.remove(index);
+                  chatCtrl.selectedData.remove(chatCtrl.selectedMessages[index!]);
+                  chatCtrl.update();
+                }
+              }
+            } else {
+              if (chatCtrl.selectedIndex.contains(index)) {
+                chatCtrl.selectedIndex.remove(index);
+                chatCtrl.selectedData.remove(chatCtrl.selectedMessages[index!]);
+                chatCtrl.update();
+              }
+            }
+          });
     });
   }
 }
