@@ -1,36 +1,39 @@
 import 'dart:developer';
 import 'package:probot/config.dart';
 
+import '../../env.dart';
 
 class SplashController extends GetxController {
   @override
   void onReady() async {
-    bool isLoginSave = appCtrl.storage.read("isLogin") ?? false;
-    bool isBiometricSave = appCtrl.storage.read("isBiometric") ?? false;
-    bool isLanguageSaved = appCtrl.storage.read("isLanguage") ?? false;
-    bool isCharacterSaved = appCtrl.storage.read("isCharacter") ?? false;
+
+    bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
+    bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
+    bool isBiometricSave = appCtrl.storage.read(session.isBiometric) ?? false;
+    bool isLanguageSaved = appCtrl.storage.read(session.isLanguage) ?? false;
+    bool isCharacterSaved = appCtrl.storage.read(session.isCharacter) ?? false;
     appCtrl.isCharacter = isCharacterSaved;
     appCtrl.isLanguage = isLanguageSaved;
     appCtrl.isBiometric = isBiometricSave;
     appCtrl.isLogin = isLoginSave;
-    appCtrl.selectedCharacter = appCtrl.storage.read("selectedCharacter") ??
-        appArray.selectCharacterList[3];
-    appCtrl.characterIndex = appCtrl.storage.read("characterIndex") ?? 3;
+    appCtrl.selectedCharacter =
+        appCtrl.storage.read(session.selectedCharacter) ??
+            appArray.selectCharacterList[3];
+    appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
     log("isBiometricSave: $isBiometricSave");
     log("isLoginSave: $isLoginSave");
     // Language Save
     Locale? locale = const Locale("en", "US");
 
     // Theme Save
-    bool isTheme = appCtrl.storage.read("isDarkMode") ?? false;
+    bool isTheme = appCtrl.storage.read(session.isDarkMode) ?? false;
     ThemeService().switchTheme(isTheme);
     appCtrl.isTheme = isTheme;
 
-    var language =
-        await appCtrl.storage.read("locale") ?? "en";
-  log("language ; $language");
+    var language = await appCtrl.storage.read(session.locale) ?? "en";
+    log("language ; $language");
     if (language != null) {
-      appCtrl.languageVal =language;
+      appCtrl.languageVal = language;
       if (language == "en") {
         locale = const Locale("en", "US");
       } else if (language == "hi") {
@@ -53,7 +56,7 @@ class SplashController extends GetxController {
     Get.forceAppUpdate();
 
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
-    var name = appCtrl.storage.read("name") ;
+    var name = appCtrl.storage.read("name");
     log("name: $name");
     var userName = appCtrl.storage.read("userName");
     log("userName: $userName");
@@ -62,27 +65,34 @@ class SplashController extends GetxController {
     log("condition: ${name != null || userName != null || firebaseUser != null}");
     appCtrl.isOnboard = onBoard;
 
+    appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
+
+
     Future.delayed(const Duration(seconds: 3), () {
       if (onBoard) {
-        if (isLoginSave) {
-          if (isBiometricSave) {
-            Get.offAllNamed(routeName.addFingerprintScreen);
-          } else {
-            Get.toNamed(routeName.dashboard);
-          }
+        if (isGuestLogin) {
+          Get.toNamed(routeName.dashboard);
         } else {
-          if (name != null || userName != null || firebaseUser != null) {
-            if (isLanguageSaved) {
-              if (isBiometricSave) {
-                Get.offAllNamed(routeName.addFingerprintScreen);
-              } else {
-                Get.toNamed(routeName.dashboard);
-              }
+          if (isLoginSave) {
+            if (isBiometricSave) {
+              Get.offAllNamed(routeName.addFingerprintScreen);
             } else {
-              Get.toNamed(routeName.selectLanguageScreen);
+              Get.toNamed(routeName.dashboard);
             }
           } else {
-            Get.toNamed(routeName.loginScreen);
+            if (name != null || userName != null || firebaseUser != null) {
+              if (isLanguageSaved) {
+                if (isBiometricSave) {
+                  Get.offAllNamed(routeName.addFingerprintScreen);
+                } else {
+                  Get.toNamed(routeName.dashboard);
+                }
+              } else {
+                Get.toNamed(routeName.selectLanguageScreen);
+              }
+            } else {
+              Get.toNamed(routeName.loginScreen);
+            }
           }
         }
       } else {
@@ -91,4 +101,5 @@ class SplashController extends GetxController {
       update();
     });
   }
+
 }

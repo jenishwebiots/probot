@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:probot/bot_api/config.dart';
+import 'package:probot/config.dart';
 
 class ApiServices {
   static var client = http.Client();
@@ -15,7 +16,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer ${ApiConfig.chatGPTkey}"
+        "Authorization": "Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}"
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",

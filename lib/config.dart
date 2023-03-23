@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import 'common/app_array.dart';
 import 'common/app_fonts.dart';
+import 'common/session.dart';
 import 'controllers/common_controllers/app_controller.dart';
 export '../controllers/index.dart';
 
@@ -24,6 +25,7 @@ export '../models/content_model.dart';
 export '../models/image_list_model.dart';
 export '../models/page_list_model.dart';
 export '../models/image_model.dart';
+export '../models/firebase_config.dart';
 export '../package_list.dart';
 export '../routes/index.dart';
 export '../routes/route_name.dart';
@@ -48,8 +50,7 @@ export '../models/chat_model.dart';
 export '../models/subscribe_model.dart';
 export '../widgets/common_pop_up_title.dart';
 export '../widgets/alert_dialog_common.dart';
-
-export '../widgets/alert_dialog_common.dart';
+export '../widgets/common_stream.dart';
 export '../widgets/scaffold_messenger.dart';
 
 
@@ -60,3 +61,4 @@ final appCtrl = Get.isRegistered<AppController>()
 
 AppFonts appFonts = AppFonts();
 AppArray appArray = AppArray();
+Session session = Session();

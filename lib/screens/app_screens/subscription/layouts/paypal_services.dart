@@ -4,7 +4,6 @@ import 'dart:convert' as convert;
 import 'package:http_auth/http_auth.dart';
 
 import '../../../../config.dart';
-import '../../../../widgets/alert_dialog_common.dart';
 
 class PaypalServices {
   String domain = "https://api.sandbox.paypal.com";

@@ -16,7 +16,7 @@ class SelectLanguageController extends GetxController {
   // continue button tap
   onContinue() async {
     appCtrl.isLanguage = true;
-    await appCtrl.storage.write("isLanguage", appCtrl.isLanguage);
+    await appCtrl.storage.write(session.isLanguage, appCtrl.isLanguage);
     if(isBack){
       Get.back();
     }else {
@@ -60,7 +60,7 @@ class SelectLanguageController extends GetxController {
     await appCtrl.storage
         .write("index", selectIndex);
     await appCtrl.storage
-        .write("locale", data.code);
+        .write(session.locale, data.code);
 
     update();
     appCtrl.update();

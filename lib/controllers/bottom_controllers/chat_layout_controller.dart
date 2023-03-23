@@ -54,14 +54,15 @@ class ChatLayoutController extends GetxController {
   static const inlineAdaptiveButtonText = 'Inline adaptive';
   static const anchoredAdaptiveButtonText = 'Anchored adaptive';
   static const nativeTemplateButtonText = 'Native template';
-
+  RewardedAd? _rewardedAd;
+  int _numRewardedLoadAttempts = 0;
   InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
   @override
   void onReady() {
     // TODO: implement onReady
-    data = appCtrl.storage.read("selectedCharacter");
+    data = appCtrl.storage.read(session.selectedCharacter);
     backgroundList = appArray.backgroundList;
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
@@ -69,6 +70,7 @@ class ChatLayoutController extends GetxController {
     update();
     log("chatList : $data");
     _createInterstitialAd();
+    _createRewardedAd();
     super.onReady();
   }
 
@@ -84,12 +86,80 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
+  void _createRewardedAd() {
+    RewardedAd.load(
+        adUnitId: Platform.isAndroid
+            ? 'ca-app-pub-3940256099942544/5224354917'
+            : 'ca-app-pub-3940256099942544/1712485313',
+        request: request,
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            log('$ad loaded.');
+            _rewardedAd = ad;
+            _numRewardedLoadAttempts = 0;
+            update();
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            log('RewardedAd failed to load: $error');
+            _rewardedAd = null;
+            _numRewardedLoadAttempts += 1;
+            if (_numRewardedLoadAttempts < 3) {
+              _createRewardedAd();
+
+            }
+            update();
+          },
+        ));
+    update();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _interstitialAd?.dispose();
+    _rewardedAd?.dispose();
+  }
+
+
+  void showRewardedAd() {
+    if (_rewardedAd == null) {
+      log('Warning: attempt to show rewarded before loaded.');
+      return;
+    }
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          log('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        log('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        log('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _createRewardedAd();
+      },
+    );
+
+    appCtrl.envConfig["chatTextCount"] = 1;
+    appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
+    appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+    appCtrl.update();
+
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(
+        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+          log('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+        });
+    _rewardedAd = null;
+  }
+
   //initialize interstitial add
   void _createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3940256099942544/1033173712'
-            : 'ca-app-pub-3940256099942544/4411468910',
+            ? appCtrl.firebaseConfigModel!.interstitialAdIdAndroid!
+            : appCtrl.firebaseConfigModel!.interstitialAdIdIOS!,
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
@@ -109,6 +179,7 @@ class ChatLayoutController extends GetxController {
           },
         ));
     update();
+    _createRewardedAd();
   }
 
 
@@ -178,12 +249,20 @@ class ChatLayoutController extends GetxController {
     // LocalStorage.saveTextCount(count: chatCount.value);
   }
 
-//process for chat
+  //process for chat
   processChat() async {
+    int chatCount = appCtrl.envConfig["chatTextCount"];
+
+    chatCount = chatCount - 1;
+    log("chatCount : $chatCount");
+    appCtrl.envConfig["chatTextCount"] = chatCount;
+    appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
+    appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+    appCtrl.update();
     FocusScope.of(Get.context!).requestFocus(FocusNode());
     speechStopMethod();
     addTextCount();
-
+  log("CONFIG L:${appCtrl.envConfig}");
     messages.value.add(
       ChatMessage(
           text: chatController.text,

@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:probot/models/firebase_config.dart';
+
 import '../../config.dart';
 
 class AppController extends GetxController {
@@ -20,7 +22,9 @@ class AppController extends GetxController {
   bool isSwitched = false;
   bool isOnboard = false;
   dynamic currency;
+  dynamic envConfig;
   int characterIndex= 3;
+  FirebaseConfigModel? firebaseConfigModel;
 
   //update theme
   updateTheme(theme) {

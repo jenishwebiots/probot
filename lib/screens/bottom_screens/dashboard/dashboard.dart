@@ -1,7 +1,10 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:probot/widgets/common_stream.dart';
+
 import '../../../config.dart';
-
-
-
 
 class Dashboard extends StatelessWidget {
   final dashboardCtrl = Get.put(DashboardController());
@@ -13,11 +16,10 @@ class Dashboard extends StatelessWidget {
     return GetBuilder<DashboardController>(builder: (_) {
       return DirectionalityRtl(
         child: WillPopScope(
-          onWillPop: () async{
+          onWillPop: () async {
             return false;
           },
           child: Scaffold(
-
             backgroundColor: appCtrl.appTheme.bg1,
             body: dashboardCtrl.widgetOptions
                 .elementAt(dashboardCtrl.selectedIndex),

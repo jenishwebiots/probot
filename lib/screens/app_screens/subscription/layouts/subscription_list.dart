@@ -1,28 +1,37 @@
 
-
-
 import '../../../../config.dart';
 
 class SubscriptionList extends StatelessWidget {
   final SubscribeModel? subscribeModel;
   final GestureTapCallback? onTap;
 
-  const SubscriptionList({Key? key, this.subscribeModel,this.onTap}) : super(key: key);
+  const SubscriptionList({Key? key, this.subscribeModel, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         CommonSubscribeTitle(subscribeModel: subscribeModel),
         ...subscribeModel!.benefits!
+            .asMap()
+            .entries
             .map((e) => Row(
                   children: [
                     Icon(Icons.circle,
                         size: Sizes.s3, color: appCtrl.appTheme.lightText),
                     const HSpace(Sizes.s8),
-                    Text(e.toString().tr,
-                        style: AppCss.outfitLight14
-                            .textColor(appCtrl.appTheme.lightText)),
+                    Expanded(
+                      child: Text(
+                          e.key == 0
+                              ? "${e.value.toString()} ${appFonts.weekBenefit1.tr}"
+                              : e.key == 1
+                                  ? "${e.value.toString()} ${appFonts.weekBenefit2.tr}"
+                                  : "${e.value.toString().tr} ${appFonts.weekBenefit3.tr}",
+                          style: AppCss.outfitLight14
+                              .textColor(appCtrl.appTheme.lightText)),
+                    ),
                   ],
                 ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i8))
             .toList(),

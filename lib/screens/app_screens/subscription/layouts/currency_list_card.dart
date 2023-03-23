@@ -48,6 +48,7 @@ class CurrencyListCard extends StatelessWidget {
             }
             appCtrl.update();
             Get.forceAppUpdate();
+            Get.back();
           }),
           if (index != appArray.currencyList.length - 1)
             const Divider(color: Color.fromRGBO(50, 52, 68, 0.08), height: 0)

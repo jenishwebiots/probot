@@ -231,6 +231,9 @@ class AppFonts {
   String payPal = "Pay pal";
   String stripe = "Stripe";
   String pay = "Pay";
+  String weekBenefit1 = "weekBenefit1";
+  String weekBenefit2 = "weekBenefit2";
+  String weekBenefit3 = "weekBenefit3";
 
   String balance = "Balance :";
   String rewards = "rewards";
@@ -241,4 +244,11 @@ class AppFonts {
   String congratulationReward = "Congratulation";
   String congratulationYouGotNewReward = "Congratulations  !! you’ve got a 1 new reward for your ProBot.";
   String hurrey = "Hurrey !";
+  String youHitTheMessage = "You've hit the message limit, ";
+  String watchNow = " Watch now";
+  String clickBelow = "click below";
+  String toGet = " to get";
+  String orSelect = " OR select a plan from the setting menu.";
+  String reward = " reward";
+  String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
 }
