@@ -3,6 +3,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import '../../../../../config.dart';
 import '../../../common/theme/theme_service.dart';
 
+
 class CommonDrawer extends StatelessWidget {
   const CommonDrawer({Key? key}) : super(key: key);
 
@@ -34,6 +35,20 @@ class CommonDrawer extends StatelessWidget {
                         dashColor: appCtrl.appTheme.txt.withOpacity(.2))
                     .marginSymmetric(horizontal: Insets.i20),
                 const VSpace(Sizes.s15),
+                Stack(
+                  alignment: Alignment.centerLeft,
+                  children: [
+                    Image.asset(eImageAssets.rewardBanner,width: Sizes.s182),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(appFonts.balance.tr,style: AppCss.outfitSemiBold12.textColor(appCtrl.appTheme.sameWhite.withOpacity(0.8))),
+                        const VSpace(Sizes.s10),
+                        Text("50${appFonts.rewards.tr}",style: AppCss.outfitBold17.textColor(appCtrl.appTheme.sameWhite))
+                      ]
+                    ).paddingOnly(left: Insets.i12)
+                  ]
+                ).inkWell(onTap: ()=> homeCtrl.onTapWatch()),
                 ...homeCtrl.drawerList
                     .asMap()
                     .entries
@@ -48,10 +63,10 @@ class CommonDrawer extends StatelessWidget {
                                   appCtrl.appTheme.txt, BlendMode.srcIn)),
                           title: Text(trans(e.value["title"]),
                               style: AppCss.outfitRegular16
-                                  .textColor(appCtrl.appTheme.txt)),
+                                  .textColor(appCtrl.appTheme.txt))
                         ))
                     .toList()
-              ],
+              ]
             ).paddingSymmetric(vertical: Insets.i30),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,

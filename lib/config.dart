@@ -47,6 +47,7 @@ export '../models/message_model.dart';
 export '../models/chat_model.dart';
 export '../models/subscribe_model.dart';
 export '../widgets/common_pop_up_title.dart';
+export '../widgets/alert_dialog_common.dart';
 
 export '../widgets/alert_dialog_common.dart';
 export '../widgets/scaffold_messenger.dart';

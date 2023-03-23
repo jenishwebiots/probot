@@ -45,6 +45,7 @@ class AppCss {
   static TextStyle get outfitBold20 => outfit.bold.size(FontSizes.f20);
   static TextStyle get outfitBold18 => outfit.bold.size(FontSizes.f18);
   static TextStyle get outfitBold16 => outfit.bold.size(FontSizes.f16);
+  static TextStyle get outfitBold17 => outfit.bold.size(FontSizes.f17);
   static TextStyle get outfitBold14 => outfit.bold.size(FontSizes.f14);
   static TextStyle get outfitBold12 => outfit.bold.size(FontSizes.f12);
   static TextStyle get outfitBold10 => outfit.bold.size(FontSizes.f10);

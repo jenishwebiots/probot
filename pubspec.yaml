@@ -65,7 +65,8 @@ dependencies:
 
   flutter_stripe: ^9.0.0+1
   http_auth: ^1.0.1
-  webview_flutter: ^4.0.7
+  webview_flutter: any
+
 
 
 dev_dependencies:

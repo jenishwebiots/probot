@@ -15,7 +15,7 @@ class HomeSliverAppBar extends StatelessWidget {
             automaticallyImplyLeading: false,
             leading:const CommonMenuIcon().inkWell(onTap: ()=> homeCtrl.scaffoldKey.currentState!.openDrawer()),
             pinned: true,
-            expandedHeight: Sizes.s330,
+            expandedHeight: Sizes.s290,
             title:
             Image.asset(eImageAssets.logo1, width: Sizes.s106),
             centerTitle: true,
