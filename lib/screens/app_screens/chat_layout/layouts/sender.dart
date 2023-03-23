@@ -25,8 +25,8 @@ class Sender extends StatelessWidget {
                 DateFormat('hh:mm a').format(
                     DateTime.fromMillisecondsSinceEpoch(
                         int.parse(chatListModel!.time!.toString()))),
-                style: AppCss.outfitMedium12
-                    .textColor(appCtrl.appTheme.lightText),
+                style:
+                    AppCss.outfitMedium12.textColor(appCtrl.appTheme.lightText),
               ),
             ],
           ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5));

@@ -25,7 +25,6 @@ class ContentWriterController extends GetxController {
   final isSpeechLoading = false.obs;
   final isSpeech = false.obs;
 
-
   dynamic htmlData;
 
   @override
@@ -87,7 +86,7 @@ class ContentWriterController extends GetxController {
     update();
     log(":ISLOADING : #${isLoading.value}");
 
-    ApiServices.textCompletionResponse(input).then((value) {
+    ApiServices.chatCompeletionResponse(input).then((value) {
       log("value : $value");
       htmlData = value;
       update();

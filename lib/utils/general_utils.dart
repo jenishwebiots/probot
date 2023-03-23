@@ -1,5 +1,8 @@
 
+import 'dart:convert';
 import 'dart:math' as math;
+
+import 'package:crypto/crypto.dart';
 
 import '../config.dart';
 
@@ -63,3 +66,18 @@ double smoothStep(double edge0, double edge1, double amount) {
 const double alphaOff = 0;
 const double alphaOn = 1;
 const int animDuration = 300;
+
+String generateNonces([int length = 32]) {
+  const charset =
+      '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+  final random = math.Random.secure();
+  return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+      .join();
+}
+
+/// Returns the sha256 hash of [input] in hex notation.
+String sha256ofString(String input) {
+  final bytes = utf8.encode(input);
+  final digest = sha256.convert(bytes);
+  return digest.toString();
+}

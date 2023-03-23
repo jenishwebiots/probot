@@ -12,9 +12,8 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
       return AppBar(
           toolbarHeight: 70,
           titleSpacing: 0,
-          leadingWidth: Sizes.s70,
-          leading: const CommonMenuIcon().inkWell(
-              onTap: () => chatCtrl.scaffoldKey.currentState!.openDrawer()),
+
+          leading:  SvgPicture.asset(eSvgAssets.leftArrow, fit: BoxFit.scaleDown,colorFilter: ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),).inkWell(onTap: ()=> Get.back()),
           automaticallyImplyLeading: false,
           backgroundColor: appCtrl.appTheme.primary,
           actions: [SvgPicture.asset(eSvgAssets.search,colorFilter: ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),), const MoreOption()],

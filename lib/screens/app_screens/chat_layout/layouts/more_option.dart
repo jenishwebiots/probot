@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:share_plus/share_plus.dart';
+
 import '../../../../config.dart';
 
 class MoreOption extends StatelessWidget {
@@ -9,18 +11,16 @@ class MoreOption extends StatelessWidget {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
       return PopupMenuButton(
           padding: EdgeInsets.zero,
-          icon: SvgPicture.asset(
-            eSvgAssets.more,
-            height: Sizes.s20,
-            fit: BoxFit.fill,
-          ),
+          icon: SvgPicture.asset(eSvgAssets.more,
+              height: Sizes.s20, fit: BoxFit.fill),
           onSelected: (result) {
             log("res : $result");
             if (result == 0) {
+              Share.share(chatCtrl.messages.toString());
             } else if (result == 1) {
-              chatCtrl.showShareDialog();
+              /*chatCtrl.showShareDialog();*/
+
             } else if (result == 2) {
-            } else if (result == 3) {
               Get.toNamed(routeName.backgroundList)!.then((value) {
                 chatCtrl.selectedImage = value;
                 appCtrl.storage.write("backgroundImage", value);
@@ -29,6 +29,8 @@ class MoreOption extends StatelessWidget {
                 Get.forceAppUpdate();
               });
             } else {
+              chatCtrl.messages.value  = [];
+              chatCtrl.update();
               chatCtrl.clearChatSuccessDialog();
             }
           },
@@ -38,15 +40,13 @@ class MoreOption extends StatelessWidget {
           ),
           itemBuilder: (ctx) => [
                 chatCtrl.buildPopupMenuItem(
-                    appFonts.rebuildResponse.tr, Icons.search, 0),
+                    appFonts.shareFriend.tr, Icons.upload, 0),
                 chatCtrl.buildPopupMenuItem(
-                    appFonts.shareFriend.tr, Icons.upload, 1),
+                    appFonts.downloadChat.tr, Icons.copy, 1),
                 chatCtrl.buildPopupMenuItem(
-                    appFonts.downloadChat.tr, Icons.copy, 2),
+                    appFonts.changeBackground.tr, Icons.copy, 2),
                 chatCtrl.buildPopupMenuItem(
-                    appFonts.changeBackground.tr, Icons.copy, 3),
-                chatCtrl.buildPopupMenuItem(
-                    appFonts.clearChat.tr, Icons.copy, 4),
+                    appFonts.clearChat.tr, Icons.copy, 3),
               ]);
     });
   }
