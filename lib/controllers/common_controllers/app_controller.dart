@@ -15,6 +15,7 @@ class AppController extends GetxController {
   bool isCharacter = false;
   bool isBiometric = false;
   bool isLogin = false;
+  bool isChatting = false;
   String languageVal = "en";
   dynamic selectedCharacter;
   final storage = GetStorage();

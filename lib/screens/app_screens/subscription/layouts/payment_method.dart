@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:probot/screens/app_screens/subscription/layouts/payment_method_list.dart';
 import '../../../../config.dart';
 
@@ -46,7 +45,8 @@ class PaymentList extends StatelessWidget {
                      subscribeCtrl.onPaypalPayment(amount: data!);
                   Get.back();
                 } else {
-                  subscribeCtrl.stripePayment(amount: data!, currency: 'INR');
+                  subscribeCtrl.subscriptions();
+                  //subscribeCtrl.stripePayment(amount: data!, currency: 'INR', );
                   Get.back();
                 }
 
@@ -62,4 +62,6 @@ class PaymentList extends StatelessWidget {
       );
     });
   }
+
+
 }

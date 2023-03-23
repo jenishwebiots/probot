@@ -25,12 +25,12 @@ class ContentWriter extends StatelessWidget {
               style: AppCss.outfitExtraBold22
                   .textColor(appCtrl.appTheme.sameWhite)),
         ),
-        body:  NotificationListener<OverscrollIndicatorNotification>(
+        body: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
             overscroll.disallowIndicator();
             return true;
           },
-          child: contentCtrl.isLoading.value ?  Center(child: Image.asset(eGifAssets.loader,height: Sizes.s80,)) : ListView(
+          child: contentCtrl.isLoading.value ? Center(child: Image.asset(eGifAssets.loader,height: Sizes.s80,)) : ListView(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,9 +42,9 @@ class ContentWriter extends StatelessWidget {
                   ContentCommonWidget().commonText(appFonts.topic),
                   const VSpace(Sizes.s8),
                   TextFieldCommon(
-                    controller: contentCtrl.contentController,
-                          hintText: appFonts.exUiUx,
-                          fillColor: appCtrl.appTheme.surface)
+                      controller: contentCtrl.contentController,
+                      hintText: appFonts.exUiUx,
+                      fillColor: appCtrl.appTheme.surface)
                       .authBoxExtension(),
                   ButtonCommon(
                       title: appFonts.generateContent,
@@ -61,9 +61,9 @@ class ContentWriter extends StatelessWidget {
                 ],
               ).marginAll(Insets.i25),
               if(contentCtrl.htmlData != null)
-              const ContentDescription().paddingAll(Insets.i20).decorated(
-                  color: appCtrl.appTheme.white,
-                  borderRadius: BorderRadius.circular(AppRadius.r8))
+                const ContentDescription().paddingAll(Insets.i20).decorated(
+                    color: appCtrl.appTheme.white,
+                    borderRadius: BorderRadius.circular(AppRadius.r8))
             ],
           ),
         ),
