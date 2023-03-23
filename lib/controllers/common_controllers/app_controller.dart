@@ -1,5 +1,5 @@
 import 'dart:developer';
-import '../../common/theme/app_theme.dart';
+
 import '../../config.dart';
 
 class AppController extends GetxController {

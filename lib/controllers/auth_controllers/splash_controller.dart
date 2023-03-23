@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:probot/config.dart';
-import '../../common/theme/theme_service.dart';
+
 
 class SplashController extends GetxController {
   @override

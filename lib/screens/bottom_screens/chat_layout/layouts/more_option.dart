@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 import 'package:share_plus/share_plus.dart';
 
@@ -13,13 +14,12 @@ class MoreOption extends StatelessWidget {
           padding: EdgeInsets.zero,
           icon: SvgPicture.asset(eSvgAssets.more,
               height: Sizes.s20, fit: BoxFit.fill),
-          onSelected: (result) {
+          onSelected: (result) async {
             log("res : $result");
             if (result == 0) {
-              Share.share(chatCtrl.messages.toString());
+              Share.share(chatCtrl.shareMessages.toString(),
+                  subject: "I'm sharing Conversation with PROBOT");
             } else if (result == 1) {
-              /*chatCtrl.showShareDialog();*/
-
             } else if (result == 2) {
               Get.toNamed(routeName.backgroundList)!.then((value) {
                 chatCtrl.selectedImage = value;
@@ -29,7 +29,7 @@ class MoreOption extends StatelessWidget {
                 Get.forceAppUpdate();
               });
             } else {
-              chatCtrl.messages.value  = [];
+              chatCtrl.messages.value = [];
               chatCtrl.update();
               chatCtrl.clearChatSuccessDialog();
             }

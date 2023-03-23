@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -5,7 +6,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../../config.dart';
 
 class ImagePreviewController extends GetxController {
@@ -46,7 +46,7 @@ class ImagePreviewController extends GetxController {
       Get.snackbar('Success', "Image Downloaded Successfully",
           backgroundColor: appCtrl.appTheme.icon,
           colorText: appCtrl.appTheme.sameWhite);
-      print(result);
+      log(result);
       update();
     } else {
       isLoading = false;
@@ -59,7 +59,7 @@ class ImagePreviewController extends GetxController {
 
   @override
   void onReady() {
-    print(isLoading);
+
     var data = Get.arguments;
     image = data ?? "";
     update();

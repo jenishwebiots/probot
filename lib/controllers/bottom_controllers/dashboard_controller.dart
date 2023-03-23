@@ -1,7 +1,4 @@
 import 'package:probot/config.dart';
-import 'package:probot/screens/bottom_screens/content_writer/content_writer.dart';
-
-import '../../screens/bottom_screens/image_generator/image_generator.dart';
 
 class DashboardController extends GetxController
     with GetTickerProviderStateMixin {

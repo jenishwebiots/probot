@@ -4,7 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
 import '../../utils/general_utils.dart';
-import '../../widgets/scaffold_messenger.dart';
 
 class SignInController extends GetxController {
   bool isLoading = false;
@@ -15,6 +14,7 @@ class SignInController extends GetxController {
   String? userName = "";
   bool obscureText = true;
 
+  //password obscure
   onObscure() {
     obscureText = !obscureText;
     update();
@@ -32,19 +32,8 @@ class SignInController extends GetxController {
     final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
     log("credential $credential");
-    /* userEmail = googleUser.email;
-    userName = googleUser.displayName;
-    userPhoto = googleUser.photoUrl;
-    update();
-    var data ={
-      "userData": googleUser,
-      "type":"google"
-    };*/
     userNameGoogle = googleUser.displayName;
     isLoading = false;
-    /* appCtrl.storage.write("name", userName);
-    appCtrl.storage.write("email", userEmail);
-    appCtrl.storage.write("photo", userPhoto);*/
     appCtrl.storage.write("userName", userNameGoogle);
     Get.offAllNamed(routeName.selectLanguageScreen);
     return await FirebaseAuth.instance.signInWithCredential(credential);
@@ -99,7 +88,6 @@ class SignInController extends GetxController {
       );
 
       log("CRED : $appleCredential");
-      // Create an `OAuthCredential` from the credential returned by Apple.
       final oauthCredential = OAuthProvider("apple.com").credential(
           idToken: appleCredential.identityToken,
           rawNonce: rawNonce,
@@ -107,8 +95,7 @@ class SignInController extends GetxController {
 
       log("AUTH : $oauthCredential");
       update();
-      // Sign in the user with Firebase. If the nonce we generated earlier does
-      // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+
       await FirebaseAuth.instance
           .signInWithCredential(oauthCredential)
           .then((value) {

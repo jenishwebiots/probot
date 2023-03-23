@@ -41,33 +41,7 @@ class SelectLanguageScreen extends StatelessWidget {
                             data: e.value,
                             selectIndex: languageCtrl.selectIndex,
                             index: e.key,
-                            onTap: () async{
-                              languageCtrl.selectIndex = e.key;
-                              if (e.value.code == "en") {
-                                appCtrl.languageVal = "en";
-                              } else if (e.value.code == "hi") {
-                                appCtrl.languageVal = "hi";
-                              } else if (e.value.code == "ar") {
-                                appCtrl.languageVal = "ar";
-                              } else if (e.value.code == "fr") {
-                                appCtrl.languageVal = "fr";
-                              }else if (e.value.code == "it") {
-                                appCtrl.languageVal = "it";
-                              }else if (e.value.code == "ge") {
-                                appCtrl.languageVal = "ge";
-                              }
-
-                              appCtrl.update();
-                              await appCtrl.storage
-                                  .write("index", languageCtrl.selectIndex);
-                              await appCtrl.storage
-                                  .write("locale", e.value.code);
-
-                              languageCtrl.update();
-                              appCtrl.update();
-                              Get.updateLocale(e.value.locale);
-                              Get.forceAppUpdate();
-                            }))
+                            onTap: ()=> languageCtrl.onLanguageSelectTap(e.key, e.value)))
                         .toList()
 
                   ]).paddingSymmetric(

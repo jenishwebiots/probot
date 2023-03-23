@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../config.dart';
-import '../../widgets/scaffold_messenger.dart';
 
 class SignUpController extends GetxController {
   bool isLoading = false;
@@ -15,10 +14,13 @@ class SignUpController extends GetxController {
   bool obscureText = true;
   bool obscureText2 = true;
 
+  //password obscure tap
   onObscure() {
     obscureText = !obscureText;
     update();
   }
+
+  //confirm password obscure tap
   onObscure2() {
     obscureText2 = !obscureText2;
     update();

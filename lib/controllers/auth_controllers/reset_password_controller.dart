@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../config.dart';
-import '../../widgets/scaffold_messenger.dart';
 
 class ResetPasswordController extends GetxController {
   GlobalKey<FormState> resetPasswordGlobalKey = GlobalKey<FormState>();

@@ -51,7 +51,7 @@ class ContentWriter extends StatelessWidget {
                       onTap: () {
                         FocusScope.of(context).unfocus();
                         if (contentCtrl.contentController.text.isNotEmpty) {
-                          contentCtrl.proccessContentWrite();
+                          contentCtrl.processContentWrite();
 
                         } else {
 

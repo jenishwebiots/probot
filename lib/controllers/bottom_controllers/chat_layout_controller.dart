@@ -4,45 +4,49 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/bot_api/api_services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:probot/screens/app_screens/chat_layout/layouts/clear_chat_success.dart';
-
 import '../../config.dart';
-import '../../screens/app_screens/chat_layout/layouts/share_layout.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class ChatLayoutController extends GetxController {
   dynamic data;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   int index = 0;
+  bool isLongPress = false;
   List backgroundList = [];
   Rx<List<ChatListDateWise>> chatList = Rx<List<ChatListDateWise>>([]);
   final chatController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   String? time;
+  List selectedIndex = [];
+  List selectedData = [];
   DateTime? receiverTime;
   static const AdRequest request = AdRequest(
     keywords: <String>['foo', 'bar'],
     contentUrl: 'http://foo.com/bar.html',
     nonPersonalizedAds: true,
   );
-
+  FocusNode focusNode = FocusNode();
   int count = 0;
   int receiverCount = 0;
   int lastIndex = 0;
   int receiverLastIndex = 0;
   String? selectedImage;
-
+  late SpeechToText speech;
   Rx<List<ChatMessage>> messages = Rx<List<ChatMessage>>([]);
   Rx<bool> isLoading = Rx<bool>(false);
   final FlutterTts? flutterTts = FlutterTts();
   final _isSpeech = false.obs;
-  List<String> shareMessages = ['--THIS IS CONVERSATION with ADBOT--\n\n'];
+  final isListening = false.obs;
+  List<String> shareMessages = ['--THIS IS CONVERSATION with PROBOT--\n\n'];
+  List<String> selectedMessages = [];
   RxInt itemCount = 0.obs;
   RxString textInput = ''.obs;
   final _isSpeechLoading = false.obs;
 
   RxInt chatCount = 0.obs;
-
+  RxString userInput = "".obs;
+  RxString result = "".obs;
   static const interstitialButtonText = 'InterstitialAd';
   static const rewardedButtonText = 'RewardedAd';
   static const rewardedInterstitialButtonText = 'RewardedInterstitialAd';
@@ -51,13 +55,8 @@ class ChatLayoutController extends GetxController {
   static const anchoredAdaptiveButtonText = 'Anchored adaptive';
   static const nativeTemplateButtonText = 'Native template';
 
-  final String _adUnitId = Platform.isAndroid
-      ? 'ca-app-pub-1426383974713305/2555623337'
-      : 'ca-app-pub-3940256099942544/2934735716';
-
   InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
-
 
   @override
   void onReady() {
@@ -66,14 +65,26 @@ class ChatLayoutController extends GetxController {
     backgroundList = appArray.backgroundList;
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
-    /* chatList =
-        appArray.chatList.map((e) => ChatListDateWise.fromJson(e)).toList();*/
+    speech = SpeechToText();
     update();
     log("chatList : $data");
     _createInterstitialAd();
     super.onReady();
   }
 
+  //clear data while go back
+  clearData() {
+    speechStopMethod();
+    isLongPress = false;
+    selectedData = [];
+    selectedIndex = [];
+    messages = Rx<List<ChatMessage>>([]);
+    shareMessages = [];
+    itemCount = 0.obs;
+    update();
+  }
+
+  //initialize interstitial add
   void _createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Platform.isAndroid
@@ -98,9 +109,10 @@ class ChatLayoutController extends GetxController {
           },
         ));
     update();
-
   }
 
+
+  //show interstitial add
   void showInterstitialAd() {
     if (_interstitialAd == null) {
       log('Warning: attempt to show interstitial before loaded.');
@@ -125,6 +137,7 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
+  //speech method
   speechMethod(String text, String language) async {
     _isSpeechLoading.value = true;
     _isSpeech.value = true;
@@ -140,12 +153,15 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
+  //stop speech method
   speechStopMethod() async {
     _isSpeech.value = false;
     await flutterTts!.stop();
     update();
   }
 
+
+  //scroll direction
   void scrollDown() {
     scrollController.animateTo(
       scrollController.position.maxScrollExtent,
@@ -154,13 +170,17 @@ class ChatLayoutController extends GetxController {
     );
   }
 
+
+  //add text count
   addTextCount() async {
     debugPrint("-------${chatCount.value.toString()}--------");
     chatCount.value++;
     // LocalStorage.saveTextCount(count: chatCount.value);
   }
 
-  proccessChat() async {
+//process for chat
+  processChat() async {
+    FocusScope.of(Get.context!).requestFocus(FocusNode());
     speechStopMethod();
     addTextCount();
 
@@ -171,6 +191,7 @@ class ChatLayoutController extends GetxController {
           time: DateTime.now().millisecondsSinceEpoch),
     );
     shareMessages.add("${chatController.text} - Myself\n");
+    selectedMessages.add("${chatController.text} - Myself\n");
     itemCount.value = messages.value.length;
     update();
     Get.forceAppUpdate();
@@ -209,7 +230,9 @@ class ChatLayoutController extends GetxController {
       itemCount.value = messages.value.length;
       update();
       shareMessages.add(
-          "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By ADBOT\n");
+          "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By PROBOT\n");
+      selectedMessages.add(
+          "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By PROBOT\n");
 
       scrollDown();
       isLoading.value = false;
@@ -220,6 +243,8 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
+
+  //pop up menu item
   PopupMenuItem buildPopupMenuItem(
       String title, IconData iconData, int position) {
     return PopupMenuItem(
@@ -271,5 +296,46 @@ class ChatLayoutController extends GetxController {
       },
       transitionDuration: const Duration(milliseconds: 300),
     );
+  }
+
+  //speech to text
+  void speechToText() async {
+    speechStopMethod();
+    chatController.text = '';
+    result.value = '';
+    userInput.value = '';
+    log("ISLISTEN : ${isListening.value}");
+    if (isListening.value == false) {
+      bool available = await speech.initialize(
+        onStatus: (val) {
+          debugPrint('*** onStatus: $val');
+          isListening.value = false;
+          speech.stop();
+          update();
+        },
+        onError: (val) {
+          debugPrint('### onError: $val');
+          isListening.value = false;
+          speech.stop();
+          update();
+        },
+      );
+      if (available) {
+        isListening.value = true;
+        speech.listen(
+            localeId: appCtrl.languageVal,
+            onResult: (val) {
+              chatController.text = val.recognizedWords.toString();
+              userInput.value = val.recognizedWords.toString();
+              log("speech.isNotListening : ${speech.isNotListening}");
+            },
+            listenFor: const Duration(seconds: 15));
+        update();
+      }
+    } else {
+      isListening.value = false;
+      speechStopMethod();
+      update();
+    }
   }
 }

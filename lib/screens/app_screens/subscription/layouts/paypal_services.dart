@@ -6,16 +6,16 @@ import 'package:http_auth/http_auth.dart';
 import '../../../../config.dart';
 import '../../../../widgets/alert_dialog_common.dart';
 
-
-
 class PaypalServices {
-
   String domain = "https://api.sandbox.paypal.com";
+
   //  String domain = "https://api.paypal.com";
 
   // change clientId and secret with your own, provided by paypal
-  String clientId = 'AWSvIg3u2s-p7g2RYkcktJLjtn3Rsw0LZAm0CoS6WeYtEoYmSzRC01bT0wVxz4whG3eN4bCu1vparBbp';
-  String secret = 'EPtAGaQiNig5iYMuxtoFs_kVimBODw7axl7hSjn21YLPi6aCRJymPoU2n9GtLWNVqXGWj155XRK7Kpcm';
+  String clientId =
+      'AWSvIg3u2s-p7g2RYkcktJLjtn3Rsw0LZAm0CoS6WeYtEoYmSzRC01bT0wVxz4whG3eN4bCu1vparBbp';
+  String secret =
+      'EPtAGaQiNig5iYMuxtoFs_kVimBODw7axl7hSjn21YLPi6aCRJymPoU2n9GtLWNVqXGWj155XRK7Kpcm';
 
   // for getting the access token from Paypal
   Future<String> getAccessToken() async {
@@ -29,7 +29,6 @@ class PaypalServices {
       }
 
       return "0";
-
     } catch (e) {
       rethrow;
     }
@@ -43,7 +42,7 @@ class PaypalServices {
           body: convert.jsonEncode(transactions),
           headers: {
             "content-type": "application/json",
-            'Authorization': 'Bearer '  "$accessToken"
+            'Authorization': 'Bearer ' "$accessToken"
           });
 
       final body = convert.jsonDecode(response.body);
@@ -91,16 +90,16 @@ class PaypalServices {
     } on Exception {
       showDialog(
           barrierDismissible: false,
-          context: Get.context!, builder: (context) {
-        return AlertDialogCommon(
-            image: eImageAssets.paymentFailed,
-            bText1: appFonts.tryAgain,
-            title: appFonts.paymentFailed,
-            subtext: appFonts.oppsDueTo,
-            b1OnTap: ()=> Get.back(),
-            crossOnTap: ()=> Get.back()
-        );
-      });
+          context: Get.context!,
+          builder: (context) {
+            return AlertDialogCommon(
+                image: eImageAssets.paymentFailed,
+                bText1: appFonts.tryAgain,
+                title: appFonts.paymentFailed,
+                subtext: appFonts.oppsDueTo,
+                b1OnTap: () => Get.back(),
+                crossOnTap: () => Get.back());
+          });
       rethrow;
     }
   }

@@ -12,14 +12,19 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DashboardController>(builder: (_) {
       return DirectionalityRtl(
-        child: Scaffold(
+        child: WillPopScope(
+          onWillPop: () async{
+            return false;
+          },
+          child: Scaffold(
 
-          backgroundColor: appCtrl.appTheme.bg1,
-          body: dashboardCtrl.widgetOptions
-              .elementAt(dashboardCtrl.selectedIndex),
-          bottomNavigationBar: dashboardCtrl.bottomList.isNotEmpty
-              ? const BottomNavBarLayout()
-              : Container(),
+            backgroundColor: appCtrl.appTheme.bg1,
+            body: dashboardCtrl.widgetOptions
+                .elementAt(dashboardCtrl.selectedIndex),
+            bottomNavigationBar: dashboardCtrl.bottomList.isNotEmpty
+                ? const BottomNavBarLayout()
+                : Container(),
+          ),
         ),
       );
     });
