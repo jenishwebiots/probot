@@ -2,9 +2,7 @@ import 'dart:core';
 import 'dart:developer';
 import 'package:probot/screens/app_screens/subscription/layouts/paypal_services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import '../../../../config.dart';
-import '../../../../widgets/alert_dialog_common.dart';
 
 
 class PaypalPayment extends StatefulWidget {
@@ -45,6 +43,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                 .executePayment(subscribeCtrl.executeUrl, payerID,
                 subscribeCtrl.accessToken)
                 .then((id) {
+                  log("Pay Id: $id");
               showDialog(
                   barrierDismissible: false,
                   context: Get.context!, builder: (context) {
@@ -58,6 +57,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                 );
               });
             });
+            Get.back();
           } else {
             showDialog(
                 barrierDismissible: false,
@@ -94,30 +94,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                 backgroundColor: appCtrl.appTheme.primary,
                 leading: const BackButton()),
             // Start payment process
-            body: WebViewWidget(controller: controller)/*WebView(
-                initialUrl: subscribeCtrl.checkoutUrl,
-                javascriptMode: JavaScriptMode.unrestricted,
-                navigationDelegate: (NavigationRequest request) {
-                  if (request.url.contains(subscribeCtrl.returnURL)) {
-                    final uri = Uri.parse(request.url);
-                    final payerID = uri.queryParameters['PayerID'];
-                    if (payerID != null) {
-                      subscribeCtrl.services
-                          .executePayment(subscribeCtrl.executeUrl, payerID,
-                          subscribeCtrl.accessToken)
-                          .then((id) {
-                        onFinish(id);
-                      });
-                    } else {
-                      Get.back();
-                    }
-                    Get.back();
-                  }
-                  if (request.url.contains(subscribeCtrl.cancelURL)) {
-                    Get.back();
-                  }
-                  return NavigationDecision.navigate;
-                })*/);
+            body: WebViewWidget(controller: controller));
       });
     } else {
       return Scaffold(

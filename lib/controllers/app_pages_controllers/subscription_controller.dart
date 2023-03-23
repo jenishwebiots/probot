@@ -8,10 +8,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../config.dart';
 
 import '../../screens/app_screens/subscription/layouts/payment_method.dart';
-import '../../screens/app_screens/subscription/layouts/payment_method_list.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_payment.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_services.dart';
-import '../../widgets/alert_dialog_common.dart';
 
 class SubscriptionController extends GetxController {
   List<SubscribeModel> subscriptionLists = [];
@@ -33,6 +31,129 @@ class SubscriptionController extends GetxController {
   String returnURL = 'return.example.com';
   String cancelURL = 'cancel.example.com';
   WebViewController controller = WebViewController();
+  var customer;
+  final client = http.Client();
+
+  static Map<String, String> headers = {
+    'Authorization':
+    'Bearer sk_test_51MmFV9SEDxC6QpAREwfslXhtxBB4xrvCCOAmN0I6EN1nGzndtX7sr2VTBgIKpsBAtNtGrQT3voNdKSoJDXAOxteE00toeXgSE1',
+    'Content-Type': 'application/x-www-form-urlencoded'
+  };
+
+
+  Future<Map<String, dynamic>> createPaymentMethod(
+      {required String number,
+        required String expMonth,
+        required String expYear,
+        required String cvc}) async {
+    const String url = 'https://api.stripe.com/v1/payment_methods';
+    var response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: {
+        'type': 'card',
+        'card[number]': number,
+        'card[exp_month]': expMonth,
+        'card[exp_year]': expYear,
+        'card[cvc]': cvc,
+      },
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      print(json.decode(response.body));
+      throw 'Failed to create PaymentMethod.';
+    }
+  }
+
+  Future<Map<String, dynamic>> createCustomer() async {
+    const String url = 'https://api.stripe.com/v1/customers';
+    var response = await client.post(
+      Uri.parse(url),
+      headers: headers,
+      body: {
+        'description': 'new customer'
+      },
+    );
+    log("response: ${response.statusCode}");
+    if (response.statusCode == 200) {
+      log("body: ${response.body}");
+      return json.decode(response.body);
+
+    } else {
+      print(json.decode(response.body));
+      throw 'Failed to register as a customer.';
+    }
+  }
+
+  Future<Map<String, dynamic>> createSubscriptions(
+         String customerId) async {
+    const String url = 'https://api.stripe.com/v1/subscriptions';
+
+    Map<String, dynamic> body = {
+      'customer': customerId,
+      'items[0][price]': '10.00',
+      "items[0][quantity]": "12"
+    };
+
+    var response =
+    await client.post(Uri.parse(url), headers: headers, body: body);
+    log("response: ${response.body}");
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      print(json.decode(response.body));
+      throw 'Failed to register as a subscriber.';
+    }
+
+  }
+
+  Future<Map<String, dynamic>> attachPaymentMethod(String paymentMethodId, String customerId) async {
+    final String url = 'https://api.stripe.com/v1/payment_methods/$paymentMethodId/attach';
+    var response = await client.post(
+      Uri.parse(url),
+      headers: headers,
+      body: {
+        'customer': customerId,
+      },
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      print(json.decode(response.body));
+      throw 'Failed to attach PaymentMethod.';
+    }
+  }
+
+  Future<Map<String, dynamic>> updateCustomer(
+      String paymentMethodId, String customerId) async {
+    final String url = 'https://api.stripe.com/v1/customers/$customerId';
+
+    var response = await client.post(
+      Uri.parse(url),
+      headers: headers,
+      body: {
+        'invoice_settings[default_payment_method]': paymentMethodId,
+      },
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      print(json.decode(response.body));
+      throw 'Failed to update Customer.';
+    }
+  }
+
+  Future<void> subscriptions() async {
+
+    final customer = await createCustomer();
+    log("message: ${customer['id']}");
+    final paymentMethod = await createPaymentMethod(number: '4242424242424242', expMonth: '03', expYear: '23', cvc: '123');
+    await attachPaymentMethod(paymentMethod['id'], customer['id']);
+    await updateCustomer(paymentMethod['id'], customer['id']);
+    await createSubscriptions(customer['id']);
+  }
+
 
   // item name, price and quantity
   String itemName = 'iPhone X';
@@ -45,6 +166,8 @@ class SubscriptionController extends GetxController {
     try {
       isLoading = true;
       paymentIntentData = await createPaymentIntent(amount, currency);
+
+      log("paymentIntentData: ${paymentIntentData!.entries.first}");
       if (paymentIntentData != null) {
         await Stripe.instance.initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
@@ -79,7 +202,7 @@ class SubscriptionController extends GetxController {
   // Stripe Error handler
   displayPaymentSheet() async {
     try {
-      await Stripe.instance.presentPaymentSheet();
+       await Stripe.instance.presentPaymentSheet();
       showDialog(
           barrierDismissible: false,
           context: Get.context!,
@@ -239,7 +362,7 @@ class SubscriptionController extends GetxController {
   }
 
   @override
-  void onReady() {
+  void onReady() async{
     paymentMethods = appArray.paymentMethodList;
     subscriptionLists = appArray.subscriptionPlan
         .map((e) => SubscribeModel.fromJson(e))
@@ -265,6 +388,7 @@ class SubscriptionController extends GetxController {
         throw Exception("exception: $e");
       }
     });
+
     /* onPaypal(onFinish);*/
     update();
     // TODO: implement onReady
