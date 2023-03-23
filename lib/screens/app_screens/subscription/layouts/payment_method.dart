@@ -43,12 +43,13 @@ class PaymentList extends StatelessWidget {
               const HSpace(Sizes.s15),
               Expanded(child: ButtonCommon(onTap: () {
                 if (subscribeCtrl.selectIndexPayment == 0) {
-                  log("tapped");
-                      Get.back();
+                     subscribeCtrl.onPaypalPayment(amount: data!);
+                  Get.back();
                 } else {
                   subscribeCtrl.stripePayment(amount: data!, currency: 'INR');
                   Get.back();
                 }
+
               }, title: appFonts.apply))
             ]).marginSymmetric(horizontal: Insets.i15),
             const VSpace(Sizes.s25)

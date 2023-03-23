@@ -68,5 +68,41 @@ class HomeController extends GetxController {
     dashboardCtrl.update();
   }
 
+  onTapWatch () {
+    showDialog(
+        barrierDismissible: false,
+        context: Get.context!, builder: (context) {
+      return AlertDialogCommon(
+          isReward: true,
+          height: Sizes.s160,
+          reward: "50",
+          image: eImageAssets.reward,
+          bText1: appFonts.watchVideo,
+          title: appFonts.availableBalance,
+          subtext: appFonts.watchTheVideoToWin,
+          style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
+          b1OnTap: () {
+            Get.back();
+            showDialog(
+                barrierDismissible: false,
+                context: Get.context!, builder: (context) {
+              return AlertDialogCommon(
+                  isReward: true,
+                  height: Sizes.s160,
+                  reward: "51",
+                  image: eGifAssets.coin,
+                  bText1: appFonts.hurrey,
+                  title: appFonts.congratulationReward,
+                  subtext: appFonts.congratulationYouGotNewReward,
+                  style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
+                  b1OnTap: ()=> Get.back(),
+                  crossOnTap: ()=> Get.back()
+              );
+            });
+          },
+          crossOnTap: ()=> Get.back()
+      );
+    });
+  }
 
 }

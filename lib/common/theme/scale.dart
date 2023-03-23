@@ -122,6 +122,7 @@ class FontSizes {
   static const double f14 = 14.0 * scale;
   static const double f15 = 15.0 * scale;
   static const double f16 = 16.0 * scale;
+  static const double f17 = 17.0 * scale;
   static const double f18 = 18.0 * scale;
   static const double f20 = 20.0 * scale;
   static const double f22 = 22.0 * scale;
@@ -224,6 +225,7 @@ class Sizes {
   static const double s170 = 170 * scale;
   static const double s175 = 175 * scale;
   static const double s180 = 180 * scale;
+  static const double s182 = 182 * scale;
   static const double s184 = 184 * scale;
   static const double s185 = 185 * scale;
   static const double s190 = 190 * scale;
@@ -241,6 +243,7 @@ class Sizes {
   static const double s266 = 266 * scale;
   static const double s270 = 270 * scale;
   static const double s280 = 280 * scale;
+  static const double s290 = 290 * scale;
   static const double s292 = 292 * scale;
   static const double s300 = 300 * scale;
   static const double s335 = 335 * scale;

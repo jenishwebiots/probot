@@ -232,4 +232,13 @@ class AppFonts {
   String stripe = "Stripe";
   String pay = "Pay";
 
+  String balance = "Balance :";
+  String rewards = "rewards";
+  String availableBalance = "Available Balance";
+  String rewardLeft = " Rewards left";
+  String watchTheVideoToWin = "Watch the video to win additional prizes and have more chances to talk with ProBot.";
+  String watchVideo = "Watch Video";
+  String congratulationReward = "Congratulation";
+  String congratulationYouGotNewReward = "Congratulations  !! you’ve got a 1 new reward for your ProBot.";
+  String hurrey = "Hurrey !";
 }

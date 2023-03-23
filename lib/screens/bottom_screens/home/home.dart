@@ -24,16 +24,11 @@ class Home extends StatelessWidget {
                 body: SingleChildScrollView(
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
                   const DottedLines(),
-                  const VSpace(Sizes.s20),
+
                   Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(appFonts.chooseOption.tr,
-                            style: AppCss.outfitRegular16
-                                .textColor(appCtrl.appTheme.lightText)
-                                .textHeight(1.3)
-                                .letterSpace(.3)),
                         const VSpace(Sizes.s20),
                         ...homeCtrl.homeOptionList.asMap().entries.map((e) {
                           return ((environment["isChatShow"] && e.key == 0) ||
@@ -49,7 +44,7 @@ class Home extends StatelessWidget {
                 ]))),
             if (homeCtrl.bannerAd != null)
               AdWidget(ad: homeCtrl.bannerAd!)
-                  .height(Sizes.s50)
+                  .height(Sizes.s50).paddingOnly(bottom: Insets.i10)
                   .width(MediaQuery.of(context).size.width)
           ]));
     });
