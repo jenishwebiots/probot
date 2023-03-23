@@ -223,6 +223,7 @@ class AppFonts {
   String google = "google";
   String apple = "apple";
 
+
   String paymentSuccess  = "Payment Success";
   String paymentFailed = "Payment Failed";
   String congratulation = "Congratulations !! Your payment was completed successfully.";
@@ -233,12 +234,25 @@ class AppFonts {
   String pay = "Pay";
 
   String balance = "Balance :";
-  String rewards = "rewards";
+  String rewards = " Rewards";
   String availableBalance = "Available Balance";
   String rewardLeft = " Rewards left";
   String watchTheVideoToWin = "Watch the video to win additional prizes and have more chances to talk with ProBot.";
-  String watchVideo = "Watch Video";
+  String watchVideo = " Watch Video";
   String congratulationReward = "Congratulation";
   String congratulationYouGotNewReward = "Congratulations  !! you’ve got a 1 new reward for your ProBot.";
   String hurrey = "Hurrey !";
+
+  String youHitTheMessage = "You've hit the message limit, ";
+  String watchNow = " Watch now";
+  String clickBelow = "click below";
+  String toGet = " to get";
+  String orSelect = " OR select a plan from the setting menu.";
+  String reward = " reward";
+  String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
+
+
+
+
+
 }
