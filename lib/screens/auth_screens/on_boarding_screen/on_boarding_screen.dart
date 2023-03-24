@@ -29,9 +29,7 @@ class OnBoardingScreen extends StatelessWidget {
                       .asMap()
                       .entries
                       .map((e) => PageViewCommon(
-                            image: e.value["image"],
-                            title: e.value['title'],
-                            subtitle: e.value["subtitle"],
+                            data: e.value,
                             onTap: () {
                               if (onBoardingCtrl.selectIndex == 2) {
                                 Get.toNamed(routeName.loginScreen);

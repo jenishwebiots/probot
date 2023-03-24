@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import '../../bot_api/config.dart';
 import '../../config.dart';
 import 'package:http/http.dart' as http;
 
@@ -39,7 +37,7 @@ class ImageGeneratorController extends GetxController {
         url,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${ApiConfig.chatGPTkey}',
+          'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
         },
         body: jsonEncode(
           {
@@ -49,7 +47,7 @@ class ImageGeneratorController extends GetxController {
           },
         ),
       );
-      print(request.body);
+      log(request.body);
       if (request.statusCode == 200) {
         addCountImage();
         imageGPTModel = ImageModel.fromJson(jsonDecode(request.body));

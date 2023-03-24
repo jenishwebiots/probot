@@ -7,11 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../config.dart';
 
-import '../../screens/app_screens/subscription/layouts/payment_method.dart';
-import '../../screens/app_screens/subscription/layouts/payment_method_list.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_payment.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_services.dart';
-import '../../widgets/alert_dialog_common.dart';
 
 class SubscriptionController extends GetxController {
   List<SubscribeModel> subscriptionLists = [];
@@ -33,18 +30,24 @@ class SubscriptionController extends GetxController {
   String returnURL = 'return.example.com';
   String cancelURL = 'cancel.example.com';
   WebViewController controller = WebViewController();
+  final client = http.Client();
+
 
   // item name, price and quantity
-  String itemName = 'iPhone X';
+  String itemName = 'PROBOT SUBSCRIPTION';
   int quantity = 1;
   Function? onFinish;
 
   // Stripe Payment Method
   Future<void> stripePayment(
-      {required String amount, required String currency}) async {
+      {required String amount,
+      required String currency,
+      SubscribeModel? subscribe}) async {
     try {
       isLoading = true;
       paymentIntentData = await createPaymentIntent(amount, currency);
+
+      log("paymentIntentData: ${paymentIntentData!.entries.first}");
       if (paymentIntentData != null) {
         await Stripe.instance.initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
@@ -67,7 +70,8 @@ class SubscriptionController extends GetxController {
                     paymentIntentData!['ephemeralKey']));
 
         isLoading = false;
-        displayPaymentSheet();
+        log("SR : $subscribe");
+        displayPaymentSheet(subscribe,"stripe");
         update();
       }
     } catch (e) {
@@ -77,7 +81,7 @@ class SubscriptionController extends GetxController {
   }
 
   // Stripe Error handler
-  displayPaymentSheet() async {
+  displayPaymentSheet(subscribe,paymentMethod) async {
     try {
       await Stripe.instance.presentPaymentSheet();
       showDialog(
@@ -89,8 +93,14 @@ class SubscriptionController extends GetxController {
                 bText1: appFonts.okay,
                 title: appFonts.paymentSuccess,
                 subtext: appFonts.congratulation,
-                b1OnTap: () => Get.offAllNamed(routeName.subscriptionPlan),
-                crossOnTap: () => Get.offAllNamed(routeName.subscriptionPlan));
+                b1OnTap: () async {
+                  final firebaseCtrl =
+                      Get.isRegistered<SubscriptionFirebaseController>()
+                          ? Get.find<SubscriptionFirebaseController>()
+                          : Get.put(SubscriptionFirebaseController());
+                  firebaseCtrl.subscribePlan(subscribeModel: subscribe,paymentMethod: paymentMethod);
+                },
+                crossOnTap: () => Get.back());
           });
     } on Exception {
       showDialog(
@@ -115,16 +125,17 @@ class SubscriptionController extends GetxController {
       Map<String, dynamic> body = {
         'amount': calculateAmount(amount),
         'currency': currency,
-        'payment_method_types[]': 'card'
+        'payment_method_types[]': 'card',
       };
       var response = await http.post(
           Uri.parse('https://api.stripe.com/v1/payment_intents'),
           body: body,
           headers: {
-            'Authorization':
-                'Bearer sk_test_51MmFV9SEDxC6QpAREwfslXhtxBB4xrvCCOAmN0I6EN1nGzndtX7sr2VTBgIKpsBAtNtGrQT3voNdKSoJDXAOxteE00toeXgSE1',
+            'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.stripeKey}',
             'Content-Type': 'application/x-www-form-urlencoded'
           });
+
+      log("jsonDecode(response.body) : ${jsonDecode(response.body)}");
       return jsonDecode(response.body);
     } catch (e) {
       throw Exception("");
@@ -208,38 +219,39 @@ class SubscriptionController extends GetxController {
     return temp;
   }
 
-  onPaypalPayment({required String amount}) async {
+  onPaypalPayment({required String amount,SubscribeModel? subscribe}) async {
     try {
       final transactions = getOrderParams(amount);
-      log("message: $transactions");
+      log("transactions: $transactions");
       final res = await services.createPaypalPayment(transactions, accessToken);
+      log("res : #$res");
       checkoutUrl = res["approvalUrl"];
       executeUrl = res["executeUrl"];
       update();
       log("RES: $res");
       log("checkoutUrl: $checkoutUrl");
       log("executeUrl: $executeUrl");
-      Get.to(() => const PaypalPayment());
+      Get.to(() => PaypalPayment(subscribe: subscribe));
     } catch (e) {
       showDialog(
           barrierDismissible: false,
-          context: Get.context!, builder: (context) {
-        return AlertDialogCommon(
-            image: eImageAssets.paymentFailed,
-            bText1: appFonts.tryAgain,
-            title: appFonts.paymentFailed,
-            subtext: appFonts.oppsDueTo,
-            b1OnTap: ()=> Get.back(),
-            crossOnTap: ()=> Get.back()
-        );
-      });
+          context: Get.context!,
+          builder: (context) {
+            return AlertDialogCommon(
+                image: eImageAssets.paymentFailed,
+                bText1: appFonts.tryAgain,
+                title: appFonts.paymentFailed,
+                subtext: appFonts.oppsDueTo,
+                b1OnTap: () => Get.back(),
+                crossOnTap: () => Get.back());
+          });
     }
 
     update();
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     paymentMethods = appArray.paymentMethodList;
     subscriptionLists = appArray.subscriptionPlan
         .map((e) => SubscribeModel.fromJson(e))
@@ -265,57 +277,37 @@ class SubscriptionController extends GetxController {
         throw Exception("exception: $e");
       }
     });
+
     /* onPaypal(onFinish);*/
     update();
     // TODO: implement onReady
     super.onReady();
   }
 
-  /*onPaypal(Function? onFinish) {
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(NavigationDelegate(onNavigationRequest: (NavigationRequest request) {
-        if (request.url.contains(returnURL)) {
-          final uri = Uri.parse(request.url);
-          final payerID = uri.queryParameters['PayerID'];
-          if (payerID != null) {
-            services
-                .executePayment(executeUrl, payerID,
-                accessToken)
-                .then((id) {
-              onFinish!(id);
-            });
-          } else {
-            Get.back();
-          }
-          Get.back();
-        }
-        if (request.url.contains(cancelURL)) {
-          Get.back();
-        }
-        return NavigationDecision.navigate;
-      }));
-  }*/
-
   // payments list
-  paymentDialog(data) {
-    Get.generalDialog(
-      barrierDismissible: false,
-      pageBuilder: (context, anim1, anim2) {
-        return Align(
-          alignment: Alignment.center,
-          child: PaymentList(data: data!),
-        );
-      },
-      transitionBuilder: (context, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 300),
-    );
+  paymentDialog(data, subscribe) {
+    log("appCtrl.isGuestLogin : ${appCtrl.isGuestLogin}");
+    if (appCtrl.isGuestLogin) {
+      Get.offAllNamed(routeName.signInScreen);
+    } else {
+      Get.generalDialog(
+        barrierDismissible: false,
+        pageBuilder: (context, anim1, anim2) {
+          return Align(
+            alignment: Alignment.center,
+            child: PaymentList(data: data!,subscribe: subscribe,),
+          );
+        },
+        transitionBuilder: (context, anim1, anim2, child) {
+          return SlideTransition(
+            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
+                .animate(anim1),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    }
   }
 
   //currency list

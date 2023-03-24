@@ -257,4 +257,21 @@ final dynamic it = {
   'home'  : "casa",
   'meansTheIndividual':
       "Si intende la persona che accede o utilizza il Servizio, o la società o altra entità legale per conto della quale tale persona accede o utilizza il Servizio, a seconda dei casi.",
+
+
+  //NEW
+  "phoneNumberVerification": "Verifica del numero di telefono",
+  "enterNumber": "Inserisci il tuo numero per ottenere OTP",
+  "phone": "Telefono",
+  "enterPhoneNo": "Inserisci il numero di telefono",
+  "getOTP": "Ottieni OTP",
+  "enter10Digit": "Inserisci il numero di cellulare a 10 cifre",
+  "loginWithPhone": "Accedi con il telefono",
+  "google": "Google",
+  "apple": "Mela",
+  "unlimited": "Illimitato",
+  'thereAreAwardLeft': "Ci sono premi @awardLeft lasciati al messaggio.",
+  'chatCountText': "Testo chat\nConteggio",
+  'imageCount': "Immagine generata\nConteggio",
+  'textCompletionCount': "Completamento del testo\nConteggio",
 };

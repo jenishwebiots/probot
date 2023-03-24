@@ -59,6 +59,7 @@ class SvgAssets {
   final String copy = "assets/svg/copy.svg";
   final String edit = "assets/svg/edit.svg";
   final String search = "assets/svg/search.svg";
+
   final String volume = "assets/svg/volume.svg";
   final String rotate = "assets/svg/rotate.svg";
 
@@ -67,6 +68,8 @@ class SvgAssets {
   final String google = "assets/svg/google.svg";
   final String apple = "assets/svg/apple.svg";
   final String play = "assets/svg/play.svg";
+
+
 
 
 }

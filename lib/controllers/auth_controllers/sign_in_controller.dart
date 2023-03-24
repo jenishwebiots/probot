@@ -1,6 +1,8 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:probot/env.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
 import '../../utils/general_utils.dart';
@@ -22,6 +24,8 @@ class SignInController extends GetxController {
 
   // SignIn With Google Method
   Future<UserCredential> signInWithGoogle() async {
+    appCtrl.isGuestLogin = false;
+    appCtrl.storage.write(session.isGuestLogin, false);
     log("message");
     isLoading = true;
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -35,12 +39,15 @@ class SignInController extends GetxController {
     userNameGoogle = googleUser.displayName;
     isLoading = false;
     appCtrl.storage.write("userName", userNameGoogle);
+    await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   // Sign In With Email & Password Method
   signInMethod() async {
+    appCtrl.isGuestLogin = false;
+    appCtrl.storage.write(session.isGuestLogin, false);
     if (signInGlobalKey.currentState!.validate()) {
       isLoading = true;
       try {
@@ -52,7 +59,8 @@ class SignInController extends GetxController {
         userName = signIn!.email;
         update();
         isLoading = false;
-        appCtrl.storage.write("name", userName);
+        appCtrl.storage.write("userName", userName);
+        await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
@@ -72,6 +80,8 @@ class SignInController extends GetxController {
 
   //sign in with apple
   signInWithApple() async {
+    appCtrl.isGuestLogin = false;
+    appCtrl.storage.write(session.isGuestLogin, false);
     isLoading = true;
     update();
     try {
@@ -98,13 +108,14 @@ class SignInController extends GetxController {
 
       await FirebaseAuth.instance
           .signInWithCredential(oauthCredential)
-          .then((value) {
+          .then((value) async{
         var signIn = FirebaseAuth.instance.currentUser;
         userName = signIn!.email;
         isLoading = false;
         update();
 
-        appCtrl.storage.write("name", userName);
+        appCtrl.storage.write("userName", userName);
+        await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
       });
       update();
@@ -119,6 +130,29 @@ class SignInController extends GetxController {
 
       log("ERROR CATHC ; $e");
     }
+  }
+
+  checkData()async{
+    await FirebaseFirestore.instance
+        .collection("userSubscribe")
+        .where("email", isEqualTo: appCtrl.storage.read("userName"))
+        .limit(1)
+        .get()
+        .then((value) {
+      log("DATA : ${value.docs.isEmpty}");
+      if (value.docs.isNotEmpty) {
+        appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
+        appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
+        appCtrl.envConfig["textCompletionCount"] =
+        value.docs[0].data()["textCompletionCount"];
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+        appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+      } else {
+        appCtrl.envConfig = environment;
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+        appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+      }
+    });
   }
 
   @override

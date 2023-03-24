@@ -1,6 +1,5 @@
 import 'package:probot/config.dart';
 
-
 class MyAccountScreen extends StatelessWidget {
   final myAccountCtrl = Get.put(MyAccountController());
 
@@ -41,9 +40,13 @@ class MyAccountScreen extends StatelessWidget {
                   .paddingOnly(bottom: Insets.i8)
             ]),
             const VSpace(Sizes.s15),
+
             const AllTextForm()
                 .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
-                .authBoxExtension()
+                .authBoxExtension(),
+
+            const MyAccountFields()
+
           ])
               .paddingSymmetric(horizontal: Insets.i20)
               .alignment(Alignment.center));

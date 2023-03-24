@@ -1,10 +1,10 @@
-import 'dart:developer';
 import 'package:probot/screens/app_screens/subscription/layouts/payment_method_list.dart';
 import '../../../../config.dart';
 
 class PaymentList extends StatelessWidget {
  final String? data;
-  const PaymentList({Key? key,this.data}) : super(key: key);
+ final SubscribeModel? subscribe;
+  const PaymentList({Key? key,this.data,this.subscribe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +43,10 @@ class PaymentList extends StatelessWidget {
               const HSpace(Sizes.s15),
               Expanded(child: ButtonCommon(onTap: () {
                 if (subscribeCtrl.selectIndexPayment == 0) {
-                     subscribeCtrl.onPaypalPayment(amount: data!);
+                     subscribeCtrl.onPaypalPayment(amount: data!,subscribe: subscribe);
                   Get.back();
                 } else {
-                  subscribeCtrl.stripePayment(amount: data!, currency: 'INR');
+                  subscribeCtrl.stripePayment(amount: data!, currency: 'INR', subscribe:subscribe );
                   Get.back();
                 }
 
@@ -62,4 +62,6 @@ class PaymentList extends StatelessWidget {
       );
     });
   }
+
+
 }

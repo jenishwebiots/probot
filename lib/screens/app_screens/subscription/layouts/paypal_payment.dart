@@ -2,14 +2,12 @@ import 'dart:core';
 import 'dart:developer';
 import 'package:probot/screens/app_screens/subscription/layouts/paypal_services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import '../../../../config.dart';
-import '../../../../widgets/alert_dialog_common.dart';
 
 
 class PaypalPayment extends StatefulWidget {
-
- const PaypalPayment({Key? key}) : super(key: key);
+  final SubscribeModel? subscribe;
+ const PaypalPayment({Key? key,this.subscribe}) : super(key: key);
 
   @override
   State<PaypalPayment> createState() => _PaypalPaymentState();
@@ -45,6 +43,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                 .executePayment(subscribeCtrl.executeUrl, payerID,
                 subscribeCtrl.accessToken)
                 .then((id) {
+                  log("Pay Id: $id");
               showDialog(
                   barrierDismissible: false,
                   context: Get.context!, builder: (context) {
@@ -53,11 +52,18 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                     bText1: appFonts.okay,
                     title: appFonts.paymentSuccess,
                     subtext: appFonts.congratulation,
-                    b1OnTap: ()=> Get.back(),
+                    b1OnTap: ()async{
+                      final firebaseCtrl =
+                      Get.isRegistered<SubscriptionFirebaseController>()
+                          ? Get.find<SubscriptionFirebaseController>()
+                          : Get.put(SubscriptionFirebaseController());
+                      firebaseCtrl.subscribePlan(subscribeModel: widget.subscribe,paymentMethod: "payPal");
+                    },
                     crossOnTap: ()=> Get.back()
                 );
               });
             });
+            Get.back();
           } else {
             showDialog(
                 barrierDismissible: false,
@@ -94,30 +100,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                 backgroundColor: appCtrl.appTheme.primary,
                 leading: const BackButton()),
             // Start payment process
-            body: WebViewWidget(controller: controller)/*WebView(
-                initialUrl: subscribeCtrl.checkoutUrl,
-                javascriptMode: JavaScriptMode.unrestricted,
-                navigationDelegate: (NavigationRequest request) {
-                  if (request.url.contains(subscribeCtrl.returnURL)) {
-                    final uri = Uri.parse(request.url);
-                    final payerID = uri.queryParameters['PayerID'];
-                    if (payerID != null) {
-                      subscribeCtrl.services
-                          .executePayment(subscribeCtrl.executeUrl, payerID,
-                          subscribeCtrl.accessToken)
-                          .then((id) {
-                        onFinish(id);
-                      });
-                    } else {
-                      Get.back();
-                    }
-                    Get.back();
-                  }
-                  if (request.url.contains(subscribeCtrl.cancelURL)) {
-                    Get.back();
-                  }
-                  return NavigationDecision.navigate;
-                })*/);
+            body: WebViewWidget(controller: controller));
       });
     } else {
       return Scaffold(

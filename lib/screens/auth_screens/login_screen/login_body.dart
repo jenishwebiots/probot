@@ -42,6 +42,7 @@ class LoginBody extends StatelessWidget {
           AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary))
           .inkWell(onTap: () {
         appCtrl.isLogin = true;
+        appCtrl.isGuestLogin = true;
         appCtrl.storage.write(session.isGuestLogin, true);
         appCtrl.storage
             .write(session.selectedCharacter, appArray.selectCharacterList[3]);

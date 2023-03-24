@@ -21,11 +21,7 @@ class ChatLayoutController extends GetxController {
   List selectedIndex = [];
   List selectedData = [];
   DateTime? receiverTime;
-  static const AdRequest request = AdRequest(
-    keywords: <String>['foo', 'bar'],
-    contentUrl: 'http://foo.com/bar.html',
-    nonPersonalizedAds: true,
-  );
+
   FocusNode focusNode = FocusNode();
   int count = 0;
   int receiverCount = 0;
@@ -54,8 +50,7 @@ class ChatLayoutController extends GetxController {
   static const inlineAdaptiveButtonText = 'Inline adaptive';
   static const anchoredAdaptiveButtonText = 'Anchored adaptive';
   static const nativeTemplateButtonText = 'Native template';
-  RewardedAd? _rewardedAd;
-  int _numRewardedLoadAttempts = 0;
+
   InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
@@ -69,8 +64,10 @@ class ChatLayoutController extends GetxController {
     speech = SpeechToText();
     update();
     log("chatList : $data");
-    _createInterstitialAd();
-    _createRewardedAd();
+    if(appCtrl.firebaseConfigModel!.isAddShow! && appCtrl.envConfig["chatTextCount"] != "unlimited") {
+      _createInterstitialAd();
+    }
+
     super.onReady();
   }
 
@@ -86,73 +83,13 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
-  void _createRewardedAd() {
-    RewardedAd.load(
-        adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3940256099942544/5224354917'
-            : 'ca-app-pub-3940256099942544/1712485313',
-        request: request,
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-          onAdLoaded: (RewardedAd ad) {
-            log('$ad loaded.');
-            _rewardedAd = ad;
-            _numRewardedLoadAttempts = 0;
-            update();
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            log('RewardedAd failed to load: $error');
-            _rewardedAd = null;
-            _numRewardedLoadAttempts += 1;
-            if (_numRewardedLoadAttempts < 3) {
-              _createRewardedAd();
-
-            }
-            update();
-          },
-        ));
-    update();
-  }
-
   @override
   void dispose() {
     super.dispose();
     _interstitialAd?.dispose();
-    _rewardedAd?.dispose();
   }
 
 
-  void showRewardedAd() {
-    if (_rewardedAd == null) {
-      log('Warning: attempt to show rewarded before loaded.');
-      return;
-    }
-    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) =>
-          log('ad onAdShowedFullScreenContent.'),
-      onAdDismissedFullScreenContent: (RewardedAd ad) {
-        log('$ad onAdDismissedFullScreenContent.');
-        ad.dispose();
-        _createRewardedAd();
-      },
-      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        log('$ad onAdFailedToShowFullScreenContent: $error');
-        ad.dispose();
-        _createRewardedAd();
-      },
-    );
-
-    appCtrl.envConfig["chatTextCount"] = 1;
-    appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
-    appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-    appCtrl.update();
-
-    _rewardedAd!.setImmersiveMode(true);
-    _rewardedAd!.show(
-        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-          log('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-        });
-    _rewardedAd = null;
-  }
 
   //initialize interstitial add
   void _createInterstitialAd() {
@@ -160,7 +97,7 @@ class ChatLayoutController extends GetxController {
         adUnitId: Platform.isAndroid
             ? appCtrl.firebaseConfigModel!.interstitialAdIdAndroid!
             : appCtrl.firebaseConfigModel!.interstitialAdIdIOS!,
-        request: request,
+        request: appCtrl.request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             log('$ad loaded');
@@ -179,9 +116,8 @@ class ChatLayoutController extends GetxController {
           },
         ));
     update();
-    _createRewardedAd();
+    appCtrl.createRewardedAd();
   }
-
 
   //show interstitial add
   void showInterstitialAd() {
@@ -231,7 +167,6 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
-
   //scroll direction
   void scrollDown() {
     scrollController.animateTo(
@@ -240,7 +175,6 @@ class ChatLayoutController extends GetxController {
       curve: Curves.easeOut,
     );
   }
-
 
   //add text count
   addTextCount() async {
@@ -251,18 +185,20 @@ class ChatLayoutController extends GetxController {
 
   //process for chat
   processChat() async {
-    int chatCount = appCtrl.envConfig["chatTextCount"];
+    if(appCtrl.envConfig["chatTextCount"] != "unlimited") {
+      int chatCount = int.parse(appCtrl.envConfig["chatTextCount"].toString());
 
-    chatCount = chatCount - 1;
-    log("chatCount : $chatCount");
-    appCtrl.envConfig["chatTextCount"] = chatCount;
-    appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
-    appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+      chatCount = chatCount - 1;
+      log("chatCount : $chatCount");
+      appCtrl.envConfig["chatTextCount"] = chatCount.toString();
+      appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+    }
     appCtrl.update();
     FocusScope.of(Get.context!).requestFocus(FocusNode());
     speechStopMethod();
     addTextCount();
-  log("CONFIG L:${appCtrl.envConfig}");
+    log("CONFIG L:${appCtrl.envConfig}");
     messages.value.add(
       ChatMessage(
           text: chatController.text,
@@ -274,6 +210,12 @@ class ChatLayoutController extends GetxController {
     itemCount.value = messages.value.length;
     update();
     Get.forceAppUpdate();
+    if(appCtrl.envConfig["chatTextCount"] != "unlimited") {
+      final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
+          ? Get.find<SubscriptionFirebaseController>()
+          : Get.put(SubscriptionFirebaseController());
+      await subscribeCtrl.addUpdateFirebaseData();
+    }
     int i = messages.value.indexWhere(
         (element) => element.chatMessageType == ChatMessageType.loading);
 
@@ -321,7 +263,6 @@ class ChatLayoutController extends GetxController {
     Get.forceAppUpdate();
     update();
   }
-
 
   //pop up menu item
   PopupMenuItem buildPopupMenuItem(

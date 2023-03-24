@@ -15,7 +15,7 @@ class OptionCard extends StatelessWidget {
             SvgPicture.asset(homeOptionModel!.image.toString(),
                     height: Sizes.s28,
                     colorFilter: ColorFilter.mode(
-                        appCtrl.appTheme.white, BlendMode.srcIn))
+                        appCtrl.appTheme.sameWhite, BlendMode.srcIn))
                 .paddingAll(Insets.i13)
                 .decorated(
                     color: appCtrl.appTheme.primary,
@@ -37,7 +37,7 @@ class OptionCard extends StatelessWidget {
         )
             .paddingSymmetric(vertical: Insets.i15, horizontal: Insets.i15)
             .decorated(
-                color: appCtrl.appTheme.white,
+                color: appCtrl.appTheme.boxBg,
                 borderRadius: BorderRadius.circular(AppRadius.r10),
                 boxShadow: [
                    BoxShadow(

@@ -268,5 +268,8 @@ final dynamic en = {
   "google": "Google",
   "apple": "Apple",
   "unlimited": "Unlimited",
-  'thereAreAwardLeft' : "There are @awardLeft awards left to message.",
+  'thereAreAwardLeft': "There are @awardLeft awards left to message.",
+  'chatCountText': "Chat Text\nCount",
+  'imageCount': "Image Generate\nCount",
+  'textCompletionCount': "Text Completion\nCount",
 };

@@ -1,11 +1,11 @@
 import '../../../../config.dart';
 
 class PageViewCommon extends StatelessWidget {
-  final String? image, title, subtitle;
+  final dynamic data;
   final GestureTapCallback? onTap;
 
   const PageViewCommon(
-      {Key? key, this.title, this.image, this.onTap, this.subtitle})
+      {Key? key, this.onTap, this.data})
       : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class PageViewCommon extends StatelessWidget {
           SizedBox(
               height: MediaQuery.of(context).size.height * 0.5,
               width: double.infinity,
-              child: Image.asset(image!, fit: BoxFit.cover))
+              child: Image.asset(data["image"], fit: BoxFit.cover))
         ]),
         const VSpace(Sizes.s40),
         Row(
@@ -62,7 +62,7 @@ class PageViewCommon extends StatelessWidget {
                           width: double.infinity),
                       Column(
                         children: [
-                          Text(title!.toString().tr,
+                          Text(data["title"].toString().tr,
                               style: AppCss.outfitMedium22
                                   .textColor(appCtrl.appTheme.txt)),
                           const VSpace(Sizes.s5),
@@ -75,7 +75,7 @@ class PageViewCommon extends StatelessWidget {
                           const VSpace(Sizes.s10),
                           SizedBox(
                               width: Sizes.s292,
-                              child: Text(subtitle!.toString().tr,
+                              child: Text(data["subtitle"].toString().tr,
                                   textAlign: TextAlign.center,
                                   style: AppCss.outfitMedium16
                                       .textColor(appCtrl.appTheme.lightText)
