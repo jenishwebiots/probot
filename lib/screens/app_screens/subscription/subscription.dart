@@ -47,7 +47,7 @@ class Subscription extends StatelessWidget {
                             return SubscriptionList(
                                     subscribeModel: subscribe,
                                     onTap: () => subscribeCtrl.paymentDialog(
-                                        subscribe.price.toString()))
+                                        subscribe.price.toString(),subscribe))
                                 .subscribeExtension()
                                 .marginOnly(bottom: Insets.i20)
                                 .inkWell(onTap: () {});

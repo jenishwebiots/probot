@@ -1,12 +1,13 @@
-import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../config.dart';
 
 class SettingController extends GetxController {
-
   List drawerList = [];
   List settingList = [];
-  String? name,userName,firebaseUser;
+  String? name, userName, firebaseUser;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -15,14 +16,9 @@ class SettingController extends GetxController {
 
     drawerList = appArray.drawerList;
     settingList = appArray.settingList;
-    name = appCtrl.storage.read("name");
-    log("name: $name");
-    userName = appCtrl.storage.read("userName");
-    log("userName: $userName");
-    firebaseUser = appCtrl.storage.read("firebaseUser");
-    log("firebaseUser: $firebaseUser");
-    update();
 
+    userName = appCtrl.storage.read("userName");
+    update();
 
     super.onReady();
   }
@@ -40,5 +36,45 @@ class SettingController extends GetxController {
     dashboardCtrl.update();
   }
 
-
+  onSettingTap(data) async {
+    if (data['title'] == "myAccount") {
+      Get.toNamed(routeName.myAccountScreen);
+    } else if (data['title'] == "notification") {
+      Get.toNamed(routeName.notificationScreen);
+    } else if (data['title'] == "fingerprintLock") {
+      Get.toNamed(routeName.fingerprintAndLockSecurity);
+    } else if (data['title'] == "privacyTerm") {
+      Get.toNamed(routeName.privacyPolicyScreen);
+    } else if (data['title'] == "language") {
+      Get.toNamed(routeName.selectLanguageScreen, arguments: true);
+    } else if (data['title'] == "selectCharacter") {
+      Get.toNamed(routeName.selectCharacterScreen, arguments: true);
+    } else if (data['title'] == "subscriptionPlan") {
+      if(appCtrl.isGuestLogin){
+        Get.toNamed(routeName.subscriptionPlanList);
+      }else {
+        FirebaseFirestore.instance
+            .collection("userSubscribe")
+            .where("email", isEqualTo: appCtrl.storage.read("userName"))
+            .limit(1)
+            .get()
+            .then((value) {
+          if (value.docs.isNotEmpty) {
+            Get.toNamed(routeName.subscriptionPlan);
+          } else {
+            Get.toNamed(routeName.subscriptionPlanList);
+          }
+        });
+      }
+    } else if (data['title'] == "logout") {
+      FirebaseAuth.instance.signOut();
+      appCtrl.storage.erase();
+      appCtrl.storage.remove(session.envConfig);
+      appCtrl.storage.remove(session.isGuestLogin);
+      appCtrl.update();
+      Get.forceAppUpdate();
+      Get.offAllNamed(routeName.signInScreen);
+    }
+    appCtrl.update();
+  }
 }

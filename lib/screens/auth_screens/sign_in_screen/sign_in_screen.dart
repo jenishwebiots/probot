@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:probot/widgets/common_social_login.dart';
 
 import '../../../config.dart';
 

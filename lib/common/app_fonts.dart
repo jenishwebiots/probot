@@ -251,7 +251,10 @@ class AppFonts {
   String clickBelow = "click below";
   String toGet = " to get";
   String orSelect = " OR select a plan from the setting menu.";
-  String reward = " reward";
+  String reward = "reward";
+  String chatCountText = "chatCountText";
+  String imageCount = "imageCount";
+  String textCompletionCount = "textCompletionCount";
   String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
 
 }

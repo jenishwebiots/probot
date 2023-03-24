@@ -238,5 +238,20 @@ final dynamic ja = {
   'meansTheIndividual'  : "お客様とは、該当する場合、本サービスにアクセスまたは使用している個人、または該当する場合、かかる個人がその代理として本サービスにアクセスまたは使用している会社またはその他の法人を意味します。",
 
 
+  //NEW
+  "phoneNumberVerification": "電話番号の確認",
+  "enterNumber": "番号を入力して OTP を取得します",
+  "phone": "電話",
+  "enterPhoneNo": "電話番号を入力してください。",
+  "getOTP": "OTP を取得",
+  "enter10Digit": "10桁の携帯電話番号を入力してください",
+  "loginWithPhone": "電話でログイン",
+  "google": "グーグル",
+  "apple": "りんご",
+  "unlimited": "無制限",
+  'thereAreAwardLeft': "@awardLeft アワードのメッセージが残っています。",
+  'chatCountText': "チャット テキスト\nカウント",
+  'imageCount': "画像生成\nカウント",
+  'textCompletionCount': "テキスト補完\nカウント",
 
 };

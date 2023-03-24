@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:probot/config.dart';
 
 import '../../env.dart';
@@ -6,7 +7,8 @@ import '../../env.dart';
 class SplashController extends GetxController {
   @override
   void onReady() async {
-
+    appCtrl.createRewardedAd();
+    appCtrl.update();
     bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
     bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
     bool isBiometricSave = appCtrl.storage.read(session.isBiometric) ?? false;
@@ -57,22 +59,50 @@ class SplashController extends GetxController {
 
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
     var name = appCtrl.storage.read("name");
-    log("name: $name");
     var userName = appCtrl.storage.read("userName");
-    log("userName: $userName");
     var firebaseUser = appCtrl.storage.read("firebaseUser");
-    log("firebaseUser: $firebaseUser");
-    log("condition: ${name != null || userName != null || firebaseUser != null}");
     appCtrl.isOnboard = onBoard;
-
     appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
+
+
+   if(!appCtrl.isGuestLogin && userName != null){
+
+     await FirebaseFirestore.instance
+         .collection("userSubscribe")
+         .where("email", isEqualTo: appCtrl.storage.read("userName"))
+         .limit(1)
+         .get()
+         .then((value) {
+       log("DATA : ${value.docs.isEmpty}");
+       if (value.docs.isNotEmpty) {
+         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
+         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
+         appCtrl.envConfig["textCompletionCount"] =
+         value.docs[0].data()["textCompletionCount"];
+         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+       } else {
+         appCtrl.envConfig =
+             appCtrl.storage.read(session.envConfig) ?? environment;
+       }
+     });
+
+   }else{
+     appCtrl.envConfig = environment;
+     appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+     appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+   }
 
 
     Future.delayed(const Duration(seconds: 3), () {
       if (onBoard) {
         if (isGuestLogin) {
+          appCtrl.isGuestLogin = isGuestLogin;
+          appCtrl.storage.write(session.isGuestLogin, isGuestLogin);
           Get.toNamed(routeName.dashboard);
         } else {
+          appCtrl.isGuestLogin = false;
+          appCtrl.storage.write(session.isGuestLogin, false);
           if (isLoginSave) {
             if (isBiometricSave) {
               Get.offAllNamed(routeName.addFingerprintScreen);
@@ -101,5 +131,4 @@ class SplashController extends GetxController {
       update();
     });
   }
-
 }

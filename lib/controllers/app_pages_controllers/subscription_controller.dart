@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../config.dart';
 
-import '../../screens/app_screens/subscription/layouts/payment_method.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_payment.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_services.dart';
 
@@ -31,138 +30,19 @@ class SubscriptionController extends GetxController {
   String returnURL = 'return.example.com';
   String cancelURL = 'cancel.example.com';
   WebViewController controller = WebViewController();
-  var customer;
   final client = http.Client();
-
-  static Map<String, String> headers = {
-    'Authorization':
-    'Bearer sk_test_51MmFV9SEDxC6QpAREwfslXhtxBB4xrvCCOAmN0I6EN1nGzndtX7sr2VTBgIKpsBAtNtGrQT3voNdKSoJDXAOxteE00toeXgSE1',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  };
-
-
-  Future<Map<String, dynamic>> createPaymentMethod(
-      {required String number,
-        required String expMonth,
-        required String expYear,
-        required String cvc}) async {
-    const String url = 'https://api.stripe.com/v1/payment_methods';
-    var response = await http.post(
-      Uri.parse(url),
-      headers: headers,
-      body: {
-        'type': 'card',
-        'card[number]': number,
-        'card[exp_month]': expMonth,
-        'card[exp_year]': expYear,
-        'card[cvc]': cvc,
-      },
-    );
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      print(json.decode(response.body));
-      throw 'Failed to create PaymentMethod.';
-    }
-  }
-
-  Future<Map<String, dynamic>> createCustomer() async {
-    const String url = 'https://api.stripe.com/v1/customers';
-    var response = await client.post(
-      Uri.parse(url),
-      headers: headers,
-      body: {
-        'description': 'new customer'
-      },
-    );
-    log("response: ${response.statusCode}");
-    if (response.statusCode == 200) {
-      log("body: ${response.body}");
-      return json.decode(response.body);
-
-    } else {
-      print(json.decode(response.body));
-      throw 'Failed to register as a customer.';
-    }
-  }
-
-  Future<Map<String, dynamic>> createSubscriptions(
-         String customerId) async {
-    const String url = 'https://api.stripe.com/v1/subscriptions';
-
-    Map<String, dynamic> body = {
-      'customer': customerId,
-      'items[0][price]': '10.00',
-      "items[0][quantity]": "12"
-    };
-
-    var response =
-    await client.post(Uri.parse(url), headers: headers, body: body);
-    log("response: ${response.body}");
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      print(json.decode(response.body));
-      throw 'Failed to register as a subscriber.';
-    }
-
-  }
-
-  Future<Map<String, dynamic>> attachPaymentMethod(String paymentMethodId, String customerId) async {
-    final String url = 'https://api.stripe.com/v1/payment_methods/$paymentMethodId/attach';
-    var response = await client.post(
-      Uri.parse(url),
-      headers: headers,
-      body: {
-        'customer': customerId,
-      },
-    );
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      print(json.decode(response.body));
-      throw 'Failed to attach PaymentMethod.';
-    }
-  }
-
-  Future<Map<String, dynamic>> updateCustomer(
-      String paymentMethodId, String customerId) async {
-    final String url = 'https://api.stripe.com/v1/customers/$customerId';
-
-    var response = await client.post(
-      Uri.parse(url),
-      headers: headers,
-      body: {
-        'invoice_settings[default_payment_method]': paymentMethodId,
-      },
-    );
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      print(json.decode(response.body));
-      throw 'Failed to update Customer.';
-    }
-  }
-
-  Future<void> subscriptions() async {
-
-    final customer = await createCustomer();
-    log("message: ${customer['id']}");
-    final paymentMethod = await createPaymentMethod(number: '4242424242424242', expMonth: '03', expYear: '23', cvc: '123');
-    await attachPaymentMethod(paymentMethod['id'], customer['id']);
-    await updateCustomer(paymentMethod['id'], customer['id']);
-    await createSubscriptions(customer['id']);
-  }
 
 
   // item name, price and quantity
-  String itemName = 'iPhone X';
+  String itemName = 'PROBOT SUBSCRIPTION';
   int quantity = 1;
   Function? onFinish;
 
   // Stripe Payment Method
   Future<void> stripePayment(
-      {required String amount, required String currency}) async {
+      {required String amount,
+      required String currency,
+      SubscribeModel? subscribe}) async {
     try {
       isLoading = true;
       paymentIntentData = await createPaymentIntent(amount, currency);
@@ -190,7 +70,8 @@ class SubscriptionController extends GetxController {
                     paymentIntentData!['ephemeralKey']));
 
         isLoading = false;
-        displayPaymentSheet();
+        log("SR : $subscribe");
+        displayPaymentSheet(subscribe,"stripe");
         update();
       }
     } catch (e) {
@@ -200,9 +81,9 @@ class SubscriptionController extends GetxController {
   }
 
   // Stripe Error handler
-  displayPaymentSheet() async {
+  displayPaymentSheet(subscribe,paymentMethod) async {
     try {
-       await Stripe.instance.presentPaymentSheet();
+      await Stripe.instance.presentPaymentSheet();
       showDialog(
           barrierDismissible: false,
           context: Get.context!,
@@ -212,8 +93,14 @@ class SubscriptionController extends GetxController {
                 bText1: appFonts.okay,
                 title: appFonts.paymentSuccess,
                 subtext: appFonts.congratulation,
-                b1OnTap: () => Get.offAllNamed(routeName.subscriptionPlan),
-                crossOnTap: () => Get.offAllNamed(routeName.subscriptionPlan));
+                b1OnTap: () async {
+                  final firebaseCtrl =
+                      Get.isRegistered<SubscriptionFirebaseController>()
+                          ? Get.find<SubscriptionFirebaseController>()
+                          : Get.put(SubscriptionFirebaseController());
+                  firebaseCtrl.subscribePlan(subscribeModel: subscribe,paymentMethod: paymentMethod);
+                },
+                crossOnTap: () => Get.back());
           });
     } on Exception {
       showDialog(
@@ -238,16 +125,17 @@ class SubscriptionController extends GetxController {
       Map<String, dynamic> body = {
         'amount': calculateAmount(amount),
         'currency': currency,
-        'payment_method_types[]': 'card'
+        'payment_method_types[]': 'card',
       };
       var response = await http.post(
           Uri.parse('https://api.stripe.com/v1/payment_intents'),
           body: body,
           headers: {
-            'Authorization':
-                'Bearer sk_test_51MmFV9SEDxC6QpAREwfslXhtxBB4xrvCCOAmN0I6EN1nGzndtX7sr2VTBgIKpsBAtNtGrQT3voNdKSoJDXAOxteE00toeXgSE1',
+            'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.stripeKey}',
             'Content-Type': 'application/x-www-form-urlencoded'
           });
+
+      log("jsonDecode(response.body) : ${jsonDecode(response.body)}");
       return jsonDecode(response.body);
     } catch (e) {
       throw Exception("");
@@ -331,38 +219,39 @@ class SubscriptionController extends GetxController {
     return temp;
   }
 
-  onPaypalPayment({required String amount}) async {
+  onPaypalPayment({required String amount,SubscribeModel? subscribe}) async {
     try {
       final transactions = getOrderParams(amount);
-      log("message: $transactions");
+      log("transactions: $transactions");
       final res = await services.createPaypalPayment(transactions, accessToken);
+      log("res : #$res");
       checkoutUrl = res["approvalUrl"];
       executeUrl = res["executeUrl"];
       update();
       log("RES: $res");
       log("checkoutUrl: $checkoutUrl");
       log("executeUrl: $executeUrl");
-      Get.to(() => const PaypalPayment());
+      Get.to(() => PaypalPayment(subscribe: subscribe));
     } catch (e) {
       showDialog(
           barrierDismissible: false,
-          context: Get.context!, builder: (context) {
-        return AlertDialogCommon(
-            image: eImageAssets.paymentFailed,
-            bText1: appFonts.tryAgain,
-            title: appFonts.paymentFailed,
-            subtext: appFonts.oppsDueTo,
-            b1OnTap: ()=> Get.back(),
-            crossOnTap: ()=> Get.back()
-        );
-      });
+          context: Get.context!,
+          builder: (context) {
+            return AlertDialogCommon(
+                image: eImageAssets.paymentFailed,
+                bText1: appFonts.tryAgain,
+                title: appFonts.paymentFailed,
+                subtext: appFonts.oppsDueTo,
+                b1OnTap: () => Get.back(),
+                crossOnTap: () => Get.back());
+          });
     }
 
     update();
   }
 
   @override
-  void onReady() async{
+  void onReady() async {
     paymentMethods = appArray.paymentMethodList;
     subscriptionLists = appArray.subscriptionPlan
         .map((e) => SubscribeModel.fromJson(e))
@@ -395,51 +284,30 @@ class SubscriptionController extends GetxController {
     super.onReady();
   }
 
-  /*onPaypal(Function? onFinish) {
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(NavigationDelegate(onNavigationRequest: (NavigationRequest request) {
-        if (request.url.contains(returnURL)) {
-          final uri = Uri.parse(request.url);
-          final payerID = uri.queryParameters['PayerID'];
-          if (payerID != null) {
-            services
-                .executePayment(executeUrl, payerID,
-                accessToken)
-                .then((id) {
-              onFinish!(id);
-            });
-          } else {
-            Get.back();
-          }
-          Get.back();
-        }
-        if (request.url.contains(cancelURL)) {
-          Get.back();
-        }
-        return NavigationDecision.navigate;
-      }));
-  }*/
-
   // payments list
-  paymentDialog(data) {
-    Get.generalDialog(
-      barrierDismissible: false,
-      pageBuilder: (context, anim1, anim2) {
-        return Align(
-          alignment: Alignment.center,
-          child: PaymentList(data: data!),
-        );
-      },
-      transitionBuilder: (context, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 300),
-    );
+  paymentDialog(data, subscribe) {
+    log("appCtrl.isGuestLogin : ${appCtrl.isGuestLogin}");
+    if (appCtrl.isGuestLogin) {
+      Get.offAllNamed(routeName.signInScreen);
+    } else {
+      Get.generalDialog(
+        barrierDismissible: false,
+        pageBuilder: (context, anim1, anim2) {
+          return Align(
+            alignment: Alignment.center,
+            child: PaymentList(data: data!,subscribe: subscribe,),
+          );
+        },
+        transitionBuilder: (context, anim1, anim2, child) {
+          return SlideTransition(
+            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
+                .animate(anim1),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    }
   }
 
   //currency list

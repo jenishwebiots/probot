@@ -1,6 +1,5 @@
 import 'package:flutter_switch/flutter_switch.dart';
 
-import '../../../../common/theme/theme_service.dart';
 import '../../../../config.dart';
 
 class CommonSwitcher extends StatelessWidget {

@@ -257,4 +257,21 @@ final dynamic hi = {
   'home'  : "घर",
   'meansTheIndividual':
       "आप का अर्थ है कि सेवा, या कंपनी, या अन्य कानूनी इकाई तक पहुँचने या उपयोग करने वाला व्यक्ति, जिसकी ओर से ऐसा व्यक्ति सेवा तक पहुँच बना रहा है या उपयोग कर रहा है, जैसा लागू हो।",
+
+
+  //NEW
+  "phoneNumberVerification": "फ़ोन नंबर सत्यापन",
+  "enterNumber": "फ़ोन",
+  "phone": "फोन नंबर दर्ज करें।",
+  "enterPhoneNo": "ओटीपी प्राप्त करें",
+  "getOTP": "10 अंकों का मोबाइल नंबर दर्ज करें",
+  "enter10Digit": "फोन से लॉग इन करें",
+  "loginWithPhone": "गूगल",
+  "google": "सेब",
+  "apple": "असीमित",
+  "unlimited": "संदेश भेजने के लिए @awardLeft पुरस्कार बाकी हैं।",
+  'thereAreAwardLeft': "चैट टेक्स्ट\nगणना करें",
+  'chatCountText': "इमेज जनरेट\nगिनती",
+  'imageCount': "टेक्स्ट पूरा होना\nगिनती",
+  'textCompletionCount': "टेक्स्ट पूरा होना\nगिनती",
 };

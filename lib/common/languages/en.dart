@@ -257,7 +257,6 @@ final dynamic en = {
   'meansTheIndividual':
       "You means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.",
 
-
   //NEW
   "phoneNumberVerification": "Phone Number Verification",
   "enterNumber": "Enter your number to get OTP",
@@ -269,5 +268,9 @@ final dynamic en = {
   "google": "Google",
   "apple": "Apple",
   "unlimited": "Unlimited",
-  'thereAreAwardLeft' : "There are @awardLeft awards left to message.",
+
+  'thereAreAwardLeft': "There are @awardLeft awards left to message.",
+  'chatCountText': "Chat Text\nCount",
+  'imageCount': "Image Generate\nCount",
+  'textCompletionCount': "Text Completion\nCount",
 };
