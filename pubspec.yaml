@@ -67,6 +67,8 @@ dependencies:
   http_auth: ^1.0.1
   webview_flutter: any
   firebase_storage: ^11.0.16
+  vibration: ^1.7.6
+  in_app_purchase: ^3.1.5
 
 
 

@@ -272,4 +272,5 @@ final dynamic ge = {
   'chatCountText': "Chat-Text\nAnzahl",
   'imageCount': "Bild erzeugen\nZählen",
   'textCompletionCount': "Text Completion\nCount",
+  'welcome': "Willkommen bei ProBot",
 };

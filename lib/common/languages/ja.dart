@@ -253,5 +253,6 @@ final dynamic ja = {
   'chatCountText': "チャット テキスト\nカウント",
   'imageCount': "画像生成\nカウント",
   'textCompletionCount': "テキスト補完\nカウント",
+  'welcome': "プロボットへようこそ",
 
 };

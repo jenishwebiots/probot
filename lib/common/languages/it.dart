@@ -274,4 +274,5 @@ final dynamic it = {
   'chatCountText': "Testo chat\nConteggio",
   'imageCount': "Immagine generata\nConteggio",
   'textCompletionCount': "Completamento del testo\nConteggio",
+  'welcome': "Benvenuto in Probot",
 };

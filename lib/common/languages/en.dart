@@ -273,4 +273,5 @@ final dynamic en = {
   'chatCountText': "Chat Text\nCount",
   'imageCount': "Image Generate\nCount",
   'textCompletionCount': "Text Completion\nCount",
+  'welcome': "Welcome to Probot",
 };

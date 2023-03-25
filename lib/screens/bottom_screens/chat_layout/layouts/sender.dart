@@ -30,10 +30,7 @@ class Sender extends StatelessWidget {
                     AppCss.outfitMedium12.textColor(appCtrl.appTheme.lightText),
               ),
             ],
-          ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5)).decorated(
-          color: chatCtrl.selectedIndex.contains(index)
-              ? appCtrl.appTheme.primaryLight
-              : appCtrl.appTheme.bg1).onLongPressTap(onLongPress: () {
+          ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5)).onLongPressTap(onLongPress: () {
 
         chatCtrl.isLongPress = true;
         if (!chatCtrl.selectedIndex.contains(index)) {

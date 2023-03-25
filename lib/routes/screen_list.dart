@@ -89,3 +89,4 @@ export '../screens/bottom_screens/chat_layout/layouts/subscribe_text_box.dart';
 export '../screens/bottom_screens/chat_layout/layouts/unlimited_subscribe_text_box.dart';
 export '../screens/bottom_screens/chat_layout/layouts/chat_layout_text_box.dart';
 export '../screens/bottom_screens/chat_layout/layouts/limit_over_layout.dart';
+export '../screens/bottom_screens/content_writer/layouts/response_data.dart';

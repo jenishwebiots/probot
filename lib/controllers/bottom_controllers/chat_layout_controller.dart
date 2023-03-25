@@ -28,7 +28,7 @@ class ChatLayoutController extends GetxController {
   int lastIndex = 0;
   int receiverLastIndex = 0;
   String? selectedImage;
-  late SpeechToText speech;
+  SpeechToText speech = SpeechToText();
   Rx<List<ChatMessage>> messages = Rx<List<ChatMessage>>([]);
   Rx<bool> isLoading = Rx<bool>(false);
   final FlutterTts? flutterTts = FlutterTts();
@@ -61,10 +61,11 @@ class ChatLayoutController extends GetxController {
     backgroundList = appArray.backgroundList;
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
-    speech = SpeechToText();
+speech = SpeechToText();
     update();
     log("chatList : $data");
-    if(appCtrl.firebaseConfigModel!.isAddShow! && appCtrl.envConfig["chatTextCount"] != "unlimited") {
+    if (appCtrl.firebaseConfigModel!.isAddShow! &&
+        appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
 
@@ -88,8 +89,6 @@ class ChatLayoutController extends GetxController {
     super.dispose();
     _interstitialAd?.dispose();
   }
-
-
 
   //initialize interstitial add
   void _createInterstitialAd() {
@@ -185,7 +184,7 @@ class ChatLayoutController extends GetxController {
 
   //process for chat
   processChat() async {
-    if(appCtrl.envConfig["chatTextCount"] != "unlimited") {
+    if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
       int chatCount = int.parse(appCtrl.envConfig["chatTextCount"].toString());
 
       chatCount = chatCount - 1;
@@ -210,7 +209,7 @@ class ChatLayoutController extends GetxController {
     itemCount.value = messages.value.length;
     update();
     Get.forceAppUpdate();
-    if(appCtrl.envConfig["chatTextCount"] != "unlimited") {
+    if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
       final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
           ? Get.find<SubscriptionFirebaseController>()
           : Get.put(SubscriptionFirebaseController());
@@ -329,28 +328,32 @@ class ChatLayoutController extends GetxController {
       bool available = await speech.initialize(
         onStatus: (val) {
           debugPrint('*** onStatus: $val');
-          isListening.value = false;
-          speech.stop();
-          update();
+
         },
         onError: (val) {
           debugPrint('### onError: $val');
-          isListening.value = false;
-          speech.stop();
-          update();
+
         },
       );
+      log("available ; $available");
       if (available) {
         isListening.value = true;
+
         speech.listen(
             localeId: appCtrl.languageVal,
+
             onResult: (val) {
+              log("VAL : $val");
               chatController.text = val.recognizedWords.toString();
               userInput.value = val.recognizedWords.toString();
-              log("speech.isNotListening : ${speech.isNotListening}");
+              update();
             },
-            listenFor: const Duration(seconds: 15));
+            cancelOnError: true,);
+
         update();
+        log("IS Listeb :' ${isListening.value}");
+      } else {
+        log("NO");
       }
     } else {
       isListening.value = false;

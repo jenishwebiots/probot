@@ -43,7 +43,7 @@ class Setting extends StatelessWidget {
                   .decorated(
                       shape: BoxShape.circle, color: appCtrl.appTheme.primary),
               const VSpace(Sizes.s10),
-              Text(settingCtrl.userName!,
+              Text(settingCtrl.userName ?? "Welcome to Probot",
                   style: AppCss.outfitMedium14
                       .textColor(appCtrl.appTheme.lightText))
             ])

@@ -274,4 +274,5 @@ final dynamic hi = {
   'chatCountText': "इमेज जनरेट\nगिनती",
   'imageCount': "टेक्स्ट पूरा होना\nगिनती",
   'textCompletionCount': "टेक्स्ट पूरा होना\nगिनती",
+  'welcome': "प्रोबोट में आपका स्वागत है",
 };
