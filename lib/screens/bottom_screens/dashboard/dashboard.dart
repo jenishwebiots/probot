@@ -1,7 +1,5 @@
+
 import '../../../config.dart';
-
-
-
 
 class Dashboard extends StatelessWidget {
   final dashboardCtrl = Get.put(DashboardController());
@@ -13,11 +11,10 @@ class Dashboard extends StatelessWidget {
     return GetBuilder<DashboardController>(builder: (_) {
       return DirectionalityRtl(
         child: WillPopScope(
-          onWillPop: () async{
+          onWillPop: () async {
             return false;
           },
           child: Scaffold(
-
             backgroundColor: appCtrl.appTheme.bg1,
             body: dashboardCtrl.widgetOptions
                 .elementAt(dashboardCtrl.selectedIndex),

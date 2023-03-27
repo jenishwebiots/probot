@@ -42,9 +42,10 @@ class LoginBody extends StatelessWidget {
           AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary))
           .inkWell(onTap: () {
         appCtrl.isLogin = true;
-        appCtrl.storage.write("isLogin", appCtrl.isLogin);
+        appCtrl.isGuestLogin = true;
+        appCtrl.storage.write(session.isGuestLogin, true);
         appCtrl.storage
-            .write("selectedCharacter", appArray.selectCharacterList[3]);
+            .write(session.selectedCharacter, appArray.selectCharacterList[3]);
         Get.offAllNamed(routeName.dashboard);
         appCtrl.update();
       })

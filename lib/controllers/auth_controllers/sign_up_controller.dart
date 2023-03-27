@@ -42,7 +42,7 @@ class SignUpController extends GetxController {
         passwordController.text = "";
         appCtrl.storage.write("firebaseUser", firebaseUser);
 
-        Get.offAllNamed(routeName.selectLanguageScreen);
+        Get.back();
       } on FirebaseAuthException catch (e) {
         if (e.code == "email-already-in-use") {
           isLoading = false;
@@ -51,7 +51,6 @@ class SignUpController extends GetxController {
       } catch (e) {
         isLoading = false;
         snackBarMessengers(message: appFonts.unknownError);
-
         Get.offAllNamed(routeName.signInScreen);
       }
     }

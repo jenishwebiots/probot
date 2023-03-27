@@ -121,8 +121,8 @@ final dynamic ja = {
   'week': "週",
   'payNow': "今払う",
   'weekBenefit1': "ProBot との無制限のチャット",
-  'weekBenefit2': "50枚の画像をダウンロードして友達と共有",
-  'weekBenefit3': "15の無料コンテンツライティングトピック",
+  'weekBenefit2': "枚の画像をダウンロードして友達と共有",
+  'weekBenefit3': "の無料コンテンツライティングトピック",
   'monthBenefit1': "無制限の画像のダウンロードと共有",
   'monthBenefit2': "50の無料コンテンツライティングトピック",
   'yearBenefit1': "無制限の画像のダウンロードと共有",
@@ -238,5 +238,21 @@ final dynamic ja = {
   'meansTheIndividual'  : "お客様とは、該当する場合、本サービスにアクセスまたは使用している個人、または該当する場合、かかる個人がその代理として本サービスにアクセスまたは使用している会社またはその他の法人を意味します。",
 
 
+  //NEW
+  "phoneNumberVerification": "電話番号の確認",
+  "enterNumber": "番号を入力して OTP を取得します",
+  "phone": "電話",
+  "enterPhoneNo": "電話番号を入力してください。",
+  "getOTP": "OTP を取得",
+  "enter10Digit": "10桁の携帯電話番号を入力してください",
+  "loginWithPhone": "電話でログイン",
+  "google": "グーグル",
+  "apple": "りんご",
+  "unlimited": "無制限",
+  'thereAreAwardLeft': "@awardLeft アワードのメッセージが残っています。",
+  'chatCountText': "チャット テキスト\nカウント",
+  'imageCount': "画像生成\nカウント",
+  'textCompletionCount': "テキスト補完\nカウント",
+  'welcome': "プロボットへようこそ",
 
 };

@@ -10,6 +10,7 @@ class CommonCircularIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+
       CircularPercentIndicator(
         radius: AppRadius.r28,
         lineWidth: 2.5,

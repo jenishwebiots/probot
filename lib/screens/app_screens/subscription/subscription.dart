@@ -1,5 +1,5 @@
-
-
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../config.dart';
 
 class Subscription extends StatelessWidget {
@@ -13,19 +13,48 @@ class Subscription extends StatelessWidget {
       return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
           appBar: AppAppBarCommon(
-              title: appFonts.subscriptionPlan,
-              actionIcon: eSvgAssets.currency,isAction: true,
-              leadingOnTap: () => Get.back(),actionOnTap: ()=>subscribeCtrl.currencyListDialog(),),
+            title: appFonts.subscriptionPlan,
+            actionIcon: eSvgAssets.currency,
+            isAction: true,
+            leadingOnTap: () => Get.back(),
+            actionOnTap: () => subscribeCtrl.currencyListDialog(),
+          ),
           body: SingleChildScrollView(
             child: Column(
               children: [
-                ...subscribeCtrl.subscriptionLists
-                    .asMap()
-                    .entries
-                    .map((e) => SubscriptionList(subscribeModel: e.value,onTap: ()=> subscribeCtrl.paymentDialog(e.value.price.toString()))
-                .subscribeExtension()
-                    .marginOnly(bottom: Insets.i20).inkWell(onTap: () {}))
-                    .toList()
+                StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("subscriptionPlan")
+                        .orderBy("price", descending: false)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Container();
+                      } else if (!snapshot.hasData) {
+                        return Center(
+                            child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              appCtrl.appTheme.primary),
+                        )).height(MediaQuery.of(context).size.height);
+                      } else {
+                        log("has : ${snapshot.data!.docs}");
+                        return Column(children: [
+                          ...snapshot.data!.docs.asMap().entries.map((e) {
+                            log("subscribe 1: ${e.value.data()}");
+                            SubscribeModel subscribe =
+                                SubscribeModel.fromJson(e.value.data());
+
+                            return SubscriptionList(
+                                    subscribeModel: subscribe,
+                                    onTap: () => subscribeCtrl.paymentDialog(
+                                        subscribe.price.toString(),subscribe))
+                                .subscribeExtension()
+                                .marginOnly(bottom: Insets.i20)
+                                .inkWell(onTap: () {});
+                          }).toList()
+                        ]);
+                      }
+                    })
               ],
             ).marginSymmetric(vertical: Insets.i25, horizontal: Insets.i20),
           ));

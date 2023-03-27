@@ -29,34 +29,51 @@ class CommonDrawer extends StatelessWidget {
                       dashLength: 3,
                       dashColor: appCtrl.appTheme.txt.withOpacity(.2))
                   .marginSymmetric(horizontal: Insets.i20),
-              const VSpace(Sizes.s15),
-              Stack(alignment: Alignment.centerLeft, children: [
-                Image.asset(eImageAssets.rewardBanner, width: Sizes.s182),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(appFonts.balance.tr,
-                      style: AppCss.outfitSemiBold12.textColor(
-                          appCtrl.appTheme.sameWhite.withOpacity(0.8))),
-                  const VSpace(Sizes.s10),
-                  Text("50${appFonts.rewards.tr}",
-                      style: AppCss.outfitBold17
-                          .textColor(appCtrl.appTheme.sameWhite))
-                ]).paddingOnly(left: Insets.i12)
-              ]).inkWell(onTap: () => homeCtrl.onTapWatch()),
+              if (appCtrl.firebaseConfigModel!.isAddShow!)
+                const VSpace(Sizes.s15),
+              if (appCtrl.firebaseConfigModel!.isAddShow!)
+                Stack(alignment: Alignment.centerLeft, children: [
+                  Image.asset(eImageAssets.rewardBanner, width: Sizes.s182),
+                  Text(appFonts.watchNow.tr,
+                          style: AppCss.outfitMedium12
+                              .textColor(const Color(0xFFF4A703)))
+                      .paddingSymmetric(
+                          horizontal: Insets.i15, vertical: Insets.i8)
+                      .decorated(
+                          color: appCtrl.appTheme.sameWhite,
+                          borderRadius: BorderRadius.circular(AppRadius.r4))
+                      .paddingOnly(left: Insets.i12)
+                ]).inkWell(onTap: () => homeCtrl.onTapWatch()),
               ...homeCtrl.drawerList
                   .asMap()
                   .entries
-                  .map((e) => ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: Insets.i20, vertical: Insets.i5),
-                      horizontalTitleGap: 0,
-                      minVerticalPadding: 0,
-                      onTap: () => appCtrl.onDrawerTap(e.key),
-                      leading: SvgPicture.asset(e.value["icon"],
-                          colorFilter: ColorFilter.mode(
-                              appCtrl.appTheme.txt, BlendMode.srcIn)),
-                      title: Text(trans(e.value["title"]),
-                          style: AppCss.outfitRegular16
-                              .textColor(appCtrl.appTheme.txt))))
+                  .map((e) => e.value["title"] == "logout"
+                      ? appCtrl.isGuestLogin
+                          ? Container()
+                          : ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: Insets.i20, vertical: Insets.i5),
+                              horizontalTitleGap: 0,
+                              minVerticalPadding: 0,
+                              onTap: () => appCtrl.onDrawerTap(e.key),
+                              leading: SvgPicture.asset(e.value["icon"],
+                                  colorFilter: ColorFilter.mode(
+                                      appCtrl.appTheme.txt, BlendMode.srcIn)),
+                              title: Text(trans(e.value["title"]),
+                                  style: AppCss.outfitRegular16
+                                      .textColor(appCtrl.appTheme.txt)))
+                      : ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: Insets.i20, vertical: Insets.i5),
+                          horizontalTitleGap: 0,
+                          minVerticalPadding: 0,
+                          onTap: () => appCtrl.onDrawerTap(e.key),
+                          leading: SvgPicture.asset(e.value["icon"],
+                              colorFilter: ColorFilter.mode(
+                                  appCtrl.appTheme.txt, BlendMode.srcIn)),
+                          title: Text(trans(e.value["title"]),
+                              style: AppCss.outfitRegular16
+                                  .textColor(appCtrl.appTheme.txt))))
                   .toList()
             ]).paddingSymmetric(vertical: Insets.i30),
             const BottomLayout()

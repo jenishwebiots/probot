@@ -126,9 +126,9 @@ final dynamic en = {
   'weekly': "Weekly",
   'week': "Week",
   'payNow': "Pay now",
-  'weekBenefit1': "Unlimited Chat with ProBot",
-  'weekBenefit2': "50 Images download and share with friend",
-  'weekBenefit3': "15 Free Content Writing Topics",
+  'weekBenefit1': "Chat with ProBot",
+  'weekBenefit2': "Images download and share with friend",
+  'weekBenefit3': "Free Content Writing Topics",
   'monthBenefit1': "Unlimited Images download and share",
   'monthBenefit2': "50 Free Content Writing Topics",
   'yearBenefit1': "Unlimited Images download and share",
@@ -257,7 +257,6 @@ final dynamic en = {
   'meansTheIndividual':
       "You means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.",
 
-
   //NEW
   "phoneNumberVerification": "Phone Number Verification",
   "enterNumber": "Enter your number to get OTP",
@@ -268,7 +267,11 @@ final dynamic en = {
   "loginWithPhone": "Login with phone",
   "google": "Google",
   "apple": "Apple",
+  "unlimited": "Unlimited",
 
-'thereAreAwardLeft' : "There are @awardLeft awards left to message.",
-
+  'thereAreAwardLeft': "There are @awardLeft awards left to message.",
+  'chatCountText': "Chat Text\nCount",
+  'imageCount': "Image Generate\nCount",
+  'textCompletionCount': "Text Completion\nCount",
+  'welcome': "Welcome to Probot",
 };

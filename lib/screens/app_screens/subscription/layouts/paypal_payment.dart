@@ -6,8 +6,8 @@ import '../../../../config.dart';
 
 
 class PaypalPayment extends StatefulWidget {
-
- const PaypalPayment({Key? key}) : super(key: key);
+  final SubscribeModel? subscribe;
+ const PaypalPayment({Key? key,this.subscribe}) : super(key: key);
 
   @override
   State<PaypalPayment> createState() => _PaypalPaymentState();
@@ -52,7 +52,13 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                     bText1: appFonts.okay,
                     title: appFonts.paymentSuccess,
                     subtext: appFonts.congratulation,
-                    b1OnTap: ()=> Get.back(),
+                    b1OnTap: ()async{
+                      final firebaseCtrl =
+                      Get.isRegistered<SubscriptionFirebaseController>()
+                          ? Get.find<SubscriptionFirebaseController>()
+                          : Get.put(SubscriptionFirebaseController());
+                      firebaseCtrl.subscribePlan(subscribeModel: widget.subscribe,paymentMethod: "payPal");
+                    },
                     crossOnTap: ()=> Get.back()
                 );
               });

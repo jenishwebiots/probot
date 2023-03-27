@@ -29,11 +29,11 @@ class AddFingerprintController extends GetxController {
                 title: appFonts.successfullyVerify,
                 subtext: appFonts.yourFingerprintHasBeenVerify,
                 b1OnTap: () {
-                  appCtrl.storage.write("isBiometric", authenticated);
+                  appCtrl.storage.write(session.isBiometric, authenticated);
                   Get.offAllNamed(routeName.dashboard);
                 },
                 crossOnTap: () {
-                  appCtrl.storage.write("isBiometric", authenticated);
+                  appCtrl.storage.write(session.isBiometric, authenticated);
                   Get.offAllNamed(routeName.dashboard);
                 }
             );

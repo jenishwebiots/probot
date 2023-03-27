@@ -16,7 +16,7 @@ class BottomNavBarLayout extends StatelessWidget {
                   child: Container(
                       height: Sizes.s58,
                       decoration: BoxDecoration(
-                          color: appCtrl.appTheme.white,
+                          color: appCtrl.appTheme.boxBg,
                           boxShadow: const [
                             BoxShadow(
                                 color: Color.fromRGBO(53, 193, 255, 0.08),
@@ -30,6 +30,7 @@ class BottomNavBarLayout extends StatelessWidget {
                           controller: dashboardCtrl.con,
                           physics: const NeverScrollableScrollPhysics(),
                           isScrollable: false,
+
                           padding: EdgeInsets.zero,
                           indicatorPadding: EdgeInsets.zero,
                           labelPadding: EdgeInsets.zero,

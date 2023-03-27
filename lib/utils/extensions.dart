@@ -35,3 +35,11 @@ extension ProbotExtensions on Widget {
                 blurRadius: 20)
           ]);
 }
+
+removeAllKey(){
+  appCtrl.storage.remove(session.envConfig);
+  appCtrl.storage.remove(session.isGuestLogin);
+  appCtrl.storage.remove(session.selectedCharacter);
+  appCtrl.storage.remove(session.isLogin);
+  appCtrl.storage.remove(session.isBiometric);
+}

@@ -11,7 +11,7 @@ class CommonSubscribeTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(subscribeModel!.icon!),
+        SvgPicture.asset(subscribeModel!.type == "weekly" ? eSvgAssets.star1  : subscribeModel!.type == "monthly" ?eSvgAssets.crown  : eSvgAssets.medal),
         const HSpace(Sizes.s8),
         RichText(
             text: TextSpan(

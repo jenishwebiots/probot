@@ -23,7 +23,7 @@ class ChatLayout extends StatelessWidget {
               backgroundColor: appCtrl.appTheme.bg1,
               appBar: const ChatScreenAppBar(),
               body: InkWell(
-                onTap: (){
+                onTap: () {
                   chatCtrl.isLongPress = false;
                   chatCtrl.selectedData = [];
                   chatCtrl.selectedIndex = [];
@@ -35,21 +35,34 @@ class ChatLayout extends StatelessWidget {
                     overscroll.disallowIndicator();
                     return true;
                   },
-                  child: Column(
-                    children: [
-                      Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
-                              style: AppCss.outfitMedium14
-                                  .textColor(appCtrl.appTheme.lightText))
-                          .marginOnly(top: Insets.i15),
-                      const VSpace(Sizes.s13),
-                      const Expanded(flex: 5, child: ChatList()),
-                      Container(),
-                      const Expanded(flex: 0, child: ChatTextBox()),
-                    ],
-                  ).backgroundImage(DecorationImage(
-                      image: AssetImage(
-                          chatCtrl.selectedImage ?? eImageAssets.background1),
-                      fit: BoxFit.fill)),
+                  child: chatCtrl.selectedImage == eImageAssets.background1
+                      ? Column(
+                          children: [
+                            Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
+                                    style: AppCss.outfitMedium14
+                                        .textColor(appCtrl.appTheme.lightText))
+                                .marginOnly(top: Insets.i15),
+                            const VSpace(Sizes.s13),
+                            const Expanded(flex: 5, child: ChatList()),
+                            Container(),
+                            const Expanded(flex: 0, child: ChatTextBox()),
+                          ],
+                        ).backgroundColor(appCtrl.appTheme.bg1)
+                      : Column(
+                          children: [
+                            Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
+                                    style: AppCss.outfitMedium14
+                                        .textColor(appCtrl.appTheme.lightText))
+                                .marginOnly(top: Insets.i15),
+                            const VSpace(Sizes.s13),
+                            const Expanded(flex: 5, child: ChatList()),
+                            Container(),
+                            const Expanded(flex: 0, child: ChatTextBox()),
+                          ],
+                        ).backgroundImage(DecorationImage(
+                          image: AssetImage(chatCtrl.selectedImage ??
+                              eImageAssets.background1),
+                          fit: BoxFit.fill)),
                 ),
               )),
         ),

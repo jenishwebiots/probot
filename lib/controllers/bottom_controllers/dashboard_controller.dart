@@ -61,8 +61,12 @@ class DashboardController extends GetxController
     con!.index = val;
     con!.addListener(listener);
     update();
+
     if (selectedIndex == 1) {
-      chatLayoutCtrl.showInterstitialAd();
+      if (appCtrl.firebaseConfigModel!.isAddShow! && appCtrl.envConfig["chatTextCount"] != "unlimited") {
+        chatLayoutCtrl.showInterstitialAd();
+      }
+
       Navigator.of(Get.context!).push(createRoute()).then((value) {
         selectedIndex = lastSelectedIndex;
         con!.index = selectedIndex;

@@ -9,17 +9,17 @@ class SelectCharacterController extends GetxController {
     selectIndex = index;
     appCtrl.selectedCharacter = data;
     appCtrl.characterIndex = index;
-    await appCtrl.storage.write("selectedCharacter", data);
-    await appCtrl.storage.write("characterIndex", index);
+    await appCtrl.storage.write(session.selectedCharacter, data);
+    await appCtrl.storage.write(session.characterIndex, index);
     await appCtrl.storage.write("character", index);
-    await appCtrl.storage.write("isCharacter", appCtrl.isCharacter);
+    await appCtrl.storage.write(session.isCharacter, appCtrl.isCharacter);
     update();
   }
 
   //continue tap
   onContinue() async{
     appCtrl.isCharacter = true;
-    await appCtrl.storage.write("isCharacter", appCtrl.isCharacter);
+    await appCtrl.storage.write(session.isCharacter, appCtrl.isCharacter);
    Get.back();
     update();
   }

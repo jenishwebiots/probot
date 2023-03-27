@@ -11,7 +11,7 @@ class ReceiverContent extends StatelessWidget {
             horizontal: Insets.i10, vertical: Insets.i12),
         decoration: BoxDecoration(
             color: appCtrl.appTheme.boxBg,
-            boxShadow:  [
+            boxShadow: appCtrl.isTheme ? null :   [
               BoxShadow(
                   color: appCtrl.appTheme.primaryShadow,
                   offset: const Offset(0, 10),

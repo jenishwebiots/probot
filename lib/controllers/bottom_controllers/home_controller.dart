@@ -1,9 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../config.dart';
-import '../../env.dart';
 
 class HomeController extends GetxController {
   List<HomeOptionModel> homeOptionList = [];
@@ -27,11 +27,12 @@ class HomeController extends GetxController {
         .toList();
     drawerList = appArray.drawerList;
     update();
-    log("homeOptionList : ${homeOptionList.length}");
+
     bannerAd = BannerAd(
         size: AdSize.banner,
-
-        adUnitId: environment["bannerAddId"],
+        adUnitId: Platform.isAndroid
+            ? appCtrl.firebaseConfigModel!.bannerAddId!
+            : appCtrl.firebaseConfigModel!.bannerIOSId!,
         listener: BannerAdListener(
           onAdLoaded: (Ad ad) {
             log('$BannerAd loaded.');
@@ -50,9 +51,7 @@ class HomeController extends GetxController {
     log("bannerAd : $bannerAd");
     update();
     super.onReady();
-
   }
-
 
   //on option tap function
   onOptionTap(data) {
@@ -68,41 +67,32 @@ class HomeController extends GetxController {
     dashboardCtrl.update();
   }
 
-  onTapWatch () {
+  onTapWatch() {
     showDialog(
         barrierDismissible: false,
-        context: Get.context!, builder: (context) {
-      return AlertDialogCommon(
-          isReward: true,
-          height: Sizes.s160,
-          reward: "50",
-          image: eImageAssets.reward,
-          bText1: appFonts.watchVideo,
-          title: appFonts.availableBalance,
-          subtext: appFonts.watchTheVideoToWin,
-          style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
-          b1OnTap: () {
-            Get.back();
-            showDialog(
-                barrierDismissible: false,
-                context: Get.context!, builder: (context) {
-              return AlertDialogCommon(
-                  isReward: true,
-                  height: Sizes.s160,
-                  reward: "51",
-                  image: eGifAssets.coin,
-                  bText1: appFonts.hurrey,
-                  title: appFonts.congratulationReward,
-                  subtext: appFonts.congratulationYouGotNewReward,
-                  style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
-                  b1OnTap: ()=> Get.back(),
-                  crossOnTap: ()=> Get.back()
-              );
-            });
-          },
-          crossOnTap: ()=> Get.back()
-      );
-    });
-  }
+        context: Get.context!,
+        builder: (context) {
 
+
+          return AlertDialogCommon(
+              isReward: true,
+              height: Sizes.s160,
+              reward: appCtrl.envConfig["chatTextCount"].toString(),
+              image: eImageAssets.reward,
+              bText1: appFonts.watchVideo,
+              title: appFonts.availableBalance,
+              subtext: appFonts.watchTheVideoToWin,
+              style:
+                  AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
+              b1OnTap: () {
+                Get.back();
+                Get.back();
+                if(appCtrl.rewardedAd == null) {
+                  appCtrl.createRewardedAd();
+                }
+                appCtrl.showRewardedAd();
+              },
+              crossOnTap: () => Get.back());
+        });
+  }
 }

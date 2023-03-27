@@ -14,6 +14,7 @@ export 'bottom_controllers/setting_controller.dart';
 export 'bottom_controllers/chat_layout_controller.dart';
 export 'bottom_controllers/content_writer_controller.dart';
 export 'app_pages_controllers/notifications_controller.dart';
+export 'app_pages_controllers/subscription_firebase_controller.dart';
 export 'bottom_controllers/image_generator_controller.dart';
 
 export 'app_pages_controllers/image_preview_controller.dart';

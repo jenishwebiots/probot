@@ -68,6 +68,11 @@ class ContentWriterController extends GetxController {
   }
 
   void  processContentWrite() async {
+    int imageCount = int.parse(appCtrl.envConfig["textCompletionCount"].toString());
+    imageCount = imageCount -1;
+    appCtrl.envConfig["textCompletionCount"] = imageCount.toString();
+    appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
+    appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
     speechStopMethod();
     addTextCount();
     isLoading.value = true;
@@ -93,6 +98,12 @@ class ContentWriterController extends GetxController {
       isLoading.value = false;
       update();
     });
+    if (appCtrl.envConfig["textCompletionCount"] != "unlimited") {
+      final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
+          ? Get.find<SubscriptionFirebaseController>()
+          : Get.put(SubscriptionFirebaseController());
+      await subscribeCtrl.addUpdateFirebaseData();
+    }
     contentController.clear();
     update();
   }

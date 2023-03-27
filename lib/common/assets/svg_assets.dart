@@ -67,8 +67,8 @@ class SvgAssets {
   final String mobile = "assets/svg/mobile.svg";
   final String google = "assets/svg/google.svg";
   final String apple = "assets/svg/apple.svg";
-
   final String play = "assets/svg/play.svg";
+
 
 
 

@@ -15,15 +15,9 @@ class MyAccountScreen extends StatelessWidget {
             const VSpace(Sizes.s10),
             Stack(alignment: Alignment.bottomRight, children: [
               Text(
-                      (myAccountCtrl.userName != null ||
-                              myAccountCtrl.name != null ||
-                              myAccountCtrl.firebaseUser != null)
-                          ? myAccountCtrl.userName != null
+                     myAccountCtrl.userName != null
                               ? myAccountCtrl.userName![0]
-                              : myAccountCtrl.name != null
-                                  ? myAccountCtrl.name![0]
-                                  : myAccountCtrl.firebaseUser![0]
-                          : "",
+                          : "S",
                       style: AppCss.outfitExtraBold40
                           .textColor(appCtrl.appTheme.sameWhite))
                   .paddingAll(Insets.i40)
@@ -45,7 +39,6 @@ class MyAccountScreen extends StatelessWidget {
                 .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
                 .authBoxExtension(),
 
-            const MyAccountFields()
 
           ])
               .paddingSymmetric(horizontal: Insets.i20)

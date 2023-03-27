@@ -7,7 +7,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import '../../config.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-class ChatLayoutController extends GetxController {
+class ChatLayoutController extends GetxController with GetSingleTickerProviderStateMixin {
   dynamic data;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -20,19 +20,17 @@ class ChatLayoutController extends GetxController {
   String? time;
   List selectedIndex = [];
   List selectedData = [];
-  DateTime? receiverTime;
-  static const AdRequest request = AdRequest(
-    keywords: <String>['foo', 'bar'],
-    contentUrl: 'http://foo.com/bar.html',
-    nonPersonalizedAds: true,
-  );
+  DateTime? receiverTime;AnimationController? animationController;
+  Animation? animation;
+
+
   FocusNode focusNode = FocusNode();
   int count = 0;
   int receiverCount = 0;
   int lastIndex = 0;
   int receiverLastIndex = 0;
   String? selectedImage;
-  late SpeechToText speech;
+  SpeechToText speech = SpeechToText();
   Rx<List<ChatMessage>> messages = Rx<List<ChatMessage>>([]);
   Rx<bool> isLoading = Rx<bool>(false);
   final FlutterTts? flutterTts = FlutterTts();
@@ -61,14 +59,22 @@ class ChatLayoutController extends GetxController {
   @override
   void onReady() {
     // TODO: implement onReady
-    data = appCtrl.storage.read("selectedCharacter");
+    data = appCtrl.storage.read(session.selectedCharacter);
     backgroundList = appArray.backgroundList;
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
-    speech = SpeechToText();
+speech = SpeechToText();
     update();
     log("chatList : $data");
-    _createInterstitialAd();
+    if (appCtrl.firebaseConfigModel!.isAddShow! &&
+        appCtrl.envConfig["chatTextCount"] != "unlimited") {
+      _createInterstitialAd();
+    }
+    animationController = AnimationController(vsync:this,duration: Duration(seconds: 2));
+    animationController!.repeat(reverse: true);
+    animation =  Tween(begin: 15.0,end: 24.0).animate(animationController!)..addListener((){
+    update();
+    });
     super.onReady();
   }
 
@@ -84,13 +90,19 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _interstitialAd?.dispose();
+  }
+
   //initialize interstitial add
   void _createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3940256099942544/1033173712'
-            : 'ca-app-pub-3940256099942544/4411468910',
-        request: request,
+            ? appCtrl.firebaseConfigModel!.interstitialAdIdAndroid!
+            : appCtrl.firebaseConfigModel!.interstitialAdIdIOS!,
+        request: appCtrl.request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             log('$ad loaded');
@@ -109,8 +121,8 @@ class ChatLayoutController extends GetxController {
           },
         ));
     update();
+    appCtrl.createRewardedAd();
   }
-
 
   //show interstitial add
   void showInterstitialAd() {
@@ -160,7 +172,6 @@ class ChatLayoutController extends GetxController {
     update();
   }
 
-
   //scroll direction
   void scrollDown() {
     scrollController.animateTo(
@@ -170,7 +181,6 @@ class ChatLayoutController extends GetxController {
     );
   }
 
-
   //add text count
   addTextCount() async {
     debugPrint("-------${chatCount.value.toString()}--------");
@@ -178,12 +188,22 @@ class ChatLayoutController extends GetxController {
     // LocalStorage.saveTextCount(count: chatCount.value);
   }
 
-//process for chat
+  //process for chat
   processChat() async {
+    if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
+      int chatCount = int.parse(appCtrl.envConfig["chatTextCount"].toString());
+
+      chatCount = chatCount - 1;
+      log("chatCount : $chatCount");
+      appCtrl.envConfig["chatTextCount"] = chatCount.toString();
+      appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+    }
+    appCtrl.update();
     FocusScope.of(Get.context!).requestFocus(FocusNode());
     speechStopMethod();
     addTextCount();
-
+    log("CONFIG L:${appCtrl.envConfig}");
     messages.value.add(
       ChatMessage(
           text: chatController.text,
@@ -195,6 +215,12 @@ class ChatLayoutController extends GetxController {
     itemCount.value = messages.value.length;
     update();
     Get.forceAppUpdate();
+    if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
+      final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
+          ? Get.find<SubscriptionFirebaseController>()
+          : Get.put(SubscriptionFirebaseController());
+      await subscribeCtrl.addUpdateFirebaseData();
+    }
     int i = messages.value.indexWhere(
         (element) => element.chatMessageType == ChatMessageType.loading);
 
@@ -242,7 +268,6 @@ class ChatLayoutController extends GetxController {
     Get.forceAppUpdate();
     update();
   }
-
 
   //pop up menu item
   PopupMenuItem buildPopupMenuItem(
@@ -309,28 +334,38 @@ class ChatLayoutController extends GetxController {
       bool available = await speech.initialize(
         onStatus: (val) {
           debugPrint('*** onStatus: $val');
-          isListening.value = false;
-          speech.stop();
-          update();
+          log("loo : ${val == "done"}");
+          if(val == "done" || val =="notListening"){
+            isListening.value = false;
+            update();
+          }
+          Get.forceAppUpdate();
+
         },
         onError: (val) {
           debugPrint('### onError: $val');
-          isListening.value = false;
-          speech.stop();
-          update();
+
         },
       );
+      log("available ; $available");
       if (available) {
         isListening.value = true;
+
         speech.listen(
             localeId: appCtrl.languageVal,
+
             onResult: (val) {
+              log("VAL : $val");
               chatController.text = val.recognizedWords.toString();
               userInput.value = val.recognizedWords.toString();
-              log("speech.isNotListening : ${speech.isNotListening}");
+              update();
             },
-            listenFor: const Duration(seconds: 15));
+            cancelOnError: true,);
+
         update();
+
+      } else {
+        log("NO");
       }
     } else {
       isListening.value = false;

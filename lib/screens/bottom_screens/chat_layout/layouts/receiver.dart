@@ -31,8 +31,8 @@ class Receiver extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                                 color: appCtrl.appTheme.boxBg,
-                                boxShadow: [
-                                  BoxShadow(
+                                boxShadow:   appCtrl.isTheme ? null : [
+                               BoxShadow(
                                       color: appCtrl.appTheme.primaryShadow,
                                       offset: const Offset(0, 10),
                                       blurRadius: 20)
@@ -99,10 +99,7 @@ class Receiver extends StatelessWidget {
                           }),
                   ])
                   .marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5))
-          .decorated(
-              color: chatCtrl.selectedIndex.contains(index)
-                  ? appCtrl.appTheme.primaryLight
-                  : appCtrl.appTheme.bg1)
+
           .onLongPressTap(onLongPress: () {
         log("chatCtrl.shareMessages[index!] : ${chatCtrl.selectedMessages[index!]}");
         chatCtrl.isLongPress = true;

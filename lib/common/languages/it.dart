@@ -128,8 +128,8 @@ final dynamic it = {
   'week': "Settimana",
   'payNow': "Paga ora",
   'weekBenefit1': "Chat illimitata con ProBot",
-  'weekBenefit2': "50 immagini da scaricare e condividere con un amico",
-  'weekBenefit3': "15 argomenti di scrittura di contenuti gratuiti",
+  'weekBenefit2': "immagini da scaricare e condividere con un amico",
+  'weekBenefit3': "argomenti di scrittura di contenuti gratuiti",
   'monthBenefit1': "Download e condivisione di immagini illimitate",
   'monthBenefit2': "50 argomenti di scrittura di contenuti gratuiti",
   'yearBenefit1': "Download e condivisione di immagini illimitate",
@@ -148,7 +148,7 @@ final dynamic it = {
   'cancel': "Annulla",
   'apply': "Fare domanda a",
   'unlimitedChat': "Illimitato\nchat",
-  'noOfDaysLeft': "Sono rimasti solo @days Left giorni nel ciclo.",
+  'noOfDaysLeft': "Sono rimasti solo @daysLeft giorni nel ciclo.",
   'renewNow': "Rinnova adesso",
 
   // Now
@@ -257,4 +257,22 @@ final dynamic it = {
   'home'  : "casa",
   'meansTheIndividual':
       "Si intende la persona che accede o utilizza il Servizio, o la società o altra entità legale per conto della quale tale persona accede o utilizza il Servizio, a seconda dei casi.",
+
+
+  //NEW
+  "phoneNumberVerification": "Verifica del numero di telefono",
+  "enterNumber": "Inserisci il tuo numero per ottenere OTP",
+  "phone": "Telefono",
+  "enterPhoneNo": "Inserisci il numero di telefono",
+  "getOTP": "Ottieni OTP",
+  "enter10Digit": "Inserisci il numero di cellulare a 10 cifre",
+  "loginWithPhone": "Accedi con il telefono",
+  "google": "Google",
+  "apple": "Mela",
+  "unlimited": "Illimitato",
+  'thereAreAwardLeft': "Ci sono premi @awardLeft lasciati al messaggio.",
+  'chatCountText': "Testo chat\nConteggio",
+  'imageCount': "Immagine generata\nConteggio",
+  'textCompletionCount': "Completamento del testo\nConteggio",
+  'welcome': "Benvenuto in Probot",
 };

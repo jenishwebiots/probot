@@ -1,36 +1,41 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:probot/config.dart';
 
+import '../../env.dart';
 
 class SplashController extends GetxController {
   @override
   void onReady() async {
-    bool isLoginSave = appCtrl.storage.read("isLogin") ?? false;
-    bool isBiometricSave = appCtrl.storage.read("isBiometric") ?? false;
-    bool isLanguageSaved = appCtrl.storage.read("isLanguage") ?? false;
-    bool isCharacterSaved = appCtrl.storage.read("isCharacter") ?? false;
+    appCtrl.createRewardedAd();
+    appCtrl.update();
+    bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
+    bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
+    bool isBiometricSave = appCtrl.storage.read(session.isBiometric) ?? false;
+    bool isLanguageSaved = appCtrl.storage.read(session.isLanguage) ?? false;
+    bool isCharacterSaved = appCtrl.storage.read(session.isCharacter) ?? false;
     appCtrl.isCharacter = isCharacterSaved;
     appCtrl.isLanguage = isLanguageSaved;
     appCtrl.isBiometric = isBiometricSave;
     appCtrl.isLogin = isLoginSave;
-    appCtrl.selectedCharacter = appCtrl.storage.read("selectedCharacter") ??
-        appArray.selectCharacterList[3];
-    appCtrl.characterIndex = appCtrl.storage.read("characterIndex") ?? 3;
+    appCtrl.selectedCharacter =
+        appCtrl.storage.read(session.selectedCharacter) ??
+            appArray.selectCharacterList[3];
+    appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
     log("isBiometricSave: $isBiometricSave");
     log("isLoginSave: $isLoginSave");
     // Language Save
     Locale? locale = const Locale("en", "US");
 
     // Theme Save
-    bool isTheme = appCtrl.storage.read("isDarkMode") ?? false;
+    bool isTheme = appCtrl.storage.read(session.isDarkMode) ?? false;
     ThemeService().switchTheme(isTheme);
     appCtrl.isTheme = isTheme;
 
-    var language =
-        await appCtrl.storage.read("locale") ?? "en";
-  log("language ; $language");
+    var language = await appCtrl.storage.read(session.locale) ?? "en";
+    log("language ; $language");
     if (language != null) {
-      appCtrl.languageVal =language;
+      appCtrl.languageVal = language;
       if (language == "en") {
         locale = const Locale("en", "US");
       } else if (language == "hi") {
@@ -53,36 +58,71 @@ class SplashController extends GetxController {
     Get.forceAppUpdate();
 
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
-    var name = appCtrl.storage.read("name") ;
-    log("name: $name");
+    var name = appCtrl.storage.read("name");
     var userName = appCtrl.storage.read("userName");
-    log("userName: $userName");
     var firebaseUser = appCtrl.storage.read("firebaseUser");
-    log("firebaseUser: $firebaseUser");
-    log("condition: ${name != null || userName != null || firebaseUser != null}");
     appCtrl.isOnboard = onBoard;
+    appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
+
+
+   if(!appCtrl.isGuestLogin && userName != null){
+
+     await FirebaseFirestore.instance
+         .collection("userSubscribe")
+         .where("email", isEqualTo: appCtrl.storage.read("userName"))
+         .limit(1)
+         .get()
+         .then((value) {
+       log("DATA : ${value.docs.isEmpty}");
+       if (value.docs.isNotEmpty) {
+         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
+         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
+         appCtrl.envConfig["textCompletionCount"] =
+         value.docs[0].data()["textCompletionCount"];
+         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+       } else {
+         appCtrl.envConfig =
+             appCtrl.storage.read(session.envConfig) ?? environment;
+       }
+     });
+
+   }else{
+     appCtrl.envConfig = environment;
+     appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+     appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+   }
+
 
     Future.delayed(const Duration(seconds: 3), () {
       if (onBoard) {
-        if (isLoginSave) {
-          if (isBiometricSave) {
-            Get.offAllNamed(routeName.addFingerprintScreen);
-          } else {
-            Get.toNamed(routeName.dashboard);
-          }
+        if (isGuestLogin) {
+          appCtrl.isGuestLogin = isGuestLogin;
+          appCtrl.storage.write(session.isGuestLogin, isGuestLogin);
+          Get.toNamed(routeName.dashboard);
         } else {
-          if (name != null || userName != null || firebaseUser != null) {
-            if (isLanguageSaved) {
-              if (isBiometricSave) {
-                Get.offAllNamed(routeName.addFingerprintScreen);
-              } else {
-                Get.toNamed(routeName.dashboard);
-              }
+          appCtrl.isGuestLogin = false;
+          appCtrl.storage.write(session.isGuestLogin, false);
+          if (isLoginSave) {
+            if (isBiometricSave) {
+              Get.offAllNamed(routeName.addFingerprintScreen);
             } else {
-              Get.toNamed(routeName.selectLanguageScreen);
+              Get.toNamed(routeName.dashboard);
             }
           } else {
-            Get.toNamed(routeName.loginScreen);
+            if (name != null || userName != null || firebaseUser != null) {
+              if (isLanguageSaved) {
+                if (isBiometricSave) {
+                  Get.offAllNamed(routeName.addFingerprintScreen);
+                } else {
+                  Get.toNamed(routeName.dashboard);
+                }
+              } else {
+                Get.toNamed(routeName.selectLanguageScreen);
+              }
+            } else {
+              Get.toNamed(routeName.loginScreen);
+            }
           }
         }
       } else {

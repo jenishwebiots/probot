@@ -11,7 +11,6 @@ class SelectLanguageScreen extends StatelessWidget {
     return GetBuilder<SelectLanguageController>(builder: (_) {
       return WillPopScope(
 
-
           onWillPop: () async {
             if (languageCtrl.isBack) {
               Get.back();
@@ -22,7 +21,7 @@ class SelectLanguageScreen extends StatelessWidget {
           },
           child: Scaffold(
               backgroundColor: appCtrl.appTheme.bg1,
-              appBar: const AppBarCommon(isSystemNavigate: false),
+              appBar:  AppBarCommon(isSystemNavigate: languageCtrl.isBack ? true: false),
               body: ListView(children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(appFonts.selectLanguage.tr,

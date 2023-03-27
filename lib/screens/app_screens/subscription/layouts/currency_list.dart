@@ -29,20 +29,7 @@ class CurrencyList extends StatelessWidget {
                 .entries
                 .map((e) => CurrencyListCard(index: e.key,data: e.value,))
                 .toList(),
-            const VSpace(Sizes.s35),
-            Row(children: [
-              Expanded(
-                  child: ButtonCommon(
-                      onTap: () {},
-                      title: appFonts.cancel,
-                      isGradient: false,
-                      style: AppCss.outfitMedium16
-                          .textColor(appCtrl.appTheme.primary),
-                      color: appCtrl.appTheme.trans,
-                      borderColor: appCtrl.appTheme.primary)),
-              const HSpace(Sizes.s15),
-              Expanded(child: ButtonCommon(onTap: () {}, title: appFonts.apply))
-            ]).marginSymmetric(horizontal: Insets.i15),
+
             const VSpace(Sizes.s25)
           ],
         )

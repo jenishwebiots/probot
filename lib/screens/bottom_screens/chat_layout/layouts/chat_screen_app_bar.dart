@@ -16,7 +16,7 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
             eSvgAssets.leftArrow,
             fit: BoxFit.scaleDown,
             colorFilter:
-                ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),
+                ColorFilter.mode(appCtrl.appTheme.sameWhite, BlendMode.srcIn),
           ).inkWell(onTap: () {
             Get.back();
             chatCtrl.clearData();

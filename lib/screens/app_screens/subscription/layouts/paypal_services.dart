@@ -10,16 +10,10 @@ class PaypalServices {
 
   //  String domain = "https://api.paypal.com";
 
-  // change clientId and secret with your own, provided by paypal
-  String clientId =
-      'AWSvIg3u2s-p7g2RYkcktJLjtn3Rsw0LZAm0CoS6WeYtEoYmSzRC01bT0wVxz4whG3eN4bCu1vparBbp';
-  String secret =
-      'EPtAGaQiNig5iYMuxtoFs_kVimBODw7axl7hSjn21YLPi6aCRJymPoU2n9GtLWNVqXGWj155XRK7Kpcm';
-
   // for getting the access token from Paypal
   Future<String> getAccessToken() async {
     try {
-      var client = BasicAuthClient(clientId, secret);
+      var client = BasicAuthClient(appCtrl.firebaseConfigModel!.payPalClientId!, appCtrl.firebaseConfigModel!.payPalSecret!);
       var response = await client.post(
           Uri.parse('$domain/v1/oauth2/token?grant_type=client_credentials'));
       if (response.statusCode == 200) {
