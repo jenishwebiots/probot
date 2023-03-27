@@ -1,3 +1,4 @@
+
 import '../../config.dart';
 
 class MyAccountController extends GetxController {
@@ -10,17 +11,12 @@ class MyAccountController extends GetxController {
   @override
   void onReady() {
 
-    emailController.addListener(() {update();});
-    firstNameController.addListener(() {update();});
-    firstNameController.addListener(() {update();});
+    emailController.text = appCtrl.storage.read("userName");
+    userName = emailController.text;
+    firstNameController.text = appCtrl.storage.read("name") ??"";
+    name = firstNameController.text;
 
-    emailController.text = "shanayajohn@gmail.com";
-    firstNameController.text = "Shanaya";
-    lastNameController.text = "John";
-
-    name = appCtrl.storage.read("name");
-    userName = appCtrl.storage.read("userName");
-    firebaseUser = appCtrl.storage.read("firebaseUser");
+   // firebaseUser = appCtrl.storage.read("firebaseUser");
 
     update();
     // TODO: implement onReady

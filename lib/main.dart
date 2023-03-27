@@ -1,9 +1,12 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'common/languages/index.dart';
+
+
 
 
 import 'config.dart';
@@ -12,9 +15,8 @@ import 'config.dart';
 void main() async {
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
- Get.put(AppController());
+ //Get.put(AppController());
   runApp(const MyApp());
 }
 
@@ -39,7 +41,7 @@ class _MyAppState extends State<MyApp> {
           if(snapshot.hasData){
             appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(snapshot.data!.docs[0].data());
             Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
-            appCtrl.storage.write(session.firebaseConfig, appCtrl.firebaseConfigModel);
+            appCtrl.storage.write(session.firebaseConfig, snapshot.data!.docs[0].data());
             appCtrl.update();
           }
         return GetMaterialApp(

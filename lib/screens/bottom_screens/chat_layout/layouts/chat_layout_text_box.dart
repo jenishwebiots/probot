@@ -22,27 +22,31 @@ class ChatLayoutTextBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             GestureDetector(
-              onTap: () async {
-                Vibration.vibrate(duration: 200);
-                chatCtrl.speechToText();
-              },
-              child: SvgPicture.asset(
-                  eSvgAssets.mic,height: chatCtrl.isListening.value ? chatCtrl.animation!.value : Sizes.s22,
+                onTap: () async {
+                  Vibration.vibrate(duration: 200);
+                  chatCtrl.speechToText();
+                },
+                child: SvgPicture.asset(
+                  eSvgAssets.mic,
+                  height: chatCtrl.isListening.value
+                      ? chatCtrl.animation!.value
+                      : Sizes.s22,
                   colorFilter: ColorFilter.mode(
                       chatCtrl.isListening.value
                           ? appCtrl.appTheme.primary
                           : appCtrl.appTheme.lightText,
                       BlendMode.srcIn),
-                )
-
-            ),
+                )),
             const HSpace(Sizes.s12),
             SvgPicture.asset(eSvgAssets.send)
                 .paddingAll(Insets.i6)
                 .decorated(
                     color: appCtrl.appTheme.primary,
                     borderRadius: BorderRadius.circular(AppRadius.r6))
-                .inkWell(onTap: () => chatCtrl.processChat()),
+                .inkWell(
+                    onTap: () => chatCtrl.chatController.text.isNotEmpty
+                        ? chatCtrl.processChat()
+                        : Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr)),
             const HSpace(Sizes.s8),
           ],
         ),

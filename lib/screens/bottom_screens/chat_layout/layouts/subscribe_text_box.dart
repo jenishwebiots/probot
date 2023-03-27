@@ -8,9 +8,10 @@ class SubscribeTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
+
       return Column(
         children: [
-          if (appCtrl.envConfig["chatTextCount"] != 0)
+          if (int.parse(appCtrl.envConfig["chatTextCount"]) != 0)
             Column(
               children: [
                 Text(
@@ -23,9 +24,9 @@ class SubscribeTextBox extends StatelessWidget {
                 const VSpace(Sizes.s10),
               ],
             ),
-          if (appCtrl.envConfig["chatTextCount"] == 0)
+          if (int.parse(appCtrl.envConfig["chatTextCount"]) == 0)
             LimitOverLayout(onTap: () => appCtrl.showRewardedAd()),
-          if (appCtrl.envConfig["chatTextCount"] != 0)
+          if (int.parse(appCtrl.envConfig["chatTextCount"]) != 0)
             const ChatLayoutTextBox()
         ],
       );

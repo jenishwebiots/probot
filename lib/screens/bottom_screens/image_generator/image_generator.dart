@@ -48,7 +48,7 @@ class ImageGenerator extends StatelessWidget {
                 )).height(MediaQuery.of(context).size.height),
                 ButtonCommon(
                   title: appFonts.generateImage,
-                  onTap: () => imageGeneratorCtrl.onTabMethod()
+                  onTap: () => imageGeneratorCtrl.imageTextController.text.isNotEmpty ? imageGeneratorCtrl.onTabMethod() : Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr)
                 ).paddingOnly(
                     bottom: Insets.i15, right: Insets.i20, left: Insets.i20)
               ]),

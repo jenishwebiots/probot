@@ -109,7 +109,7 @@ class AppArray {
 
   //drawer list
   var drawerList = [
-    {"title": "proBot", "icon": eSvgAssets.chat},
+    {"title": "chatBot", "icon": eSvgAssets.chat},
     {"title": "option2", "icon": eSvgAssets.gallery},
     {"title": "option3", "icon": eSvgAssets.content},
     {"title": "setting", "icon": eSvgAssets.setting},
@@ -278,13 +278,11 @@ class AppArray {
   //setting list
   var settingList = [
     {"icon": eSvgAssets.profile, "title": "myAccount"},
+    {"icon": eSvgAssets.chat,"title": "selectCharacter" },
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
-    {"icon": eSvgAssets.lock, "title": "resetPassword"},
-    {"icon": eSvgAssets.bell2, "title": "notification"},
     {"icon": eSvgAssets.translate, "title": "language"},
-    {"icon": eSvgAssets.chat, "title": "selectCharacter"},
     //{"icon": eSvgAssets.star, "title": "rateApp"},
     //{"icon": eSvgAssets.security, "title": "privacyTerm"},
     {"icon": eSvgAssets.logout, "title": "logout"}
@@ -400,11 +398,14 @@ var notificationList = [
 var paymentMethodList = [
   {
     "icon": eImageAssets.paypal,
-    "title": appFonts.payPal,
+    "title": appFonts.payPal.tr,
   },
   {
     "icon": eImageAssets.stripe,
-    "title": appFonts.stripe,
+    "title": appFonts.stripe.tr,
+  },{
+    "icon": eImageAssets.razor,
+    "title": appFonts.razor.tr
   },
 ];
 }

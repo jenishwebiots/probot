@@ -16,7 +16,7 @@ class TopLayout extends StatelessWidget {
             prefixIcon:
                 SvgPicture.asset(eSvgAssets.search, fit: BoxFit.scaleDown)
                     .inkWell(onTap: () {}),
-            suffixIcon: SizedBox(
+            /*suffixIcon: SizedBox(
                 height: 10,
                 width: 5,
                 child: Row(
@@ -28,7 +28,7 @@ class TopLayout extends StatelessWidget {
                           .inkWell(
                               onTap: () => imageGeneratorCtrl.onTapFilter())
                           .paddingSymmetric(horizontal: Insets.i10)
-                    ]))).authBoxExtension(),
+                    ]))*/).authBoxExtension(),
         const VSpace(Sizes.s10),
         SizedBox(
                 child: Row(

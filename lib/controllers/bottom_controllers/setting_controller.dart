@@ -55,7 +55,7 @@ class SettingController extends GetxController {
       Get.toNamed(routeName.selectCharacterScreen, arguments: true);
     } else if (data['title'] == "subscriptionPlan") {
       if(appCtrl.isGuestLogin){
-        Get.toNamed(routeName.subscriptionPlanList);
+        Get.offAllNamed(routeName.signInScreen);
       }else {
         FirebaseFirestore.instance
             .collection("userSubscribe")

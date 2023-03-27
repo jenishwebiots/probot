@@ -202,6 +202,7 @@ class Sizes {
   static const double s96 = 96 * scale;
   static const double s100 = 100 * scale;
   static const double s102 = 102 * scale;
+  static const double s105 = 105 * scale;
   static const double s106 = 106 * scale;
   static const double s108 = 108 * scale;
   static const double s110 = 110 * scale;

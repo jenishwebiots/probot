@@ -39,4 +39,7 @@ class ApiServices {
 
     return newresponse['choices'][0]['message']['content'];
   }
+
+
+
 }

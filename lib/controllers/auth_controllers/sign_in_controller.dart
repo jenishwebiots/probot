@@ -12,6 +12,7 @@ class SignInController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
+
   String? userNameGoogle = "";
   String? userName = "";
   bool obscureText = true;
@@ -45,9 +46,9 @@ class SignInController extends GetxController {
     userNameGoogle = user!.email;
     isLoading = false;
     appCtrl.storage.write("userName", userNameGoogle);
+    appCtrl.storage.write("name", user.displayName);
     await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
-    Get.toNamed(routeName.dashboard);
   }
 
   // Sign In With Email & Password Method
@@ -66,6 +67,7 @@ class SignInController extends GetxController {
         update();
         isLoading = false;
         appCtrl.storage.write("userName", userName);
+        appCtrl.storage.write("name", signIn.displayName);
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
       } on FirebaseAuthException catch (e) {
@@ -121,6 +123,7 @@ class SignInController extends GetxController {
         update();
 
         appCtrl.storage.write("userName", userName);
+        appCtrl.storage.write("name", signIn.displayName);
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
       });

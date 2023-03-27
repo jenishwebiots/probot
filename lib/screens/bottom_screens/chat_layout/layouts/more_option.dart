@@ -30,6 +30,7 @@ class MoreOption extends StatelessWidget {
               });
             } else {
               chatCtrl.messages.value = [];
+              chatCtrl.clearData();
               chatCtrl.update();
               chatCtrl.clearChatSuccessDialog();
             }

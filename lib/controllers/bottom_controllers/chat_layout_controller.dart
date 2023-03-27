@@ -70,7 +70,7 @@ speech = SpeechToText();
         appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
-    animationController = AnimationController(vsync:this,duration: Duration(seconds: 2));
+    animationController = AnimationController(vsync:this,duration: const Duration(seconds: 2));
     animationController!.repeat(reverse: true);
     animation =  Tween(begin: 15.0,end: 24.0).animate(animationController!)..addListener((){
     update();
@@ -221,6 +221,7 @@ speech = SpeechToText();
           : Get.put(SubscriptionFirebaseController());
       await subscribeCtrl.addUpdateFirebaseData();
     }
+    log("chatCount1 : ${appCtrl.envConfig}");
     int i = messages.value.indexWhere(
         (element) => element.chatMessageType == ChatMessageType.loading);
 
