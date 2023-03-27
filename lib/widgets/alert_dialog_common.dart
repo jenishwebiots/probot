@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../../config.dart';
 
 class AlertDialogCommon extends StatelessWidget {
-  final String? image, title, subtext, bText1,reward;
+  final String? image, title, subtext, bText1, reward;
   final GestureTapCallback? b1OnTap, crossOnTap;
   final TextStyle? style;
   final double? height;
@@ -17,9 +17,10 @@ class AlertDialogCommon extends StatelessWidget {
       this.image,
       this.subtext,
       this.crossOnTap,
-        this.height,
-        this.isReward = false,
-      this.style,this.reward})
+      this.height,
+      this.isReward = false,
+      this.style,
+      this.reward})
       : super(key: key);
 
   @override
@@ -34,14 +35,14 @@ class AlertDialogCommon extends StatelessWidget {
             const VSpace(Sizes.s55),
             // Gif
             Image.asset(image!, height: height ?? Sizes.s190),
-            if(isReward == true)
-            Column(
-              children: [
-                DottedLines(width: Sizes.s40,color: appCtrl.appTheme.primary),
+            if (isReward == true)
+              Column(children: [
+                DottedLines(width: Sizes.s40, color: appCtrl.appTheme.primary),
                 const VSpace(Sizes.s10),
-                Text("$reward${appFonts.rewardLeft}",style: AppCss.outfitblack20.textColor(appCtrl.appTheme.primary))
-              ]
-            ),
+                Text("$reward${appFonts.rewardLeft}",
+                    style: AppCss.outfitblack20
+                        .textColor(appCtrl.appTheme.primary))
+              ]),
             const VSpace(Sizes.s18),
             // Sub text
             Text(subtext!.tr,

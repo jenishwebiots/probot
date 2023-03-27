@@ -55,7 +55,7 @@ class CommonDrawer extends StatelessWidget {
                                   horizontal: Insets.i20, vertical: Insets.i5),
                               horizontalTitleGap: 0,
                               minVerticalPadding: 0,
-                              onTap: () => appCtrl.onDrawerTap(e.key),
+                              onTap: () => appCtrl.onDrawerTap(e.key,e.value),
                               leading: SvgPicture.asset(e.value["icon"],
                                   colorFilter: ColorFilter.mode(
                                       appCtrl.appTheme.txt, BlendMode.srcIn)),
@@ -67,7 +67,7 @@ class CommonDrawer extends StatelessWidget {
                               horizontal: Insets.i20, vertical: Insets.i5),
                           horizontalTitleGap: 0,
                           minVerticalPadding: 0,
-                          onTap: () => appCtrl.onDrawerTap(e.key),
+                          onTap: () => appCtrl.onDrawerTap(e.key,e.value),
                           leading: SvgPicture.asset(e.value["icon"],
                               colorFilter: ColorFilter.mode(
                                   appCtrl.appTheme.txt, BlendMode.srcIn)),

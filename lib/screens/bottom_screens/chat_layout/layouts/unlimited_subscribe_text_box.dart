@@ -13,7 +13,7 @@ class UnlimitedSubscribeTextBox extends StatelessWidget {
       return Column(
         children: [
           if (snapShot!.data!.docs[0].data()["subscriptionType"] != "yearly")
-            if (appCtrl.envConfig["chatTextCount"] != 0)
+            if (int.parse(appCtrl.envConfig["chatTextCount"]) != 0)
               Column(
                 children: [
                   Text(
@@ -27,9 +27,9 @@ class UnlimitedSubscribeTextBox extends StatelessWidget {
                 ],
               ),
           if (snapShot!.data!.docs[0].data()["subscriptionType"] != "unlimited")
-            if (appCtrl.envConfig["chatTextCount"] == 0)
+            if (int.parse(appCtrl.envConfig["chatTextCount"]) == 0)
               LimitOverLayout(onTap: () => appCtrl.showRewardedAd()),
-          if (appCtrl.envConfig["chatTextCount"] != 0)
+          if (int.parse(appCtrl.envConfig["chatTextCount"]) != 0)
             const ChatLayoutTextBox()
         ],
       );

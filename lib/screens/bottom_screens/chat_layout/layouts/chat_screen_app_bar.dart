@@ -52,12 +52,8 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                       const HSpace(Sizes.s17),
                     ],
                   )
-                : Row(
-                    children: [
-                      ChatCommonWidget().commonSvgIcon(eSvgAssets.search),
-                      const MoreOption(),
-                    ],
-                  )
+                : const MoreOption()
+
           ],
           title: Row(children: [
             Container(

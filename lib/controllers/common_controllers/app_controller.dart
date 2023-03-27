@@ -45,19 +45,19 @@ class AppController extends GetxController {
   }
 
   //on drawer Tap
-  onDrawerTap(index) {
+  onDrawerTap(index, data) {
     log("index : E$index");
     Get.back();
     final dashboardCtrl = Get.find<DashboardController>();
-    if (index == 0) {
+    if (data["title"] == "chatBot") {
       dashboardCtrl.onBottomTap(1);
-    } else if (index == 1) {
+    } else if (data["title"] == "option2") {
       dashboardCtrl.onBottomTap(2);
-    } else if (index == 2) {
+    } else if (data["title"] == "option3") {
       dashboardCtrl.onBottomTap(3);
-    } else if (index == 3) {
+    }else if (data["title"] == "setting") {
       dashboardCtrl.onBottomTap(4);
-    } else if (index == 4) {
+    } else if (data["title"] == "language") {
       Get.toNamed(routeName.selectLanguageScreen, arguments: true);
     } else {
       FirebaseAuth.instance.signOut();
@@ -72,10 +72,11 @@ class AppController extends GetxController {
   }
 
   void createRewardedAd() {
+    appCtrl.firebaseConfigModel =  FirebaseConfigModel.fromJson(appCtrl.storage.read(session.firebaseConfig));
     RewardedAd.load(
         adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3940256099942544/5224354917'
-            : 'ca-app-pub-3940256099942544/1712485313',
+            ? appCtrl.firebaseConfigModel!.rewardAndroidId!
+            : appCtrl.firebaseConfigModel!.rewardIOSId!,
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {

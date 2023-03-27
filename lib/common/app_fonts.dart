@@ -79,35 +79,35 @@ class AppFonts {
   String tapCharacter = "tapCharacter";
   String chatWithProBot = "chatWithProBot";
 
-  String addFingerprint = "Add fingerprint";
-  String placeYourFinger = "Place your finger on the sensor";
-  String pressTheSensor = "Press the sensor and lift when you feel vibration";
-  String moveYourFinger = "Move your finger";
+  String addFingerprint = "addFingerprint";
+  String placeYourFinger = "placeYourFinger";
+  String pressTheSensor = "pressTheSensor";
+  String moveYourFinger = "moveYourFinger";
   String tryRestingAnother =
-      "Try resting another area of your finger on the sensor.";
+      "tryRestingAnother";
   String yourFingerprintHasBeen =
-      "Your fingerprint has been added successfully.";
-  String done = "Done";
+      "yourFingerprintHasBeen";
+  String done = "done";
 
-  String notification = "Notification";
-  String hennyHasSent = "Henny has sent you images of “Surat”.";
+  String notification = "notification";
+  String hennyHasSent = "hennyHasSent";
   String yourPasswordHasBeen =
-      "Your password has been changed, wait for a while to reset it.";
+      "yourPasswordHasBeen";
   String sophieHasWrite =
-      "Sophie has write some content for your “UI/UX Design” topic.";
-  String dinoHasSent = "Dino has sent you message.";
-  String marvelHasSent = "Marvel has sent you an image.";
+      "sophieHasWrite";
+  String dinoHasSent = "dinoHasSent";
+  String marvelHasSent = "marvelHasSent";
   String kettieHasWrite =
-      "Kettie has write content for your recently new topic “Development”";
-  String kingHasSend = "King has send message you about recent news.";
-  String justNow = "Just now";
-  String am12 = "12:30 am";
-  String am11 = "11:20 am";
-  String am10 = "10:15 am";
-  String am9 = "09:41 am";
+      "kettieHasWrite";
+  String kingHasSend = "kingHasSend";
+  String justNow = "justNow";
+  String am12 = "am12";
+  String am11 = "am11";
+  String am10 = "am10";
+  String am9 = "am9";
   String youDontHave =
-      "You don't have any new notifications; reload it to get new one.";
-  String refresh = "Refresh";
+      "youDontHave";
+  String refresh = "refresh";
   String whatsapp = "whatsapp";
   String insta = "insta";
   String tele = "tele";
@@ -130,79 +130,79 @@ class AppFonts {
   String writeContent = "writeContent";
   String description = "description";
 
-  String imageGenerator = "Image generator";
-  String search = "Search";
-  String imageSize = "Image size";
-  String viewType = "View type";
-  String selectSize = "Select size";
-  String selectType = "Select type";
+  String imageGenerator = "imageGenerator";
+  String search = "search";
+  String imageSize = "imageSize";
+  String viewType = "viewType";
+  String selectSize = "selectSize";
+  String selectType = "selectType";
   String youHaveNotYet =
-      "You have not yet searched for anything, begin your search now.";
-  String generateImage = "Generate image";
-  String noOfImages = "No. of images";
-  String imageStyle = "Image style";
-  String mood = "Mood";
-  String imageColor = "Image color";
+      "youHaveNotYet";
+  String generateImage = "generateImage";
+  String noOfImages = "noOfImages";
+  String imageStyle = "imageStyle";
+  String mood = "mood";
+  String imageColor = "imageColor";
 
-  String defaults = "Default";
-  String abstract = "Abstract";
-  String anime = "Anime";
-  String cartoon = "Cartoon";
-  String comic = "Comic";
-  String happy = "Happy";
-  String sad = "Sad";
-  String angry = "Angry";
-  String color = "Color";
-  String blackWhite = "Black & white";
-  String neon = "Neon";
-  String pageType = "Page type";
-  String gridType = "Grid type";
-  String imagePreview = "Image preview";
-  String share = "Share";
-  String download = "Download";
-  String cancel = "Cancel";
-  String apply = "Apply";
-  String loading = "Loading...";
+  String defaults = "defaults";
+  String abstract = "abstract";
+  String anime = "anime";
+  String cartoon = "cartoon";
+  String comic = "comic";
+  String happy = "happy";
+  String sad = "sad";
+  String angry = "angry";
+  String color = "color";
+  String blackWhite = "blackWhite";
+  String neon = "neon";
+  String pageType = "pageType";
+  String gridType = "gridType";
+  String imagePreview = "imagePreview";
+  String share = "share";
+  String download = "download";
+  String cancel = "cancel";
+  String apply = "apply";
+  String loading = "loading";
 
-  String myAccount = "My account";
-  String firstName = "First name";
-  String lastName = "Last name";
-  String emailPhone = "Email/phone";
-  String update = "Update";
-  String enterFirstName = "Enter First Name";
-  String enterLastName = "Enter Last Name";
-  String enterEmailName = "Enter Email Name";
-  String pleaseEnterValue = "Please Enter Value";
-  String enterAtLeast = "Enter At Least 6 Characters";
+  String myAccount = "myAccount";
+  String firstName = "firstName";
+  String lastName = "lastName";
+  String emailPhone = "emailPhone";
+  String update = "update";
+  String enterFirstName = "enterFirstName";
+  String enterLastName = "enterLastName";
+  String enterEmailName = "enterEmailName";
+  String pleaseEnterValue = "pleaseEnterValue";
+  String enterAtLeast = "enterAtLeast";
 
-  String newMessage = "New message notification";
-  String newUpdates = "New updates";
-  String passwordChange = "Password changed";
-  String fingerprintLock = "Fingerprint lock & security";
-  String verify = "Verify";
-  String successfullyVerify = "Successfully Verify";
+  String newMessage = "newMessage";
+  String newUpdates = "newUpdates";
+  String passwordChange = "passwordChange";
+  String fingerprintLock = "fingerprintLock";
+  String verify = "verify";
+  String successfullyVerify = "successfullyVerify";
   String yourFingerprintHasBeenVerify =
-      "Your fingerprint has been verify successfully.";
-  String fingerprintError = "Fingerprint Error";
+      "yourFingerprintHasBeenVerify";
+  String fingerprintError = "fingerprintError";
   String sorryFingerprint =
-      "Sorry !!  Fingerprint verification failed, please try again..";
-  String tryAgain = "Try again";
+      "sorryFingerprint";
+  String tryAgain = "tryAgain";
   String deviceNotSupported =
-      "Device not supported or Add fingerprint to your device";
-  String youHaveNotVerify = "You have not yet verify a fingerprint";
+      "deviceNotSupported";
+  String youHaveNotVerify = "youHaveNotVerify";
 
-  String privacyTerm = "Privacy & term";
-  String interpretationDefinitions = "Interpretation & Definitions";
-  String collecting = "Collecting & Using Your Personal Data";
-  String retention = "Retention of Your Personal Data";
-  String transfer = "Transfer of Your Personal Data";
-  String deleteYour = "Delete Your Personal Data";
-  String disclosure = "Disclosure of Your Personal Data";
-  String childrenPrivacy = "Children's Privacy";
-  String linksToOther = "Links to Other Websites";
-  String changesToThis = "Changes to this Privacy Policy";
+  String privacyTerm = "privacyTerm";
+  String interpretationDefinitions = "interpretationDefinitions";
+  String collecting = "collecting";
+  String retention = "retention";
+  String transfer = "transfer";
+  String deleteYour = "deleteYour";
+  String disclosure = "disclosure";
+  String childrenPrivacy = "childrenPrivacy";
+  String linksToOther = "linksToOther";
+  String changesToThis = "changesToThis";
   String thisPrivacyPolicy =
-      "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.";
+      "thisPrivacyPolicy";
 
   String generateContent = "generateContent";
   String subscriptionPlan = "subscriptionPlan";
@@ -224,37 +224,49 @@ class AppFonts {
   String apple = "apple";
 
 
-  String paymentSuccess  = "Payment Success";
-  String paymentFailed = "Payment Failed";
-  String congratulation = "Congratulations !! Your payment was completed successfully.";
-  String oppsDueTo = "Oops !!  Due to a technical issue, payment was failed. Please try again.";
-  String payMoneyFrom = "Pay Money From";
-  String payPal = "Pay pal";
-  String stripe = "Stripe";
-  String pay = "Pay";
+  String paymentSuccess  = "paymentSuccess";
+  String paymentFailed = "paymentFailed";
+  String congratulation = "congratulation";
+  String oppsDueTo = "oppsDueTo";
+  String payMoneyFrom = "payMoneyFrom";
+  String payPal = "payPal";
+  String stripe = "stripe";
+  String pay = "pay";
   String weekBenefit1 = "weekBenefit1";
   String weekBenefit2 = "weekBenefit2";
   String weekBenefit3 = "weekBenefit3";
 
-  String balance = "Balance :";
-  String rewards = " Rewards";
-  String availableBalance = "Available Balance";
-  String rewardLeft = " Rewards left";
-  String watchTheVideoToWin = "Watch the video to win additional prizes and have more chances to talk with ProBot.";
-  String watchVideo = " Watch Video";
-  String congratulationReward = "Congratulation";
-  String congratulationYouGotNewReward = "Congratulations  !! you’ve got a 1 new reward for your ProBot.";
-  String hurrey = "Hurrey !";
+  String balance = "balance";
+  String rewards = " rewards";
+  String availableBalance = "availableBalance";
+  String rewardLeft = "rewardLeft";
+  String watchTheVideoToWin = "watchTheVideoToWin";
+  String watchVideo = "watchVideo";
+  String congratulationReward = "congratulationReward";
+  String congratulationYouGotNewReward = "congratulationYouGotNewReward";
+  String hurrey = "hurrey";
 
-  String youHitTheMessage = "You've hit the message limit, ";
-  String watchNow = " Watch now";
-  String clickBelow = "click below";
-  String toGet = " to get";
-  String orSelect = " OR select a plan from the setting menu.";
+  String youHitTheMessage = "youHitTheMessage";
+  String watchNow = "watchNow";
+  String clickBelow = "clickBelow";
+  String toGet = "toGet";
+  String orSelect = "orSelect";
+  String razor = "razor";
+
   String reward = "reward";
   String chatCountText = "chatCountText";
   String imageCount = "imageCount";
   String textCompletionCount = "textCompletionCount";
+  String noPaymentMethod = "noPaymentMethod";
+  String clearSuccessFully = "clearSuccessFully";
+  String attention = "attention";
+  String enterTextBoxValue = "enterTextBoxValue";
+  String generated = "generated";
+  String pleaseWaitFor = "pleaseWaitFor";
+  String chatBot = "ChatBot";
+  String yourImageGenerator = "yourImageGenerator";
+  String yourContentWriting = "yourContentWriting";
+
   String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
 
 }

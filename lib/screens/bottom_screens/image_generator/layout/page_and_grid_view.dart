@@ -44,7 +44,7 @@ class PageAndGridView extends StatelessWidget {
                 const VSpace(Sizes.s15),
                 SizedBox(
                     width: Sizes.s292,
-                    child: Text(appFonts.youHaveNotYet,
+                    child: Text(appFonts.youHaveNotYet.tr,
                         textAlign: TextAlign.center,
                         style: AppCss.outfitMedium14
                             .textColor(appCtrl.appTheme.lightText)

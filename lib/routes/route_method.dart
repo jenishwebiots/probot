@@ -9,13 +9,13 @@ class AppRoute {
     GetPage(name: _routeName.splashScreen, page: () => SplashScreen()),
     GetPage(name: _routeName.onBoardingScreen, page: () => OnBoardingScreen()),
     GetPage(name: _routeName.loginScreen, page: () => const LoginScreen()),
-    GetPage(name: _routeName.signInScreen, page: () => SignInScreen()),
+    GetPage(name: _routeName.signInScreen, page: () => const SignInScreen()),
     GetPage(
         name: _routeName.restPasswordScreen, page: () => RestPasswordScreen()),
     GetPage(
         name: _routeName.changePasswordScreen,
         page: () => const ChangePasswordScreen()),
-    GetPage(name: _routeName.signUpScreen, page: () => SignUpScreen()),
+    GetPage(name: _routeName.signUpScreen, page: () => const SignUpScreen()),
     GetPage(
         name: _routeName.selectLanguageScreen,
         page: () => SelectLanguageScreen()),

@@ -71,7 +71,7 @@ final dynamic en = {
   'addNow': "Add Now",
   'doItLater': "Do It Later",
 
-  'option1': "Chat with different probot",
+  'option1': "Chat with different bots",
   'option2': "Image generator",
   'option3': "Content writer",
   'desc1': "Get a quick response to any query",
@@ -269,9 +269,48 @@ final dynamic en = {
   "apple": "Apple",
   "unlimited": "Unlimited",
 
+
+'paymentSuccess'  : "Payment Success",
+'paymentFailed' : "Payment Failed",
+'congratulation' : "Congratulations !! Your payment was completed successfully.",
+'oppsDueTo' : "Oops !!  Due to a technical issue, payment was failed. Please try again.",
+'payMoneyFrom' : "Pay Money From",
+'payPal' : "PayPal",
+'stripe' : "Stripe",
+'pay' : "Pay",
+
+
   'thereAreAwardLeft': "There are @awardLeft awards left to message.",
   'chatCountText': "Chat Text\nCount",
   'imageCount': "Image Generate\nCount",
   'textCompletionCount': "Text Completion\nCount",
   'welcome': "Welcome to Probot",
+
+'balance' : "Balance :",
+'rewards' : " Rewards",
+'availableBalance' : "Available Balance",
+'rewardLeft' : " Rewards left",
+'watchTheVideoToWin' : "Watch the video to win additional prizes and have more chances to talk with ProBot.",
+'watchVideo' : " Watch Video",
+'congratulationReward' : "Congratulation",
+'congratulationYouGotNewReward' : "Congratulations  !! you’ve got a 1 new reward for your ProBot.",
+'hurrey' : "Hurrey !",
+'youHitTheMessage' : "You've hit the message limit, ",
+'watchNow' : " Watch now",
+'clickBelow' : "click below",
+'toGet' : " to get",
+'orSelect' : " OR select a plan from the setting menu.",
+'razor' : "Razorpay",
+'reward' : " reward",
+
+'noPaymentMethod' : "No Payment Method implement",
+'clearSuccessFully' : "Successfully Clear",
+'attention' : "Attention !",
+'enterTextBoxValue' : "Enter text box value",
+'generated' : "Generated",
+'pleaseWaitFor' : "Please wait for load image",
+'chatBot' : "ChatBot",
+'yourImageGenerator' : "Your image generate balance is over",
+'yourContentWriting' : "Your content writing balance is over",
+
 };

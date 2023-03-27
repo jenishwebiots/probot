@@ -7,7 +7,6 @@ import '../../env.dart';
 class SplashController extends GetxController {
   @override
   void onReady() async {
-    appCtrl.createRewardedAd();
     appCtrl.update();
     bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
     bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
@@ -88,7 +87,7 @@ class SplashController extends GetxController {
      });
 
    }else{
-     appCtrl.envConfig = environment;
+
      appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
    }

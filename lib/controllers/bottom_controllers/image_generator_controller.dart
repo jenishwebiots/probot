@@ -33,39 +33,46 @@ class ImageGeneratorController extends GetxController {
     log("imageText: $imageText");
     try {
       int imageCount = int.parse(appCtrl.envConfig["imageCount"].toString());
-      imageCount = imageCount -1;
-      appCtrl.envConfig["imageCount"] = imageCount.toString();
-      appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
-      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-      update();
-      var request = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
-        },
-        body: jsonEncode(
-          {
-            'prompt': imageText,
-            'n': 5,
-            "size": size,
-          },
-        ),
-      );
-      log(request.body);
-      if (request.statusCode == 200) {
-        addCountImage();
-        imageGPTModel = ImageModel.fromJson(jsonDecode(request.body));
+      if(imageCount == 0){
+        Get.snackbar(appFonts.attention.tr, appFonts.yourImageGenerator.tr);
+      }else {
+        imageCount = imageCount - 1;
+        Get.snackbar(appFonts.generated.tr, appFonts.pleaseWaitFor.tr);
+        appCtrl.envConfig["imageCount"] = imageCount.toString();
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+        appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
         update();
-        Get.forceAppUpdate();
-      } else {
-        debugPrint(jsonDecode(request.body));
-      }
-      if (appCtrl.envConfig["imageCount"] != "unlimited") {
-        final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
-            ? Get.find<SubscriptionFirebaseController>()
-            : Get.put(SubscriptionFirebaseController());
-        await subscribeCtrl.addUpdateFirebaseData();
+        var request = await http.post(
+          url,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!
+                .chatGPTKey}',
+          },
+          body: jsonEncode(
+            {
+              'prompt': imageText,
+              'n': 5,
+              "size": size,
+            },
+          ),
+        );
+        log(request.body);
+        if (request.statusCode == 200) {
+          addCountImage();
+          imageGPTModel = ImageModel.fromJson(jsonDecode(request.body));
+          update();
+          Get.forceAppUpdate();
+        } else {
+          debugPrint(jsonDecode(request.body));
+        }
+        if (appCtrl.envConfig["imageCount"] != "unlimited") {
+          final subscribeCtrl = Get.isRegistered<
+              SubscriptionFirebaseController>()
+              ? Get.find<SubscriptionFirebaseController>()
+              : Get.put(SubscriptionFirebaseController());
+          await subscribeCtrl.addUpdateFirebaseData();
+        }
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -87,7 +94,7 @@ class ImageGeneratorController extends GetxController {
     isLoader = true;
     FocusScope.of(Get.context!).unfocus();
     await getGPTImage(imageText: imageTextController.text.trim());
-    Get.snackbar('Generated', "Please wait for load image");
+
     isLoader = false;
   }
 

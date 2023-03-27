@@ -34,7 +34,7 @@ class SettingList extends StatelessWidget {
                     style:
                         AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
                   ).marginSymmetric(horizontal: Insets.i15),
-                (index == 1)
+                (data["title"] == "rtl")
                     ? CommonSwitcher(index: index)
                     : data["title"] != "logout"
                         ? SvgPicture.asset(

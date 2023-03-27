@@ -15,7 +15,7 @@ class FingerprintAndLockSecurity extends StatelessWidget {
                 Image.asset(eImageAssets.addFinger,
                     height: Sizes.s360, width: Sizes.s270),
                 const VSpace(Sizes.s15),
-                Text(appFonts.youHaveNotVerify,
+                Text(appFonts.youHaveNotVerify.tr,
                     style:
                         AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt))
               ]),

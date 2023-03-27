@@ -9,6 +9,7 @@ class SignUpController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
   GlobalKey<FormState> signUpGlobalKey = GlobalKey<FormState>();
 
+
   String? firebaseUser = '';
 
   bool obscureText = true;

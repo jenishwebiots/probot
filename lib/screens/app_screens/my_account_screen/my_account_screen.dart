@@ -11,38 +11,40 @@ class MyAccountScreen extends StatelessWidget {
       return Scaffold(
           appBar: AppAppBarCommon(
               title: appFonts.myAccount, leadingOnTap: () => Get.back()),
-          body: Column(children: [
-            const VSpace(Sizes.s10),
-            Stack(alignment: Alignment.bottomRight, children: [
-              Text(
-                     myAccountCtrl.userName != null
-                              ? myAccountCtrl.userName![0]
-                          : "S",
-                      style: AppCss.outfitExtraBold40
-                          .textColor(appCtrl.appTheme.sameWhite))
-                  .paddingAll(Insets.i40)
-                  .decorated(
-                      shape: BoxShape.circle, color: appCtrl.appTheme.primary),
-              SvgPicture.asset(eSvgAssets.camera, fit: BoxFit.scaleDown)
-                  .paddingAll(Insets.i8)
-                  .decorated(
-                      shape: BoxShape.circle,
-                      color: appCtrl.appTheme.sameWhite,
-                      border: Border.all(
-                          width: 2,
-                          color: appCtrl.appTheme.primary.withOpacity(0.1)))
-                  .paddingOnly(bottom: Insets.i8)
-            ]),
-            const VSpace(Sizes.s15),
+          body: SingleChildScrollView(
+            child: Column(children: [
+              const VSpace(Sizes.s10),
+              Stack(alignment: Alignment.bottomRight, children: [
+                Text(
+                       myAccountCtrl.userName != null
+                                ? myAccountCtrl.userName![0]
+                            : "S",
+                        style: AppCss.outfitExtraBold40
+                            .textColor(appCtrl.appTheme.sameWhite))
+                    .paddingAll(Insets.i40)
+                    .decorated(
+                        shape: BoxShape.circle, color: appCtrl.appTheme.primary),
+                SvgPicture.asset(eSvgAssets.camera, fit: BoxFit.scaleDown)
+                    .paddingAll(Insets.i8)
+                    .decorated(
+                        shape: BoxShape.circle,
+                        color: appCtrl.appTheme.sameWhite,
+                        border: Border.all(
+                            width: 2,
+                            color: appCtrl.appTheme.primary.withOpacity(0.1)))
+                    .paddingOnly(bottom: Insets.i8)
+              ]),
+              const VSpace(Sizes.s15),
 
-            const AllTextForm()
-                .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
-                .authBoxExtension(),
+              const AllTextForm()
+                  .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
+                  .authBoxExtension(),
 
 
-          ])
-              .paddingSymmetric(horizontal: Insets.i20)
-              .alignment(Alignment.center));
+            ])
+                .paddingSymmetric(horizontal: Insets.i20)
+                .alignment(Alignment.center),
+          ));
     });
   }
 }

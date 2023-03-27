@@ -67,44 +67,50 @@ class ContentWriterController extends GetxController {
     // LocalStorage.saveTextCount(count: count.value);
   }
 
-  void  processContentWrite() async {
-    int imageCount = int.parse(appCtrl.envConfig["textCompletionCount"].toString());
-    imageCount = imageCount -1;
-    appCtrl.envConfig["textCompletionCount"] = imageCount.toString();
-    appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
-    appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-    speechStopMethod();
-    addTextCount();
-    isLoading.value = true;
-    update();
-    messages.value.add(
-      ContentMessage(
-        text: contentController.text,
-        textMessageType: ContentMessageType.user,
-      ),
-    );
+  void processContentWrite() async {
+    int imageCount =
+        int.parse(appCtrl.envConfig["textCompletionCount"].toString());
+    if (imageCount == 0) {
+      Get.snackbar(appFonts.attention.tr, appFonts.yourContentWriting.tr);
+    } else {
 
-    var input = contentController.text;
-    contentInput.value = contentController.text;
-    contentController.clear();
-    update();
-    log(":IS LOADING : #${isLoading.value}");
-
-    ApiServices.chatCompeletionResponse(input).then((value) {
-      log("value : $value");
-      htmlData = value;
+      imageCount = imageCount - 1;
+      appCtrl.envConfig["textCompletionCount"] = imageCount.toString();
+      appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+      speechStopMethod();
+      addTextCount();
+      isLoading.value = true;
       update();
+      messages.value.add(
+        ContentMessage(
+          text: contentController.text,
+          textMessageType: ContentMessageType.user,
+        ),
+      );
 
-      isLoading.value = false;
+      var input = contentController.text;
+      contentInput.value = contentController.text;
+      contentController.clear();
       update();
-    });
-    if (appCtrl.envConfig["textCompletionCount"] != "unlimited") {
-      final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
-          ? Get.find<SubscriptionFirebaseController>()
-          : Get.put(SubscriptionFirebaseController());
-      await subscribeCtrl.addUpdateFirebaseData();
+      log(":IS LOADING : #${isLoading.value}");
+
+      ApiServices.chatCompeletionResponse(input).then((value) {
+        log("value : $value");
+        htmlData = value;
+        update();
+
+        isLoading.value = false;
+        update();
+      });
+      if (appCtrl.envConfig["textCompletionCount"] != "unlimited") {
+        final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
+            ? Get.find<SubscriptionFirebaseController>()
+            : Get.put(SubscriptionFirebaseController());
+        await subscribeCtrl.addUpdateFirebaseData();
+      }
+      contentController.clear();
+      update();
     }
-    contentController.clear();
-    update();
   }
 }

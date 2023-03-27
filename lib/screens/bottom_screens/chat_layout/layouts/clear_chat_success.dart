@@ -15,7 +15,7 @@ class ClearChatSuccess extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(appFonts.shareToFriend.tr,
+              Text(appFonts.clearSuccessFully.tr,
                       style: AppCss.outfitblack20
                           .textColor(appCtrl.appTheme.txt)
                           .textDecoration(TextDecoration.none))
@@ -42,7 +42,7 @@ class ClearChatSuccess extends StatelessWidget {
               style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)).paddingSymmetric(horizontal: Insets.i30),
 
           const VSpace(Sizes.s20),
-          ButtonCommon(title: appFonts.okay,margin: 20,),
+          ButtonCommon(title: appFonts.okay,margin: 20,onTap: ()=> Get.back(),),
           const VSpace(Sizes.s25)
         ],
       )

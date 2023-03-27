@@ -74,7 +74,7 @@ class SignUpField extends StatelessWidget {
                     text: appFonts.signIn.tr,
                     style:
                         AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt))
-              ])).inkWell(onTap: () => Get.toNamed(routeName.signInScreen))
+              ])).inkWell(onTap: () => Get.back())
         ])
       ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25);
     });

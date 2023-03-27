@@ -1,6 +1,6 @@
 class FirebaseConfigModel {
   String? bannerAddId;
-  String? bannerIOSId;
+  String? bannerIOSId,rewardAndroidId,rewardIOSId,razorPayKey,razorPaySecret;
   String? chatGPTKey;
   String? interstitialAdIdAndroid;
   String? interstitialAdIdIOS;
@@ -11,7 +11,7 @@ class FirebaseConfigModel {
   bool? isChatShow;
   bool? isImageGeneratorShow;
   bool? isTextCompletionShow;
-  bool? isAddShow;
+  bool? isAddShow,isRazorPay,isStripe,isPaypal;
 
   FirebaseConfigModel(
       {this.bannerAddId,
@@ -25,11 +25,14 @@ class FirebaseConfigModel {
       this.stripePublishKey,
       this.isChatShow,
       this.isImageGeneratorShow,
-      this.isTextCompletionShow,this.isAddShow});
+        this.rewardAndroidId,this.rewardIOSId,this.razorPayKey,this.razorPaySecret,
+      this.isTextCompletionShow,this.isAddShow,this.isPaypal,this.isRazorPay,this.isStripe});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
     bannerAddId = json['bannerAddId'];
     bannerIOSId = json['bannerIOSId'];
+    rewardAndroidId = json['rewardAndroidId'];
+    rewardIOSId = json['rewardIOSId'];
     chatGPTKey = json['chatGPTKey'];
     interstitialAdIdAndroid = json['interstitialAdIdAndroid'];
     interstitialAdIdIOS = json['interstitialAdIdIOS'];
@@ -41,6 +44,11 @@ class FirebaseConfigModel {
     isImageGeneratorShow = json['isImageGeneratorShow'];
     isTextCompletionShow = json['isTextCompletionShow'];
     isAddShow = json['isAddShow'];
+    isRazorPay = json['isRazorPay'];
+    isPaypal = json['isPayPal'];
+    isStripe = json['isStripe'];
+    razorPayKey = json['razorPayKey'];
+    razorPaySecret = json['razorPaySecret'];
   }
 
   Map<String, dynamic> toJson() {
@@ -58,6 +66,13 @@ class FirebaseConfigModel {
     data['isImageGeneratorShow'] = isImageGeneratorShow;
     data['isTextCompletionShow'] = isTextCompletionShow;
     data['isAddShow'] = isAddShow;
+    data['isStripe'] = isStripe;
+    data['isPayPal'] = isPaypal;
+    data['isRazorPay'] = isRazorPay;
+    data['rewardIOSId'] = rewardIOSId;
+    data['rewardAndroidId'] = rewardAndroidId;
+    data['razorPayKey'] = razorPayKey;
+    data['razorPaySecret'] = razorPaySecret;
     return data;
   }
 }

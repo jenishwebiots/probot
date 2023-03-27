@@ -4,11 +4,13 @@ import 'dart:developer';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../config.dart';
 
 import '../../screens/app_screens/subscription/layouts/paypal_payment.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_services.dart';
+import '../../screens/app_screens/subscription/layouts/razorpay_services.dart';
 
 class SubscriptionController extends GetxController {
   List<SubscribeModel> subscriptionLists = [];
@@ -31,7 +33,7 @@ class SubscriptionController extends GetxController {
   String cancelURL = 'cancel.example.com';
   WebViewController controller = WebViewController();
   final client = http.Client();
-
+  Razorpay razorpay = Razorpay();
 
   // item name, price and quantity
   String itemName = 'PROBOT SUBSCRIPTION';
@@ -71,7 +73,7 @@ class SubscriptionController extends GetxController {
 
         isLoading = false;
         log("SR : $subscribe");
-        displayPaymentSheet(subscribe,"stripe");
+        displayPaymentSheet(subscribe, "stripe");
         update();
       }
     } catch (e) {
@@ -81,7 +83,7 @@ class SubscriptionController extends GetxController {
   }
 
   // Stripe Error handler
-  displayPaymentSheet(subscribe,paymentMethod) async {
+  displayPaymentSheet(subscribe, paymentMethod) async {
     try {
       await Stripe.instance.presentPaymentSheet();
       showDialog(
@@ -98,7 +100,8 @@ class SubscriptionController extends GetxController {
                       Get.isRegistered<SubscriptionFirebaseController>()
                           ? Get.find<SubscriptionFirebaseController>()
                           : Get.put(SubscriptionFirebaseController());
-                  firebaseCtrl.subscribePlan(subscribeModel: subscribe,paymentMethod: paymentMethod);
+                  firebaseCtrl.subscribePlan(
+                      subscribeModel: subscribe, paymentMethod: paymentMethod);
                 },
                 crossOnTap: () => Get.back());
           });
@@ -219,7 +222,7 @@ class SubscriptionController extends GetxController {
     return temp;
   }
 
-  onPaypalPayment({required String amount,SubscribeModel? subscribe}) async {
+  onPaypalPayment({required String amount, SubscribeModel? subscribe}) async {
     try {
       final transactions = getOrderParams(amount);
       log("transactions: $transactions");
@@ -250,6 +253,55 @@ class SubscriptionController extends GetxController {
     update();
   }
 
+   initPayment() {
+    /// Test payment gateway
+    razorpay = Razorpay();
+    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
+    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
+
+    ///
+  }
+
+
+  // Razorpay error response
+  void handlePaymentErrorResponse() {
+    showDialog(
+        barrierDismissible: false,
+        context: Get.context!,
+        builder: (context) {
+          return AlertDialogCommon(
+              image: eImageAssets.paymentFailed,
+              bText1: appFonts.tryAgain,
+              title: appFonts.paymentFailed,
+              subtext: appFonts.oppsDueTo,
+              b1OnTap: () => Get.back(),
+              crossOnTap: () => Get.back());
+        });
+  }
+
+  // Razorpay success response
+  handlePaymentSuccessResponse({SubscribeModel? subscribeModel}) {
+    showDialog(
+        barrierDismissible: false,
+        context: Get.context!,
+        builder: (context) {
+          return AlertDialogCommon(
+              image: eImageAssets.paymentSuccess,
+              bText1: appFonts.okay,
+              title: appFonts.paymentSuccess,
+              subtext: appFonts.congratulation,
+              b1OnTap: () {
+                final firebaseCtrl =
+                Get.isRegistered<SubscriptionFirebaseController>()
+                    ? Get.find<SubscriptionFirebaseController>()
+                    : Get.put(SubscriptionFirebaseController());
+                firebaseCtrl.subscribePlan(
+                    subscribeModel: subscribeModel, paymentMethod: "razor");
+              },
+              crossOnTap: () => Get.back());
+        });
+  }
+
   @override
   void onReady() async {
     paymentMethods = appArray.paymentMethodList;
@@ -277,11 +329,53 @@ class SubscriptionController extends GetxController {
         throw Exception("exception: $e");
       }
     });
-
+    initPayment();
+    // initPayment();
     /* onPaypal(onFinish);*/
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  final Razorpay _razorpay = Razorpay(); //Instance of razor pay
+  /*initRazorPay() {
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
+
+  }*/
+
+  openSession({SubscribeModel? subscribe}) {
+    createOrder().then((orderId) {
+      log("orderId: $orderId");
+      if (orderId.toString().isNotEmpty) {
+        var options = {
+          'key': appCtrl.firebaseConfigModel!.razorPayKey!,
+          //Razor pay API Key
+          "subscription_id": "sub_LVj2COfX915tfr",
+          //in the smallest currency sub-unit.
+          'name': 'Company Name.',
+          "recurring": true,
+          "confirm_close": true,
+          'order_id': orderId,
+          // Generate order_id using Orders API
+          'description': 'Description for order',
+          //Order Description to be shown in razor pay page
+          'timeout': 360,
+          // in seconds
+          'prefill': {
+            'contact': '9123456789',
+            'email': 'flutterwings304@gmail.com'
+          }
+          //contact number and email id of user
+        };
+        _razorpay.open(options);
+        razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
+        razorpay.on(
+            Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse(subscribeModel: subscribe));
+      } else {
+        log("EERRR");
+      }
+    });
   }
 
   // payments list
@@ -295,7 +389,10 @@ class SubscriptionController extends GetxController {
         pageBuilder: (context, anim1, anim2) {
           return Align(
             alignment: Alignment.center,
-            child: PaymentList(data: data!,subscribe: subscribe,),
+            child: PaymentList(
+              data: data!,
+              subscribe: subscribe,
+            ),
           );
         },
         transitionBuilder: (context, anim1, anim2, child) {

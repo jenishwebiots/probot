@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:probot/widgets/common_social_login.dart';
 
 import '../../../../config.dart';
@@ -60,22 +62,31 @@ class SignInTextField extends StatelessWidget {
                         text: appFonts.signUp.tr,
                         style: AppCss.outfitMedium16
                             .textColor(appCtrl.appTheme.txt))
-                  ])).inkWell(onTap: () => Get.toNamed(routeName.signUpScreen))
+                  ])).inkWell(onTap: () => Get.to(const SignUpScreen()))
             ]),
         const OrLayout().alignment(Alignment.center),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            CommonSocialLogin(
-                image: eSvgAssets.google,
-                name: appFonts.google,
-                onTap: () => signInCtrl.signInWithGoogle()),
-            CommonSocialLogin(
-                image: eSvgAssets.apple,
-                name: appFonts.google,
-                onTap: () => signInCtrl.signInWithApple()),
-          ],
-        )
+        Platform.isIOS
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CommonSocialLogin(
+                      image: eSvgAssets.google,
+                      name: appFonts.google,
+                      onTap: () => signInCtrl.signInWithGoogle()),
+                  CommonSocialLogin(
+                      image: eSvgAssets.apple,
+                      name: appFonts.apple,
+                      onTap: () => signInCtrl.signInWithApple()),
+                ],
+              )
+            : ButtonCommon(
+                title: appFonts.continueWithGoogle,
+                icon: SvgPicture.asset(eSvgAssets.google),
+                isGradient: false,
+                color: appCtrl.appTheme.textField,
+                style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt),
+          onTap: () => signInCtrl.signInWithGoogle(),
+              )
       ])
           .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
           .authBoxExtension();

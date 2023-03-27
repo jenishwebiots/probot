@@ -48,6 +48,7 @@ class ImageAssets {
   final String tick = "assets/images/icons/tick.png";
   final String stripe = "assets/images/icons/stripe.png";
   final String paypal = "assets/images/icons/paypal.png";
+  final String razor = "assets/images/icons/razor.png";
 
   // chat
   final String chat1 = "assets/images/chat/chat1.png";

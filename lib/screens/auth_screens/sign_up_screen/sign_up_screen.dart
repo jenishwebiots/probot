@@ -1,14 +1,22 @@
 import '../../../config.dart';
 
-class SignUpScreen extends StatelessWidget {
-  final signUpCtrl = Get.put(SignUpController());
+class SignUpScreen extends StatefulWidget {
 
-  SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final signUpCtrl = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SignUpController>(builder: (_) {
       return Scaffold(
+        key: scaffoldKey,
           appBar: const AppBarCommon(isArrow: false),
           body: Stack(alignment: Alignment.center, children: [
             ListView(children: [
