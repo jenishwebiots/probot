@@ -7,7 +7,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import '../../config.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-class ChatLayoutController extends GetxController {
+class ChatLayoutController extends GetxController with GetSingleTickerProviderStateMixin {
   dynamic data;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -20,7 +20,9 @@ class ChatLayoutController extends GetxController {
   String? time;
   List selectedIndex = [];
   List selectedData = [];
-  DateTime? receiverTime;
+  DateTime? receiverTime;AnimationController? animationController;
+  Animation? animation;
+
 
   FocusNode focusNode = FocusNode();
   int count = 0;
@@ -68,7 +70,11 @@ speech = SpeechToText();
         appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
-
+    animationController = AnimationController(vsync:this,duration: Duration(seconds: 2));
+    animationController!.repeat(reverse: true);
+    animation =  Tween(begin: 15.0,end: 24.0).animate(animationController!)..addListener((){
+    update();
+    });
     super.onReady();
   }
 
@@ -328,6 +334,12 @@ speech = SpeechToText();
       bool available = await speech.initialize(
         onStatus: (val) {
           debugPrint('*** onStatus: $val');
+          log("loo : ${val == "done"}");
+          if(val == "done" || val =="notListening"){
+            isListening.value = false;
+            update();
+          }
+          Get.forceAppUpdate();
 
         },
         onError: (val) {
@@ -351,7 +363,7 @@ speech = SpeechToText();
             cancelOnError: true,);
 
         update();
-        log("IS Listeb :' ${isListening.value}");
+
       } else {
         log("NO");
       }

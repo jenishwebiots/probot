@@ -39,6 +39,6 @@ class ChatCommonWidget{
   Widget commonSvgIcon(icon,{GestureTapCallback? onTap}) =>  SvgPicture.asset(
     icon,
     colorFilter:
-    ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),
+    ColorFilter.mode(appCtrl.appTheme.sameWhite, BlendMode.srcIn),
   ).inkWell(onTap: onTap);
 }

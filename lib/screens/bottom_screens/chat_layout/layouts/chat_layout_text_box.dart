@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/services.dart';
 import 'package:vibration/vibration.dart';
 
 import '../../../../config.dart';
@@ -25,23 +22,20 @@ class ChatLayoutTextBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             GestureDetector(
-                onLongPress: () async{
-                  Vibration.vibrate(duration: 200);
-                  chatCtrl.speechToText();
-                },
-                onLongPressEnd: (val) {
-                  chatCtrl.isListening.value = false;
-                  chatCtrl.speechStopMethod();
-                  chatCtrl.update();
-                },
-                child: SvgPicture.asset(
-                  eSvgAssets.mic,
+              onTap: () async {
+                Vibration.vibrate(duration: 200);
+                chatCtrl.speechToText();
+              },
+              child: SvgPicture.asset(
+                  eSvgAssets.mic,height: chatCtrl.isListening.value ? chatCtrl.animation!.value : Sizes.s22,
                   colorFilter: ColorFilter.mode(
                       chatCtrl.isListening.value
                           ? appCtrl.appTheme.primary
                           : appCtrl.appTheme.lightText,
                       BlendMode.srcIn),
-                )),
+                )
+
+            ),
             const HSpace(Sizes.s12),
             SvgPicture.asset(eSvgAssets.send)
                 .paddingAll(Insets.i6)

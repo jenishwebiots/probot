@@ -56,8 +56,13 @@ class Setting extends StatelessWidget {
           ...settingCtrl.settingList
               .asMap()
               .entries
-              .map((e) => SettingList(index: e.key, data: e.value)
-                  .marginSymmetric(horizontal: Insets.i20))
+              .map((e) => e.value["title"] == "logout"
+                  ? appCtrl.isGuestLogin
+                      ? Container()
+                      : SettingList(index: e.key, data: e.value)
+                          .marginSymmetric(horizontal: Insets.i20)
+                  : SettingList(index: e.key, data: e.value)
+              .marginSymmetric(horizontal: Insets.i20))
               .toList()
         ]).marginOnly(bottom: Insets.i25)),
       );

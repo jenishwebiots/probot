@@ -37,8 +37,8 @@ class ContentDescription extends StatelessWidget {
                 log(parsedstring3);
                 Clipboard.setData(ClipboardData(text: parsedstring3));
               }),
-              const HSpace(Sizes.s12),
-              SvgPicture.asset(eSvgAssets.edit).descriptionOptionBg()
+             /* const HSpace(Sizes.s12),
+              SvgPicture.asset(eSvgAssets.edit).descriptionOptionBg()*/
             ])
           ]),
           const VSpace(Sizes.s15),

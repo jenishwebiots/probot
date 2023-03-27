@@ -5,7 +5,7 @@ import 'package:probot/config.dart';
 
 class SubscriptionFirebaseController extends GetxController {
   //subscribe plan
-  subscribePlan({SubscribeModel? subscribeModel,paymentMethod}) async {
+  subscribePlan({SubscribeModel? subscribeModel, paymentMethod}) async {
     DateTime now = DateTime.now();
     DateTime? expiryDate;
     if (subscribeModel!.type == "weekly") {
@@ -22,9 +22,9 @@ class SubscriptionFirebaseController extends GetxController {
     int id = DateTime.now().millisecondsSinceEpoch;
     log("appCtrl.envConfig: ${appCtrl.envConfig}");
     String count = "";
-    if(subscribeModel.type! == "yearly"){
+    if (subscribeModel.type! == "yearly") {
       count = "unlimited";
-    }else{
+    } else {
       int chatCount = int.parse(appCtrl.envConfig["chatTextCount"].toString());
       count = (chatCount + int.parse(subscribeModel.chatCount!)).toString();
     }
@@ -44,7 +44,7 @@ class SubscriptionFirebaseController extends GetxController {
       "paymentMethod": paymentMethod,
       "textCompletionCount": subscribeModel.textCompletionCount.toString(),
     }).then((value) {
-      if(subscribeModel.type! == "yearly"){
+      if (subscribeModel.type! == "yearly") {
         log("appCtrl.envConfig: ${appCtrl.envConfig}");
         appCtrl.envConfig["chatTextCount"] = count;
         appCtrl.envConfig["imageCount"] = subscribeModel.imageCount;
@@ -54,7 +54,7 @@ class SubscriptionFirebaseController extends GetxController {
         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
         Get.back();
         Get.back();
-      }else {
+      } else {
         log("appCtrl.envConfig: ${appCtrl.envConfig}");
         appCtrl.envConfig["chatTextCount"] = count;
         appCtrl.envConfig["imageCount"] = subscribeModel.imageCount;
@@ -66,7 +66,6 @@ class SubscriptionFirebaseController extends GetxController {
         Get.back();
         Get.toNamed(routeName.subscriptionPlan);
       }
-
     });
   }
 
@@ -84,6 +83,8 @@ class SubscriptionFirebaseController extends GetxController {
           .doc(value.docs[0].id)
           .update({
         "chatCount": appCtrl.envConfig["chatTextCount"],
+        "imageCount": appCtrl.envConfig["imageCount"],
+        "textCompletionCount": appCtrl.envConfig["textCompletionCount"],
       }).then((value) async {
         await FirebaseFirestore.instance
             .collection("userSubscribe")

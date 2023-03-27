@@ -31,8 +31,8 @@ class Receiver extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                                 color: appCtrl.appTheme.boxBg,
-                                boxShadow: [
-                                  BoxShadow(
+                                boxShadow:   appCtrl.isTheme ? null : [
+                               BoxShadow(
                                       color: appCtrl.appTheme.primaryShadow,
                                       offset: const Offset(0, 10),
                                       blurRadius: 20)

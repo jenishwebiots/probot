@@ -38,7 +38,11 @@ class SettingController extends GetxController {
 
   onSettingTap(data) async {
     if (data['title'] == "myAccount") {
-      Get.toNamed(routeName.myAccountScreen);
+      if(appCtrl.isGuestLogin){
+        Get.offAllNamed(routeName.signInScreen);
+      }else {
+        Get.toNamed(routeName.myAccountScreen);
+      }
     } else if (data['title'] == "notification") {
       Get.toNamed(routeName.notificationScreen);
     } else if (data['title'] == "fingerprintLock") {

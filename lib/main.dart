@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -7,17 +8,26 @@ import 'common/languages/index.dart';
 
 import 'config.dart';
 
+
 void main() async {
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-//  Get.put(AppController());
+ Get.put(AppController());
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
 
   @override
   Widget build(BuildContext context) {

@@ -23,25 +23,31 @@ class SignInController extends GetxController {
   }
 
   // SignIn With Google Method
-  Future<UserCredential> signInWithGoogle() async {
+  Future signInWithGoogle() async {
     appCtrl.isGuestLogin = false;
     appCtrl.storage.write(session.isGuestLogin, false);
     log("message");
     isLoading = true;
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    log("googleUser $googleUser");
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
-    log("googleAuth  $googleAuth");
-    final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-    log("credential $credential");
-    userNameGoogle = googleUser.displayName;
+
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount!.authentication;
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+    User? user = (await auth.signInWithCredential(credential)).user;
+    update();
+    userNameGoogle = user!.email;
     isLoading = false;
     appCtrl.storage.write("userName", userNameGoogle);
     await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    Get.toNamed(routeName.dashboard);
   }
 
   // Sign In With Email & Password Method
@@ -108,7 +114,7 @@ class SignInController extends GetxController {
 
       await FirebaseAuth.instance
           .signInWithCredential(oauthCredential)
-          .then((value) async{
+          .then((value) async {
         var signIn = FirebaseAuth.instance.currentUser;
         userName = signIn!.email;
         isLoading = false;
@@ -132,7 +138,7 @@ class SignInController extends GetxController {
     }
   }
 
-  checkData()async{
+  checkData() async {
     await FirebaseFirestore.instance
         .collection("userSubscribe")
         .where("email", isEqualTo: appCtrl.storage.read("userName"))
@@ -144,7 +150,7 @@ class SignInController extends GetxController {
         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
         appCtrl.envConfig["textCompletionCount"] =
-        value.docs[0].data()["textCompletionCount"];
+            value.docs[0].data()["textCompletionCount"];
         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
       } else {

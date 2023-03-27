@@ -32,6 +32,11 @@ class ImageGeneratorController extends GetxController {
       {required String imageText, String? size = "256x256"}) async {
     log("imageText: $imageText");
     try {
+      int imageCount = int.parse(appCtrl.envConfig["imageCount"].toString());
+      imageCount = imageCount -1;
+      appCtrl.envConfig["imageCount"] = imageCount.toString();
+      appCtrl.storage.write(session.envConfig,appCtrl.envConfig);
+      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
       update();
       var request = await http.post(
         url,
@@ -55,6 +60,12 @@ class ImageGeneratorController extends GetxController {
         Get.forceAppUpdate();
       } else {
         debugPrint(jsonDecode(request.body));
+      }
+      if (appCtrl.envConfig["imageCount"] != "unlimited") {
+        final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
+            ? Get.find<SubscriptionFirebaseController>()
+            : Get.put(SubscriptionFirebaseController());
+        await subscribeCtrl.addUpdateFirebaseData();
       }
     } catch (e) {
       debugPrint(e.toString());

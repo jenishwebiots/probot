@@ -47,18 +47,33 @@ class CommonDrawer extends StatelessWidget {
               ...homeCtrl.drawerList
                   .asMap()
                   .entries
-                  .map((e) => ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: Insets.i20, vertical: Insets.i5),
-                      horizontalTitleGap: 0,
-                      minVerticalPadding: 0,
-                      onTap: () => appCtrl.onDrawerTap(e.key),
-                      leading: SvgPicture.asset(e.value["icon"],
-                          colorFilter: ColorFilter.mode(
-                              appCtrl.appTheme.txt, BlendMode.srcIn)),
-                      title: Text(trans(e.value["title"]),
-                          style: AppCss.outfitRegular16
-                              .textColor(appCtrl.appTheme.txt))))
+                  .map((e) => e.value["title"] == "logout"
+                      ? appCtrl.isGuestLogin
+                          ? Container()
+                          : ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: Insets.i20, vertical: Insets.i5),
+                              horizontalTitleGap: 0,
+                              minVerticalPadding: 0,
+                              onTap: () => appCtrl.onDrawerTap(e.key),
+                              leading: SvgPicture.asset(e.value["icon"],
+                                  colorFilter: ColorFilter.mode(
+                                      appCtrl.appTheme.txt, BlendMode.srcIn)),
+                              title: Text(trans(e.value["title"]),
+                                  style: AppCss.outfitRegular16
+                                      .textColor(appCtrl.appTheme.txt)))
+                      : ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: Insets.i20, vertical: Insets.i5),
+                          horizontalTitleGap: 0,
+                          minVerticalPadding: 0,
+                          onTap: () => appCtrl.onDrawerTap(e.key),
+                          leading: SvgPicture.asset(e.value["icon"],
+                              colorFilter: ColorFilter.mode(
+                                  appCtrl.appTheme.txt, BlendMode.srcIn)),
+                          title: Text(trans(e.value["title"]),
+                              style: AppCss.outfitRegular16
+                                  .textColor(appCtrl.appTheme.txt))))
                   .toList()
             ]).paddingSymmetric(vertical: Insets.i30),
             const BottomLayout()
