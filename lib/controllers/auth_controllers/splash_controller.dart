@@ -7,6 +7,7 @@ import '../../env.dart';
 class SplashController extends GetxController {
   @override
   void onReady() async {
+
     appCtrl.update();
     bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
     bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
@@ -60,38 +61,41 @@ class SplashController extends GetxController {
     var name = appCtrl.storage.read("name");
     var userName = appCtrl.storage.read("userName");
     var firebaseUser = appCtrl.storage.read("firebaseUser");
+    var number = appCtrl.storage.read("number");
+    log("number : $number");
     appCtrl.isOnboard = onBoard;
     appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
 
+    dynamic selectedImage = appCtrl.storage.read("backgroundImage")?? appArray.backgroundList[0];
+    appCtrl.storage.write("backgroundImage", selectedImage);
 
-   if(!appCtrl.isGuestLogin && userName != null){
+    log("SPLASH BG : $selectedImage");
 
-     await FirebaseFirestore.instance
-         .collection("userSubscribe")
-         .where("email", isEqualTo: appCtrl.storage.read("userName"))
-         .limit(1)
-         .get()
-         .then((value) {
-       log("DATA : ${value.docs.isEmpty}");
-       if (value.docs.isNotEmpty) {
-         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
-         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
-         appCtrl.envConfig["textCompletionCount"] =
-         value.docs[0].data()["textCompletionCount"];
-         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-       } else {
-         appCtrl.envConfig =
-             appCtrl.storage.read(session.envConfig) ?? environment;
-       }
-     });
-
-   }else{
-
-     appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-     appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-   }
-
+    if (!appCtrl.isGuestLogin && userName != null) {
+      await FirebaseFirestore.instance
+          .collection("userSubscribe")
+          .where("email", isEqualTo: appCtrl.storage.read("userName"))
+          .limit(1)
+          .get()
+          .then((value) {
+        log("DATA : ${value.docs.isEmpty}");
+        if (value.docs.isNotEmpty) {
+          appCtrl.envConfig["chatTextCount"] =
+              value.docs[0].data()["chatCount"];
+          appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
+          appCtrl.envConfig["textCompletionCount"] =
+              value.docs[0].data()["textCompletionCount"];
+          appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+          appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+        } else {
+          appCtrl.envConfig =
+              appCtrl.storage.read(session.envConfig) ?? environment;
+        }
+      });
+    } else {
+      appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+    }
 
     Future.delayed(const Duration(seconds: 3), () {
       if (onBoard) {
@@ -102,6 +106,7 @@ class SplashController extends GetxController {
         } else {
           appCtrl.isGuestLogin = false;
           appCtrl.storage.write(session.isGuestLogin, false);
+
           if (isLoginSave) {
             if (isBiometricSave) {
               Get.offAllNamed(routeName.addFingerprintScreen);
@@ -109,7 +114,7 @@ class SplashController extends GetxController {
               Get.toNamed(routeName.dashboard);
             }
           } else {
-            if (name != null || userName != null || firebaseUser != null) {
+            if (name != null || userName != null || firebaseUser != null || number != null) {
               if (isLanguageSaved) {
                 if (isBiometricSave) {
                   Get.offAllNamed(routeName.addFingerprintScreen);

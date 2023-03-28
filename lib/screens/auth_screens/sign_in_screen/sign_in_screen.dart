@@ -20,26 +20,31 @@ class _SignInScreenState extends State<SignInScreen> {
         key: scaffoldKey,
           backgroundColor: appCtrl.appTheme.bg1,
           appBar: const AppBarCommon(isArrow: false),
-          body: ListView(children: [
-            const VSpace(Sizes.s5),
-            Form(
-                    key: signInCtrl.signInGlobalKey,
+          body: Stack(
+            children: [
+              ListView(children: [
+                const VSpace(Sizes.s5),
+                Form(
+                        key: signInCtrl.signInGlobalKey,
 
-                    child:
-                        const SingleChildScrollView(child: SignInTextField()))
-                .paddingSymmetric(
-                    horizontal: Insets.i20, vertical: Insets.i15),
-            Text(appFonts.simplyUseThis.tr,
-                    textAlign: TextAlign.center,
-                    style: AppCss.outfitMedium16
-                        .textColor(appCtrl.appTheme.lightText)
-                        .textHeight(1.3))
-                .alignment(Alignment.bottomCenter)
-                .paddingSymmetric(
-                    vertical: Insets.i40, horizontal: Insets.i20),
-            if (signInCtrl.isLoading == true)
-              const Center(child: CircularProgressIndicator())
-          ]).height(MediaQuery.of(context).size.height));
+                        child:
+                            const SingleChildScrollView(child: SignInTextField()))
+                    .paddingSymmetric(
+                        horizontal: Insets.i20, vertical: Insets.i15),
+                Text(appFonts.simplyUseThis.tr,
+                        textAlign: TextAlign.center,
+                        style: AppCss.outfitMedium16
+                            .textColor(appCtrl.appTheme.lightText)
+                            .textHeight(1.3))
+                    .alignment(Alignment.bottomCenter)
+                    .paddingSymmetric(
+                        vertical: Insets.i40, horizontal: Insets.i20),
+
+              ]).height(MediaQuery.of(context).size.height),
+              if (signInCtrl.isLoading == true)
+                const Center(child: CircularProgressIndicator())
+            ],
+          ));
     });
   }
 }

@@ -21,14 +21,14 @@ class AllTextForm extends StatelessWidget {
                       controller: myAccountCtrl.firstNameController,
                       hintText: appFonts.enterFirstName.tr),
                   const VSpace(Sizes.s15),
-                  Text(appFonts.lastName.tr,
+                  Text(appFonts.phone.tr,
                       style: AppCss.outfitMedium16
                           .textColor(appCtrl.appTheme.txt)),
                   const VSpace(Sizes.s10),
                   TextFieldCommon(
-                      validator: (name) => Validation().emailValidation(name),
-                      controller: myAccountCtrl.lastNameController,
-                      hintText: appFonts.enterLastName.tr),
+                      validator: (name) => Validation().phoneValidation(name),
+                      controller: myAccountCtrl.numberController,
+                      hintText: appFonts.enterPhoneNo.tr),
                   const VSpace(Sizes.s15),
                   Text(appFonts.email.tr,
                       style: AppCss.outfitMedium16

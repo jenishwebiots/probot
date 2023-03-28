@@ -21,7 +21,7 @@ final dynamic en = {
   'fastResponse': "Fast Response for everything you need",
   'welcomeBack': "Welcome Back !!",
   'fillTheBelow': "Fill the below form",
-  'email': "Email/phone",
+  'email': "Email",
   'enterEmail': "Enter mail id/phone no.",
   'password': "Password",
   'enterPassword': "Enter password",

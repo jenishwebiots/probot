@@ -29,7 +29,7 @@ class SignInController extends GetxController {
     appCtrl.storage.write(session.isGuestLogin, false);
     log("message");
     isLoading = true;
-
+update();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -45,6 +45,7 @@ class SignInController extends GetxController {
     update();
     userNameGoogle = user!.email;
     isLoading = false;
+    update();
     appCtrl.storage.write("userName", userNameGoogle);
     appCtrl.storage.write("name", user.displayName);
     await checkData();
@@ -57,6 +58,7 @@ class SignInController extends GetxController {
     appCtrl.storage.write(session.isGuestLogin, false);
     if (signInGlobalKey.currentState!.validate()) {
       isLoading = true;
+      update();
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: emailController.text.toString(),
@@ -73,14 +75,16 @@ class SignInController extends GetxController {
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
           isLoading = false;
-
+update();
           snackBarMessengers(message: appFonts.wrongPassword);
         } else if (e.code == 'user-not-found') {
           isLoading = false;
+          update();
           snackBarMessengers(message: appFonts.userNotFound);
         }
       } catch (e) {
         isLoading = false;
+        update();
         snackBarMessengers(message: appFonts.unknownError);
       }
     }

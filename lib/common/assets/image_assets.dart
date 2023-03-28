@@ -67,4 +67,11 @@ class ImageAssets {
   final String background5 = "assets/images/background/bg5.png";
   final String background6 = "assets/images/background/bg6.png";
 
+  final String dBg1 = "assets/images/background/dBg1.png";
+  final String dBg2 = "assets/images/background/dBg2.png";
+  final String dBg3 = "assets/images/background/dBg3.png";
+  final String dBg4 = "assets/images/background/dBg4.png";
+  final String dBg5 = "assets/images/background/dBg5.png";
+  final String dBg6 = "assets/images/background/dBg6.png";
+
 }

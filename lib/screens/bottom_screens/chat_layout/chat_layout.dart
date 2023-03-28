@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:intl/intl.dart';
 import 'package:probot/config.dart';
 
@@ -8,6 +10,7 @@ class ChatLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("image: ${chatCtrl.selectedImage}");
     return GetBuilder<ChatLayoutController>(builder: (_) {
       return DirectionalityRtl(
         child: WillPopScope(
@@ -35,24 +38,11 @@ class ChatLayout extends StatelessWidget {
                     overscroll.disallowIndicator();
                     return true;
                   },
-                  child: chatCtrl.selectedImage == eImageAssets.background1
-                      ? Column(
+                  child:  Column(
                           children: [
                             Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
                                     style: AppCss.outfitMedium14
-                                        .textColor(appCtrl.appTheme.lightText))
-                                .marginOnly(top: Insets.i15),
-                            const VSpace(Sizes.s13),
-                            const Expanded(flex: 5, child: ChatList()),
-                            Container(),
-                            const Expanded(flex: 0, child: ChatTextBox()),
-                          ],
-                        ).backgroundColor(appCtrl.appTheme.bg1)
-                      : Column(
-                          children: [
-                            Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
-                                    style: AppCss.outfitMedium14
-                                        .textColor(appCtrl.appTheme.lightText))
+                                        .textColor(appCtrl.appTheme.txt))
                                 .marginOnly(top: Insets.i15),
                             const VSpace(Sizes.s13),
                             const Expanded(flex: 5, child: ChatList()),
@@ -60,8 +50,7 @@ class ChatLayout extends StatelessWidget {
                             const Expanded(flex: 0, child: ChatTextBox()),
                           ],
                         ).backgroundImage(DecorationImage(
-                          image: AssetImage(chatCtrl.selectedImage ??
-                              eImageAssets.background1),
+                          image: AssetImage(appCtrl.isTheme ? chatCtrl.selectedImage["darkImage"] : chatCtrl.selectedImage["image"]),
                           fit: BoxFit.fill)),
                 ),
               )),

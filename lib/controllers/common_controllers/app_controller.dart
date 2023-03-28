@@ -28,6 +28,7 @@ class AppController extends GetxController {
   bool isSwitched = false;
   bool isOnboard = false;
   bool isGuestLogin = false;
+  bool isNumber = false;
   dynamic currency;
   dynamic envConfig;
   int characterIndex = 3;
@@ -57,16 +58,6 @@ class AppController extends GetxController {
       dashboardCtrl.onBottomTap(3);
     }else if (data["title"] == "setting") {
       dashboardCtrl.onBottomTap(4);
-    } else if (data["title"] == "language") {
-      Get.toNamed(routeName.selectLanguageScreen, arguments: true);
-    } else {
-      FirebaseAuth.instance.signOut();
-      appCtrl.storage.erase();
-      appCtrl.storage.remove(session.envConfig);
-      appCtrl.storage.remove(session.isGuestLogin);
-      appCtrl.update();
-      Get.forceAppUpdate();
-      Get.offAllNamed(routeName.signInScreen);
     }
     dashboardCtrl.update();
   }

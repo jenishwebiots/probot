@@ -3,7 +3,8 @@ import '../../../../config.dart';
 class CommonContent extends StatelessWidget {
   final String? text;
   final int? index;
-  const CommonContent({Key? key, this.text,this.index}) : super(key: key);
+  final Widget? time;
+  const CommonContent({Key? key, this.text,this.index,this.time}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,17 @@ class CommonContent extends StatelessWidget {
         decoration: BoxDecoration(
             color: appCtrl.appTheme.primary,
             borderRadius: BorderRadius.circular(AppRadius.r6)),
-        child: Text(
-          text!,
-          style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.sameWhite),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              text!,
+              style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.sameWhite),
+            ),
+            const VSpace(Sizes.s10),
+            time!
+          ],
         ),
       ).inkWell(
           onTap: () {

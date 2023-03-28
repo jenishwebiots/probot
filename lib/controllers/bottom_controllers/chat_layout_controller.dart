@@ -29,7 +29,7 @@ class ChatLayoutController extends GetxController with GetSingleTickerProviderSt
   int receiverCount = 0;
   int lastIndex = 0;
   int receiverLastIndex = 0;
-  String? selectedImage;
+  dynamic selectedImage;
   SpeechToText speech = SpeechToText();
   Rx<List<ChatMessage>> messages = Rx<List<ChatMessage>>([]);
   Rx<bool> isLoading = Rx<bool>(false);
@@ -62,7 +62,7 @@ class ChatLayoutController extends GetxController with GetSingleTickerProviderSt
     data = appCtrl.storage.read(session.selectedCharacter);
     backgroundList = appArray.backgroundList;
     selectedImage =
-        appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
+        appCtrl.storage.read("backgroundImage") ;
 speech = SpeechToText();
     update();
     log("chatList : $data");

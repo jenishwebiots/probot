@@ -267,6 +267,14 @@ class AppFonts {
   String yourImageGenerator = "yourImageGenerator";
   String yourContentWriting = "yourContentWriting";
 
+  String otpVerification = "OTP Verification";
+  String weHaveSentTheCode = "We have sent the code verification to your mobile number";
+  String verifyProceed = "Verify & proceed";
+  String dontReciveOtp = "Don’t receive OTP code ? ";
+  String resendIt = "Resend it";
+  String enterValidNumber = "Enter Valid Number";
+  String selectCountry = "Select Country";
+
   String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
 
 }

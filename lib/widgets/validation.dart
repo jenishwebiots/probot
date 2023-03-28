@@ -42,6 +42,21 @@ class Validation {
     if (phone.isEmpty) {
       return appFonts.pleaseEnterValue.tr;
     }
+    if(!regex.hasMatch(phone)) {
+      return appFonts.enterValidNumber;
+    }
+
+    return null;
+  }
+
+  // Otp Validation
+  otpValidation (value) {
+    if (value!.isEmpty) {
+      return ("Enter otp ");
+    }
+    if (!regex.hasMatch(value)) {
+      return ("Enter valid otp");
+    }
     return null;
   }
 

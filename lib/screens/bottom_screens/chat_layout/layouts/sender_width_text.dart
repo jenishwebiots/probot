@@ -3,8 +3,9 @@ import '../../../../config.dart';
 class SenderWidthText extends StatelessWidget {
   final String? text;
   final int? index;
+  final Widget? time;
 
-  const SenderWidthText({Key? key, this.text, this.index}) : super(key: key);
+  const SenderWidthText({Key? key, this.text, this.index,this.time}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +17,20 @@ class SenderWidthText extends StatelessWidget {
         decoration: BoxDecoration(
             color: appCtrl.appTheme.boxBg,
             borderRadius: BorderRadius.circular(AppRadius.r6)),
-        child: Text(
-          text!,
-          overflow: TextOverflow.clip,
-          style: AppCss.outfitMedium14
-              .textColor(appCtrl.appTheme.txt)
-              .textHeight(1.2),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              text!,
+              overflow: TextOverflow.clip,
+              style: AppCss.outfitMedium14
+                  .textColor(appCtrl.appTheme.txt)
+                  .textHeight(1.2),
+            ),
+            const VSpace(Sizes.s10),
+            time!
+          ],
         ),
       ).inkWell(onTap: () {
         if (chatCtrl.isLongPress) {
