@@ -4,6 +4,7 @@ import 'common/app_array.dart';
 import 'common/app_fonts.dart';
 import 'common/session.dart';
 import 'controllers/common_controllers/app_controller.dart';
+import 'controllers/common_controllers/in_app_controller.dart';
 export '../controllers/index.dart';
 
 export 'package:flutter/material.dart';
@@ -58,6 +59,9 @@ export '../widgets/scaffold_messenger.dart';
 final appCtrl = Get.isRegistered<AppController>()
     ? Get.find<AppController>()
     : Get.put(AppController());
+final inAppCtrl = Get.isRegistered<InAppController>()
+    ? Get.find<InAppController>()
+    : Get.put(InAppController());
 
 AppFonts appFonts = AppFonts();
 AppArray appArray = AppArray();

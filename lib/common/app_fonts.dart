@@ -267,6 +267,9 @@ class AppFonts {
   String yourImageGenerator = "yourImageGenerator";
   String yourContentWriting = "yourContentWriting";
 
+
+  String inApp = "inApp";
+
   String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
 
 }
