@@ -278,7 +278,7 @@ class AppArray {
   //setting list
   var settingList = [
     {"icon": eSvgAssets.profile, "title": "myAccount"},
-    {"icon": eSvgAssets.chat,"title": "selectCharacter" },
+    {"icon": eSvgAssets.chat, "title": "selectCharacter"},
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
@@ -298,18 +298,21 @@ class AppArray {
   ];
 
   // notification list
-var notificationList = [
-  {
-    "title": appFonts.newMessage,
-    "value": true,
-  },{
-    "title": appFonts.newUpdates,
-    "value": false,
-  },{
-    "title": appFonts.passwordChange,
-    "value": true,
-  },
-];
+  var notificationList = [
+    {
+      "title": appFonts.newMessage,
+      "value": true,
+    },
+    {
+      "title": appFonts.newUpdates,
+      "value": false,
+    },
+    {
+      "title": appFonts.passwordChange,
+      "value": true,
+    },
+  ];
+
   //subscription plan
   var subscriptionPlan = [
     {
@@ -395,17 +398,16 @@ var notificationList = [
   ];
 
   // payment method
-var paymentMethodList = [
-  {
-    "icon": eImageAssets.paypal,
-    "title": appFonts.payPal.tr,
-  },
-  {
-    "icon": eImageAssets.stripe,
-    "title": appFonts.stripe.tr,
-  },{
-    "icon": eImageAssets.razor,
-    "title": appFonts.razor.tr
-  },
-];
+  var paymentMethodList = [
+    {
+      "icon": eImageAssets.paypal,
+      "title": appFonts.payPal.tr,
+    },
+    {
+      "icon": eImageAssets.stripe,
+      "title": appFonts.stripe.tr,
+    },
+    {"icon": eImageAssets.razor, "title": appFonts.razor.tr},
+    {"icon": eImageAssets.inApp, "title": appFonts.inApp},
+  ];
 }
