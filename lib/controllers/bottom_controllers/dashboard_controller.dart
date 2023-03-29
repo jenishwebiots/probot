@@ -29,7 +29,6 @@ class DashboardController extends GetxController
 
   @override
   void onReady() async {
-    // TODO: implement onReady
     con = TabController(vsync: this, length: 5, initialIndex: 0)
       ..addListener(listener);
     animationControllers = List.generate(5, (i) {
@@ -91,6 +90,11 @@ class DashboardController extends GetxController
         return SlideTransition(position: animation.drive(tween), child: child);
       },
     );
+  }
+
+  onSelectedIndex (index) {
+    selectedIndex = index;
+    update();
   }
 
   @override

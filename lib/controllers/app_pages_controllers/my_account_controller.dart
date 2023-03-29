@@ -14,7 +14,7 @@ class MyAccountController extends GetxController {
   void onReady() {
     numberController.text = appCtrl.storage.read("number");
     number = numberController.text;
-    emailController.text = (appCtrl.storage.read("userName"))!;
+    emailController.text = appCtrl.storage.read("userName") ;
     userName = emailController.text;
     firstNameController.text = appCtrl.storage.read("name") ??"";
     name = firstNameController.text;

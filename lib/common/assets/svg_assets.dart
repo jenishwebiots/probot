@@ -70,6 +70,7 @@ class SvgAssets {
   final String play = "assets/svg/play.svg";
   final String selectCharacter = "assets/svg/selectCharacter.svg";
   final String chatHistory = "assets/svg/chatHistory.svg";
+  final String tick = "assets/svg/tick.svg";
 
 
 

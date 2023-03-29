@@ -1,6 +1,7 @@
 import 'package:probot/utils/general_utils.dart';
 import '../../../../../config.dart';
 import 'layouts/bottom_layout.dart';
+import 'layouts/drawer_list_common.dart';
 
 class CommonDrawer extends StatelessWidget {
   const CommonDrawer({Key? key}) : super(key: key);
@@ -47,33 +48,21 @@ class CommonDrawer extends StatelessWidget {
               ...homeCtrl.drawerList
                   .asMap()
                   .entries
-                  .map((e) => e.value["title"] == "logout"
-                      ? appCtrl.isGuestLogin
-                          ? Container()
-                          : ListTile(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: Insets.i20, vertical: Insets.i5),
-                              horizontalTitleGap: 0,
-                              minVerticalPadding: 0,
-                              onTap: () => appCtrl.onDrawerTap(e.key,e.value),
-                              leading: SvgPicture.asset(e.value["icon"],
-                                  colorFilter: ColorFilter.mode(
-                                      appCtrl.appTheme.txt, BlendMode.srcIn)),
-                              title: Text(trans(e.value["title"]),
-                                  style: AppCss.outfitRegular16
-                                      .textColor(appCtrl.appTheme.txt)))
-                      : ListTile(
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: Insets.i20, vertical: Insets.i5),
-                          horizontalTitleGap: 0,
-                          minVerticalPadding: 0,
-                          onTap: () => appCtrl.onDrawerTap(e.key,e.value),
-                          leading: SvgPicture.asset(e.value["icon"],
-                              colorFilter: ColorFilter.mode(
-                                  appCtrl.appTheme.txt, BlendMode.srcIn)),
-                          title: Text(trans(e.value["title"]),
-                              style: AppCss.outfitRegular16
-                                  .textColor(appCtrl.appTheme.txt))))
+                  .map((e) => e.value["title"] == "chatBot"
+                      ? appCtrl.firebaseConfigModel!.isChatShow!
+                          ? DrawerListCommon(data: e.value, index: e.key)
+                          : Container()
+                      : e.value["title"] == "option2"
+                          ? appCtrl.firebaseConfigModel!.isImageGeneratorShow!
+                              ? DrawerListCommon(data: e.value, index: e.key)
+                              : Container()
+                          : e.value["title"] == "option3"
+                              ? appCtrl.firebaseConfigModel!
+                                      .isImageGeneratorShow!
+                                  ? DrawerListCommon(
+                                      data: e.value, index: e.key)
+                                  : Container()
+                              : DrawerListCommon(data: e.value, index: e.key))
                   .toList()
             ]).paddingSymmetric(vertical: Insets.i30),
             const BottomLayout()

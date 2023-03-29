@@ -407,4 +407,37 @@ var paymentMethodList = [
     "title": appFonts.razor.tr
   },
 ];
+
+// chat history
+var chatHistoryList = [
+  {
+    "icon": eImageAssets.sc1,
+    "title": appFonts.whatIsApp,
+    "subtitle": appFonts.min2,
+  },{
+    "icon": eImageAssets.sc2,
+    "title": appFonts.howToMake,
+    "subtitle": appFonts.min50,
+  },{
+    "icon": eImageAssets.sc3,
+    "title": appFonts.whatIsTheNext,
+    "subtitle": appFonts.yesterday,
+  },{
+    "icon": eImageAssets.sc4,
+    "title": appFonts.whoIsShahRukh,
+    "subtitle": appFonts.march26,
+  },{
+    "icon": eImageAssets.sc5,
+    "title": appFonts.howTolLearn,
+    "subtitle": appFonts.march25,
+  },{
+    "icon": eImageAssets.sc6,
+    "title": appFonts.isACourse,
+    "subtitle": appFonts.march24,
+  },{
+    "icon": eImageAssets.sc7,
+    "title": appFonts.whatIsFull,
+    "subtitle": appFonts.march23,
+  },
+];
 }

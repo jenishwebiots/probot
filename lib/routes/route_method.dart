@@ -1,5 +1,3 @@
-
-
 import '../config.dart';
 
 RouteName _routeName = RouteName();
@@ -42,8 +40,7 @@ class AppRoute {
         name: _routeName.privacyPolicyScreen,
         page: () => PrivacyPolicyScreen()),
     GetPage(name: _routeName.subscriptionPlanList, page: () => Subscription()),
-    GetPage(
-        name: _routeName.subscriptionPlan,
-        page: () => const SubscriptionPlan()),
+    GetPage(name: _routeName.subscriptionPlan, page: () => const SubscriptionPlan()),
+    GetPage(name: _routeName.chatHistory, page: () => ChatHistoryScreen()),
   ];
 }
