@@ -6,6 +6,8 @@ import 'package:probot/config.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../consumable_store.dart';
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';// import for SKPaymentQueueDelegateWrapper
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 
 final bool kAutoConsume = Platform.isIOS || true;
@@ -68,6 +70,12 @@ class InAppController extends GetxController{
       loading = false;
       update();
       return;
+    }
+
+    if (Platform.isIOS) {
+      var iosPlatformAddition = inAppPurchase
+          .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
     }
 
     /* if (Platform.isIOS) {
@@ -202,4 +210,18 @@ class InAppController extends GetxController{
     super.dispose();
   }
 
+}
+
+
+class ExamplePaymentQueueDelegate implements SKPaymentQueueDelegateWrapper {
+  @override
+  bool shouldContinueTransaction(
+      SKPaymentTransactionWrapper transaction, SKStorefrontWrapper storefront) {
+    return true;
+  }
+
+  @override
+  bool shouldShowPriceConsent() {
+    return false;
+  }
 }

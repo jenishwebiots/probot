@@ -102,8 +102,7 @@ class PaymentList extends StatelessWidget {
                                   } else if (subscribeCtrl.selectIndexPayment ==
                                       3) {
                                     log("DATA : ${inAppCtrl.products[0].price} - ${inAppCtrl.products[0].title}");
-                                    log("DATA : ${inAppCtrl.products[1].price} - ${inAppCtrl.products[1].title}");
-                                    log("DATA : ${inAppCtrl.products[2].price} - ${inAppCtrl.products[2].title}");
+
                                     late PurchaseParam purchaseParam;
                                     final Map<String, PurchaseDetails>
                                         purchases = Map<String,
@@ -154,6 +153,8 @@ class PaymentList extends StatelessWidget {
                                               : subscribe!.type == "monthly"
                                               ? inAppCtrl.products[0]
                                               : inAppCtrl.products[2]);
+
+                                      log("IOS : $purchaseParam");
                                     }
 
                                     String id = subscribe!.type == "weekly"
