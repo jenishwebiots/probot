@@ -42,7 +42,6 @@ class PaymentList extends StatelessWidget {
                     : Column(
                         children:
                             appArray.paymentMethodList.asMap().entries.map((e) {
-                        log("paypal: ${e.value["title"]}");
                         return e.value["title"] == "payPal"
                             ? appCtrl.firebaseConfigModel!.isPaypal!
                                 ? PaymentMethodList(index: e.key, data: e.value)
@@ -101,7 +100,7 @@ class PaymentList extends StatelessWidget {
                                     Get.back();
                                   } else if (subscribeCtrl.selectIndexPayment ==
                                       3) {
-                                    log("DATA : ${inAppCtrl.products[0].price} - ${inAppCtrl.products[0].title}");
+                                    log("DATA : ${inAppCtrl.products}");
 
                                     late PurchaseParam purchaseParam;
                                     final Map<String, PurchaseDetails>
