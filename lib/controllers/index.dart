@@ -22,4 +22,5 @@ export 'app_pages_controllers/my_account_controller.dart';
 export 'app_pages_controllers/add_fingerprint_controller.dart';
 
 export 'app_pages_controllers/subscription_controller.dart';
+export 'app_pages_controllers/chat_history_controller.dart';
 

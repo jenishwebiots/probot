@@ -267,6 +267,32 @@ class AppFonts {
   String yourImageGenerator = "yourImageGenerator";
   String yourContentWriting = "yourContentWriting";
 
+  String otpVerification = "OTP Verification";
+  String weHaveSentTheCode = "We have sent the code verification to your mobile number";
+  String verifyProceed = "Verify & proceed";
+  String dontReciveOtp = "Don’t receive OTP code ? ";
+  String resendIt = "Resend it";
+  String enterValidNumber = "Enter Valid Number";
+  String selectCountry = "Select Country";
+  String chatHistory = "Chat History";
+  String whatIsApp = "What is app development ?";
+  String min2 = "2 min ago";
+  String howToMake = "How to make pasta ?";
+  String min50 = "50 min ago";
+  String whatIsTheNext = "What is the next move of Indian army ?";
+  String yesterday = "Yesterday";
+  String whoIsShahRukh = "Who is shah rukh khan ?";
+  String march26 = "26 March, 2023";
+  String howTolLearn = "How to learn English ?";
+  String march25 = "25 March, 2023";
+  String isACourse = "Is a course in design required to become...";
+  String march24 = "24 March, 2023";
+  String whatIsFull = "What is full form of SGPA ?";
+  String march23 = "23 March, 2023";
+  String successfullyClear = "Successfully Clear";
+  String yourChatHistory = "Your chat history has been successfully cleared.";
+  String selectAll = "Select all";
+  String clearAll = "Clear all";
 
   String inApp = "inApp";
 

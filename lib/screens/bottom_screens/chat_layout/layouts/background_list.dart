@@ -9,7 +9,7 @@ class BackgroundList extends StatelessWidget {
       return Scaffold(
         backgroundColor: appCtrl.appTheme.white,
         appBar: AppAppBarCommon(
-            title: "Default Wallpaper", actionIcon: eSvgAssets.delete),
+            title: "Default Wallpaper",isAction: false,leadingOnTap: ()=> Get.back()),
         body: GridView.builder(
           shrinkWrap: true,
           padding: const EdgeInsets.all(Insets.i20),
@@ -21,11 +21,11 @@ class BackgroundList extends StatelessWidget {
               crossAxisCount: 2),
           itemBuilder: (context, index) {
             return Image.asset(
-              chatCtrl.backgroundList[index]["image"],
+             appCtrl.isTheme ? chatCtrl.backgroundList[index]["darkImage"] : chatCtrl.backgroundList[index]["image"],
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.fill,
               height: Sizes.s216,
-            ).clipRRect(all: AppRadius.r10).inkWell(onTap: ()=> Get.back(result: chatCtrl.backgroundList[index]["image"]));
+            ).clipRRect(all: AppRadius.r10).inkWell(onTap: ()=> Get.back(result: chatCtrl.backgroundList[index]));
           },
         ),
       );

@@ -2,7 +2,8 @@ import '../../../../config.dart';
 
 class ReceiverContent extends StatelessWidget {
   final String? text;
-  const ReceiverContent({Key? key,this.text}) : super(key: key);
+  final Widget? row;
+  const ReceiverContent({Key? key,this.text,this.row}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,17 @@ class ReceiverContent extends StatelessWidget {
             ],
             borderRadius:
             BorderRadius.circular(AppRadius.r6)),
-        child: Text(
-          text!,
-          overflow: TextOverflow.clip,
-          style: AppCss.outfitLight12
-              .textColor(appCtrl.appTheme.txt)
-              .textHeight(1.2),
+        child: Column(
+          children: [
+            Text(
+              text!,
+              overflow: TextOverflow.clip,
+              style: AppCss.outfitLight12
+                  .textColor(appCtrl.appTheme.txt)
+                  .textHeight(1.2),
+            ),
+            row!
+          ],
         ));
   }
 }

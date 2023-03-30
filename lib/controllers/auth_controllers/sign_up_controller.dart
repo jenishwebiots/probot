@@ -31,6 +31,7 @@ class SignUpController extends GetxController {
   signUpMethod() async {
     if (signUpGlobalKey.currentState!.validate()) {
       isLoading = true;
+      update();
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text.toString(),
@@ -47,10 +48,12 @@ class SignUpController extends GetxController {
       } on FirebaseAuthException catch (e) {
         if (e.code == "email-already-in-use") {
           isLoading = false;
+          update();
           snackBarMessengers(message: appFonts.emailAlreadyUse);
         }
       } catch (e) {
         isLoading = false;
+        update();
         snackBarMessengers(message: appFonts.unknownError);
         Get.offAllNamed(routeName.signInScreen);
       }

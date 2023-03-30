@@ -22,11 +22,14 @@ class MoreOption extends StatelessWidget {
             } else if (result == 1) {
             } else if (result == 2) {
               Get.toNamed(routeName.backgroundList)!.then((value) {
-                chatCtrl.selectedImage = value;
-                appCtrl.storage.write("backgroundImage", value);
-                chatCtrl.update();
-                log("chatCtrl.selectedImage : ${chatCtrl.selectedImage}");
-                Get.forceAppUpdate();
+                if(value != null) {
+                  chatCtrl.selectedImage = value;
+                  appCtrl.storage.write("backgroundImage", value);
+                  chatCtrl.update();
+                  log("chatCtrl.selectedImage : ${chatCtrl.selectedImage}");
+                  Get.forceAppUpdate();
+                }
+
               });
             } else {
               chatCtrl.messages.value = [];

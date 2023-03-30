@@ -110,11 +110,10 @@ class AppArray {
   //drawer list
   var drawerList = [
     {"title": "chatBot", "icon": eSvgAssets.chat},
+    {"title": "chatHistory", "icon": eSvgAssets.chatHistory},
     {"title": "option2", "icon": eSvgAssets.gallery},
     {"title": "option3", "icon": eSvgAssets.content},
     {"title": "setting", "icon": eSvgAssets.setting},
-    {"title": "language", "icon": eSvgAssets.translate},
-    {"title": "logout", "icon": eSvgAssets.logout},
   ];
 
   //chat list
@@ -267,18 +266,18 @@ class AppArray {
 
   //background list
   var backgroundList = [
-    {"image": eImageAssets.background1},
-    {"image": eImageAssets.background2},
-    {"image": eImageAssets.background3},
-    {"image": eImageAssets.background4},
-    {"image": eImageAssets.background5},
-    {"image": eImageAssets.background6}
+    {"image": eImageAssets.background1,"darkImage": eImageAssets.dBg1},
+    {"image": eImageAssets.background2,"darkImage": eImageAssets.dBg2},
+    {"image": eImageAssets.background3,"darkImage": eImageAssets.dBg3},
+    {"image": eImageAssets.background4,"darkImage": eImageAssets.dBg4},
+    {"image": eImageAssets.background5,"darkImage": eImageAssets.dBg5},
+    {"image": eImageAssets.background6,"darkImage": eImageAssets.dBg6}
   ];
 
   //setting list
   var settingList = [
     {"icon": eSvgAssets.profile, "title": "myAccount"},
-    {"icon": eSvgAssets.chat, "title": "selectCharacter"},
+    {"icon": eSvgAssets.selectCharacter,"title": "selectCharacter" },
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
@@ -397,7 +396,40 @@ class AppArray {
     },
   ];
 
-  // payment method
+
+
+// chat history
+var chatHistoryList = [
+  {
+    "icon": eImageAssets.sc1,
+    "title": appFonts.whatIsApp,
+    "subtitle": appFonts.min2,
+  },{
+    "icon": eImageAssets.sc2,
+    "title": appFonts.howToMake,
+    "subtitle": appFonts.min50,
+  },{
+    "icon": eImageAssets.sc3,
+    "title": appFonts.whatIsTheNext,
+    "subtitle": appFonts.yesterday,
+  },{
+    "icon": eImageAssets.sc4,
+    "title": appFonts.whoIsShahRukh,
+    "subtitle": appFonts.march26,
+  },{
+    "icon": eImageAssets.sc5,
+    "title": appFonts.howTolLearn,
+    "subtitle": appFonts.march25,
+  },{
+    "icon": eImageAssets.sc6,
+    "title": appFonts.isACourse,
+    "subtitle": appFonts.march24,
+  },{
+    "icon": eImageAssets.sc7,
+    "title": appFonts.whatIsFull,
+    "subtitle": appFonts.march23,
+  },
+];
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,

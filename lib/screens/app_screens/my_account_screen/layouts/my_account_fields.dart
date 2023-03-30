@@ -23,7 +23,7 @@ class MyAccountFields extends StatelessWidget {
             const VSpace(Sizes.s10),
             TextFieldCommon(
                 validator: (name) => Validation().emailValidation(name),
-                controller: myAccountCtrl.lastNameController,
+                controller: myAccountCtrl.numberController,
                 hintText: appFonts.enterLastName.tr),
             const VSpace(Sizes.s15),
             Text(appFonts.email.tr,

@@ -51,36 +51,69 @@ class Receiver extends StatelessWidget {
                                   children: [
                                     chatListModel!.text!.length > 40
                                         ? ReceiverWidthText(
-                                            text: chatListModel!.text!)
-                                        : ReceiverContent(
-                                            text: chatListModel!.text!),
-                                    const HSpace(Sizes.s5),
-                                    SvgPicture.asset(eSvgAssets.volume).inkWell(
-                                        onTap: () {
-                                      String code = appCtrl.languageVal == "en"
-                                          ? "US"
-                                          : appCtrl.languageVal == "fr"
-                                              ? "CA"
-                                              : appCtrl.languageVal == "ge"
+                                            text: chatListModel!.text!,row: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ChatCommonWidget().timeTextLayout(
+                                            chatListModel!.time!.toString()),
+                                        SvgPicture.asset(eSvgAssets.volume).inkWell(
+                                            onTap: () {
+                                              String code = appCtrl.languageVal == "en"
+                                                  ? "US"
+                                                  : appCtrl.languageVal == "fr"
+                                                  ? "CA"
+                                                  : appCtrl.languageVal == "ge"
                                                   ? "GE"
                                                   : appCtrl.languageVal == "hi"
-                                                      ? "IN"
-                                                      : appCtrl.languageVal ==
-                                                              "it"
-                                                          ? "IT"
-                                                          : appCtrl.languageVal ==
-                                                                  "ja"
-                                                              ? "JP"
-                                                              : "US";
-                                      chatCtrl.speechMethod(
-                                          chatListModel!.text!,
-                                          '${appCtrl.languageVal}-$code');
-                                    })
+                                                  ? "IN"
+                                                  : appCtrl.languageVal ==
+                                                  "it"
+                                                  ? "IT"
+                                                  : appCtrl.languageVal ==
+                                                  "ja"
+                                                  ? "JP"
+                                                  : "US";
+                                              chatCtrl.speechMethod(
+                                                  chatListModel!.text!,
+                                                  '${appCtrl.languageVal}-$code');
+                                            })
+                                      ],
+                                    ),)
+                                        : ReceiverContent(
+                                            text: chatListModel!.text!,row: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ChatCommonWidget().timeTextLayout(
+                                            chatListModel!.time!.toString()),
+                                        SvgPicture.asset(eSvgAssets.volume).inkWell(
+                                            onTap: () {
+                                              String code = appCtrl.languageVal == "en"
+                                                  ? "US"
+                                                  : appCtrl.languageVal == "fr"
+                                                  ? "CA"
+                                                  : appCtrl.languageVal == "ge"
+                                                  ? "GE"
+                                                  : appCtrl.languageVal == "hi"
+                                                  ? "IN"
+                                                  : appCtrl.languageVal ==
+                                                  "it"
+                                                  ? "IT"
+                                                  : appCtrl.languageVal ==
+                                                  "ja"
+                                                  ? "JP"
+                                                  : "US";
+                                              chatCtrl.speechMethod(
+                                                  chatListModel!.text!,
+                                                  '${appCtrl.languageVal}-$code');
+                                            })
+                                      ],
+                                    ),),
+                                    const HSpace(Sizes.s5),
+
                                   ],
                                 ),
                                 const VSpace(Sizes.s3),
-                                ChatCommonWidget().timeTextLayout(
-                                    chatListModel!.time!.toString())
+
                               ]).inkWell(onTap: () {
                             if (chatCtrl.isLongPress) {
                               if (!chatCtrl.selectedIndex.contains(index)) {

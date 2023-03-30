@@ -75,6 +75,7 @@ class AppCss {
   static TextStyle get outfitRegular18 => outfit.regular.size(FontSizes.f18);
   static TextStyle get outfitRegular16 => outfit.regular.size(FontSizes.f16);
   static TextStyle get outfitRegular14 => outfit.regular.size(FontSizes.f14);
+  static TextStyle get outfitRegular13 => outfit.regular.size(FontSizes.f13);
   static TextStyle get outfitRegular12 => outfit.regular.size(FontSizes.f12);
   static TextStyle get outfitRegular11 => outfit.regular.size(FontSizes.f11);
 
