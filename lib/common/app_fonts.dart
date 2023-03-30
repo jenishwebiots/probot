@@ -294,6 +294,8 @@ class AppFonts {
   String selectAll = "Select all";
   String clearAll = "Clear all";
 
+  String inApp = "inApp";
+
   String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
 
 }

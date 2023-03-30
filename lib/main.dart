@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:probot/controllers/common_controllers/in_app_controller.dart';
 import 'common/languages/index.dart';
 
 
@@ -16,7 +17,7 @@ void main() async {
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
- //Get.put(AppController());
+ Get.put(InAppController());
   runApp(const MyApp());
 }
 

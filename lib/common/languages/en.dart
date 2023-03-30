@@ -341,4 +341,6 @@ final dynamic en = {
   'yourChatHistory': "Your chat history has been successfully cleared.",
   'selectAll': "Select all",
   'clearAll': "Clear all",
+
+  'inApp': "In-App Purchase",
 };

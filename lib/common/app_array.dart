@@ -297,18 +297,21 @@ class AppArray {
   ];
 
   // notification list
-var notificationList = [
-  {
-    "title": appFonts.newMessage,
-    "value": true,
-  },{
-    "title": appFonts.newUpdates,
-    "value": false,
-  },{
-    "title": appFonts.passwordChange,
-    "value": true,
-  },
-];
+  var notificationList = [
+    {
+      "title": appFonts.newMessage,
+      "value": true,
+    },
+    {
+      "title": appFonts.newUpdates,
+      "value": false,
+    },
+    {
+      "title": appFonts.passwordChange,
+      "value": true,
+    },
+  ];
+
   //subscription plan
   var subscriptionPlan = [
     {
@@ -393,20 +396,7 @@ var notificationList = [
     },
   ];
 
-  // payment method
-var paymentMethodList = [
-  {
-    "icon": eImageAssets.paypal,
-    "title": appFonts.payPal.tr,
-  },
-  {
-    "icon": eImageAssets.stripe,
-    "title": appFonts.stripe.tr,
-  },{
-    "icon": eImageAssets.razor,
-    "title": appFonts.razor.tr
-  },
-];
+
 
 // chat history
 var chatHistoryList = [
@@ -440,4 +430,16 @@ var chatHistoryList = [
     "subtitle": appFonts.march23,
   },
 ];
+  var paymentMethodList = [
+    {
+      "icon": eImageAssets.paypal,
+      "title": appFonts.payPal.tr,
+    },
+    {
+      "icon": eImageAssets.stripe,
+      "title": appFonts.stripe.tr,
+    },
+    {"icon": eImageAssets.razor, "title": appFonts.razor.tr},
+    {"icon": eImageAssets.inApp, "title": appFonts.inApp},
+  ];
 }

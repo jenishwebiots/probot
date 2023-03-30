@@ -33,9 +33,9 @@ class ImageGeneratorController extends GetxController {
     log("imageText: $imageText");
     try {
       int imageCount = int.parse(appCtrl.envConfig["imageCount"].toString());
-      if(imageCount == 0){
+      if (imageCount == 0) {
         Get.snackbar(appFonts.attention.tr, appFonts.yourImageGenerator.tr);
-      }else {
+      } else {
         imageCount = imageCount - 1;
         Get.snackbar(appFonts.generated.tr, appFonts.pleaseWaitFor.tr);
         appCtrl.envConfig["imageCount"] = imageCount.toString();
@@ -46,7 +46,8 @@ class ImageGeneratorController extends GetxController {
           url,
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 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',
+            'Authorization':
+                'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
           },
           body: jsonEncode(
             {
@@ -66,10 +67,10 @@ class ImageGeneratorController extends GetxController {
           debugPrint(jsonDecode(request.body));
         }
         if (appCtrl.envConfig["imageCount"] != "unlimited") {
-          final subscribeCtrl = Get.isRegistered<
-              SubscriptionFirebaseController>()
-              ? Get.find<SubscriptionFirebaseController>()
-              : Get.put(SubscriptionFirebaseController());
+          final subscribeCtrl =
+              Get.isRegistered<SubscriptionFirebaseController>()
+                  ? Get.find<SubscriptionFirebaseController>()
+                  : Get.put(SubscriptionFirebaseController());
           await subscribeCtrl.addUpdateFirebaseData();
         }
       }

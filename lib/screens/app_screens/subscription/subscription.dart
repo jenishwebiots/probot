@@ -40,7 +40,6 @@ class Subscription extends StatelessWidget {
                         log("has : ${snapshot.data!.docs}");
                         return Column(children: [
                           ...snapshot.data!.docs.asMap().entries.map((e) {
-                            log("subscribe 1: ${e.value.data()}");
                             SubscribeModel subscribe =
                                 SubscribeModel.fromJson(e.value.data());
 
