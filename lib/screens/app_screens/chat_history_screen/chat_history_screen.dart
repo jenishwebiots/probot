@@ -44,7 +44,6 @@ class ChatHistoryScreen extends StatelessWidget {
               },onTap: () {
                     log("message");
                 if (chatHistoryCtrl.isLongPress) {
-                  print("object ${chatHistoryCtrl.isLongPress}");
                   if (!chatHistoryCtrl.selectedIndex.contains(e.key)) {
                     chatHistoryCtrl.selectedIndex.add(e.key);
                     chatHistoryCtrl.update();

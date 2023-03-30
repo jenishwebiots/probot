@@ -39,7 +39,7 @@ class AlertDialogCommon extends StatelessWidget {
               Column(children: [
                 DottedLines(width: Sizes.s40, color: appCtrl.appTheme.primary),
                 const VSpace(Sizes.s10),
-                Text("$reward${appFonts.rewardLeft}",
+                Text("$reward ${appFonts.rewardLeft.tr}",
                     style: AppCss.outfitblack20
                         .textColor(appCtrl.appTheme.primary))
               ]),

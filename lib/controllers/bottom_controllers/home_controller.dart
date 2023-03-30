@@ -80,7 +80,7 @@ class HomeController extends GetxController {
               reward: appCtrl.envConfig["chatTextCount"].toString(),
               image: eImageAssets.reward,
               bText1: appFonts.watchVideo,
-              title: appFonts.availableBalance,
+              title: appFonts.availableBalance.tr,
               subtext: appFonts.watchTheVideoToWin,
               style:
                   AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),

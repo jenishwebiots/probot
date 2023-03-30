@@ -1,7 +1,4 @@
 import 'dart:math';
-
-import 'package:probot/screens/bottom_screens/dashboard/layouts/tab_layout.dart';
-
 import '../../../../../config.dart';
 import 'dashboard_widget.dart';
 
