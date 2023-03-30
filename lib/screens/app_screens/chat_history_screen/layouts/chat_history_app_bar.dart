@@ -2,8 +2,8 @@ import '../../../../config.dart';
 
 class ChatHistoryAppBar extends StatelessWidget with PreferredSizeWidget {
   final List? index;
-  final GestureTapCallback? onDeleteTap;
-  const ChatHistoryAppBar({Key? key,this.index,this.onDeleteTap}) : super(key: key);
+  final GestureTapCallback? onDeleteTap,onMenuTap;
+  const ChatHistoryAppBar({Key? key,this.index,this.onDeleteTap,this.onMenuTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,8 @@ class ChatHistoryAppBar extends StatelessWidget with PreferredSizeWidget {
               SvgPicture.asset(eSvgAssets.search,colorFilter: ColorFilter.mode(appCtrl.appTheme.sameWhite, BlendMode.srcIn),),
               const HSpace(Sizes.s10),
               SvgPicture.asset(eSvgAssets.more,
-                  height: Sizes.s20, fit: BoxFit.fill),
+                  height: Sizes.s20, fit: BoxFit.fill).inkWell(onTap: onMenuTap),
               const HSpace(Sizes.s10),
-              /*const MoreOption()*/
             ]
           )
         ],

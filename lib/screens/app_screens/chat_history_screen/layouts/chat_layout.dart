@@ -22,6 +22,7 @@ class ChatHistoryLayout extends StatelessWidget {
                     Image.asset(data["icon"],
                         height: Sizes.s40, width: Sizes.s40, fit: BoxFit.fill)
                   ])),
+              if(chatHistoryCtrl.selectedIndex.contains(index))
               SvgPicture.asset(eSvgAssets.tick)
             ]),
             const HSpace(Sizes.s10),
@@ -33,7 +34,7 @@ class ChatHistoryLayout extends StatelessWidget {
                         .textColor(appCtrl.appTheme.txt)
                         .textHeight(1.2)),
                 const VSpace(Sizes.s5),
-                Text(data["subtitle"],
+                Text(data["subtitle"].toString().tr,
                     style:
                         AppCss.outfitMedium12.textColor(appCtrl.appTheme.lightText))
               ]),

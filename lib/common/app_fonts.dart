@@ -289,6 +289,10 @@ class AppFonts {
   String march24 = "24 March, 2023";
   String whatIsFull = "What is full form of SGPA ?";
   String march23 = "23 March, 2023";
+  String successfullyClear = "Successfully Clear";
+  String yourChatHistory = "Your chat history has been successfully cleared.";
+  String selectAll = "Select all";
+  String clearAll = "Clear all";
 
   String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
 

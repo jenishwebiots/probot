@@ -15,8 +15,16 @@ class ChatHistoryScreen extends StatelessWidget {
       return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
           appBar:  ChatHistoryAppBar(index: chatHistoryCtrl.selectedIndex,onDeleteTap: () {
-            chatHistoryCtrl.selectedIndex.map((e) => null).toList();
-            chatHistoryCtrl.update();
+
+            /*chatHistoryCtrl.selectedIndex.asMap().entries.forEach((e) {
+              chatHistoryCtrl.chatHistoryLists.removeAt(e.key);
+              chatHistoryCtrl.update();
+            });
+            chatHistoryCtrl.chatHistoryLists.asMap().entries.forEach((e) {
+              chatHistoryCtrl.selectedIndex.removeWhere((element) => element != e.value);
+              chatHistoryCtrl.update();
+            });*/
+
           }),
           body: SingleChildScrollView(
             child: Column(children: [
