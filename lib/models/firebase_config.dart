@@ -15,7 +15,7 @@ class FirebaseConfigModel {
   bool? isChatShow;
   bool? isImageGeneratorShow;
   bool? isTextCompletionShow;
-  bool? isAddShow, isRazorPay, isStripe, isPaypal;
+  bool? isAddShow, isRazorPay, isStripe, isPaypal, isChatHistory;
 
   FirebaseConfigModel(
       {this.bannerAddId,
@@ -37,7 +37,8 @@ class FirebaseConfigModel {
       this.isAddShow,
       this.isPaypal,
       this.isRazorPay,
-      this.isStripe});
+      this.isStripe,
+      this.isChatHistory});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
     bannerAddId = json['bannerAddId'] ?? "";
@@ -54,6 +55,7 @@ class FirebaseConfigModel {
     isChatShow = json['isChatShow'] ?? true;
     isImageGeneratorShow = json['isImageGeneratorShow'] ?? true;
     isTextCompletionShow = json['isTextCompletionShow'] ?? true;
+    isChatHistory = json['isChatHistory'] ?? true;
     isAddShow = json['isAddShow'] ?? true;
     isRazorPay = json['isRazorPay'] ?? true;
     isPaypal = json['isPayPal'] ?? true;
@@ -84,6 +86,7 @@ class FirebaseConfigModel {
     data['rewardAndroidId'] = rewardAndroidId;
     data['razorPayKey'] = razorPayKey;
     data['razorPaySecret'] = razorPaySecret;
+    data['isChatHistory'] = isChatHistory;
     return data;
   }
 }

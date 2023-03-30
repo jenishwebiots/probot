@@ -1,4 +1,5 @@
-import 'package:probot/utils/general_utils.dart';
+import 'dart:developer';
+
 import '../../../../../config.dart';
 import 'layouts/bottom_layout.dart';
 import 'layouts/drawer_list_common.dart';
@@ -9,6 +10,7 @@ class CommonDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (homeCtrl) {
+      log("ISCHAT : ${appCtrl.firebaseConfigModel!.isChatHistory!}");
       return Drawer(
           width: Sizes.s223,
           backgroundColor: appCtrl.appTheme.boxBg,
@@ -45,25 +47,28 @@ class CommonDrawer extends StatelessWidget {
                           borderRadius: BorderRadius.circular(AppRadius.r4))
                       .paddingOnly(left: Insets.i12)
                 ]).inkWell(onTap: () => homeCtrl.onTapWatch()),
-              ...homeCtrl.drawerList
-                  .asMap()
-                  .entries
-                  .map((e) => e.value["title"] == "chatBot"
-                      ? appCtrl.firebaseConfigModel!.isChatShow!
-                          ? DrawerListCommon(data: e.value, index: e.key)
-                          : Container()
-                      : e.value["title"] == "option2"
-                          ? appCtrl.firebaseConfigModel!.isImageGeneratorShow!
-                              ? DrawerListCommon(data: e.value, index: e.key)
-                              : Container()
-                          : e.value["title"] == "option3"
-                              ? appCtrl.firebaseConfigModel!
-                                      .isImageGeneratorShow!
-                                  ? DrawerListCommon(
-                                      data: e.value, index: e.key)
-                                  : Container()
-                              : DrawerListCommon(data: e.value, index: e.key))
-                  .toList()
+              ...homeCtrl.drawerList.asMap().entries.map((e) {
+
+                return e.value["title"] == "chatBot"
+                    ? appCtrl.firebaseConfigModel!.isChatShow!
+                        ? DrawerListCommon(data: e.value, index: e.key)
+                        : Container()
+                    : e.value["title"] == "chatHistory"
+                        ? appCtrl.firebaseConfigModel!.isChatHistory!
+                            ? DrawerListCommon(data: e.value, index: e.key)
+                            : Container()
+                        : e.value["title"] == "option2"
+                            ? appCtrl.firebaseConfigModel!.isImageGeneratorShow!
+                                ? DrawerListCommon(data: e.value, index: e.key)
+                                : Container()
+                            : e.value["title"] == "option3"
+                                ? appCtrl.firebaseConfigModel!
+                                        .isImageGeneratorShow!
+                                    ? DrawerListCommon(
+                                        data: e.value, index: e.key)
+                                    : Container()
+                                : DrawerListCommon(data: e.value, index: e.key);
+              }).toList()
             ]).paddingSymmetric(vertical: Insets.i30),
             const BottomLayout()
           ]));

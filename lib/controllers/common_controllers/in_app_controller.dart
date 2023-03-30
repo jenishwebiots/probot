@@ -15,12 +15,10 @@ final bool kAutoConsume = Platform.isIOS || true;
 const String kConsumableId = 'basic_plan_9';
 const String kUpgradeId = 'advance_plan_19';
 const String kSilverSubscriptionId = 'standard_plan_29';
-const String kGoldSubscriptionId = 'subscription_gold';
 const List<String> _kProductIds = <String>[
   kConsumableId,
    kUpgradeId,
    kSilverSubscriptionId,
-/*  _kGoldSubscriptionId,*/
 ];
 
 class InAppController extends GetxController{
@@ -129,10 +127,7 @@ class InAppController extends GetxController{
     purchasePending = false;
     loading = false;
     update();
-    log("products : $products");
-    log("products : ${products[0].title}");
-    log("products : ${products[1].title}");
-    log("products : ${products[2].title}");
+
     log("consumablesVal : $consumablesVal");
   }
 

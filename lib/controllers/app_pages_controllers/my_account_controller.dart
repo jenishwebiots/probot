@@ -12,7 +12,7 @@ class MyAccountController extends GetxController {
 
   @override
   void onReady() {
-    numberController.text = appCtrl.storage.read("number");
+    numberController.text = appCtrl.storage.read("number") ?? "";
     number = numberController.text;
     emailController.text = appCtrl.storage.read("userName") ;
     userName = emailController.text;

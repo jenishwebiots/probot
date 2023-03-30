@@ -16,7 +16,7 @@ class CommonStream extends StatelessWidget {
           if(snapshot.hasData){
             appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(snapshot.data!.docs[0].data());
             Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
-            appCtrl.storage.write(session.firebaseConfig, appCtrl.firebaseConfigModel);
+            appCtrl.storage.write(session.firebaseConfig, snapshot.data!.docs[0].data());
           }
           return child!;
         }
