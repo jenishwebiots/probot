@@ -23,5 +23,6 @@ class RouteName {
 
   final String subscriptionPlanList = "/subscriptionPlanList";
   final String subscriptionPlan = "/subscriptionPlan";
+  final String inAppList = "/inAppList";
 
 }

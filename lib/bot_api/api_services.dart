@@ -15,7 +15,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}"
+        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",
@@ -39,7 +39,4 @@ class ApiServices {
 
     return newresponse['choices'][0]['message']['content'];
   }
-
-
-
 }
