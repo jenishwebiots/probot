@@ -186,6 +186,7 @@ final dynamic ge = {
   'lastName': "Familienname, Nachname",
   'emailPhone': "E-Mail/Telefon",
   'update': "Aktualisieren",
+  "deleteAccount": "Konto löschen",
   'enterFirstName': "Bitte Vornamen eingeben",
   'enterLastName': "Nachnamen eingeben",
   'enterEmailName': "Geben Sie den E-Mail-Namen ein",

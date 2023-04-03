@@ -188,6 +188,7 @@ final dynamic hi = {
   'lastName': "उपनाम",
   'emailPhone': "ईमेल/फोन",
   'update': "अद्यतन",
+  "deleteAccount": "खाता हटा दो",
   'enterFirstName': "प्रथम नाम दर्ज करें",
   'enterLastName': "अंतिम नाम दर्ज करो",
   'enterEmailName': "ईमेल नाम दर्ज करें",

@@ -83,30 +83,25 @@ class AppFonts {
   String placeYourFinger = "placeYourFinger";
   String pressTheSensor = "pressTheSensor";
   String moveYourFinger = "moveYourFinger";
-  String tryRestingAnother =
-      "tryRestingAnother";
-  String yourFingerprintHasBeen =
-      "yourFingerprintHasBeen";
+  String tryRestingAnother = "tryRestingAnother";
+  String yourFingerprintHasBeen = "yourFingerprintHasBeen";
   String done = "done";
 
   String notification = "notification";
   String hennyHasSent = "hennyHasSent";
-  String yourPasswordHasBeen =
-      "yourPasswordHasBeen";
-  String sophieHasWrite =
-      "sophieHasWrite";
+  String yourPasswordHasBeen = "yourPasswordHasBeen";
+  String sophieHasWrite = "sophieHasWrite";
   String dinoHasSent = "dinoHasSent";
   String marvelHasSent = "marvelHasSent";
-  String kettieHasWrite =
-      "kettieHasWrite";
+  String kettieHasWrite = "kettieHasWrite";
   String kingHasSend = "kingHasSend";
   String justNow = "justNow";
   String am12 = "am12";
   String am11 = "am11";
   String am10 = "am10";
   String am9 = "am9";
-  String youDontHave =
-      "youDontHave";
+  String youDontHave = "youDontHave";
+  String noDataFound = "No History found";
   String refresh = "refresh";
   String whatsapp = "whatsapp";
   String insta = "insta";
@@ -136,8 +131,7 @@ class AppFonts {
   String viewType = "viewType";
   String selectSize = "selectSize";
   String selectType = "selectType";
-  String youHaveNotYet =
-      "youHaveNotYet";
+  String youHaveNotYet = "youHaveNotYet";
   String generateImage = "generateImage";
   String noOfImages = "noOfImages";
   String imageStyle = "imageStyle";
@@ -169,6 +163,7 @@ class AppFonts {
   String lastName = "lastName";
   String emailPhone = "emailPhone";
   String update = "update";
+  String deleteAccount = "deleteAccount";
   String enterFirstName = "enterFirstName";
   String enterLastName = "enterLastName";
   String enterEmailName = "enterEmailName";
@@ -181,14 +176,11 @@ class AppFonts {
   String fingerprintLock = "fingerprintLock";
   String verify = "verify";
   String successfullyVerify = "successfullyVerify";
-  String yourFingerprintHasBeenVerify =
-      "yourFingerprintHasBeenVerify";
+  String yourFingerprintHasBeenVerify = "yourFingerprintHasBeenVerify";
   String fingerprintError = "fingerprintError";
-  String sorryFingerprint =
-      "sorryFingerprint";
+  String sorryFingerprint = "sorryFingerprint";
   String tryAgain = "tryAgain";
-  String deviceNotSupported =
-      "deviceNotSupported";
+  String deviceNotSupported = "deviceNotSupported";
   String youHaveNotVerify = "youHaveNotVerify";
 
   String privacyTerm = "privacyTerm";
@@ -201,8 +193,7 @@ class AppFonts {
   String childrenPrivacy = "childrenPrivacy";
   String linksToOther = "linksToOther";
   String changesToThis = "changesToThis";
-  String thisPrivacyPolicy =
-      "thisPrivacyPolicy";
+  String thisPrivacyPolicy = "thisPrivacyPolicy";
 
   String generateContent = "generateContent";
   String subscriptionPlan = "subscriptionPlan";
@@ -223,8 +214,7 @@ class AppFonts {
   String google = "google";
   String apple = "apple";
 
-
-  String paymentSuccess  = "paymentSuccess";
+  String paymentSuccess = "paymentSuccess";
   String paymentFailed = "paymentFailed";
   String congratulation = "congratulation";
   String oppsDueTo = "oppsDueTo";
@@ -268,7 +258,8 @@ class AppFonts {
   String yourContentWriting = "yourContentWriting";
 
   String otpVerification = "OTP Verification";
-  String weHaveSentTheCode = "We have sent the code verification to your mobile number";
+  String weHaveSentTheCode =
+      "We have sent the code verification to your mobile number";
   String verifyProceed = "Verify & proceed";
   String dontReciveOtp = "Don’t receive OTP code ? ";
   String resendIt = "Resend it";
@@ -296,6 +287,6 @@ class AppFonts {
 
   String inApp = "inApp";
 
-  String thereAreAwardLeft(val) => "thereAreAwardLeft".trParams({'awardLeft':val});
-
+  String thereAreAwardLeft(val) =>
+      "thereAreAwardLeft".trParams({'awardLeft': val});
 }

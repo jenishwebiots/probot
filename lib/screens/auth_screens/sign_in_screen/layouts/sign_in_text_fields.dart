@@ -65,26 +65,24 @@ class SignInTextField extends StatelessWidget {
                   ])).inkWell(onTap: () => Get.to(const SignUpScreen()))
             ]),
         const OrLayout().alignment(Alignment.center),
-
-             Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CommonSocialLogin(
-                      image: eSvgAssets.google,
-                      name: appFonts.google,
-                      onTap: () => signInCtrl.signInWithGoogle()),
-                  CommonSocialLogin(
-                      image: eSvgAssets.mobile,
-                      name: appFonts.phone  ,
-                      onTap: () => Get.toNamed(routeName.mobileLogin)),
-                  if(Platform.isIOS)
-                  CommonSocialLogin(
-                      image: eSvgAssets.apple,
-                      name: appFonts.apple,
-                      onTap: () => signInCtrl.signInWithApple()),
-                ],
-              )
-
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CommonSocialLogin(
+                image: eSvgAssets.google,
+                name: appFonts.google,
+                onTap: () => signInCtrl.signInWithGoogle()),
+            CommonSocialLogin(
+                image: eSvgAssets.mobile,
+                name: appFonts.phone,
+                onTap: () => Get.toNamed(routeName.mobileLogin)),
+            if (Platform.isIOS)
+              CommonSocialLogin(
+                  image: eSvgAssets.apple,
+                  name: appFonts.apple,
+                  onTap: () => signInCtrl.signInWithApple()),
+          ],
+        )
       ])
           .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
           .authBoxExtension();

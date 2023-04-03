@@ -187,6 +187,7 @@ final dynamic en = {
   'lastName': "Last name",
   'emailPhone': "Email/phone",
   'update': "Update",
+  "deleteAccount": "Delete Account",
   'enterFirstName': "Enter First Name",
   'enterLastName': "Enter Last Name",
   'enterEmailName': "Enter Email Name",
@@ -316,7 +317,8 @@ final dynamic en = {
   'yourContentWriting': "Your content writing balance is over",
 
   'otpVerification': "OTP Verification",
-  'weHaveSentTheCode': "We have sent the code verification to your mobile number",
+  'weHaveSentTheCode':
+      "We have sent the code verification to your mobile number",
   'verifyProceed': "Verify & proceed",
   'dontReciveOtp': "Don’t receive OTP code ? ",
   'resendIt': "Resend it",

@@ -181,6 +181,7 @@ final dynamic ja = {
   'lastName'  : "苗字",
   'emailPhone'  : "メール/電話",
   'update'  : "アップデート",
+  "deleteAccount": "アカウントを削除する",
   'enterFirstName'  : "名を入力してください",
   'enterLastName'  : "姓を入力",
   'enterEmailName'  : "メール名を入力",

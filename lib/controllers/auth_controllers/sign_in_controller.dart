@@ -29,7 +29,7 @@ class SignInController extends GetxController {
     appCtrl.storage.write(session.isGuestLogin, false);
     log("message");
     isLoading = true;
-update();
+    update();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -48,6 +48,25 @@ update();
     update();
     appCtrl.storage.write("userName", userNameGoogle);
     appCtrl.storage.write("name", user.displayName);
+
+    if (user != null) {
+      // Check is already sign up
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: user.uid)
+          .get();
+      final List<DocumentSnapshot> documents = result.docs;
+      if (documents.length == 0) {
+        // Update data to server if new user
+        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'logintype': "Google",
+          'nickname': user.displayName,
+          'photoUrl': user.photoURL,
+          'id': user.uid
+        });
+      }
+    }
+
     await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
   }
@@ -57,13 +76,13 @@ update();
     appCtrl.isGuestLogin = false;
     appCtrl.storage.write(session.isGuestLogin, false);
     if (signInGlobalKey.currentState!.validate()) {
-      isLoading = true;
+      // isLoading = true;
       update();
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: emailController.text.toString(),
-            password: passwordController.text.toString());
-
+        var firebaseUser = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text.toString(),
+                password: passwordController.text.toString());
         var signIn = FirebaseAuth.instance.currentUser;
         userName = signIn!.email;
         update();
@@ -72,10 +91,31 @@ update();
         appCtrl.storage.write("name", signIn.displayName);
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
+
+        if (firebaseUser != null) {
+          // Check is already sign up
+          final QuerySnapshot result = await FirebaseFirestore.instance
+              .collection('users')
+              .where('id', isEqualTo: firebaseUser.user!.uid)
+              .get();
+          final List<DocumentSnapshot> documents = result.docs;
+          if (documents.length == 0) {
+            // Update data to server if new user
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(firebaseUser.user!.uid)
+                .set({
+              'logintype': "Email",
+              'nickname': firebaseUser.user!.displayName,
+              'photoUrl': firebaseUser.user!.photoURL,
+              'id': firebaseUser.user!.uid
+            });
+          }
+        }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
           isLoading = false;
-update();
+          update();
           snackBarMessengers(message: appFonts.wrongPassword);
         } else if (e.code == 'user-not-found') {
           isLoading = false;
@@ -128,9 +168,26 @@ update();
 
         appCtrl.storage.write("userName", userName);
         appCtrl.storage.write("name", signIn.displayName);
+
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
+
+        final QuerySnapshot result = await FirebaseFirestore.instance
+            .collection('users')
+            .where('id', isEqualTo: signIn.uid)
+            .get();
+        final List<DocumentSnapshot> documents = result.docs;
+        if (documents.length == 0) {
+          // Update data to server if new user
+          FirebaseFirestore.instance.collection('users').doc(signIn.uid).set({
+            'logintype': "Apple",
+            'nickname': signIn.displayName,
+            'photoUrl': signIn.photoURL,
+            'id': signIn.uid
+          });
+        }
       });
+
       update();
     } on FirebaseAuthException catch (e) {
       isLoading = false;

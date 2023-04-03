@@ -14,9 +14,8 @@ class MobileLoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   bool isLoading = false;
 
-  onTapOtp() async{
+  onTapOtp() async {
     if (mobileGlobalKey.currentState!.validate()) {
-
       // Otp Method
       isLoading = true;
       update();
@@ -26,11 +25,11 @@ class MobileLoginController extends GetxController {
         verificationFailed: (FirebaseAuthException e) {},
         codeSent: (String verificationId, int? resendToken) async {
           verificationId = verificationId;
-          var phoneUser =  FirebaseAuth.instance.currentUser;
+          var phoneUser = FirebaseAuth.instance.currentUser;
           userName = phoneUser?.phoneNumber;
           isLoading = false;
           update();
-          appCtrl.storage.write("number",  mobileController.text);
+          appCtrl.storage.write("number", mobileController.text);
           showDialog(
               barrierDismissible: false,
               context: Get.context!,
@@ -39,86 +38,111 @@ class MobileLoginController extends GetxController {
                     contentPadding: EdgeInsets.zero,
                     shape: const RoundedRectangleBorder(
                         borderRadius:
-                        BorderRadius.all(Radius.circular(AppRadius.r14))),
+                            BorderRadius.all(Radius.circular(AppRadius.r14))),
                     backgroundColor: appCtrl.appTheme.white,
                     content: Stack(
                       children: [
                         Stack(alignment: Alignment.topRight, children: [
                           Form(
                             key: otpGlobalKey,
-                            child: Column(mainAxisSize: MainAxisSize.min, children: [
-                              const VSpace(Sizes.s55),
-                              Text(appFonts.weHaveSentTheCode.tr,
-                                  textAlign: TextAlign.center,
-                                  style: AppCss.outfitMedium16
-                                      .textColor(appCtrl.appTheme.txt).textHeight(1.2)),
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const VSpace(Sizes.s55),
+                                  Text(appFonts.weHaveSentTheCode.tr,
+                                      textAlign: TextAlign.center,
+                                      style: AppCss.outfitMedium16
+                                          .textColor(appCtrl.appTheme.txt)
+                                          .textHeight(1.2)),
 
-                              const VSpace(Sizes.s18),
-                              // Number
-                              Text("“${mobileController.text}“",style: AppCss.outfitSemiBold16
-                                  .textColor(appCtrl.appTheme.txt)).paddingSymmetric(horizontal: Insets.i5),
-                              const VSpace(Sizes.s25),
-                              OtpLayout(
-                                  controller: otpController,
-                                  validator: (value)=> Validation().otpValidation(value),
-                                  onSubmitted: (val) {
-                                    otpController.text = val;
-                                  },
-                                  defaultPinTheme: defaultPinTheme,
-                                  errorPinTheme: defaultPinTheme.copyWith(
-                                      decoration: BoxDecoration(
-                                          color: appCtrl.appTheme.error,
-                                          borderRadius: BorderRadius.circular(AppRadius.r5))),
-                                  focusedPinTheme: defaultPinTheme.copyWith(
-                                      height: Sizes.s48,
-                                      width: Sizes.s55,
-                                      decoration: defaultPinTheme.decoration!.copyWith(
-                                          color: appCtrl.appTheme.textField,
-                                          border: Border.all(color: appCtrl.appTheme.primary))
-                                  )),
-                              const VSpace(Sizes.s25),
-                              ButtonCommon(onTap: () async {
-                                if (otpGlobalKey.currentState!.validate()) {
-
-                                  try {
-                                    isLoading = true;
-                                    update();
-                                    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                                        verificationId: verificationId, smsCode: otpController.text.toString());
-                                    await auth.signInWithCredential(credential);
-                                    isLoading = false;
-                                    update();
-                                    Get.offAllNamed(routeName.selectLanguageScreen);
-                                  } catch (e) {
-                                    isLoading = false;
-                                    update();
-                                    snackBarMessengers(message: 'Invalid code');
-                                  }
-                                }
-
-                              }, title: appFonts.verifyProceed),
-                              const VSpace(Sizes.s15),
-                              RichText(text: TextSpan(
-                                  text: appFonts.dontReciveOtp,
-                                  style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText),
-                                  children: [
-                                    TextSpan(
-                                        text: appFonts.resendIt,
-                                        style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.primary)
-                                    )
-                                  ]
-                              ))
-                            ]).paddingSymmetric(horizontal: Insets.i20,vertical: Insets.i20),
+                                  const VSpace(Sizes.s18),
+                                  // Number
+                                  Text("“${mobileController.text}“",
+                                          style: AppCss.outfitSemiBold16
+                                              .textColor(appCtrl.appTheme.txt))
+                                      .paddingSymmetric(horizontal: Insets.i5),
+                                  const VSpace(Sizes.s25),
+                                  OtpLayout(
+                                      controller: otpController,
+                                      validator: (value) =>
+                                          Validation().otpValidation(value),
+                                      onSubmitted: (val) {
+                                        otpController.text = val;
+                                      },
+                                      defaultPinTheme: defaultPinTheme,
+                                      errorPinTheme: defaultPinTheme.copyWith(
+                                          decoration: BoxDecoration(
+                                              color: appCtrl.appTheme.error,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      AppRadius.r5))),
+                                      focusedPinTheme: defaultPinTheme.copyWith(
+                                          height: Sizes.s48,
+                                          width: Sizes.s55,
+                                          decoration: defaultPinTheme
+                                              .decoration!
+                                              .copyWith(
+                                                  color: appCtrl
+                                                      .appTheme.textField,
+                                                  border: Border.all(
+                                                      color: appCtrl
+                                                          .appTheme.primary)))),
+                                  const VSpace(Sizes.s25),
+                                  ButtonCommon(
+                                      onTap: () async {
+                                        if (otpGlobalKey.currentState!
+                                            .validate()) {
+                                          try {
+                                            isLoading = true;
+                                            update();
+                                            PhoneAuthCredential credential =
+                                                PhoneAuthProvider.credential(
+                                                    verificationId:
+                                                        verificationId,
+                                                    smsCode: otpController.text
+                                                        .toString());
+                                            await auth.signInWithCredential(
+                                                credential);
+                                            isLoading = false;
+                                            update();
+                                            Get.offAllNamed(
+                                                routeName.selectLanguageScreen);
+                                          } catch (e) {
+                                            isLoading = false;
+                                            update();
+                                            snackBarMessengers(
+                                                message: 'Invalid code');
+                                          }
+                                        }
+                                      },
+                                      title: appFonts.verifyProceed),
+                                  const VSpace(Sizes.s15),
+                                  RichText(
+                                      text: TextSpan(
+                                          text: appFonts.dontReciveOtp,
+                                          style: AppCss.outfitMedium14
+                                              .textColor(
+                                                  appCtrl.appTheme.lightText),
+                                          children: [
+                                        TextSpan(
+                                            text: appFonts.resendIt,
+                                            style: AppCss.outfitMedium14
+                                                .textColor(
+                                                    appCtrl.appTheme.primary))
+                                      ]))
+                                ]).paddingSymmetric(
+                                horizontal: Insets.i20, vertical: Insets.i20),
                           ),
                           Column(mainAxisSize: MainAxisSize.min, children: [
                             const VSpace(Sizes.s5),
                             Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   // Title
                                   Text(appFonts.otpVerification,
-                                      style: AppCss.outfitSemiBold20
-                                          .textColor(appCtrl.appTheme.txt))
+                                          style: AppCss.outfitSemiBold20
+                                              .textColor(appCtrl.appTheme.txt))
                                       .paddingSymmetric(horizontal: Insets.i20),
                                   IconButton(
                                       onPressed: () => Get.back(),
@@ -127,10 +151,11 @@ class MobileLoginController extends GetxController {
                                           color: appCtrl.appTheme.lightText))
                                 ]),
                             const VSpace(Sizes.s5),
-                            DottedLines(width: MediaQuery.of(context).size.width)
+                            DottedLines(
+                                width: MediaQuery.of(context).size.width)
                           ])
                         ]),
-                        if(isLoading == true)
+                        if (isLoading == true)
                           const Center(child: CircularProgressIndicator())
                       ],
                     ));
@@ -141,15 +166,12 @@ class MobileLoginController extends GetxController {
     }
   }
 
-  final defaultPinTheme =  PinTheme(
+  final defaultPinTheme = PinTheme(
       textStyle: AppCss.outfitSemiBold18.textColor(appCtrl.appTheme.txt),
       width: Sizes.s55,
       height: Sizes.s48,
       decoration: BoxDecoration(
           color: appCtrl.appTheme.textField,
           borderRadius: BorderRadius.circular(AppRadius.r5),
-          border: Border.all(color: appCtrl.appTheme.trans)
-      )
-  );
-
+          border: Border.all(color: appCtrl.appTheme.trans)));
 }

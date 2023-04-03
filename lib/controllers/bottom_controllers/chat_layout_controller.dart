@@ -6,8 +6,11 @@ import 'package:probot/bot_api/api_services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../../config.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ChatLayoutController extends GetxController with GetSingleTickerProviderStateMixin {
+class ChatLayoutController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   dynamic data;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -20,9 +23,9 @@ class ChatLayoutController extends GetxController with GetSingleTickerProviderSt
   String? time;
   List selectedIndex = [];
   List selectedData = [];
-  DateTime? receiverTime;AnimationController? animationController;
+  DateTime? receiverTime;
+  AnimationController? animationController;
   Animation? animation;
-
 
   FocusNode focusNode = FocusNode();
   int count = 0;
@@ -61,20 +64,21 @@ class ChatLayoutController extends GetxController with GetSingleTickerProviderSt
     // TODO: implement onReady
     data = appCtrl.storage.read(session.selectedCharacter);
     backgroundList = appArray.backgroundList;
-    selectedImage =
-        appCtrl.storage.read("backgroundImage") ;
-speech = SpeechToText();
+    selectedImage = appCtrl.storage.read("backgroundImage");
+    speech = SpeechToText();
     update();
     log("chatList : $data");
     if (appCtrl.firebaseConfigModel!.isAddShow! &&
         appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
-    animationController = AnimationController(vsync:this,duration: const Duration(seconds: 2));
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
     animationController!.repeat(reverse: true);
-    animation =  Tween(begin: 15.0,end: 24.0).animate(animationController!)..addListener((){
-    update();
-    });
+    animation = Tween(begin: 15.0, end: 24.0).animate(animationController!)
+      ..addListener(() {
+        update();
+      });
     super.onReady();
   }
 
@@ -263,9 +267,22 @@ speech = SpeechToText();
 
       scrollDown();
       isLoading.value = false;
+
+      int id = DateTime.now().millisecondsSinceEpoch;
+      FirebaseFirestore.instance
+          .collection('chatHistory')
+          .doc(id.toString())
+          .set({
+        'userId': FirebaseAuth.instance.currentUser!.uid,
+        'avatar': appCtrl.selectedCharacter["image"],
+        'question': chatController.text,
+        'answer': value.toString(),
+        "createdDate": DateTime.now().millisecondsSinceEpoch,
+      });
+      chatController.clear();
       update();
     });
-    chatController.clear();
+
     Get.forceAppUpdate();
     update();
   }
@@ -336,16 +353,14 @@ speech = SpeechToText();
         onStatus: (val) {
           debugPrint('*** onStatus: $val');
           log("loo : ${val == "done"}");
-          if(val == "done" || val =="notListening"){
+          if (val == "done" || val == "notListening") {
             isListening.value = false;
             update();
           }
           Get.forceAppUpdate();
-
         },
         onError: (val) {
           debugPrint('### onError: $val');
-
         },
       );
       log("available ; $available");
@@ -353,18 +368,17 @@ speech = SpeechToText();
         isListening.value = true;
 
         speech.listen(
-            localeId: appCtrl.languageVal,
-
-            onResult: (val) {
-              log("VAL : $val");
-              chatController.text = val.recognizedWords.toString();
-              userInput.value = val.recognizedWords.toString();
-              update();
-            },
-            cancelOnError: true,);
+          localeId: appCtrl.languageVal,
+          onResult: (val) {
+            log("VAL : $val");
+            chatController.text = val.recognizedWords.toString();
+            userInput.value = val.recognizedWords.toString();
+            update();
+          },
+          cancelOnError: true,
+        );
 
         update();
-
       } else {
         log("NO");
       }

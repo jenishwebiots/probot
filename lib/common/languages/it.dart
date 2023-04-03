@@ -188,6 +188,7 @@ final dynamic it = {
   'lastName': "Cognome",
   'emailPhone': "E-mail/telefono",
   'update': "Aggiornamento",
+  "deleteAccount": "Eliminare l'account",
   'enterFirstName': "Inserisci il nome",
   'enterLastName': "Inserisci Cognome",
   'enterEmailName': "Inserisci il nome e-mail",

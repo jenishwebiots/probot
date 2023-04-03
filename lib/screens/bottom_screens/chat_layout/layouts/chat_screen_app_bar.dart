@@ -53,7 +53,6 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                     ],
                   )
                 : const MoreOption()
-
           ],
           title: Row(children: [
             Container(

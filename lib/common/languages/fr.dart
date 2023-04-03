@@ -191,6 +191,7 @@ final dynamic fr = {
   'lastName': "Nom de famille",
   'emailPhone': "Courriel/téléphone",
   'update': "Mise à jour",
+  "deleteAccount": "Supprimer le compte",
   'enterFirstName': "Entrez votre prénom",
   'enterLastName': "Entrer le nom de famille",
   'enterEmailName': "Entrez le nom de l'e-mail",
