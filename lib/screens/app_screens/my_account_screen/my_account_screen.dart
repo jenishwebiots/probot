@@ -14,26 +14,15 @@ class MyAccountScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(children: [
               const VSpace(Sizes.s10),
-              Stack(alignment: Alignment.bottomRight, children: [
-                Text(
-                       myAccountCtrl.userName != null
-                                ? myAccountCtrl.userName![0]
-                            : "S",
-                        style: AppCss.outfitExtraBold40
-                            .textColor(appCtrl.appTheme.sameWhite))
-                    .paddingAll(Insets.i40)
-                    .decorated(
-                        shape: BoxShape.circle, color: appCtrl.appTheme.primary),
-                SvgPicture.asset(eSvgAssets.camera, fit: BoxFit.scaleDown)
-                    .paddingAll(Insets.i8)
-                    .decorated(
-                        shape: BoxShape.circle,
-                        color: appCtrl.appTheme.sameWhite,
-                        border: Border.all(
-                            width: 2,
-                            color: appCtrl.appTheme.primary.withOpacity(0.1)))
-                    .paddingOnly(bottom: Insets.i8)
-              ]),
+              Text(
+                     myAccountCtrl.userName != null
+                              ? myAccountCtrl.userName![0]
+                          : "S",
+                      style: AppCss.outfitExtraBold40
+                          .textColor(appCtrl.appTheme.sameWhite))
+                  .paddingAll(Insets.i40)
+                  .decorated(
+                      shape: BoxShape.circle, color: appCtrl.appTheme.primary),
               const VSpace(Sizes.s15),
 
               const AllTextForm()

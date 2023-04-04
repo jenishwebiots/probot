@@ -8,7 +8,7 @@ class LimitOverLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.bottomCenter, children: [
       SizedBox(
-          height: Sizes.s108,
+          height: MediaQuery.of(context).size.height * 0.12,
           child: Column(children: [
             SizedBox(
                     child: SizedBox(

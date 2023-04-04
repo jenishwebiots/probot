@@ -51,7 +51,7 @@ class ChatLayout extends StatelessWidget {
                   ).backgroundImage(DecorationImage(
                       image: AssetImage(appCtrl.isTheme
                           ? chatCtrl.selectedImage["darkImage"]
-                          : chatCtrl.selectedImage["image"]),
+                          : chatCtrl.selectedImage["image"] ?? eImageAssets.background1),
                       fit: BoxFit.fill)),
                 ),
               )),

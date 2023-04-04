@@ -56,7 +56,7 @@ class ChatHistoryLayout extends StatelessWidget {
             .inkWell(onTap: onTap),
       )
           .decorated(
-              color: chatHistoryCtrl.selectedIndex.contains(index)
+              color: chatHistoryCtrl.selectedIndex.contains(data.id)
                   ? appCtrl.appTheme.primaryLight
                   : appCtrl.appTheme.boxBg,
               borderRadius:
