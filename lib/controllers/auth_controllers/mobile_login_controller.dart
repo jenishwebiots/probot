@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pinput/pinput.dart';
@@ -27,9 +30,32 @@ class MobileLoginController extends GetxController {
           verificationId = verificationId;
           var phoneUser = FirebaseAuth.instance.currentUser;
           userName = phoneUser?.phoneNumber;
+
+          await FirebaseFirestore.instance
+              .collection('users')
+              .where('id', isEqualTo: phoneUser?.uid).limit(1)
+              .get().then((value) {
+
+            log("doc ${value.docs.isEmpty}");
+            if (value.docs.isEmpty) {
+
+              // Update data to server if new user
+              FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(phoneUser?.uid)
+                  .set({
+                'logintype': "Email",
+                'nickname': phoneUser?.displayName,
+                'email': phoneUser?.email,
+                'phone':phoneUser?.phoneNumber,
+                'id': phoneUser?.uid
+              });
+            }
+          });
           isLoading = false;
           update();
           appCtrl.storage.write("number", mobileController.text);
+          appCtrl.storage.write("id", phoneUser?.uid);
           showDialog(
               barrierDismissible: false,
               context: Get.context!,

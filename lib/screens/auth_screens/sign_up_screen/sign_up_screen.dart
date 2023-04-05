@@ -35,9 +35,10 @@ GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
                   .alignment(Alignment.bottomCenter)
                   .paddingSymmetric(
                       vertical: Insets.i40, horizontal: Insets.i10),
-              if (signUpCtrl.isLoading == true)
-                const Center(child: CircularProgressIndicator())
-            ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i15)
+
+            ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i15),
+            if (signUpCtrl.isLoading == true)
+              const Center(child: CircularProgressIndicator())
           ]));
     });
   }

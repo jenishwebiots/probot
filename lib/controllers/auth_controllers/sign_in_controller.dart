@@ -49,24 +49,22 @@ class SignInController extends GetxController {
     appCtrl.storage.write("userName", userNameGoogle);
     appCtrl.storage.write("name", user.displayName);
 
-    if (user != null) {
-      // Check is already sign up
-      final QuerySnapshot result = await FirebaseFirestore.instance
-          .collection('users')
-          .where('id', isEqualTo: user.uid)
-          .get();
-      final List<DocumentSnapshot> documents = result.docs;
-      if (documents.length == 0) {
-        // Update data to server if new user
-        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'logintype': "Google",
-          'nickname': user.displayName,
-          'photoUrl': user.photoURL,
-          'id': user.uid
-        });
-      }
+    final QuerySnapshot result = await FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: user.uid)
+        .get();
+    final List<DocumentSnapshot> documents = result.docs;
+    if (documents.isEmpty) {
+      // Update data to server if new user
+      FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'logintype': "Google",
+        'nickname': user.displayName,
+        'email': user.email,
+        'phone': user.phoneNumber,
+        'id': user.uid
+      });
     }
-
+    appCtrl.storage.write("id", user.uid);
     await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
   }
@@ -92,26 +90,30 @@ class SignInController extends GetxController {
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
 
-        if (firebaseUser != null) {
-          // Check is already sign up
-          final QuerySnapshot result = await FirebaseFirestore.instance
-              .collection('users')
-              .where('id', isEqualTo: firebaseUser.user!.uid)
-              .get();
-          final List<DocumentSnapshot> documents = result.docs;
-          if (documents.length == 0) {
-            // Update data to server if new user
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(firebaseUser.user!.uid)
-                .set({
-              'logintype': "Email",
-              'nickname': firebaseUser.user!.displayName,
-              'photoUrl': firebaseUser.user!.photoURL,
-              'id': firebaseUser.user!.uid
-            });
-          }
-        }
+         await FirebaseFirestore.instance
+            .collection('users')
+            .where('id', isEqualTo: firebaseUser.user!.uid).limit(1)
+            .get().then((value) {
+
+              log("doc ${value.docs.isEmpty}");
+           if (value.docs.isEmpty) {
+
+             // Update data to server if new user
+             FirebaseFirestore.instance
+                 .collection('users')
+                 .doc(firebaseUser.user!.uid)
+                 .set({
+               'logintype': "Email",
+               'nickname': firebaseUser.user!.displayName,
+               'email': firebaseUser.user!.email,
+               'phone': firebaseUser.user!.phoneNumber,
+               'id': firebaseUser.user!.uid
+             });
+           }
+         });
+
+
+        appCtrl.storage.write("id", firebaseUser.user!.uid);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
           isLoading = false;
@@ -125,7 +127,7 @@ class SignInController extends GetxController {
       } catch (e) {
         isLoading = false;
         update();
-        snackBarMessengers(message: appFonts.unknownError);
+        snackBarMessengers(message: e.toString());
       }
     }
   }
@@ -172,20 +174,28 @@ class SignInController extends GetxController {
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
 
-        final QuerySnapshot result = await FirebaseFirestore.instance
+        await FirebaseFirestore.instance
             .collection('users')
-            .where('id', isEqualTo: signIn.uid)
-            .get();
-        final List<DocumentSnapshot> documents = result.docs;
-        if (documents.length == 0) {
-          // Update data to server if new user
-          FirebaseFirestore.instance.collection('users').doc(signIn.uid).set({
-            'logintype': "Apple",
-            'nickname': signIn.displayName,
-            'photoUrl': signIn.photoURL,
-            'id': signIn.uid
-          });
-        }
+            .where('id', isEqualTo: signIn.uid).limit(1)
+            .get().then((value) {
+
+          log("doc ${value.docs.isEmpty}");
+          if (value.docs.isEmpty) {
+
+            // Update data to server if new user
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(signIn.uid)
+                .set({
+              'logintype': "Email",
+              'nickname': signIn.displayName,
+              'email': signIn.email,
+              'phone':signIn.phoneNumber,
+              'id': signIn.uid
+            });
+          }
+        });
+        appCtrl.storage.write("id", signIn.uid);
       });
 
       update();

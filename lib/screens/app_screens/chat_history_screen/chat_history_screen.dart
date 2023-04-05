@@ -18,14 +18,27 @@ class ChatHistoryScreen extends StatelessWidget {
           appBar: ChatHistoryAppBar(
               index: chatHistoryCtrl.selectedIndex,
               onDeleteTap: () {
-                /*chatHistoryCtrl.selectedIndex.asMap().entries.forEach((e) {
-              chatHistoryCtrl.chatHistoryLists.removeAt(e.key);
-              chatHistoryCtrl.update();
-            });
-            chatHistoryCtrl.chatHistoryLists.asMap().entries.forEach((e) {
-              chatHistoryCtrl.selectedIndex.removeWhere((element) => element != e.value);
-              chatHistoryCtrl.update();
-            });*/
+                FirebaseFirestore.instance
+                    .collection("chatHistory")
+                    .where('userId',
+                        isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                    .get()
+                    .then((value) {
+                  value.docs.asMap().entries.map((e) {
+                    String id = e.value.id;
+                    if (chatHistoryCtrl.selectedIndex.contains(e.value.id)) {
+                      FirebaseFirestore.instance
+                          .collection("chatHistory")
+                          .doc(e.value.id)
+                          .delete();
+                      chatHistoryCtrl.selectedIndex
+                          .removeWhere((element) => element == id);
+                      chatHistoryCtrl.update();
+                    }
+                  }).toList();
+                  chatHistoryCtrl.update();
+                });
+
               }),
           body: StreamBuilder(
               stream: FirebaseFirestore.instance
@@ -64,42 +77,46 @@ class ChatHistoryScreen extends StatelessWidget {
                               .entries
                               .map((e) => ChatHistoryLayout(
                                     data: e.value,
-                                    index: e.key,
                                     isLongPress: chatHistoryCtrl.isLongPress,
                                     onLongPressTap: () {
                                       chatHistoryCtrl.isLongPress = true;
                                       log("press: ${chatHistoryCtrl.isLongPress}");
-                                      log("index: ${!chatHistoryCtrl.selectedIndex.contains(e.key)}");
+                                      log("index: ${!chatHistoryCtrl.selectedIndex.contains(e.value.id)}");
                                       if (!chatHistoryCtrl.selectedIndex
-                                          .contains(e.key)) {
+                                          .contains(e.value.id)) {
                                         chatHistoryCtrl.selectedIndex
-                                            .add(e.key);
+                                            .add(e.value.id);
                                         log("index2: ${chatHistoryCtrl.selectedIndex}");
                                         chatHistoryCtrl.update();
                                       }
                                       chatHistoryCtrl.update();
                                     },
                                     onTap: () {
-                                      log("message");
+                                      log("message ${chatHistoryCtrl.isLongPress}");
                                       if (chatHistoryCtrl.isLongPress) {
                                         if (!chatHistoryCtrl.selectedIndex
-                                            .contains(e.key)) {
+                                            .contains(e.value.id)) {
                                           chatHistoryCtrl.selectedIndex
-                                              .add(e.key);
+                                              .add(e.value.id);
                                           chatHistoryCtrl.update();
                                         } else {
                                           if (chatHistoryCtrl.selectedIndex
-                                              .contains(e.key)) {
+                                              .contains(e.value.id)) {
                                             chatHistoryCtrl.selectedIndex
-                                                .remove(e.key);
+                                                .remove(e.value.id);
                                             chatHistoryCtrl.update();
                                           }
                                         }
+                                      } else {
+                                        Get.toNamed(routeName.chatLayout);
                                       }
+
                                       if (chatHistoryCtrl
                                           .selectedIndex.isEmpty) {
-                                        chatHistoryCtrl.isLongPress == false;
+                                        chatHistoryCtrl.isLongPress = false;
+                                        log("selectIndex: ${chatHistoryCtrl.selectedIndex.isEmpty}");
                                         chatHistoryCtrl.update();
+                                        Get.forceAppUpdate();
                                       }
                                     },
                                   ))
