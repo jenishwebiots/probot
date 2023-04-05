@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:probot/config.dart';
 
@@ -39,10 +40,17 @@ class ChatLayout extends StatelessWidget {
                   },
                   child: Column(
                     children: [
+                      const VSpace(Sizes.s10),
+                      if (appCtrl.firebaseConfigModel!.isAddShow!)
+                        if (chatCtrl.bannerAd != null)
+                          AdWidget(ad: chatCtrl.bannerAd!)
+                              .height(Sizes.s50)
+                              .paddingOnly(bottom: Insets.i10)
+                              .width(MediaQuery.of(context).size.width),
                       Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
                               style: AppCss.outfitMedium14
                                   .textColor(appCtrl.appTheme.txt))
-                          .marginOnly(top: Insets.i15),
+                          .marginOnly(top: Insets.i5),
                       const VSpace(Sizes.s13),
                       const Expanded(flex: 5, child: ChatList()),
                       Container(),

@@ -72,6 +72,33 @@ class SvgAssets {
   final String chatHistory = "assets/svg/chatHistory.svg";
   final String tick = "assets/svg/tick.svg";
 
+  // Quick advisory
+  final String travel = "assets/svg/airplane.svg";
+  final String beauty = "assets/svg/beauty.svg";
+  final String comedy = "assets/svg/comedy.svg";
+  final String education = "assets/svg/education.svg";
+  final String electronics = "assets/svg/electronics.svg";
+  final String entertainment = "assets/svg/entertainment.svg";
+  final String essay = "assets/svg/essay.svg";
+  final String fashion = "assets/svg/fashion.svg";
+  final String fitness = "assets/svg/fitness.svg";
+  final String food = "assets/svg/food.svg";
+  final String music = "assets/svg/music.svg";
+  final String news = "assets/svg/news.svg";
+  final String programing = "assets/svg/programing.svg";
+  final String sports = "assets/svg/sports.svg";
+  final String stockMarket = "assets/svg/stockMarket.svg";
+  final String technology = "assets/svg/technology.svg";
+  final String yoga = "assets/svg/yoga.svg";
+
+  final String askAnything = "assets/svg/askAnything.svg";
+  final String codeGenerator = "assets/svg/codeGenerator.svg";
+  final String translateAnything = "assets/svg/translateAnything.svg";
+  final String socialMedia = "assets/svg/socialMedia.svg";
+  final String emailGenerator = "assets/svg/emailGenerator.svg";
+  final String personalAdvice = "assets/svg/personalAdvice.svg";
+  final String passwordGenerator = "assets/svg/passwordGenerator.svg";
+
 
 
 

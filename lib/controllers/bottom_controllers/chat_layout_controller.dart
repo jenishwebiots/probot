@@ -58,13 +58,36 @@ class ChatLayoutController extends GetxController
 
   InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
+  BannerAd? bannerAd;
+  bool bannerAdIsLoaded = false;
 
   @override
   void onReady() {
     // TODO: implement onReady
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: Platform.isAndroid
+            ? appCtrl.firebaseConfigModel!.bannerAddId!
+            : appCtrl.firebaseConfigModel!.bannerIOSId!,
+        listener: BannerAdListener(
+          onAdLoaded: (Ad ad) {
+            log('$BannerAd loaded.');
+            bannerAdIsLoaded = true;
+            update();
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            log('$BannerAd failedToLoad: $error');
+            ad.dispose();
+          },
+          onAdOpened: (Ad ad) => log('$BannerAd onAdOpened.'),
+          onAdClosed: (Ad ad) => log('$BannerAd onAdClosed.'),
+        ),
+        request: const AdRequest())
+      ..load();
+    log("bannerAd : $bannerAd");
     data = appCtrl.storage.read(session.selectedCharacter);
     backgroundList = appArray.backgroundList;
-    selectedImage = appCtrl.storage.read("backgroundImage");
+    selectedImage = appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
     speech = SpeechToText();
     update();
     log("chatList : $data");

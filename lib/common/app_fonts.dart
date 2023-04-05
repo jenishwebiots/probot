@@ -257,35 +257,70 @@ class AppFonts {
   String yourImageGenerator = "yourImageGenerator";
   String yourContentWriting = "yourContentWriting";
 
-  String otpVerification = "OTP Verification";
+  String otpVerification = "otpVerification";
   String weHaveSentTheCode =
-      "We have sent the code verification to your mobile number";
-  String verifyProceed = "Verify & proceed";
-  String dontReciveOtp = "Don’t receive OTP code ? ";
-  String resendIt = "Resend it";
-  String enterValidNumber = "Enter Valid Number";
-  String selectCountry = "Select Country";
-  String chatHistory = "Chat History";
-  String whatIsApp = "What is app development ?";
-  String min2 = "2 min ago";
-  String howToMake = "How to make pasta ?";
-  String min50 = "50 min ago";
-  String whatIsTheNext = "What is the next move of Indian army ?";
-  String yesterday = "Yesterday";
-  String whoIsShahRukh = "Who is shah rukh khan ?";
-  String march26 = "26 March, 2023";
-  String howTolLearn = "How to learn English ?";
-  String march25 = "25 March, 2023";
-  String isACourse = "Is a course in design required to become...";
-  String march24 = "24 March, 2023";
-  String whatIsFull = "What is full form of SGPA ?";
-  String march23 = "23 March, 2023";
-  String successfullyClear = "Successfully Clear";
-  String yourChatHistory = "Your chat history has been successfully cleared.";
-  String selectAll = "Select all";
-  String clearAll = "Clear all";
+      "weHaveSentTheCode";
+  String verifyProceed = "verifyProceed";
+  String dontReciveOtp = "dontReciveOtp";
+  String resendIt = "resendIt";
+  String enterValidNumber = "enterValidNumber";
+  String selectCountry = "selectCountry";
+  String chatHistory = "chatHistory";
+  String whatIsApp = "whatIsApp";
+  String min2 = "min2";
+  String howToMake = "howToMake";
+  String min50 = "min50";
+  String whatIsTheNext = "whatIsTheNext";
+  String yesterday = "yesterday";
+  String whoIsShahRukh = "whoIsShahRukh";
+  String march26 = "march26";
+  String howTolLearn = "howTolLearn";
+  String march25 = "march25";
+  String isACourse = "isACourse";
+  String march24 = "march24";
+  String whatIsFull = "whatIsFull";
+  String march23 = "march23";
+  String successfullyClear = "successfullyClear";
+  String yourChatHistory = "yourChatHistory";
+  String selectAll = "selectAll";
+  String clearAll = "clearAll";
 
   String inApp = "inApp";
+
+  String travel = "travel";
+  String fashion = "fashion";
+  String programing = "programing";
+  String education = "education";
+  String technology = "technology";
+  String comedy = "comedy";
+
+  String news = "news";
+  String music = "music";
+  String fitness = "fitness";
+  String sports = "sports";
+  String beauty = "beauty";
+  String food = "food";
+  String electronic = "electronic";
+  String stockMarket = "stockMarket";
+  String yogaMeditation = "yogaMeditation";
+  String entertainment = "entertainment";
+
+  String essayWriter = "essayWriter";
+  String askAnything = "askAnything";
+  String codeGenerator = "codeGenerator";
+  String translateAnything = "translateAnything";
+  String socialMedia = "socialMedia";
+  String emailGenerator = "emailGenerator";
+  String personalAdvice = "personalAdvice";
+  String passwordGenerator = "passwordGenerator";
+  String travelHangout = "travelHangout";
+
+  String quickAdvice = "Quick Advice";
+  String viewAll = "View all";
+  String writeAnything = "Write anything to translate...";
+  String max500 = "500 max";
+  String translate = "Translate";
+
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

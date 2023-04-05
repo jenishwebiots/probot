@@ -339,4 +339,33 @@ final dynamic it = {
   'selectAll': "Seleziona tutto",
   'clearAll': "Cancella tutto",
 
+  'inApp': "Acquisto in app",
+
+  'travel' : "Viaggio",
+  'fashion' : "Moda",
+  'programing' : "Programmazione",
+  'education' : "Formazione scolastica",
+  'technology' : "Tecnologia",
+  'comedy' : "Commedia",
+  'news' : "Notizia",
+  'music' : "Musica",
+  'fitness' : "Fitness",
+  'sports' : "Gli sport",
+  'beauty' : "Bellezza",
+  'food' : "Cibo",
+  'electronic' : "Elettronico",
+  'stockMarket' : "Mercato azionario",
+  'yogaMeditation' : "Yoga/meditazione",
+  'entertainment' : "Divertimento",
+
+  'essayWriter': "Scrittore di saggi",
+  'askAnything' : "Chiedi qualsiasi cosa",
+  'codeGenerator' : "Generatore di codici",
+  'translateAnything' : "Traduci qualsiasi cosa",
+  'socialMedia' : "Mezzi sociali",
+  'emailGenerator' : "Generatore di posta elettronica",
+  'personalAdvice' : "Consiglio personale",
+  'passwordGenerator' : "Generatore di password",
+  'travelHangout' : "Viaggio/ritrovo",
+
 };

@@ -47,7 +47,7 @@ class ImageGeneratorController extends GetxController {
           headers: {
             'Content-Type': 'application/json',
             'Authorization':
-                'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
+                'Bearer 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',
           },
           body: jsonEncode(
             {

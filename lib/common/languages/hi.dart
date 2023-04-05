@@ -339,4 +339,33 @@ final dynamic hi = {
   'selectAll': "सबका चयन करें",
   'clearAll': "सभी साफ करें",
 
+  'inApp': "ऐप में खरीदारी",
+
+  'travel' : "यात्रा",
+  'fashion' : "पहनावा",
+  'programing' : "कार्यक्रमों की",
+  'education' : "शिक्षा",
+  'technology' : "तकनीकी",
+  'comedy' : "कॉमेडी",
+  'news' : "समाचार",
+  'music' : "संगीत",
+  'fitness' : "स्वास्थ्य",
+  'sports' : "खेल",
+  'beauty' : "सुंदरता",
+  'food' : "खाना",
+  'electronic' : "इलेक्ट्रोनिक",
+  'stockMarket' : "शेयर बाजार",
+  'yogaMeditation' : "योग/ध्यान",
+  'entertainment' : "मनोरंजन",
+
+  'essayWriter': "निबंध रत्नाकर",
+  'askAnything' : "कुछ भी पूछें",
+  'codeGenerator' : "कोड जनरेटर",
+  'translateAnything' : "कुछ भी अनुवाद करें",
+  'socialMedia' : "सामाजिक मीडिया",
+  'emailGenerator' : "ईमेल जनरेटर",
+  'personalAdvice' : "व्यक्तिगत सलाह",
+  'passwordGenerator' : "पासवर्ड जनरेटर",
+  'travelHangout' : "यात्रा/हैंगआउट",
+
 };

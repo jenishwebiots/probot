@@ -16,25 +16,30 @@ class ChatList extends StatelessWidget {
 
           chatCtrl.update();
         },
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            controller: chatCtrl.scrollController,
-            itemCount: chatCtrl.itemCount.value,
-            itemBuilder: (context, i) {
-              if (chatCtrl.messages.value[i].chatMessageType ==
-                  ChatMessageType.bot ||chatCtrl.messages.value[i].chatMessageType ==
-                  ChatMessageType.loading ) {
-                return Receiver(
-                  chatListModel: chatCtrl.messages.value[i],
-                  index: i,
-                );
-              } else {
-                return Sender(
-                    chatListModel: chatCtrl.messages.value[i],
-                    index: i,);
-              }
-            }),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                controller: chatCtrl.scrollController,
+                itemCount: chatCtrl.itemCount.value,
+                itemBuilder: (context, i) {
+                  if (chatCtrl.messages.value[i].chatMessageType ==
+                      ChatMessageType.bot ||chatCtrl.messages.value[i].chatMessageType ==
+                      ChatMessageType.loading ) {
+                    return Receiver(
+                      chatListModel: chatCtrl.messages.value[i],
+                      index: i,
+                    );
+                  } else {
+                    return Sender(
+                        chatListModel: chatCtrl.messages.value[i],
+                        index: i,);
+                  }
+                }),
+          ],
+        ),
       );
     });
   }

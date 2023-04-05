@@ -1,5 +1,4 @@
 import '../config.dart';
-import '../screens/app_screens/subscription/layouts/in_app_list.dart';
 
 RouteName _routeName = RouteName();
 
@@ -45,6 +44,8 @@ class AppRoute {
     GetPage(name: _routeName.subscriptionPlan, page: () => const SubscriptionPlan()),
     GetPage(name: _routeName.chatHistory, page: () => ChatHistoryScreen()),
     GetPage(name: _routeName.inAppList, page: () => InAppList()),
+    GetPage(name: _routeName.quickAdvisor, page: () => QuickAdvisorScreen()),
+    GetPage(name: _routeName.translateScreen, page: () => TranslateScreen()),
 
   ];
 }

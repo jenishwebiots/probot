@@ -8,6 +8,7 @@ import '../../config.dart';
 class HomeController extends GetxController {
   List<HomeOptionModel> homeOptionList = [];
   List drawerList = [];
+  List quickAdvisorLists = [];
   BannerAd? bannerAd;
   bool bannerAdIsLoaded = false;
 
@@ -26,6 +27,7 @@ class HomeController extends GetxController {
         .map((e) => HomeOptionModel.fromJson(e))
         .toList();
     drawerList = appArray.drawerList;
+    quickAdvisorLists = appArray.quickAdvisor.getRange(0, 6).toList();
     update();
 
     bannerAd = BannerAd(
