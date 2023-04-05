@@ -8,6 +8,7 @@ class ReceiverContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: Sizes.s200,
         padding: const EdgeInsets.symmetric(
             horizontal: Insets.i10, vertical: Insets.i12),
         decoration: BoxDecoration(
@@ -27,8 +28,9 @@ class ReceiverContent extends StatelessWidget {
               overflow: TextOverflow.clip,
               style: AppCss.outfitLight12
                   .textColor(appCtrl.appTheme.txt)
-                  .textHeight(1.2),
+                  .textHeight(1.2)
             ),
+            const VSpace(Sizes.s10),
             row!
           ],
         ));

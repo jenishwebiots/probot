@@ -25,6 +25,8 @@ class RouteName {
   final String subscriptionPlan = "/subscriptionPlan";
   final String chatHistory = "/chatHistory";
   final String inAppList = "/inAppList";
+  final String quickAdvisor = "/quickAdvisor";
+  final String translateScreen = "/translateScreen";
 
 
 }
