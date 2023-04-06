@@ -27,6 +27,7 @@ class RouteName {
   final String inAppList = "/inAppList";
   final String quickAdvisor = "/quickAdvisor";
   final String translateScreen = "/translateScreen";
+  final String commonWebView = "/commonWebView";
 
 
 }

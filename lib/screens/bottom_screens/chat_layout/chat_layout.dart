@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:probot/config.dart';
@@ -10,7 +12,7 @@ class ChatLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+  log("SE : ${chatCtrl.selectedImage}");
     return GetBuilder<ChatLayoutController>(builder: (_) {
       return DirectionalityRtl(
         child: WillPopScope(
@@ -21,6 +23,7 @@ class ChatLayout extends StatelessWidget {
             return true;
           },
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
               key: chatCtrl.scaffoldKey,
               drawer: const CommonDrawer(),
               backgroundColor: appCtrl.appTheme.bg1,

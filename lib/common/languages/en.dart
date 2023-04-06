@@ -373,4 +373,5 @@ final dynamic en = {
 'personalAdvice' : "Personal advice",
 'passwordGenerator' : "Password generator",
 'travelHangout' : "Travel/hangout",
+'refundPolicy' : "Refund & Policy",
 };

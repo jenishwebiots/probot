@@ -64,6 +64,8 @@ class DashboardController extends GetxController
     if (selectedIndex == 1) {
       if (appCtrl.firebaseConfigModel!.isAddShow! && appCtrl.envConfig["chatTextCount"] != "unlimited") {
         chatLayoutCtrl.showInterstitialAd();
+        chatLayoutCtrl.chatId = Get.arguments ?? DateTime.now().millisecondsSinceEpoch.toString();
+        chatLayoutCtrl.update();
       }
 
       Navigator.of(Get.context!).push(createRoute()).then((value) {

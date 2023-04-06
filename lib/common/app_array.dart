@@ -282,8 +282,9 @@ class AppArray {
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
     {"icon": eSvgAssets.translate, "title": "language"},
-    //{"icon": eSvgAssets.star, "title": "rateApp"},
-    //{"icon": eSvgAssets.security, "title": "privacyTerm"},
+    {"icon": eSvgAssets.star, "title": "rateApp"},
+    {"icon": eSvgAssets.security, "title": "privacyTerm"},
+    {"icon": eSvgAssets.refund, "title": "refundPolicy"},
     {"icon": eSvgAssets.logout, "title": "logout"}
   ];
 

@@ -19,25 +19,33 @@ class ChatHistoryScreen extends StatelessWidget {
               index: chatHistoryCtrl.selectedIndex,
               onDeleteTap: () {
                 FirebaseFirestore.instance
-                    .collection("chatHistory")
-                    .where('userId',
-                        isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                    .collection("users")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection("chats")
                     .get()
                     .then((value) {
-                  value.docs.asMap().entries.map((e) {
-                    String id = e.value.id;
-                    if (chatHistoryCtrl.selectedIndex.contains(e.value.id)) {
-                      FirebaseFirestore.instance
-                          .collection("chatHistory")
-                          .doc(e.value.id)
-                          .delete();
-                      chatHistoryCtrl.selectedIndex
-                          .removeWhere((element) => element == id);
-                      chatHistoryCtrl.update();
+                  value
+                      .docs
+                      .asMap()
+                      .entries
+                      .forEach((element) {
+                    if(chatHistoryCtrl.selectedIndex.contains(element.value.id)){
+                      FirebaseFirestore.instance.collection(
+                          "chatHistory")
+                          .doc(element.value.id)
+                          .delete().then((value) {
+                        FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .collection("chats").doc(element.value.id).delete();
+                        chatHistoryCtrl.selectedIndex
+                            .removeWhere((elements) => elements == element.value.id);
+                        chatHistoryCtrl.update();
+                      });
                     }
-                  }).toList();
-                  chatHistoryCtrl.update();
+                  });
                 });
+                chatHistoryCtrl.update();
               }),
           body: StreamBuilder(
               stream:   FirebaseFirestore.instance
@@ -113,10 +121,13 @@ class ChatHistoryScreen extends StatelessWidget {
                               }
                             }
                           } else {
+                            log("CH : ${e.value["chatId"]}");
                             Get.toNamed(
                                 routeName.chatLayout,
                                 arguments:
                                 e.value["chatId"]);
+                            final chatCtrl = Get.isRegistered<ChatLayoutController>() ? Get.find<ChatLayoutController>() : Get.put(ChatLayoutController());
+                            chatCtrl.getChatId();
                           }
 
                           if (chatHistoryCtrl

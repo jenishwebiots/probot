@@ -23,7 +23,6 @@ class SubscriptionPlan extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                log("DATA : ${snapshot.data!.docs[0].data()}");
                 return StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("subscriptionPlan")

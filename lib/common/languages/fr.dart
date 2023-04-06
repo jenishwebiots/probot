@@ -372,4 +372,6 @@ final dynamic fr = {
   'personalAdvice' : "Conseils personnalisés",
   'passwordGenerator' : "Générateur de mot de passe",
   'travelHangout' : "Voyage/séjour",
+
+  'refundPolicy' : "Politique de remboursement",
 };

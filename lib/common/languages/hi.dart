@@ -368,4 +368,5 @@ final dynamic hi = {
   'passwordGenerator' : "पासवर्ड जनरेटर",
   'travelHangout' : "यात्रा/हैंगआउट",
 
+  'refundPolicy' : "भुगतान वापसी की नीति",
 };

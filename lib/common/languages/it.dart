@@ -368,4 +368,5 @@ final dynamic it = {
   'passwordGenerator' : "Generatore di password",
   'travelHangout' : "Viaggio/ritrovo",
 
+  'refundPolicy' : "Politica di rimborso",
 };

@@ -93,7 +93,6 @@ class SplashController extends GetxController {
           .limit(1)
           .get()
           .then((value) {
-        log("DATA : ${value.docs.isEmpty}");
         if (value.docs.isNotEmpty) {
           appCtrl.envConfig["chatTextCount"] =
               value.docs[0].data()["chatCount"];

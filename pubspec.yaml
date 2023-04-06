@@ -73,6 +73,8 @@ dependencies:
   country_list_pick: ^1.0.1+6
   pinput: ^2.2.31
   fluttertoast: ^8.2.1
+  url_launcher: ^6.1.10
+  launch_review: ^3.0.1
 
 
 

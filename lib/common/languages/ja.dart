@@ -347,4 +347,6 @@ final dynamic ja = {
   'passwordGenerator' : "パスワードジェネレーター",
   'travelHangout' : "旅行/たまり場",
 
+  'refundPolicy' : "代金返却方針",
+
 };

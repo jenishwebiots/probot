@@ -19,7 +19,7 @@ class MyAccountController extends GetxController {
       Get.offAllNamed(routeName.loginScreen);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
-        print(
+        log(
             'The user must reauthenticate before this operation can be executed.');
       }
     }

@@ -367,4 +367,5 @@ final dynamic ge = {
   'passwordGenerator' : "Passwortgenerator",
   'travelHangout' : "Reisen/Treffen",
 
+  'refundPolicy' : "Rückgaberecht",
 };

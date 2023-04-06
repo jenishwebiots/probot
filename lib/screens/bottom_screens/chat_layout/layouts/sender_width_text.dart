@@ -11,7 +11,7 @@ class SenderWidthText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
       return Container(
-        width: 250,
+        width: Sizes.s250,
         padding: const EdgeInsets.symmetric(
             horizontal: Insets.i10, vertical: Insets.i12),
         decoration: BoxDecoration(

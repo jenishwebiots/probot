@@ -5,6 +5,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:probot/env.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
+
+// Needed because we can't import `dart:html` into a mobile app,
+// while on the flip-side access to `dart:io` throws at runtime (hence the `kIsWeb` check below)
+
 import '../../utils/general_utils.dart';
 
 class SignInController extends GetxController {
@@ -34,9 +38,9 @@ class SignInController extends GetxController {
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
     final GoogleSignInAccount? googleSignInAccount =
-    await googleSignIn.signIn();
+        await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
-    await googleSignInAccount!.authentication;
+        await googleSignInAccount!.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
@@ -67,6 +71,7 @@ class SignInController extends GetxController {
     appCtrl.storage.write("id", user.uid);
     await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
+
   }
 
   // Sign In With Email & Password Method
@@ -79,8 +84,8 @@ class SignInController extends GetxController {
       try {
         var firebaseUser = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
-            email: emailController.text.toString(),
-            password: passwordController.text.toString());
+                email: emailController.text.toString(),
+                password: passwordController.text.toString());
         var signIn = FirebaseAuth.instance.currentUser;
         userName = signIn!.email;
         update();
@@ -92,12 +97,12 @@ class SignInController extends GetxController {
 
         await FirebaseFirestore.instance
             .collection('users')
-            .where('id', isEqualTo: firebaseUser.user!.uid).limit(1)
-            .get().then((value) {
-
+            .where('id', isEqualTo: firebaseUser.user!.uid)
+            .limit(1)
+            .get()
+            .then((value) {
           log("doc ${value.docs.isEmpty}");
           if (value.docs.isEmpty) {
-
             // Update data to server if new user
             FirebaseFirestore.instance
                 .collection('users')
@@ -111,7 +116,6 @@ class SignInController extends GetxController {
             });
           }
         });
-
 
         appCtrl.storage.write("id", firebaseUser.user!.uid);
       } on FirebaseAuthException catch (e) {
@@ -176,21 +180,18 @@ class SignInController extends GetxController {
 
         await FirebaseFirestore.instance
             .collection('users')
-            .where('id', isEqualTo: signIn.uid).limit(1)
-            .get().then((value) {
-
+            .where('id', isEqualTo: signIn.uid)
+            .limit(1)
+            .get()
+            .then((value) {
           log("doc ${value.docs.isEmpty}");
           if (value.docs.isEmpty) {
-
             // Update data to server if new user
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(signIn.uid)
-                .set({
+            FirebaseFirestore.instance.collection('users').doc(signIn.uid).set({
               'logintype': "Email",
               'nickname': signIn.displayName,
               'email': signIn.email,
-              'phone':signIn.phoneNumber,
+              'phone': signIn.phoneNumber,
               'id': signIn.uid
             });
           }
@@ -219,12 +220,11 @@ class SignInController extends GetxController {
         .limit(1)
         .get()
         .then((value) {
-      log("DATA : ${value.docs.isEmpty}");
       if (value.docs.isNotEmpty) {
         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
         appCtrl.envConfig["textCompletionCount"] =
-        value.docs[0].data()["textCompletionCount"];
+            value.docs[0].data()["textCompletionCount"];
         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
       } else {
