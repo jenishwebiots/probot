@@ -442,4 +442,35 @@ var chatHistoryList = [
     {"icon": eImageAssets.razor, "title": appFonts.razor.tr},
     {"icon": eImageAssets.inApp, "title": appFonts.inApp},
   ];
+
+  var quickAdvisor = [
+    {
+      "icon": eSvgAssets.askAnything,
+      "title":appFonts.askAnything
+    },{
+      "icon": eSvgAssets.codeGenerator,
+      "title":appFonts.codeGenerator
+    },{
+      "icon": eSvgAssets.translateAnything,
+      "title":appFonts.translateAnything
+    },{
+      "icon": eSvgAssets.socialMedia,
+      "title":appFonts.socialMedia
+    },{
+      "icon": eSvgAssets.emailGenerator,
+      "title":appFonts.emailGenerator
+    },{
+      "icon": eSvgAssets.personalAdvice,
+      "title":appFonts.personalAdvice
+    },{
+      "icon": eSvgAssets.passwordGenerator,
+      "title":appFonts.passwordGenerator
+    },{
+      "icon": eSvgAssets.travel,
+      "title":appFonts.travelHangout
+    },{
+      "icon": eSvgAssets.essay,
+      "title":appFonts.essayWriter
+    }
+  ];
 }

@@ -338,4 +338,33 @@ final dynamic ge = {
   'selectAll': "Wählen Sie Alle",
   'clearAll': "Alles löschen",
 
+  'inApp': "In-App-Kauf",
+
+  'travel' : "Reisen",
+  'fashion' : "Mode",
+  'programing' : "Programmierung",
+  'education' : "Ausbildung",
+  'technology' : "Technologie",
+  'comedy' : "Komödie",
+  'news' : "Nachricht",
+  'music' : "Musik",
+  'fitness' : "Fitness",
+  'sports' : "Sport",
+  'beauty' : "Schönheit",
+  'food' : "Essen",
+  'electronic' : "Elektronisch",
+  'stockMarket' : "Aktienmarkt",
+  'yogaMeditation' : "Yoga/Meditation",
+  'entertainment' : "Unterhaltung",
+
+  'essayWriter': "Essay-Autor",
+  'askAnything' : "Frag irgendwas",
+  'codeGenerator' : "Code Generator",
+  'translateAnything' : "Übersetzen Sie alles",
+  'socialMedia' : "Sozialen Medien",
+  'emailGenerator' : "E-Mail-Generator",
+  'personalAdvice' : "Persönliche Beratung",
+  'passwordGenerator' : "Passwortgenerator",
+  'travelHangout' : "Reisen/Treffen",
+
 };

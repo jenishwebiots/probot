@@ -11,7 +11,7 @@ class TextFieldCommon extends StatelessWidget {
   final TextInputType? keyboardType;
   final FocusNode? focusNode;
   final ValueChanged<String>? onChanged;
-  final int? maxLength,minLines;
+  final int? maxLength,minLines,maxLines;
 
   const TextFieldCommon(
       {Key? key,
@@ -26,13 +26,14 @@ class TextFieldCommon extends StatelessWidget {
       this.keyboardType,
       this.focusNode,
       this.onChanged,
-      this.maxLength,this.minLines})
+      this.maxLength,this.minLines, this.maxLines})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Text field common
     return TextFormField(
+      maxLines: maxLines,
       style: AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt),
       focusNode: focusNode,
         obscureText: obscureText,

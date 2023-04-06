@@ -318,4 +318,33 @@ final dynamic ja = {
   'selectAll': "すべて選択",
   'clearAll': "すべてクリア",
 
+  'inApp': "アプリ内購入",
+
+  'travel' : "旅行",
+  'fashion' : "ファッション",
+  'programing' : "プログラミング",
+  'education' : "教育",
+  'technology' : "テクノロジー",
+  'comedy' : "コメディ",
+  'news' : "ニュース",
+  'music' : "音楽",
+  'fitness' : "フィットネス",
+  'sports' : "スポーツ",
+  'beauty' : "美しさ",
+  'food' : "食べ物",
+  'electronic' : "電子",
+  'stockMarket' : "株式市場",
+  'yogaMeditation' : "ヨガ・瞑想",
+  'entertainment' : "エンターテイメント",
+
+  'essayWriter': "エッセイライター",
+  'askAnything' : "何かを頼みます",
+  'codeGenerator' : "コードジェネレーター",
+  'translateAnything' : "なんでも翻訳",
+  'socialMedia' : "ソーシャルメディア",
+  'emailGenerator' : "メールジェネレーター",
+  'personalAdvice' : "個人的なアドバイス",
+  'passwordGenerator' : "パスワードジェネレーター",
+  'travelHangout' : "旅行/たまり場",
+
 };

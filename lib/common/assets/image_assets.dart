@@ -36,6 +36,7 @@ class ImageAssets {
   final String paymentSuccess = "assets/images/paymentSuccess.png";
   final String rewardBanner = "assets/images/rewardBanner.png";
   final String reward = "assets/images/reward.png";
+  final String quickAdvisorContainer = "assets/images/quickAdvisorContainer.png";
 
   // Icons
   final String google = "assets/images/icons/Google.png";

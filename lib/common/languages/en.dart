@@ -345,4 +345,32 @@ final dynamic en = {
   'clearAll': "Clear all",
 
   'inApp': "In-App Purchase",
+
+  'travel': "Travel",
+  'fashion': "Fashion",
+  'programing': "Programing",
+  'education': "Education",
+  'technology': "Technology",
+  'comedy': "Comedy",
+
+  'news': "News",
+  'music': "Music",
+  'fitness': "Fitness",
+  'sports': "Sports",
+  'beauty': "Beauty",
+  'food': "Food",
+  'electronic': "Electronic",
+  'stockMarket': "Stock Market",
+  'yogaMeditation': "Yoga/Meditation",
+  'entertainment': "Entertainment",
+
+'essayWriter': "Essay writer",
+'askAnything' : "Ask anything",
+'codeGenerator' : "Code generator",
+'translateAnything' : "Translate anything",
+'socialMedia' : "Social media",
+'emailGenerator' : "Email generator",
+'personalAdvice' : "Personal advice",
+'passwordGenerator' : "Password generator",
+'travelHangout' : "Travel/hangout",
 };

@@ -24,3 +24,5 @@ export 'app_pages_controllers/add_fingerprint_controller.dart';
 export 'app_pages_controllers/subscription_controller.dart';
 export 'app_pages_controllers/chat_history_controller.dart';
 
+export 'package:probot/controllers/app_pages_controllers/quick_advisor_controller.dart';
+

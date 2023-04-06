@@ -15,8 +15,8 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-      //  'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
+
 
       },
       body: json.encode({
@@ -31,7 +31,7 @@ class ApiServices {
         ]
       }),
     );
-    // print(LocalStorage.getChatGptApiKey());
+
     print("hello chat");
     print(
         "Chat respons   =======${jsonDecode(utf8.decode(response.bodyBytes))}");
@@ -39,6 +39,6 @@ class ApiServices {
     Map<String, dynamic> newresponse =
         jsonDecode(utf8.decode(response.bodyBytes));
 
-    return newresponse['choices'][0]['message']['content'];
+    return response.statusCode == 200 ? newresponse['choices'][0]['message']['content'] :"";
   }
 }

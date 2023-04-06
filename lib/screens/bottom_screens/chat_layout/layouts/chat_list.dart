@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../config.dart';
@@ -14,7 +15,7 @@ class ChatList extends StatelessWidget {
         stream: FirebaseFirestore.instance
             .collection("chatHistory")
             .doc(chatCtrl.chatId)
-            .collection("chats").snapshots(),
+            .collection("chats").orderBy("createdDate",descending: false).snapshots(),
         builder: (context,snapShot) {
           if(snapShot.hasData) {
             return InkWell(
@@ -22,27 +23,30 @@ class ChatList extends StatelessWidget {
                 chatCtrl.isLongPress = false;
                 chatCtrl.selectedData = [];
                 chatCtrl.selectedIndex = [];
-
                 chatCtrl.update();
               },
-              child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  controller: chatCtrl.scrollController,
-                  itemCount: snapShot.data!.docs.length,
-                  itemBuilder: (context, i) {
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
 
-                    if (snapShot.data!.docs[i].data()["isSender"] == false) {
-                      return Receiver(
-                        chatListModel:snapShot.data!.docs[i].data(),
-                        index: i,
-                      );
-                    } else {
-                      return Sender(
-                        chatListModel:snapShot.data!.docs[i].data(),
-                        index: i,);
-                    }
-                  }),
+                    controller: chatCtrl.scrollController,
+                    itemCount: snapShot.data!.docs.length,
+                    itemBuilder: (context, i) {
+
+                      if (snapShot.data!.docs[i].data()["messageType"] == ChatMessageType.bot.name || snapShot.data!.docs[i].data()["messageType"] == ChatMessageType.loading.name ) {
+                        return Receiver(
+                          chatListModel:snapShot.data!.docs[i].data(),
+                          index: i,
+                        );
+                      } else {
+                        return Sender(
+                          chatListModel:snapShot.data!.docs[i].data(),
+                          index: i,);
+                      }
+                    }),
+              ),
             );
           }else{
             return Container();
