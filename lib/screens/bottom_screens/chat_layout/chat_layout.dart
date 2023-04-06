@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:intl/intl.dart';
 import 'package:probot/config.dart';
@@ -10,7 +9,7 @@ class ChatLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("image: ${chatCtrl.selectedImage}");
+
     return GetBuilder<ChatLayoutController>(builder: (_) {
       return DirectionalityRtl(
         child: WillPopScope(
@@ -51,7 +50,7 @@ class ChatLayout extends StatelessWidget {
                   ).backgroundImage(DecorationImage(
                       image: AssetImage(appCtrl.isTheme
                           ? chatCtrl.selectedImage["darkImage"]
-                          : chatCtrl.selectedImage["image"] ?? eImageAssets.background1),
+                          : chatCtrl.selectedImage == null ? eImageAssets.background1: chatCtrl.selectedImage["image"] ?? eImageAssets.background1),
                       fit: BoxFit.fill)),
                 ),
               )),

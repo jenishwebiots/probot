@@ -32,6 +32,7 @@ class SplashController extends GetxController {
     ThemeService().switchTheme(isTheme);
     appCtrl.isTheme = isTheme;
 
+    //language
     var language = await appCtrl.storage.read(session.locale) ?? "en";
     log("language ; $language");
     if (language != null) {
@@ -56,6 +57,20 @@ class SplashController extends GetxController {
     Get.updateLocale(locale);
     appCtrl.update();
     Get.forceAppUpdate();
+
+    //currency
+    appCtrl.currency = await appCtrl.storage.read("currency") ?? appArray.currencyList[0];
+
+    appCtrl.priceSymbol = appCtrl.currency["symbol"];
+    if (appCtrl.currency["title"] == "dollar") {
+      appCtrl.currencyVal = double.parse(appArray.currencyList[0]["USD"].toString()).roundToDouble();
+    } else if (appCtrl.currency ["title"] == "euro") {
+      appCtrl.currencyVal = double.parse(appArray.currencyList[0]["EUR"].toString()).roundToDouble();
+    } else if (appCtrl.currency ["title"] == "inr") {
+      appCtrl.currencyVal = double.parse(appArray.currencyList[0]["INR"].toString()).roundToDouble();
+    } else {
+      appCtrl.currencyVal = double.parse(appArray.currencyList[0]["POU"].toString()).roundToDouble();
+    }
 
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
     var name = appCtrl.storage.read("name");

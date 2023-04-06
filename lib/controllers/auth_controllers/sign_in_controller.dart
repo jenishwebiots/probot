@@ -34,9 +34,9 @@ class SignInController extends GetxController {
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
     final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
+    await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount!.authentication;
+    await googleSignInAccount!.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
@@ -79,8 +79,8 @@ class SignInController extends GetxController {
       try {
         var firebaseUser = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
-                email: emailController.text.toString(),
-                password: passwordController.text.toString());
+            email: emailController.text.toString(),
+            password: passwordController.text.toString());
         var signIn = FirebaseAuth.instance.currentUser;
         userName = signIn!.email;
         update();
@@ -90,27 +90,27 @@ class SignInController extends GetxController {
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
 
-         await FirebaseFirestore.instance
+        await FirebaseFirestore.instance
             .collection('users')
             .where('id', isEqualTo: firebaseUser.user!.uid).limit(1)
             .get().then((value) {
 
-              log("doc ${value.docs.isEmpty}");
-           if (value.docs.isEmpty) {
+          log("doc ${value.docs.isEmpty}");
+          if (value.docs.isEmpty) {
 
-             // Update data to server if new user
-             FirebaseFirestore.instance
-                 .collection('users')
-                 .doc(firebaseUser.user!.uid)
-                 .set({
-               'logintype': "Email",
-               'nickname': firebaseUser.user!.displayName,
-               'email': firebaseUser.user!.email,
-               'phone': firebaseUser.user!.phoneNumber,
-               'id': firebaseUser.user!.uid
-             });
-           }
-         });
+            // Update data to server if new user
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(firebaseUser.user!.uid)
+                .set({
+              'logintype': "Email",
+              'nickname': firebaseUser.user!.displayName,
+              'email': firebaseUser.user!.email,
+              'phone': firebaseUser.user!.phoneNumber,
+              'id': firebaseUser.user!.uid
+            });
+          }
+        });
 
 
         appCtrl.storage.write("id", firebaseUser.user!.uid);
@@ -224,7 +224,7 @@ class SignInController extends GetxController {
         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
         appCtrl.envConfig["textCompletionCount"] =
-            value.docs[0].data()["textCompletionCount"];
+        value.docs[0].data()["textCompletionCount"];
         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
       } else {

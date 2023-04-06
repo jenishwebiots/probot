@@ -39,7 +39,7 @@ class CurrencyListCard extends StatelessWidget {
                   appCtrl.currency[data["code"]].toString());
 
               await appCtrl.storage
-                  .write("currencyCode", appCtrl.currency);
+                  .write("currency", appCtrl.currency);
 
               appCtrl.update();
               subscribeCtrl.update();
