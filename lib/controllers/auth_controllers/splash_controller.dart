@@ -72,6 +72,7 @@ class SplashController extends GetxController {
       appCtrl.currencyVal = double.parse(appArray.currencyList[0]["POU"].toString()).roundToDouble();
     }
 
+
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
     var name = appCtrl.storage.read("name");
     var userName = appCtrl.storage.read("userName");

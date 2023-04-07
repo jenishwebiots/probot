@@ -1,5 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:probot/screens/bottom_screens/chat_layout/layouts/guest_receiver.dart';
+import 'package:probot/screens/bottom_screens/chat_layout/layouts/guest_sender.dart';
 
 import '../../../../config.dart';
 
@@ -11,12 +13,44 @@ class ChatList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
 
-      return StreamBuilder(
+      return appCtrl.isGuestLogin ?
+      InkWell(
+        onTap: (){
+          chatCtrl.isLongPress = false;
+          chatCtrl.selectedData = [];
+          chatCtrl.selectedIndex = [];
+
+          chatCtrl.update();
+        },
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              controller: chatCtrl.scrollController,
+              itemCount: chatCtrl.itemCount.value,
+              itemBuilder: (context, i) {
+                if (chatCtrl.messages.value[i].chatMessageType ==
+                    ChatMessageType.bot ||chatCtrl.messages.value[i].chatMessageType ==
+                    ChatMessageType.loading ) {
+                  return GuestReceiver(
+                    chatListModel: chatCtrl.messages.value[i],
+                    index: i,
+                  );
+                } else {
+                  return GuestSender(
+                    chatListModel: chatCtrl.messages.value[i],
+                    index: i,);
+                }
+              }),
+        ),
+      ): StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("chatHistory")
             .doc(chatCtrl.chatId)
             .collection("chats").orderBy("createdDate",descending: false).snapshots(),
         builder: (context,snapShot) {
+
           if(snapShot.hasData) {
             return InkWell(
               onTap: () {
@@ -30,7 +64,6 @@ class ChatList extends StatelessWidget {
                 child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
-
                     controller: chatCtrl.scrollController,
                     itemCount: snapShot.data!.docs.length,
                     itemBuilder: (context, i) {

@@ -89,7 +89,7 @@ class ChatLayoutController extends GetxController
     data = appCtrl.storage.read(session.selectedCharacter);
 
     backgroundList = appArray.backgroundList;
-
+    selectedImage = appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     speech = SpeechToText();
     update();
     log("chatList : $chatId");
@@ -97,6 +97,7 @@ class ChatLayoutController extends GetxController
         appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
+
 
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));

@@ -1,46 +1,45 @@
-import 'dart:developer';
-
 import 'package:intl/intl.dart';
-import 'package:probot/widgets/common_volume.dart';
 
 import '../../../../config.dart';
+import '../../../../widgets/common_volume.dart';
 
-class Sender extends StatelessWidget {
-  final dynamic chatListModel;
+class GuestSender extends StatelessWidget {
+  final ChatMessage? chatListModel;
   final int? dateWiseIndex, index;
 
-  const Sender({Key? key, this.chatListModel, this.index, this.dateWiseIndex})
+  const GuestSender(
+      {Key? key, this.chatListModel, this.index, this.dateWiseIndex})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
-      log("SENDER: ${chatListModel["message"]}");
       return Align(
               alignment: Alignment.centerRight,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  chatListModel["message"].length > 40
+                  chatListModel!.text!.length > 40
                       ? SenderWidthText(
-                          text: chatListModel["message"],
+                          text: chatListModel!.text!,
                           index: index,
                           time: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  DateFormat('hh:mm a').format(
-                                      DateTime.fromMillisecondsSinceEpoch(
-                                          int.parse(chatListModel["createdDate"]
-                                              .toString()))),
-                                  style: AppCss.outfitMedium12
-                                      .textColor(appCtrl.appTheme.sameWhite),
-                                ),
-                                CommonVolume(message: chatListModel["message"])
-                              ]),
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                DateFormat('hh:mm a').format(
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                        int.parse(
+                                            chatListModel!.time!.toString()))),
+                                style: AppCss.outfitMedium12
+                                    .textColor(appCtrl.appTheme.sameWhite),
+                              ),
+                              CommonVolume(message: chatListModel!.text!)
+                            ],
+                          ),
                         )
                       : CommonContent(
-                          text: chatListModel["message"],
+                          text: chatListModel!.text!,
                           index: index,
                           time: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -49,13 +48,13 @@ class Sender extends StatelessWidget {
                               Text(
                                 DateFormat('hh:mm a').format(
                                     DateTime.fromMillisecondsSinceEpoch(
-                                        int.parse(chatListModel["createdDate"]
-                                            .toString()))),
+                                        int.parse(
+                                            chatListModel!.time!.toString()))),
                                 style: AppCss.outfitMedium12
                                     .textColor(appCtrl.appTheme.sameWhite),
                               ),
                               const HSpace(Sizes.s15),
-                              CommonVolume(message: chatListModel["message"])
+                              CommonVolume(message: chatListModel!.text!)
                             ],
                           )),
                   const VSpace(Sizes.s3),

@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -12,7 +11,7 @@ class ChatLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  log("SE : ${chatCtrl.selectedImage}");
+    log("SE : ${chatCtrl.selectedImage}");
     return GetBuilder<ChatLayoutController>(builder: (_) {
       return DirectionalityRtl(
         child: WillPopScope(
@@ -23,7 +22,7 @@ class ChatLayout extends StatelessWidget {
             return true;
           },
           child: Scaffold(
-            resizeToAvoidBottomInset: true,
+              resizeToAvoidBottomInset: true,
               key: chatCtrl.scaffoldKey,
               drawer: const CommonDrawer(),
               backgroundColor: appCtrl.appTheme.bg1,
@@ -60,8 +59,14 @@ class ChatLayout extends StatelessWidget {
                     ],
                   ).backgroundImage(DecorationImage(
                       image: AssetImage(appCtrl.isTheme
-                          ? chatCtrl.selectedImage["darkImage"]
-                          : chatCtrl.selectedImage == null ? eImageAssets.background1: chatCtrl.selectedImage["image"] ?? eImageAssets.background1),
+                          ? chatCtrl.selectedImage == null
+                              ? eImageAssets.dBg1
+                              : chatCtrl.selectedImage["darkImage"] ??
+                                  eImageAssets.dBg1
+                          : chatCtrl.selectedImage == null
+                              ? eImageAssets.background1
+                              : chatCtrl.selectedImage["image"] ??
+                                  eImageAssets.background1),
                       fit: BoxFit.fill)),
                 ),
               )),

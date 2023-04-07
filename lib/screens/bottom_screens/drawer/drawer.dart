@@ -48,19 +48,22 @@ class CommonDrawer extends StatelessWidget {
                       .paddingOnly(left: Insets.i12)
                 ]).inkWell(onTap: () => homeCtrl.onTapWatch()),
               ...homeCtrl.drawerList.asMap().entries.map((e) {
-
+log("guest: ${appCtrl.isGuestLogin}");
                 return e.value["title"] == "chatBot"
                     ? appCtrl.firebaseConfigModel!.isChatShow!
                         ? DrawerListCommon(data: e.value, index: e.key)
                         : Container()
-                    : e.value["title"] == "chatHistory"
+
+                    : e.key == 1 && appCtrl.isGuestLogin ? Container() : (e.value["title"] == "chatHistory")
                         ? appCtrl.firebaseConfigModel!.isChatHistory!
                             ? DrawerListCommon(data: e.value, index: e.key)
                             : Container()
+
                         : e.value["title"] == "option2"
                             ? appCtrl.firebaseConfigModel!.isImageGeneratorShow!
                                 ? DrawerListCommon(data: e.value, index: e.key)
                                 : Container()
+
                             : e.value["title"] == "option3"
                                 ? appCtrl.firebaseConfigModel!
                                         .isImageGeneratorShow!
