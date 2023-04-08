@@ -15,7 +15,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
 
 
       },
@@ -35,6 +35,7 @@ class ApiServices {
     print("hello chat");
     print(
         "Chat respons   =======${jsonDecode(utf8.decode(response.bodyBytes))}");
+    log("STATUS : ${response.statusCode}");
     // Do something with the response
     Map<String, dynamic> newresponse =
         jsonDecode(utf8.decode(response.bodyBytes));

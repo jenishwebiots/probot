@@ -89,7 +89,8 @@ class ChatLayoutController extends GetxController
     data = appCtrl.storage.read(session.selectedCharacter);
 
     backgroundList = appArray.backgroundList;
-    selectedImage = appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
+    selectedImage =
+        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     speech = SpeechToText();
     update();
     log("chatList : $chatId");
@@ -97,7 +98,6 @@ class ChatLayoutController extends GetxController
         appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
-
 
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -221,7 +221,7 @@ class ChatLayoutController extends GetxController
 
   getChatId() {
     selectedImage =
-        appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
+        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     chatId = Get.arguments ?? DateTime.now().millisecondsSinceEpoch.toString();
     update();
   }
@@ -229,6 +229,7 @@ class ChatLayoutController extends GetxController
   //process for chat
   processChat() async {
     int createdDate = DateTime.now().millisecondsSinceEpoch;
+    //chat, image and text completion count as per subscription or not
     if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
       int chatCount = int.parse(appCtrl.envConfig["chatTextCount"].toString());
 
@@ -243,6 +244,7 @@ class ChatLayoutController extends GetxController
     speechStopMethod();
     addTextCount();
     log("CONFIG L:${appCtrl.envConfig}");
+    // add this data for guest
     messages.value.add(
       ChatMessage(
           text: chatController.text,
@@ -264,6 +266,8 @@ class ChatLayoutController extends GetxController
     int i = messages.value.indexWhere(
         (element) => element.chatMessageType == ChatMessageType.loading);
     bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin);
+
+    log("isGuestLogin : $isGuestLogin");
     if (i < 0) {
       Future.delayed(const Duration(milliseconds: 5));
       log("i : $i");
@@ -277,18 +281,21 @@ class ChatLayoutController extends GetxController
       itemCount.value = messages.value.length;
       update();
     }
+
+    //store data in firebase
     textInput.value = chatController.text;
     if (!isGuestLogin) {
-      FirebaseFirestore.instance
+      log("chatId : $chatId");
+      await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection("chats")
           .where("chatId", isEqualTo: chatId)
           .limit(1)
           .get()
-          .then((valueCheck) {
+          .then((valueCheck) async {
         if (valueCheck.docs.isEmpty) {
-          FirebaseFirestore.instance
+          await FirebaseFirestore.instance
               .collection("users")
               .doc(FirebaseAuth.instance.currentUser!.uid)
               .collection("chats")
@@ -298,8 +305,8 @@ class ChatLayoutController extends GetxController
             'message': textInput.value,
             'chatId': chatId,
             "createdDate": createdDate,
-          }).then((add) {
-            FirebaseFirestore.instance
+          }).then((add) async {
+            await FirebaseFirestore.instance
                 .collection("chatHistory")
                 .doc(chatId)
                 .collection("chats")
@@ -310,12 +317,12 @@ class ChatLayoutController extends GetxController
               'chatId': chatId,
               "createdDate": createdDate,
               "messageType": ChatMessageType.user.name
-            }).then((values) {
-              deleteLoading();
+            }).then((values) async {
+              await deleteLoading();
             });
           });
         } else {
-          FirebaseFirestore.instance
+          await FirebaseFirestore.instance
               .collection("users")
               .doc(FirebaseAuth.instance.currentUser!.uid)
               .collection("chats")
@@ -326,8 +333,8 @@ class ChatLayoutController extends GetxController
             'message': textInput.value,
             'chatId': chatId,
             "createdDate": createdDate,
-          }).then((values) {
-            FirebaseFirestore.instance
+          }).then((values) async {
+            await FirebaseFirestore.instance
                 .collection("chatHistory")
                 .doc(chatId)
                 .collection("chats")
@@ -338,8 +345,8 @@ class ChatLayoutController extends GetxController
               'chatId': chatId,
               "createdDate": createdDate,
               "messageType": ChatMessageType.user.name
-            }).then((addVal) {
-              deleteLoading();
+            }).then((addVal) async {
+              await deleteLoading();
             });
           });
         }
@@ -350,10 +357,13 @@ class ChatLayoutController extends GetxController
     chatController.clear();
     scrollDown();
     update();
-    ApiServices.chatCompeletionResponse(chatController.text).then((value) {
+    await Future.delayed(const Duration(milliseconds: 3));
+    ApiServices.chatCompeletionResponse(textInput.value)
+        .then((value) async {
+      log("RESPONSE : $value");
       if (value == "") {
         if (!isGuestLogin) {
-          FirebaseFirestore.instance
+          await FirebaseFirestore.instance
               .collection("chatHistory")
               .doc(chatId)
               .collection("chats")
@@ -361,8 +371,8 @@ class ChatLayoutController extends GetxController
               .limit(1)
               .get()
               .then((loadVal) {
-            log("LOAD DATA : ${loadVal.docs[0]}");
             if (loadVal.docs.isNotEmpty) {
+              log("LOAD DATA : ${loadVal.docs[0].id}");
               FirebaseFirestore.instance
                   .collection("chatHistory")
                   .doc(chatId)
@@ -433,12 +443,13 @@ class ChatLayoutController extends GetxController
 
       update();
     });
-
+    scrollDown();
     Get.forceAppUpdate();
     update();
   }
 
   deleteLoading() async {
+    log("DELETE");
     FirebaseFirestore.instance
         .collection("chatHistory")
         .doc(chatId)
@@ -448,6 +459,7 @@ class ChatLayoutController extends GetxController
         .get()
         .then((loadVal) {
       if (loadVal.docs.isNotEmpty) {
+        log("DELETE1");
         FirebaseFirestore.instance
             .collection("chatHistory")
             .doc(chatId)
@@ -469,6 +481,7 @@ class ChatLayoutController extends GetxController
           });
         });
       } else {
+        log("DELETE2");
         FirebaseFirestore.instance
             .collection("chatHistory")
             .doc(chatId)

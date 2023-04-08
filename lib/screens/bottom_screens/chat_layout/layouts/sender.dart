@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:intl/intl.dart';
 import 'package:probot/widgets/common_volume.dart';
@@ -15,7 +15,6 @@ class Sender extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
-      log("SENDER: ${chatListModel["message"]}");
       return Align(
               alignment: Alignment.centerRight,
               child: Column(

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../config.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AllTextForm extends StatelessWidget {
   const AllTextForm({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/config.dart';
 
-import 'layouts/quick_advisor_layout.dart';
 
 class Home extends StatelessWidget {
   final homeCtrl = Get.put(HomeController());

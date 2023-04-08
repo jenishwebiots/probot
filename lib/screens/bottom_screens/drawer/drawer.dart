@@ -48,29 +48,20 @@ class CommonDrawer extends StatelessWidget {
                       .paddingOnly(left: Insets.i12)
                 ]).inkWell(onTap: () => homeCtrl.onTapWatch()),
               ...homeCtrl.drawerList.asMap().entries.map((e) {
-log("guest: ${appCtrl.isGuestLogin}");
+                log("guest: ${appCtrl.isGuestLogin}");
                 return e.value["title"] == "chatBot"
                     ? appCtrl.firebaseConfigModel!.isChatShow!
                         ? DrawerListCommon(data: e.value, index: e.key)
                         : Container()
-
-                    : e.key == 1 && appCtrl.isGuestLogin ? Container() : (e.value["title"] == "chatHistory")
-                        ? appCtrl.firebaseConfigModel!.isChatHistory!
+                    : e.value["title"] == "option2"
+                        ? appCtrl.firebaseConfigModel!.isImageGeneratorShow!
                             ? DrawerListCommon(data: e.value, index: e.key)
                             : Container()
-
-                        : e.value["title"] == "option2"
+                        : e.value["title"] == "option3"
                             ? appCtrl.firebaseConfigModel!.isImageGeneratorShow!
                                 ? DrawerListCommon(data: e.value, index: e.key)
                                 : Container()
-
-                            : e.value["title"] == "option3"
-                                ? appCtrl.firebaseConfigModel!
-                                        .isImageGeneratorShow!
-                                    ? DrawerListCommon(
-                                        data: e.value, index: e.key)
-                                    : Container()
-                                : DrawerListCommon(data: e.value, index: e.key);
+                            : DrawerListCommon(data: e.value, index: e.key);
               }).toList()
             ]).paddingSymmetric(vertical: Insets.i30),
             const BottomLayout()
