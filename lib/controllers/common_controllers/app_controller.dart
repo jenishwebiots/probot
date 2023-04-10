@@ -59,7 +59,7 @@ class AppController extends GetxController {
       dashboardCtrl.onBottomTap(4);
     } else if (data["title"] == "chatHistory") {
      if(appCtrl.isGuestLogin){
-       Get.offAllNamed(routeName.signInScreen);
+       Get.toNamed(routeName.signInScreen);
      }else{
        Get.toNamed(routeName.chatHistory);
      }

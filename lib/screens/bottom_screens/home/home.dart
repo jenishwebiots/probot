@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
                   ]).marginSymmetric(horizontal: Sizes.s20)
             ])),
             if (appCtrl.firebaseConfigModel!.isAddShow!)
-              if (homeCtrl.bannerAd != null)
+              if (homeCtrl.bannerAd != null && homeCtrl.bannerAdIsLoaded)
                 AdWidget(ad: homeCtrl.bannerAd!)
                     .height(Sizes.s50)
                     .paddingOnly(bottom: Insets.i10)

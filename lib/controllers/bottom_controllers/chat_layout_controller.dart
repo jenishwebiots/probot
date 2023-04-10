@@ -109,6 +109,8 @@ class ChatLayoutController extends GetxController
     super.onReady();
   }
 
+
+
   //clear data while go back
   clearData() {
     speechStopMethod();
@@ -125,6 +127,8 @@ class ChatLayoutController extends GetxController
   void dispose() {
     super.dispose();
     _interstitialAd?.dispose();
+    bannerAd?.dispose();
+    bannerAd=null;
   }
 
   //initialize interstitial add

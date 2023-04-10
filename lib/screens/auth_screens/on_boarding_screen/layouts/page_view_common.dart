@@ -25,9 +25,9 @@ class PageViewCommon extends StatelessWidget {
           SizedBox(
               height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.5,
               width: double.infinity,
-              child: Image.asset(data["image"], fit: BoxFit.fill))
+              child: Image.asset(data["image"], fit: BoxFit.contain))
         ]),
-        const VSpace(Sizes.s40),
+        const VSpace(Sizes.s20),
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List<Widget>.generate(

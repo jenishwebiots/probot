@@ -8,6 +8,7 @@ import '../../config.dart';
 class SettingController extends GetxController {
   List drawerList = [];
   List settingList = [];
+  bool isLoading = false;
   String? name, userName, firebaseUser;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -40,7 +41,7 @@ class SettingController extends GetxController {
   onSettingTap(data) async {
     if (data['title'] == "myAccount") {
       if (appCtrl.isGuestLogin) {
-        Get.offAllNamed(routeName.signInScreen);
+        Get.toNamed(routeName.signInScreen);
       } else {
         Get.toNamed(routeName.myAccountScreen);
       }
@@ -65,7 +66,7 @@ class SettingController extends GetxController {
           iOSAppId: " ${appCtrl.firebaseConfigModel!.rateAppIOSId}");
     } else if (data['title'] == "subscriptionPlan") {
       if (appCtrl.isGuestLogin) {
-        Get.offAllNamed(routeName.signInScreen);
+        Get.toNamed(routeName.signInScreen);
       } else {
         FirebaseFirestore.instance
             .collection("userSubscribe")

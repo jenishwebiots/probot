@@ -43,7 +43,7 @@ class ChatLayout extends StatelessWidget {
                     children: [
                       const VSpace(Sizes.s10),
                       if (appCtrl.firebaseConfigModel!.isAddShow!)
-                        if (chatCtrl.bannerAd != null)
+                        if (chatCtrl.bannerAd != null && chatCtrl.bannerAdIsLoaded)
                           AdWidget(ad: chatCtrl.bannerAd!)
                               .height(Sizes.s50)
                               .paddingOnly(bottom: Insets.i10)
