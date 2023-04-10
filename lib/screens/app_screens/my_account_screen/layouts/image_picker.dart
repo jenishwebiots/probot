@@ -1,5 +1,5 @@
 import '../../../../config.dart';
-import '../icon_creation.dart';
+import 'icon_creation.dart';
 
 class ImagePickerLayout extends StatelessWidget {
   final GestureTapCallback? cameraTap,galleryTap;

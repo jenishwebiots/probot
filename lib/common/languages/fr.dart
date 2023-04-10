@@ -374,4 +374,10 @@ final dynamic fr = {
   'travelHangout' : "Voyage/séjour",
 
   'refundPolicy' : "Politique de remboursement",
+  'translate': "Traduire",
+  'camera': "Caméra",
+  'gallery': "Galerie",
+  'noInternet': "Oops !! Pas d'Internet",
+  'retry': "Recommencez",
+  'noInternetDesc': "Impossible de se connecter à Internet.\nVeuillez vérifier vos paramètres de connexion Internet.",
 };

@@ -1,4 +1,4 @@
-import '../../../../../../config.dart';
+import '../../../../../../../config.dart';
 
 class IconCreation extends StatelessWidget {
   final IconData? icons;

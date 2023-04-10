@@ -368,4 +368,10 @@ final dynamic ge = {
   'travelHangout' : "Reisen/Treffen",
 
   'refundPolicy' : "Rückgaberecht",
+  'translate': "Übersetzen",
+  'camera': "Kamera",
+  'gallery': "Galerie",
+  'noInternet': "Hoppla !! Kein Internet",
+  'retry': "Wiederholen",
+  'noInternetDesc': "Es konnte keine Internetverbindung hergestellt werden.\nBitte überprüfen Sie Ihre Internetverbindungseinstellungen.",
 };

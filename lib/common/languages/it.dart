@@ -369,4 +369,10 @@ final dynamic it = {
   'travelHangout' : "Viaggio/ritrovo",
 
   'refundPolicy' : "Politica di rimborso",
+  'translate': "Tradurre",
+  'camera': "Telecamera",
+  'gallery': "Galleria",
+  'noInternet': "Ops!! Senza internet",
+  'retry': "Riprova",
+  'noInternetDesc': "Impossibile connettersi a Internet.\nVerificare le impostazioni della connessione Internet.",
 };

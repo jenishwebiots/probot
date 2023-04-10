@@ -19,15 +19,15 @@ class PageViewCommon extends StatelessWidget {
                   .textColor(appCtrl.appTheme.lightText))
               .inkWell(onTap: () => onBoardingCtrl.pageCtrl.jumpToPage(2))
               .paddingOnly(
-              top: Insets.i50, bottom: Insets.i12, right: Insets.i12)
+              top: Insets.i50, bottom: Insets.i10, right: Insets.i12)
               : const Text("").paddingOnly(
-              top: Insets.i50, bottom: Insets.i12, right: Insets.i12),
+              top: Insets.i50, bottom: Insets.i10, right: Insets.i12),
           SizedBox(
               height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.5,
               width: double.infinity,
-              child: Image.asset(data["image"], fit: BoxFit.contain))
+              child: Image.asset(data["image"], fit: BoxFit.fill))
         ]),
-        const VSpace(Sizes.s20),
+        const VSpace(Sizes.s34),
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List<Widget>.generate(
