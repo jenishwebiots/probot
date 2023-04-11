@@ -374,4 +374,9 @@ final dynamic ge = {
   'noInternet': "Hoppla !! Kein Internet",
   'retry': "Wiederholen",
   'noInternetDesc': "Es konnte keine Internetverbindung hergestellt werden.\nBitte überprüfen Sie Ihre Internetverbindungseinstellungen.",
+
+  'yes' : "Ja",
+  'no' : "NEIN",
+  'alert' : "Alarm!",
+  'deleteConfirmation' : "Möchten Sie dieses Konto wirklich löschen?",
 };

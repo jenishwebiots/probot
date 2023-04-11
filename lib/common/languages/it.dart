@@ -375,4 +375,9 @@ final dynamic it = {
   'noInternet': "Ops!! Senza internet",
   'retry': "Riprova",
   'noInternetDesc': "Impossibile connettersi a Internet.\nVerificare le impostazioni della connessione Internet.",
+
+  'yes' : "SÌ",
+  'no' : "NO",
+  'alert' : "Mettere in guardia!",
+  'deleteConfirmation' : "Sei sicuro di voler eliminare questo account?",
 };

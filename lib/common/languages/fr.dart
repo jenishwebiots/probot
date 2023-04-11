@@ -380,4 +380,9 @@ final dynamic fr = {
   'noInternet': "Oops !! Pas d'Internet",
   'retry': "Recommencez",
   'noInternetDesc': "Impossible de se connecter à Internet.\nVeuillez vérifier vos paramètres de connexion Internet.",
+
+  'yes' : "Oui",
+  'no' : "Non",
+  'alert' : "Alerte!",
+  'deleteConfirmation' : "Voulez-vous vraiment supprimer ce compte?",
 };

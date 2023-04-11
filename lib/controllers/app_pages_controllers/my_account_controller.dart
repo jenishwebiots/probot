@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../config.dart';
+import '../../screens/app_screens/my_account_screen/layouts/delete_account_alert.dart';
 import '../../screens/app_screens/my_account_screen/layouts/image_picker.dart';
 
 class MyAccountController extends GetxController {
@@ -23,13 +24,50 @@ class MyAccountController extends GetxController {
 
   deleteAccount() async {
     try {
-      await FirebaseAuth.instance.currentUser!.delete();
+      /* FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .delete();
+*/
       Get.offAllNamed(routeName.loginScreen);
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("chats")
+          .get()
+          .then((value) {
+        if (value.docs.isNotEmpty) {
+          value.docs.asMap().entries.forEach((element) {
+            if (element.value.data()["chatId"] != null) {
+              FirebaseFirestore.instance
+                  .collection("chatHistory")
+                  .doc(element.value.data()["chatId"])
+                  .delete();
+            }
+          });
+        }
+      }).then((value) async {
+        Get.offAllNamed(routeName.loginScreen);
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .delete();
+      });
+
+      await FirebaseAuth.instance.currentUser!.delete().then(
+          (value) => Fluttertoast.showToast(msg: 'Delete User Successfully'));
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         log('The user must reauthenticate before this operation can be executed.');
       }
     }
+  }
+
+
+  //delete chat layout
+  Widget buildPopupDialog() {
+    return const DeleteAlert();
   }
 
   onUpdate() {
@@ -59,10 +97,8 @@ class MyAccountController extends GetxController {
           });
         }
       }
-    });
+    }).then((value) => Fluttertoast.showToast(msg: 'Data Upload Successfully'));
   }
-
-
 
   @override
   void onReady() {
@@ -81,16 +117,13 @@ class MyAccountController extends GetxController {
     super.onReady();
   }
 
-
-
-
   //image picker option
   imagePickerOption(BuildContext context) {
     showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.vertical(top: Radius.circular(AppRadius.r25)),
+              BorderRadius.vertical(top: Radius.circular(AppRadius.r25)),
         ),
         builder: (BuildContext context) {
           // return your layout
@@ -104,7 +137,6 @@ class MyAccountController extends GetxController {
         });
   }
 
-
 // GET IMAGE FROM GALLERY
   Future getImage(source) async {
     final ImagePicker picker = ImagePicker();
@@ -115,7 +147,6 @@ class MyAccountController extends GetxController {
       uploadFile();
     }
   }
-
 
 // UPLOAD SELECTED IMAGE TO FIREBASE
   Future uploadFile() async {
@@ -130,22 +161,19 @@ class MyAccountController extends GetxController {
     uploadTask.then((res) {
       log("res : $res");
       res.ref.getDownloadURL().then((downloadUrl) async {
-       appCtrl.storage.write("image", downloadUrl);
+        appCtrl.storage.write("image", downloadUrl);
 
         await FirebaseFirestore.instance
             .collection('users')
             .doc(id)
-            .update({'image': downloadUrl}).then((value) {
-        });
+            .update({'image': downloadUrl}).then((value) {});
         isLoading = false;
         update();
-        update();
+        Fluttertoast.showToast(msg: 'Image Upload Successfully');
       }, onError: (err) {
         update();
         Fluttertoast.showToast(msg: 'Image is Not Valid');
       });
     });
   }
-
-
 }

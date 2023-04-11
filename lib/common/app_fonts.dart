@@ -326,6 +326,10 @@ class AppFonts {
   String noInternet = "noInternet";
   String noInternetDesc = "noInternetDesc";
   String retry = "retry";
+  String yes = "yes";
+  String no = "no";
+  String alert = "alert";
+  String deleteConfirmation = "deleteConfirmation";
 
 
   String thereAreAwardLeft(val) =>

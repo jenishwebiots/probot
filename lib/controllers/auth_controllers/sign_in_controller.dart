@@ -63,7 +63,7 @@ class SignInController extends GetxController {
       FirebaseFirestore.instance.collection('users').doc(user.uid).set({
         'logintype': "Google",
         'nickname': user.displayName,
-        'email': user.email,
+        'email': userNameGoogle,
         'phone': user.phoneNumber,
         'id': user.uid
       });
@@ -110,7 +110,7 @@ class SignInController extends GetxController {
                 .set({
               'logintype': "Email",
               'nickname': firebaseUser.user!.displayName,
-              'email': firebaseUser.user!.email,
+              'email': userName,
               'phone': firebaseUser.user!.phoneNumber,
               'id': firebaseUser.user!.uid
             });

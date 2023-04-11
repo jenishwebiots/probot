@@ -41,7 +41,7 @@ project.ext {
     KEYSTORE_STORE_PASSWORD = keystoreProperties['storePassword']
     KEYSTORE_KEY_ALIAS = keystoreProperties['keyAlias']
     KEYSTORE_KEY_PASSWORD = keystoreProperties['keyPassword']
-    VERSION_CODE = configured ? keystoreProperties['versionCode'].toInteger() : 13
+    VERSION_CODE = configured ? keystoreProperties['versionCode'].toInteger() : 14
     VERSION_NAME = configured ? keystoreProperties['versionName'] : "1.0.0"
 }
 
@@ -83,7 +83,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 13
+        versionCode 14
         versionName "1.0.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

@@ -355,4 +355,8 @@ final dynamic ja = {
   'retry': "リトライ",
   'noInternetDesc': "インターネットに接続できませんでした。\nインターネット接続の設定を確認してください。",
 
+  'yes' : "はい",
+  'no' : "いいえ",
+  'alert' : "警告！",
+  'deleteConfirmation' : "このアカウントを削除してもよろしいですか?",
 };

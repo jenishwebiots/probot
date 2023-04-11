@@ -11,8 +11,12 @@ class PageViewCommon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OnBoardingController>(builder: (onBoardingCtrl) {
-      return Column(children: [
-        Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+        Stack(
+            alignment: Alignment.topRight,
+            children: [
           onBoardingCtrl.selectIndex != 2
               ? Text(appFonts.skip.tr,
               style: AppCss.outfitMedium16
@@ -23,11 +27,11 @@ class PageViewCommon extends StatelessWidget {
               : const Text("").paddingOnly(
               top: Insets.i50, bottom: Insets.i10, right: Insets.i12),
           SizedBox(
-              height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.5,
-              width: double.infinity,
-              child: Image.asset(data["image"], fit: BoxFit.fill))
+              height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
+              width:MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
+              child: Image.asset(data["image"], fit: BoxFit.fill)).paddingOnly(top: Insets.i45)
         ]),
-        const VSpace(Sizes.s34),
+
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List<Widget>.generate(
@@ -96,7 +100,7 @@ class PageViewCommon extends StatelessWidget {
                 appCtrl.appTheme.secondary,
                 appCtrl.appTheme.primary
               ], center: const Alignment(-0.9, -0.4)))
-        ])
+        ]).marginOnly(bottom: Insets.i3)
       ]);
     });
   }

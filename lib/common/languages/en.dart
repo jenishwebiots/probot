@@ -381,4 +381,9 @@ final dynamic en = {
   'noInternet': "Oops !! No internet",
   'retry': "Retry",
   'noInternetDesc': "Couldn't connect to the internet.\nPlease check your internet connection settings.",
+
+  'yes' : "Yes",
+  'no' : "No",
+  'alert' : "Alert!",
+  'deleteConfirmation' : "Are you sure you want to delete this account?",
 };
