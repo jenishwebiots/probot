@@ -24,11 +24,7 @@ class MyAccountController extends GetxController {
 
   deleteAccount() async {
     try {
-      /* FirebaseFirestore.instance
-          .collection("users")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .delete();
-*/
+
       Get.offAllNamed(routeName.loginScreen);
       await FirebaseFirestore.instance
           .collection("users")
@@ -55,7 +51,7 @@ class MyAccountController extends GetxController {
       });
 
       await FirebaseAuth.instance.currentUser!.delete().then(
-          (value) => Fluttertoast.showToast(msg: 'Delete User Successfully'));
+          (value) => Fluttertoast.showToast(msg: appFonts.deleteUserSuccessfully.tr));
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
@@ -97,7 +93,7 @@ class MyAccountController extends GetxController {
           });
         }
       }
-    }).then((value) => Fluttertoast.showToast(msg: 'Data Upload Successfully'));
+    }).then((value) => Fluttertoast.showToast(msg: appFonts.dataUploadSuccessfully.tr));
   }
 
   @override
@@ -169,7 +165,7 @@ class MyAccountController extends GetxController {
             .update({'image': downloadUrl}).then((value) {});
         isLoading = false;
         update();
-        Fluttertoast.showToast(msg: 'Image Upload Successfully');
+        Fluttertoast.showToast(msg: appFonts.imageUploadSuccessfully.tr);
       }, onError: (err) {
         update();
         Fluttertoast.showToast(msg: 'Image is Not Valid');

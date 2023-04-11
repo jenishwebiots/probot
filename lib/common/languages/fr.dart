@@ -385,4 +385,7 @@ final dynamic fr = {
   'no' : "Non",
   'alert' : "Alerte!",
   'deleteConfirmation' : "Voulez-vous vraiment supprimer ce compte?",
+  'deleteUserSuccessfully' : "Supprimer l'utilisateur avec succès",
+  'dataUploadSuccessfully' : "Téléchargement des données réussi",
+  'imageUploadSuccessfully' : "Téléchargement d'image réussi",
 };

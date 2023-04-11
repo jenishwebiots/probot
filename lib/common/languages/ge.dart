@@ -379,4 +379,7 @@ final dynamic ge = {
   'no' : "NEIN",
   'alert' : "Alarm!",
   'deleteConfirmation' : "Möchten Sie dieses Konto wirklich löschen?",
+  'deleteUserSuccessfully' : "Benutzer erfolgreich gelöscht",
+  'dataUploadSuccessfully' : "Daten-Upload erfolgreich",
+  'imageUploadSuccessfully' : "Bild-Upload erfolgreich",
 };

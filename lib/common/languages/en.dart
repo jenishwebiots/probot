@@ -386,4 +386,7 @@ final dynamic en = {
   'no' : "No",
   'alert' : "Alert!",
   'deleteConfirmation' : "Are you sure you want to delete this account?",
+  'deleteUserSuccessfully' : "User Delete Successfully",
+  'dataUploadSuccessfully' : "Data Upload Successfully",
+  'imageUploadSuccessfully' : "Image Upload Successfully",
 };

@@ -380,4 +380,7 @@ final dynamic it = {
   'no' : "NO",
   'alert' : "Mettere in guardia!",
   'deleteConfirmation' : "Sei sicuro di voler eliminare questo account?",
+  'deleteUserSuccessfully' : "Eliminazione dell'utente riuscita",
+  'dataUploadSuccessfully' : "Caricamento dati riuscito",
+  'imageUploadSuccessfully' : "Caricamento immagine riuscito",
 };

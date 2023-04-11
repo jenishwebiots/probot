@@ -380,4 +380,7 @@ final dynamic hi = {
   'no' : "नहीं",
   'alert' : "चेतावनी!",
   'deleteConfirmation' : "क्या आप वाकई इस खाते को हटाना चाहते हैं?",
+  'deleteUserSuccessfully' : "उपयोगकर्ता सफलतापूर्वक हटाएं",
+  'dataUploadSuccessfully' : "डेटा अपलोड सफलतापूर्वक",
+  'imageUploadSuccessfully' : "छवि अपलोड सफलतापूर्वक",
 };

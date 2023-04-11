@@ -330,6 +330,9 @@ class AppFonts {
   String no = "no";
   String alert = "alert";
   String deleteConfirmation = "deleteConfirmation";
+  String deleteUserSuccessfully = "deleteUserSuccessfully";
+  String dataUploadSuccessfully = "dataUploadSuccessfully";
+  String imageUploadSuccessfully = "imageUploadSuccessfully";
 
 
   String thereAreAwardLeft(val) =>

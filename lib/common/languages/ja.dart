@@ -359,4 +359,7 @@ final dynamic ja = {
   'no' : "いいえ",
   'alert' : "警告！",
   'deleteConfirmation' : "このアカウントを削除してもよろしいですか?",
+  'deleteUserSuccessfully' : "ユーザーが正常に削除されました",
+  'dataUploadSuccessfully' : "データアップロード成功",
+  'imageUploadSuccessfully' : "画像アップロード成功",
 };
