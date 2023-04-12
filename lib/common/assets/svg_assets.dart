@@ -104,8 +104,5 @@ class SvgAssets {
   final String language = "assets/svg/language.svg";
   final String caption = "assets/svg/caption.svg";
   final String hashtag = "assets/svg/hashtag.svg";
-
-
-
-
+  final String twitter = "assets/svg/twitter.svg";
 }

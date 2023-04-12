@@ -1,14 +1,25 @@
 import '../../config.dart';
 
 class SocialMediaController extends GetxController {
-    List socialMediaLists = [];
+  TextEditingController captionController = TextEditingController();
 
-    @override
+  List socialMediaLists = [];
+  List captionCreatorLists = [];
+  int selectedIndex = 0;
+
+  SfRangeValues values = const SfRangeValues(40, 60);
+
+  onCaptionChange(index) {
+    selectedIndex = index;
+    update();
+  }
+
+  @override
   void onReady() {
-      socialMediaLists = appArray.socialMediaList;
-      update();
+    captionCreatorLists = appArray.captionCreatorList;
+    socialMediaLists = appArray.socialMediaList;
+    update();
     // TODO: implement onReady
     super.onReady();
   }
-
 }

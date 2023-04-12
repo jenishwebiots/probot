@@ -258,8 +258,7 @@ class AppFonts {
   String yourContentWriting = "yourContentWriting";
 
   String otpVerification = "otpVerification";
-  String weHaveSentTheCode =
-      "weHaveSentTheCode";
+  String weHaveSentTheCode = "weHaveSentTheCode";
   String verifyProceed = "verifyProceed";
   String dontReciveOtp = "dontReciveOtp";
   String resendIt = "resendIt";
@@ -328,57 +327,60 @@ class AppFonts {
   String endTranslation = "End Translation";
   String areYouSure = "Are you sure you want to end this translation ?";
   String end = "End";
-  String selectLanguageAnd  = "Select language and write stuff to translation :";
-  String select  = "Select";
-  String noItemFound  = "No item found";
-  String typeAnythingTo  = "Type anything to view a remarkable code :";
-  String writeStuff  = "Write stuff you want covert in code :";
-  String createMagicalCode  = "Create magical code";
-  String weCreatedIncredible  = "We've created incredible code for you :";
-  String generatedCode  = "Generated code";
-  String endCodeGenerator  = "End code generator";
-  String areYouSureEndCodeGenerator  = "Are you sure you want to end this code generator ?";
-  String emailWriter  = "Email Writer";
-  String toGetTheExcellent  = "To get the excellent mail, write your subject :";
-  String writeFrom  = "Write from";
-  String writeTo  = "Write to";
-  String tone  = "Tone";
-  String business  = "Business";
-  String general  = "General";
-  String academic  = "Academic";
-  String casual  = "Casual";
-  String mailLength  = "Mail length";
-  String small  = "Small";
-  String medium  = "Medium";
-  String large  = "Large";
-  String myFitnessMail  = "My finest mail, please !";
-  String weCreatedLetter  = "We've created an awesome letter for you :";
-  String generatedMail  = "Generated mail";
-  String endEmailWriter  = "End email writer";
-  String selectCodeLanguage  = "Select Code Language";
-  String enterValue  = "Enter value";
-  String areYouSureEndEmail  = "Are you sure you want to end this email writing ?";
-  String chooseOneOfThese  = "Choose one of these to create a fantastic post :";
-  String captionAbout  = "Caption about post";
-  String getMusicSuggestion  = "Get music suggestion";
-  String findTheBest  = "Find the best #hashtag";
-  String captionCreator  = "Caption Creator";
-  String fillUpTheForm  = "Fill up the form to get the most suitable caption :";
-  String selectPlatform  = "Select platform :";
-  String instagram  = "Instagram";
-  String twitter  = "Twitter";
-  String writeDetail  = "Write detail about photo :";
-  String targetedAudience  = "Targeted audience :";
-  String captionTone  = "Caption tone";
-  String funny  = "Funny";
-  String serious  = "Serious";
-  String informative  = "Informative";
-  String bringMeTheBest  = "Bring me the best lines";
-  String fantasticSuggestion  = "Fantastic suggestion for your post :";
-  String amazingCaption  = "Amazing caption";
-  String endCaptionGenerator  = "End caption generator";
+  String selectLanguageAnd = "Select language and write stuff to translation :";
+  String select = "Select";
+  String noItemFound = "No item found";
+  String typeAnythingTo = "Type anything to view a remarkable code :";
+  String writeStuff = "Write stuff you want covert in code :";
+  String createMagicalCode = "Create magical code";
+  String weCreatedIncredible = "We've created incredible code for you :";
+  String generatedCode = "Generated code";
+  String endCodeGenerator = "End code generator";
+  String areYouSureEndCodeGenerator =
+      "Are you sure you want to end this code generator ?";
+  String emailWriter = "Email Writer";
+  String toGetTheExcellent = "To get the excellent mail, write your subject :";
+  String writeFrom = "Write from";
+  String writeTo = "Write to";
+  String tone = "Tone";
+  String business = "Business";
+  String general = "General";
+  String academic = "Academic";
+  String casual = "Casual";
+  String mailLength = "Mail length";
+  String small = "Small";
+  String medium = "Medium";
+  String large = "Large";
+  String myFitnessMail = "My finest mail, please !";
+  String weCreatedLetter = "We've created an awesome letter for you :";
+  String generatedMail = "Generated mail";
+  String endEmailWriter = "End email writer";
+  String selectCodeLanguage = "Select Code Language";
+  String enterValue = "Enter value";
+  String areYouSureEndEmail =
+      "Are you sure you want to end this email writing ?";
+  String chooseOneOfThese = "Choose one of these to create a fantastic post :";
+  String captionAbout = "Caption about post";
+  String getMusicSuggestion = "Get music suggestion";
+  String findTheBest = "Find the best #hashtag";
+  String captionCreator = "Caption Creator";
+  String fillUpTheForm = "Fill up the form to get the most suitable caption :";
+  String selectPlatform = "Select platform :";
+  String instagram = "Instagram";
+  String twitter = "Twitter";
+  String writeDetail = "Write detail about photo :";
+  String targetedAudience = "Targeted audience :";
+  String captionTone = "Caption tone";
+  String funny = "Funny";
+  String serious = "Serious";
+  String informative = "Informative";
+  String bringMeTheBest = "Bring me the best lines";
+  String fantasticSuggestion = "Fantastic suggestion for your post :";
+  String amazingCaption = "Amazing caption";
+  String endCaptionGenerator = "End caption generator";
   String endCaptionCreator = "End Caption Creator";
-  String areYouSureEndCaption = "Are you sure you want to end this caption creator ?";
+  String areYouSureEndCaption =
+      "Are you sure you want to end this caption creator ?";
   String musicForPost = "Music for post";
   String acquireTheRight = "Acquire the right soundtrack for your post :";
   String selectMusic = "Select music category :";
@@ -386,7 +388,8 @@ class AppFonts {
   String highestQuality = "Highest quality post-production music :";
   String musicSuggestion = "Music suggestion";
   String endMusicGeneration = "End music generation";
-  String areYouSureEndMusic = "Are you sure you want to end this music generator ?";
+  String areYouSureEndMusic =
+      "Are you sure you want to end this music generator ?";
   String hashTagsForPost = "Hashtag for post";
   String fillBelowToRight = "Fill below to have right hashtag for your post";
   String describeYourPost = "Describe your post :";
@@ -395,8 +398,9 @@ class AppFonts {
   String itMayTakeUpTo = "It may take up to 30 sec to generate content.";
   String hashtagsForYou = "Hashtags for you :";
   String endHashtagBuilder = "End hashtags builder";
-  String areYouSureEndHashtag = "Are you sure you want to end this hashtag builder ?";
-
+  String areYouSureEndHashtag =
+      "Are you sure you want to end this hashtag builder ?";
+  String fbHalf = "Fb";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

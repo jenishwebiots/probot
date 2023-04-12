@@ -459,7 +459,7 @@ class AppArray {
     {"icon": eSvgAssets.essay, "title": appFonts.essayWriter}
   ];
 
-  static final List <String> translateLanguages = [
+  static final List<String> translateLanguages = [
     'Abkhaz',
     'Afar',
     'Afrikaans',
@@ -645,10 +645,10 @@ class AppArray {
   ];
 
   var toneList = [
-         "business",
-         "general",
-         "academic",
-         "casual",
+    "business",
+    "general",
+    "academic",
+    "casual",
   ];
 
   var mailLengthList = [
@@ -658,18 +658,14 @@ class AppArray {
   ];
 
   var socialMediaList = [
-    {
-      "image": eSvgAssets.caption,
-      "title": appFonts.captionAbout
-    },
-    {
-      "image": eSvgAssets.music,
-      "title": appFonts.getMusicSuggestion
-    },
-    {
-      "image": eSvgAssets.hashtag,
-      "title": appFonts.findTheBest
-    },
+    {"image": eSvgAssets.caption, "title": appFonts.captionAbout},
+    {"image": eSvgAssets.music, "title": appFonts.getMusicSuggestion},
+    {"image": eSvgAssets.hashtag, "title": appFonts.findTheBest},
   ];
 
+  var captionCreatorList = [
+    {"image": eSvgAssets.insta, "title": appFonts.insta},
+    {"image": eSvgAssets.fb, "title": appFonts.fbHalf},
+    {"image": eSvgAssets.twitter, "title": appFonts.twitter},
+  ];
 }

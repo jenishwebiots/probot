@@ -2,6 +2,7 @@ import 'package:probot/screens/app_screens/code_generator_screen/code_generator_
 import 'package:probot/screens/app_screens/social_media_screen/social_media_screen.dart';
 
 import '../config.dart';
+import '../screens/app_screens/caption_creator_screen/caption_creator_screen.dart';
 import '../screens/app_screens/email_generator_screen/email_generator_screen.dart';
 
 RouteName _routeName = RouteName();
@@ -44,15 +45,22 @@ class AppRoute {
         name: _routeName.privacyPolicyScreen,
         page: () => PrivacyPolicyScreen()),
     GetPage(name: _routeName.subscriptionPlanList, page: () => Subscription()),
-
-    GetPage(name: _routeName.subscriptionPlan, page: () => const SubscriptionPlan()),
+    GetPage(
+        name: _routeName.subscriptionPlan,
+        page: () => const SubscriptionPlan()),
     GetPage(name: _routeName.chatHistory, page: () => ChatHistoryScreen()),
     GetPage(name: _routeName.inAppList, page: () => InAppList()),
     GetPage(name: _routeName.quickAdvisor, page: () => QuickAdvisorScreen()),
     GetPage(name: _routeName.translateScreen, page: () => TranslateScreen()),
-    GetPage(name: _routeName.codeGeneratorScreen, page: () => CodeGeneratorScreen()),
-    GetPage(name: _routeName.emailWriterScreen, page: () => EmailGeneratorScreen()),
-    GetPage(name: _routeName.socialMediaScreen, page: () => SocialMediaScreen()),
-
+    GetPage(
+        name: _routeName.codeGeneratorScreen,
+        page: () => CodeGeneratorScreen()),
+    GetPage(
+        name: _routeName.emailWriterScreen, page: () => EmailGeneratorScreen()),
+    GetPage(
+        name: _routeName.socialMediaScreen, page: () => SocialMediaScreen()),
+    GetPage(
+        name: _routeName.captionCreatorScreen,
+        page: () => CaptionCreatorScreen()),
   ];
 }

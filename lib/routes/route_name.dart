@@ -30,6 +30,5 @@ class RouteName {
   final String codeGeneratorScreen = "/codeGeneratorScreen";
   final String emailWriterScreen = "/emailWriterScreen";
   final String socialMediaScreen = "/socialMediaScreen";
-
-
+  final String captionCreatorScreen = "/captionCreatorScreen";
 }
