@@ -62,7 +62,7 @@ class TopLayout extends StatelessWidget {
                       .asMap()
                       .entries
                       .map((e) => DropdownMenuItem(
-                          value: e.value, child: Text(e.value)))
+                          value: e.value, child: Text(e.value.toString().tr)))
                       .toList(),
                   onChanged: (val) {
                     imageGeneratorCtrl.viewValue = val.toString();

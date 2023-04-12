@@ -33,7 +33,7 @@ class TextFieldCommon extends StatelessWidget {
   Widget build(BuildContext context) {
     // Text field common
     return TextFormField(
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       style: AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt),
       focusNode: focusNode,
         obscureText: obscureText,

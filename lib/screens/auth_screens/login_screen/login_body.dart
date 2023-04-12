@@ -13,7 +13,7 @@ class LoginBody extends StatelessWidget {
                 .backgroundColor(appCtrl.appTheme.error),
             const HSpace(Sizes.s12),
             SizedBox(
-                width: Sizes.s300,
+                width: MediaQuery.of(context).size.height < 534 ? Sizes.s266 : Sizes.s300,
                 child: Text(appFonts.fastResponse.tr,
                     style: AppCss.outfitSemiBold22
                         .textColor(appCtrl.appTheme.txt)

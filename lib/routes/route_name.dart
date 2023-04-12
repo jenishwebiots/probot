@@ -27,6 +27,9 @@ class RouteName {
   final String inAppList = "/inAppList";
   final String quickAdvisor = "/quickAdvisor";
   final String translateScreen = "/translateScreen";
+  final String codeGeneratorScreen = "/codeGeneratorScreen";
+  final String emailWriterScreen = "/emailWriterScreen";
+  final String socialMediaScreen = "/socialMediaScreen";
 
 
 }

@@ -266,18 +266,18 @@ class AppArray {
 
   //background list
   var backgroundList = [
-    {"image": eImageAssets.background1,"darkImage": eImageAssets.dBg1},
-    {"image": eImageAssets.background2,"darkImage": eImageAssets.dBg2},
-    {"image": eImageAssets.background3,"darkImage": eImageAssets.dBg3},
-    {"image": eImageAssets.background4,"darkImage": eImageAssets.dBg4},
-    {"image": eImageAssets.background5,"darkImage": eImageAssets.dBg5},
-    {"image": eImageAssets.background6,"darkImage": eImageAssets.dBg6}
+    {"image": eImageAssets.background1, "darkImage": eImageAssets.dBg1},
+    {"image": eImageAssets.background2, "darkImage": eImageAssets.dBg2},
+    {"image": eImageAssets.background3, "darkImage": eImageAssets.dBg3},
+    {"image": eImageAssets.background4, "darkImage": eImageAssets.dBg4},
+    {"image": eImageAssets.background5, "darkImage": eImageAssets.dBg5},
+    {"image": eImageAssets.background6, "darkImage": eImageAssets.dBg6}
   ];
 
   //setting list
   var settingList = [
     {"icon": eSvgAssets.profile, "title": "myAccount"},
-    {"icon": eSvgAssets.selectCharacter,"title": "selectCharacter" },
+    {"icon": eSvgAssets.selectCharacter, "title": "selectCharacter"},
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
@@ -396,40 +396,44 @@ class AppArray {
     },
   ];
 
-
-
 // chat history
-var chatHistoryList = [
-  {
-    "icon": eImageAssets.sc1,
-    "title": appFonts.whatIsApp,
-    "subtitle": appFonts.min2,
-  },{
-    "icon": eImageAssets.sc2,
-    "title": appFonts.howToMake,
-    "subtitle": appFonts.min50,
-  },{
-    "icon": eImageAssets.sc3,
-    "title": appFonts.whatIsTheNext,
-    "subtitle": appFonts.yesterday,
-  },{
-    "icon": eImageAssets.sc4,
-    "title": appFonts.whoIsShahRukh,
-    "subtitle": appFonts.march26,
-  },{
-    "icon": eImageAssets.sc5,
-    "title": appFonts.howTolLearn,
-    "subtitle": appFonts.march25,
-  },{
-    "icon": eImageAssets.sc6,
-    "title": appFonts.isACourse,
-    "subtitle": appFonts.march24,
-  },{
-    "icon": eImageAssets.sc7,
-    "title": appFonts.whatIsFull,
-    "subtitle": appFonts.march23,
-  },
-];
+  var chatHistoryList = [
+    {
+      "icon": eImageAssets.sc1,
+      "title": appFonts.whatIsApp,
+      "subtitle": appFonts.min2,
+    },
+    {
+      "icon": eImageAssets.sc2,
+      "title": appFonts.howToMake,
+      "subtitle": appFonts.min50,
+    },
+    {
+      "icon": eImageAssets.sc3,
+      "title": appFonts.whatIsTheNext,
+      "subtitle": appFonts.yesterday,
+    },
+    {
+      "icon": eImageAssets.sc4,
+      "title": appFonts.whoIsShahRukh,
+      "subtitle": appFonts.march26,
+    },
+    {
+      "icon": eImageAssets.sc5,
+      "title": appFonts.howTolLearn,
+      "subtitle": appFonts.march25,
+    },
+    {
+      "icon": eImageAssets.sc6,
+      "title": appFonts.isACourse,
+      "subtitle": appFonts.march24,
+    },
+    {
+      "icon": eImageAssets.sc7,
+      "title": appFonts.whatIsFull,
+      "subtitle": appFonts.march23,
+    },
+  ];
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,
@@ -444,33 +448,228 @@ var chatHistoryList = [
   ];
 
   var quickAdvisor = [
-    {
-      "icon": eSvgAssets.askAnything,
-      "title":appFonts.askAnything
-    },{
-      "icon": eSvgAssets.codeGenerator,
-      "title":appFonts.codeGenerator
-    },{
-      "icon": eSvgAssets.translateAnything,
-      "title":appFonts.translateAnything
-    },{
-      "icon": eSvgAssets.socialMedia,
-      "title":appFonts.socialMedia
-    },{
-      "icon": eSvgAssets.emailGenerator,
-      "title":appFonts.emailGenerator
-    },{
-      "icon": eSvgAssets.personalAdvice,
-      "title":appFonts.personalAdvice
-    },{
-      "icon": eSvgAssets.passwordGenerator,
-      "title":appFonts.passwordGenerator
-    },{
-      "icon": eSvgAssets.travel,
-      "title":appFonts.travelHangout
-    },{
-      "icon": eSvgAssets.essay,
-      "title":appFonts.essayWriter
-    }
+    {"icon": eSvgAssets.askAnything, "title": appFonts.askAnything},
+    {"icon": eSvgAssets.codeGenerator, "title": appFonts.codeGenerator},
+    {"icon": eSvgAssets.translateAnything, "title": appFonts.translateAnything},
+    {"icon": eSvgAssets.socialMedia, "title": appFonts.socialMedia},
+    {"icon": eSvgAssets.emailGenerator, "title": appFonts.emailGenerator},
+    {"icon": eSvgAssets.personalAdvice, "title": appFonts.personalAdvice},
+    {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
+    {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
+    {"icon": eSvgAssets.essay, "title": appFonts.essayWriter}
   ];
+
+  static final List <String> translateLanguages = [
+    'Abkhaz',
+    'Afar',
+    'Afrikaans',
+    'Akan',
+    'Albanian',
+    'Amharic',
+    'Arabic',
+    'Aragonese',
+    'Armenian',
+    'Assamese',
+    'Avaric',
+    'Avestan',
+    'Aymara',
+    'Azerbaijani',
+    'Bambara',
+    'Bashkir',
+    'Basque',
+    'Belarusian',
+    'Bengali',
+    'Bihari',
+    'Bislama',
+    'Bosnian',
+    'Breton',
+    'Bulgarian',
+    'Burmese',
+    'Catalan',
+    'Chamorro',
+    'Chechen',
+    'Chichewa',
+    'Chinese',
+    'Chuvash',
+    'Cornish',
+    'Corsican',
+    'Cree',
+    'Croatian',
+    'Czech',
+    'Danish',
+    'Divehi',
+    'Dutch',
+    'English',
+    'Esperanto',
+    'Estonian',
+    'Ewe',
+    'Faroese',
+    'Fijian',
+    'Finnish',
+    'French',
+    'Fula',
+    'Galician',
+    'Georgian',
+    'German',
+    'Greek',
+    'Guaraní',
+    'Gujarati',
+    'Haitian',
+    'Hausa',
+    'Hebrew',
+    'Herero',
+    'Hindi',
+    'Hiri Motu',
+    'Hungarian',
+    'Interlingua',
+    'Indonesian',
+    'Interlingue',
+    'Irish',
+    'Igbo',
+    'Inupiaq',
+    'Ido',
+    'Icelandic',
+    'Italian',
+    'Inuktitut',
+    'Japanese',
+    'Javanese',
+    'Kalaallisut',
+    'Kannada',
+    'Kanuri',
+    'Kashmiri',
+    'Kazakh',
+    'Khmer',
+    'Kikuyu',
+    'Kinyarwanda',
+    'Kirghiz',
+    'Komi',
+    'Kongo',
+    'Korean',
+    'Kurdish',
+    'Kwanyama',
+    'Latin',
+    'Luxembourgish',
+    'Luganda',
+    'Limburgish',
+    'Lingala',
+    'Lao',
+    'Lithuanian',
+    'Luba-Katanga',
+    'Latvian',
+    'Manx',
+    'Macedonian',
+    'Malagasy',
+    'Malay',
+    'Malayalam',
+    'Maltese',
+    'Māori',
+    'Marathi',
+    'Marshallese',
+    'Mongolian',
+    'Nauru',
+    'Navajo',
+    'Norwegian Bokmål',
+    'North Ndebele',
+    'Nepali',
+    'Ndonga',
+    'Norwegian Nynorsk',
+    'Norwegian',
+    'Nuosu',
+    'South Ndebele',
+    'Occitan',
+    'Ojibwe',
+    'Old Church Slavonic',
+    'Oromo',
+    'Oriya',
+    'Ossetian',
+    'Panjabi',
+    'Pāli',
+    'Persian',
+    'Polish',
+    'Pashto',
+    'Portuguese',
+    'Quechua',
+    'Romansh',
+    'Kirundi',
+    'Romanian',
+    'Russian',
+    'Sanskrit',
+    'Sardinian',
+    'Sindhi',
+    'Northern Sami',
+    'Samoan',
+    'Sango',
+    'Serbian',
+    'Scottish Gaelic',
+    'Shona',
+    'Sinhala',
+    'Slovak',
+    'Slovene',
+    'Somali',
+    'Southern Sotho',
+    'Spanish',
+    'Sundanese',
+    'Swahili',
+    'Swati',
+    'Swedish',
+    'Tamil',
+    'Telugu',
+    'Tajik',
+    'Thai',
+    'Tigrinya',
+    'Tibetan',
+    'Turkmen',
+    'Tagalog',
+    'Tswana',
+    'Tonga',
+    'Turkish',
+    'Tsonga',
+    'Tatar',
+    'Twi',
+    'Tahitian',
+    'Uighur',
+    'Ukrainian',
+    'Urdu',
+    'Uzbek',
+    'Venda',
+    'Vietnamese',
+    'Volapük',
+    'Walloon',
+    'Welsh',
+    'Wolof',
+    'Western Frisian',
+    'Xhosa',
+    'Yiddish',
+    'Yoruba',
+    'Zhuang'
+  ];
+
+  var toneList = [
+         "business",
+         "general",
+         "academic",
+         "casual",
+  ];
+
+  var mailLengthList = [
+    "small",
+    "medium",
+    "large",
+  ];
+
+  var socialMediaList = [
+    {
+      "image": eSvgAssets.caption,
+      "title": appFonts.captionAbout
+    },
+    {
+      "image": eSvgAssets.music,
+      "title": appFonts.getMusicSuggestion
+    },
+    {
+      "image": eSvgAssets.hashtag,
+      "title": appFonts.findTheBest
+    },
+  ];
+
 }

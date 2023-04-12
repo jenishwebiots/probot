@@ -98,6 +98,12 @@ class SvgAssets {
   final String emailGenerator = "assets/svg/emailGenerator.svg";
   final String personalAdvice = "assets/svg/personalAdvice.svg";
   final String passwordGenerator = "assets/svg/passwordGenerator.svg";
+  final String cross = "assets/svg/cross.svg";
+  final String microphone = "assets/svg/microphone.svg";
+  final String translates = "assets/svg/translates.svg";
+  final String language = "assets/svg/language.svg";
+  final String caption = "assets/svg/caption.svg";
+  final String hashtag = "assets/svg/hashtag.svg";
 
 
 

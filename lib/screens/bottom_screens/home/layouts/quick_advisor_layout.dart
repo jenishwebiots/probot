@@ -28,6 +28,12 @@ class QuickAdvisorLayout extends StatelessWidget {
     ]).inkWell(onTap: () {
       if (data["title"] == appFonts.translateAnything) {
         Get.toNamed(routeName.translateScreen);
+      } else if (data["title"] == appFonts.codeGenerator) {
+        Get.toNamed(routeName.codeGeneratorScreen);
+      } else if (data["title"] == appFonts.emailGenerator) {
+        Get.toNamed(routeName.emailWriterScreen);
+      } else if (data["title"] == appFonts.socialMedia) {
+        Get.toNamed(routeName.socialMediaScreen);
       }
 
     });
