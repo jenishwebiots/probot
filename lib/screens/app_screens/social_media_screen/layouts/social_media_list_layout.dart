@@ -36,6 +36,10 @@ class SocialMediaListLayout extends StatelessWidget {
     ]).inkWell(onTap: () {
       if (data["title"] == appFonts.captionAbout) {
         Get.toNamed(routeName.captionCreatorScreen);
+      } else if (data["title"] == appFonts.getMusicSuggestion) {
+        Get.toNamed(routeName.musicForPostScreen);
+      } else {
+        Get.toNamed(routeName.hashtagForPostScreen);
       }
     });
   }

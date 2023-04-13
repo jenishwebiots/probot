@@ -668,4 +668,11 @@ class AppArray {
     {"image": eSvgAssets.fb, "title": appFonts.fbHalf},
     {"image": eSvgAssets.twitter, "title": appFonts.twitter},
   ];
+
+  var captionToneList = [
+    {"image": eImageAssets.funny, "title": appFonts.funny},
+    {"image": eImageAssets.sad, "title": appFonts.sad},
+    {"image": eImageAssets.serious, "title": appFonts.serious},
+    {"image": eImageAssets.informative, "title": appFonts.informative},
+  ];
 }

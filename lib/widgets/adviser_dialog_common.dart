@@ -26,7 +26,7 @@ class AdviserDialog extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: AppCss.outfitMedium16
                       .textColor(appCtrl.appTheme.txt)
-                      .textHeight(1.2)),
+                      .textHeight(1.2)).paddingSymmetric(horizontal: Insets.i20),
               Row(children: [
                 Expanded(
                     child: ButtonCommon(
@@ -41,7 +41,7 @@ class AdviserDialog extends StatelessWidget {
                 Expanded(
                     child: ButtonCommon(
                       title: appFonts.end,
-                      onTap: endOnTap,
+                      onTap: endOnTap
                     ))
               ]).paddingSymmetric(
                   horizontal: Insets.i20, vertical: Insets.i20)

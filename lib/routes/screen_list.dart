@@ -104,3 +104,8 @@ export '../screens/app_screens/email_generator_screen/layouts/tone_layout.dart';
 export '../screens/bottom_screens/image_generator/layout/top_layout.dart';
 export '../screens/app_screens/email_generator_screen/layouts/top_layout.dart';
 export '../screens/app_screens/email_generator_screen/layouts/slider_layout.dart';
+export '../screens/app_screens/caption_creator_screen/layouts/caption_tone_layout.dart';
+export '../screens/app_screens/caption_creator_screen/layouts/platform_layout.dart';
+export '../screens/app_screens/caption_creator_screen/layouts/target_audience_slider_layout.dart';
+export '../screens/app_screens/caption_creator_screen/layouts/without_caption_layout.dart';
+export '../screens/app_screens/music_for_post_screen/layouts/music_category_layout.dart';

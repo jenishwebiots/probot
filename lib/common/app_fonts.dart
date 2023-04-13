@@ -401,6 +401,7 @@ class AppFonts {
   String areYouSureEndHashtag =
       "Are you sure you want to end this hashtag builder ?";
   String fbHalf = "Fb";
+  String generateSuitableMusic = "Generate suitable music";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

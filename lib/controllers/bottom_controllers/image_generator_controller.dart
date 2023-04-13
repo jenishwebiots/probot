@@ -47,7 +47,7 @@ class ImageGeneratorController extends GetxController {
           headers: {
             'Content-Type': 'application/json',
             'Authorization':
-                'Bearer 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',
+                'Bearer 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',
           },
           body: jsonEncode(
             {

@@ -31,4 +31,6 @@ class RouteName {
   final String emailWriterScreen = "/emailWriterScreen";
   final String socialMediaScreen = "/socialMediaScreen";
   final String captionCreatorScreen = "/captionCreatorScreen";
+  final String musicForPostScreen = "/musicForPostScreen";
+  final String hashtagForPostScreen = "/hashtagForPostScreen";
 }

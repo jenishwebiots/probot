@@ -1,9 +1,11 @@
 import 'package:probot/screens/app_screens/code_generator_screen/code_generator_screen.dart';
+import 'package:probot/screens/app_screens/music_for_post_screen/music_for_post_screen.dart';
 import 'package:probot/screens/app_screens/social_media_screen/social_media_screen.dart';
 
 import '../config.dart';
 import '../screens/app_screens/caption_creator_screen/caption_creator_screen.dart';
 import '../screens/app_screens/email_generator_screen/email_generator_screen.dart';
+import '../screens/app_screens/hashtag_for_post_screen/hashtag_for_post_screen.dart';
 
 RouteName _routeName = RouteName();
 
@@ -59,8 +61,8 @@ class AppRoute {
         name: _routeName.emailWriterScreen, page: () => EmailGeneratorScreen()),
     GetPage(
         name: _routeName.socialMediaScreen, page: () => SocialMediaScreen()),
-    GetPage(
-        name: _routeName.captionCreatorScreen,
-        page: () => CaptionCreatorScreen()),
+    GetPage(name: _routeName.captionCreatorScreen, page: () => CaptionCreatorScreen()),
+    GetPage(name: _routeName.musicForPostScreen, page: () => MusicForPostScreen()),
+    GetPage(name: _routeName.hashtagForPostScreen, page: () => HashtagForPostScreen()),
   ];
 }

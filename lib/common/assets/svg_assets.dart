@@ -105,4 +105,6 @@ class SvgAssets {
   final String caption = "assets/svg/caption.svg";
   final String hashtag = "assets/svg/hashtag.svg";
   final String twitter = "assets/svg/twitter.svg";
+  final String sliderThumb = "assets/svg/sliderThumb.svg";
+
 }

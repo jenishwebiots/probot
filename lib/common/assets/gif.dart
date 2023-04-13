@@ -4,5 +4,6 @@ class GifAssets {
   final String loader = "assets/gif/loader.gif";
   final String coin = "assets/gif/coin.gif";
   final String coinDark = "assets/gif/coinDark.gif";
+  final String hashtagLoader = "assets/gif/hashtagLoader.gif";
 
 }
