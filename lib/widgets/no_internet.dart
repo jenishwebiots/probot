@@ -14,10 +14,7 @@ class NoInternet extends StatelessWidget {
     return StreamBuilder(
         stream: Connectivity().onConnectivityChanged,
         builder: (context, AsyncSnapshot<ConnectivityResult> snapshot) {
-          if(snapshot.data != ConnectivityResult.none && snapshot.data != null){
-            final splashCtrl = Get.find<SplashController>();
 
-          }
           return snapshot.data == ConnectivityResult.none ||
                   snapshot.data == null
               ? Scaffold(

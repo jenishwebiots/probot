@@ -116,70 +116,6 @@ class AppArray {
     {"title": "setting", "icon": eSvgAssets.setting},
   ];
 
-  //chat list
-  var chatList = [
-    {
-      "dateTime": "Today, 5:30 am",
-      "chat": [
-        {
-          "isReceiver": true,
-          "message": "Hello, There ?",
-          "time": "5:30",
-        },
-        {
-          "isReceiver": false,
-          "message": "Hello !!",
-          "time": "5:31",
-        },
-        {
-          "isReceiver": true,
-          "message": "How are you ? 😄",
-          "time": "5:31",
-        },
-        {
-          "isReceiver": false,
-          "message": "I’m good ! what about you ?",
-          "time": "5:32",
-        },
-        {
-          "isReceiver": false,
-          "message": "I’m good ! what about you ?",
-          "time": "5:32",
-        },
-        {
-          "isReceiver": true,
-          "message": "Too good !\nWhere were you all this time ?",
-          "time": "5:32",
-        },
-        {"isReceiver": true, "message": "Have any problem ?", "time": "5:32"},
-        {
-          "isReceiver": false,
-          "message": "Yeah ! i’m not so good. 😐",
-          "time": "5:33"
-        },
-        {
-          "isReceiver": false,
-          "message": "I need just some time. 😇",
-          "time": "5:33",
-        },
-        {
-          "isReceiver": true,
-          "message": "Too good !\nWhere were you all this time ?",
-          "time": "5:34",
-        },
-        {
-          "isReceiver": true,
-          "message": "Too good !\nWhere were you all this time ?",
-          "time": "5:34",
-        },
-        {
-          "isReceiver": false,
-          "message": "I need just some time. 😇",
-          "time": "5:35",
-        },
-      ]
-    }
-  ];
 
   // notification list
   var notificationsList = [
@@ -266,18 +202,18 @@ class AppArray {
 
   //background list
   var backgroundList = [
-    {"image": eImageAssets.background1,"darkImage": eImageAssets.dBg1},
-    {"image": eImageAssets.background2,"darkImage": eImageAssets.dBg2},
-    {"image": eImageAssets.background3,"darkImage": eImageAssets.dBg3},
-    {"image": eImageAssets.background4,"darkImage": eImageAssets.dBg4},
-    {"image": eImageAssets.background5,"darkImage": eImageAssets.dBg5},
-    {"image": eImageAssets.background6,"darkImage": eImageAssets.dBg6}
+    {"image": eImageAssets.background1, "darkImage": eImageAssets.dBg1},
+    {"image": eImageAssets.background2, "darkImage": eImageAssets.dBg2},
+    {"image": eImageAssets.background3, "darkImage": eImageAssets.dBg3},
+    {"image": eImageAssets.background4, "darkImage": eImageAssets.dBg4},
+    {"image": eImageAssets.background5, "darkImage": eImageAssets.dBg5},
+    {"image": eImageAssets.background6, "darkImage": eImageAssets.dBg6}
   ];
 
   //setting list
   var settingList = [
     {"icon": eSvgAssets.profile, "title": "myAccount"},
-    {"icon": eSvgAssets.selectCharacter,"title": "selectCharacter" },
+    {"icon": eSvgAssets.selectCharacter, "title": "selectCharacter"},
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
@@ -397,81 +333,68 @@ class AppArray {
     },
   ];
 
-
-
 // chat history
-var chatHistoryList = [
-  {
-    "icon": eImageAssets.sc1,
-    "title": appFonts.whatIsApp,
-    "subtitle": appFonts.min2,
-  },{
-    "icon": eImageAssets.sc2,
-    "title": appFonts.howToMake,
-    "subtitle": appFonts.min50,
-  },{
-    "icon": eImageAssets.sc3,
-    "title": appFonts.whatIsTheNext,
-    "subtitle": appFonts.yesterday,
-  },{
-    "icon": eImageAssets.sc4,
-    "title": appFonts.whoIsShahRukh,
-    "subtitle": appFonts.march26,
-  },{
-    "icon": eImageAssets.sc5,
-    "title": appFonts.howTolLearn,
-    "subtitle": appFonts.march25,
-  },{
-    "icon": eImageAssets.sc6,
-    "title": appFonts.isACourse,
-    "subtitle": appFonts.march24,
-  },{
-    "icon": eImageAssets.sc7,
-    "title": appFonts.whatIsFull,
-    "subtitle": appFonts.march23,
-  },
-];
+  var chatHistoryList = [
+    {
+      "icon": eImageAssets.sc1,
+      "title": appFonts.whatIsApp,
+      "subtitle": appFonts.min2,
+    },
+    {
+      "icon": eImageAssets.sc2,
+      "title": appFonts.howToMake,
+      "subtitle": appFonts.min50,
+    },
+    {
+      "icon": eImageAssets.sc3,
+      "title": appFonts.whatIsTheNext,
+      "subtitle": appFonts.yesterday,
+    },
+    {
+      "icon": eImageAssets.sc4,
+      "title": appFonts.whoIsShahRukh,
+      "subtitle": appFonts.march26,
+    },
+    {
+      "icon": eImageAssets.sc5,
+      "title": appFonts.howTolLearn,
+      "subtitle": appFonts.march25,
+    },
+    {
+      "icon": eImageAssets.sc6,
+      "title": appFonts.isACourse,
+      "subtitle": appFonts.march24,
+    },
+    {
+      "icon": eImageAssets.sc7,
+      "title": appFonts.whatIsFull,
+      "subtitle": appFonts.march23,
+    },
+  ];
+
+
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,
-      "title": appFonts.payPal.tr,
+      "title": appFonts.payPal,
     },
     {
       "icon": eImageAssets.stripe,
-      "title": appFonts.stripe.tr,
+      "title": appFonts.stripe,
     },
-    {"icon": eImageAssets.razor, "title": appFonts.razor.tr},
+    {"icon": eImageAssets.razor, "title": appFonts.razor},
     {"icon": eImageAssets.inApp, "title": appFonts.inApp},
   ];
 
   var quickAdvisor = [
-    {
-      "icon": eSvgAssets.askAnything,
-      "title":appFonts.askAnything
-    },{
-      "icon": eSvgAssets.codeGenerator,
-      "title":appFonts.codeGenerator
-    },{
-      "icon": eSvgAssets.translateAnything,
-      "title":appFonts.translateAnything
-    },{
-      "icon": eSvgAssets.socialMedia,
-      "title":appFonts.socialMedia
-    },{
-      "icon": eSvgAssets.emailGenerator,
-      "title":appFonts.emailGenerator
-    },{
-      "icon": eSvgAssets.personalAdvice,
-      "title":appFonts.personalAdvice
-    },{
-      "icon": eSvgAssets.passwordGenerator,
-      "title":appFonts.passwordGenerator
-    },{
-      "icon": eSvgAssets.travel,
-      "title":appFonts.travelHangout
-    },{
-      "icon": eSvgAssets.essay,
-      "title":appFonts.essayWriter
-    }
+    {"icon": eSvgAssets.askAnything, "title": appFonts.askAnything},
+    {"icon": eSvgAssets.codeGenerator, "title": appFonts.codeGenerator},
+    {"icon": eSvgAssets.translateAnything, "title": appFonts.translateAnything},
+    {"icon": eSvgAssets.socialMedia, "title": appFonts.socialMedia},
+    {"icon": eSvgAssets.emailGenerator, "title": appFonts.emailGenerator},
+    {"icon": eSvgAssets.personalAdvice, "title": appFonts.personalAdvice},
+    {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
+    {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
+    {"icon": eSvgAssets.essay, "title": appFonts.essayWriter}
   ];
 }

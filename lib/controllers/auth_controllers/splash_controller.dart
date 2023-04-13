@@ -1,8 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:probot/config.dart';
-import 'package:probot/widgets/no_internet.dart';
 
 import '../../env.dart';
 

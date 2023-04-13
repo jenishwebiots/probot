@@ -15,7 +15,7 @@ class FirebaseConfigModel {
   bool? isChatShow;
   bool? isImageGeneratorShow;
   bool? isTextCompletionShow;
-  bool? isAddShow, isRazorPay, isStripe, isPaypal, isChatHistory,isGuestLoginEnable;
+  bool? isAddShow, isRazorPay, isStripe, isPaypal, isInApp, isChatHistory,isGuestLoginEnable;
 
   FirebaseConfigModel(
       {this.bannerAddId,
@@ -40,6 +40,7 @@ class FirebaseConfigModel {
       this.isTextCompletionShow,
       this.isAddShow,
       this.isPaypal,
+      this.isInApp,
       this.isRazorPay,
       this.isStripe,
       this.isChatHistory,this.isGuestLoginEnable});
@@ -68,6 +69,7 @@ class FirebaseConfigModel {
     isRazorPay = json['isRazorPay'] ?? true;
     isPaypal = json['isPayPal'] ?? true;
     isStripe = json['isStripe'] ?? true;
+    isInApp = json['isInApp'] ?? true;
     isGuestLoginEnable = json['isGuestLoginEnable'] ?? true;
     razorPayKey = json['razorPayKey'] ?? "";
     razorPaySecret = json['razorPaySecret'] ?? "";
@@ -100,6 +102,7 @@ class FirebaseConfigModel {
     data['razorPayKey'] = razorPayKey;
     data['razorPaySecret'] = razorPaySecret;
     data['isChatHistory'] = isChatHistory;
+    data['isInApp'] = isInApp;
     data['isGuestLoginEnable'] = isGuestLoginEnable;
     return data;
   }
