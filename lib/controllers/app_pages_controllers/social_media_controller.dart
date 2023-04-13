@@ -11,10 +11,12 @@ class SocialMediaController extends GetxController {
   TextEditingController captionGeneratedController = TextEditingController();
   TextEditingController musicGeneratedController = TextEditingController();
   TextEditingController hashtagController = TextEditingController();
-  final FixedExtentScrollController? scrollController = FixedExtentScrollController();
-  final FixedExtentScrollController? categoryScrollController = FixedExtentScrollController();
+  TextEditingController hashtagGeneratedController = TextEditingController();
+  final FixedExtentScrollController? scrollController =
+      FixedExtentScrollController();
+  final FixedExtentScrollController? categoryScrollController =
+      FixedExtentScrollController();
   double progressValue = 0;
-
 
   final languageCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
@@ -28,6 +30,8 @@ class SocialMediaController extends GetxController {
   int selectedIndexTone = 0;
   bool isCaptionGenerated = false;
   bool isMusicGenerated = false;
+  bool isHashtagGenerated = false;
+  bool isLoader = false;
   int value = 0;
   String? selectItem;
   String? onSelect;
@@ -46,8 +50,9 @@ class SocialMediaController extends GetxController {
   }
 
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('json_class/genres.json');
-    final  data = await json.decode(response);
+    final String response =
+        await rootBundle.loadString('json_class/genres.json');
+    final data = await json.decode(response);
     musicCategoryList = data;
     update();
   }
@@ -57,12 +62,12 @@ class SocialMediaController extends GetxController {
     update();
   }
 
-  onMusicGenerate () {
+  onMusicGenerate() {
     isMusicGenerated = true;
     update();
   }
 
-  onCaptionToneChange (index) {
+  onCaptionToneChange(index) {
     selectedIndexTone = index;
     update();
   }
@@ -72,14 +77,23 @@ class SocialMediaController extends GetxController {
     update();
   }
 
+  onHashtagGenerate() {
+    isHashtagGenerated = true;
+    isLoader = true;
+    update();
+  }
+
   endCaptionGeneratorDialog() {
     Get.generalDialog(
         pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(title: appFonts.endCaptionGenerator,subTitle: appFonts.areYouSureEndCodeGenerator,endOnTap: () {
-            isCaptionGenerated = false;
-            Get.back();
-            update();
-          });
+          return AdviserDialog(
+              title: appFonts.endCaptionGenerator,
+              subTitle: appFonts.areYouSureEndCodeGenerator,
+              endOnTap: () {
+                isCaptionGenerated = false;
+                Get.back();
+                update();
+              });
         },
         transitionBuilder: (context, anim1, anim2, child) {
           return SlideTransition(
@@ -88,8 +102,7 @@ class SocialMediaController extends GetxController {
             child: child,
           );
         },
-        transitionDuration: const Duration(milliseconds: 300)
-    );
+        transitionDuration: const Duration(milliseconds: 300));
   }
 
   onSelectLanguageSheet() {
@@ -97,49 +110,46 @@ class SocialMediaController extends GetxController {
       isScrollControlled: true,
       backgroundColor: appCtrl.appTheme.white,
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-              return  GetBuilder<SocialMediaController>(
-                builder: (socialMediaCtrl) {
-                  return LanguagePickerLayout(
-                    title: appFonts.selectLanguage,
-                    list: languageCtrl.translateLanguagesList,
-                    index: value,
-                    suggestionsCallbacks: (value) {
-                      return StateService.getSuggestions(value,languageCtrl.translateLanguagesList);
-                    },
-                    scrollController: socialMediaCtrl.scrollController,
-                    onSuggestionSelected: (i) {
-                      int index =
-                      languageCtrl.translateLanguagesList.indexWhere((element) {
-                        return element == i;
-                      });
-                      socialMediaCtrl.scrollController!.jumpToItem(index);
-                      log("suggestion: $i");
-                      log("index: $index");
-                      update();
-                      socialMediaCtrl.update();
-                    },
-                    onSelectedItemChanged: (i) {
-                      value = i;
-                      selectItem = languageCtrl.translateLanguagesList[i];
-                      log("SELECT ITEM: $selectItem");
-                      update();
-                      socialMediaCtrl.update();
-                    },
-                    selectOnTap: () {
-                      onSelect = selectItem;
-                      Get.back();
-                      socialMediaCtrl.update();
-                    },
-                  );
-                }
-              );
-
+        return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
+          return LanguagePickerLayout(
+            title: appFonts.selectLanguage,
+            list: languageCtrl.translateLanguagesList,
+            index: value,
+            suggestionsCallbacks: (value) {
+              return StateService.getSuggestions(
+                  value, languageCtrl.translateLanguagesList);
+            },
+            scrollController: socialMediaCtrl.scrollController,
+            onSuggestionSelected: (i) {
+              int index =
+                  languageCtrl.translateLanguagesList.indexWhere((element) {
+                return element == i;
+              });
+              socialMediaCtrl.scrollController!.jumpToItem(index);
+              log("suggestion: $i");
+              log("index: $index");
+              update();
+              socialMediaCtrl.update();
+            },
+            onSelectedItemChanged: (i) {
+              value = i;
+              selectItem = languageCtrl.translateLanguagesList[i];
+              log("SELECT ITEM: $selectItem");
+              update();
+              socialMediaCtrl.update();
+            },
+            selectOnTap: () {
+              onSelect = selectItem;
+              Get.back();
+              socialMediaCtrl.update();
+            },
+          );
+        });
       }),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(AppRadius.r10),
-              topLeft: Radius.circular(AppRadius.r10))
-      ),
+              topLeft: Radius.circular(AppRadius.r10))),
     );
   }
 
@@ -148,60 +158,60 @@ class SocialMediaController extends GetxController {
       isScrollControlled: true,
       backgroundColor: appCtrl.appTheme.white,
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        return  GetBuilder<SocialMediaController>(
-            builder: (socialMediaCtrl) {
-              return LanguagePickerLayout(
-                title: appFonts.selectMusicCategory,
-                list: socialMediaCtrl.musicCategoryList,
-                index: socialMediaCtrl.categoryValue,
-                suggestionsCallbacks: (value) {
-                  return StateService.getSuggestions(value,socialMediaCtrl.musicCategoryList.cast<String>());
-                },
-                scrollController: socialMediaCtrl.categoryScrollController,
-                onSuggestionSelected: (i) {
-                  int index =
+        return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
+          return LanguagePickerLayout(
+            title: appFonts.selectMusicCategory,
+            list: socialMediaCtrl.musicCategoryList,
+            index: socialMediaCtrl.categoryValue,
+            suggestionsCallbacks: (value) {
+              return StateService.getSuggestions(
+                  value, socialMediaCtrl.musicCategoryList.cast<String>());
+            },
+            scrollController: socialMediaCtrl.categoryScrollController,
+            onSuggestionSelected: (i) {
+              int index =
                   socialMediaCtrl.musicCategoryList.indexWhere((element) {
-                    return element == i;
-                  });
-                  socialMediaCtrl.categoryScrollController!.jumpToItem(index);
-                  log("suggestion: $i");
-                  log("index: $index");
-                  update();
-                  socialMediaCtrl.update();
-                },
-                onSelectedItemChanged: (i) {
-                  socialMediaCtrl.categoryValue = i;
-                  categorySelectItem = socialMediaCtrl.musicCategoryList[i];
-                  log("SELECT ITEM: $categorySelectItem");
-                  update();
-                  socialMediaCtrl.update();
-                },
-                selectOnTap: () {
-                  categoryOnSelect = categorySelectItem;
-                  Get.back();
-                  socialMediaCtrl.update();
-                },
-              );
-            }
-        );
-
+                return element == i;
+              });
+              socialMediaCtrl.categoryScrollController!.jumpToItem(index);
+              log("suggestion: $i");
+              log("index: $index");
+              update();
+              socialMediaCtrl.update();
+            },
+            onSelectedItemChanged: (i) {
+              socialMediaCtrl.categoryValue = i;
+              categorySelectItem = socialMediaCtrl.musicCategoryList[i];
+              log("SELECT ITEM: $categorySelectItem");
+              update();
+              socialMediaCtrl.update();
+            },
+            selectOnTap: () {
+              categoryOnSelect = categorySelectItem;
+              Get.back();
+              socialMediaCtrl.update();
+            },
+          );
+        });
       }),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(AppRadius.r10),
-              topLeft: Radius.circular(AppRadius.r10))
-      ),
+              topLeft: Radius.circular(AppRadius.r10))),
     );
   }
 
   endMusicGeneratorDialog() {
     Get.generalDialog(
         pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(title: appFonts.endMusicGeneration,subTitle: appFonts.areYouSureEndMusic,endOnTap: () {
-            isMusicGenerated = false;
-            Get.back();
-            update();
-          });
+          return AdviserDialog(
+              title: appFonts.endMusicGeneration,
+              subTitle: appFonts.areYouSureEndMusic,
+              endOnTap: () {
+                isMusicGenerated = false;
+                Get.back();
+                update();
+              });
         },
         transitionBuilder: (context, anim1, anim2, child) {
           return SlideTransition(
@@ -210,12 +220,39 @@ class SocialMediaController extends GetxController {
             child: child,
           );
         },
-        transitionDuration: const Duration(milliseconds: 300)
-    );
+        transitionDuration: const Duration(milliseconds: 300));
+  }
+
+  endHashtagGeneratorDialog() {
+    Get.generalDialog(
+        pageBuilder: (context, anim1, anim2) {
+          return AdviserDialog(
+              title: appFonts.endHashtagBuilder,
+              subTitle: appFonts.areYouSureEndCodeGenerator,
+              endOnTap: () {
+                isHashtagGenerated = false;
+                Get.back();
+                update();
+              });
+        },
+        transitionBuilder: (context, anim1, anim2, child) {
+          return SlideTransition(
+            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
+                .animate(anim1),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 300));
   }
 
   @override
   void onReady() {
+    Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      isLoader = false;
+      progressValue = 0.0;
+      update();
+    });
+
     readJson();
     updateProgress();
     captionCreatorLists = appArray.captionCreatorList;
