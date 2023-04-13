@@ -29,8 +29,9 @@ class HomeTopLayout extends StatelessWidget {
             const CommonMenuIcon().inkWell(
                 onTap: onTap),
             Image.asset(eImageAssets.logo1, width: Sizes.s106),
-            SvgPicture.asset(eSvgAssets.bell)
-                .paddingSymmetric(horizontal: Insets.i20)
+          /*  SvgPicture.asset(eSvgAssets.bell)
+                .paddingSymmetric(horizontal: Insets.i20)*/
+            const SizedBox(width: Sizes.s60)
           ],
         ).paddingSymmetric(vertical: Insets.i55)
       ],

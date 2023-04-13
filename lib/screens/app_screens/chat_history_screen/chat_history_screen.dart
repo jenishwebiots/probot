@@ -19,32 +19,39 @@ class ChatHistoryScreen extends StatelessWidget {
               index: chatHistoryCtrl.selectedIndex,
               onDeleteTap: () {
                 FirebaseFirestore.instance
-                    .collection("chatHistory")
-                    .where('userId',
-                        isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                    .collection("users")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection("chats")
                     .get()
                     .then((value) {
-                  value.docs.asMap().entries.map((e) {
-                    String id = e.value.id;
-                    if (chatHistoryCtrl.selectedIndex.contains(e.value.id)) {
-                      FirebaseFirestore.instance
-                          .collection("chatHistory")
-                          .doc(e.value.id)
-                          .delete();
-                      chatHistoryCtrl.selectedIndex
-                          .removeWhere((element) => element == id);
-                      chatHistoryCtrl.update();
+                  value
+                      .docs
+                      .asMap()
+                      .entries
+                      .forEach((element) {
+                    if(chatHistoryCtrl.selectedIndex.contains(element.value.id)){
+                      FirebaseFirestore.instance.collection(
+                          "chatHistory")
+                          .doc(element.value.id)
+                          .delete().then((value) {
+                        FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .collection("chats").doc(element.value.id).delete();
+                        chatHistoryCtrl.selectedIndex
+                            .removeWhere((elements) => elements == element.value.id);
+                        chatHistoryCtrl.update();
+                      });
                     }
-                  }).toList();
-                  chatHistoryCtrl.update();
+                  });
                 });
-
+                chatHistoryCtrl.update();
               }),
           body: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection("chatHistory")
-                  .where('userId',
-                      isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+              stream:   FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .collection("chats")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
@@ -71,58 +78,73 @@ class ChatHistoryScreen extends StatelessWidget {
                             ],
                           ),
                         ).height(MediaQuery.of(context).size.height)
-                      : Column(children: [
-                          ...snapshot.data!.docs
-                              .asMap()
-                              .entries
-                              .map((e) => ChatHistoryLayout(
-                                    data: e.value,
-                                    isLongPress: chatHistoryCtrl.isLongPress,
-                                    onLongPressTap: () {
-                                      chatHistoryCtrl.isLongPress = true;
-                                      log("press: ${chatHistoryCtrl.isLongPress}");
-                                      log("index: ${!chatHistoryCtrl.selectedIndex.contains(e.value.id)}");
-                                      if (!chatHistoryCtrl.selectedIndex
-                                          .contains(e.value.id)) {
-                                        chatHistoryCtrl.selectedIndex
-                                            .add(e.value.id);
-                                        log("index2: ${chatHistoryCtrl.selectedIndex}");
-                                        chatHistoryCtrl.update();
-                                      }
-                                      chatHistoryCtrl.update();
-                                    },
-                                    onTap: () {
-                                      log("message ${chatHistoryCtrl.isLongPress}");
-                                      if (chatHistoryCtrl.isLongPress) {
-                                        if (!chatHistoryCtrl.selectedIndex
-                                            .contains(e.value.id)) {
-                                          chatHistoryCtrl.selectedIndex
-                                              .add(e.value.id);
-                                          chatHistoryCtrl.update();
-                                        } else {
-                                          if (chatHistoryCtrl.selectedIndex
-                                              .contains(e.value.id)) {
-                                            chatHistoryCtrl.selectedIndex
-                                                .remove(e.value.id);
-                                            chatHistoryCtrl.update();
-                                          }
-                                        }
-                                      } else {
-                                        Get.toNamed(routeName.chatLayout);
-                                      }
+                      : SingleChildScrollView(
+                    child: Column(children: [
+                      ...snapshot.data!.docs
+                          .asMap()
+                          .entries
+                          .map((e) => ChatHistoryLayout(
+                        data: e.value,
+                        isLongPress:
+                        chatHistoryCtrl.isLongPress,
+                        onLongPressTap: () {
+                          chatHistoryCtrl.isLongPress =
+                          true;
+                          log("press: ${chatHistoryCtrl.isLongPress}");
+                          log("index: ${!chatHistoryCtrl.selectedIndex.contains(e.value.id)}");
+                          if (!chatHistoryCtrl.selectedIndex
+                              .contains(e.value.id)) {
+                            chatHistoryCtrl.selectedIndex
+                                .add(e.value.id);
+                            log("index2: ${chatHistoryCtrl.selectedIndex}");
+                            chatHistoryCtrl.update();
+                          }
+                          chatHistoryCtrl.update();
+                        },
+                        onTap: () {
+                          log("message ${chatHistoryCtrl.isLongPress}");
+                          if (chatHistoryCtrl.isLongPress) {
+                            if (!chatHistoryCtrl
+                                .selectedIndex
+                                .contains(e.value.id)) {
+                              chatHistoryCtrl.selectedIndex
+                                  .add(e.value.id);
+                              chatHistoryCtrl.update();
+                            } else {
+                              if (chatHistoryCtrl
+                                  .selectedIndex
+                                  .contains(e.value.id)) {
+                                chatHistoryCtrl
+                                    .selectedIndex
+                                    .remove(e.value.id);
+                                chatHistoryCtrl.update();
+                              }
+                            }
+                          } else {
+                            log("CH : ${e.value["chatId"]}");
+                            Get.toNamed(
+                                routeName.chatLayout,
+                                arguments:
+                                e.value["chatId"]);
+                            final chatCtrl = Get.isRegistered<ChatLayoutController>() ? Get.find<ChatLayoutController>() : Get.put(ChatLayoutController());
+                            chatCtrl.getChatId();
+                          }
 
-                                      if (chatHistoryCtrl
-                                          .selectedIndex.isEmpty) {
-                                        chatHistoryCtrl.isLongPress = false;
-                                        log("selectIndex: ${chatHistoryCtrl.selectedIndex.isEmpty}");
-                                        chatHistoryCtrl.update();
-                                        Get.forceAppUpdate();
-                                      }
-                                    },
-                                  ))
-                              .toList()
-                        ]).paddingSymmetric(
-                          vertical: Insets.i25, horizontal: Insets.i20);
+                          if (chatHistoryCtrl
+                              .selectedIndex.isEmpty) {
+                            chatHistoryCtrl.isLongPress =
+                            false;
+                            log("selectIndex: ${chatHistoryCtrl.selectedIndex.isEmpty}");
+                            chatHistoryCtrl.update();
+                            Get.forceAppUpdate();
+                          }
+                        },
+                      ))
+                          .toList()
+                    ]).paddingSymmetric(
+                        vertical: Insets.i25,
+                        horizontal: Insets.i20),
+                  );
                 }
               }));
     });

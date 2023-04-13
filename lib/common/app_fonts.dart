@@ -314,12 +314,25 @@ class AppFonts {
   String personalAdvice = "personalAdvice";
   String passwordGenerator = "passwordGenerator";
   String travelHangout = "travelHangout";
+  String refundPolicy = "refundPolicy";
 
   String quickAdvice = "Quick Advice";
   String viewAll = "View all";
   String writeAnything = "Write anything to translate...";
   String max500 = "500 max";
   String translate = "Translate";
+  String camera = "camera";
+  String gallery = "gallery";
+  String noInternet = "noInternet";
+  String noInternetDesc = "noInternetDesc";
+  String retry = "retry";
+  String yes = "yes";
+  String no = "no";
+  String alert = "alert";
+  String deleteConfirmation = "deleteConfirmation";
+  String deleteUserSuccessfully = "deleteUserSuccessfully";
+  String dataUploadSuccessfully = "dataUploadSuccessfully";
+  String imageUploadSuccessfully = "imageUploadSuccessfully";
 
 
   String thereAreAwardLeft(val) =>

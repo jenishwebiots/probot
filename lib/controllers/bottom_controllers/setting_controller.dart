@@ -1,12 +1,14 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:launch_review/launch_review.dart';
 
 import '../../config.dart';
 
 class SettingController extends GetxController {
   List drawerList = [];
   List settingList = [];
+  bool isLoading = false;
   String? name, userName, firebaseUser;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -38,25 +40,34 @@ class SettingController extends GetxController {
 
   onSettingTap(data) async {
     if (data['title'] == "myAccount") {
-      if(appCtrl.isGuestLogin){
-        Get.offAllNamed(routeName.signInScreen);
-      }else {
+      if (appCtrl.isGuestLogin) {
+        Get.toNamed(routeName.signInScreen);
+      } else {
         Get.toNamed(routeName.myAccountScreen);
       }
     } else if (data['title'] == "notification") {
       Get.toNamed(routeName.notificationScreen);
     } else if (data['title'] == "fingerprintLock") {
       Get.toNamed(routeName.fingerprintAndLockSecurity);
-    } else if (data['title'] == "privacyTerm") {
-      Get.toNamed(routeName.privacyPolicyScreen);
     } else if (data['title'] == "language") {
       Get.toNamed(routeName.selectLanguageScreen, arguments: true);
     } else if (data['title'] == "selectCharacter") {
       Get.toNamed(routeName.selectCharacterScreen, arguments: true);
+    } else if (data['title'] == "privacyTerm") {
+      Get.toNamed(routeName.commonWebView,
+          arguments: appCtrl.firebaseConfigModel!.privacyPolicyLink);
+    } else if (data['title'] == "refundPolicy") {
+      Get.toNamed(routeName.commonWebView,
+          arguments: appCtrl.firebaseConfigModel!.refundLink);
+    } else if (data['title'] == "rateApp") {
+      //your Android package name and Your IOS App id should be kept over here
+      LaunchReview.launch(
+          androidAppId: appCtrl.firebaseConfigModel!.rateAppAndroidId,
+          iOSAppId: " ${appCtrl.firebaseConfigModel!.rateAppIOSId}");
     } else if (data['title'] == "subscriptionPlan") {
-      if(appCtrl.isGuestLogin){
-        Get.offAllNamed(routeName.signInScreen);
-      }else {
+      if (appCtrl.isGuestLogin) {
+        Get.toNamed(routeName.signInScreen);
+      } else {
         FirebaseFirestore.instance
             .collection("userSubscribe")
             .where("email", isEqualTo: appCtrl.storage.read("userName"))

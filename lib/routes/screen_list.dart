@@ -96,3 +96,4 @@ export '../screens/app_screens/chat_history_screen/chat_history_screen.dart';
 export '../screens/app_screens/quick_advisor_screen/quick_advisor_screen.dart';
 export '../screens/app_screens/subscription/layouts/in_app_list.dart';
 export '../screens/app_screens/translate_screen/translate_screen.dart';
+export '../screens/app_screens/my_account_screen/layouts/user_image.dart';

@@ -34,7 +34,8 @@ class PaymentList extends StatelessWidget {
                 const VSpace(Sizes.s25),
                 (appCtrl.firebaseConfigModel!.isPaypal! == false &&
                         appCtrl.firebaseConfigModel!.isRazorPay! == false &&
-                        appCtrl.firebaseConfigModel!.isStripe! == false)
+                        appCtrl.firebaseConfigModel!.isStripe! == false &&
+                        appCtrl.firebaseConfigModel!.isInApp! == false)
                     ? Text(appFonts.noPaymentMethod.tr,
                             style: AppCss.outfitSemiBold16
                                 .textColor(appCtrl.appTheme.error))
@@ -57,7 +58,7 @@ class PaymentList extends StatelessWidget {
                                             index: e.key, data: e.value)
                                         : Container()
                                     : e.value["title"] == "inApp"
-                                        ? appCtrl.firebaseConfigModel!.isStripe!
+                                        ? appCtrl.firebaseConfigModel!.isInApp!
                                             ? PaymentMethodList(
                                                 index: e.key, data: e.value)
                                             : Container()
@@ -100,7 +101,6 @@ class PaymentList extends StatelessWidget {
                                     Get.back();
                                   } else if (subscribeCtrl.selectIndexPayment ==
                                       3) {
-                                    log("DATA : ${inAppCtrl.products}");
 
                                     late PurchaseParam purchaseParam;
                                     final Map<String, PurchaseDetails>

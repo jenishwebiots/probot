@@ -21,8 +21,9 @@ class UnlimitedSubscribeTextBox extends StatelessWidget {
                           .thereAreAwardLeft(
                               appCtrl.envConfig["chatTextCount"].toString())
                           .tr,
-                      style: AppCss.outfitSemiBold14
-                          .textColor(appCtrl.isTheme ? appCtrl.appTheme.lightText : appCtrl.appTheme.txt)),
+                      style: AppCss.outfitSemiBold14.textColor(appCtrl.isTheme
+                          ? appCtrl.appTheme.lightText
+                          : appCtrl.appTheme.txt)),
                   const VSpace(Sizes.s10),
                 ],
               ),

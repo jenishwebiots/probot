@@ -29,6 +29,7 @@ class MobileLoginController extends GetxController {
         codeSent: (String verificationId, int? resendToken) async {
           verificationId = verificationId;
           var phoneUser = FirebaseAuth.instance.currentUser;
+
           userName = phoneUser?.phoneNumber;
 
           await FirebaseFirestore.instance

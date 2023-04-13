@@ -1,3 +1,6 @@
+import 'package:probot/widgets/common_web_view.dart';
+import 'package:probot/widgets/no_internet.dart';
+
 import '../config.dart';
 
 RouteName _routeName = RouteName();
@@ -45,7 +48,9 @@ class AppRoute {
     GetPage(name: _routeName.chatHistory, page: () => ChatHistoryScreen()),
     GetPage(name: _routeName.inAppList, page: () => InAppList()),
     GetPage(name: _routeName.quickAdvisor, page: () => QuickAdvisorScreen()),
-    GetPage(name: _routeName.translateScreen, page: () => TranslateScreen()),
+    GetPage(name: _routeName.translateScreen, page: () => const TranslateScreen()),
+    GetPage(name: _routeName.commonWebView, page: () => const CommonWebView()),
+    GetPage(name: _routeName.noInternet, page: () => const NoInternet()),
 
   ];
 }

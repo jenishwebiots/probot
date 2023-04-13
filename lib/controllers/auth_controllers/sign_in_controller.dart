@@ -5,6 +5,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:probot/env.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
+
+// Needed because we can't import `dart:html` into a mobile app,
+// while on the flip-side access to `dart:io` throws at runtime (hence the `kIsWeb` check below)
+
 import '../../utils/general_utils.dart';
 
 class SignInController extends GetxController {
@@ -59,7 +63,7 @@ class SignInController extends GetxController {
       FirebaseFirestore.instance.collection('users').doc(user.uid).set({
         'logintype': "Google",
         'nickname': user.displayName,
-        'email': user.email,
+        'email': userNameGoogle,
         'phone': user.phoneNumber,
         'id': user.uid
       });
@@ -67,6 +71,7 @@ class SignInController extends GetxController {
     appCtrl.storage.write("id", user.uid);
     await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
+
   }
 
   // Sign In With Email & Password Method
@@ -90,28 +95,27 @@ class SignInController extends GetxController {
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
 
-         await FirebaseFirestore.instance
+        await FirebaseFirestore.instance
             .collection('users')
-            .where('id', isEqualTo: firebaseUser.user!.uid).limit(1)
-            .get().then((value) {
-
-              log("doc ${value.docs.isEmpty}");
-           if (value.docs.isEmpty) {
-
-             // Update data to server if new user
-             FirebaseFirestore.instance
-                 .collection('users')
-                 .doc(firebaseUser.user!.uid)
-                 .set({
-               'logintype': "Email",
-               'nickname': firebaseUser.user!.displayName,
-               'email': firebaseUser.user!.email,
-               'phone': firebaseUser.user!.phoneNumber,
-               'id': firebaseUser.user!.uid
-             });
-           }
-         });
-
+            .where('id', isEqualTo: firebaseUser.user!.uid)
+            .limit(1)
+            .get()
+            .then((value) {
+          log("doc ${value.docs.isEmpty}");
+          if (value.docs.isEmpty) {
+            // Update data to server if new user
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(firebaseUser.user!.uid)
+                .set({
+              'logintype': "Email",
+              'nickname': firebaseUser.user!.displayName,
+              'email': userName,
+              'phone': firebaseUser.user!.phoneNumber,
+              'id': firebaseUser.user!.uid
+            });
+          }
+        });
 
         appCtrl.storage.write("id", firebaseUser.user!.uid);
       } on FirebaseAuthException catch (e) {
@@ -176,21 +180,18 @@ class SignInController extends GetxController {
 
         await FirebaseFirestore.instance
             .collection('users')
-            .where('id', isEqualTo: signIn.uid).limit(1)
-            .get().then((value) {
-
+            .where('id', isEqualTo: signIn.uid)
+            .limit(1)
+            .get()
+            .then((value) {
           log("doc ${value.docs.isEmpty}");
           if (value.docs.isEmpty) {
-
             // Update data to server if new user
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(signIn.uid)
-                .set({
+            FirebaseFirestore.instance.collection('users').doc(signIn.uid).set({
               'logintype': "Email",
               'nickname': signIn.displayName,
               'email': signIn.email,
-              'phone':signIn.phoneNumber,
+              'phone': signIn.phoneNumber,
               'id': signIn.uid
             });
           }
@@ -219,7 +220,6 @@ class SignInController extends GetxController {
         .limit(1)
         .get()
         .then((value) {
-      log("DATA : ${value.docs.isEmpty}");
       if (value.docs.isNotEmpty) {
         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
