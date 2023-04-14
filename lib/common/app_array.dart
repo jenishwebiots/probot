@@ -688,4 +688,9 @@ class AppArray {
     "strong",
   ];
 
+  var essayTypeList = [
+    "informative",
+    "persuade",
+    "analyze",
+  ];
 }

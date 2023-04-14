@@ -34,4 +34,6 @@ class RouteName {
   final String musicForPostScreen = "/musicForPostScreen";
   final String hashtagForPostScreen = "/hashtagForPostScreen";
   final String passwordGeneratorScreen = "/passwordGeneratorScreen";
+  final String essayWriterScreen = "/essayWriterScreen";
+  final String travelScreen = "/travelScreen";
 }

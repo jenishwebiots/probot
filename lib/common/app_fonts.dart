@@ -414,7 +414,20 @@ class AppFonts {
   String strong = "Strong";
   String generatedPassword = "Generated password";
   String endPasswordGenerator = "End password generator";
-  String areYouSureEndPasswordGenerator = "Are you sure you want to end this password generator ?";
+  String areYouSureEndPasswordGenerator =
+      "Are you sure you want to end this password generator ?";
+  String getAnExceptional = "Get an exceptional essay on any subject :";
+  String subjectOfTheEssay = "Subject of the essay";
+  String writeTheEssay = "Write the essay topic";
+  String essayType = "Essay type";
+  String persuade = "Persuade";
+  String analyze = "Analyze";
+  String startEssayWriting = "Start essay writing";
+  String outExpertHave = "Our experts have written this excellent essay :";
+  String essayWriting = "Essay writing";
+  String endEssayWriting = "End essay writing";
+  String areYouEndEssayWriting =
+      "Are you sure you want to end this essay writing ?";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

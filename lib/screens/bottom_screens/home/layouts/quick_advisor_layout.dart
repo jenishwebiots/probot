@@ -3,7 +3,7 @@ import '../../../../config.dart';
 class QuickAdvisorLayout extends StatelessWidget {
   final dynamic data;
 
-  const QuickAdvisorLayout({Key? key,this.data}) : super(key: key);
+  const QuickAdvisorLayout({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,8 @@ class QuickAdvisorLayout extends StatelessWidget {
         SizedBox(
             height: Sizes.s110,
             width: Sizes.s100,
-            child: Image.asset(eImageAssets.quickAdvisorContainer,alignment: Alignment.bottomCenter)),
+            child: Image.asset(eImageAssets.quickAdvisorContainer,
+                alignment: Alignment.bottomCenter)),
         SizedBox(
             child: SvgPicture.asset(data["icon"])
                 .paddingAll(Insets.i12)
@@ -21,7 +22,8 @@ class QuickAdvisorLayout extends StatelessWidget {
       ]),
       SizedBox(
         width: Sizes.s80,
-        child: Text(data["title"].toString().tr,textAlign: TextAlign.center,
+        child: Text(data["title"].toString().tr,
+                textAlign: TextAlign.center,
                 style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.txt))
             .paddingOnly(bottom: Insets.i10),
       )
@@ -36,8 +38,11 @@ class QuickAdvisorLayout extends StatelessWidget {
         Get.toNamed(routeName.socialMediaScreen);
       } else if (data["title"] == appFonts.passwordGenerator) {
         Get.toNamed(routeName.passwordGeneratorScreen);
+      } else if (data["title"] == appFonts.essayWriter) {
+        Get.toNamed(routeName.essayWriterScreen);
+      } else if (data["title"] == appFonts.travelHangout) {
+        Get.toNamed(routeName.travelScreen);
       }
-
     });
   }
 }
