@@ -402,6 +402,19 @@ class AppFonts {
       "Are you sure you want to end this hashtag builder ?";
   String fbHalf = "Fb";
   String generateSuitableMusic = "Generate suitable music";
+  String getTheStrong = "Get the strong password for any site";
+  String passwordLength = "Password length";
+  String passwordType = "Password type";
+  String onlyCharacter = "Only character";
+  String characterAndNumber = "Character and number";
+  String characterNumberSymbol = "Character, number and symbol";
+  String passwordStrength = "Password strength";
+  String poor = "Poor";
+  String average = "Average";
+  String strong = "Strong";
+  String generatedPassword = "Generated password";
+  String endPasswordGenerator = "End password generator";
+  String areYouSureEndPasswordGenerator = "Are you sure you want to end this password generator ?";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

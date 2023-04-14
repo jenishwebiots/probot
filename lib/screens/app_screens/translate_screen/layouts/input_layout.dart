@@ -37,7 +37,6 @@ class InputLayout extends StatelessWidget {
       Stack(alignment: Alignment.bottomRight, children: [
         SizedBox(
                 child: TextFieldCommon(
-
                     controller: controller!,
                     hintText: hintText ?? appFonts.writeAnything,
                     minLines: 8,

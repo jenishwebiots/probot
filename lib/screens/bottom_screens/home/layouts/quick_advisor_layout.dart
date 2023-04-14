@@ -34,6 +34,8 @@ class QuickAdvisorLayout extends StatelessWidget {
         Get.toNamed(routeName.emailWriterScreen);
       } else if (data["title"] == appFonts.socialMedia) {
         Get.toNamed(routeName.socialMediaScreen);
+      } else if (data["title"] == appFonts.passwordGenerator) {
+        Get.toNamed(routeName.passwordGeneratorScreen);
       }
 
     });

@@ -80,6 +80,11 @@ class SocialMediaController extends GetxController {
   onHashtagGenerate() {
     isHashtagGenerated = true;
     isLoader = true;
+    Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      isLoader = false;
+      progressValue = 0.0;
+      update();
+    });
     update();
   }
 
@@ -245,14 +250,10 @@ class SocialMediaController extends GetxController {
         transitionDuration: const Duration(milliseconds: 300));
   }
 
+
+
   @override
   void onReady() {
-    Timer.periodic(const Duration(seconds: 5), (Timer t) {
-      isLoader = false;
-      progressValue = 0.0;
-      update();
-    });
-
     readJson();
     updateProgress();
     captionCreatorLists = appArray.captionCreatorList;

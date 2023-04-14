@@ -29,4 +29,5 @@ export 'app_pages_controllers/translate_controller.dart';
 export 'app_pages_controllers/code_generator_controller.dart';
 export 'app_pages_controllers/email_generator_controller.dart';
 export 'app_pages_controllers/social_media_controller.dart';
+export 'app_pages_controllers/password_controller.dart';
 

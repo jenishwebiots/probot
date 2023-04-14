@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:probot/widgets/text_common.dart';
 
 import 'common/app_array.dart';
 import 'common/app_fonts.dart';
@@ -67,3 +68,4 @@ final inAppCtrl = Get.isRegistered<InAppController>()
 AppFonts appFonts = AppFonts();
 AppArray appArray = AppArray();
 Session session = Session();
+TextCommon textCommon = TextCommon();
