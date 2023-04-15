@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:probot/config.dart';
 
 class TravelController extends GetxController {
@@ -7,11 +5,9 @@ class TravelController extends GetxController {
 
   onGoPage(value) {
     if (value["title"] == appFonts.nearbyPoints) {
-      Get.toNamed(
-          routeName.nearbyPointsScreen);
+      Get.toNamed(routeName.nearbyPointsScreen);
     } else {
-      /*Get.toNamed(
-          routeName.hashtagForPostScreen);*/
+      Get.toNamed(routeName.distanceAttractionScreen);
     }
     update();
   }

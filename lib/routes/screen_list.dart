@@ -18,6 +18,7 @@ export '../screens/app_screens/music_for_post_screen/layouts/music_category_layo
 export '../screens/app_screens/my_account_screen/all_text_form.dart';
 export '../screens/app_screens/my_account_screen/layouts/my_account_fields.dart';
 export '../screens/app_screens/my_account_screen/my_account_screen.dart';
+export '../screens/app_screens/nearby_points_screen/layouts/distance_slider.dart';
 export '../screens/app_screens/notifications_screen/layouts/notification_layout.dart';
 export '../screens/app_screens/notifications_screen/notifications_screen.dart';
 export '../screens/app_screens/password_generator_screen/layouts/password_length_slider.dart';
@@ -25,6 +26,7 @@ export '../screens/app_screens/password_generator_screen/layouts/password_streng
 export '../screens/app_screens/password_generator_screen/layouts/radio_button_layout.dart';
 export '../screens/app_screens/privacy_policy_screen/privacy_policy_screen.dart';
 export '../screens/app_screens/quick_advisor_screen/quick_advisor_screen.dart';
+export '../screens/app_screens/social_media_screen/layouts/social_media_list_layout.dart';
 export '../screens/app_screens/subscription/layouts/currency_list.dart';
 export '../screens/app_screens/subscription/layouts/currency_list_card.dart';
 export '../screens/app_screens/subscription/layouts/currency_radio.dart';
@@ -95,4 +97,3 @@ export '../screens/bottom_screens/setting/layouts/common_switcher.dart';
 export '../screens/bottom_screens/setting/layouts/setting_list.dart';
 export '../screens/bottom_screens/setting/layouts/user_layout.dart';
 export '../screens/bottom_screens/setting/setting.dart';
-export '../screens/app_screens/social_media_screen/layouts/social_media_list_layout.dart';

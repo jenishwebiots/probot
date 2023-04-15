@@ -1,10 +1,8 @@
 import 'dart:developer';
+
 import 'package:probot/common/app_array.dart';
 
 import '../../config.dart';
-import '../../models/translate_model.dart';
-import '../../screens/app_screens/translate_screen/layouts/country_picker_layout.dart';
-import '../../screens/app_screens/translate_screen/layouts/language_services.dart';
 
 class TranslateController extends GetxController {
   TextEditingController transController = TextEditingController();
@@ -16,11 +14,13 @@ class TranslateController extends GetxController {
   var onToSelect;
   int value = 0;
   int toValue = 0;
-  List <String>translateLanguagesList = [];
-  final FixedExtentScrollController? fromScrollController = FixedExtentScrollController();
-  final FixedExtentScrollController? toScrollController = FixedExtentScrollController();
-  final ScrollController? thumbScrollController = ScrollController(initialScrollOffset: 50.0);
-
+  List<String> translateLanguagesList = [];
+  final FixedExtentScrollController? fromScrollController =
+      FixedExtentScrollController();
+  final FixedExtentScrollController? toScrollController =
+      FixedExtentScrollController();
+  final ScrollController? thumbScrollController =
+      ScrollController(initialScrollOffset: 50.0);
 
   @override
   void onReady() {
@@ -98,49 +98,45 @@ class TranslateController extends GetxController {
       isScrollControlled: true,
       backgroundColor: appCtrl.appTheme.white,
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        return GetBuilder<TranslateController>(
-          builder: (translateCtrl) {
-            return LanguagePickerLayout(
-              list: translateLanguagesList,
-              title: appFonts.selectLanguage,
-              index: value,
-              scrollController: translateCtrl.fromScrollController,
-              thumbScrollController: thumbScrollController,
-              suggestionsCallbacks: (value) {
-                return StateService.getSuggestions(value,translateLanguagesList);
-              },
-              onSuggestionSelected: (i) {
-                int index =
-                AppArray.translateLanguages.indexWhere((element) {
-                  return element == i;
-                });
-                translateCtrl.fromScrollController!.jumpToItem(index);
-                log("suggestion: $i");
-                log("index: $index");
-                update();
-                translateCtrl.update();
-              },
-              onSelectedItemChanged: (i) {
-                value = i;
-                selectItem = translateLanguagesList[i];
-                log("SELECT ITEM: $selectItem");
-                update();
-                translateCtrl.update();
-              },
-              selectOnTap: () {
-                onFromSelect = selectItem;
-                Get.back();
-                translateCtrl.update();
-              },
-            );
-          }
-        );
+        return GetBuilder<TranslateController>(builder: (translateCtrl) {
+          return LanguagePickerLayout(
+            list: translateLanguagesList,
+            title: appFonts.selectLanguage,
+            index: value,
+            scrollController: translateCtrl.fromScrollController,
+            thumbScrollController: thumbScrollController,
+            suggestionsCallbacks: (value) {
+              return StateService.getSuggestions(value, translateLanguagesList);
+            },
+            onSuggestionSelected: (i) {
+              int index = AppArray.translateLanguages.indexWhere((element) {
+                return element == i;
+              });
+              translateCtrl.fromScrollController!.jumpToItem(index);
+              log("suggestion: $i");
+              log("index: $index");
+              update();
+              translateCtrl.update();
+            },
+            onSelectedItemChanged: (i) {
+              value = i;
+              selectItem = translateLanguagesList[i];
+              log("SELECT ITEM: $selectItem");
+              update();
+              translateCtrl.update();
+            },
+            selectOnTap: () {
+              onFromSelect = selectItem;
+              Get.back();
+              translateCtrl.update();
+            },
+          );
+        });
       }),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(AppRadius.r10),
-            topLeft: Radius.circular(AppRadius.r10))
-      ),
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(AppRadius.r10),
+              topLeft: Radius.circular(AppRadius.r10))),
     );
   }
 
@@ -150,42 +146,39 @@ class TranslateController extends GetxController {
       isScrollControlled: true,
       backgroundColor: appCtrl.appTheme.white,
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        return GetBuilder<TranslateController>(
-          builder: (translateCtrl) {
-            return LanguagePickerLayout(
-              title: appFonts.selectLanguage,
-              list: translateLanguagesList,
-              index: toValue,
-              scrollController: translateCtrl.toScrollController,
-              suggestionsCallbacks: (value) {
-                return StateService.getSuggestions(value,translateLanguagesList);
-              },
-              onSelectedItemChanged: (i) {
-                toValue = i;
-                toSelectItem = translateLanguagesList[i];
-                log("SELECT ITEM: $toSelectItem");
-                update();
-                translateCtrl.update();
-              },
-              onSuggestionSelected: (i) {
-                int index =
-                AppArray.translateLanguages.indexWhere((element) {
-                  return element == i;
-                });
-                translateCtrl.toScrollController!.jumpToItem(index);
-                log("suggestion: $i");
-                log("index: $index");
-                update();
-                translateCtrl.update();
-              },
-              selectOnTap: () {
-                onToSelect = toSelectItem;
-                Get.back();
-                translateCtrl.update();
-              },
-            );
-          }
-        );
+        return GetBuilder<TranslateController>(builder: (translateCtrl) {
+          return LanguagePickerLayout(
+            title: appFonts.selectLanguage,
+            list: translateLanguagesList,
+            index: toValue,
+            scrollController: translateCtrl.toScrollController,
+            suggestionsCallbacks: (value) {
+              return StateService.getSuggestions(value, translateLanguagesList);
+            },
+            onSelectedItemChanged: (i) {
+              toValue = i;
+              toSelectItem = translateLanguagesList[i];
+              log("SELECT ITEM: $toSelectItem");
+              update();
+              translateCtrl.update();
+            },
+            onSuggestionSelected: (i) {
+              int index = AppArray.translateLanguages.indexWhere((element) {
+                return element == i;
+              });
+              translateCtrl.toScrollController!.jumpToItem(index);
+              log("suggestion: $i");
+              log("index: $index");
+              update();
+              translateCtrl.update();
+            },
+            selectOnTap: () {
+              onToSelect = toSelectItem;
+              Get.back();
+              translateCtrl.update();
+            },
+          );
+        });
       }),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(

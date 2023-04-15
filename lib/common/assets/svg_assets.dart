@@ -109,5 +109,5 @@ class SvgAssets {
   final String passwordThumb = "assets/svg/passwordThumb.svg";
   final String distance = "assets/svg/distance.svg";
   final String nearby = "assets/svg/nearby.svg";
-
+  final String distanceThumb = "assets/svg/distanceThumb.svg";
 }

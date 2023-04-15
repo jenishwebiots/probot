@@ -1,11 +1,12 @@
 import '../../config.dart';
 
 class NearbyPointsController extends GetxController {
-  SfRangeValues values = const SfRangeValues(30, 40);
-  bool nearbyPointsGenerated = false;
+  SfRangeValues values = const SfRangeValues(05, 15);
+  bool isNearbyPointsGenerated = false;
+  TextEditingController nearbyController = TextEditingController();
 
-  onNearbyPointGenerate () {
-    nearbyPointsGenerated = true;
+  onNearbyPointGenerate() {
+    isNearbyPointsGenerated = true;
     update();
   }
 
@@ -16,7 +17,7 @@ class NearbyPointsController extends GetxController {
               title: appFonts.endTraveling,
               subTitle: appFonts.areYouSureEndTravelling,
               endOnTap: () {
-                nearbyPointsGenerated = false;
+                isNearbyPointsGenerated = false;
                 Get.back();
                 update();
               });
@@ -30,5 +31,4 @@ class NearbyPointsController extends GetxController {
         },
         transitionDuration: const Duration(milliseconds: 300));
   }
-
 }
