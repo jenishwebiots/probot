@@ -107,5 +107,7 @@ class SvgAssets {
   final String twitter = "assets/svg/twitter.svg";
   final String sliderThumb = "assets/svg/sliderThumb.svg";
   final String passwordThumb = "assets/svg/passwordThumb.svg";
+  final String distance = "assets/svg/distance.svg";
+  final String nearby = "assets/svg/nearby.svg";
 
 }

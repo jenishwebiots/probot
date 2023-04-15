@@ -3,9 +3,9 @@ import '../../../../config.dart';
 class SocialMediaListLayout extends StatelessWidget {
   final dynamic data;
   final GestureTapCallback? onTap;
-  final int? index;
+  final int? index,totalLength;
 
-  const SocialMediaListLayout({Key? key, this.data, this.onTap, this.index})
+  const SocialMediaListLayout({Key? key, this.data, this.onTap, this.index,this.totalLength})
       : super(key: key);
 
   @override
@@ -30,17 +30,9 @@ class SocialMediaListLayout extends StatelessWidget {
                     ColorFilter.mode(appCtrl.appTheme.txt, BlendMode.srcIn))
             .paddingSymmetric(horizontal: Insets.i10)
       ]),
-      if (index != 2) const VSpace(Sizes.s15),
-      if (index != 2)
+      if (index != totalLength) const VSpace(Sizes.s15),
+      if (index != totalLength)
         const Divider(height: 1, thickness: 1).paddingOnly(bottom: Insets.i15)
-    ]).inkWell(onTap: () {
-      if (data["title"] == appFonts.captionAbout) {
-        Get.toNamed(routeName.captionCreatorScreen);
-      } else if (data["title"] == appFonts.getMusicSuggestion) {
-        Get.toNamed(routeName.musicForPostScreen);
-      } else {
-        Get.toNamed(routeName.hashtagForPostScreen);
-      }
-    });
+    ]).inkWell(onTap: onTap);
   }
 }

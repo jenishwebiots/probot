@@ -426,8 +426,23 @@ class AppFonts {
   String outExpertHave = "Our experts have written this excellent essay :";
   String essayWriting = "Essay writing";
   String endEssayWriting = "End essay writing";
-  String areYouEndEssayWriting =
-      "Are you sure you want to end this essay writing ?";
+  String areYouEndEssayWriting = "Are you sure you want to end this essay writing ?";
+  String exploreNearby = "Explore nearby points of interest :";
+  String nearbyPoints = "Nearby Points";
+  String distanceAttraction = "Distance attraction";
+  String visitWonderfulLocations = "Visit wonderful locations around you :";
+  String iAmLooking = "I m looking place for";
+  String myCurrentLocation = "My current location";
+  String distanceFrom = "Distance from my current location";
+  String takeMeTo = "Take me to a lovely location";
+  String selectPlaceCategory = "Select Place Category";
+  String weFoundTheMost = "We found the most amazing place for you :";
+  String someInterestingLocation = "Some interesting location :";
+  String endTraveling = "End travelling";
+  String areYouSureEndTravelling = "Are you sure you want to end this travelling ?";
+  String visitWonderfulLocationsAroundWorld = "Visit wonderful locations around world :";
+  String theLocationYou = "The location you wish to go";
+  String budgetOfTravelling = "Budget of travelling/hangout between";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

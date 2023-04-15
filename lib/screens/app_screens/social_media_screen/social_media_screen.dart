@@ -26,7 +26,10 @@ class SocialMediaScreen extends StatelessWidget {
                                 .asMap()
                                 .entries
                                 .map((e) => SocialMediaListLayout(
-                                    data: e.value, index: e.key))
+                                    data: e.value,
+                                    index: e.key,
+                                    totalLength: socialMediaCtrl.socialMediaLists.length-1,
+                                    onTap: ()=> socialMediaCtrl.onGoPage(e.value)))
                                 .toList()))
                     .paddingSymmetric(
                         vertical: Insets.i20, horizontal: Insets.i15)

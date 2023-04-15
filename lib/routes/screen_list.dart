@@ -95,3 +95,4 @@ export '../screens/bottom_screens/setting/layouts/common_switcher.dart';
 export '../screens/bottom_screens/setting/layouts/setting_list.dart';
 export '../screens/bottom_screens/setting/layouts/user_layout.dart';
 export '../screens/bottom_screens/setting/setting.dart';
+export '../screens/app_screens/social_media_screen/layouts/social_media_list_layout.dart';

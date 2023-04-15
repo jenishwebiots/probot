@@ -77,6 +77,16 @@ class SocialMediaController extends GetxController {
     update();
   }
 
+  onGoPage(value) {
+    if (value == appFonts.captionAbout) {
+      Get.toNamed(routeName.captionCreatorScreen);
+    } else if (value == appFonts.getMusicSuggestion) {
+      Get.toNamed(routeName.musicForPostScreen);
+    } else {
+      Get.toNamed(routeName.hashtagForPostScreen);
+    }
+  }
+
   onHashtagGenerate() {
     isHashtagGenerated = true;
     isLoader = true;
@@ -249,8 +259,6 @@ class SocialMediaController extends GetxController {
         },
         transitionDuration: const Duration(milliseconds: 300));
   }
-
-
 
   @override
   void onReady() {

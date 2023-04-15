@@ -7,6 +7,7 @@ import '../screens/app_screens/caption_creator_screen/caption_creator_screen.dar
 import '../screens/app_screens/email_generator_screen/email_generator_screen.dart';
 import '../screens/app_screens/essay_writer_screen/essay_writer_screen.dart';
 import '../screens/app_screens/hashtag_for_post_screen/hashtag_for_post_screen.dart';
+import '../screens/app_screens/nearby_points_screen/nearby_points_screen.dart';
 import '../screens/app_screens/password_generator_screen/password_generator_screen.dart';
 import '../screens/app_screens/travel_screen/travel_screen.dart';
 
@@ -78,5 +79,6 @@ class AppRoute {
     GetPage(
         name: _routeName.essayWriterScreen, page: () => EssayWriterScreen()),
     GetPage(name: _routeName.travelScreen, page: () => TravelScreen()),
+    GetPage(name: _routeName.nearbyPointsScreen, page: () => NearbyPointsScreen()),
   ];
 }

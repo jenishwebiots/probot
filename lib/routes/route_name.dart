@@ -36,4 +36,5 @@ class RouteName {
   final String passwordGeneratorScreen = "/passwordGeneratorScreen";
   final String essayWriterScreen = "/essayWriterScreen";
   final String travelScreen = "/travelScreen";
+  final String nearbyPointsScreen = "/nearbyPointsScreen";
 }

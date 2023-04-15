@@ -693,4 +693,10 @@ class AppArray {
     "persuade",
     "analyze",
   ];
+
+  var travelHangoutList = [
+    {"image": eSvgAssets.nearby, "title": appFonts.nearbyPoints},
+    {"image": eSvgAssets.distance, "title": appFonts.distanceAttraction},
+  ];
+
 }
