@@ -13,10 +13,14 @@ class SocialMediaListLayout extends StatelessWidget {
     return Column(children: [
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Row(children: [
-          SvgPicture.asset(data["image"]).paddingAll(Insets.i15).decorated(
-              color: appCtrl.appTheme.primary,
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(AppRadius.r8))),
+          SizedBox(
+            height: Sizes.s52,
+            width: Sizes.s52,
+            child: SvgPicture.asset(data["image"]).paddingAll(Insets.i15).decorated(
+                color: appCtrl.appTheme.primary,
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(AppRadius.r8))),
+          ),
           const HSpace(Sizes.s12),
           Text(data["title"]!.toString().tr,
               style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt))

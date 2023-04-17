@@ -97,3 +97,7 @@ export '../screens/bottom_screens/setting/layouts/common_switcher.dart';
 export '../screens/bottom_screens/setting/layouts/setting_list.dart';
 export '../screens/bottom_screens/setting/layouts/user_layout.dart';
 export '../screens/bottom_screens/setting/setting.dart';
+export '../screens/app_screens/distance_attraction_screen/layouts/distance_slider_layout.dart';
+export '../screens/app_screens/distance_attraction_screen/layouts/distance_generated_layout.dart';
+export '../screens/app_screens/baby_name_screen/layout/baby_name_top_layout.dart';
+export '../screens/app_screens/cv_maker_screen/layouts/cv_maker_layout.dart';

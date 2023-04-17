@@ -699,4 +699,45 @@ class AppArray {
     {"image": eSvgAssets.distance, "title": appFonts.distanceAttraction},
   ];
 
+  var personalAdvisorList = [
+    {"image": eSvgAssets.babyName, "title": appFonts.babyNameSuggestion},
+    {"image": eSvgAssets.cv, "title": appFonts.cvMaker},
+    {"image": eSvgAssets.gift, "title": appFonts.giftSuggestion},
+    {"image": eSvgAssets.birthday, "title": appFonts.birthdayMessage},
+    {"image": eSvgAssets.anniversary, "title": appFonts.anniversaryMessage},
+    {"image": eSvgAssets.wedding, "title": appFonts.weddingWishes},
+    {"image": eSvgAssets.newBaby, "title": appFonts.newBabyWishes},
+    {"image": eSvgAssets.getWell, "title": appFonts.getWellMessage},
+    {"image": eSvgAssets.newYear, "title": appFonts.newYearWishes},
+    {"image": eSvgAssets.valentine, "title": appFonts.valentineDay},
+    {"image": eSvgAssets.mothersDay, "title": appFonts.mothersDayWishes},
+    {"image": eSvgAssets.fathersDay, "title": appFonts.fathersDayWishes},
+    {"image": eSvgAssets.promotion, "title": appFonts.promotionWishes},
+    {"image": eSvgAssets.babyShower, "title": appFonts.babyShowerMessage},
+    {"image": eSvgAssets.farewell, "title": appFonts.farewellMessage},
+  ];
+  var genderList = [
+    {"image": eSvgAssets.girl, "title": appFonts.girl},
+    {"image": eSvgAssets.boy, "title": appFonts.boy},
+  ];
+
+  var nameSuggestionList = [
+    "zodiac",
+    "letter",
+  ];
+
+  var zodiacList = [
+    'Aries',
+    'Taurus',
+    'Gemini',
+    'Cancer',
+    'Leo',
+    'Virgo',
+    'Libra',
+    'Scorpio',
+    'Sagittarius',
+    'Capricorn',
+    'Aquarius',
+    'Pisces'
+  ];
 }

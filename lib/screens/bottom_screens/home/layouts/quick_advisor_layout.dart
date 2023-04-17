@@ -42,6 +42,8 @@ class QuickAdvisorLayout extends StatelessWidget {
         Get.toNamed(routeName.essayWriterScreen);
       } else if (data["title"] == appFonts.travelHangout) {
         Get.toNamed(routeName.travelScreen);
+      } else if (data["title"] == appFonts.personalAdvice) {
+        Get.toNamed(routeName.personalAdvisorScreen);
       }
     });
   }

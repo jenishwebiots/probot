@@ -31,3 +31,6 @@ export 'bottom_controllers/home_controller.dart';
 export 'bottom_controllers/image_generator_controller.dart';
 export 'bottom_controllers/setting_controller.dart';
 export 'common_controllers/app_controller.dart';
+export 'app_pages_controllers/personal_advisor_controller.dart';
+export 'personal_advisor_controllers/baby_name_controller.dart';
+export 'personal_advisor_controllers/cv_maker_controller.dart';

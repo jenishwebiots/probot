@@ -10,7 +10,7 @@ class NearbyPointsController extends GetxController {
     update();
   }
 
-  endCaptionGeneratorDialog() {
+  endNearbyGeneratorDialog() {
     Get.generalDialog(
         pageBuilder: (context, anim1, anim2) {
           return AdviserDialog(

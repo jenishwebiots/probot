@@ -64,7 +64,7 @@ class NearbyPointsScreen extends StatelessWidget {
                       ButtonCommon(
                         title: appFonts.endTraveling,
                         onTap: () =>
-                            nearbyPointCtrl.endCaptionGeneratorDialog(),
+                            nearbyPointCtrl.endNearbyGeneratorDialog(),
                       )
                     ]).paddingSymmetric(
                   vertical: Insets.i30, horizontal: Insets.i20));

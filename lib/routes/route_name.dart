@@ -38,4 +38,7 @@ class RouteName {
   final String travelScreen = "/travelScreen";
   final String nearbyPointsScreen = "/nearbyPointsScreen";
   final String distanceAttractionScreen = "/distanceAttractionScreen";
+  final String personalAdvisorScreen = "/personalAdvisorScreen";
+  final String babyNameScreen = "/babyNameScreen";
+  final String cvMakerScreen = "/cvMakerScreen";
 }

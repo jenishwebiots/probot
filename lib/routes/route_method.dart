@@ -1,9 +1,12 @@
 import 'package:probot/screens/app_screens/code_generator_screen/code_generator_screen.dart';
 import 'package:probot/screens/app_screens/music_for_post_screen/music_for_post_screen.dart';
+import 'package:probot/screens/app_screens/personal_advisor_screen/personal_advisor_screen.dart';
 import 'package:probot/screens/app_screens/social_media_screen/social_media_screen.dart';
 
 import '../config.dart';
+import '../screens/app_screens/baby_name_screen/baby_name_screen.dart';
 import '../screens/app_screens/caption_creator_screen/caption_creator_screen.dart';
+import '../screens/app_screens/cv_maker_screen/cv_maker_screen.dart';
 import '../screens/app_screens/distance_attraction_screen/distance_attraction_screen.dart';
 import '../screens/app_screens/email_generator_screen/email_generator_screen.dart';
 import '../screens/app_screens/essay_writer_screen/essay_writer_screen.dart';
@@ -82,8 +85,9 @@ class AppRoute {
     GetPage(name: _routeName.travelScreen, page: () => TravelScreen()),
     GetPage(
         name: _routeName.nearbyPointsScreen, page: () => NearbyPointsScreen()),
-    GetPage(
-        name: _routeName.distanceAttractionScreen,
-        page: () => DistanceAttractionScreen()),
+    GetPage(name: _routeName.distanceAttractionScreen, page: () => DistanceAttractionScreen()),
+    GetPage(name: _routeName.personalAdvisorScreen, page: () => PersonalAdvisorScreen()),
+    GetPage(name: _routeName.babyNameScreen, page: () => BabyNameScreen()),
+    GetPage(name: _routeName.cvMakerScreen, page: () => CvMakerScreen()),
   ];
 }
