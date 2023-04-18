@@ -67,7 +67,8 @@ class PaymentList extends StatelessWidget {
                 const VSpace(Sizes.s35),
                 (appCtrl.firebaseConfigModel!.isPaypal! == false &&
                         appCtrl.firebaseConfigModel!.isRazorPay! == false &&
-                        appCtrl.firebaseConfigModel!.isStripe! == false)
+                        appCtrl.firebaseConfigModel!.isStripe! == false &&
+                        appCtrl.firebaseConfigModel!.isInApp! == false)
                     ? Container()
                     : Row(children: [
                         Expanded(

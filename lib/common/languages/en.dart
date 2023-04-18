@@ -389,4 +389,12 @@ final dynamic en = {
   'deleteUserSuccessfully' : "User Delete Successfully",
   'dataUploadSuccessfully' : "Data Upload Successfully",
   'imageUploadSuccessfully' : "Image Upload Successfully",
+  'totalCoinsAvailable' : "@totalCoins Coins available",
+  'wantUnlimited' : "Want unlimited question answer click on",
+  'viewSubscription' : "“ View Subscription Plan”",
+  'wantMoreCoins' : "Want more coin balance, click on",
+  'topUpBalance' : "“Top-up Balance”",
+  'viewSubscriptionPlan' : "View subscription plan",
+  'topBalance' : "Top-up balance",
+  'selectPlan' : "Select plan",
 };

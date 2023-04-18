@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pinput/pinput.dart';
 
@@ -32,31 +33,7 @@ class MobileLoginController extends GetxController {
 
           userName = phoneUser?.phoneNumber;
 
-          await FirebaseFirestore.instance
-              .collection('users')
-              .where('id', isEqualTo: phoneUser?.uid).limit(1)
-              .get().then((value) {
 
-            log("doc ${value.docs.isEmpty}");
-            if (value.docs.isEmpty) {
-
-              // Update data to server if new user
-              FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(phoneUser?.uid)
-                  .set({
-                'logintype': "Email",
-                'nickname': phoneUser?.displayName,
-                'email': phoneUser?.email,
-                'phone':phoneUser?.phoneNumber,
-                'id': phoneUser?.uid
-              });
-            }
-          });
-          isLoading = false;
-          update();
-          appCtrl.storage.write("number", mobileController.text);
-          appCtrl.storage.write("id", phoneUser?.uid);
           showDialog(
               barrierDismissible: false,
               context: Get.context!,
@@ -132,6 +109,48 @@ class MobileLoginController extends GetxController {
                                                 credential);
                                             isLoading = false;
                                             update();
+                                            await FirebaseFirestore.instance
+                                                .collection('users')
+                                                .where('id', isEqualTo: phoneUser?.uid)
+                                                .limit(1)
+                                                .get()
+                                                .then((value)async {
+                                              log("doc ${value.docs.isEmpty}");
+                                              if (value.docs.isEmpty) {
+                                                FirebaseMessaging.instance.getToken().then((token) async {
+                                                  // Update data to server if new user
+                                                  await   FirebaseFirestore.instance
+                                                      .collection('users')
+                                                      .doc(phoneUser?.uid)
+                                                      .set({
+                                                    'logintype': "Email",
+                                                    'nickname': phoneUser?.displayName,
+                                                    'email': phoneUser?.email,
+                                                    'phone': phoneUser?.phoneNumber,
+                                                    'id': phoneUser?.uid,
+                                                    "balance": 5,
+                                                    "fcmToken": token,
+                                                    "isActive":true
+                                                  });
+                                                });
+                                                appCtrl.envConfig["balance"] = 5;
+                                              } else {
+                                                await FirebaseMessaging.instance.getToken().then((token) async {
+                                                  await FirebaseFirestore.instance
+                                                      .collection('users')
+                                                      .doc(phoneUser?.uid)
+                                                      .update({
+                                                    "fcmToken": token,
+                                                    "isActive":true
+                                                  });
+                                                });
+                                                appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+                                              }
+                                            });
+                                            isLoading = false;
+                                            update();
+                                            appCtrl.storage.write("number", mobileController.text);
+                                            appCtrl.storage.write("id", phoneUser?.uid);
                                             Get.offAllNamed(
                                                 routeName.selectLanguageScreen);
                                           } catch (e) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class FirebaseConfigModel {
   String? bannerAddId,
       bannerIOSId,
@@ -11,11 +13,23 @@ class FirebaseConfigModel {
       payPalClientId,
       payPalSecret,
       stripeKey,
-      stripePublishKey,privacyPolicyLink,rateAppAndroidId,rateAppIOSId,refundLink;
+      stripePublishKey,
+      privacyPolicyLink,
+      rateAppAndroidId,
+      rateAppIOSId,
+      refundLink;
   bool? isChatShow;
   bool? isImageGeneratorShow;
+  int? balance;
   bool? isTextCompletionShow;
-  bool? isAddShow, isRazorPay, isStripe, isPaypal, isInApp, isChatHistory,isGuestLoginEnable;
+  bool? isAddShow,
+      isRazorPay,
+      isStripe,
+      isPaypal,
+      isInApp,
+      isChatHistory,
+      isGuestLoginEnable,
+      isGoogleAdmobEnable;
 
   FirebaseConfigModel(
       {this.bannerAddId,
@@ -43,9 +57,13 @@ class FirebaseConfigModel {
       this.isInApp,
       this.isRazorPay,
       this.isStripe,
-      this.isChatHistory,this.isGuestLoginEnable});
+      this.isChatHistory,
+      this.isGuestLoginEnable,
+      this.isGoogleAdmobEnable,
+      this.balance});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
+
     bannerAddId = json['bannerAddId'] ?? "";
     bannerIOSId = json['bannerIOSId'] ?? "";
     rewardAndroidId = json['rewardAndroidId'] ?? "true";
@@ -71,8 +89,10 @@ class FirebaseConfigModel {
     isStripe = json['isStripe'] ?? true;
     isInApp = json['isInApp'] ?? true;
     isGuestLoginEnable = json['isGuestLoginEnable'] ?? true;
+    isGoogleAdmobEnable = json['isGoogleAdmobEnable'] ?? true;
     razorPayKey = json['razorPayKey'] ?? "";
     razorPaySecret = json['razorPaySecret'] ?? "";
+    balance = json['balance'] ?? 5;
   }
 
   Map<String, dynamic> toJson() {
@@ -104,6 +124,8 @@ class FirebaseConfigModel {
     data['isChatHistory'] = isChatHistory;
     data['isInApp'] = isInApp;
     data['isGuestLoginEnable'] = isGuestLoginEnable;
+    data['isGoogleAdmobEnable'] = isGoogleAdmobEnable;
+    data['balance'] = balance;
     return data;
   }
 }
