@@ -44,5 +44,5 @@ class RouteName {
   final String giftSuggestionScreen = "/giftSuggestionScreen";
   final String birthdayMessageScreen = "/birthdayMessageScreen";
   final String anniversaryMessageScreen = "/anniversaryMessageScreen";
-
+  final String newBabyWishesScreen = "/newBabyWishesScreen";
 }

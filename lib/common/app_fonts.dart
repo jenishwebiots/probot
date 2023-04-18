@@ -426,7 +426,8 @@ class AppFonts {
   String outExpertHave = "Our experts have written this excellent essay :";
   String essayWriting = "Essay writing";
   String endEssayWriting = "End essay writing";
-  String areYouEndEssayWriting = "Are you sure you want to end this essay writing ?";
+  String areYouEndEssayWriting =
+      "Are you sure you want to end this essay writing ?";
   String exploreNearby = "Explore nearby points of interest :";
   String nearbyPoints = "Nearby Points";
   String distanceAttraction = "Distance attraction";
@@ -439,8 +440,10 @@ class AppFonts {
   String weFoundTheMost = "We found the most amazing place for you :";
   String someInterestingLocation = "Some interesting location :";
   String endTraveling = "End travelling";
-  String areYouSureEndTravelling = "Are you sure you want to end this travelling ?";
-  String visitWonderfulLocationsAroundWorld = "Visit wonderful locations around world :";
+  String areYouSureEndTravelling =
+      "Are you sure you want to end this travelling ?";
+  String visitWonderfulLocationsAroundWorld =
+      "Visit wonderful locations around world :";
   String theLocationYou = "The location you wish to go";
   String budgetOfTravelling = "Budget of travelling/hangout between";
   String raiseYourAffection = "Raise your affection for the person you love :";
@@ -472,7 +475,8 @@ class AppFonts {
   String babyName = "Baby name :";
   String endNameSuggestion = "End name suggestion";
   String enterFirstLetter = "Enter first letter";
-  String areYouSureEndBabyName = "Are you sure you want to end this baby name suggestion ?";
+  String areYouSureEndBabyName =
+      "Are you sure you want to end this baby name suggestion ?";
   String createProfessional = "Create professional CV letter based on";
   String personalInfo = "Personal Info";
   String name = "Name";
@@ -489,7 +493,8 @@ class AppFonts {
   String createACvThat = "Created a CV that confirms your employment :";
   String professionalCv = "Professional CV for you :";
   String endMyCv = "End my CV process";
-  String areYouSureEndCv = "Are you sure you want to end this CV maker process?";
+  String areYouSureEndCv =
+      "Are you sure you want to end this CV maker process?";
   String discoverIncredible = "Discover incredible gift ideas for :";
   String sendGiftTo = "Send gift to";
   String occasion = "Occasion";
@@ -497,14 +502,16 @@ class AppFonts {
   String amazingGift = "Amazing gift suggestion :";
   String endGiftIdeas = "End gift ideas";
   String endGiftSuggestion = "End Gifts Suggestion";
-  String areYouSureEndGiftSuggestion = "Are you sure you want to end this gifts suggestion ?";
+  String areYouSureEndGiftSuggestion =
+      "Are you sure you want to end this gifts suggestion ?";
   String aSpecialDay = "A special day deserve a special message :";
   String sendBirthdayWishes = "Send birthday wishes to";
   String messageGenerateIn = "Message generate in";
   String generateGoodWishes = "Generate good wishes";
   String generatedWishes = "Generated wishes :";
   String endBirthdayMessage = "End birthday message";
-  String areYouSureEndBirthday = "Are you sure you want to end this birthday message ?";
+  String areYouSureEndBirthday =
+      "Are you sure you want to end this birthday message ?";
   String goodWishesOn = "Good wishes on special day for special one";
   String yearOfAnniversary = "Year of anniversary";
   String typeOfAnniversary = "Type of anniversary";
@@ -512,7 +519,8 @@ class AppFonts {
   String messageSendTo = "Message send to";
   String selectYears = "Select Years of Anniversary";
   String endAnniversaryMessage = "End anniversary message";
-  String areYouSureEndAnniversary = "Are you sure you want to end this anniversary message ?";
+  String areYouSureEndAnniversary =
+      "Are you sure you want to end this anniversary message ?";
   String wonderFullGreetings = "Wonderful greetings for the newborn baby :";
   String relationWithBaby = "Relation with baby";
   String wishGenerateIn = "Wish generate in";
@@ -520,7 +528,9 @@ class AppFonts {
   String goodWishes = "Good Wishes";
   String lovelyGreetings = "lovely greetings to the nicest person  :";
   String endBornBabyWish = "End born baby wish";
-  String areYouSureEndBaby = "Are you sure you want to end this born baby wish ?";
+  String areYouSureEndBaby =
+      "Are you sure you want to end this born baby wish ?";
+  String babyNameOnly = "Baby name";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});
