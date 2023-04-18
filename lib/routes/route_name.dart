@@ -41,4 +41,8 @@ class RouteName {
   final String personalAdvisorScreen = "/personalAdvisorScreen";
   final String babyNameScreen = "/babyNameScreen";
   final String cvMakerScreen = "/cvMakerScreen";
+  final String giftSuggestionScreen = "/giftSuggestionScreen";
+  final String birthdayMessageScreen = "/birthdayMessageScreen";
+  final String anniversaryMessageScreen = "/anniversaryMessageScreen";
+
 }

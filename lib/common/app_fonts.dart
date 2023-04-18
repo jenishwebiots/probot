@@ -490,6 +490,37 @@ class AppFonts {
   String professionalCv = "Professional CV for you :";
   String endMyCv = "End my CV process";
   String areYouSureEndCv = "Are you sure you want to end this CV maker process?";
+  String discoverIncredible = "Discover incredible gift ideas for :";
+  String sendGiftTo = "Send gift to";
+  String occasion = "Occasion";
+  String generateTheBeautiful = "Generate the beautiful idea";
+  String amazingGift = "Amazing gift suggestion :";
+  String endGiftIdeas = "End gift ideas";
+  String endGiftSuggestion = "End Gifts Suggestion";
+  String areYouSureEndGiftSuggestion = "Are you sure you want to end this gifts suggestion ?";
+  String aSpecialDay = "A special day deserve a special message :";
+  String sendBirthdayWishes = "Send birthday wishes to";
+  String messageGenerateIn = "Message generate in";
+  String generateGoodWishes = "Generate good wishes";
+  String generatedWishes = "Generated wishes :";
+  String endBirthdayMessage = "End birthday message";
+  String areYouSureEndBirthday = "Are you sure you want to end this birthday message ?";
+  String goodWishesOn = "Good wishes on special day for special one";
+  String yearOfAnniversary = "Year of anniversary";
+  String typeOfAnniversary = "Type of anniversary";
+  String relation = "Relation";
+  String messageSendTo = "Message send to";
+  String selectYears = "Select Years of Anniversary";
+  String endAnniversaryMessage = "End anniversary message";
+  String areYouSureEndAnniversary = "Are you sure you want to end this anniversary message ?";
+  String wonderFullGreetings = "Wonderful greetings for the newborn baby :";
+  String relationWithBaby = "Relation with baby";
+  String wishGenerateIn = "Wish generate in";
+  String goodWishesPlease = "Good wishes, Please";
+  String goodWishes = "Good Wishes";
+  String lovelyGreetings = "lovely greetings to the nicest person  :";
+  String endBornBabyWish = "End born baby wish";
+  String areYouSureEndBaby = "Are you sure you want to end this born baby wish ?";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

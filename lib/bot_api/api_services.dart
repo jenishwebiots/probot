@@ -15,7 +15,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer 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',
 
       },
       body: json.encode({

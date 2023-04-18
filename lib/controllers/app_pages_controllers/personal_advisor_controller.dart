@@ -8,6 +8,12 @@ class PersonalAdvisorController extends GetxController {
          Get.toNamed(routeName.babyNameScreen);
        } else if (value["title"] == appFonts.cvMaker) {
          Get.toNamed(routeName.cvMakerScreen);
+       } else if (value["title"] == appFonts.giftSuggestion) {
+         Get.toNamed(routeName.giftSuggestionScreen);
+       } else if (value["title"] == appFonts.birthdayMessage) {
+         Get.toNamed(routeName.birthdayMessageScreen);
+       } else if (value["title"] == appFonts.anniversaryMessage) {
+         Get.toNamed(routeName.anniversaryMessageScreen);
        }
      }
 

@@ -34,3 +34,6 @@ export 'common_controllers/app_controller.dart';
 export 'app_pages_controllers/personal_advisor_controller.dart';
 export 'personal_advisor_controllers/baby_name_controller.dart';
 export 'personal_advisor_controllers/cv_maker_controller.dart';
+export 'personal_advisor_controllers/gift_suggestion_controller.dart';
+export 'personal_advisor_controllers/birthday_message_controller.dart';
+export 'personal_advisor_controllers/anniversary_message_controller.dart';
