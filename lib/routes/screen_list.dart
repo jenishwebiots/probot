@@ -103,3 +103,5 @@ export '../screens/app_screens/baby_name_screen/layout/baby_name_top_layout.dart
 export '../screens/app_screens/cv_maker_screen/layouts/cv_maker_layout.dart';
 export '../screens/app_screens/gift_suggestion_screen/layouts/without_generate_layout.dart';
 export '../screens/app_screens/anniversary_message_screen/layouts/anniversary_message_layout.dart';
+export '../screens/app_screens/new_baby_wishes_screen/layout/new_baby_wishes_layout.dart';
+export '../screens/app_screens/get_well_message_screen/layouts/get_well_message_layout.dart';

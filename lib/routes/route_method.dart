@@ -12,6 +12,7 @@ import '../screens/app_screens/cv_maker_screen/cv_maker_screen.dart';
 import '../screens/app_screens/distance_attraction_screen/distance_attraction_screen.dart';
 import '../screens/app_screens/email_generator_screen/email_generator_screen.dart';
 import '../screens/app_screens/essay_writer_screen/essay_writer_screen.dart';
+import '../screens/app_screens/get_well_message_screen/get_well_message_screen.dart';
 import '../screens/app_screens/gift_suggestion_screen/gift_suggestion_screen.dart';
 import '../screens/app_screens/hashtag_for_post_screen/hashtag_for_post_screen.dart';
 import '../screens/app_screens/nearby_points_screen/nearby_points_screen.dart';
@@ -106,8 +107,7 @@ class AppRoute {
     GetPage(
         name: _routeName.anniversaryMessageScreen,
         page: () => AnniversaryMessageScreen()),
-    GetPage(
-        name: _routeName.newBabyWishesScreen,
-        page: () => NewBabyWishesScreen()),
+    GetPage(name: _routeName.newBabyWishesScreen,page: () => NewBabyWishesScreen()),
+    GetPage(name: _routeName.getWellMessageScreen,page: () => GetWellMessageScreen()),
   ];
 }

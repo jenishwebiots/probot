@@ -1,41 +1,41 @@
 import '../../../config.dart';
 
-class NewBabyWishesScreen extends StatelessWidget {
-  final newCtrl = Get.put(NewBabyWishesController());
+class GetWellMessageScreen extends StatelessWidget {
+  final getCtrl = Get.put(GetWellMessageController());
 
-  NewBabyWishesScreen({Key? key}) : super(key: key);
+  GetWellMessageScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewBabyWishesController>(builder: (_) {
+    return GetBuilder<GetWellMessageController>(builder: (_) {
       return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
           resizeToAvoidBottomInset: false,
           appBar: AppAppBarCommon(
-              title: appFonts.newBabyWishes, leadingOnTap: () => Get.back()),
+              title: appFonts.getWellMessage, leadingOnTap: () => Get.back()),
           body: SingleChildScrollView(
-              child: newCtrl.isWishGenerate == true
+              child: getCtrl.isWellMessageGenerated == true
                   ? Column(children: [
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             textCommon.outfitSemiBoldPrimary16(
-                                text: appFonts.lovelyGreetings),
+                                text: appFonts.sendingBestWishes),
                             const VSpace(Sizes.s15),
                             InputLayout(
                                 hintText: "",
-                                title: appFonts.goodWishes,
+                                title: appFonts.healthyWishes,
                                 color: appCtrl.appTheme.white,
                                 isMax: false,
-                                controller: newCtrl.wishGenController)
+                                controller: getCtrl.wellGenController)
                           ]),
                       const VSpace(Sizes.s20),
                       ButtonCommon(
-                          title: appFonts.endBornBabyWish,
-                          onTap: () => newCtrl.endBabyWishesSuggestion())
+                          title: appFonts.endWellWishes,
+                          onTap: () => getCtrl.endWellWishes())
                     ]).paddingSymmetric(
-                      horizontal: Insets.i20, vertical: Insets.i30)
-                  : const NewBabyWishesLayout()));
+                      vertical: Insets.i30, horizontal: Insets.i20)
+                  : const GetWellMessageLayout()));
     });
   }
 }

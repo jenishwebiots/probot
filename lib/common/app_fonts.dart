@@ -531,6 +531,13 @@ class AppFonts {
   String areYouSureEndBaby =
       "Are you sure you want to end this born baby wish ?";
   String babyNameOnly = "Baby name";
+  String sendingBestWishes = "Sending best wishes for a speedy recovery :";
+  String wellWishes = "Well wishes send to";
+  String whatHappened = "What happened with him/her";
+  String generateHealthWishes = "Generate healthy wishes";
+  String healthyWishes = "Healthy wishes";
+  String endWellWishes = "End well wishes";
+  String areYouSureEndWell = "Are you sure you want to end this well  wishes ?";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});
