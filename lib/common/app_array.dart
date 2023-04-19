@@ -116,70 +116,6 @@ class AppArray {
     {"title": "setting", "icon": eSvgAssets.setting},
   ];
 
-  //chat list
-  var chatList = [
-    {
-      "dateTime": "Today, 5:30 am",
-      "chat": [
-        {
-          "isReceiver": true,
-          "message": "Hello, There ?",
-          "time": "5:30",
-        },
-        {
-          "isReceiver": false,
-          "message": "Hello !!",
-          "time": "5:31",
-        },
-        {
-          "isReceiver": true,
-          "message": "How are you ? 😄",
-          "time": "5:31",
-        },
-        {
-          "isReceiver": false,
-          "message": "I’m good ! what about you ?",
-          "time": "5:32",
-        },
-        {
-          "isReceiver": false,
-          "message": "I’m good ! what about you ?",
-          "time": "5:32",
-        },
-        {
-          "isReceiver": true,
-          "message": "Too good !\nWhere were you all this time ?",
-          "time": "5:32",
-        },
-        {"isReceiver": true, "message": "Have any problem ?", "time": "5:32"},
-        {
-          "isReceiver": false,
-          "message": "Yeah ! i’m not so good. 😐",
-          "time": "5:33"
-        },
-        {
-          "isReceiver": false,
-          "message": "I need just some time. 😇",
-          "time": "5:33",
-        },
-        {
-          "isReceiver": true,
-          "message": "Too good !\nWhere were you all this time ?",
-          "time": "5:34",
-        },
-        {
-          "isReceiver": true,
-          "message": "Too good !\nWhere were you all this time ?",
-          "time": "5:34",
-        },
-        {
-          "isReceiver": false,
-          "message": "I need just some time. 😇",
-          "time": "5:35",
-        },
-      ]
-    }
-  ];
 
   // notification list
   var notificationsList = [
@@ -282,8 +218,9 @@ class AppArray {
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
     {"icon": eSvgAssets.translate, "title": "language"},
-    //{"icon": eSvgAssets.star, "title": "rateApp"},
-    //{"icon": eSvgAssets.security, "title": "privacyTerm"},
+    {"icon": eSvgAssets.star, "title": "rateApp"},
+    {"icon": eSvgAssets.security, "title": "privacyTerm"},
+    {"icon": eSvgAssets.refund, "title": "refundPolicy"},
     {"icon": eSvgAssets.logout, "title": "logout"}
   ];
 
@@ -434,16 +371,17 @@ class AppArray {
       "subtitle": appFonts.march23,
     },
   ];
+
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,
-      "title": appFonts.payPal.tr,
+      "title": appFonts.payPal,
     },
     {
       "icon": eImageAssets.stripe,
-      "title": appFonts.stripe.tr,
+      "title": appFonts.stripe,
     },
-    {"icon": eImageAssets.razor, "title": appFonts.razor.tr},
+    {"icon": eImageAssets.razor, "title": appFonts.razor},
     {"icon": eImageAssets.inApp, "title": appFonts.inApp},
   ];
 
@@ -457,6 +395,7 @@ class AppArray {
     {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
     {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
     {"icon": eSvgAssets.essay, "title": appFonts.essayWriter}
+
   ];
 
   static final List<String> translateLanguages = [

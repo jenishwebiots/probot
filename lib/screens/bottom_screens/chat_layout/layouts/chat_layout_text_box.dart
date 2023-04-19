@@ -1,3 +1,9 @@
+import 'dart:developer';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:vibration/vibration.dart';
 
 import '../../../../config.dart';
@@ -15,12 +21,31 @@ class ChatLayoutTextBox extends StatelessWidget {
         fillColor:
             appCtrl.isTheme ? appCtrl.appTheme.bg : appCtrl.appTheme.white,
         minLines: 1,
-        prefixIcon: SvgPicture.asset(eSvgAssets.smile)
-            .paddingOnly(left: Insets.i18, right: Insets.i10),
         suffixIcon: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            GestureDetector(
+                onTap: () async {
+                  chatCtrl.screenshotController
+                      .capture(delay: const Duration(milliseconds: 10))
+                      .then((capturedImage) async {
+
+                        Uint8List? bytes =capturedImage;
+                    final directory = await getApplicationDocumentsDirectory();
+                    final image = File("${directory.path}/probot.png");
+                    image.writeAsBytesSync(bytes!);
+                        log("image : $image");
+                   await Share.shareXFiles([XFile(image.path)],
+                        subject: "Probot image");
+                  }).catchError((onError) {
+                    print(onError);
+                  });
+                },
+                child: SvgPicture.asset(
+                  eSvgAssets.capture,
+                )),
+            const HSpace(Sizes.s12),
             GestureDetector(
                 onTap: () async {
                   Vibration.vibrate(duration: 200);
@@ -46,7 +71,8 @@ class ChatLayoutTextBox extends StatelessWidget {
                 .inkWell(
                     onTap: () => chatCtrl.chatController.text.isNotEmpty
                         ? chatCtrl.processChat()
-                        : Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr)),
+                        : Get.snackbar(appFonts.attention.tr,
+                            appFonts.enterTextBoxValue.tr)),
             const HSpace(Sizes.s8),
           ],
         ),

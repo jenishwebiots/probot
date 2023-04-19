@@ -10,6 +10,7 @@ class CommonContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
       return Container(
+
         padding: const EdgeInsets.symmetric(
             horizontal: Insets.i10, vertical: Insets.i12),
         decoration: BoxDecoration(
@@ -18,6 +19,7 @@ class CommonContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               text!,

@@ -1,8 +1,11 @@
+import 'package:probot/widgets/common_balance.dart';
+
 import '../../../../config.dart';
 
 class HomeTopLayout extends StatelessWidget {
   final GestureTapCallback? onTap;
-  const HomeTopLayout({Key? key,this.onTap}) : super(key: key);
+
+  const HomeTopLayout({Key? key, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +19,22 @@ class HomeTopLayout extends StatelessWidget {
                     radius: 1,
                     center: const Alignment(-0.1, 0.1),
                     colors: [
-                      appCtrl.appTheme.primary,
-                      appCtrl.appTheme.radialGradient
-                    ])),
+                  appCtrl.appTheme.primary,
+                  appCtrl.appTheme.radialGradient
+                ])),
             child: Image.asset(
               eImageAssets.homeAppBar,
-            ).paddingSymmetric(
-                vertical: Insets.i20, horizontal: Insets.i35)),
+            ).paddingSymmetric(vertical: Insets.i20, horizontal: Insets.i35)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const CommonMenuIcon().inkWell(
-                onTap: onTap),
-            Image.asset(eImageAssets.logo1, width: Sizes.s106),
-            SvgPicture.asset(eSvgAssets.bell)
-                .paddingSymmetric(horizontal: Insets.i20)
+            Row(
+              children: [
+                const CommonMenuIcon().inkWell(onTap: onTap),
+                Image.asset(eImageAssets.logo1, width: Sizes.s106),
+              ],
+            ),
+            const CommonBalance()
           ],
         ).paddingSymmetric(vertical: Insets.i55)
       ],

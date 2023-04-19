@@ -25,6 +25,7 @@ class SvgAssets {
   final String download = "assets/svg/download.svg";
   final String smile = "assets/svg/smile.svg";
   final String mic = "assets/svg/mic.svg";
+  final String capture = "assets/svg/capture.svg";
   final String send = "assets/svg/send.svg";
   final String wa = "assets/svg/wa.svg";
   final String insta = "assets/svg/insta.svg";
@@ -39,6 +40,7 @@ class SvgAssets {
   final String star = "assets/svg/star.svg";
   final String star1 = "assets/svg/star1.svg";
   final String security = "assets/svg/security.svg";
+  final String refund = "assets/svg/refund.svg";
   final String sun = "assets/svg/sun.svg";
   final String bell2 = "assets/svg/bell2.svg";
   final String arrowRight1 = "assets/svg/arrowRight1.svg";
@@ -71,6 +73,7 @@ class SvgAssets {
   final String selectCharacter = "assets/svg/selectCharacter.svg";
   final String chatHistory = "assets/svg/chatHistory.svg";
   final String tick = "assets/svg/tick.svg";
+
 
   // Quick advisory
   final String travel = "assets/svg/airplane.svg";
