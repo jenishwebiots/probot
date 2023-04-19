@@ -73,11 +73,16 @@ dependencies:
   country_list_pick: ^1.0.1+6
   pinput: ^2.2.31
   fluttertoast: ^8.2.1
+  flutter_typeahead: ^4.3.7
+  syncfusion_flutter_sliders: ^21.1.39
+  syncfusion_flutter_core: ^21.1.39
+  dotted_border: ^2.0.0+3
   url_launcher: ^6.1.10
   launch_review: ^3.0.1
   image_picker: ^0.8.7+1
   connectivity_plus: ^3.0.3
   new_version: ^0.3.1
+
 
 
 
@@ -110,6 +115,8 @@ flutter:
     - assets/images/background/
     - assets/svg/
     - assets/gif/
+    - json_class/languages.json
+    - json_class/genres.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -30,6 +30,7 @@ class PageViewCommon extends StatelessWidget {
               height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
               width:MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
               child: Image.asset(data["image"], fit: BoxFit.fill)).paddingOnly(top: Insets.i45)
+
         ]),
 
         Row(

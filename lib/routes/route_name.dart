@@ -27,6 +27,26 @@ class RouteName {
   final String inAppList = "/inAppList";
   final String quickAdvisor = "/quickAdvisor";
   final String translateScreen = "/translateScreen";
+
+  final String codeGeneratorScreen = "/codeGeneratorScreen";
+  final String emailWriterScreen = "/emailWriterScreen";
+  final String socialMediaScreen = "/socialMediaScreen";
+  final String captionCreatorScreen = "/captionCreatorScreen";
+  final String musicForPostScreen = "/musicForPostScreen";
+  final String hashtagForPostScreen = "/hashtagForPostScreen";
+  final String passwordGeneratorScreen = "/passwordGeneratorScreen";
+  final String essayWriterScreen = "/essayWriterScreen";
+  final String travelScreen = "/travelScreen";
+  final String nearbyPointsScreen = "/nearbyPointsScreen";
+  final String distanceAttractionScreen = "/distanceAttractionScreen";
+  final String personalAdvisorScreen = "/personalAdvisorScreen";
+  final String babyNameScreen = "/babyNameScreen";
+  final String cvMakerScreen = "/cvMakerScreen";
+  final String giftSuggestionScreen = "/giftSuggestionScreen";
+  final String birthdayMessageScreen = "/birthdayMessageScreen";
+  final String anniversaryMessageScreen = "/anniversaryMessageScreen";
+  final String newBabyWishesScreen = "/newBabyWishesScreen";
+
   final String commonWebView = "/commonWebView";
   final String noInternet = "/noInternet";
 
