@@ -1,9 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/bot_api/api_services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:screenshot/screenshot.dart';
 import '../../config.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,12 +43,17 @@ class ChatLayoutController extends GetxController
   final FlutterTts? flutterTts = FlutterTts();
   final _isSpeech = false.obs;
   final isListening = false.obs;
+  ScreenshotController screenshotController = ScreenshotController();
   List<String> shareMessages = ['--THIS IS CONVERSATION with PROBOT--\n\n'];
   List<String> selectedMessages = [];
   RxInt itemCount = 0.obs;
+  Widget currentAd = const SizedBox(
+    width: 0.0,
+    height: 0.0,
+  );
   RxString textInput = ''.obs;
   final _isSpeechLoading = false.obs;
-
+bool _isInterstitialAdLoaded =false;
   RxInt chatCount = 0.obs;
   RxString userInput = "".obs;
   RxString result = "".obs;
@@ -86,6 +94,20 @@ class ChatLayoutController extends GetxController
         request: const AdRequest())
       ..load();
     log("bannerAd : $bannerAd");
+
+
+    _getId().then((id) {
+      String? deviceId = id;
+
+      FacebookAudienceNetwork.init(
+        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        iOSAdvertiserTrackingEnabled: true,
+      );
+
+    });
+    _showBannerAd();
+
+
     data = appCtrl.storage.read(session.selectedCharacter);
 
     backgroundList = appArray.backgroundList;
@@ -98,6 +120,7 @@ class ChatLayoutController extends GetxController
         appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
+    loadInterstitialAd();
 
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -130,6 +153,60 @@ class ChatLayoutController extends GetxController
     bannerAd?.dispose();
     bannerAd=null;
   }
+
+  Future<String?> _getId() async {
+    var deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) { // import 'dart:io'
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor; // Unique ID on iOS
+    } else {
+      var androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.id; // Unique ID on Android
+    }
+  }
+
+  _showBannerAd() {
+    log("SHOW BANNER");
+    currentAd = FacebookBannerAd(
+      // placementId: "YOUR_PLACEMENT_ID",
+      placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", //testid
+      bannerSize: BannerSize.STANDARD,
+      listener: (result, value) {
+        print("Banner Ad: $result -->  $value");
+      },
+    );
+    update();
+    log("_currentAd : $currentAd");
+  }
+
+  void loadInterstitialAd() {
+    FacebookAudienceNetwork.init(
+      testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+      iOSAdvertiserTrackingEnabled: true,
+    );
+
+    FacebookInterstitialAd.loadInterstitialAd(
+      placementId: "IIMG_16_9_APP_INSTALL#1191601381370304_1191963614667414",
+      listener: (result, value) {
+        log("result : $result");
+        log("result1 : ${result.name}");
+        log("result2 : $value");
+        if (result == InterstitialAdResult.LOADED) {
+          FacebookInterstitialAd.showInterstitialAd(delay: 5000);
+        }
+      },
+    );
+
+  }
+
+  showFbInterstitialAd() {
+    if (_isInterstitialAdLoaded == true) {
+      FacebookInterstitialAd.showInterstitialAd();
+    } else {
+      print("Interstial Ad not yet loaded!");
+    }
+  }
+
 
   //initialize interstitial add
   void _createInterstitialAd() {

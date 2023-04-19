@@ -25,6 +25,7 @@ class SvgAssets {
   final String download = "assets/svg/download.svg";
   final String smile = "assets/svg/smile.svg";
   final String mic = "assets/svg/mic.svg";
+  final String capture = "assets/svg/capture.svg";
   final String send = "assets/svg/send.svg";
   final String wa = "assets/svg/wa.svg";
   final String insta = "assets/svg/insta.svg";
@@ -72,6 +73,7 @@ class SvgAssets {
   final String selectCharacter = "assets/svg/selectCharacter.svg";
   final String chatHistory = "assets/svg/chatHistory.svg";
   final String tick = "assets/svg/tick.svg";
+
 
   // Quick advisory
   final String travel = "assets/svg/airplane.svg";

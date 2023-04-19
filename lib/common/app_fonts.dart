@@ -546,8 +546,18 @@ class AppFonts {
   String deleteUserSuccessfully = "deleteUserSuccessfully";
   String dataUploadSuccessfully = "dataUploadSuccessfully";
   String imageUploadSuccessfully = "imageUploadSuccessfully";
+  String wantUnlimited = "wantUnlimited";
+  String viewSubscription = "viewSubscription";
+  String wantMoreCoins = "wantMoreCoins";
+  String topUpBalance = "topUpBalance";
+  String viewSubscriptionPlan = "viewSubscriptionPlan";
+  String topBalance = "topBalance";
+  String selectPlan = "selectPlan";
 
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});
+
+  String totalCoinsAvailable(val) =>
+      "totalCoinsAvailable".trParams({'totalCoins': val});
 }

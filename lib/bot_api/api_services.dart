@@ -15,8 +15,8 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
-
+        //'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
+        'Authorization': 'Bearer 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',
 
       },
       body: json.encode({

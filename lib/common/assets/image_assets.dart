@@ -43,6 +43,10 @@ class ImageAssets {
 
   final String noInternet = "assets/images/noInternet.png";
   final String wires = "assets/images/wires.png";
+  final String coins = "assets/images/coins.png";
+  final String cashOffer = "assets/images/cashOffer.png";
+  final String subscriptionTopBg = "assets/images/subscriptionTopBg.png";
+  final String subscriptionCrown = "assets/images/subscriptionCrown.png";
 
 
   // Icons
