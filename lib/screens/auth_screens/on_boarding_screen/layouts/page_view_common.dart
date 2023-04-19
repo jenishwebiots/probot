@@ -11,28 +11,33 @@ class PageViewCommon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OnBoardingController>(builder: (onBoardingCtrl) {
-      return Column(children: [
-        Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+        Stack(
+            alignment: Alignment.topRight,
+            children: [
           onBoardingCtrl.selectIndex != 2
               ? Text(appFonts.skip.tr,
-                      style: AppCss.outfitMedium16
-                          .textColor(appCtrl.appTheme.lightText))
-                  .inkWell(onTap: () => onBoardingCtrl.pageCtrl.jumpToPage(2))
-                  .paddingOnly(
-                      top: Insets.i50, bottom: Insets.i12, right: Insets.i12)
+              style: AppCss.outfitMedium16
+                  .textColor(appCtrl.appTheme.lightText))
+              .inkWell(onTap: () => onBoardingCtrl.pageCtrl.jumpToPage(2))
+              .paddingOnly(
+              top: Insets.i50, bottom: Insets.i10, right: Insets.i12)
               : const Text("").paddingOnly(
-                  top: Insets.i50, bottom: Insets.i12, right: Insets.i12),
+              top: Insets.i50, bottom: Insets.i10, right: Insets.i12),
           SizedBox(
-              height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.5,
-              width: double.infinity,
-              child: Image.asset(data["image"], fit: BoxFit.fill))
+              height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
+              width:MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
+              child: Image.asset(data["image"], fit: BoxFit.fill)).paddingOnly(top: Insets.i45)
+
         ]),
-        const VSpace(Sizes.s40),
+
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List<Widget>.generate(
-              onBoardingCtrl.onBoardingLists.length,
-                  (index) => InkWell(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List<Widget>.generate(
+                onBoardingCtrl.onBoardingLists.length,
+                    (index) => InkWell(
                     onTap: () {
                       onBoardingCtrl.pageCtrl.animateToPage(index,
                           duration: const Duration(milliseconds: 300),
@@ -43,7 +48,7 @@ class PageViewCommon extends StatelessWidget {
                         color: onBoardingCtrl.selectIndex >= index ? appCtrl.appTheme.primary : appCtrl.appTheme.primary.withOpacity(0.2),
                         borderRadius: const BorderRadius.all(
                             Radius.circular(AppRadius.r10))).paddingSymmetric(horizontal: Insets.i3)
-                  ))
+                ))
         ),
 
         const VSpace(Sizes.s10),
@@ -61,42 +66,42 @@ class PageViewCommon extends StatelessWidget {
                           height: 200,
                           width: double.infinity),
                       Column(
-                        children: [
-                          Text(data["title"].toString().tr,
-                              style: AppCss.outfitMedium22
-                                  .textColor(appCtrl.appTheme.txt)),
-                          const VSpace(Sizes.s5),
-                          Divider(
-                              height: 2,
-                              thickness: 2,
-                              color: appCtrl.appTheme.primary,
-                              endIndent: 180,
-                              indent: 180),
-                          const VSpace(Sizes.s10),
-                          SizedBox(
-                              width: Sizes.s292,
-                              child: Text(data["subtitle"].toString().tr,
-                                  textAlign: TextAlign.center,
-                                  style: AppCss.outfitMedium16
-                                      .textColor(appCtrl.appTheme.lightText)
-                                      .textHeight(1.5)))
-                        ]
+                          children: [
+                            Text(data["title"].toString().tr,
+                                style: AppCss.outfitMedium22
+                                    .textColor(appCtrl.appTheme.txt)),
+                            const VSpace(Sizes.s5),
+                            Divider(
+                                height: 2,
+                                thickness: 2,
+                                color: appCtrl.appTheme.primary,
+                                endIndent: 180,
+                                indent: 180),
+                            const VSpace(Sizes.s10),
+                            SizedBox(
+                                width: Sizes.s292,
+                                child: Text(data["subtitle"].toString().tr,
+                                    textAlign: TextAlign.center,
+                                    style: AppCss.outfitMedium16
+                                        .textColor(appCtrl.appTheme.lightText)
+                                        .textHeight(1.5)))
+                          ]
                       ).paddingOnly(top: Insets.i30)
                     ])
                   ])),
           SizedBox(
-                  height: Sizes.s52,
-                  width: Sizes.s52,
-                  child: SvgPicture.asset(eSvgAssets.rightArrow,
-                      fit: BoxFit.scaleDown))
+              height: Sizes.s52,
+              width: Sizes.s52,
+              child: SvgPicture.asset(eSvgAssets.rightArrow,
+                  fit: BoxFit.scaleDown))
               .inkWell(onTap: onTap)
               .decorated(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(colors: [
-                    appCtrl.appTheme.secondary,
-                    appCtrl.appTheme.primary
-                  ], center: const Alignment(-0.9, -0.4)))
-        ])
+              shape: BoxShape.circle,
+              gradient: RadialGradient(colors: [
+                appCtrl.appTheme.secondary,
+                appCtrl.appTheme.primary
+              ], center: const Alignment(-0.9, -0.4)))
+        ]).marginOnly(bottom: Insets.i3)
       ]);
     });
   }

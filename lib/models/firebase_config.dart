@@ -1,21 +1,21 @@
 class FirebaseConfigModel {
-  String? bannerAddId;
-  String? bannerIOSId,
+  String? bannerAddId,
+      bannerIOSId,
       rewardAndroidId,
       rewardIOSId,
       razorPayKey,
-      razorPaySecret;
-  String? chatGPTKey;
-  String? interstitialAdIdAndroid;
-  String? interstitialAdIdIOS;
-  String? payPalClientId;
-  String? payPalSecret;
-  String? stripeKey;
-  String? stripePublishKey;
+      razorPaySecret,
+      chatGPTKey,
+      interstitialAdIdAndroid,
+      interstitialAdIdIOS,
+      payPalClientId,
+      payPalSecret,
+      stripeKey,
+      stripePublishKey,privacyPolicyLink,rateAppAndroidId,rateAppIOSId,refundLink;
   bool? isChatShow;
   bool? isImageGeneratorShow;
   bool? isTextCompletionShow;
-  bool? isAddShow, isRazorPay, isStripe, isPaypal, isChatHistory;
+  bool? isAddShow, isRazorPay, isStripe, isPaypal, isInApp, isChatHistory,isGuestLoginEnable;
 
   FirebaseConfigModel(
       {this.bannerAddId,
@@ -27,6 +27,10 @@ class FirebaseConfigModel {
       this.payPalSecret,
       this.stripeKey,
       this.stripePublishKey,
+      this.privacyPolicyLink,
+      this.refundLink,
+      this.rateAppAndroidId,
+      this.rateAppIOSId,
       this.isChatShow,
       this.isImageGeneratorShow,
       this.rewardAndroidId,
@@ -36,9 +40,10 @@ class FirebaseConfigModel {
       this.isTextCompletionShow,
       this.isAddShow,
       this.isPaypal,
+      this.isInApp,
       this.isRazorPay,
       this.isStripe,
-      this.isChatHistory});
+      this.isChatHistory,this.isGuestLoginEnable});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
     bannerAddId = json['bannerAddId'] ?? "";
@@ -52,6 +57,10 @@ class FirebaseConfigModel {
     payPalSecret = json['payPalSecret'] ?? "";
     stripeKey = json['stripeKey'] ?? "";
     stripePublishKey = json['stripePublishKey'] ?? "";
+    privacyPolicyLink = json['privacyPolicyLink'] ?? "";
+    refundLink = json['refundLink'] ?? "";
+    rateAppAndroidId = json['rateAppAndroidId'] ?? "";
+    rateAppIOSId = json['rateAppIOSId'] ?? "";
     isChatShow = json['isChatShow'] ?? true;
     isImageGeneratorShow = json['isImageGeneratorShow'] ?? true;
     isTextCompletionShow = json['isTextCompletionShow'] ?? true;
@@ -60,6 +69,8 @@ class FirebaseConfigModel {
     isRazorPay = json['isRazorPay'] ?? true;
     isPaypal = json['isPayPal'] ?? true;
     isStripe = json['isStripe'] ?? true;
+    isInApp = json['isInApp'] ?? true;
+    isGuestLoginEnable = json['isGuestLoginEnable'] ?? true;
     razorPayKey = json['razorPayKey'] ?? "";
     razorPaySecret = json['razorPaySecret'] ?? "";
   }
@@ -75,6 +86,10 @@ class FirebaseConfigModel {
     data['payPalSecret'] = payPalSecret;
     data['stripeKey'] = stripeKey;
     data['stripePublishKey'] = stripePublishKey;
+    data['privacyPolicyLink'] = privacyPolicyLink;
+    data['refundLink'] = refundLink;
+    data['rateAppAndroidId'] = rateAppAndroidId;
+    data['rateAppIOSId'] = rateAppIOSId;
     data['isChatShow'] = isChatShow;
     data['isImageGeneratorShow'] = isImageGeneratorShow;
     data['isTextCompletionShow'] = isTextCompletionShow;
@@ -87,6 +102,8 @@ class FirebaseConfigModel {
     data['razorPayKey'] = razorPayKey;
     data['razorPaySecret'] = razorPaySecret;
     data['isChatHistory'] = isChatHistory;
+    data['isInApp'] = isInApp;
+    data['isGuestLoginEnable'] = isGuestLoginEnable;
     return data;
   }
 }

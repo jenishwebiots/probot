@@ -83,6 +83,7 @@ export '../screens/bottom_screens/content_writer/layouts/business_idea_drop_down
 export '../screens/bottom_screens/content_writer/layouts/content_description.dart';
 export '../screens/bottom_screens/content_writer/layouts/content_widget.dart';
 export '../screens/bottom_screens/content_writer/layouts/response_data.dart';
+
 export '../screens/bottom_screens/dashboard/dashboard.dart';
 export '../screens/bottom_screens/dashboard/layouts/bottom_bar.dart';
 export '../screens/bottom_screens/drawer/drawer.dart';
@@ -103,3 +104,12 @@ export '../screens/app_screens/baby_name_screen/layout/baby_name_top_layout.dart
 export '../screens/app_screens/cv_maker_screen/layouts/cv_maker_layout.dart';
 export '../screens/app_screens/gift_suggestion_screen/layouts/without_generate_layout.dart';
 export '../screens/app_screens/anniversary_message_screen/layouts/anniversary_message_layout.dart';
+
+
+export '../screens/app_screens/chat_history_screen/chat_history_screen.dart';
+
+export '../screens/app_screens/quick_advisor_screen/quick_advisor_screen.dart';
+export '../screens/app_screens/subscription/layouts/in_app_list.dart';
+export '../screens/app_screens/translate_screen/translate_screen.dart';
+export '../screens/app_screens/my_account_screen/layouts/user_image.dart';
+

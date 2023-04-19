@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import '../../../../config.dart';
 
-class Receiver extends StatelessWidget {
-  final dynamic chatListModel;
+class GuestReceiver extends StatelessWidget {
+  final ChatMessage? chatListModel;
   final int? index;
 
-  const Receiver({
+  const GuestReceiver({
     Key? key,
     this.chatListModel,
     this.index,
@@ -14,7 +14,6 @@ class Receiver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
       return Align(
           alignment: Alignment.centerLeft,
@@ -23,9 +22,9 @@ class Receiver extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ChatCommonWidget()
-                    .userImage(chatListModel["avatar"]),
+                    .userImage(appCtrl.selectedCharacter["image"]),
                 const HSpace(Sizes.s6),
-                chatListModel["messageType"] == ChatMessageType.loading.name
+                chatListModel!.chatMessageType == ChatMessageType.loading
                     ? Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: Insets.i10,
@@ -50,13 +49,13 @@ class Receiver extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          chatListModel["message"].length > 40
+                          chatListModel!.text!.length > 40
                               ? ReceiverWidthText(
-                            text: chatListModel["message"],row: Row(
+                            text: chatListModel!.text!,row: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ChatCommonWidget().timeTextLayout(
-                                  chatListModel["createdDate"].toString()),
+                                  chatListModel!.time!.toString()),
                               SvgPicture.asset(eSvgAssets.volume).inkWell(
                                   onTap: () {
                                     String code = appCtrl.languageVal == "en"
@@ -75,17 +74,17 @@ class Receiver extends StatelessWidget {
                                         ? "JP"
                                         : "US";
                                     chatCtrl.speechMethod(
-                                        chatListModel["message"],
+                                        chatListModel!.text!,
                                         '${appCtrl.languageVal}-$code');
                                   })
                             ],
                           ),)
                               : ReceiverContent(
-                            text: chatListModel["message"],row: Row(
+                            text: chatListModel!.text!,row: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ChatCommonWidget().timeTextLayout(
-                                  chatListModel["createdDate"].toString()),
+                                  chatListModel!.time!.toString()),
                               SvgPicture.asset(eSvgAssets.volume).inkWell(
                                   onTap: () {
                                     String code = appCtrl.languageVal == "en"
@@ -104,7 +103,7 @@ class Receiver extends StatelessWidget {
                                         ? "JP"
                                         : "US";
                                     chatCtrl.speechMethod(
-                                        chatListModel["message"],
+                                        chatListModel!.text!,
                                         '${appCtrl.languageVal}-$code');
                                   })
                             ],
@@ -133,6 +132,7 @@ class Receiver extends StatelessWidget {
                 }),
               ])
               .marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5))
+
           .onLongPressTap(onLongPress: () {
         log("chatCtrl.shareMessages[index!] : ${chatCtrl.selectedMessages[index!]}");
         chatCtrl.isLongPress = true;

@@ -11,7 +11,7 @@ class ChatLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("image: ${chatCtrl.selectedImage}");
+    log("SE : ${chatCtrl.selectedImage}");
     return GetBuilder<ChatLayoutController>(builder: (_) {
       return DirectionalityRtl(
         child: WillPopScope(
@@ -22,6 +22,7 @@ class ChatLayout extends StatelessWidget {
             return true;
           },
           child: Scaffold(
+              resizeToAvoidBottomInset: true,
               key: chatCtrl.scaffoldKey,
               drawer: const CommonDrawer(),
               backgroundColor: appCtrl.appTheme.bg1,
@@ -42,7 +43,7 @@ class ChatLayout extends StatelessWidget {
                     children: [
                       const VSpace(Sizes.s10),
                       if (appCtrl.firebaseConfigModel!.isAddShow!)
-                        if (chatCtrl.bannerAd != null)
+                        if (chatCtrl.bannerAd != null && chatCtrl.bannerAdIsLoaded)
                           AdWidget(ad: chatCtrl.bannerAd!)
                               .height(Sizes.s50)
                               .paddingOnly(bottom: Insets.i10)
@@ -58,8 +59,14 @@ class ChatLayout extends StatelessWidget {
                     ],
                   ).backgroundImage(DecorationImage(
                       image: AssetImage(appCtrl.isTheme
-                          ? chatCtrl.selectedImage["darkImage"]
-                          : chatCtrl.selectedImage["image"] ?? eImageAssets.background1),
+                          ? chatCtrl.selectedImage == null
+                              ? eImageAssets.dBg1
+                              : chatCtrl.selectedImage["darkImage"] ??
+                                  eImageAssets.dBg1
+                          : chatCtrl.selectedImage == null
+                              ? eImageAssets.background1
+                              : chatCtrl.selectedImage["image"] ??
+                                  eImageAssets.background1),
                       fit: BoxFit.fill)),
                 ),
               )),

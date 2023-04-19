@@ -30,6 +30,39 @@ class HomeController extends GetxController {
     quickAdvisorLists = appArray.quickAdvisor.getRange(0, 6).toList();
     update();
 
+    log("bannerAdIsLoaded : $bannerAdIsLoaded");
+    if(bannerAd == null) {
+      bannerAd = BannerAd(
+          size: AdSize.banner,
+          adUnitId: Platform.isAndroid
+              ? appCtrl.firebaseConfigModel!.bannerAddId!
+              : appCtrl.firebaseConfigModel!.bannerIOSId!,
+          listener: BannerAdListener(
+            onAdLoaded: (Ad ad) {
+              log('$BannerAd loaded.');
+              bannerAdIsLoaded = true;
+              update();
+            },
+            onAdFailedToLoad: (Ad ad, LoadAdError error) {
+              log('$BannerAd failedToLoad: $error');
+              ad.dispose();
+            },
+            onAdOpened: (Ad ad) => log('$BannerAd onAdOpened.'),
+            onAdClosed: (Ad ad) => log('$BannerAd onAdClosed.'),
+
+          ),
+          request: const AdRequest())
+        ..load();
+      log("Home Banner : $bannerAd");
+    }else{
+      bannerAd!.dispose();
+      buildBanner();
+    }
+    update();
+    super.onReady();
+  }
+
+  buildBanner()async{
     bannerAd = BannerAd(
         size: AdSize.banner,
         adUnitId: Platform.isAndroid
@@ -47,12 +80,11 @@ class HomeController extends GetxController {
           },
           onAdOpened: (Ad ad) => log('$BannerAd onAdOpened.'),
           onAdClosed: (Ad ad) => log('$BannerAd onAdClosed.'),
+
         ),
         request: const AdRequest())
       ..load();
-    log("bannerAd : $bannerAd");
-    update();
-    super.onReady();
+    log("Home Banner AGAIn: $bannerAd");
   }
 
   //on option tap function
@@ -96,5 +128,13 @@ class HomeController extends GetxController {
               },
               crossOnTap: () => Get.back());
         });
+  }
+
+  @override
+  void dispose() {
+    // TODO: Dispose a BannerAd object
+    bannerAd?.dispose();
+    bannerAd=null;
+    super.dispose();
   }
 }

@@ -6,7 +6,6 @@ import '../../env.dart';
 class SplashController extends GetxController {
   @override
   void onReady() async {
-
     appCtrl.update();
     bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
     bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
@@ -31,6 +30,7 @@ class SplashController extends GetxController {
     ThemeService().switchTheme(isTheme);
     appCtrl.isTheme = isTheme;
 
+    //language
     var language = await appCtrl.storage.read(session.locale) ?? "en";
     log("language ; $language");
     if (language != null) {
@@ -56,6 +56,29 @@ class SplashController extends GetxController {
     appCtrl.update();
     Get.forceAppUpdate();
 
+    //currency
+    appCtrl.currency =
+        await appCtrl.storage.read("currency") ?? appArray.currencyList[0];
+
+    appCtrl.priceSymbol = appCtrl.currency["symbol"];
+    if (appCtrl.currency["title"] == "dollar") {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["USD"].toString())
+              .roundToDouble();
+    } else if (appCtrl.currency["title"] == "euro") {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["EUR"].toString())
+              .roundToDouble();
+    } else if (appCtrl.currency["title"] == "inr") {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["INR"].toString())
+              .roundToDouble();
+    } else {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["POU"].toString())
+              .roundToDouble();
+    }
+
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
     var name = appCtrl.storage.read("name");
     var userName = appCtrl.storage.read("userName");
@@ -65,7 +88,8 @@ class SplashController extends GetxController {
     appCtrl.isOnboard = onBoard;
     appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
 
-    dynamic selectedImage = appCtrl.storage.read("backgroundImage")?? appArray.backgroundList[0];
+    dynamic selectedImage =
+        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     appCtrl.storage.write("backgroundImage", selectedImage);
 
     log("SPLASH BG : $selectedImage");
@@ -77,7 +101,6 @@ class SplashController extends GetxController {
           .limit(1)
           .get()
           .then((value) {
-        log("DATA : ${value.docs.isEmpty}");
         if (value.docs.isNotEmpty) {
           appCtrl.envConfig["chatTextCount"] =
               value.docs[0].data()["chatCount"];
@@ -113,7 +136,10 @@ class SplashController extends GetxController {
               Get.toNamed(routeName.dashboard);
             }
           } else {
-            if (name != null || userName != null || firebaseUser != null || number != null) {
+            if (name != null ||
+                userName != null ||
+                firebaseUser != null ||
+                number != null) {
               if (isLanguageSaved) {
                 if (isBiometricSave) {
                   Get.offAllNamed(routeName.addFingerprintScreen);
@@ -131,6 +157,7 @@ class SplashController extends GetxController {
       } else {
         Get.toNamed(routeName.onBoardingScreen);
       }
+
       update();
     });
   }

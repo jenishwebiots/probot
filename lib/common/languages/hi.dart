@@ -368,4 +368,19 @@ final dynamic hi = {
   'passwordGenerator' : "पासवर्ड जनरेटर",
   'travelHangout' : "यात्रा/हैंगआउट",
 
+  'refundPolicy' : "भुगतान वापसी की नीति",
+  'translate': "अनुवाद",
+  'camera': "कैमरा",
+  'gallery': "गेलरी",
+  'noInternet': "उफ़ !! कोई इंटरनेट नहीं",
+  'retry': "पुन: प्रयास करें",
+  'noInternetDesc': "इंटरनेट से कनेक्ट नहीं हो सका.\nकृपया अपनी इंटरनेट कनेक्शन सेटिंग जांचें.",
+
+  'yes' : "हाँ",
+  'no' : "नहीं",
+  'alert' : "चेतावनी!",
+  'deleteConfirmation' : "क्या आप वाकई इस खाते को हटाना चाहते हैं?",
+  'deleteUserSuccessfully' : "उपयोगकर्ता सफलतापूर्वक हटाएं",
+  'dataUploadSuccessfully' : "डेटा अपलोड सफलतापूर्वक",
+  'imageUploadSuccessfully' : "छवि अपलोड सफलतापूर्वक",
 };
