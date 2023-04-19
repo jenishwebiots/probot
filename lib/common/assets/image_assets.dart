@@ -37,12 +37,17 @@ class ImageAssets {
   final String rewardBanner = "assets/images/rewardBanner.png";
   final String reward = "assets/images/reward.png";
   final String quickAdvisorContainer = "assets/images/quickAdvisorContainer.png";
+
+  final String slider = "assets/images/slider.png";
+  final String languageContainer = "assets/images/languageContainer.png";
+
   final String noInternet = "assets/images/noInternet.png";
   final String wires = "assets/images/wires.png";
   final String coins = "assets/images/coins.png";
   final String cashOffer = "assets/images/cashOffer.png";
   final String subscriptionTopBg = "assets/images/subscriptionTopBg.png";
   final String subscriptionCrown = "assets/images/subscriptionCrown.png";
+
 
   // Icons
   final String google = "assets/images/icons/Google.png";
@@ -57,6 +62,10 @@ class ImageAssets {
   final String paypal = "assets/images/icons/paypal.png";
   final String razor = "assets/images/icons/razor.png";
   final String inApp = "assets/images/icons/inApp.png";
+  final String funny = "assets/images/icons/funny.png";
+  final String informative = "assets/images/icons/informative.png";
+  final String sad = "assets/images/icons/sad.png";
+  final String serious = "assets/images/icons/serious.png";
 
   // chat
   final String chat1 = "assets/images/chat/chat1.png";

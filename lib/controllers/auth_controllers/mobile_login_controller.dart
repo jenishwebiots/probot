@@ -165,13 +165,13 @@ class MobileLoginController extends GetxController {
                                   const VSpace(Sizes.s15),
                                   RichText(
                                       text: TextSpan(
-                                          text: appFonts.dontReciveOtp,
+                                          text: appFonts.dontReciveOtp.tr,
                                           style: AppCss.outfitMedium14
                                               .textColor(
                                                   appCtrl.appTheme.lightText),
                                           children: [
                                         TextSpan(
-                                            text: appFonts.resendIt,
+                                            text: appFonts.resendIt.tr,
                                             style: AppCss.outfitMedium14
                                                 .textColor(
                                                     appCtrl.appTheme.primary))

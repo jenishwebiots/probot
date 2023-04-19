@@ -101,8 +101,34 @@ class SvgAssets {
   final String emailGenerator = "assets/svg/emailGenerator.svg";
   final String personalAdvice = "assets/svg/personalAdvice.svg";
   final String passwordGenerator = "assets/svg/passwordGenerator.svg";
-
-
-
+  final String cross = "assets/svg/cross.svg";
+  final String microphone = "assets/svg/microphone.svg";
+  final String translates = "assets/svg/translates.svg";
+  final String language = "assets/svg/language.svg";
+  final String caption = "assets/svg/caption.svg";
+  final String hashtag = "assets/svg/hashtag.svg";
+  final String twitter = "assets/svg/twitter.svg";
+  final String sliderThumb = "assets/svg/sliderThumb.svg";
+  final String passwordThumb = "assets/svg/passwordThumb.svg";
+  final String distance = "assets/svg/distance.svg";
+  final String nearby = "assets/svg/nearby.svg";
+  final String distanceThumb = "assets/svg/distanceThumb.svg";
+  final String anniversary = "assets/svg/anniversary.svg";
+  final String babyName = "assets/svg/babyName.svg";
+  final String babyShower = "assets/svg/babyShower.svg";
+  final String birthday = "assets/svg/birthday.svg";
+  final String cv = "assets/svg/cv.svg";
+  final String farewell = "assets/svg/farewell.svg";
+  final String fathersDay = "assets/svg/fathersDay.svg";
+  final String getWell = "assets/svg/getWell.svg";
+  final String gift = "assets/svg/gift.svg";
+  final String mothersDay = "assets/svg/mothersDay.svg";
+  final String newBaby = "assets/svg/newBaby.svg";
+  final String newYear = "assets/svg/newYear.svg";
+  final String promotion = "assets/svg/promotion.svg";
+  final String valentine = "assets/svg/valentine.svg";
+  final String wedding = "assets/svg/wedding.svg";
+  final String boy = "assets/svg/boy.svg";
+  final String girl = "assets/svg/girl.svg";
 
 }

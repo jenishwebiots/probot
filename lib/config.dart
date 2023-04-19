@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:probot/widgets/dialog_common.dart';
+import 'package:probot/widgets/text_common.dart';
 
 import 'common/app_array.dart';
 import 'common/app_fonts.dart';
@@ -53,7 +55,8 @@ export '../widgets/common_pop_up_title.dart';
 export '../widgets/alert_dialog_common.dart';
 export '../widgets/common_stream.dart';
 export '../widgets/scaffold_messenger.dart';
-
+export '../widgets/adviser_dialog_common.dart';
+export '../widgets/select_gender_layout.dart';
 
 
 final appCtrl = Get.isRegistered<AppController>()
@@ -66,3 +69,5 @@ final inAppCtrl = Get.isRegistered<InAppController>()
 AppFonts appFonts = AppFonts();
 AppArray appArray = AppArray();
 Session session = Session();
+TextCommon textCommon = TextCommon();
+DialogLayout dialogLayout = DialogLayout();
