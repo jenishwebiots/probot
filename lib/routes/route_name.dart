@@ -49,6 +49,5 @@ class RouteName {
 
   final String commonWebView = "/commonWebView";
   final String noInternet = "/noInternet";
-
-
+  final String valentineScreen = "/valentineScreen";
 }

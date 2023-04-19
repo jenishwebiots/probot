@@ -547,6 +547,15 @@ class AppFonts {
   String dataUploadSuccessfully = "dataUploadSuccessfully";
   String imageUploadSuccessfully = "imageUploadSuccessfully";
 
+  String wonderfulMessage = "Wonderful message for valentine's day :";
+  String wishesFor = "Wishes for";
+  String valentineDayMessage = "Valentine day message";
+  String generateLovelyMessage = "Generate lovely message";
+  String valentineDaySpecial = "Valentine’s day special";
+  String endLovelyMessage = "End lovely message";
+  String endValentineMessage = "End Valentine’s message";
+  String areYouSureEndValentine =
+      "Are you sure you want to end this valentine message ?";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

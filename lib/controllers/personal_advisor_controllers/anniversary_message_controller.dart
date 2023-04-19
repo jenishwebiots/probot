@@ -10,6 +10,8 @@ class AnniversaryMessageController extends GetxController {
   final FixedExtentScrollController? languageScrollController =
       FixedExtentScrollController();
   TextEditingController wishGenController = TextEditingController();
+  TextEditingController relationController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
   int value = 0;
   int langValue = 0;

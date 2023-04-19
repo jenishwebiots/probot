@@ -38,3 +38,4 @@ export 'personal_advisor_controllers/birthday_message_controller.dart';
 export 'personal_advisor_controllers/cv_maker_controller.dart';
 export 'personal_advisor_controllers/gift_suggestion_controller.dart';
 export 'personal_advisor_controllers/new_baby_wishes_controller.dart';
+export 'personal_advisor_controllers/valentine_day_controller.dart';
