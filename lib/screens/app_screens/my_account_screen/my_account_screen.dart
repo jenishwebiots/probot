@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:probot/config.dart';
+
 
 class MyAccountScreen extends StatelessWidget {
   final myAccountCtrl = Get.put(MyAccountController());
@@ -11,29 +13,38 @@ class MyAccountScreen extends StatelessWidget {
       return Scaffold(
           appBar: AppAppBarCommon(
               title: appFonts.myAccount, leadingOnTap: () => Get.back()),
-          body: SingleChildScrollView(
-            child: Column(children: [
-              const VSpace(Sizes.s10),
-              Text(
-                     myAccountCtrl.userName != null
-                              ? myAccountCtrl.userName![0]
-                          : "S",
-                      style: AppCss.outfitExtraBold40
-                          .textColor(appCtrl.appTheme.sameWhite))
-                  .paddingAll(Insets.i40)
-                  .decorated(
-                      shape: BoxShape.circle, color: appCtrl.appTheme.primary),
-              const VSpace(Sizes.s15),
+          body: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .where('id', isEqualTo: myAccountCtrl.id)
+                  .limit(1)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return SingleChildScrollView(
+                    child: Column(children: [
+                      const VSpace(Sizes.s10),
+                      UserImage(
 
-              const AllTextForm()
-                  .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
-                  .authBoxExtension(),
-
-
-            ])
-                .paddingSymmetric(horizontal: Insets.i20)
-                .alignment(Alignment.center),
-          ));
+                              name: snapshot.data!.docs[0].data()["email"],
+                              image: snapshot.data!.docs[0].data()["image"],
+                              isLoading: myAccountCtrl.isLoading)
+                          .inkWell(
+                              onTap: () =>
+                                  myAccountCtrl.imagePickerOption(context)),
+                      const VSpace(Sizes.s15),
+                      const AllTextForm()
+                          .paddingSymmetric(
+                              horizontal: Insets.i20, vertical: Insets.i25)
+                          .authBoxExtension(),
+                    ])
+                        .paddingSymmetric(horizontal: Insets.i20)
+                        .alignment(Alignment.center),
+                  );
+                } else {
+                  return Container();
+                }
+              }));
     });
   }
 }

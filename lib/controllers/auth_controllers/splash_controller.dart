@@ -1,12 +1,13 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:probot/config.dart';
 import '../../env.dart';
 
 class SplashController extends GetxController {
   @override
   void onReady() async {
-
     appCtrl.update();
     bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
     bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
@@ -31,6 +32,7 @@ class SplashController extends GetxController {
     ThemeService().switchTheme(isTheme);
     appCtrl.isTheme = isTheme;
 
+    //language
     var language = await appCtrl.storage.read(session.locale) ?? "en";
     log("language ; $language");
     if (language != null) {
@@ -56,6 +58,29 @@ class SplashController extends GetxController {
     appCtrl.update();
     Get.forceAppUpdate();
 
+    //currency
+    appCtrl.currency =
+        await appCtrl.storage.read("currency") ?? appArray.currencyList[0];
+
+    appCtrl.priceSymbol = appCtrl.currency["symbol"];
+    if (appCtrl.currency["title"] == "dollar") {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["USD"].toString())
+              .roundToDouble();
+    } else if (appCtrl.currency["title"] == "euro") {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["EUR"].toString())
+              .roundToDouble();
+    } else if (appCtrl.currency["title"] == "inr") {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["INR"].toString())
+              .roundToDouble();
+    } else {
+      appCtrl.currencyVal =
+          double.parse(appArray.currencyList[0]["POU"].toString())
+              .roundToDouble();
+    }
+
     bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
     var name = appCtrl.storage.read("name");
     var userName = appCtrl.storage.read("userName");
@@ -65,44 +90,65 @@ class SplashController extends GetxController {
     appCtrl.isOnboard = onBoard;
     appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
 
-    dynamic selectedImage = appCtrl.storage.read("backgroundImage")?? appArray.backgroundList[0];
+    update();
+    dynamic selectedImage =
+        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     appCtrl.storage.write("backgroundImage", selectedImage);
 
     log("SPLASH BG : $selectedImage");
-
+    await FirebaseFirestore.instance.collection("config").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        appCtrl.firebaseConfigModel =
+            FirebaseConfigModel.fromJson(value.docs[0].data());
+        Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
+        appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
+        appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
+        appCtrl.update();
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      }
+    });
     if (!appCtrl.isGuestLogin && userName != null) {
       await FirebaseFirestore.instance
           .collection("userSubscribe")
           .where("email", isEqualTo: appCtrl.storage.read("userName"))
           .limit(1)
           .get()
-          .then((value) {
-        log("DATA : ${value.docs.isEmpty}");
-        if (value.docs.isNotEmpty) {
-          appCtrl.envConfig["chatTextCount"] =
-              value.docs[0].data()["chatCount"];
-          appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
-          appCtrl.envConfig["textCompletionCount"] =
-              value.docs[0].data()["textCompletionCount"];
-          appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-          appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-        } else {
-          appCtrl.envConfig =
-              appCtrl.storage.read(session.envConfig) ?? environment;
+          .then((value) async {
+        if (value.docs.isNotEmpty ) {
+          if(value.docs[0].data()["isSubscribe"] == false){
+            appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+            appCtrl.update();
+            appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+          }
+        }else{
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .get()
+              .then((value) {
+            if (value.exists) {
+              appCtrl.envConfig["balance"] = value.data()!["balance"];
+              appCtrl.update();
+              appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+            }
+          });
         }
       });
     } else {
-      appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      log("appCtrl.envConfig : ${appCtrl.envConfig}");
+      appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;
       appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
     }
-
+    update();
     Future.delayed(const Duration(seconds: 3), () {
+      log("onBoard : $onBoard");
       if (onBoard) {
         if (isGuestLogin) {
           appCtrl.isGuestLogin = isGuestLogin;
           appCtrl.storage.write(session.isGuestLogin, isGuestLogin);
           Get.toNamed(routeName.dashboard);
         } else {
+          log("onBoard : $onBoard");
           appCtrl.isGuestLogin = false;
           appCtrl.storage.write(session.isGuestLogin, false);
 
@@ -113,7 +159,10 @@ class SplashController extends GetxController {
               Get.toNamed(routeName.dashboard);
             }
           } else {
-            if (name != null || userName != null || firebaseUser != null || number != null) {
+            if (name != null ||
+                userName != null ||
+                firebaseUser != null ||
+                number != null) {
               if (isLanguageSaved) {
                 if (isBiometricSave) {
                   Get.offAllNamed(routeName.addFingerprintScreen);
@@ -131,6 +180,7 @@ class SplashController extends GetxController {
       } else {
         Get.toNamed(routeName.onBoardingScreen);
       }
+
       update();
     });
   }

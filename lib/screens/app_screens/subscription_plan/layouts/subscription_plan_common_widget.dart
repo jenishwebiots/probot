@@ -11,7 +11,7 @@ class SubscriptionPlanCommonWidget {
       .marginSymmetric(horizontal: Insets.i15);
 
   //no of days left text
-  Widget noOfDaysLeftText(number) => Text(appFonts.noOfDaysLeft(number),
+  Widget noOfDaysLeftText(number) => Text(number,
           style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.redColor))
       .marginSymmetric(horizontal: Insets.i15, vertical: Insets.i15);
 

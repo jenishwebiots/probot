@@ -1,10 +1,15 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:probot/env.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../config.dart';
+
+// Needed because we can't import `dart:html` into a mobile app,
+// while on the flip-side access to `dart:io` throws at runtime (hence the `kIsWeb` check below)
+
 import '../../utils/general_utils.dart';
 
 class SignInController extends GetxController {
@@ -49,21 +54,45 @@ class SignInController extends GetxController {
     appCtrl.storage.write("userName", userNameGoogle);
     appCtrl.storage.write("name", user.displayName);
 
-    final QuerySnapshot result = await FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
         .where('id', isEqualTo: user.uid)
-        .get();
-    final List<DocumentSnapshot> documents = result.docs;
-    if (documents.isEmpty) {
-      // Update data to server if new user
-      FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-        'logintype': "Google",
-        'nickname': user.displayName,
-        'email': user.email,
-        'phone': user.phoneNumber,
-        'id': user.uid
-      });
-    }
+        .limit(1)
+        .get()
+        .then((result)async {
+      if (result.docs.isEmpty) {
+        // Update data to server if new user
+        FirebaseMessaging.instance.getToken().then((token) async {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set({
+            'logintype': "Google",
+            'nickname': user.displayName,
+            'email': userNameGoogle,
+            'phone': user.phoneNumber,
+            'id': user.uid,
+            "balance": 5,
+            "fcmToken": token,
+            "isActive":true
+          });
+        });
+
+        appCtrl.envConfig["balance"] = 5;
+      } else {
+       await FirebaseMessaging.instance.getToken().then((token) async {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .update({
+            "fcmToken": token,
+            "isActive":true
+          });
+        });
+        appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
+      }
+    });
+
     appCtrl.storage.write("id", user.uid);
     await checkData();
     Get.offAllNamed(routeName.selectLanguageScreen);
@@ -89,30 +118,45 @@ class SignInController extends GetxController {
         appCtrl.storage.write("name", signIn.displayName);
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
-
-         await FirebaseFirestore.instance
-            .collection('users')
-            .where('id', isEqualTo: firebaseUser.user!.uid).limit(1)
-            .get().then((value) {
-
-              log("doc ${value.docs.isEmpty}");
-           if (value.docs.isEmpty) {
-
-             // Update data to server if new user
-             FirebaseFirestore.instance
-                 .collection('users')
-                 .doc(firebaseUser.user!.uid)
-                 .set({
-               'logintype': "Email",
-               'nickname': firebaseUser.user!.displayName,
-               'email': firebaseUser.user!.email,
-               'phone': firebaseUser.user!.phoneNumber,
-               'id': firebaseUser.user!.uid
-             });
-           }
-         });
-
-
+        FirebaseMessaging.instance.getToken().then((token) async {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .where('id', isEqualTo: firebaseUser.user!.uid)
+              .limit(1)
+              .get()
+              .then((value) async{
+            log("doc ${value.docs.isEmpty}");
+            if (value.docs.isEmpty) {
+              // Update data to server if new user
+              FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(firebaseUser.user!.uid)
+                  .set({
+                'logintype': "Email",
+                'nickname': firebaseUser.user!.displayName,
+                'email': userName,
+                'phone': firebaseUser.user!.phoneNumber,
+                'id': firebaseUser.user!.uid,
+                "balance": 5,
+                "fcmToken": token,
+                "isActive":true
+              });
+              appCtrl.envConfig["balance"] = 5;
+            } else {
+              await FirebaseMessaging.instance.getToken().then((token) async {
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(firebaseUser.user!.uid)
+                    .update({
+                  "fcmToken": token,
+                  "isActive":true
+                });
+              });
+              appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+            }
+          });
+        });
+        update();
         appCtrl.storage.write("id", firebaseUser.user!.uid);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
@@ -173,27 +217,43 @@ class SignInController extends GetxController {
 
         await checkData();
         Get.offAllNamed(routeName.selectLanguageScreen);
-
-        await FirebaseFirestore.instance
-            .collection('users')
-            .where('id', isEqualTo: signIn.uid).limit(1)
-            .get().then((value) {
-
-          log("doc ${value.docs.isEmpty}");
-          if (value.docs.isEmpty) {
-
-            // Update data to server if new user
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(signIn.uid)
-                .set({
-              'logintype': "Email",
-              'nickname': signIn.displayName,
-              'email': signIn.email,
-              'phone':signIn.phoneNumber,
-              'id': signIn.uid
-            });
-          }
+        FirebaseMessaging.instance.getToken().then((token) async {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .where('id', isEqualTo: signIn.uid)
+              .limit(1)
+              .get()
+              .then((value)async {
+            log("doc ${value.docs.isEmpty}");
+            if (value.docs.isEmpty) {
+              // Update data to server if new user
+              FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(signIn.uid)
+                  .set({
+                'logintype': "Email",
+                'nickname': signIn.displayName,
+                'email': signIn.email,
+                'phone': signIn.phoneNumber,
+                'id': signIn.uid,
+                "balance": 5,
+                "fcmToken": token,
+                "isActive":true
+              });
+              appCtrl.envConfig["balance"] = 5;
+            } else {
+              await FirebaseMessaging.instance.getToken().then((token) async {
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(signIn.uid)
+                    .update({
+                  "fcmToken": token,
+                  "isActive":true
+                });
+              });
+              appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+            }
+          });
         });
         appCtrl.storage.write("id", signIn.uid);
       });
@@ -219,7 +279,6 @@ class SignInController extends GetxController {
         .limit(1)
         .get()
         .then((value) {
-      log("DATA : ${value.docs.isEmpty}");
       if (value.docs.isNotEmpty) {
         appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
         appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];

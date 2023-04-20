@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../config.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AllTextForm extends StatelessWidget {
   const AllTextForm({Key? key}) : super(key: key);
@@ -50,12 +49,17 @@ class AllTextForm extends StatelessWidget {
                   ButtonCommon(title: appFonts.update,onTap: ()=> myAccountCtrl.onUpdate()),
                   const VSpace(Sizes.s20),
                   ButtonCommon(
-                      onTap: () => myAccountCtrl.deleteAccount(), title: appFonts.deleteAccount)
+                      onTap: (){
+                        showDialog(
+                            context: Get.context!,
+                            builder: (BuildContext context) => myAccountCtrl
+                                .buildPopupDialog());
+                      }, title: appFonts.deleteAccount)
                 ]));
           } else {
             return Container();
           }
-          
+
         }
       );
     });

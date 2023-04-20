@@ -15,6 +15,8 @@ final bool kAutoConsume = Platform.isIOS || true;
 const String kConsumableId = 'basic_plan_9';
 const String kUpgradeId = 'advance_plan_19';
 const String kSilverSubscriptionId = 'standard_plan_29';
+const String basicSubPlan9 = 'basic_sub_plan_9';
+const String advanceSubPlan19 = 'advance_sub_plan_19';
 const List<String> _kProductIds = <String>[
   kConsumableId,
    kUpgradeId,
@@ -49,7 +51,7 @@ class InAppController extends GetxController{
           // handle error here.
         });
     initStoreInfo();
-    log("subscription : $subscription");
+    log("subscription : ${subscription.isPaused}");
     super.onReady();
   }
 

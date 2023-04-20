@@ -313,12 +313,14 @@ class AppFonts {
   String personalAdvice = "personalAdvice";
   String passwordGenerator = "passwordGenerator";
   String travelHangout = "travelHangout";
+  String refundPolicy = "refundPolicy";
 
   String quickAdvice = "Quick Advice";
   String viewAll = "View all";
   String writeAnything = "Write anything to translate...";
   String max50 = "50 max";
   String translate = "Translate";
+
   String from = "From";
   String to = "To";
   String englishTyping = "English Typing :";
@@ -531,7 +533,38 @@ class AppFonts {
   String areYouSureEndBaby =
       "Are you sure you want to end this born baby wish ?";
   String babyNameOnly = "Baby name";
+  String sendingBestWishes = "Sending best wishes for a speedy recovery :";
+  String wellWishes = "Well wishes send to";
+  String whatHappened = "What happened with him/her";
+  String generateHealthWishes = "Generate healthy wishes";
+  String healthyWishes = "Healthy wishes";
+  String endWellWishes = "End well wishes";
+  String areYouSureEndWell = "Are you sure you want to end this well  wishes ?";
+
+  String camera = "camera";
+  String gallery = "gallery";
+  String noInternet = "noInternet";
+  String noInternetDesc = "noInternetDesc";
+  String retry = "retry";
+  String yes = "yes";
+  String no = "no";
+  String alert = "alert";
+  String deleteConfirmation = "deleteConfirmation";
+  String deleteUserSuccessfully = "deleteUserSuccessfully";
+  String dataUploadSuccessfully = "dataUploadSuccessfully";
+  String imageUploadSuccessfully = "imageUploadSuccessfully";
+  String wantUnlimited = "wantUnlimited";
+  String viewSubscription = "viewSubscription";
+  String wantMoreCoins = "wantMoreCoins";
+  String topUpBalance = "topUpBalance";
+  String viewSubscriptionPlan = "viewSubscriptionPlan";
+  String topBalance = "topBalance";
+  String selectPlan = "selectPlan";
+
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});
+
+  String totalCoinsAvailable(val) =>
+      "totalCoinsAvailable".trParams({'totalCoins': val});
 }

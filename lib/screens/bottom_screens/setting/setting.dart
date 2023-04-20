@@ -1,5 +1,7 @@
+
 import 'package:probot/config.dart';
 import 'package:probot/screens/bottom_screens/setting/layouts/count_layout.dart';
+import 'package:probot/screens/bottom_screens/setting/layouts/setting_user.dart';
 
 class Setting extends StatelessWidget {
   final settingCtrl = Get.put(SettingController());
@@ -32,16 +34,7 @@ class Setting extends StatelessWidget {
                 right: Insets.i20,
                 bottom: Insets.i20),
             Column(children: [
-              Text(
-                      settingCtrl.userName != null
-                          ? settingCtrl.userName![0]
-                          : "S",
-                      style: AppCss.outfitExtraBold30
-                          .textColor(appCtrl.appTheme.sameWhite))
-                  .paddingSymmetric(
-                      horizontal: Insets.i22, vertical: Insets.i18)
-                  .decorated(
-                      shape: BoxShape.circle, color: appCtrl.appTheme.primary),
+              const SettingUser(),
               const VSpace(Sizes.s10),
               Text(settingCtrl.userName ?? "Welcome to Probot",
                   style: AppCss.outfitMedium14
@@ -62,7 +55,7 @@ class Setting extends StatelessWidget {
                       : SettingList(index: e.key, data: e.value)
                           .marginSymmetric(horizontal: Insets.i20)
                   : SettingList(index: e.key, data: e.value)
-              .marginSymmetric(horizontal: Insets.i20))
+                      .marginSymmetric(horizontal: Insets.i20))
               .toList()
         ]).marginOnly(bottom: Insets.i25)),
       );
