@@ -82,6 +82,7 @@ dependencies:
   image_picker: ^0.8.7+1
   connectivity_plus: ^3.0.3
   new_version: ^0.3.1
+  animated_text_kit: ^4.2.2
 
 
 

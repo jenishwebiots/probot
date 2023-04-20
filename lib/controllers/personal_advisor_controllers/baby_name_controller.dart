@@ -1,5 +1,7 @@
 import 'dart:developer';
+
 import 'package:probot/bot_api/api_services.dart';
+
 import '../../config.dart';
 
 class BabyNameSuggestionController extends GetxController {
@@ -17,6 +19,7 @@ class BabyNameSuggestionController extends GetxController {
   int value = 0;
   String? selectItem;
   String? onSelect;
+  String response = '';
 
   onGenderChange(index) {
     selectedIndex = index;
@@ -29,10 +32,14 @@ class BabyNameSuggestionController extends GetxController {
   }
 
   onNameGenerate() {
-    isNameGenerate = true;
     ApiServices.chatCompeletionResponse(selectedNameIndex == 0
-        ? "Suggest a ${genderLists[selectedIndex!]['title']} name with ${selectItem ?? "Capricorn"} Zodiac"
-        : "Suggest a ${genderLists[selectedIndex!]['title']} name start with ${latterController.text}");
+            ? "Suggest a 10 ${genderLists[selectedIndex!]['title']} name with ${selectItem ?? "Capricorn"} Zodiac"
+            : "Suggest a 10 ${genderLists[selectedIndex!]['title']} name start with ${latterController.text}")
+        .then((value) => {
+              response = value,
+              update(),
+              isNameGenerate = true,
+            });
     update();
   }
 

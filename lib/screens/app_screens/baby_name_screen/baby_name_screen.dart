@@ -29,7 +29,7 @@ class BabyNameScreen extends StatelessWidget {
                               title: appFonts.babyName,
                               color: appCtrl.appTheme.white,
                               isMax: false,
-                              controller: babyCtrl.generatedNameController)
+                              responseText: babyCtrl.response)
                         ]),
                     const VSpace(Sizes.s20),
                     ButtonCommon(

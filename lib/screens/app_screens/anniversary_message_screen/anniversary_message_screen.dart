@@ -28,7 +28,7 @@ class AnniversaryMessageScreen extends StatelessWidget {
                                 title: appFonts.generatedWishes,
                                 color: appCtrl.appTheme.white,
                                 isMax: false,
-                                controller: anniCtrl.wishGenController),
+                                responseText: anniCtrl.response),
                             const VSpace(Sizes.s20),
                             ButtonCommon(
                                 title: appFonts.endAnniversaryMessage,

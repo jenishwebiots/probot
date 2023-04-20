@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:probot/bot_api/api_services.dart';
 
 import '../../config.dart';
@@ -9,9 +11,15 @@ class BabyShowerController extends GetxController {
   bool isMessageGenerate = false;
 
   onWishesGenerate() {
-    isMessageGenerate = true;
     ApiServices.chatCompeletionResponse(
-        "Write a baby shower message to ${coupleController.text} from ${relationController.text}");
+            "Write a baby shower message to ${coupleController.text} from ${relationController.text}")
+        .then((value) => {
+              log("RESPONSE++++++++++++++++++++$value"),
+              messageGeneratedController.text = value,
+              update(),
+              isMessageGenerate = true,
+              update(),
+            });
     update();
   }
 

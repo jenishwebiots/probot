@@ -23,15 +23,22 @@ class AnniversaryMessageController extends GetxController {
   String? onSelect;
   String? langOnSelect;
   bool isMessageGenerate = false;
+  String response = '';
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
   onMessageGenerate() {
-    isMessageGenerate = true;
     ApiServices.chatCompeletionResponse(
-        "I want to write ${typeOfAnniController.text} anniversary wish to ${messageSendController.text} for ${onSelect ?? "10"} years of togetherness in ${wishGenController.text}");
+            "I want to write ${typeOfAnniController.text} anniversary wish to ${messageSendController.text}  for ${onSelect ?? "10"} years of togetherness in ${relationController.text}")
+        .then((value) => {
+              log("RES:====================== $value"),
+              response = value,
+              update(),
+              isMessageGenerate = true,
+              update()
+            });
     update();
   }
 
