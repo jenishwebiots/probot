@@ -128,5 +128,9 @@ class SvgAssets {
   final String wedding = "assets/svg/wedding.svg";
   final String boy = "assets/svg/boy.svg";
   final String girl = "assets/svg/girl.svg";
+  final String zodiac = "assets/svg/zodiac.svg";
+  final String location = "assets/svg/location.svg";
+  final String code = "assets/svg/code.svg";
+  final String calender = "assets/svg/calender.svg";
 
 }

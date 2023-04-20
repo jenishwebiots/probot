@@ -16,32 +16,37 @@ class NearbyPointsScreen extends StatelessWidget {
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                      Column(children: [
-                        textCommon.outfitSemiBoldPrimary16(
-                            text: appFonts.visitWonderfulLocations),
-                        const VSpace(Sizes.s15),
-                        Column(children: [
-                          MusicCategoryLayout(
-                            title: appFonts.iAmLooking,
-                            category: /*socialMediaCtrl.categoryOnSelect ?? */
-                                "Restaurant", /* onTap: () => socialMediaCtrl.onSelectMusicCategorySheet() */
-                          ),
-                          const VSpace(Sizes.s20),
-                          MusicCategoryLayout(
-                            title: appFonts.myCurrentLocation,
-                            category: /* socialMediaCtrl.categoryOnSelect ?? */
-                                "Surat", /*onTap: () => socialMediaCtrl.onSelectMusicCategorySheet() */
-                          ),
-                          const VSpace(Sizes.s20),
-                          textCommon.outfitSemiBoldTxt14(
-                              text: appFonts.distanceFrom),
-                          const VSpace(Sizes.s60),
-                          const DistanceSlider()
-                        ])
-                            .paddingSymmetric(
-                                vertical: Insets.i20, horizontal: Insets.i15)
-                            .authBoxExtension()
-                      ]),
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            textCommon.outfitSemiBoldPrimary16(
+                                text: appFonts.visitWonderfulLocations),
+                            const VSpace(Sizes.s15),
+                            Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                  MusicCategoryLayout(
+                                    title: appFonts.iAmLooking,
+                                    category: /*socialMediaCtrl.categoryOnSelect ?? */
+                                        "Restaurant", /* onTap: () => socialMediaCtrl.onSelectMusicCategorySheet() */
+                                  ),
+                                  const VSpace(Sizes.s20),
+                                  MusicCategoryLayout(
+                                    title: appFonts.myCurrentLocation,
+                                    category: /* socialMediaCtrl.categoryOnSelect ?? */
+                                        "Surat", /*onTap: () => socialMediaCtrl.onSelectMusicCategorySheet() */
+                                  ),
+                                  const VSpace(Sizes.s20),
+                                  textCommon.outfitSemiBoldTxt14(
+                                      text: appFonts.distanceFrom),
+                                  const VSpace(Sizes.s60),
+                                  const DistanceSlider()
+                                ])
+                                .paddingSymmetric(
+                                    vertical: Insets.i20,
+                                    horizontal: Insets.i15)
+                                .authBoxExtension()
+                          ]),
                       ButtonCommon(
                           title: appFonts.takeMeTo,
                           onTap: () => nearbyPointCtrl.onNearbyPointGenerate())
@@ -62,10 +67,9 @@ class NearbyPointsScreen extends StatelessWidget {
                             controller: nearbyPointCtrl.nearbyController)
                       ]),
                       ButtonCommon(
-                        title: appFonts.endTraveling,
-                        onTap: () =>
-                            nearbyPointCtrl.endNearbyGeneratorDialog(),
-                      )
+                          title: appFonts.endTraveling,
+                          onTap: () =>
+                              nearbyPointCtrl.endNearbyGeneratorDialog())
                     ]).paddingSymmetric(
                   vertical: Insets.i30, horizontal: Insets.i20));
     });

@@ -12,7 +12,7 @@ class BabyNameScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           backgroundColor: appCtrl.appTheme.bg1,
           appBar: AppAppBarCommon(
-              title: appFonts.babyShowerMessage,
+              title: appFonts.babyNameSuggestion,
               leadingOnTap: () => Get.back()),
           body: Column(children: [
             babyCtrl.isNameGenerate == false

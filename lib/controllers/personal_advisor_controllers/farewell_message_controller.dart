@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 import '../../config.dart';
 
 class FarewellMessageController extends GetxController {
