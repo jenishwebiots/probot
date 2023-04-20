@@ -50,5 +50,12 @@ class RouteName {
   final String commonWebView = "/commonWebView";
   final String noInternet = "/noInternet";
   final String valentineScreen = "/valentineScreen";
+  final String newYearGreetingScreen = "/newYearGreetingScreen";
+  final String mothersDayWishesScreen = "/mothersDayWishesScreen";
+  final String fathersDayWishesScreen = "/fathersDayWishesScreen";
+  final String promotionWishesScreen = "/promotionWishesScreen";
+  final String babyShowerScreen = "/babyShowerScreen";
+  final String farewellMessageScreen = "/farewellMessageScreen";
+  final String weddingWishesScreen = "/weddingWishesScreen";
 
 }

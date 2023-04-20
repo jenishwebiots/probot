@@ -561,8 +561,45 @@ class AppFonts {
   String valentineDaySpecial = "Valentine’s day special";
   String endLovelyMessage = "End lovely message";
   String endValentineMessage = "End Valentine’s message";
-  String areYouSureEndValentine =
-      "Are you sure you want to end this valentine message ?";
+  String areYouSureEndValentine = "Are you sure you want to end this valentine message ?";
+  String newYearGreeting = "New years greeting";
+  String aFreshStart = "A fresh start for the year greetings :";
+  String year = "Year";
+  String sendWishesTo = "Send wishes to";
+  String dazzlingBestWishes = "Dazzling best wishes for the upcoming year";
+  String createSpectacular = "Create spectacular greeting";
+  String endNewYearGreeting = "End New Year Greeting";
+  String areYouSureEndGreeting = "Are you sure you want to end this new year greetings ?";
+  String greetingForMother = "Greetings for Mother's Day";
+  String mothersName = "Mother’s name";
+  String generateBeautifulWish = "Generate beautiful wish";
+  String heartfeltWishes = "Heartfelt wishes to the mother character :";
+  String endMotherDay = "End mother’s day wish";
+  String areYouSureEndMotherDay = "Are you sure you want to end this mother’s day wish ?";
+  String greetingForFathers = "Greetings for Father's Day";
+  String fathersName = "Father’s name";
+  String warmestRegards = "Warmest regards to the father";
+  String endFathersDay = "End father’s day wish";
+  String areYouSureEndFathersDay = "Are you sure you want to end this Father’s day wishes ?";
+  String aspiresToAdvance = "Aspires to advance in life by one step :";
+  String endPromotionWish = "End promotion wish";
+  String salutationFor = "Salutations for the foreseeable future :";
+  String areYouSureEndPromotion = "Are you sure you want to end this promotion wishes ?";
+  String joyfulBabyShower = "Joyful baby shower wishes :";
+  String coupleName = "Couple name";
+  String congratulatoryMessage = "Congratulatory messages for the baby shower :";
+  String babyShowerWishes = "Baby shower wishes";
+  String generateSweetMessage = "Generate sweet message";
+  String endBabyShower = "End baby shower message";
+  String areYouSureEndBabyShower = "Are you sure you want to end this End baby shower message ?";
+  String brightFuture = "Bright future messages on farewell :";
+  String aFewWishes = "A few wishes for a prosperous future :";
+  String endFarewellMessage = "End Farewell Message";
+  String areYouSureEndFarewell = "Are you sure you want to end this End farewell message ?";
+  String lovelyGreeting = "lovely greetings to the nicest person  :";
+  String endWeddingWishes = "End wedding wishes";
+  String generateLovelyWishes = "Generate lovely wishes";
+  String areYouSureEndWedding = "Are you sure you want to end this wedding message ?";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

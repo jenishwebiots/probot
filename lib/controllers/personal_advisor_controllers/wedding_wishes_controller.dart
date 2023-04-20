@@ -2,17 +2,16 @@ import 'dart:developer';
 
 import '../../config.dart';
 
-class AnniversaryMessageController extends GetxController {
+class WeddingWishesController extends GetxController {
   List<String> anniversaryYearList =
-      List<String>.generate(70, (counter) => "${counter + 1}");
+  List<String>.generate(70, (counter) => "${counter + 1}");
   final FixedExtentScrollController? anniYearScrollController =
-      FixedExtentScrollController();
+  FixedExtentScrollController();
   final FixedExtentScrollController? languageScrollController =
-      FixedExtentScrollController();
+  FixedExtentScrollController();
   TextEditingController wishGenController = TextEditingController();
   TextEditingController relationController = TextEditingController();
-  TextEditingController typeOfAnniController = TextEditingController();
-  TextEditingController messageSendController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
   int value = 0;
   int langValue = 0;
@@ -20,23 +19,23 @@ class AnniversaryMessageController extends GetxController {
   String? langSelectItem;
   String? onSelect;
   String? langOnSelect;
-  bool isMessageGenerate = false;
+  bool isWeddingWishGenerate = false;
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
   onMessageGenerate() {
-    isMessageGenerate = true;
+    isWeddingWishGenerate = true;
     update();
   }
 
-  endNameSuggestion() {
+  endWeddingWishes() {
     dialogLayout.endDialog(
-        title: appFonts.endAnniversaryMessage,
-        subTitle: appFonts.areYouSureEndAnniversary,
+        title: appFonts.endWeddingWishes,
+        subTitle: appFonts.areYouSureEndWedding,
         onTap: () {
-          isMessageGenerate = false;
+          isWeddingWishGenerate = false;
           Get.back();
           update();
         });
@@ -47,38 +46,38 @@ class AnniversaryMessageController extends GetxController {
       isScrollControlled: true,
       backgroundColor: appCtrl.appTheme.white,
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        return GetBuilder<AnniversaryMessageController>(builder: (anniCtrl) {
+        return GetBuilder<WeddingWishesController>(builder: (weddingCtrl) {
           return LanguagePickerLayout(
             title: appFonts.selectLanguage,
-            list: anniCtrl.langCtrl.translateLanguagesList,
+            list: weddingCtrl.langCtrl.translateLanguagesList,
             index: langValue,
             suggestionsCallbacks: (value) {
               return StateService.getSuggestions(
-                  value, anniCtrl.langCtrl.translateLanguagesList);
+                  value, weddingCtrl.langCtrl.translateLanguagesList);
             },
-            scrollController: anniCtrl.languageScrollController,
+            scrollController: weddingCtrl.languageScrollController,
             onSuggestionSelected: (i) {
-              int index = anniCtrl.langCtrl.translateLanguagesList
+              int index = weddingCtrl.langCtrl.translateLanguagesList
                   .indexWhere((element) {
                 return element == i;
               });
-              anniCtrl.languageScrollController!.jumpToItem(index);
+              weddingCtrl.languageScrollController!.jumpToItem(index);
               log("suggestion: $i");
               log("index: $index");
               update();
-              anniCtrl.update();
+              weddingCtrl.update();
             },
             onSelectedItemChanged: (i) {
               langValue = i;
-              langSelectItem = anniCtrl.langCtrl.translateLanguagesList[i];
+              langSelectItem = weddingCtrl.langCtrl.translateLanguagesList[i];
               log("SELECT ITEM: $selectItem");
               update();
-              anniCtrl.update();
+              weddingCtrl.update();
             },
             selectOnTap: () {
               langOnSelect = langSelectItem;
               Get.back();
-              anniCtrl.update();
+              weddingCtrl.update();
             },
           );
         });
@@ -90,42 +89,42 @@ class AnniversaryMessageController extends GetxController {
     );
   }
 
-  onAnniYearSheet() {
+  onWeddingAnniSheet() {
     Get.bottomSheet(
       isScrollControlled: true,
       backgroundColor: appCtrl.appTheme.white,
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        return GetBuilder<AnniversaryMessageController>(builder: (anniCtrl) {
+        return GetBuilder<WeddingWishesController>(builder: (weddingCtrl) {
           return LanguagePickerLayout(
             title: appFonts.selectLanguage,
-            list: anniCtrl.anniversaryYearList,
+            list: weddingCtrl.anniversaryYearList,
             index: value,
             suggestionsCallbacks: (value) {
               return StateService.getSuggestions(
-                  value, anniCtrl.anniversaryYearList);
+                  value, weddingCtrl.anniversaryYearList);
             },
-            scrollController: anniCtrl.anniYearScrollController,
+            scrollController: weddingCtrl.anniYearScrollController,
             onSuggestionSelected: (i) {
-              int index = anniCtrl.anniversaryYearList.indexWhere((element) {
+              int index = weddingCtrl.anniversaryYearList.indexWhere((element) {
                 return element == i;
               });
-              anniCtrl.anniYearScrollController!.jumpToItem(index);
+              weddingCtrl.anniYearScrollController!.jumpToItem(index);
               log("suggestion: $i");
               log("index: $index");
               update();
-              anniCtrl.update();
+              weddingCtrl.update();
             },
             onSelectedItemChanged: (i) {
               value = i;
-              selectItem = anniCtrl.anniversaryYearList[i];
+              selectItem = weddingCtrl.anniversaryYearList[i];
               log("SELECT ITEM: $selectItem");
               update();
-              anniCtrl.update();
+              weddingCtrl.update();
             },
             selectOnTap: () {
               onSelect = selectItem;
               Get.back();
-              anniCtrl.update();
+              weddingCtrl.update();
             },
           );
         });

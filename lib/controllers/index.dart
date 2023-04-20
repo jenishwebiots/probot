@@ -38,8 +38,13 @@ export 'personal_advisor_controllers/birthday_message_controller.dart';
 export 'personal_advisor_controllers/cv_maker_controller.dart';
 export 'personal_advisor_controllers/gift_suggestion_controller.dart';
 export 'personal_advisor_controllers/new_baby_wishes_controller.dart';
-
 export 'personal_advisor_controllers/get_well_message_controller.dart';
-
 export 'personal_advisor_controllers/valentine_day_controller.dart';
+export 'personal_advisor_controllers/new_year_greeting_controller.dart';
+export 'personal_advisor_controllers/mothers_day_wishes_controller.dart';
+export 'personal_advisor_controllers/fathers_day_wishes_controller.dart';
+export 'personal_advisor_controllers/promotion_wishes_controller.dart';
+export 'personal_advisor_controllers/baby_shower_controller.dart';
+export 'personal_advisor_controllers/farewell_message_controller.dart';
+export 'personal_advisor_controllers/wedding_wishes_controller.dart';
 

@@ -7,6 +7,8 @@ class NewBabyWishesController extends GetxController {
       FixedExtentScrollController();
 
   TextEditingController wishGenController = TextEditingController();
+  TextEditingController babyController = TextEditingController();
+  TextEditingController relationGenController = TextEditingController();
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()

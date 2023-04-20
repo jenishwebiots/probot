@@ -8,20 +8,27 @@ import 'package:probot/widgets/no_internet.dart';
 import '../config.dart';
 import '../screens/app_screens/anniversary_message_screen/anniversary_message_screen.dart';
 import '../screens/app_screens/baby_name_screen/baby_name_screen.dart';
+import '../screens/app_screens/baby_shower_screen/baby_shower_screen.dart';
 import '../screens/app_screens/birthday_message_screen/birthday_message_screen.dart';
 import '../screens/app_screens/caption_creator_screen/caption_creator_screen.dart';
 import '../screens/app_screens/cv_maker_screen/cv_maker_screen.dart';
 import '../screens/app_screens/distance_attraction_screen/distance_attraction_screen.dart';
 import '../screens/app_screens/email_generator_screen/email_generator_screen.dart';
 import '../screens/app_screens/essay_writer_screen/essay_writer_screen.dart';
+import '../screens/app_screens/farewell_message_screen/farewell_message_screen.dart';
+import '../screens/app_screens/fathers_day_wishes_screen/fathers_day_wishes_screen.dart';
 import '../screens/app_screens/get_well_message_screen/get_well_message_screen.dart';
 import '../screens/app_screens/gift_suggestion_screen/gift_suggestion_screen.dart';
 import '../screens/app_screens/hashtag_for_post_screen/hashtag_for_post_screen.dart';
+import '../screens/app_screens/mothers_day_wishes_screen/mothers_day_wishes_screen.dart';
 import '../screens/app_screens/nearby_points_screen/nearby_points_screen.dart';
 import '../screens/app_screens/new_baby_wishes_screen/new_baby_wishes_screen.dart';
+import '../screens/app_screens/new_year_greeting_screen/new_year_greeting_screen.dart';
 import '../screens/app_screens/password_generator_screen/password_generator_screen.dart';
+import '../screens/app_screens/promotion_wishes_screen/promotion_wishes_screen.dart';
 import '../screens/app_screens/travel_screen/travel_screen.dart';
 import '../screens/app_screens/valentine_day_screen/valentine_day_screen.dart';
+import '../screens/app_screens/wedding_wishes_screen/wedding_wishes_screen.dart';
 
 RouteName _routeName = RouteName();
 
@@ -121,6 +128,13 @@ class AppRoute {
     GetPage(name: _routeName.commonWebView, page: () => const CommonWebView()),
     GetPage(name: _routeName.noInternet, page: () => const NoInternet()),
     GetPage(name: _routeName.valentineScreen, page: () => ValentineDayScreen()),
+    GetPage(name: _routeName.newYearGreetingScreen, page: () => NewYearGreetingScreen()),
+    GetPage(name: _routeName.mothersDayWishesScreen, page: () => MothersDayWishesScreen()),
+    GetPage(name: _routeName.fathersDayWishesScreen, page: () => FathersDayWishesScreen()),
+    GetPage(name: _routeName.promotionWishesScreen, page: () => PromotionWishesScreen()),
+    GetPage(name: _routeName.babyShowerScreen, page: () => BabyShowerScreen()),
+    GetPage(name: _routeName.farewellMessageScreen, page: () => FarewellMessageScreen()),
+    GetPage(name: _routeName.weddingWishesScreen, page: () => WeddingWishesScreen()),
 
   ];
 }

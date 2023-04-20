@@ -96,7 +96,7 @@ class SplashController extends GetxController {
 
     log("SPLASH BG : $selectedImage");
 
-    if (!appCtrl.isGuestLogin && userName != null) {
+    /*if (!appCtrl.isGuestLogin && userName != null) {
       await FirebaseFirestore.instance
           .collection("userSubscribe")
           .where("email", isEqualTo: appCtrl.storage.read("userName"))
@@ -119,7 +119,7 @@ class SplashController extends GetxController {
     } else {
       appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
       appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-    }
+    }*/
 
     Future.delayed(const Duration(seconds: 3), () {
       if (onBoard) {

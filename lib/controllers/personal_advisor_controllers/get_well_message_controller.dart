@@ -3,6 +3,9 @@ import '../../config.dart';
 class GetWellMessageController extends GetxController {
 
   TextEditingController wellGenController = TextEditingController();
+  TextEditingController wellWishesGenController = TextEditingController();
+  TextEditingController relationGenController = TextEditingController();
+  TextEditingController whatHappenController = TextEditingController();
 
    bool isWellMessageGenerated = false;
 
