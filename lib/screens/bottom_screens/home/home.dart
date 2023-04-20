@@ -33,8 +33,11 @@ class Home extends StatelessWidget {
                               style: AppCss.outfitSemiBold16
                                   .textColor(appCtrl.appTheme.txt)),
                           Text(appFonts.viewAll.tr,
-                              style: AppCss.outfitSemiBold12
-                                  .textColor(appCtrl.appTheme.primary)).inkWell(onTap: ()=> Get.toNamed(routeName.quickAdvisor))
+                                  style: AppCss.outfitSemiBold12
+                                      .textColor(appCtrl.appTheme.primary))
+                              .inkWell(
+                                  onTap: () =>
+                                      Get.toNamed(routeName.quickAdvisor))
                         ]),
                     /* ...homeCtrl.homeOptionList.asMap().entries.map((e) {
                           return ((appCtrl.firebaseConfigModel!.isChatShow! &&

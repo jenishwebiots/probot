@@ -77,6 +77,12 @@ dependencies:
   syncfusion_flutter_sliders: ^21.1.39
   syncfusion_flutter_core: ^21.1.39
   dotted_border: ^2.0.0+3
+  url_launcher: ^6.1.10
+  launch_review: ^3.0.1
+  image_picker: ^0.8.7+1
+  connectivity_plus: ^3.0.3
+  new_version: ^0.3.1
+
 
 
 

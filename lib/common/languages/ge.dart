@@ -367,4 +367,19 @@ final dynamic ge = {
   'passwordGenerator' : "Passwortgenerator",
   'travelHangout' : "Reisen/Treffen",
 
+  'refundPolicy' : "Rückgaberecht",
+  'translate': "Übersetzen",
+  'camera': "Kamera",
+  'gallery': "Galerie",
+  'noInternet': "Hoppla !! Kein Internet",
+  'retry': "Wiederholen",
+  'noInternetDesc': "Es konnte keine Internetverbindung hergestellt werden.\nBitte überprüfen Sie Ihre Internetverbindungseinstellungen.",
+
+  'yes' : "Ja",
+  'no' : "NEIN",
+  'alert' : "Alarm!",
+  'deleteConfirmation' : "Möchten Sie dieses Konto wirklich löschen?",
+  'deleteUserSuccessfully' : "Benutzer erfolgreich gelöscht",
+  'dataUploadSuccessfully' : "Daten-Upload erfolgreich",
+  'imageUploadSuccessfully' : "Bild-Upload erfolgreich",
 };

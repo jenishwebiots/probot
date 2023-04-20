@@ -347,4 +347,19 @@ final dynamic ja = {
   'passwordGenerator' : "パスワードジェネレーター",
   'travelHangout' : "旅行/たまり場",
 
+  'refundPolicy' : "代金返却方針",
+  'translate': "翻訳",
+  'camera': "カメラ",
+  'gallery': "ギャラリー",
+  'noInternet': "おっと ！！インターネットがない",
+  'retry': "リトライ",
+  'noInternetDesc': "インターネットに接続できませんでした。\nインターネット接続の設定を確認してください。",
+
+  'yes' : "はい",
+  'no' : "いいえ",
+  'alert' : "警告！",
+  'deleteConfirmation' : "このアカウントを削除してもよろしいですか?",
+  'deleteUserSuccessfully' : "ユーザーが正常に削除されました",
+  'dataUploadSuccessfully' : "データアップロード成功",
+  'imageUploadSuccessfully' : "画像アップロード成功",
 };

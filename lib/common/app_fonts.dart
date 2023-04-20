@@ -313,12 +313,14 @@ class AppFonts {
   String personalAdvice = "personalAdvice";
   String passwordGenerator = "passwordGenerator";
   String travelHangout = "travelHangout";
+  String refundPolicy = "refundPolicy";
 
   String quickAdvice = "Quick Advice";
   String viewAll = "View all";
   String writeAnything = "Write anything to translate...";
   String max50 = "50 max";
   String translate = "Translate";
+
   String from = "From";
   String to = "To";
   String englishTyping = "English Typing :";
@@ -538,6 +540,29 @@ class AppFonts {
   String healthyWishes = "Healthy wishes";
   String endWellWishes = "End well wishes";
   String areYouSureEndWell = "Are you sure you want to end this well  wishes ?";
+
+  String camera = "camera";
+  String gallery = "gallery";
+  String noInternet = "noInternet";
+  String noInternetDesc = "noInternetDesc";
+  String retry = "retry";
+  String yes = "yes";
+  String no = "no";
+  String alert = "alert";
+  String deleteConfirmation = "deleteConfirmation";
+  String deleteUserSuccessfully = "deleteUserSuccessfully";
+  String dataUploadSuccessfully = "dataUploadSuccessfully";
+  String imageUploadSuccessfully = "imageUploadSuccessfully";
+
+  String wonderfulMessage = "Wonderful message for valentine's day :";
+  String wishesFor = "Wishes for";
+  String valentineDayMessage = "Valentine day message";
+  String generateLovelyMessage = "Generate lovely message";
+  String valentineDaySpecial = "Valentine’s day special";
+  String endLovelyMessage = "End lovely message";
+  String endValentineMessage = "End Valentine’s message";
+  String areYouSureEndValentine =
+      "Are you sure you want to end this valentine message ?";
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

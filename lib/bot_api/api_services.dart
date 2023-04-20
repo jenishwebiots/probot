@@ -17,6 +17,7 @@ class ApiServices {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
 
+
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",
@@ -30,14 +31,15 @@ class ApiServices {
         ]
       }),
     );
-    // print(LocalStorage.getChatGptApiKey());
+
     print("hello chat");
     print(
         "Chat respons   =======${jsonDecode(utf8.decode(response.bodyBytes))}");
+    log("STATUS : ${response.statusCode}");
     // Do something with the response
     Map<String, dynamic> newresponse =
         jsonDecode(utf8.decode(response.bodyBytes));
 
-    return newresponse['choices'][0]['message']['content'];
+    return response.statusCode == 200 ? newresponse['choices'][0]['message']['content'] :"";
   }
 }

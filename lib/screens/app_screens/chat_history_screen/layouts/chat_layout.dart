@@ -36,16 +36,14 @@ class ChatHistoryLayout extends StatelessWidget {
           Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(data["question"].toString().tr,
+              Text(data["message"].toString().tr,
                   style: AppCss.outfitMedium14
                       .textColor(appCtrl.appTheme.txt)
                       .textHeight(1.2)),
               const VSpace(Sizes.s5),
               Text(
-                  DateFormat("hh:mm a")
-                      .format(DateTime(data["createdDate"]))
-                      .toString()
-                      .tr,
+                  DateFormat('hh:mm a').format(
+                      DateTime.fromMillisecondsSinceEpoch(int.parse(data["createdDate"].toString()))),
                   style: AppCss.outfitMedium12
                       .textColor(appCtrl.appTheme.lightText))
             ]),

@@ -19,13 +19,14 @@ class ChatLayoutController extends GetxController
   List backgroundList = [];
   Rx<List<ChatListDateWise>> chatList = Rx<List<ChatListDateWise>>([]);
   final chatController = TextEditingController();
-  final ScrollController scrollController = ScrollController();
+  ScrollController scrollController = ScrollController();
   String? time;
   List selectedIndex = [];
   List selectedData = [];
   DateTime? receiverTime;
   AnimationController? animationController;
   Animation? animation;
+  String? chatId;
 
   FocusNode focusNode = FocusNode();
   int count = 0;
@@ -86,15 +87,18 @@ class ChatLayoutController extends GetxController
       ..load();
     log("bannerAd : $bannerAd");
     data = appCtrl.storage.read(session.selectedCharacter);
+
     backgroundList = appArray.backgroundList;
-    selectedImage = appCtrl.storage.read("backgroundImage") ?? eImageAssets.background1;
+    selectedImage =
+        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     speech = SpeechToText();
     update();
-    log("chatList : $data");
+    log("chatList : $chatId");
     if (appCtrl.firebaseConfigModel!.isAddShow! &&
         appCtrl.envConfig["chatTextCount"] != "unlimited") {
       _createInterstitialAd();
     }
+
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
     animationController!.repeat(reverse: true);
@@ -104,6 +108,8 @@ class ChatLayoutController extends GetxController
       });
     super.onReady();
   }
+
+
 
   //clear data while go back
   clearData() {
@@ -121,6 +127,8 @@ class ChatLayoutController extends GetxController
   void dispose() {
     super.dispose();
     _interstitialAd?.dispose();
+    bannerAd?.dispose();
+    bannerAd=null;
   }
 
   //initialize interstitial add
@@ -215,8 +223,17 @@ class ChatLayoutController extends GetxController
     // LocalStorage.saveTextCount(count: chatCount.value);
   }
 
+  getChatId() {
+    selectedImage =
+        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
+    chatId = Get.arguments ?? DateTime.now().millisecondsSinceEpoch.toString();
+    update();
+  }
+
   //process for chat
   processChat() async {
+    int createdDate = DateTime.now().millisecondsSinceEpoch;
+    //chat, image and text completion count as per subscription or not
     if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
       int chatCount = int.parse(appCtrl.envConfig["chatTextCount"].toString());
 
@@ -231,6 +248,7 @@ class ChatLayoutController extends GetxController
     speechStopMethod();
     addTextCount();
     log("CONFIG L:${appCtrl.envConfig}");
+    // add this data for guest
     messages.value.add(
       ChatMessage(
           text: chatController.text,
@@ -251,7 +269,9 @@ class ChatLayoutController extends GetxController
     log("chatCount1 : ${appCtrl.envConfig}");
     int i = messages.value.indexWhere(
         (element) => element.chatMessageType == ChatMessageType.loading);
+    bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin);
 
+    log("isGuestLogin : $isGuestLogin");
     if (i < 0) {
       Future.delayed(const Duration(milliseconds: 5));
       log("i : $i");
@@ -261,53 +281,225 @@ class ChatLayoutController extends GetxController
             chatMessageType: ChatMessageType.loading,
             time: DateTime.now().millisecondsSinceEpoch),
       );
+
       itemCount.value = messages.value.length;
       update();
     }
+
+    //store data in firebase
     textInput.value = chatController.text;
+    if (!isGuestLogin) {
+      log("chatId : $chatId");
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("chats")
+          .where("chatId", isEqualTo: chatId)
+          .limit(1)
+          .get()
+          .then((valueCheck) async {
+        if (valueCheck.docs.isEmpty) {
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection("chats")
+              .add({
+            'userId': FirebaseAuth.instance.currentUser!.uid,
+            'avatar': appCtrl.selectedCharacter["image"],
+            'message': textInput.value,
+            'chatId': chatId,
+            "createdDate": createdDate,
+          }).then((add) async {
+            await FirebaseFirestore.instance
+                .collection("chatHistory")
+                .doc(chatId)
+                .collection("chats")
+                .add({
+              'userId': FirebaseAuth.instance.currentUser!.uid,
+              'avatar': appCtrl.selectedCharacter["image"],
+              'message': textInput.value,
+              'chatId': chatId,
+              "createdDate": createdDate,
+              "messageType": ChatMessageType.user.name
+            }).then((values) async {
+              await deleteLoading();
+            });
+          });
+        } else {
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection("chats")
+              .doc(valueCheck.docs[0].id)
+              .update({
+            'userId': FirebaseAuth.instance.currentUser!.uid,
+            'avatar': appCtrl.selectedCharacter["image"],
+            'message': textInput.value,
+            'chatId': chatId,
+            "createdDate": createdDate,
+          }).then((values) async {
+            await FirebaseFirestore.instance
+                .collection("chatHistory")
+                .doc(chatId)
+                .collection("chats")
+                .add({
+              'userId': FirebaseAuth.instance.currentUser!.uid,
+              'avatar': appCtrl.selectedCharacter["image"],
+              'message': textInput.value,
+              'chatId': chatId,
+              "createdDate": createdDate,
+              "messageType": ChatMessageType.user.name
+            }).then((addVal) async {
+              await deleteLoading();
+            });
+          });
+        }
+      });
+    }
 
     update();
-
+    chatController.clear();
     scrollDown();
     update();
-    ApiServices.chatCompeletionResponse(chatController.text).then((value) {
-      // isLoading.value = false
-      messages.value.removeWhere(
-          (element) => element.chatMessageType == ChatMessageType.loading);
+    await Future.delayed(const Duration(milliseconds: 3));
+    ApiServices.chatCompeletionResponse(textInput.value)
+        .then((value) async {
+      log("RESPONSE : $value");
+      if (value == "") {
+        if (!isGuestLogin) {
+          await FirebaseFirestore.instance
+              .collection("chatHistory")
+              .doc(chatId)
+              .collection("chats")
+              .where("messageType", isEqualTo: ChatMessageType.loading.name)
+              .limit(1)
+              .get()
+              .then((loadVal) {
+            if (loadVal.docs.isNotEmpty) {
+              log("LOAD DATA : ${loadVal.docs[0].id}");
+              FirebaseFirestore.instance
+                  .collection("chatHistory")
+                  .doc(chatId)
+                  .collection("chats")
+                  .doc(loadVal.docs[0].id)
+                  .delete();
+            }
+          });
+        }
+      } else {
+        // isLoading.value = false
+        log("valuevalue : $value");
+        messages.value.removeWhere(
+            (element) => element.chatMessageType == ChatMessageType.loading);
 
-      messages.value.add(
-        ChatMessage(
-            text: value.replaceFirst("\n", " ").replaceFirst("\n", " "),
-            chatMessageType: ChatMessageType.bot,
-            time: DateTime.now().millisecondsSinceEpoch),
-      );
-      itemCount.value = messages.value.length;
-      update();
-      shareMessages.add(
-          "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By PROBOT\n");
-      selectedMessages.add(
-          "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By PROBOT\n");
+        messages.value.add(
+          ChatMessage(
+              text: value.replaceFirst("\n", " ").replaceFirst("\n", " "),
+              chatMessageType: ChatMessageType.bot,
+              time: DateTime.now().millisecondsSinceEpoch),
+        );
 
-      scrollDown();
-      isLoading.value = false;
+        itemCount.value = messages.value.length;
+        update();
+        shareMessages.add(
+            "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By PROBOT\n");
+        selectedMessages.add(
+            "${value.replaceFirst("\n", " ").replaceFirst("\n", " ")} -By PROBOT\n");
 
-      int id = DateTime.now().millisecondsSinceEpoch;
-      FirebaseFirestore.instance
-          .collection('chatHistory')
-          .doc(id.toString())
-          .set({
-        'userId': FirebaseAuth.instance.currentUser!.uid,
-        'avatar': appCtrl.selectedCharacter["image"],
-        'question': chatController.text,
-        'answer': value.toString(),
-        "createdDate": DateTime.now().millisecondsSinceEpoch,
-      });
-      chatController.clear();
+        scrollDown();
+        isLoading.value = false;
+        if (!isGuestLogin) {
+          FirebaseFirestore.instance
+              .collection("chatHistory")
+              .doc(chatId)
+              .collection("chats")
+              .where("messageType", isEqualTo: ChatMessageType.loading.name)
+              .limit(1)
+              .get()
+              .then((loadVal) {
+            log("LOAD DATA : ${loadVal.docs[0]}");
+            if (loadVal.docs.isNotEmpty) {
+              FirebaseFirestore.instance
+                  .collection("chatHistory")
+                  .doc(chatId)
+                  .collection("chats")
+                  .doc(loadVal.docs[0].id)
+                  .delete()
+                  .then((res) {
+                FirebaseFirestore.instance
+                    .collection("chatHistory")
+                    .doc(chatId)
+                    .collection("chats")
+                    .add({
+                  'userId': FirebaseAuth.instance.currentUser!.uid,
+                  'avatar': appCtrl.selectedCharacter["image"],
+                  'message':
+                      value.replaceFirst("\n", " ").replaceFirst("\n", " "),
+                  'chatId': chatId,
+                  "createdDate": DateTime.now().millisecondsSinceEpoch,
+                  "messageType": ChatMessageType.bot.name
+                });
+              });
+            }
+          });
+        }
+      }
+
       update();
     });
-
+    scrollDown();
     Get.forceAppUpdate();
     update();
+  }
+
+  deleteLoading() async {
+    log("DELETE");
+    FirebaseFirestore.instance
+        .collection("chatHistory")
+        .doc(chatId)
+        .collection("chats")
+        .where("messageType", isEqualTo: ChatMessageType.loading.name)
+        .limit(1)
+        .get()
+        .then((loadVal) {
+      if (loadVal.docs.isNotEmpty) {
+        log("DELETE1");
+        FirebaseFirestore.instance
+            .collection("chatHistory")
+            .doc(chatId)
+            .collection("chats")
+            .doc(loadVal.docs[0].id)
+            .delete()
+            .then((values) {
+          FirebaseFirestore.instance
+              .collection("chatHistory")
+              .doc(chatId)
+              .collection("chats")
+              .add({
+            'userId': FirebaseAuth.instance.currentUser!.uid,
+            'avatar': appCtrl.selectedCharacter["image"],
+            'message': "",
+            'chatId': chatId,
+            "createdDate": DateTime.now().millisecondsSinceEpoch,
+            "messageType": ChatMessageType.loading.name
+          });
+        });
+      } else {
+        log("DELETE2");
+        FirebaseFirestore.instance
+            .collection("chatHistory")
+            .doc(chatId)
+            .collection("chats")
+            .add({
+          'userId': FirebaseAuth.instance.currentUser!.uid,
+          'avatar': appCtrl.selectedCharacter["image"],
+          'message': "",
+          'chatId': chatId,
+          "createdDate": DateTime.now().millisecondsSinceEpoch,
+          "messageType": ChatMessageType.loading.name
+        });
+      }
+    });
   }
 
   //pop up menu item

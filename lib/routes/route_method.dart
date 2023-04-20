@@ -2,6 +2,8 @@ import 'package:probot/screens/app_screens/code_generator_screen/code_generator_
 import 'package:probot/screens/app_screens/music_for_post_screen/music_for_post_screen.dart';
 import 'package:probot/screens/app_screens/personal_advisor_screen/personal_advisor_screen.dart';
 import 'package:probot/screens/app_screens/social_media_screen/social_media_screen.dart';
+import 'package:probot/widgets/common_web_view.dart';
+import 'package:probot/widgets/no_internet.dart';
 
 import '../config.dart';
 import '../screens/app_screens/anniversary_message_screen/anniversary_message_screen.dart';
@@ -19,6 +21,7 @@ import '../screens/app_screens/nearby_points_screen/nearby_points_screen.dart';
 import '../screens/app_screens/new_baby_wishes_screen/new_baby_wishes_screen.dart';
 import '../screens/app_screens/password_generator_screen/password_generator_screen.dart';
 import '../screens/app_screens/travel_screen/travel_screen.dart';
+import '../screens/app_screens/valentine_day_screen/valentine_day_screen.dart';
 
 RouteName _routeName = RouteName();
 
@@ -107,7 +110,17 @@ class AppRoute {
     GetPage(
         name: _routeName.anniversaryMessageScreen,
         page: () => AnniversaryMessageScreen()),
+
     GetPage(name: _routeName.newBabyWishesScreen,page: () => NewBabyWishesScreen()),
     GetPage(name: _routeName.getWellMessageScreen,page: () => GetWellMessageScreen()),
+
+    GetPage(
+        name: _routeName.newBabyWishesScreen,
+        page: () => NewBabyWishesScreen()),
+    GetPage(name: _routeName.translateScreen, page: () => TranslateScreen()),
+    GetPage(name: _routeName.commonWebView, page: () => const CommonWebView()),
+    GetPage(name: _routeName.noInternet, page: () => const NoInternet()),
+    GetPage(name: _routeName.valentineScreen, page: () => ValentineDayScreen()),
+
   ];
 }
