@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:probot/bot_api/api_services.dart';
 import 'package:probot/config.dart';
 
 class NewBabyWishesController extends GetxController {
@@ -23,6 +24,8 @@ class NewBabyWishesController extends GetxController {
 
   onWishesGenerate() {
     isWishGenerate = true;
+    ApiServices.chatCompeletionResponse(
+        "suggest new born baby ${genderLists[selectIndex]['title']} ${babyController.text} message from ${relationGenController.text} in ${wishGenController.text}");
     update();
   }
 

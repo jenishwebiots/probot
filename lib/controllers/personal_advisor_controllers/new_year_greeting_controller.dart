@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:probot/bot_api/api_services.dart';
+
 import '../../config.dart';
 
 class NewYearGreetingController extends GetxController {
-
   bool isGreetingGenerate = false;
-  final FixedExtentScrollController? languageScrollController = FixedExtentScrollController();
+  final FixedExtentScrollController? languageScrollController =
+      FixedExtentScrollController();
   TextEditingController yearController = TextEditingController();
   TextEditingController sendWishesController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -19,8 +21,10 @@ class NewYearGreetingController extends GetxController {
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
-  onNewYearWishesGenerate () {
+  onNewYearWishesGenerate() {
     isGreetingGenerate = true;
+    ApiServices.chatCompeletionResponse(
+        "Happy new year ${yearController.text} message for ${sendWishesController.text} in ${newYearWishGenController.text}");
     update();
   }
 
@@ -52,7 +56,8 @@ class NewYearGreetingController extends GetxController {
             },
             onSelectedItemChanged: (i) {
               newYearCtrl.value = i;
-              newYearCtrl.selectItem = newYearCtrl.langCtrl.translateLanguagesList[i];
+              newYearCtrl.selectItem =
+                  newYearCtrl.langCtrl.translateLanguagesList[i];
               log("SELECT ITEM: $selectItem");
               update();
               newYearCtrl.update();
@@ -82,5 +87,4 @@ class NewYearGreetingController extends GetxController {
           update();
         });
   }
-
 }

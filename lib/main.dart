@@ -45,11 +45,11 @@ class _MyAppState extends State<MyApp> {
     // or you can fetch the status and display your own dialog, or no dialog.
     const simpleBehavior = true;
 
-    if (simpleBehavior == true) {
-      basicStatusCheck(newVersion);
-    } else {
-      advancedStatusCheck(newVersion);
-    }
+    // if (simpleBehavior == true) {
+    //   basicStatusCheck(newVersion);
+    // } else {
+    //   advancedStatusCheck(newVersion);
+    // }
   }
 
   basicStatusCheck(NewVersion newVersion) {

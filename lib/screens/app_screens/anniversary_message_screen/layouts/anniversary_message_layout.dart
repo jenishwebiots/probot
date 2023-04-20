@@ -18,15 +18,21 @@ class AnniversaryMessageLayout extends StatelessWidget {
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.typeOfAnniversary),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                controller: anniCtrl.typeOfAnniController,
+                hintText: appFonts.enterValue),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.relation),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                controller: anniCtrl.relationController,
+                hintText: appFonts.enterValue),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.messageSendTo),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                controller: anniCtrl.messageSendController,
+                hintText: appFonts.enterValue),
             const VSpace(Sizes.s20),
             MusicCategoryLayout(
                 title: appFonts.messageGenerateIn,

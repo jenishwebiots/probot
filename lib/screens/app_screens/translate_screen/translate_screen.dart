@@ -1,5 +1,6 @@
 import '../../../config.dart';
 import 'layouts/translation_layout.dart';
+import 'package:probot/bot_api/api_services.dart';
 
 class TranslateScreen extends StatelessWidget {
   final translateCtrl = Get.put(TranslateController());
@@ -26,8 +27,12 @@ class TranslateScreen extends StatelessWidget {
               TranslationLayout(
                   from: translateCtrl.onFromSelect ?? appFonts.english,
                   to: translateCtrl.onToSelect ?? appFonts.hindi,
-                  fromOnTap: () {translateCtrl.onFromLanguageSheet();},
-                  toOnTap: () {translateCtrl.onToLanguageSheet();}),
+                  fromOnTap: () {
+                    translateCtrl.onFromLanguageSheet();
+                  },
+                  toOnTap: () {
+                    translateCtrl.onToLanguageSheet();
+                  }),
               const VSpace(Sizes.s25),
               InputLayout(
                   title: appFonts.englishTyping,
@@ -43,6 +48,8 @@ class TranslateScreen extends StatelessWidget {
                   title: appFonts.translate,
                   onTap: () {
                     translateCtrl.isTranslated = true;
+                    ApiServices.chatCompeletionResponse(
+                        "Translate ${translateCtrl.transController.text} from ${translateCtrl.onFromSelect ?? appFonts.english} to ${translateCtrl.onToSelect ?? appFonts.hindi} language");
                     translateCtrl.update();
                   }).paddingOnly(bottom: Insets.i25),
             if (translateCtrl.isTranslated == true)

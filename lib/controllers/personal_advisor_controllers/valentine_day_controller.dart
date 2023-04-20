@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:probot/bot_api/api_services.dart';
+
 import '../../config.dart';
 
 class ValentineDayController extends GetxController {
@@ -21,6 +23,8 @@ class ValentineDayController extends GetxController {
 
   onValWishesGenerate() {
     isValentineGenerate = true;
+    ApiServices.chatCompeletionResponse(
+        "Write a Valentine's day wish message for ${wishForController.text} ${nameController.text} in ${valWishGenController.text}");
     update();
   }
 

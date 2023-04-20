@@ -15,9 +15,8 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
-
-
+        'Authorization':
+            'Bearer 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',
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",
@@ -40,6 +39,8 @@ class ApiServices {
     Map<String, dynamic> newresponse =
         jsonDecode(utf8.decode(response.bodyBytes));
 
-    return response.statusCode == 200 ? newresponse['choices'][0]['message']['content'] :"";
+    return response.statusCode == 200
+        ? newresponse['choices'][0]['message']['content']
+        : "";
   }
 }

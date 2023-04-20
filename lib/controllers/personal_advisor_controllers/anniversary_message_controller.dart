@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:probot/bot_api/api_services.dart';
+
 import '../../config.dart';
 
 class AnniversaryMessageController extends GetxController {
@@ -28,6 +30,8 @@ class AnniversaryMessageController extends GetxController {
 
   onMessageGenerate() {
     isMessageGenerate = true;
+    ApiServices.chatCompeletionResponse(
+        "I want to write ${typeOfAnniController.text} anniversary wish to ${messageSendController.text} for ${onSelect ?? "10"} years of togetherness in ${wishGenController.text}");
     update();
   }
 

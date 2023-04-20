@@ -1,15 +1,16 @@
 import 'dart:developer';
-
+import 'package:probot/bot_api/api_services.dart';
 import '../../config.dart';
 
 class BabyNameSuggestionController extends GetxController {
   TextEditingController latterController = TextEditingController();
   TextEditingController generatedNameController = TextEditingController();
-  final FixedExtentScrollController? scrollController = FixedExtentScrollController();
+  final FixedExtentScrollController? scrollController =
+      FixedExtentScrollController();
 
   List genderLists = [];
   List nameSuggestionLists = [];
-  List <String> zodiacLists = [];
+  List<String> zodiacLists = [];
   int? selectedIndex = 0;
   int? selectedNameIndex = 0;
   bool isNameGenerate = false;
@@ -29,6 +30,9 @@ class BabyNameSuggestionController extends GetxController {
 
   onNameGenerate() {
     isNameGenerate = true;
+    ApiServices.chatCompeletionResponse(selectedNameIndex == 0
+        ? "Suggest a ${genderLists[selectedIndex!]['title']} name with ${selectItem ?? "Capricorn"} Zodiac"
+        : "Suggest a ${genderLists[selectedIndex!]['title']} name start with ${latterController.text}");
     update();
   }
 
@@ -54,13 +58,11 @@ class BabyNameSuggestionController extends GetxController {
             list: babyCtrl.zodiacLists,
             index: value,
             suggestionsCallbacks: (value) {
-              return StateService.getSuggestions(
-                  value, babyCtrl.zodiacLists);
+              return StateService.getSuggestions(value, babyCtrl.zodiacLists);
             },
             scrollController: babyCtrl.scrollController,
             onSuggestionSelected: (i) {
-              int index =
-              babyCtrl.zodiacLists.indexWhere((element) {
+              int index = babyCtrl.zodiacLists.indexWhere((element) {
                 return element == i;
               });
               babyCtrl.scrollController!.jumpToItem(index);

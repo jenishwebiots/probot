@@ -1,9 +1,8 @@
 import 'dart:developer';
-
+import 'package:probot/bot_api/api_services.dart';
 import '../../config.dart';
 
 class BirthdayMessageController extends GetxController {
-
   TextEditingController birthdayMessagesGenController = TextEditingController();
   TextEditingController birthdayWishGenController = TextEditingController();
   TextEditingController nameGenController = TextEditingController();
@@ -11,7 +10,7 @@ class BirthdayMessageController extends GetxController {
   bool isBirthdayGenerated = false;
 
   final FixedExtentScrollController? scrollController =
-  FixedExtentScrollController();
+      FixedExtentScrollController();
   int value = 0;
   String? selectItem;
   String? onSelect;
@@ -19,8 +18,10 @@ class BirthdayMessageController extends GetxController {
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
-  onTapWishesGenerate () {
+  onTapWishesGenerate() {
     isBirthdayGenerated = true;
+    ApiServices.chatCompeletionResponse(
+        "Birthday wish message for ${birthdayWishGenController.text} with ${nameGenController.text} name in ${birthdayMessagesGenController.text}");
     update();
   }
 
@@ -51,8 +52,8 @@ class BirthdayMessageController extends GetxController {
             },
             scrollController: birthdayCtrl.scrollController,
             onSuggestionSelected: (i) {
-              int index =
-              birthdayCtrl.langCtrl.translateLanguagesList.indexWhere((element) {
+              int index = birthdayCtrl.langCtrl.translateLanguagesList
+                  .indexWhere((element) {
                 return element == i;
               });
               birthdayCtrl.scrollController!.jumpToItem(index);
@@ -82,5 +83,4 @@ class BirthdayMessageController extends GetxController {
               topLeft: Radius.circular(AppRadius.r10))),
     );
   }
-
 }

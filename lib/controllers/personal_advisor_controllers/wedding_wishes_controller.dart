@@ -1,14 +1,14 @@
 import 'dart:developer';
-
+import 'package:probot/bot_api/api_services.dart';
 import '../../config.dart';
 
 class WeddingWishesController extends GetxController {
   List<String> anniversaryYearList =
-  List<String>.generate(70, (counter) => "${counter + 1}");
+      List<String>.generate(70, (counter) => "${counter + 1}");
   final FixedExtentScrollController? anniYearScrollController =
-  FixedExtentScrollController();
+      FixedExtentScrollController();
   final FixedExtentScrollController? languageScrollController =
-  FixedExtentScrollController();
+      FixedExtentScrollController();
   TextEditingController wishGenController = TextEditingController();
   TextEditingController relationController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -27,6 +27,8 @@ class WeddingWishesController extends GetxController {
 
   onMessageGenerate() {
     isWeddingWishGenerate = true;
+    ApiServices.chatCompeletionResponse(
+        "I want to wish ${relationController.text} for wedding to ${relationController.text} in ${wishGenController.text}");
     update();
   }
 

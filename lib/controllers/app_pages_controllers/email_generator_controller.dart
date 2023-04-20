@@ -1,4 +1,5 @@
 import 'package:probot/config.dart';
+import 'package:probot/bot_api/api_services.dart';
 
 class EmailGeneratorController extends GetxController {
   TextEditingController topicController = TextEditingController();
@@ -13,6 +14,8 @@ class EmailGeneratorController extends GetxController {
 
   onGenerateMail() {
     isMailGenerated = true;
+    ApiServices.chatCompeletionResponse(
+        "Write a ${mailLengthLists[2]} mail to ${writeToController.text} from ${writeFromController.text} for ${topicController.text} in ${toneLists[selectIndex]} tone");
     update();
   }
 
@@ -24,11 +27,14 @@ class EmailGeneratorController extends GetxController {
   endEmailGeneratorDialog() {
     Get.generalDialog(
         pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(title: appFonts.endEmailWriter,subTitle: appFonts.areYouSureEndEmail,endOnTap: () {
-            isMailGenerated = false;
-            Get.back();
-            update();
-          });
+          return AdviserDialog(
+              title: appFonts.endEmailWriter,
+              subTitle: appFonts.areYouSureEndEmail,
+              endOnTap: () {
+                isMailGenerated = false;
+                Get.back();
+                update();
+              });
         },
         transitionBuilder: (context, anim1, anim2, child) {
           return SlideTransition(
@@ -37,8 +43,7 @@ class EmailGeneratorController extends GetxController {
             child: child,
           );
         },
-        transitionDuration: const Duration(milliseconds: 300)
-    );
+        transitionDuration: const Duration(milliseconds: 300));
   }
 
   @override

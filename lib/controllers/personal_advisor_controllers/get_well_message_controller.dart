@@ -1,18 +1,21 @@
+import 'package:probot/bot_api/api_services.dart';
+
 import '../../config.dart';
 
 class GetWellMessageController extends GetxController {
-
   TextEditingController wellGenController = TextEditingController();
   TextEditingController wellWishesGenController = TextEditingController();
   TextEditingController relationGenController = TextEditingController();
   TextEditingController whatHappenController = TextEditingController();
 
-   bool isWellMessageGenerated = false;
+  bool isWellMessageGenerated = false;
 
-   onWellMessageGenerate () {
-     isWellMessageGenerated = true;
-     update();
-   }
+  onWellMessageGenerate() {
+    isWellMessageGenerated = true;
+    ApiServices.chatCompeletionResponse(
+        "get well soon message for ${whatHappenController.text} to ${relationGenController.text}");
+    update();
+  }
 
   endWellWishes() {
     dialogLayout.endDialog(
@@ -24,5 +27,4 @@ class GetWellMessageController extends GetxController {
           update();
         });
   }
-
 }

@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/services.dart';
-
+import 'package:probot/bot_api/api_services.dart';
 import '../../config.dart';
 
 class SocialMediaController extends GetxController {
@@ -59,11 +58,15 @@ class SocialMediaController extends GetxController {
 
   onCaptionGenerate() {
     isCaptionGenerated = true;
+    ApiServices.chatCompeletionResponse(
+        "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} plateform for ${captionController.text} photo");
     update();
   }
 
   onMusicGenerate() {
     isMusicGenerated = true;
+    ApiServices.chatCompeletionResponse(
+        "Please give me music Suggestion ${categoryOnSelect ?? "Classic"} category and in ${onSelect ?? "Hindi"} for post");
     update();
   }
 
@@ -78,9 +81,9 @@ class SocialMediaController extends GetxController {
   }
 
   onGoPage(value) {
-    if (value == appFonts.captionAbout) {
+    if (value['title'] == appFonts.captionAbout) {
       Get.toNamed(routeName.captionCreatorScreen);
-    } else if (value == appFonts.getMusicSuggestion) {
+    } else if (value['title'] == appFonts.getMusicSuggestion) {
       Get.toNamed(routeName.musicForPostScreen);
     } else {
       Get.toNamed(routeName.hashtagForPostScreen);
@@ -90,6 +93,8 @@ class SocialMediaController extends GetxController {
   onHashtagGenerate() {
     isHashtagGenerated = true;
     isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Please give me Hashtag Suggestion for ${hashtagController.text} post");
     Timer.periodic(const Duration(seconds: 5), (Timer t) {
       isLoader = false;
       progressValue = 0.0;

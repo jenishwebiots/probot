@@ -1,4 +1,5 @@
 import '../../../config.dart';
+import 'package:probot/bot_api/api_services.dart';
 
 class CodeGeneratorScreen extends StatelessWidget {
   final codeGeneratorCtrl = Get.put(CodeGeneratorController());
@@ -9,7 +10,7 @@ class CodeGeneratorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CodeGeneratorController>(builder: (_) {
       return Scaffold(
-        resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomInset: true,
           backgroundColor: appCtrl.appTheme.bg1,
           appBar: AppAppBarCommon(
               title: appFonts.codeGenerator, leadingOnTap: () => Get.back()),
@@ -40,7 +41,7 @@ class CodeGeneratorScreen extends StatelessWidget {
                     ]).paddingSymmetric(
                   horizontal: Insets.i20, vertical: Insets.i30)
               : SingleChildScrollView(
-                child: Column(children: [
+                  child: Column(children: [
                     Text(appFonts.typeAnythingTo,
                         style: AppCss.outfitSemiBold16
                             .textColor(appCtrl.appTheme.primary)),
@@ -52,16 +53,20 @@ class CodeGeneratorScreen extends StatelessWidget {
                               style: AppCss.outfitSemiBold14
                                   .textColor(appCtrl.appTheme.txt)),
                           const VSpace(Sizes.s8),
-                              SizedBox(
-                                width: double.infinity,
-                                  child: Text(codeGeneratorCtrl.onSelect ?? "C#",
-                                      style: AppCss.outfitMedium16
-                                          .textColor(appCtrl.appTheme.txt))
+                          SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                          codeGeneratorCtrl.onSelect ?? "C#",
+                                          style: AppCss.outfitMedium16
+                                              .textColor(appCtrl.appTheme.txt))
                                       .paddingAll(Insets.i15)
                                       .decorated(
-                                      color: appCtrl.appTheme.textField,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(AppRadius.r8)))).inkWell(onTap: ()=> codeGeneratorCtrl.onSelectLanguageSheet()),
+                                          color: appCtrl.appTheme.textField,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(AppRadius.r8))))
+                              .inkWell(
+                                  onTap: () => codeGeneratorCtrl
+                                      .onSelectLanguageSheet()),
                           const VSpace(Sizes.s28),
                           InputLayout(
                               title: appFonts.writeStuff,
@@ -78,11 +83,13 @@ class CodeGeneratorScreen extends StatelessWidget {
                         title: appFonts.createMagicalCode,
                         onTap: () {
                           codeGeneratorCtrl.isCodeGenerate = true;
+                          ApiServices.chatCompeletionResponse(
+                              "Write a code for ${codeGeneratorCtrl.codeController.text} in ${codeGeneratorCtrl.onSelect ?? "C#"} language");
                           codeGeneratorCtrl.update();
                         })
                   ]).paddingSymmetric(
-                    horizontal: Insets.i20, vertical: Insets.i30),
-              ));
+                      horizontal: Insets.i20, vertical: Insets.i30),
+                ));
     });
   }
 }
