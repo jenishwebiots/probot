@@ -13,11 +13,17 @@ class ValentineDayLayout extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             textCommon.outfitSemiBoldTxt14(text: appFonts.wishesFor),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+              hintText: appFonts.enterValue,
+              controller: valCtrl.wishForController,
+            ),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.name),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+              hintText: appFonts.enterValue,
+              controller: valCtrl.nameController,
+            ),
             const VSpace(Sizes.s20),
             MusicCategoryLayout(
                 title: appFonts.messageGenerateIn,

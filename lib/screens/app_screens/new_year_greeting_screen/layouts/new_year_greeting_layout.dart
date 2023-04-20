@@ -13,15 +13,21 @@ class NewYearGreetingLayout extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             textCommon.outfitSemiBoldTxt14(text: appFonts.year),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                hintText: appFonts.enterValue,
+                controller: newYearCtrl.yearController),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.sendWishesTo),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                hintText: appFonts.enterValue,
+                controller: newYearCtrl.sendWishesController),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.name),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                hintText: appFonts.enterValue,
+                controller: newYearCtrl.nameController),
             const VSpace(Sizes.s20),
             MusicCategoryLayout(
                 title: appFonts.wishGenerateIn,

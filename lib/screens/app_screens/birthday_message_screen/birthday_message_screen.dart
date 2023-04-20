@@ -46,11 +46,17 @@ class BirthdayMessageScreen extends StatelessWidget {
                           textCommon.outfitSemiBoldTxt14(
                               text: appFonts.sendBirthdayWishes),
                           const VSpace(Sizes.s10),
-                          TextFieldCommon(hintText: appFonts.enterValue),
+                          TextFieldCommon(
+                            hintText: appFonts.enterValue,
+                            controller: birthdayCtrl.birthdayWishGenController,
+                          ),
                           const VSpace(Sizes.s20),
                           textCommon.outfitSemiBoldTxt14(text: appFonts.name),
                           const VSpace(Sizes.s10),
-                          TextFieldCommon(hintText: appFonts.enterValue),
+                          TextFieldCommon(
+                            hintText: appFonts.enterValue,
+                            controller: birthdayCtrl.nameGenController,
+                          ),
                           const VSpace(Sizes.s20),
                           MusicCategoryLayout(
                               title: appFonts.messageGenerateIn,
