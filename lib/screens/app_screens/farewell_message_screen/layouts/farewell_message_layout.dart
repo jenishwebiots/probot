@@ -13,11 +13,17 @@ class FarewellMessageLayout extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             textCommon.outfitSemiBoldTxt14(text: appFonts.name),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+              hintText: appFonts.enterValue,
+              controller: farewellCtrl.nameController,
+            ),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.relation),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue)
+            TextFieldCommon(
+              hintText: appFonts.enterValue,
+              controller: farewellCtrl.relationController,
+            )
           ])
               .paddingSymmetric(horizontal: Insets.i15, vertical: Insets.i20)
               .authBoxExtension()

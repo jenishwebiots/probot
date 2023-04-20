@@ -18,11 +18,15 @@ class WeddingWishesLayout extends StatelessWidget {
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.relation),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                hintText: appFonts.enterValue,
+                controller: weddingWishesCtrl.relationController),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.name),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+                hintText: appFonts.enterValue,
+                controller: weddingWishesCtrl.nameController),
             const VSpace(Sizes.s20),
             MusicCategoryLayout(
                 title: appFonts.messageGenerateIn,

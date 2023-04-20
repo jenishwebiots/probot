@@ -24,20 +24,20 @@ class GetWellMessageLayout extends StatelessWidget {
                 ])),
             const VSpace(Sizes.s10),
             TextFieldCommon(
-                controller: getCtrl.wellWishesGenController,
-                hintText: appFonts.enterValue),
+                hintText: appFonts.enterValue,
+                controller: getCtrl.wellWishesGenController),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.relation),
             const VSpace(Sizes.s10),
             TextFieldCommon(
-                controller: getCtrl.relationGenController,
-                hintText: appFonts.enterValue),
+                hintText: appFonts.enterValue,
+                controller: getCtrl.relationGenController),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.whatHappened),
             const VSpace(Sizes.s10),
             TextFieldCommon(
-                controller: getCtrl.whatHappenController,
-                hintText: appFonts.enterValue)
+                hintText: appFonts.enterValue,
+                controller: getCtrl.whatHappenController)
           ])
               .paddingSymmetric(vertical: Insets.i20, horizontal: Insets.i15)
               .authBoxExtension()

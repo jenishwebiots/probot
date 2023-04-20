@@ -59,6 +59,7 @@ class CodeGeneratorController extends GetxController {
         return GetBuilder<CodeGeneratorController>(
             builder: (codeGeneratorCtrl) {
               return  LanguagePickerLayout(
+                image: eSvgAssets.code,
                 title: appFonts.selectCodeLanguage,
                 list: codingLanguages,
                 index: value,

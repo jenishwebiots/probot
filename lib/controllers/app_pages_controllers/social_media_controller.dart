@@ -81,9 +81,9 @@ class SocialMediaController extends GetxController {
   }
 
   onGoPage(value) {
-    if (value['title'] == appFonts.captionAbout) {
+    if (value["title"] == appFonts.captionAbout) {
       Get.toNamed(routeName.captionCreatorScreen);
-    } else if (value['title'] == appFonts.getMusicSuggestion) {
+    } else if (value["title"] == appFonts.getMusicSuggestion) {
       Get.toNamed(routeName.musicForPostScreen);
     } else {
       Get.toNamed(routeName.hashtagForPostScreen);
@@ -180,6 +180,7 @@ class SocialMediaController extends GetxController {
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
           return LanguagePickerLayout(
+            image: eSvgAssets.music,
             title: appFonts.selectMusicCategory,
             list: socialMediaCtrl.musicCategoryList,
             index: socialMediaCtrl.categoryValue,

@@ -54,6 +54,7 @@ class BabyNameSuggestionController extends GetxController {
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         return GetBuilder<BabyNameSuggestionController>(builder: (babyCtrl) {
           return LanguagePickerLayout(
+            image: eSvgAssets.zodiac,
             title: appFonts.selectLanguage,
             list: babyCtrl.zodiacLists,
             index: value,

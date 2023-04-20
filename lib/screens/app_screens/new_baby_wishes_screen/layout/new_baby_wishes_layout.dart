@@ -29,14 +29,16 @@ class NewBabyWishesLayout extends StatelessWidget {
               textCommon.outfitSemiBoldTxt14(text: appFonts.babyNameOnly),
               const VSpace(Sizes.s10),
               TextFieldCommon(
-                  controller: newCtrl.babyController,
-                  hintText: appFonts.enterValue),
+                hintText: appFonts.enterValue,
+                controller: newCtrl.babyController,
+              ),
               const VSpace(Sizes.s20),
               textCommon.outfitSemiBoldTxt14(text: appFonts.relationWithBaby),
               const VSpace(Sizes.s10),
               TextFieldCommon(
-                  controller: newCtrl.relationGenController,
-                  hintText: appFonts.enterValue),
+                hintText: appFonts.enterValue,
+                controller: newCtrl.relationGenController,
+              ),
               const VSpace(Sizes.s20),
               MusicCategoryLayout(
                   title: appFonts.messageGenerateIn,
