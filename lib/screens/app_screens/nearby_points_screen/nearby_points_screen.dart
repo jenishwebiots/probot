@@ -64,7 +64,7 @@ class NearbyPointsScreen extends StatelessWidget {
                             title: appFonts.someInterestingLocation,
                             isMax: false,
                             color: appCtrl.appTheme.white,
-                            controller: nearbyPointCtrl.nearbyController)
+                            responseText: "")
                       ]),
                       ButtonCommon(
                           title: appFonts.endTraveling,

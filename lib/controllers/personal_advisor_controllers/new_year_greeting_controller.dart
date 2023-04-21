@@ -6,6 +6,7 @@ import '../../config.dart';
 
 class NewYearGreetingController extends GetxController {
   bool isGreetingGenerate = false;
+  bool isLoader = false;
   final FixedExtentScrollController? languageScrollController =
       FixedExtentScrollController();
   TextEditingController yearController = TextEditingController();
@@ -16,15 +17,27 @@ class NewYearGreetingController extends GetxController {
   int value = 0;
   String? selectItem;
   String? onSelect;
+  String? response = '';
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
   onNewYearWishesGenerate() {
-    isGreetingGenerate = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Happy new year ${yearController.text} message for ${sendWishesController.text} in ${newYearWishGenController.text}");
+        "Happy new year ${yearController.text} message for ${nameController.text} from ${sendWishesController.text} in ${selectItem ?? "English"}").then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          isGreetingGenerate = true;
+          update();
+    });
+    yearController.clear();
+    sendWishesController.clear();
+    nameController.clear();
+    newYearWishGenController.clear();
+    selectItem = '';
     update();
   }
 
@@ -82,6 +95,11 @@ class NewYearGreetingController extends GetxController {
         title: appFonts.endNewYearGreeting,
         subTitle: appFonts.areYouSureEndGreeting,
         onTap: () {
+          yearController.clear();
+          sendWishesController.clear();
+          nameController.clear();
+          newYearWishGenController.clear();
+          selectItem = '';
           isGreetingGenerate = false;
           Get.back();
           update();

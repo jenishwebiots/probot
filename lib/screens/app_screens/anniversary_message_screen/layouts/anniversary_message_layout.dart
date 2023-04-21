@@ -13,7 +13,7 @@ class AnniversaryMessageLayout extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             MusicCategoryLayout(
                 title: appFonts.yearOfAnniversary,
-                category: anniCtrl.onSelect ?? "20",
+                category: anniCtrl.onSelect ?? "10",
                 onTap: () => anniCtrl.onAnniYearSheet()),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.typeOfAnniversary),

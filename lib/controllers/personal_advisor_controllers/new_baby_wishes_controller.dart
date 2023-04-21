@@ -20,12 +20,23 @@ class NewBabyWishesController extends GetxController {
   int langValue = 0;
   String? langSelectItem;
   String? langOnSelect;
+  String? response = '';
   bool isWishGenerate = false;
+  bool isLoader = false;
 
   onWishesGenerate() {
-    isWishGenerate = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "suggest new born baby ${genderLists[selectIndex]['title']} ${babyController.text} message from ${relationGenController.text} in ${wishGenController.text}");
+        "suggest new born baby ${genderLists[selectIndex]['title']} ${babyController.text} message from ${relationGenController.text} in $langOnSelect").then((value) {
+          response = value;
+          update();
+          isWishGenerate = true;
+          isLoader = false;
+          update();
+    });
+    babyController.clear();
+    relationGenController.clear();
+    langSelectItem = '';
     update();
   }
 
@@ -39,6 +50,9 @@ class NewBabyWishesController extends GetxController {
         title: appFonts.endBornBabyWish,
         subTitle: appFonts.areYouSureEndBabyName,
         onTap: () {
+          babyController.clear();
+          relationGenController.clear();
+          langSelectItem = '';
           isWishGenerate = false;
           Get.back();
           update();

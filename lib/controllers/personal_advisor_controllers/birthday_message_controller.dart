@@ -8,6 +8,8 @@ class BirthdayMessageController extends GetxController {
   TextEditingController nameGenController = TextEditingController();
 
   bool isBirthdayGenerated = false;
+  bool isLoader = false;
+  String? response = '';
 
   final FixedExtentScrollController? scrollController =
       FixedExtentScrollController();
@@ -19,9 +21,19 @@ class BirthdayMessageController extends GetxController {
       : Get.put(TranslateController());
 
   onTapWishesGenerate() {
-    isBirthdayGenerated = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Birthday wish message for ${birthdayWishGenController.text} with ${nameGenController.text} name in ${birthdayMessagesGenController.text}");
+        "Birthday wish message for ${birthdayWishGenController.text} with ${nameGenController.text} name in ${selectItem ?? "Hindi"}").then((value) {
+          response = value;
+          update();
+          isBirthdayGenerated = true;
+          isLoader = false;
+          update();
+    });
+    birthdayMessagesGenController.clear();
+    birthdayWishGenController.clear();
+    nameGenController.clear();
+    selectItem = "";
     update();
   }
 
@@ -30,6 +42,10 @@ class BirthdayMessageController extends GetxController {
         title: appFonts.endBirthdayMessage,
         subTitle: appFonts.areYouSureEndBirthday,
         onTap: () {
+          birthdayMessagesGenController.clear();
+          birthdayWishGenController.clear();
+          nameGenController.clear();
+          selectItem = "";
           isBirthdayGenerated = false;
           Get.back();
           update();

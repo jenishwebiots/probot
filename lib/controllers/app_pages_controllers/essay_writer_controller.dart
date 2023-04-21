@@ -1,3 +1,4 @@
+import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
 class EssayWriterController extends GetxController {
@@ -6,9 +7,20 @@ class EssayWriterController extends GetxController {
   List essayTypeLists = [];
   int selectedIndex = 0;
   bool isEssayGenerated = false;
+  bool isLoader = false;
+  String? response = "";
 
   onEssayGenerated() {
-    isEssayGenerated = true;
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Write a essay on ${essayController.text} in tone of ${selectedIndex == 0 ? "Informative" : selectedIndex == 1 ? "Persuade" : "Analyze"} ").then((value) {
+      response = value;
+      isEssayGenerated = true;
+      isLoader = false;
+      update();
+    });
+    essayController.clear();
+    selectedIndex = 0;
     update();
   }
 
@@ -24,6 +36,8 @@ class EssayWriterController extends GetxController {
               title: appFonts.endEssayWriting,
               subTitle: appFonts.areYouEndEssayWriting,
               endOnTap: () {
+                essayController.clear();
+                selectedIndex = 0;
                 isEssayGenerated = false;
                 Get.back();
                 update();

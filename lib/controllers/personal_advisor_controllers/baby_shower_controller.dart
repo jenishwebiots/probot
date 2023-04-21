@@ -9,17 +9,22 @@ class BabyShowerController extends GetxController {
   TextEditingController relationController = TextEditingController();
   TextEditingController messageGeneratedController = TextEditingController();
   bool isMessageGenerate = false;
+  bool isLoader = false;
+  String? response = '';
 
   onWishesGenerate() {
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
             "Write a baby shower message to ${coupleController.text} from ${relationController.text}")
-        .then((value) => {
-              log("RESPONSE++++++++++++++++++++$value"),
-              messageGeneratedController.text = value,
-              update(),
-              isMessageGenerate = true,
-              update(),
-            });
+        .then((value) {
+      response = value;
+      update();
+      isLoader = false;
+      isMessageGenerate = true;
+      update();
+    });
+    coupleController.clear();
+    relationController.clear();
     update();
   }
 
@@ -28,6 +33,8 @@ class BabyShowerController extends GetxController {
         title: appFonts.endBirthdayMessage,
         subTitle: appFonts.areYouSureEndBabyShower,
         onTap: () {
+          coupleController.clear();
+          relationController.clear();
           isMessageGenerate = false;
           Get.back();
           update();

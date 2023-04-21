@@ -76,6 +76,7 @@ class GeneratedMailLayout extends StatelessWidget {
                       horizontal: Insets.i15, vertical: Insets.i20)
                   .authBoxExtension()
             ]),
+            const VSpace(Sizes.s30),
             ButtonCommon(
                 title: appFonts.myFitnessMail,
                 onTap: () => emailGeneratorCtrl.onGenerateMail())

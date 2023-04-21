@@ -6,11 +6,21 @@ class GiftSuggestionController extends GetxController {
   TextEditingController occasionController = TextEditingController();
   TextEditingController generatedSuggestionController = TextEditingController();
   bool isGiftSuggestionGenerate = false;
+  bool isLoader = false;
+  String? response = '';
 
   onGiftSuggestionGenerate() {
-    isGiftSuggestionGenerate = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "I want to gift ${sendGiftController.text} so please suggest gift for ${occasionController.text} occasion");
+        "I want to gift ${sendGiftController.text} so please suggest gift for ${occasionController.text} occasion").then((value) {
+         response = value;
+         update();
+         isGiftSuggestionGenerate = true;
+         isLoader = false;
+         update();
+    });
+    sendGiftController.clear();
+    occasionController.clear();
     update();
   }
 
@@ -19,6 +29,8 @@ class GiftSuggestionController extends GetxController {
         title: appFonts.endGiftSuggestion,
         subTitle: appFonts.areYouSureEndGiftSuggestion,
         onTap: () {
+          sendGiftController.clear();
+          occasionController.clear();
           isGiftSuggestionGenerate = false;
           Get.back();
           update();

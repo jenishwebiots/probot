@@ -20,7 +20,7 @@ class DistanceGeneratedLayout extends StatelessWidget {
                     title: appFonts.distanceAttraction,
                     color: appCtrl.appTheme.white,
                     isMax: false,
-                    controller: distanceCtrl.controller)
+                    responseText: "")
               ]),
           const VSpace(Sizes.s20),
           ButtonCommon(

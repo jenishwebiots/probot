@@ -37,6 +37,9 @@ class SocialMediaController extends GetxController {
   int categoryValue = 0;
   String? categorySelectItem;
   String? categoryOnSelect;
+  String? hashtagResponse = '';
+  String? captionResponse = '';
+  String? musicResponse = '';
 
   SfRangeValues values = const SfRangeValues(30, 40);
 
@@ -57,16 +60,28 @@ class SocialMediaController extends GetxController {
   }
 
   onCaptionGenerate() {
-    isCaptionGenerated = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} plateform for ${captionController.text} photo");
+        "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController.text} photo").then((value) {
+         captionResponse = value;
+         update();
+         isCaptionGenerated = true;
+         isLoader = false;
+         update();
+    });
     update();
   }
 
   onMusicGenerate() {
-    isMusicGenerated = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Please give me music Suggestion ${categoryOnSelect ?? "Classic"} category and in ${onSelect ?? "Hindi"} for post");
+        "Please give me music Suggestion ${categorySelectItem ?? "Classic"} category and in ${selectItem ?? "Hindi"} for post").then((value) {
+          musicResponse = value;
+          update();
+          isMusicGenerated = true;
+          isLoader = false;
+          update();
+    });
     update();
   }
 
@@ -91,11 +106,16 @@ class SocialMediaController extends GetxController {
   }
 
   onHashtagGenerate() {
-    isHashtagGenerated = true;
+    const oneSec = Duration(seconds: 1);
+    Timer.periodic(oneSec, (Timer t) {
+      progressValue += 0.03;
+      update();
+    });
     isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Please give me Hashtag Suggestion for ${hashtagController.text} post");
-    Timer.periodic(const Duration(seconds: 5), (Timer t) {
+        "Please give me Hashtag Suggestion for ${hashtagController.text} post").then((value) {
+      hashtagResponse = value;
+      isHashtagGenerated = true;
       isLoader = false;
       progressValue = 0.0;
       update();
@@ -104,25 +124,15 @@ class SocialMediaController extends GetxController {
   }
 
   endCaptionGeneratorDialog() {
-    Get.generalDialog(
-        pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(
-              title: appFonts.endCaptionGenerator,
-              subTitle: appFonts.areYouSureEndCodeGenerator,
-              endOnTap: () {
-                isCaptionGenerated = false;
-                Get.back();
-                update();
-              });
-        },
-        transitionBuilder: (context, anim1, anim2, child) {
-          return SlideTransition(
-            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-                .animate(anim1),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300));
+    dialogLayout.endDialog(
+        title: appFonts.endCaptionGenerator,
+        subTitle: appFonts.areYouSureEndCodeGenerator,
+        onTap: () {
+          captionController.clear();
+          isCaptionGenerated = false;
+          Get.back();
+          update();
+        });
   }
 
   onSelectLanguageSheet() {
@@ -223,53 +233,32 @@ class SocialMediaController extends GetxController {
   }
 
   endMusicGeneratorDialog() {
-    Get.generalDialog(
-        pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(
-              title: appFonts.endMusicGeneration,
-              subTitle: appFonts.areYouSureEndMusic,
-              endOnTap: () {
-                isMusicGenerated = false;
-                Get.back();
-                update();
-              });
-        },
-        transitionBuilder: (context, anim1, anim2, child) {
-          return SlideTransition(
-            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-                .animate(anim1),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300));
+    dialogLayout.endDialog(
+        title: appFonts.endMusicGeneration,
+        subTitle: appFonts.areYouSureEndMusic,
+        onTap: () {
+          musicGeneratedController.clear();
+          isMusicGenerated = false;
+          Get.back();
+          update();
+        });
   }
 
   endHashtagGeneratorDialog() {
-    Get.generalDialog(
-        pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(
-              title: appFonts.endHashtagBuilder,
-              subTitle: appFonts.areYouSureEndCodeGenerator,
-              endOnTap: () {
-                isHashtagGenerated = false;
-                Get.back();
-                update();
-              });
-        },
-        transitionBuilder: (context, anim1, anim2, child) {
-          return SlideTransition(
-            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-                .animate(anim1),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300));
+    dialogLayout.endDialog(
+        title: appFonts.endHashtagBuilder,
+        subTitle: appFonts.areYouSureEndCodeGenerator,
+        onTap: () {
+          hashtagController.clear();
+          isHashtagGenerated = false;
+          Get.back();
+          update();
+        });
   }
 
   @override
   void onReady() {
     readJson();
-    updateProgress();
     captionCreatorLists = appArray.captionCreatorList;
     socialMediaLists = appArray.socialMediaList;
     captionToneLists = appArray.captionToneList;

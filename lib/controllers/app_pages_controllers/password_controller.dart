@@ -1,5 +1,6 @@
 
 
+import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
 class PasswordController extends GetxController {
@@ -11,6 +12,8 @@ class PasswordController extends GetxController {
   List passwordStrengthLists = [];
   int selectedIndex = 0;
   bool isPasswordGenerated = false;
+  bool isLoader = false;
+  String? response = '';
 
   onChangePasswordType (index) {
     selectedIndex = index;
@@ -18,7 +21,14 @@ class PasswordController extends GetxController {
   }
 
   onPasswordGenerate () {
-    isPasswordGenerated = true;
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Create password which length of ${value ?? "11"} and password type of ${selectedIndex == 0 ? "Only Character" : selectedIndex == 1 ? "Character and number" : "Character,number & symbol"} and password strength is ${strengthValue == 0 ? "Poor" : strengthValue == 1 ? "Average" : "Strong"} ").then((value) {
+      response = value;
+      isPasswordGenerated = true;
+      isLoader = false;
+      update();
+    });
     update();
   }
 
@@ -26,6 +36,9 @@ class PasswordController extends GetxController {
     Get.generalDialog(
         pageBuilder: (context, anim1, anim2) {
           return AdviserDialog(title: appFonts.endPasswordGenerator,subTitle: appFonts.areYouSureEndPasswordGenerator,endOnTap: () {
+            value = 11;
+            strengthValue = 0;
+            selectedIndex = 0;
             isPasswordGenerated = false;
             Get.back();
             update();

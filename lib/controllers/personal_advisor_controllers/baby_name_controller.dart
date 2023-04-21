@@ -16,6 +16,7 @@ class BabyNameSuggestionController extends GetxController {
   int? selectedIndex = 0;
   int? selectedNameIndex = 0;
   bool isNameGenerate = false;
+  bool isLoader = false;
   int value = 0;
   String? selectItem;
   String? onSelect;
@@ -32,14 +33,19 @@ class BabyNameSuggestionController extends GetxController {
   }
 
   onNameGenerate() {
+    isLoader = true;
     ApiServices.chatCompeletionResponse(selectedNameIndex == 0
             ? "Suggest a 10 ${genderLists[selectedIndex!]['title']} name with ${selectItem ?? "Capricorn"} Zodiac"
             : "Suggest a 10 ${genderLists[selectedIndex!]['title']} name start with ${latterController.text}")
-        .then((value) => {
-              response = value,
-              update(),
-              isNameGenerate = true,
+        .then((value)  {
+              response = value;
+              update();
+             isLoader = false;
+             isNameGenerate = true;
+             update();
             });
+    selectItem = '';
+    latterController.text = '';
     update();
   }
 
@@ -48,6 +54,8 @@ class BabyNameSuggestionController extends GetxController {
         title: appFonts.endNameSuggestion,
         subTitle: appFonts.areYouSureEndBabyName,
         onTap: () {
+          selectItem = '';
+          latterController.text = '';
           isNameGenerate = false;
           Get.back();
           update();

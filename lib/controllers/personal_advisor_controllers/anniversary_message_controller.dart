@@ -23,6 +23,7 @@ class AnniversaryMessageController extends GetxController {
   String? onSelect;
   String? langOnSelect;
   bool isMessageGenerate = false;
+  bool isLoader = false;
   String response = '';
 
   final langCtrl = Get.isRegistered<TranslateController>()
@@ -30,15 +31,22 @@ class AnniversaryMessageController extends GetxController {
       : Get.put(TranslateController());
 
   onMessageGenerate() {
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-            "I want to write ${typeOfAnniController.text} anniversary wish to ${messageSendController.text}  for ${onSelect ?? "10"} years of togetherness in ${relationController.text}")
-        .then((value) => {
-              log("RES:====================== $value"),
-              response = value,
-              update(),
-              isMessageGenerate = true,
-              update()
+            "I want to write ${typeOfAnniController.text} anniversary wish to ${messageSendController.text}  for ${selectItem ?? "10"} years of togetherness in ${relationController.text}")
+        .then((value)  {
+              response = value;
+              update();
+              isMessageGenerate = true;
+              isLoader = false;
+              update();
             });
+    wishGenController.clear();
+    relationController.clear();
+    typeOfAnniController.clear();
+    messageSendController.clear();
+    selectItem = "";
+    langSelectItem = '';
     update();
   }
 
@@ -47,6 +55,12 @@ class AnniversaryMessageController extends GetxController {
         title: appFonts.endAnniversaryMessage,
         subTitle: appFonts.areYouSureEndAnniversary,
         onTap: () {
+          wishGenController.clear();
+          relationController.clear();
+          typeOfAnniController.clear();
+          messageSendController.clear();
+          selectItem = "";
+          langSelectItem = '';
           isMessageGenerate = false;
           Get.back();
           update();

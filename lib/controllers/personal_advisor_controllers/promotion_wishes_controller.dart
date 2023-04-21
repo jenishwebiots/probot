@@ -7,11 +7,20 @@ class PromotionWishesController extends GetxController {
   TextEditingController relationController = TextEditingController();
   TextEditingController wishGeneratedController = TextEditingController();
   bool isWishesGenerate = false;
+  bool isLoader = false;
+  String? response = '';
 
   onWishesGenerate() {
-    isWishesGenerate = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Write a promotion wish message to ${nameController.text} from ${relationController.text}");
+        "Write a promotion wish message to ${nameController.text} from ${relationController.text}").then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          isWishesGenerate = true;
+    });
+    relationController.clear();
+    nameController.clear();
     update();
   }
 
@@ -20,6 +29,8 @@ class PromotionWishesController extends GetxController {
         title: appFonts.endPromotionWish,
         subTitle: appFonts.areYouSureEndPromotion,
         onTap: () {
+          relationController.clear();
+          nameController.clear();
           isWishesGenerate = false;
           Get.back();
           update();

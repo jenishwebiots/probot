@@ -17,15 +17,27 @@ class ValentineDayController extends GetxController {
 
   String? selectItem;
   String? onSelectItem;
+  String? response = '';
   int value = 0;
 
   bool isValentineGenerate = false;
+  bool isLoader = false;
 
   onValWishesGenerate() {
-    isValentineGenerate = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Write a Valentine's day wish message for ${wishForController.text} ${nameController.text} in ${valWishGenController.text}");
-    update();
+        "Write a Valentine's day wish message for ${wishForController.text} from ${nameController.text} in ${selectItem ?? "English"}").then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          isValentineGenerate = true;
+          update();
+    });
+    valWishGenController.clear();
+    nameController.clear();
+    wishForController.clear();
+    selectItem = "";
+        update();
   }
 
   endValentine() {
@@ -33,6 +45,10 @@ class ValentineDayController extends GetxController {
         title: appFonts.endValentineMessage,
         subTitle: appFonts.areYouSureEndValentine,
         onTap: () {
+          valWishGenController.clear();
+          nameController.clear();
+          wishForController.clear();
+          selectItem = "";
           isValentineGenerate = false;
           Get.back();
           update();

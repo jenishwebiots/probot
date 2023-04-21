@@ -19,16 +19,29 @@ class WeddingWishesController extends GetxController {
   String? langSelectItem;
   String? onSelect;
   String? langOnSelect;
+  String response = "";
   bool isWeddingWishGenerate = false;
+  bool isLoader = false;
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
   onMessageGenerate() {
-    isWeddingWishGenerate = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "I want to wish ${relationController.text} for wedding to ${relationController.text} in ${wishGenController.text}");
+        "I want to wish ${nameController.text} for wedding to ${relationController.text} in ${selectItem ?? "English"}").then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          isWeddingWishGenerate = true;
+          update();
+    });
+    wishGenController.clear();
+    relationController.clear();
+    nameController.clear();
+    selectItem = '';
+    langSelectItem = '';
     update();
   }
 
@@ -37,6 +50,11 @@ class WeddingWishesController extends GetxController {
         title: appFonts.endWeddingWishes,
         subTitle: appFonts.areYouSureEndWedding,
         onTap: () {
+          wishGenController.clear();
+          relationController.clear();
+          nameController.clear();
+          selectItem = '';
+          langSelectItem = '';
           isWeddingWishGenerate = false;
           Get.back();
           update();

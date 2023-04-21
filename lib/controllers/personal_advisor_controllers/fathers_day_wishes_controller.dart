@@ -7,11 +7,21 @@ class FathersDayWishesController extends GetxController {
   TextEditingController relationController = TextEditingController();
   TextEditingController wishGeneratedController = TextEditingController();
   bool isWishesGenerate = false;
+  bool isLoader = false;
+  String? response = '';
 
   onWishesGenerate() {
-    isWishesGenerate = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Write a Father's day wish message to ${fatherController.text} from ${relationController.text}");
+        "Write a Father's day wish message to ${fatherController.text} from ${relationController.text}").then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          isWishesGenerate = true;
+          update();
+    });
+    fatherController.clear();
+    relationController.clear();
     update();
   }
 
@@ -20,6 +30,8 @@ class FathersDayWishesController extends GetxController {
         title: appFonts.endFathersDay,
         subTitle: appFonts.areYouSureEndFathersDay,
         onTap: () {
+          fatherController.clear();
+          relationController.clear();
           isWishesGenerate = false;
           Get.back();
           update();

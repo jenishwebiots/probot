@@ -10,10 +10,13 @@ class MusicForPostScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: AppAppBarCommon(
               title: appFonts.musicForPost, leadingOnTap: () => Get.back()),
-          body: socialMediaCtrl.isMusicGenerated == true
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                child: socialMediaCtrl.isMusicGenerated == true
+                    ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -26,16 +29,16 @@ class MusicForPostScreen extends StatelessWidget {
                                 title: appFonts.musicSuggestion,
                                 isMax: false,
                                 color: appCtrl.appTheme.white,
-                                controller:
-                                    socialMediaCtrl.musicGeneratedController)
+                                responseText: socialMediaCtrl.musicResponse)
                           ]),
+                      const VSpace(Sizes.s30),
                       ButtonCommon(
                           title: appFonts.endMusicGeneration,
                           onTap: () =>
                               socialMediaCtrl.endMusicGeneratorDialog())
                     ]).paddingSymmetric(
-                  vertical: Insets.i30, horizontal: Insets.i20)
-              : Column(children: [
+                    vertical: Insets.i30, horizontal: Insets.i20)
+                    : Column(children: [
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -44,8 +47,8 @@ class MusicForPostScreen extends StatelessWidget {
                                 .textColor(appCtrl.appTheme.primary)),
                         const VSpace(Sizes.s15),
                         Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                               MusicCategoryLayout(
                                   title: appFonts.selectMusicCategory,
                                   category: socialMediaCtrl.categoryOnSelect ??
@@ -60,7 +63,7 @@ class MusicForPostScreen extends StatelessWidget {
                                       socialMediaCtrl.onSelectLanguageSheet())
                             ])
                             .paddingSymmetric(
-                                vertical: Insets.i20, horizontal: Insets.i15)
+                            vertical: Insets.i20, horizontal: Insets.i15)
                             .authBoxExtension()
                       ]),
                   const VSpace(Sizes.s30),
@@ -68,7 +71,11 @@ class MusicForPostScreen extends StatelessWidget {
                       title: appFonts.generateSuitableMusic,
                       onTap: () => socialMediaCtrl.onMusicGenerate())
                 ]).paddingSymmetric(
-                  vertical: Insets.i30, horizontal: Insets.i20));
+                    vertical: Insets.i30, horizontal: Insets.i20),
+              ),
+              if(socialMediaCtrl.isLoader == true) const LoaderLayout()
+            ]
+          ));
     });
   }
 }

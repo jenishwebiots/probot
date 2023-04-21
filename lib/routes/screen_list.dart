@@ -114,4 +114,6 @@ export '../screens/app_screens/promotion_wishes_screen/layouts/promotion_wishes_
 export '../screens/app_screens/baby_shower_screen/layouts/baby_shower_layout.dart';
 export '../screens/app_screens/farewell_message_screen/layouts/farewell_message_layout.dart';
 export '../screens/app_screens/wedding_wishes_screen/layouts/wedding_wishes_layout.dart';
+export '../screens/bottom_screens/image_generator/layout/loader_layout.dart';
+export '../screens/app_screens/password_generator_screen/layouts/password_layout.dart';
 

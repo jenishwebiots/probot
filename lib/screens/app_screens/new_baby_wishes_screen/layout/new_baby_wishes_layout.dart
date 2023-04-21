@@ -11,6 +11,7 @@ class NewBabyWishesLayout extends StatelessWidget {
           Column(children: [
             textCommon.outfitSemiBoldPrimary16(
                 text: appFonts.wonderFullGreetings),
+            const VSpace(Sizes.s15),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               textCommon.outfitSemiBoldTxt14(text: appFonts.selectGender),
               const VSpace(Sizes.s10),

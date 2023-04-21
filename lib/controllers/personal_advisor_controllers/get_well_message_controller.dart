@@ -9,11 +9,23 @@ class GetWellMessageController extends GetxController {
   TextEditingController whatHappenController = TextEditingController();
 
   bool isWellMessageGenerated = false;
+  bool isLoader = false;
+  String? response = '';
 
   onWellMessageGenerate() {
-    isWellMessageGenerated = true;
+    isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "get well soon message for ${whatHappenController.text} to ${relationGenController.text}");
+        "get well soon message to ${relationGenController.text} ${wellWishesGenController.text} for ${whatHappenController.text}").then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          isWellMessageGenerated = true;
+          update();
+    });
+    wellGenController.clear();
+    wellWishesGenController.clear();
+    relationGenController.clear();
+    whatHappenController.clear();
     update();
   }
 
@@ -22,7 +34,11 @@ class GetWellMessageController extends GetxController {
         title: appFonts.endWellWishes,
         subTitle: appFonts.areYouSureEndWell,
         onTap: () {
-          isWellMessageGenerated = false;
+          wellGenController.clear();
+          wellWishesGenController.clear();
+          relationGenController.clear();
+          whatHappenController.clear();
+              isWellMessageGenerated = false;
           Get.back();
           update();
         });

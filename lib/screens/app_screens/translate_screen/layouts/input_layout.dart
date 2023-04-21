@@ -34,7 +34,7 @@ class InputLayout extends StatelessWidget {
         if (isMax == true) SvgIconsCommon(icon: eSvgAssets.microphone),
         if (isMax != true)
           Row(children: [
-            SvgIconsCommon(icon: eSvgAssets.volume),
+            SvgIconsCommon(icon: eSvgAssets.volume,),
             SvgIconsCommon(icon: eSvgAssets.share)
                 .paddingSymmetric(horizontal: Insets.i10),
             SvgIconsCommon(icon: eSvgAssets.copy)
@@ -44,19 +44,19 @@ class InputLayout extends StatelessWidget {
       Stack(alignment: Alignment.bottomRight, children: [
         SizedBox(
           width: double.infinity,
-          child: AnimatedTextKit(isRepeatingAnimation: false, animatedTexts: [
+          child: isMax == false ?  AnimatedTextKit(isRepeatingAnimation: false, animatedTexts: [
             TyperAnimatedText(responseText!,
                 textStyle:
-                    AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt),
-                speed: const Duration(milliseconds: 100))
+                    AppCss.outfitMedium14.textColor(appCtrl.appTheme.txt).textHeight(1.3),
+                speed: const Duration(milliseconds: 50))
           ]).paddingAll(Insets
-              .i15), /*TextFieldCommon(
+              .i15) : TextFieldCommon(
                     controller: controller!,
                     hintText: hintText ?? appFonts.writeAnything,
                     minLines: 8,
                     maxLines: maxLine ?? 100,
                     fillColor: color ?? appCtrl.appTheme.textField,
-                    keyboardType: TextInputType.multiline)*/
+                    keyboardType: TextInputType.multiline)
         ).authBoxExtension(),
         if (isMax == true)
           Column(crossAxisAlignment: CrossAxisAlignment.end, children: [

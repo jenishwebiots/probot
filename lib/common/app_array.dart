@@ -398,7 +398,7 @@ class AppArray {
 
   ];
 
-  static final List<String> translateLanguages = [
+  var  translateLanguages = [
     'Abkhaz',
     'Afar',
     'Afrikaans',
