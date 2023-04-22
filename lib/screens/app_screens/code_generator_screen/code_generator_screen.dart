@@ -24,7 +24,7 @@ class CodeGeneratorScreen extends StatelessWidget {
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(appFonts.weCreatedIncredible,
+                            Text(appFonts.weCreatedIncredible.tr,
                                 style: AppCss.outfitSemiBold16
                                     .textColor(appCtrl.appTheme.primary)),
                             const VSpace(Sizes.s23),
@@ -42,8 +42,10 @@ class CodeGeneratorScreen extends StatelessWidget {
                     ]).paddingSymmetric(
                     horizontal: Insets.i20, vertical: Insets.i30)
                     : SingleChildScrollView(
-                    child: Column(children: [
-                      Text(appFonts.typeAnythingTo,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Text(appFonts.typeAnythingTo.tr,
                           style: AppCss.outfitSemiBold16
                               .textColor(appCtrl.appTheme.primary)),
                       const VSpace(Sizes.s15),

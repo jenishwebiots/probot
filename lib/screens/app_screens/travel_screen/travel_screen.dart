@@ -11,7 +11,7 @@ class TravelScreen extends StatelessWidget {
       return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
           resizeToAvoidBottomInset: false,
-          appBar: AppAppBarCommon(title: appFonts.travelHangout),
+          appBar: AppAppBarCommon(title: appFonts.travelHangout,leadingOnTap:()=> Get.back()),
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             textCommon.outfitSemiBoldPrimary16(text: appFonts.exploreNearby),
             const VSpace(Sizes.s15),

@@ -57,6 +57,7 @@ export '../widgets/common_stream.dart';
 export '../widgets/scaffold_messenger.dart';
 export '../widgets/adviser_dialog_common.dart';
 export '../widgets/select_gender_layout.dart';
+export '../widgets/api_notes_layout.dart';
 
 
 final appCtrl = Get.isRegistered<AppController>()

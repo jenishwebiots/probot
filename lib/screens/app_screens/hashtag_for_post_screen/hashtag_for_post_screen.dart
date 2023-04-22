@@ -13,8 +13,10 @@ class HashtagForPostScreen extends StatelessWidget {
           body: Stack(children: [
             SingleChildScrollView(
               child: Column(children: [
-                Column(children: [
-                  Text(appFonts.fillBelowToRight,
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  Text(appFonts.fillBelowToRight.tr,
                       style: AppCss.outfitBold16
                           .textColor(appCtrl.appTheme.primary)),
                   const VSpace(Sizes.s15),

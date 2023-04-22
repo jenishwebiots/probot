@@ -7,7 +7,6 @@ import 'package:probot/config.dart';
     final myData = await ApiServices().razorPayApi();
     log("myDataCreate: $myData");
     if (myData["status"] == "success") {
-      log(myData);
       return myData["body"]["id"];
     } else {
       return "err";

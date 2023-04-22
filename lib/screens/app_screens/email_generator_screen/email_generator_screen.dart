@@ -23,7 +23,7 @@ class EmailGeneratorScreen extends StatelessWidget {
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(appFonts.weCreatedLetter,
+                            Text(appFonts.weCreatedLetter.tr,
                                 style: AppCss.outfitSemiBold16
                                     .textColor(appCtrl.appTheme.primary)),
                             const VSpace(Sizes.s15),

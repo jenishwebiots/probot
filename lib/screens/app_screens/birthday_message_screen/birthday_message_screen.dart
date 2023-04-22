@@ -37,7 +37,9 @@ class BirthdayMessageScreen extends StatelessWidget {
               : Stack(
                 children: [
                   Column(children: [
-                      Column(children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                         textCommon.outfitSemiBoldPrimary16(
                             text: appFonts.aSpecialDay),
                         const VSpace(Sizes.s15),

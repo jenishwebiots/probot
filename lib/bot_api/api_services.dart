@@ -16,7 +16,7 @@ class ApiServices {
       headers: {
         'Content-Type': 'application/json',
         'Authorization':
-            'Bearer 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',
+            'Bearer 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',
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",

@@ -1,3 +1,4 @@
+import 'package:probot/screens/app_screens/add_api_key_screen/add_api_key_screen.dart';
 import 'package:probot/screens/app_screens/code_generator_screen/code_generator_screen.dart';
 import 'package:probot/screens/app_screens/music_for_post_screen/music_for_post_screen.dart';
 import 'package:probot/screens/app_screens/personal_advisor_screen/personal_advisor_screen.dart';
@@ -20,6 +21,7 @@ import '../screens/app_screens/fathers_day_wishes_screen/fathers_day_wishes_scre
 import '../screens/app_screens/get_well_message_screen/get_well_message_screen.dart';
 import '../screens/app_screens/gift_suggestion_screen/gift_suggestion_screen.dart';
 import '../screens/app_screens/hashtag_for_post_screen/hashtag_for_post_screen.dart';
+import '../screens/app_screens/manage_api_key_screen/manage_api_key_screen.dart';
 import '../screens/app_screens/mothers_day_wishes_screen/mothers_day_wishes_screen.dart';
 import '../screens/app_screens/nearby_points_screen/nearby_points_screen.dart';
 import '../screens/app_screens/new_baby_wishes_screen/new_baby_wishes_screen.dart';
@@ -135,6 +137,7 @@ class AppRoute {
     GetPage(name: _routeName.babyShowerScreen, page: () => BabyShowerScreen()),
     GetPage(name: _routeName.farewellMessageScreen, page: () => FarewellMessageScreen()),
     GetPage(name: _routeName.weddingWishesScreen, page: () => WeddingWishesScreen()),
-
+    GetPage(name: _routeName.manageApiKeyScreen, page: () => ManageApiKeyScreen()),
+    GetPage(name: _routeName.addApiKeyScreen, page: () => AddApiKeyScreen()),
   ];
 }

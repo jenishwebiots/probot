@@ -217,6 +217,7 @@ class AppArray {
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
+    {"icon": eSvgAssets.apiKey, "title": "manageApiKey"},
     {"icon": eSvgAssets.translate, "title": "language"},
     {"icon": eSvgAssets.star, "title": "rateApp"},
     {"icon": eSvgAssets.security, "title": "privacyTerm"},

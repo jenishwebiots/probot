@@ -21,7 +21,7 @@ class CaptionCreatorScreen extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(appFonts.fantasticSuggestion,
+                                    Text(appFonts.fantasticSuggestion.tr,
                                         style: AppCss.outfitBold16.textColor(
                                             appCtrl.appTheme.primary)),
                                     const VSpace(Sizes.s15),
@@ -42,7 +42,7 @@ class CaptionCreatorScreen extends StatelessWidget {
                           vertical: Insets.i30, horizontal: Insets.i20)
                       : const WithoutCaptionLayout()),
               if (socialMediaCtrl.isLoader == true) const LoaderLayout()
-            ],
+            ]
           ));
     });
   }

@@ -35,7 +35,7 @@ class PasswordLayout extends StatelessWidget {
               children: passwordCtrl.passwordStrengthLists
                   .asMap()
                   .entries
-                  .map((e) => Text(e.value,
+                  .map((e) => Text(e.value.toString().tr,
                   style: AppCss.outfitMedium14.textColor(
                       passwordCtrl.strengthValue >= e.key
                           ? appCtrl.appTheme.primary

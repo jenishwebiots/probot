@@ -28,9 +28,12 @@ class InputLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(title!.toString().tr,
-            style: AppCss.outfitSemiBold14
-                .textColor(txtColor ?? appCtrl.appTheme.txt)),
+        SizedBox(
+          width: isMax == true ? Sizes.s250 : Sizes.s180,
+          child: Text(title!.toString().tr,overflow: TextOverflow.ellipsis,
+              style: AppCss.outfitSemiBold14
+                  .textColor(txtColor ?? appCtrl.appTheme.txt))
+        ),
         if (isMax == true) SvgIconsCommon(icon: eSvgAssets.microphone),
         if (isMax != true)
           Row(children: [

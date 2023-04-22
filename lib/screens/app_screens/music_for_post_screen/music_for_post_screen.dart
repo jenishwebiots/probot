@@ -20,7 +20,7 @@ class MusicForPostScreen extends StatelessWidget {
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(appFonts.highestQuality,
+                            Text(appFonts.highestQuality.tr,
                                 style: AppCss.outfitBold16
                                     .textColor(appCtrl.appTheme.primary)),
                             const VSpace(Sizes.s15),
@@ -42,7 +42,7 @@ class MusicForPostScreen extends StatelessWidget {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(appFonts.acquireTheRight,
+                        Text(appFonts.acquireTheRight.tr,
                             style: AppCss.outfitBold16
                                 .textColor(appCtrl.appTheme.primary)),
                         const VSpace(Sizes.s15),

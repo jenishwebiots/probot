@@ -13,7 +13,7 @@ class GetWellMessageLayout extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             RichText(
                 text: TextSpan(
-                    text: appFonts.wellWishes,
+                    text: appFonts.wellWishes.tr,
                     style:
                         AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt),
                     children: [

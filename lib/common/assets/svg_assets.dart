@@ -132,5 +132,7 @@ class SvgAssets {
   final String location = "assets/svg/location.svg";
   final String code = "assets/svg/code.svg";
   final String calender = "assets/svg/calender.svg";
+  final String apiKey = "assets/svg/apiKey.svg";
+  final String apiArrow = "assets/svg/apiArrow.svg";
 
 }

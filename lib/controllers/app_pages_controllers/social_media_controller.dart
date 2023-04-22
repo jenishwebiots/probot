@@ -62,7 +62,7 @@ class SocialMediaController extends GetxController {
   onCaptionGenerate() {
     isLoader = true;
     ApiServices.chatCompeletionResponse(
-        "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController.text} photo").then((value) {
+        "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController.text} photo for ${values.start} to ${values.end} age targeted audience").then((value) {
          captionResponse = value;
          update();
          isCaptionGenerated = true;

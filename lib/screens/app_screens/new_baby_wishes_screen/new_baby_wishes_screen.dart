@@ -10,7 +10,6 @@ class NewBabyWishesScreen extends StatelessWidget {
     return GetBuilder<NewBabyWishesController>(builder: (_) {
       return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
-          resizeToAvoidBottomInset: false,
           appBar: AppAppBarCommon(
               title: appFonts.newBabyWishes, leadingOnTap: () => Get.back()),
           body: Stack(

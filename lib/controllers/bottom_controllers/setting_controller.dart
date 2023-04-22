@@ -89,6 +89,8 @@ class SettingController extends GetxController {
       appCtrl.update();
       Get.forceAppUpdate();
       Get.offAllNamed(routeName.signInScreen);
+    } else if (data['title'] == "manageApiKey") {
+      Get.toNamed(routeName.addApiKeyScreen);
     }
     appCtrl.update();
   }

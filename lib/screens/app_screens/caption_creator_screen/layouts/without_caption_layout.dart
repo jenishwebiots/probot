@@ -7,15 +7,17 @@ class WithoutCaptionLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
       return SingleChildScrollView(
-          child: Column(children: [
-        Text(appFonts.fillUpTheForm,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+        Text(appFonts.fillUpTheForm.tr,
             style: AppCss.outfitBold16.textColor(appCtrl.appTheme.primary)),
         const VSpace(Sizes.s15),
         SizedBox(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-              Text(appFonts.selectPlatform,
+              Text(appFonts.selectPlatform.tr,
                   style:
                       AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt)),
               const VSpace(Sizes.s10),
@@ -38,13 +40,13 @@ class WithoutCaptionLayout extends StatelessWidget {
                   controller: socialMediaCtrl.captionController,
                   onTap: () => socialMediaCtrl.captionController.clear()),
               const VSpace(Sizes.s20),
-              Text(appFonts.targetedAudience,
+              Text(appFonts.targetedAudience.tr,
                   style:
                       AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt)),
               const VSpace(Sizes.s10),
               const TargetAudienceSliderLayout(),
               const VSpace(Sizes.s20),
-              Text(appFonts.captionTone,
+              Text(appFonts.captionTone.tr,
                   style:
                       AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt)),
               const VSpace(Sizes.s10),
