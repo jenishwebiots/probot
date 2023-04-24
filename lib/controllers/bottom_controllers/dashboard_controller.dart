@@ -23,7 +23,7 @@ class DashboardController extends GetxController
     Home(),
     const Text("CHAT"),
     ImageGenerator(),
-    ContentWriter(),
+    ContentWriterScreen(),
     Setting(),
   ];
 

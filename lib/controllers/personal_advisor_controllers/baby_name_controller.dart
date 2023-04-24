@@ -37,15 +37,17 @@ class BabyNameSuggestionController extends GetxController {
     ApiServices.chatCompeletionResponse(selectedNameIndex == 0
             ? "Suggest a 10 ${genderLists[selectedIndex!]['title']} name with ${selectItem ?? "Capricorn"} Zodiac"
             : "Suggest a 10 ${genderLists[selectedIndex!]['title']} name start with ${latterController.text}")
-        .then((value)  {
-              response = value;
-              update();
-             isLoader = false;
-             isNameGenerate = true;
-             update();
-            });
-    selectItem = '';
-    latterController.text = '';
+        .then((value) {
+      response = value;
+      update();
+      isLoader = false;
+      selectedIndex = 0;
+      selectedNameIndex = 0;
+      selectItem = '';
+      latterController.text = '';
+      isNameGenerate = true;
+      update();
+    });
     update();
   }
 

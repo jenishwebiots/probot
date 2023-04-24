@@ -44,7 +44,7 @@ class InputLayout extends StatelessWidget {
           ])
       ]),
       const VSpace(Sizes.s10),
-      Stack(alignment: Alignment.bottomRight, children: [
+      Stack(alignment:appCtrl.isRTL ?  Alignment.bottomLeft : Alignment.bottomRight, children: [
         SizedBox(
           width: double.infinity,
           child: isMax == false ?  AnimatedTextKit(isRepeatingAnimation: false, animatedTexts: [

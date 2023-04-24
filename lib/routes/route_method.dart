@@ -143,5 +143,6 @@ class AppRoute {
     GetPage(name: _routeName.weddingWishesScreen, page: () => WeddingWishesScreen()),
     GetPage(name: _routeName.manageApiKeyScreen, page: () => ManageApiKeyScreen()),
     GetPage(name: _routeName.addApiKeyScreen, page: () => AddApiKeyScreen()),
+    GetPage(name: _routeName.contentWriterScreen, page: () => ContentWriterScreen()),
   ];
 }
