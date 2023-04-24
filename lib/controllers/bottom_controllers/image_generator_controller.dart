@@ -29,7 +29,7 @@ class ImageGeneratorController extends GetxController {
   final TextEditingController imageTextController = TextEditingController();
 
   Future getGPTImage(
-      {required String imageText, String? size = "256x256"}) async {
+      {String? imageText, String? size = "256x256"}) async {
     log("imageText: $imageText");
     try {
       int imageCount = int.parse(appCtrl.envConfig["imageCount"].toString());

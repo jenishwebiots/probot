@@ -27,9 +27,9 @@ class PageViewCommon extends StatelessWidget {
               : const Text("").paddingOnly(
               top: Insets.i50, bottom: Insets.i10, right: Insets.i12),
           SizedBox(
-              height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
-              width:MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.58,
-              child: Image.asset(data["image"], fit: BoxFit.fill)).paddingOnly(top: Insets.i45)
+              height: MediaQuery.of(context).size.height < 534 ? MediaQuery.of(context).size.height * 0.3 : MediaQuery.of(context).size.height * 0.5,
+              width: double.infinity,
+              child: Image.asset(data["image"], fit: BoxFit.fill))
         ]),
 
         Row(

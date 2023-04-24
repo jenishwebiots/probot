@@ -29,8 +29,8 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
         ],
         title: Row(children: [
           const HSpace(Sizes.s10),
-          SvgPicture.asset(eSvgAssets.leftArrow,
-              fit: BoxFit.scaleDown,
+          SvgPicture.asset(appCtrl.isRTL || appCtrl.languageVal == "ar" ? eSvgAssets.rightArrow1 : eSvgAssets.leftArrow,
+              height: 15,
               colorFilter: ColorFilter.mode(
                   appCtrl.isTheme
                       ? appCtrl.appTheme.sameWhite

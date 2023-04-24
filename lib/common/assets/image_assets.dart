@@ -39,6 +39,8 @@ class ImageAssets {
   final String quickAdvisorContainer = "assets/images/quickAdvisorContainer.png";
   final String noInternet = "assets/images/noInternet.png";
   final String wires = "assets/images/wires.png";
+  final String slider = "assets/images/slider.png";
+  final String languageContainer = "assets/images/languageContainer.png";
 
   // Icons
   final String google = "assets/images/icons/Google.png";
@@ -53,6 +55,10 @@ class ImageAssets {
   final String paypal = "assets/images/icons/paypal.png";
   final String razor = "assets/images/icons/razor.png";
   final String inApp = "assets/images/icons/inApp.png";
+  final String funny = "assets/images/icons/funny.png";
+  final String informative = "assets/images/icons/informative.png";
+  final String sad = "assets/images/icons/sad.png";
+  final String serious = "assets/images/icons/serious.png";
 
   // chat
   final String chat1 = "assets/images/chat/chat1.png";
