@@ -598,6 +598,18 @@ class AppFonts {
   String removeApiKey = "Remove API key";
   String apiKeyRemoved = "API Key Removed";
   String yourApiKey = "Your API key was successfully removed, you can add it again from setting > manage API.";
+  String code = "Code";
+  String questionSuggestion = "Question suggestion";
+  String translation = "Translation";
+  String preBuildQuestions = "• Pre build Questions  :";
+  String developmentArchitecture = "Development architecture and code for a  <website description> website with JavaScript.";
+  String helpMeFindMistakes = "Help me find mistakes in the following code<paste code below>";
+  String writingThisCode = "Writing this code for C# <post code below>";
+  String findTheBugWithThis = "Find the bug with this code <Post code below>";
+  String iNeedToCreateARest = "I need to create a REST API endpoint for my web application.";
+  String voice = "Voice";
+  String content = "Content";
+
 
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});

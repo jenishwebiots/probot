@@ -59,5 +59,6 @@ class RouteName {
   final String weddingWishesScreen = "/weddingWishesScreen";
   final String manageApiKeyScreen = "/manageApiKeyScreen";
   final String addApiKeyScreen = "/addApiKeyScreen";
+  final String contentWriterScreen = "/contentWriterScreen";
 
 }

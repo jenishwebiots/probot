@@ -11,6 +11,7 @@ class SliderLayout extends StatelessWidget {
       builder: (emailGeneratorCtrl) {
         return SfSliderTheme(
             data: SfSliderThemeData(
+
                 overlayRadius: 0,
                 inactiveTrackHeight: 3,
                 activeTrackHeight: 3),

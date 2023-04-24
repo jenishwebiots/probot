@@ -43,6 +43,7 @@ class ImageAssets {
 
   final String noInternet = "assets/images/noInternet.png";
   final String wires = "assets/images/wires.png";
+  final String voice = "assets/images/voice.png";
 
 
   // Icons

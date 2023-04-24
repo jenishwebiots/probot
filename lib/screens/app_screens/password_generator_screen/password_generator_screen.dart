@@ -8,38 +8,40 @@ class PasswordGeneratorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PasswordController>(builder: (_) {
-      return Scaffold(
-          appBar: AppAppBarCommon(
-              title: appFonts.passwordGenerator,
-              leadingOnTap: () => Get.back()),
-          body: Stack(children: [
-            SingleChildScrollView(
-                child: Column(children: [
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                textCommon.outfitSemiBoldPrimary16(text: appFonts.getTheStrong),
-                const VSpace(Sizes.s15),
-                const PasswordLayout(),
-                const VSpace(Sizes.s30),
-                if (passwordCtrl.isPasswordGenerated != true)
-                  ButtonCommon(
-                      title: appFonts.buildSomeMagic,
-                      onTap: () => passwordCtrl.onPasswordGenerate()),
-                if (passwordCtrl.isPasswordGenerated == true)
-                  Column(children: [
-                    InputLayout(
-                        color: appCtrl.appTheme.white,
-                        title: appFonts.generatedPassword,
-                        isMax: false,
-                        responseText: passwordCtrl.response),
-                    const VSpace(Sizes.s20),
+      return DirectionalityRtl(
+        child: Scaffold(
+            appBar: AppAppBarCommon(
+                title: appFonts.passwordGenerator,
+                leadingOnTap: () => Get.back()),
+            body: Stack(children: [
+              SingleChildScrollView(
+                  child: Column(children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  textCommon.outfitSemiBoldPrimary16(text: appFonts.getTheStrong),
+                  const VSpace(Sizes.s15),
+                  const PasswordLayout(),
+                  const VSpace(Sizes.s30),
+                  if (passwordCtrl.isPasswordGenerated != true)
                     ButtonCommon(
-                        title: appFonts.endPasswordGenerator,
-                        onTap: () => passwordCtrl.endPasswordGeneratorDialog())
-                  ])
-              ])
-            ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20)),
-            if (passwordCtrl.isLoader == true) const LoaderLayout()
-          ]));
+                        title: appFonts.buildSomeMagic,
+                        onTap: () => passwordCtrl.onPasswordGenerate()),
+                  if (passwordCtrl.isPasswordGenerated == true)
+                    Column(children: [
+                      InputLayout(
+                          color: appCtrl.appTheme.white,
+                          title: appFonts.generatedPassword,
+                          isMax: false,
+                          responseText: passwordCtrl.response),
+                      const VSpace(Sizes.s20),
+                      ButtonCommon(
+                          title: appFonts.endPasswordGenerator,
+                          onTap: () => passwordCtrl.endPasswordGeneratorDialog())
+                    ])
+                ])
+              ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20)),
+              if (passwordCtrl.isLoader == true) const LoaderLayout()
+            ])),
+      );
     });
   }
 }
