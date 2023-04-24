@@ -27,6 +27,8 @@ class RouteName {
   final String inAppList = "/inAppList";
   final String quickAdvisor = "/quickAdvisor";
   final String translateScreen = "/translateScreen";
+  final String commonWebView = "/commonWebView";
+  final String noInternet = "/noInternet";
 
   final String codeGeneratorScreen = "/codeGeneratorScreen";
   final String emailWriterScreen = "/emailWriterScreen";
@@ -47,8 +49,6 @@ class RouteName {
   final String anniversaryMessageScreen = "/anniversaryMessageScreen";
   final String newBabyWishesScreen = "/newBabyWishesScreen";
   final String getWellMessageScreen = "/getWellMessageScreen";
-  final String commonWebView = "/commonWebView";
-  final String noInternet = "/noInternet";
   final String valentineScreen = "/valentineScreen";
   final String newYearGreetingScreen = "/newYearGreetingScreen";
   final String mothersDayWishesScreen = "/mothersDayWishesScreen";
@@ -59,5 +59,4 @@ class RouteName {
   final String weddingWishesScreen = "/weddingWishesScreen";
   final String manageApiKeyScreen = "/manageApiKeyScreen";
   final String addApiKeyScreen = "/addApiKeyScreen";
-
 }

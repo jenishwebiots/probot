@@ -372,7 +372,6 @@ class AppArray {
       "subtitle": appFonts.march23,
     },
   ];
-
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,
@@ -396,7 +395,6 @@ class AppArray {
     {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
     {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
     {"icon": eSvgAssets.essay, "title": appFonts.essayWriter}
-
   ];
 
   var  translateLanguages = [
