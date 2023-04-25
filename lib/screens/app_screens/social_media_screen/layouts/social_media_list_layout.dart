@@ -16,7 +16,7 @@ class SocialMediaListLayout extends StatelessWidget {
           SizedBox(
             height: Sizes.s52,
             width: Sizes.s52,
-            child: SvgPicture.asset(data["image"]).paddingAll(Insets.i15).decorated(
+            child: SvgPicture.asset(data["image"],colorFilter: ColorFilter.mode(appCtrl.appTheme.sameWhite, BlendMode.srcIn)).paddingAll(Insets.i15).decorated(
                 color: appCtrl.appTheme.primary,
                 borderRadius:
                     const BorderRadius.all(Radius.circular(AppRadius.r8))),
