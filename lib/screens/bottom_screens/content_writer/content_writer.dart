@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:probot/config.dart';
 
 
-class ContentWriter extends StatelessWidget {
+class ContentWriterScreen extends StatelessWidget {
   final contentCtrl = Get.put(ContentWriterController());
 
-  ContentWriter({Key? key}) : super(key: key);
+  ContentWriterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

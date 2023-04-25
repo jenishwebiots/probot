@@ -30,7 +30,6 @@ class RouteName {
   final String commonWebView = "/commonWebView";
   final String noInternet = "/noInternet";
 
-
   final String codeGeneratorScreen = "/codeGeneratorScreen";
   final String emailWriterScreen = "/emailWriterScreen";
   final String socialMediaScreen = "/socialMediaScreen";
@@ -51,5 +50,17 @@ class RouteName {
   final String newBabyWishesScreen = "/newBabyWishesScreen";
 
 
+  final String getWellMessageScreen = "/getWellMessageScreen";
+  final String valentineScreen = "/valentineScreen";
+  final String newYearGreetingScreen = "/newYearGreetingScreen";
+  final String mothersDayWishesScreen = "/mothersDayWishesScreen";
+  final String fathersDayWishesScreen = "/fathersDayWishesScreen";
+  final String promotionWishesScreen = "/promotionWishesScreen";
+  final String babyShowerScreen = "/babyShowerScreen";
+  final String farewellMessageScreen = "/farewellMessageScreen";
+  final String weddingWishesScreen = "/weddingWishesScreen";
+  final String manageApiKeyScreen = "/manageApiKeyScreen";
+  final String addApiKeyScreen = "/addApiKeyScreen";
+  final String contentWriterScreen = "/contentWriterScreen";
 
 }

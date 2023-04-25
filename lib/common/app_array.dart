@@ -217,6 +217,7 @@ class AppArray {
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
+    {"icon": eSvgAssets.apiKey, "title": "manageApiKey"},
     {"icon": eSvgAssets.translate, "title": "language"},
     {"icon": eSvgAssets.star, "title": "rateApp"},
     {"icon": eSvgAssets.security, "title": "privacyTerm"},
@@ -371,7 +372,6 @@ class AppArray {
       "subtitle": appFonts.march23,
     },
   ];
-
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,
@@ -394,11 +394,11 @@ class AppArray {
     {"icon": eSvgAssets.personalAdvice, "title": appFonts.personalAdvice},
     {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
     {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
-    {"icon": eSvgAssets.essay, "title": appFonts.essayWriter}
-
+    {"icon": eSvgAssets.essay, "title": appFonts.essayWriter},
+    {"icon": eSvgAssets.content, "title": appFonts.content}
   ];
 
-  static final List<String> translateLanguages = [
+  var  translateLanguages = [
     'Abkhaz',
     'Afar',
     'Afrikaans',
@@ -678,5 +678,56 @@ class AppArray {
     'Capricorn',
     'Aquarius',
     'Pisces'
+  ];
+
+  var questionSuggestionList = [
+    {
+      "id":1,
+      "title": appFonts.code
+    },{
+      "id":2,
+      "title": appFonts.translation
+    },{
+      "id":3,
+      "title": appFonts.socialMedia
+    },{
+      "id":4,
+      "title": appFonts.travel
+    }
+  ];
+
+  var questionsList = [
+    {
+      "id":1,
+      "preBuildQuestions": [
+        {"title": appFonts.developmentArchitecture},
+        {"title": appFonts.helpMeFindMistakes},
+
+        {"title": appFonts.iNeedToCreateARest},
+      ]
+    },{
+      "id":2,
+      "preBuildQuestions": [
+
+        {"title": appFonts.writingThisCode},
+        {"title": appFonts.iNeedToCreateARest},
+      ]
+    },{
+      "id":3,
+      "preBuildQuestions": [
+        {"title": appFonts.developmentArchitecture},
+        {"title": appFonts.helpMeFindMistakes},
+        {"title": appFonts.writingThisCode},
+
+      ]
+    },{
+      "id":4,
+      "preBuildQuestions": [
+        {"title": appFonts.developmentArchitecture},
+        {"title": appFonts.helpMeFindMistakes},
+
+        {"title": appFonts.iNeedToCreateARest},
+      ]
+    },
   ];
 }

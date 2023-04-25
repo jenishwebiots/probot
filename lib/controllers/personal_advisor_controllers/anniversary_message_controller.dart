@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:probot/bot_api/api_services.dart';
+
 import '../../config.dart';
 
 class AnniversaryMessageController extends GetxController {
@@ -10,6 +12,9 @@ class AnniversaryMessageController extends GetxController {
   final FixedExtentScrollController? languageScrollController =
       FixedExtentScrollController();
   TextEditingController wishGenController = TextEditingController();
+  TextEditingController relationController = TextEditingController();
+  TextEditingController typeOfAnniController = TextEditingController();
+  TextEditingController messageSendController = TextEditingController();
 
   int value = 0;
   int langValue = 0;
@@ -18,13 +23,30 @@ class AnniversaryMessageController extends GetxController {
   String? onSelect;
   String? langOnSelect;
   bool isMessageGenerate = false;
+  bool isLoader = false;
+  String response = '';
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
   onMessageGenerate() {
-    isMessageGenerate = true;
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+            "I want to write ${typeOfAnniController.text} anniversary wish to ${messageSendController.text}  for ${selectItem ?? "10"} years of togetherness in ${relationController.text}")
+        .then((value)  {
+              response = value;
+              update();
+              isMessageGenerate = true;
+              isLoader = false;
+              update();
+            });
+    wishGenController.clear();
+    relationController.clear();
+    typeOfAnniController.clear();
+    messageSendController.clear();
+    selectItem = "";
+    langSelectItem = '';
     update();
   }
 
@@ -33,6 +55,12 @@ class AnniversaryMessageController extends GetxController {
         title: appFonts.endAnniversaryMessage,
         subTitle: appFonts.areYouSureEndAnniversary,
         onTap: () {
+          wishGenController.clear();
+          relationController.clear();
+          typeOfAnniController.clear();
+          messageSendController.clear();
+          selectItem = "";
+          langSelectItem = '';
           isMessageGenerate = false;
           Get.back();
           update();

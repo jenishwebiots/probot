@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/services.dart';
-
+import 'package:probot/bot_api/api_services.dart';
 import '../../config.dart';
 
 class SocialMediaController extends GetxController {
@@ -38,6 +37,9 @@ class SocialMediaController extends GetxController {
   int categoryValue = 0;
   String? categorySelectItem;
   String? categoryOnSelect;
+  String? hashtagResponse = '';
+  String? captionResponse = '';
+  String? musicResponse = '';
 
   SfRangeValues values = const SfRangeValues(30, 40);
 
@@ -58,12 +60,28 @@ class SocialMediaController extends GetxController {
   }
 
   onCaptionGenerate() {
-    isCaptionGenerated = true;
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController.text} photo for ${values.start} to ${values.end} age targeted audience").then((value) {
+         captionResponse = value;
+         update();
+         isCaptionGenerated = true;
+         isLoader = false;
+         update();
+    });
     update();
   }
 
   onMusicGenerate() {
-    isMusicGenerated = true;
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Please give me music Suggestion ${categorySelectItem ?? "Classic"} category and in ${selectItem ?? "Hindi"} for post").then((value) {
+          musicResponse = value;
+          update();
+          isMusicGenerated = true;
+          isLoader = false;
+          update();
+    });
     update();
   }
 
@@ -78,9 +96,9 @@ class SocialMediaController extends GetxController {
   }
 
   onGoPage(value) {
-    if (value == appFonts.captionAbout) {
+    if (value["title"] == appFonts.captionAbout) {
       Get.toNamed(routeName.captionCreatorScreen);
-    } else if (value == appFonts.getMusicSuggestion) {
+    } else if (value["title"] == appFonts.getMusicSuggestion) {
       Get.toNamed(routeName.musicForPostScreen);
     } else {
       Get.toNamed(routeName.hashtagForPostScreen);
@@ -88,9 +106,16 @@ class SocialMediaController extends GetxController {
   }
 
   onHashtagGenerate() {
-    isHashtagGenerated = true;
+    const oneSec = Duration(seconds: 1);
+    Timer.periodic(oneSec, (Timer t) {
+      progressValue += 0.03;
+      update();
+    });
     isLoader = true;
-    Timer.periodic(const Duration(seconds: 5), (Timer t) {
+    ApiServices.chatCompeletionResponse(
+        "Please give me Hashtag Suggestion for ${hashtagController.text} post").then((value) {
+      hashtagResponse = value;
+      isHashtagGenerated = true;
       isLoader = false;
       progressValue = 0.0;
       update();
@@ -99,25 +124,15 @@ class SocialMediaController extends GetxController {
   }
 
   endCaptionGeneratorDialog() {
-    Get.generalDialog(
-        pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(
-              title: appFonts.endCaptionGenerator,
-              subTitle: appFonts.areYouSureEndCodeGenerator,
-              endOnTap: () {
-                isCaptionGenerated = false;
-                Get.back();
-                update();
-              });
-        },
-        transitionBuilder: (context, anim1, anim2, child) {
-          return SlideTransition(
-            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-                .animate(anim1),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300));
+    dialogLayout.endDialog(
+        title: appFonts.endCaptionGenerator,
+        subTitle: appFonts.areYouSureEndCodeGenerator,
+        onTap: () {
+          captionController.clear();
+          isCaptionGenerated = false;
+          Get.back();
+          update();
+        });
   }
 
   onSelectLanguageSheet() {
@@ -175,6 +190,7 @@ class SocialMediaController extends GetxController {
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
           return LanguagePickerLayout(
+            image: eSvgAssets.music,
             title: appFonts.selectMusicCategory,
             list: socialMediaCtrl.musicCategoryList,
             index: socialMediaCtrl.categoryValue,
@@ -217,53 +233,33 @@ class SocialMediaController extends GetxController {
   }
 
   endMusicGeneratorDialog() {
-    Get.generalDialog(
-        pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(
-              title: appFonts.endMusicGeneration,
-              subTitle: appFonts.areYouSureEndMusic,
-              endOnTap: () {
-                isMusicGenerated = false;
-                Get.back();
-                update();
-              });
-        },
-        transitionBuilder: (context, anim1, anim2, child) {
-          return SlideTransition(
-            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-                .animate(anim1),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300));
+    dialogLayout.endDialog(
+        title: appFonts.endMusicGeneration,
+        subTitle: appFonts.areYouSureEndMusic,
+        onTap: () {
+          musicGeneratedController.clear();
+          isMusicGenerated = false;
+          Get.back();
+          update();
+        });
   }
 
   endHashtagGeneratorDialog() {
-    Get.generalDialog(
-        pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(
-              title: appFonts.endHashtagBuilder,
-              subTitle: appFonts.areYouSureEndCodeGenerator,
-              endOnTap: () {
-                isHashtagGenerated = false;
-                Get.back();
-                update();
-              });
-        },
-        transitionBuilder: (context, anim1, anim2, child) {
-          return SlideTransition(
-            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-                .animate(anim1),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300));
+    dialogLayout.endDialog(
+        title: appFonts.endHashtagBuilder,
+        subTitle: appFonts.areYouSureEndCodeGenerator,
+        onTap: () {
+          hashtagController.clear();
+          isHashtagGenerated = false;
+          progressValue = 0.0;
+          Get.back();
+          update();
+        });
   }
 
   @override
   void onReady() {
     readJson();
-    updateProgress();
     captionCreatorLists = appArray.captionCreatorList;
     socialMediaLists = appArray.socialMediaList;
     captionToneLists = appArray.captionToneList;

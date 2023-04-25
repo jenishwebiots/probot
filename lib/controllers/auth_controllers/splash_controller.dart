@@ -1,8 +1,10 @@
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:probot/config.dart';
+
 import '../../env.dart';
 
 class SplashController extends GetxController {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/services.dart';
+import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
 
@@ -9,11 +10,13 @@ class CodeGeneratorController extends GetxController {
   TextEditingController codeController = TextEditingController();
   final FixedExtentScrollController? scrollController = FixedExtentScrollController();
   bool isCodeGenerate = false;
+  bool isLoader = false;
   List codingLanguages = [];
 
   int value = 0;
   String? selectItem;
   String? onSelect;
+  String? response = "";
 
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('json_class/languages.json');
@@ -30,24 +33,30 @@ class CodeGeneratorController extends GetxController {
     super.onReady();
   }
 
+  onCodeGenerate () {
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Write a code for ${codeController.text} in ${onSelect ?? "C#"} language").then((value) {
+          response = value;
+          isCodeGenerate = true;
+          isLoader = false;
+          update();
+    });
+    codeController.clear();
+    update();
+  }
+
   endCodeGeneratorDialog() {
-    Get.generalDialog(
-      pageBuilder: (context, anim1, anim2) {
-        return AdviserDialog(title: appFonts.endCodeGenerator,subTitle: appFonts.areYouSureEndCodeGenerator,endOnTap: () {
+    dialogLayout.endDialog(
+        title: appFonts.endCodeGenerator,
+        subTitle: appFonts.areYouSureEndCodeGenerator,
+        onTap: () {
+          codeController.clear();
+          onSelect = 'C#';
           isCodeGenerate = false;
           Get.back();
           update();
-        },);
-      },
-      transitionBuilder: (context, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 300)
-    );
+        });
   }
 
   // from languages list
@@ -59,6 +68,7 @@ class CodeGeneratorController extends GetxController {
         return GetBuilder<CodeGeneratorController>(
             builder: (codeGeneratorCtrl) {
               return  LanguagePickerLayout(
+                image: eSvgAssets.code,
                 title: appFonts.selectCodeLanguage,
                 list: codingLanguages,
                 index: value,

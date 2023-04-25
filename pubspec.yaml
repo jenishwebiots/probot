@@ -74,6 +74,10 @@ dependencies:
   country_list_pick: ^1.0.1+6
   pinput: ^2.2.31
   fluttertoast: ^8.2.1
+  flutter_typeahead: ^4.3.7
+  syncfusion_flutter_sliders: ^21.1.39
+  syncfusion_flutter_core: ^21.1.39
+  dotted_border: ^2.0.0+3
   url_launcher: ^6.1.10
   launch_review: ^3.0.1
   image_picker: ^0.8.7+1
@@ -88,6 +92,7 @@ dependencies:
   syncfusion_flutter_core: ^21.1.39
   dotted_border: ^2.0.0+3
 
+  animated_text_kit: ^4.2.2
 
 
 dev_dependencies:

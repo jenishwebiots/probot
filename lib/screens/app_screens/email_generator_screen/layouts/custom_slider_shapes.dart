@@ -1,6 +1,3 @@
-import 'package:syncfusion_flutter_core/theme.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
-
 import '../../../../config.dart';
 
 class SfTickShapes extends SfTickShape {
@@ -98,3 +95,4 @@ class SfThumbShapes extends SfThumbShape {
         paint);
   }
 }
+

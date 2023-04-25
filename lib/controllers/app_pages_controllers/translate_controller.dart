@@ -1,17 +1,17 @@
 import 'dart:developer';
-
-import 'package:probot/common/app_array.dart';
-
+import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
 class TranslateController extends GetxController {
   TextEditingController transController = TextEditingController();
   TextEditingController transCompleteController = TextEditingController();
   bool isTranslated = false;
+  bool isLoader = false;
   var selectItem;
   var toSelectItem;
   var onFromSelect;
   var onToSelect;
+  String? response = '';
   int value = 0;
   int toValue = 0;
   List<String> translateLanguagesList = [];
@@ -24,72 +24,35 @@ class TranslateController extends GetxController {
 
   @override
   void onReady() {
-    translateLanguagesList = AppArray.translateLanguages;
+    translateLanguagesList = appArray.translateLanguages;
     update();
     // TODO: implement onReady
     super.onReady();
   }
 
+  onTranslate () {
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Translate ${transController.text} from ${onFromSelect ?? appFonts.english} to ${onToSelect ?? appFonts.hindi} language").then((value) {
+          response = value;
+          update();
+          isTranslated = true;
+          isLoader = false;
+          update();
+    });
+    update();
+  }
+
   endTranslationDialog() {
-    Get.generalDialog(
-      pageBuilder: (context, anim1, anim2) {
-        return Align(
-            alignment: Alignment.center,
-            child: Material(
-                color: appCtrl.appTheme.trans,
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  CommonPopUpTitle(title: appFonts.endTranslation.tr),
-                  DottedLine(
-                      direction: Axis.horizontal,
-                      lineLength: double.infinity,
-                      lineThickness: 1,
-                      dashLength: 3,
-                      dashColor: appCtrl.appTheme.txt.withOpacity(.1)),
-                  const VSpace(Sizes.s20),
-                  Image.asset(eImageAssets.notification, height: Sizes.s180),
-                  const VSpace(Sizes.s15),
-                  Text(appFonts.areYouSure.tr,
-                      textAlign: TextAlign.center,
-                      style: AppCss.outfitMedium16
-                          .textColor(appCtrl.appTheme.txt)
-                          .textHeight(1.2)),
-                  Row(children: [
-                    Expanded(
-                        child: ButtonCommon(
-                            title: appFonts.cancel,
-                            isGradient: false,
-                            style: AppCss.outfitMedium16
-                                .textColor(appCtrl.appTheme.primary),
-                            color: appCtrl.appTheme.trans,
-                            borderColor: appCtrl.appTheme.primary,
-                            onTap: () => Get.back())),
-                    const HSpace(Sizes.s15),
-                    Expanded(
-                        child: ButtonCommon(
-                      title: appFonts.end,
-                      onTap: () {
-                        isTranslated = false;
-                        update();
-                        Get.back();
-                      },
-                    ))
-                  ]).paddingSymmetric(
-                      horizontal: Insets.i20, vertical: Insets.i20)
-                ])
-                    .decorated(
-                        color: appCtrl.appTheme.white,
-                        borderRadius: BorderRadius.circular(AppRadius.r10))
-                    .marginSymmetric(horizontal: Insets.i20)));
-      },
-      transitionBuilder: (context, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 300),
-    );
+    dialogLayout.endDialog(
+        title: appFonts.endTranslation,
+        subTitle: appFonts.areYouSure,
+        onTap: () {
+          transController.clear();
+          isTranslated = false;
+          Get.back();
+          update();
+        });
   }
 
   // from languages list
@@ -109,7 +72,7 @@ class TranslateController extends GetxController {
               return StateService.getSuggestions(value, translateLanguagesList);
             },
             onSuggestionSelected: (i) {
-              int index = AppArray.translateLanguages.indexWhere((element) {
+              int index = translateCtrl.translateLanguagesList.indexWhere((element) {
                 return element == i;
               });
               translateCtrl.fromScrollController!.jumpToItem(index);
@@ -163,7 +126,7 @@ class TranslateController extends GetxController {
               translateCtrl.update();
             },
             onSuggestionSelected: (i) {
-              int index = AppArray.translateLanguages.indexWhere((element) {
+              int index = translateCtrl.translateLanguagesList.indexWhere((element) {
                 return element == i;
               });
               translateCtrl.toScrollController!.jumpToItem(index);

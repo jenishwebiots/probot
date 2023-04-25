@@ -21,6 +21,8 @@ class ChatLayoutTextBox extends StatelessWidget {
         fillColor:
             appCtrl.isTheme ? appCtrl.appTheme.bg : appCtrl.appTheme.white,
         minLines: 1,
+        prefixIcon: SvgPicture.asset(eSvgAssets.suggestion).inkWell(onTap: ()=> chatCtrl.onTapSuggestions())
+            .paddingOnly(left: Insets.i18, right: Insets.i10),
         suffixIcon: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,

@@ -9,8 +9,10 @@ class GeneratedMailLayout extends StatelessWidget {
       return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(children: [
-              Text(appFonts.toGetTheExcellent,
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+              Text(appFonts.toGetTheExcellent.tr,
                   style: AppCss.outfitSemiBold16
                       .textColor(appCtrl.appTheme.primary)),
               const VSpace(Sizes.s15),
@@ -65,7 +67,7 @@ class GeneratedMailLayout extends StatelessWidget {
                         children: emailGeneratorCtrl.mailLengthLists
                             .asMap()
                             .entries
-                            .map((e) => Text(e.value,
+                            .map((e) => Text(e.value.toString().tr,
                                 style: AppCss.outfitSemiBold14.textColor(
                                     emailGeneratorCtrl.value >= e.key
                                         ? appCtrl.appTheme.primary
@@ -76,6 +78,7 @@ class GeneratedMailLayout extends StatelessWidget {
                       horizontal: Insets.i15, vertical: Insets.i20)
                   .authBoxExtension()
             ]),
+            const VSpace(Sizes.s30),
             ButtonCommon(
                 title: appFonts.myFitnessMail,
                 onTap: () => emailGeneratorCtrl.onGenerateMail())

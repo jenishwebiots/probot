@@ -38,6 +38,8 @@ class ApiServices {
     Map<String, dynamic> newresponse =
         jsonDecode(utf8.decode(response.bodyBytes));
 
-    return response.statusCode == 200 ? newresponse['choices'][0]['message']['content'] :"";
+    return response.statusCode == 200
+        ? newresponse['choices'][0]['message']['content']
+        : "";
   }
 }

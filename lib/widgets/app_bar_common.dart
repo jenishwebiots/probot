@@ -28,16 +28,20 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
                 .inkWell(onTap: actionOnTap)
         ],
         title: Row(children: [
-          const HSpace(Sizes.s10),
-          SvgPicture.asset(appCtrl.isRTL || appCtrl.languageVal == "ar" ? eSvgAssets.rightArrow1 : eSvgAssets.leftArrow,
-              height: 15,
-              colorFilter: ColorFilter.mode(
-                  appCtrl.isTheme
-                      ? appCtrl.appTheme.sameWhite
-                      : appCtrl.appTheme.white,
-                  BlendMode.srcIn))
-             
-              .inkWell(onTap: leadingOnTap),
+
+          SizedBox(
+            height: 15,
+            width: 15,
+            child: SvgPicture.asset(appCtrl.isRTL || appCtrl.languageVal == "ar" ? eSvgAssets.rightArrow1 : eSvgAssets.leftArrow,
+                height: 10,
+                colorFilter: ColorFilter.mode(
+                    appCtrl.isTheme
+                        ? appCtrl.appTheme.sameWhite
+                        : appCtrl.appTheme.white,
+                    BlendMode.srcIn))
+
+                .inkWell(onTap: leadingOnTap),
+          ),
           const HSpace(Sizes.s17),
           Text(title!.tr,
               style:

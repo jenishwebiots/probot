@@ -9,32 +9,42 @@ class EmailGeneratorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EmailGeneratorController>(builder: (_) {
-      return Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppAppBarCommon(
-              title: appFonts.emailWriter, leadingOnTap: () => Get.back()),
-          body: emailGeneratorCtrl.isMailGenerated == true
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(appFonts.weCreatedLetter,
-                                style: AppCss.outfitSemiBold16
-                                    .textColor(appCtrl.appTheme.primary)),
-                            const VSpace(Sizes.s15),
-                            InputLayout(
-                                color: appCtrl.appTheme.white,
-                                title: appFonts.generatedMail,
-                                isMax: false,
-                                controller:
-                                    emailGeneratorCtrl.generatedMailController)
-                          ]),
-                      ButtonCommon(title: appFonts.endEmailWriter, onTap: ()=> emailGeneratorCtrl.endEmailGeneratorDialog())
-                    ]).paddingSymmetric(
-                  vertical: Insets.i30, horizontal: Insets.i20)
-              : const GeneratedMailLayout());
+      return DirectionalityRtl(
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: AppAppBarCommon(
+                title: appFonts.emailWriter, leadingOnTap: () => Get.back()),
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: emailGeneratorCtrl.isMailGenerated == true
+                      ? Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(appFonts.weCreatedLetter.tr,
+                                  style: AppCss.outfitSemiBold16
+                                      .textColor(appCtrl.appTheme.primary)),
+                              const VSpace(Sizes.s15),
+                              InputLayout(
+                                  color: appCtrl.appTheme.white,
+                                  title: appFonts.generatedMail,
+                                  isMax: false,
+                                  responseText: emailGeneratorCtrl.response
+                              )
+                            ]),
+                        const VSpace(Sizes.s30),
+                        ButtonCommon(title: appFonts.endEmailWriter, onTap: ()=> emailGeneratorCtrl.endEmailGeneratorDialog())
+                      ]).paddingSymmetric(
+                      vertical: Insets.i30, horizontal: Insets.i20)
+                      : const GeneratedMailLayout(),
+                ),
+                if(emailGeneratorCtrl.isLoader == true) const LoaderLayout()
+              ],
+            )),
+      );
     });
   }
 }

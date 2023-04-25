@@ -71,13 +71,13 @@ class Dashboard extends StatelessWidget {
                                           .isTextCompletionShow!)
                                         TabCommon(
                                             title: "content",
-                                            sImage: eSvgAssets.contentColor,
-                                            usImage: eSvgAssets.content,
+                                            sImage: eSvgAssets.micColor,
+                                            usImage: eSvgAssets.micNav,
                                             index: 3),
                                       TabCommon(
-                                          title: "setting",
-                                          sImage: eSvgAssets.settingColor,
-                                          usImage: eSvgAssets.setting,
+                                          title: "camera",
+                                          sImage: eSvgAssets.cameraColor,
+                                          usImage: eSvgAssets.cameraNav,
                                           index: 4)
                                     ])) /*dashboardCtrl.bottomList.isNotEmpty
                     ? const BottomNavBarLayout()

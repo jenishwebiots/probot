@@ -1,21 +1,26 @@
 import 'dart:developer';
 
+import 'package:probot/bot_api/api_services.dart';
+
 import '../../config.dart';
 
 class BabyNameSuggestionController extends GetxController {
   TextEditingController latterController = TextEditingController();
   TextEditingController generatedNameController = TextEditingController();
-  final FixedExtentScrollController? scrollController = FixedExtentScrollController();
+  final FixedExtentScrollController? scrollController =
+      FixedExtentScrollController();
 
   List genderLists = [];
   List nameSuggestionLists = [];
-  List <String> zodiacLists = [];
+  List<String> zodiacLists = [];
   int? selectedIndex = 0;
   int? selectedNameIndex = 0;
   bool isNameGenerate = false;
+  bool isLoader = false;
   int value = 0;
   String? selectItem;
   String? onSelect;
+  String response = '';
 
   onGenderChange(index) {
     selectedIndex = index;
@@ -28,7 +33,21 @@ class BabyNameSuggestionController extends GetxController {
   }
 
   onNameGenerate() {
-    isNameGenerate = true;
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(selectedNameIndex == 0
+            ? "Suggest a 10 ${genderLists[selectedIndex!]['title']} name with ${selectItem ?? "Capricorn"} Zodiac"
+            : "Suggest a 10 ${genderLists[selectedIndex!]['title']} name start with ${latterController.text}")
+        .then((value) {
+      response = value;
+      update();
+      isLoader = false;
+      selectedIndex = 0;
+      selectedNameIndex = 0;
+      selectItem = '';
+      latterController.text = '';
+      isNameGenerate = true;
+      update();
+    });
     update();
   }
 
@@ -37,6 +56,8 @@ class BabyNameSuggestionController extends GetxController {
         title: appFonts.endNameSuggestion,
         subTitle: appFonts.areYouSureEndBabyName,
         onTap: () {
+          selectItem = '';
+          latterController.text = '';
           isNameGenerate = false;
           Get.back();
           update();
@@ -50,17 +71,16 @@ class BabyNameSuggestionController extends GetxController {
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         return GetBuilder<BabyNameSuggestionController>(builder: (babyCtrl) {
           return LanguagePickerLayout(
+            image: eSvgAssets.zodiac,
             title: appFonts.selectLanguage,
             list: babyCtrl.zodiacLists,
             index: value,
             suggestionsCallbacks: (value) {
-              return StateService.getSuggestions(
-                  value, babyCtrl.zodiacLists);
+              return StateService.getSuggestions(value, babyCtrl.zodiacLists);
             },
             scrollController: babyCtrl.scrollController,
             onSuggestionSelected: (i) {
-              int index =
-              babyCtrl.zodiacLists.indexWhere((element) {
+              int index = babyCtrl.zodiacLists.indexWhere((element) {
                 return element == i;
               });
               babyCtrl.scrollController!.jumpToItem(index);

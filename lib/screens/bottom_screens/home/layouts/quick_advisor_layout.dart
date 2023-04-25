@@ -15,7 +15,7 @@ class QuickAdvisorLayout extends StatelessWidget {
             child: Image.asset(eImageAssets.quickAdvisorContainer,
                 alignment: Alignment.bottomCenter)),
         SizedBox(
-            child: SvgPicture.asset(data["icon"])
+            child: SvgPicture.asset(data["icon"],colorFilter: ColorFilter.mode(appCtrl.appTheme.sameWhite, BlendMode.srcIn),)
                 .paddingAll(Insets.i12)
                 .decorated(
                     color: appCtrl.appTheme.primary, shape: BoxShape.circle))
@@ -44,6 +44,8 @@ class QuickAdvisorLayout extends StatelessWidget {
         Get.toNamed(routeName.travelScreen);
       } else if (data["title"] == appFonts.personalAdvice) {
         Get.toNamed(routeName.personalAdvisorScreen);
+      }else if (data["title"] == appFonts.content) {
+        Get.toNamed(routeName.contentWriterScreen);
       }
     });
   }
