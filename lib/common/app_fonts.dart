@@ -320,6 +320,18 @@ class AppFonts {
   String writeAnything = "Write anything to translate...";
   String max50 = "50 max";
   String translate = "Translate";
+  String camera = "camera";
+  String gallery = "gallery";
+  String noInternet = "noInternet";
+  String noInternetDesc = "noInternetDesc";
+  String retry = "retry";
+  String yes = "yes";
+  String no = "no";
+  String alert = "alert";
+  String deleteConfirmation = "deleteConfirmation";
+  String deleteUserSuccessfully = "deleteUserSuccessfully";
+  String dataUploadSuccessfully = "dataUploadSuccessfully";
+  String imageUploadSuccessfully = "imageUploadSuccessfully";
 
   String from = "From";
   String to = "To";
@@ -534,18 +546,6 @@ class AppFonts {
       "Are you sure you want to end this born baby wish ?";
   String babyNameOnly = "Baby name";
 
-  String camera = "camera";
-  String gallery = "gallery";
-  String noInternet = "noInternet";
-  String noInternetDesc = "noInternetDesc";
-  String retry = "retry";
-  String yes = "yes";
-  String no = "no";
-  String alert = "alert";
-  String deleteConfirmation = "deleteConfirmation";
-  String deleteUserSuccessfully = "deleteUserSuccessfully";
-  String dataUploadSuccessfully = "dataUploadSuccessfully";
-  String imageUploadSuccessfully = "imageUploadSuccessfully";
   String wantUnlimited = "wantUnlimited";
   String viewSubscription = "viewSubscription";
   String wantMoreCoins = "wantMoreCoins";
