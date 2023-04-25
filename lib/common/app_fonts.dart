@@ -598,25 +598,38 @@ class AppFonts {
   String enterYourApi = "Enter your API key here";
   String note = "Note :";
   String save = "Save";
-  String yourMobileDevices = "Your mobile device's internal storage for your API key ensures that it is never communicated to a third party.";
-  String youCanKeep = "You can keep your key to use it later and remove it if you decide not to use it any longer.";
+  String yourMobileDevices =
+      "Your mobile device's internal storage for your API key ensures that it is never communicated to a third party.";
+  String youCanKeep =
+      "You can keep your key to use it later and remove it if you decide not to use it any longer.";
   String manageApiKey = "Manage API key";
   String removeApiKey = "Remove API key";
   String apiKeyRemoved = "API Key Removed";
-  String yourApiKey = "Your API key was successfully removed, you can add it again from setting > manage API.";
+  String yourApiKey =
+      "Your API key was successfully removed, you can add it again from setting > manage API.";
   String code = "Code";
   String questionSuggestion = "Question suggestion";
   String translation = "Translation";
   String preBuildQuestions = "• Pre build Questions  :";
-  String developmentArchitecture = "Development architecture and code for a  <website description> website with JavaScript.";
-  String helpMeFindMistakes = "Help me find mistakes in the following code<paste code below>";
+  String developmentArchitecture =
+      "Development architecture and code for a  <website description> website with JavaScript.";
+  String helpMeFindMistakes =
+      "Help me find mistakes in the following code<paste code below>";
   String writingThisCode = "Writing this code for C# <post code below>";
   String findTheBugWithThis = "Find the bug with this code <Post code below>";
-  String iNeedToCreateARest = "I need to create a REST API endpoint for my web application.";
+  String iNeedToCreateARest =
+      "I need to create a REST API endpoint for my web application.";
   String voice = "Voice";
   String content = "Content";
 
-
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});
+
+  String endWellWishes = "endWellWishes";
+  String areYouSureEndWell = "areYouSureEndWell";
+  String sendingBestWishes = "sendingBestWishes";
+  String wellWishes = "wellWishes";
+  String whatHappened = "whatHappened";
+  String generateHealthWishes = "generateHealthWishes";
+  String healthyWishes = "healthyWishes";
 }
