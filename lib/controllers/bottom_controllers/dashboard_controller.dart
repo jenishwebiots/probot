@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:probot/config.dart';
 
+
 class DashboardController extends GetxController
     with GetTickerProviderStateMixin {
   int selectedIndex = 0;
@@ -25,7 +26,7 @@ class DashboardController extends GetxController
     Home(),
     const Text("CHAT"),
     ImageGenerator(),
-    ContentWriterScreen(),
+    VoiceScreen(),
     Setting(),
   ];
 

@@ -88,10 +88,7 @@ dependencies:
   facebook_audience_network: ^1.0.1
   screenshot: ^1.3.0
 
-  flutter_typeahead: ^4.3.7
-  syncfusion_flutter_sliders: ^21.1.39
-  syncfusion_flutter_core: ^21.1.39
-  dotted_border: ^2.0.0+3
+
 
 
 

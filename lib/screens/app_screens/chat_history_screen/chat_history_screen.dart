@@ -74,12 +74,24 @@ class ChatHistoryScreen extends StatelessWidget {
                               Text(appFonts.noDataFound.tr,
                                   textAlign: TextAlign.center,
                                   style: AppCss.outfitMedium14
-                                      .textColor(appCtrl.appTheme.lightText)),
-                            ],
-                          ),
+                                      .textColor(appCtrl.appTheme.lightText))
+                            ]
+                          )
                         ).height(MediaQuery.of(context).size.height)
                       : SingleChildScrollView(
                     child: Column(children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: chatHistoryCtrl.historyTagLists.asMap().entries.map((e) => SuggestionLayout(
+                            data: e.value,
+                            index: e.key,
+                            selectIndex: chatHistoryCtrl.selectIndex,
+                            onTap:()=> chatHistoryCtrl.onHistoryTagChange(e.key)
+                          )).toList()
+                        )
+                      ),
+                      const VSpace(Sizes.s35),
                       ...snapshot.data!.docs
                           .asMap()
                           .entries

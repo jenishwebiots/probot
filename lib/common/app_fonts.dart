@@ -591,6 +591,13 @@ class AppFonts {
   String endWeddingWishes = "endWeddingWishes";
   String generateLovelyWishes = "generateLovelyWishes";
   String areYouSureEndWedding = "areYouSureEndWedding";
+  String endWellWishes = "endWellWishes";
+  String areYouSureEndWell = "areYouSureEndWell";
+  String sendingBestWishes = "sendingBestWishes";
+  String wellWishes = "wellWishes";
+  String whatHappened = "whatHappened";
+  String generateHealthWishes = "generateHealthWishes";
+  String healthyWishes = "healthyWishes";
 
   String addApiKey = "Add API key";
   String addKey = "Add key :";
@@ -615,6 +622,10 @@ class AppFonts {
   String iNeedToCreateARest = "I need to create a REST API endpoint for my web application.";
   String voice = "Voice";
   String content = "Content";
+  String pressTheButton = "Press the button while speaking your query to the bot for an intelligent, brilliant response.";
+  String all = "All";
+  String chat = "Chat";
+  String image = "Image";
 
   String wantUnlimited = "wantUnlimited";
   String viewSubscription = "viewSubscription";

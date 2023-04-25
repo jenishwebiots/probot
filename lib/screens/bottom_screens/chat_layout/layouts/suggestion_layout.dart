@@ -12,7 +12,7 @@ class SuggestionLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
             child: Text(data["title"].toString().tr,
-                    style: AppCss.outfitSemiBold14
+                    style: AppCss.outfitMedium14
                         .textColor(index == selectIndex ? appCtrl.appTheme.sameWhite : appCtrl.appTheme.primary))
                 .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i10)
                 .decorated(

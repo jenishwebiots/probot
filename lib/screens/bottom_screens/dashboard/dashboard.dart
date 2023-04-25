@@ -70,7 +70,7 @@ class Dashboard extends StatelessWidget {
                                       if (appCtrl.firebaseConfigModel!
                                           .isTextCompletionShow!)
                                         TabCommon(
-                                            title: "content",
+                                            title: "voice",
                                             sImage: eSvgAssets.micColor,
                                             usImage: eSvgAssets.micNav,
                                             index: 3),
