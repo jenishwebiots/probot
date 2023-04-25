@@ -84,7 +84,7 @@ class ChatHistoryScreen extends StatelessWidget {
                           .asMap()
                           .entries
                           .map((e) => ChatHistoryLayout(
-                        data: e.value,
+                        data: e.value.data(),
                         isLongPress:
                         chatHistoryCtrl.isLongPress,
                         onLongPressTap: () {
@@ -121,11 +121,11 @@ class ChatHistoryScreen extends StatelessWidget {
                               }
                             }
                           } else {
-                            log("CH : ${e.value["chatId"]}");
+                            log("CH : ${e.value.data()}");
                             Get.toNamed(
                                 routeName.chatLayout,
                                 arguments:
-                                e.value["chatId"]);
+                                e.value.data());
                             final chatCtrl = Get.isRegistered<ChatLayoutController>() ? Get.find<ChatLayoutController>() : Get.put(ChatLayoutController());
                             chatCtrl.getChatId();
                           }

@@ -26,8 +26,7 @@ class BirthdayMessageScreen extends StatelessWidget {
                             title: appFonts.generatedWishes,
                             color: appCtrl.appTheme.white,
                             isMax: false,
-                            controller:
-                                birthdayCtrl.birthdayMessagesGenController)
+                            responseText: birthdayCtrl.response)
                       ]),
                   const VSpace(Sizes.s20),
                   ButtonCommon(
@@ -35,38 +34,51 @@ class BirthdayMessageScreen extends StatelessWidget {
                       onTap: () => birthdayCtrl.endNameSuggestion())
                 ]).paddingSymmetric(
                   vertical: Insets.i30, horizontal: Insets.i20)
-              : Column(children: [
+              : Stack(
+                children: [
                   Column(children: [
-                    textCommon.outfitSemiBoldPrimary16(
-                        text: appFonts.aSpecialDay),
-                    const VSpace(Sizes.s15),
-                    Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          textCommon.outfitSemiBoldTxt14(
-                              text: appFonts.sendBirthdayWishes),
-                          const VSpace(Sizes.s10),
-                          TextFieldCommon(hintText: appFonts.enterValue),
-                          const VSpace(Sizes.s20),
-                          textCommon.outfitSemiBoldTxt14(text: appFonts.name),
-                          const VSpace(Sizes.s10),
-                          TextFieldCommon(hintText: appFonts.enterValue),
-                          const VSpace(Sizes.s20),
-                          MusicCategoryLayout(
-                              title: appFonts.messageGenerateIn,
-                              category: birthdayCtrl.selectItem ?? "Hindi",
-                              onTap: () => birthdayCtrl.onLanguageSheet())
-                        ])
-                        .paddingSymmetric(
-                            vertical: Insets.i20, horizontal: Insets.i15)
-                        .authBoxExtension(),
-                    const VSpace(Sizes.s30),
-                    ButtonCommon(
-                        title: appFonts.generateGoodWishes,
-                        onTap: () => birthdayCtrl.onTapWishesGenerate())
-                  ])
-                ]).paddingSymmetric(
-                  vertical: Insets.i30, horizontal: Insets.i20));
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        textCommon.outfitSemiBoldPrimary16(
+                            text: appFonts.aSpecialDay),
+                        const VSpace(Sizes.s15),
+                        Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                              textCommon.outfitSemiBoldTxt14(
+                                  text: appFonts.sendBirthdayWishes),
+                              const VSpace(Sizes.s10),
+                              TextFieldCommon(
+                                hintText: appFonts.enterValue,
+                                controller: birthdayCtrl.birthdayWishGenController,
+                              ),
+                              const VSpace(Sizes.s20),
+                              textCommon.outfitSemiBoldTxt14(text: appFonts.name),
+                              const VSpace(Sizes.s10),
+                              TextFieldCommon(
+                                hintText: appFonts.enterValue,
+                                controller: birthdayCtrl.nameGenController,
+                              ),
+                              const VSpace(Sizes.s20),
+                              MusicCategoryLayout(
+                                  title: appFonts.messageGenerateIn,
+                                  category: birthdayCtrl.selectItem ?? "Hindi",
+                                  onTap: () => birthdayCtrl.onLanguageSheet())
+                            ])
+                            .paddingSymmetric(
+                                vertical: Insets.i20, horizontal: Insets.i15)
+                            .authBoxExtension(),
+                        const VSpace(Sizes.s30),
+                        ButtonCommon(
+                            title: appFonts.generateGoodWishes,
+                            onTap: () => birthdayCtrl.onTapWishesGenerate())
+                      ])
+                    ]).paddingSymmetric(
+                      vertical: Insets.i30, horizontal: Insets.i20),
+                  if(birthdayCtrl.isLoader == true) const LoaderLayout()
+                ]
+              ));
     });
   }
 }

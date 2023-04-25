@@ -12,7 +12,7 @@ class LoaderScreen extends StatelessWidget {
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Image.asset(eGifAssets.hashtagLoader, height: Sizes.s170),
         const VSpace(Sizes.s25),
-        Text(appFonts.gatheringContent,
+        Text(appFonts.gatheringContent.tr,
             style: AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt)),
         const VSpace(Sizes.s15),
         SizedBox(
@@ -26,7 +26,7 @@ class LoaderScreen extends StatelessWidget {
                     value: value!,
                     minHeight: 4))),
         const VSpace(Sizes.s10),
-        Text(appFonts.itMayTakeUpTo,
+        Text(appFonts.itMayTakeUpTo.tr,
             style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText))
       ])
           .paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20)

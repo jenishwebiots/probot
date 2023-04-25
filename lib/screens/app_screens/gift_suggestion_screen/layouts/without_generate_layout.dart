@@ -13,11 +13,17 @@ class WithoutGenerateResponseLayout extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             textCommon.outfitSemiBoldTxt14(text: appFonts.sendGiftTo),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue),
+            TextFieldCommon(
+              hintText: appFonts.enterValue,
+              controller: giftSuggestionCtrl.sendGiftController,
+            ),
             const VSpace(Sizes.s20),
             textCommon.outfitSemiBoldTxt14(text: appFonts.occasion),
             const VSpace(Sizes.s10),
-            TextFieldCommon(hintText: appFonts.enterValue)
+            TextFieldCommon(
+              hintText: appFonts.enterValue,
+              controller: giftSuggestionCtrl.occasionController,
+            )
           ])
               .paddingSymmetric(vertical: Insets.i20, horizontal: Insets.i15)
               .authBoxExtension()

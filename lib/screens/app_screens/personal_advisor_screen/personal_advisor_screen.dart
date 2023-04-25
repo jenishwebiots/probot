@@ -10,7 +10,7 @@ class PersonalAdvisorScreen extends StatelessWidget {
     return GetBuilder<PersonalAdvisorController>(builder: (_) {
       return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
-          appBar: AppAppBarCommon(title: appFonts.personalAdvice),
+          appBar: AppAppBarCommon(title: appFonts.personalAdvice,leadingOnTap: ()=> Get.back()),
           body: SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

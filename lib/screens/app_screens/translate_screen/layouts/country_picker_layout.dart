@@ -13,7 +13,7 @@ class LanguagePickerLayout extends StatelessWidget {
   final GestureTapCallback? selectOnTap;
   final ScrollController? thumbScrollController;
   final SuggestionsCallback<String>? suggestionsCallbacks;
-  final String? title;
+  final String? title,image;
 
   const LanguagePickerLayout(
       {Key? key,
@@ -24,7 +24,7 @@ class LanguagePickerLayout extends StatelessWidget {
       this.onSuggestionSelected,
       this.scrollController,
       this.selectOnTap,
-      this.thumbScrollController,this.suggestionsCallbacks,this.title})
+      this.thumbScrollController,this.suggestionsCallbacks,this.title,this.image})
       : super(key: key);
 
   @override
@@ -111,6 +111,7 @@ class LanguagePickerLayout extends StatelessWidget {
                     SizedBox(
                         height: Sizes.s270,
                         child: CupertinoPicker(
+
                             scrollController: scrollController,
                             selectionOverlay:
                                 CupertinoPickerDefaultSelectionOverlay(
@@ -129,7 +130,6 @@ class LanguagePickerLayout extends StatelessWidget {
                                   thumbVisibility: true,
                                   trackVisibility: true,
                                   child: Expanded(
-
                                     child: ListView.builder(
                                 shrinkWrap: true,
                                  itemCount: list!.length,
@@ -162,7 +162,7 @@ class LanguagePickerLayout extends StatelessWidget {
                   ]),
                   Stack(alignment: Alignment.centerRight, children: [
                     Image.asset(eImageAssets.slider, height: Sizes.s255),
-                    SvgPicture.asset(eSvgAssets.language)
+                    SvgPicture.asset(image ?? eSvgAssets.language)
                         .paddingSymmetric(horizontal: Insets.i28)
                   ])
                 ]),

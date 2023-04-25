@@ -46,9 +46,20 @@ class RouteName {
   final String birthdayMessageScreen = "/birthdayMessageScreen";
   final String anniversaryMessageScreen = "/anniversaryMessageScreen";
   final String newBabyWishesScreen = "/newBabyWishesScreen";
-
+  final String getWellMessageScreen = "/getWellMessageScreen";
   final String commonWebView = "/commonWebView";
   final String noInternet = "/noInternet";
-
+  final String valentineScreen = "/valentineScreen";
+  final String newYearGreetingScreen = "/newYearGreetingScreen";
+  final String mothersDayWishesScreen = "/mothersDayWishesScreen";
+  final String fathersDayWishesScreen = "/fathersDayWishesScreen";
+  final String promotionWishesScreen = "/promotionWishesScreen";
+  final String babyShowerScreen = "/babyShowerScreen";
+  final String farewellMessageScreen = "/farewellMessageScreen";
+  final String weddingWishesScreen = "/weddingWishesScreen";
+  final String manageApiKeyScreen = "/manageApiKeyScreen";
+  final String addApiKeyScreen = "/addApiKeyScreen";
+  final String balanceTopUp = "/balanceTopUp";
+  final String viewSubscription = "/viewSubscription";
 
 }

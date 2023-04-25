@@ -1,7 +1,8 @@
 class SubscribeModel {
-  String? planName;
+  String? title;
   String? type;
   int? price;
+  int? balance;
   String? priceTpe;
   String? icon;
   String? chatCount;
@@ -10,9 +11,10 @@ class SubscribeModel {
   List<String>? benefits;
 
   SubscribeModel(
-      {this.planName,
+      {this.title,
         this.type,
         this.price,
+        this.balance,
         this.priceTpe,
         this.icon,
         this.chatCount,
@@ -21,10 +23,11 @@ class SubscribeModel {
         this.benefits});
 
   SubscribeModel.fromJson(Map<String, dynamic> json) {
-    planName = json['planName'];
+    title = json['title'];
     type = json['type'];
     price = json['price'];
     priceTpe = json['priceTpe'];
+    balance = json['balance'] ?? 5;
     icon = json['icon'];
     chatCount = json['chatCount'];
     imageCount = json['imageCount'];
@@ -36,10 +39,11 @@ class SubscribeModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['planName'] = planName;
+    data['title'] = title;
     data['type'] = type;
     data['price'] = price;
     data['priceTpe'] = priceTpe;
+    data['balance'] = balance;
     data['icon'] = icon;
     data['chatCount'] = chatCount;
     data['imageCount'] = imageCount;

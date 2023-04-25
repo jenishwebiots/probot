@@ -1,19 +1,31 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
 
 
-class CodeGeneratorController extends GetxController {
+class CodeGeneratorController extends GetxController with GetSingleTickerProviderStateMixin  {
   TextEditingController codeController = TextEditingController();
   final FixedExtentScrollController? scrollController = FixedExtentScrollController();
   bool isCodeGenerate = false;
+  bool isLoader = false;
   List codingLanguages = [];
+  SpeechToText speech = SpeechToText();
+  final FlutterTts? flutterTts = FlutterTts();
+  final _isSpeech = false.obs;
+  final isListening = false.obs;
+
+  AnimationController? animationController;
+  Animation? animation;
 
   int value = 0;
   String? selectItem;
   String? onSelect;
+  String? response = "";
 
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('json_class/languages.json');
@@ -25,29 +37,43 @@ class CodeGeneratorController extends GetxController {
 @override
   void onReady() {
     readJson();
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animationController!.repeat(reverse: true);
+    animation = Tween(begin: 15.0, end: 24.0).animate(animationController!)
+      ..addListener(() {
+        update();
+      });
     update();
     // TODO: implement onReady
     super.onReady();
   }
 
+  onCodeGenerate () {
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Write a code for ${codeController.text} in ${onSelect ?? "C#"} language").then((value) {
+          response = value;
+          isCodeGenerate = true;
+          isLoader = false;
+          update();
+    });
+    codeController.clear();
+    update();
+  }
+
+
   endCodeGeneratorDialog() {
-    Get.generalDialog(
-      pageBuilder: (context, anim1, anim2) {
-        return AdviserDialog(title: appFonts.endCodeGenerator,subTitle: appFonts.areYouSureEndCodeGenerator,endOnTap: () {
+    dialogLayout.endDialog(
+        title: appFonts.endCodeGenerator,
+        subTitle: appFonts.areYouSureEndCodeGenerator,
+        onTap: () {
+          codeController.clear();
+          onSelect = 'C#';
           isCodeGenerate = false;
           Get.back();
           update();
-        },);
-      },
-      transitionBuilder: (context, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 300)
-    );
+        });
   }
 
   // from languages list
@@ -59,6 +85,7 @@ class CodeGeneratorController extends GetxController {
         return GetBuilder<CodeGeneratorController>(
             builder: (codeGeneratorCtrl) {
               return  LanguagePickerLayout(
+                image: eSvgAssets.code,
                 title: appFonts.selectCodeLanguage,
                 list: codingLanguages,
                 index: value,
@@ -99,6 +126,66 @@ class CodeGeneratorController extends GetxController {
               topLeft: Radius.circular(AppRadius.r10))
       ),
     );
+  }
+
+  //stop speech method
+  speechStopMethod() async {
+    _isSpeech.value = false;
+    await flutterTts!.stop();
+    update();
+  }
+
+  //speech to text
+  void speechToText() async {
+    speechStopMethod();
+    codeController.text = '';
+
+    log("ISLISTEN : ${isListening.value}");
+    if (isListening.value == false) {
+      bool available = await speech.initialize(
+        onStatus: (val) {
+          debugPrint('*** onStatus: $val');
+          log("loo : ${val == "done"}");
+          if (val == "done" || val == "notListening") {
+            isListening.value = false;
+            update();
+          }
+          Get.forceAppUpdate();
+        },
+        onError: (val) {
+          debugPrint('### onError: $val');
+        },
+      );
+      log("available ; $available");
+      if (available) {
+        isListening.value = true;
+
+        speech.listen(
+          localeId: appCtrl.languageVal,
+          onResult: (val) {
+            log("VAL : $val");
+            codeController.text = val.recognizedWords.toString();
+            update();
+          },
+          cancelOnError: true,
+        );
+
+        update();
+      } else {
+        log("NO");
+      }
+    } else {
+      isListening.value = false;
+      speechStopMethod();
+      update();
+    }
+  }
+
+  @override
+  void dispose() {
+
+    animationController!.dispose();
+    super.dispose();
   }
 
 }

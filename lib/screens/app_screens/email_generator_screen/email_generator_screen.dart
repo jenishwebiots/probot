@@ -13,14 +13,17 @@ class EmailGeneratorScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: AppAppBarCommon(
               title: appFonts.emailWriter, leadingOnTap: () => Get.back()),
-          body: emailGeneratorCtrl.isMailGenerated == true
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                child: emailGeneratorCtrl.isMailGenerated == true
+                    ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(appFonts.weCreatedLetter,
+                            Text(appFonts.weCreatedLetter.tr,
                                 style: AppCss.outfitSemiBold16
                                     .textColor(appCtrl.appTheme.primary)),
                             const VSpace(Sizes.s15),
@@ -28,13 +31,18 @@ class EmailGeneratorScreen extends StatelessWidget {
                                 color: appCtrl.appTheme.white,
                                 title: appFonts.generatedMail,
                                 isMax: false,
-                                controller:
-                                    emailGeneratorCtrl.generatedMailController)
+                                responseText: emailGeneratorCtrl.response
+                            )
                           ]),
+                      const VSpace(Sizes.s30),
                       ButtonCommon(title: appFonts.endEmailWriter, onTap: ()=> emailGeneratorCtrl.endEmailGeneratorDialog())
                     ]).paddingSymmetric(
-                  vertical: Insets.i30, horizontal: Insets.i20)
-              : const GeneratedMailLayout());
+                    vertical: Insets.i30, horizontal: Insets.i20)
+                    : const GeneratedMailLayout(),
+              ),
+              if(emailGeneratorCtrl.isLoader == true) const LoaderLayout()
+            ],
+          ));
     });
   }
 }

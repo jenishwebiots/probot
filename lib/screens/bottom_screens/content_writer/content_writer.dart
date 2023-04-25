@@ -17,6 +17,9 @@ class ContentWriter extends StatelessWidget {
         drawer: const CommonDrawer(),
         appBar: AppBar(
           leadingWidth: Sizes.s70,
+          actions: [
+            const CommonBalance().marginOnly(right: Insets.i20,top: Insets.i10,bottom: Insets.i10)
+          ],
           leading: const CommonMenuIcon().inkWell(
               onTap: () => contentCtrl.scaffoldKey.currentState!.openDrawer()),
           automaticallyImplyLeading: false,

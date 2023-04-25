@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../config.dart';
+
 
 class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
   const ChatScreenAppBar({Key? key}) : super(key: key);
@@ -52,17 +54,37 @@ class ChatScreenAppBar extends StatelessWidget with PreferredSizeWidget {
                       const HSpace(Sizes.s17),
                     ],
                   )
-                : const MoreOption()
+                : Row(
+                  children:const [
+                     CommonBalance(),
+                     MoreOption(),
+                  ],
+                )
           ],
           title: Row(children: [
-            Container(
-              height: Sizes.s50,
-              width: Sizes.s50,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage(appCtrl.selectedCharacter["image"]))),
-            ),
+            CachedNetworkImage(
+                imageUrl: chatCtrl.argImage!,
+                width: Sizes.s50,
+                height: Sizes.s50,
+                fit: BoxFit.fill,
+                imageBuilder: (context, imageProvider) => Container(
+                  height: Sizes.s50,
+                  width: Sizes.s50,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(chatCtrl.argImage!))),
+                ),
+                placeholder: (context, url) =>
+                const CircularProgressIndicator(),
+                errorWidget: (context, url, error) =>Container(
+                  height: Sizes.s50,
+                  width: Sizes.s50,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: AssetImage(appCtrl.selectedCharacter["image"]))),
+                )),
             const HSpace(Sizes.s10),
             Text(appCtrl.selectedCharacter["title"].toString().tr,
                 style: AppCss.outfitExtraBold22

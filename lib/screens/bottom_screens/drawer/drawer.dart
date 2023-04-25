@@ -32,21 +32,7 @@ class CommonDrawer extends StatelessWidget {
                       dashLength: 3,
                       dashColor: appCtrl.appTheme.txt.withOpacity(.2))
                   .marginSymmetric(horizontal: Insets.i20),
-              if (appCtrl.firebaseConfigModel!.isAddShow!)
-                const VSpace(Sizes.s15),
-              if (appCtrl.firebaseConfigModel!.isAddShow!)
-                Stack(alignment: Alignment.centerLeft, children: [
-                  Image.asset(eImageAssets.rewardBanner, width: Sizes.s182),
-                  Text(appFonts.watchNow.tr,
-                          style: AppCss.outfitMedium12
-                              .textColor(const Color(0xFFF4A703)))
-                      .paddingSymmetric(
-                          horizontal: Insets.i15, vertical: Insets.i8)
-                      .decorated(
-                          color: appCtrl.appTheme.sameWhite,
-                          borderRadius: BorderRadius.circular(AppRadius.r4))
-                      .paddingOnly(left: Insets.i12)
-                ]).inkWell(onTap: () => homeCtrl.onTapWatch()),
+
               ...homeCtrl.drawerList.asMap().entries.map((e) {
                 log("guest: ${appCtrl.isGuestLogin}");
                 return e.value["title"] == "chatBot"

@@ -22,7 +22,7 @@ class CharacterLayout extends StatelessWidget {
         Hero(
           tag: "chat$index",
           child: SizedBox(
-              child: Image.asset(data["image"]!,
+              child: Image.network(data["image"]!,
                   height: Sizes.s80, width: Sizes.s80)),
         ),
         if (isSelectedShow)

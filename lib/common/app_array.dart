@@ -116,7 +116,6 @@ class AppArray {
     {"title": "setting", "icon": eSvgAssets.setting},
   ];
 
-
   // notification list
   var notificationsList = [
     {
@@ -217,6 +216,7 @@ class AppArray {
     {"icon": eSvgAssets.rtl, "title": "rtl"},
     {"icon": eSvgAssets.subscribe, "title": "subscriptionPlan"},
     {"icon": eSvgAssets.fingerLock, "title": "fingerprintLock"},
+    {"icon": eSvgAssets.apiKey, "title": "manageApiKey"},
     {"icon": eSvgAssets.translate, "title": "language"},
     {"icon": eSvgAssets.star, "title": "rateApp"},
     {"icon": eSvgAssets.security, "title": "privacyTerm"},
@@ -395,10 +395,9 @@ class AppArray {
     {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
     {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
     {"icon": eSvgAssets.essay, "title": appFonts.essayWriter}
-
   ];
 
-  static final List<String> translateLanguages = [
+  var translateLanguages = [
     'Abkhaz',
     'Afar',
     'Afrikaans',
@@ -665,6 +664,7 @@ class AppArray {
     "letter",
   ];
 
+  //zodiac list
   var zodiacList = [
     'Aries',
     'Taurus',
@@ -678,5 +678,13 @@ class AppArray {
     'Capricorn',
     'Aquarius',
     'Pisces'
+  ];
+
+  // top-up balance option
+  var topUpBalanceOption = [
+    {"icon": eSvgAssets.star1, "price": 15},
+    {"icon": eSvgAssets.crown, "price": 35},
+    {"icon": eSvgAssets.diamond, "price": 65},
+    {"icon": eSvgAssets.dollar1, "price": 0}
   ];
 }

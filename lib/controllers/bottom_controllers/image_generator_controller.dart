@@ -46,8 +46,9 @@ class ImageGeneratorController extends GetxController {
           url,
           headers: {
             'Content-Type': 'application/json',
+            'Authorization':
+                'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
 
-            'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
           },
           body: jsonEncode(
             {
@@ -66,13 +67,11 @@ class ImageGeneratorController extends GetxController {
         } else {
           debugPrint(jsonDecode(request.body));
         }
-        if (appCtrl.envConfig["imageCount"] != "unlimited") {
-          final subscribeCtrl =
-              Get.isRegistered<SubscriptionFirebaseController>()
-                  ? Get.find<SubscriptionFirebaseController>()
-                  : Get.put(SubscriptionFirebaseController());
-          await subscribeCtrl.addUpdateFirebaseData();
-        }
+        final subscribeCtrl =
+        Get.isRegistered<SubscriptionFirebaseController>()
+            ? Get.find<SubscriptionFirebaseController>()
+            : Get.put(SubscriptionFirebaseController());
+        await subscribeCtrl.removeBalance();
       }
     } catch (e) {
       debugPrint(e.toString());

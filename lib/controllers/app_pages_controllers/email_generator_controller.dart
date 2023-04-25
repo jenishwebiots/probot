@@ -1,4 +1,5 @@
 import 'package:probot/config.dart';
+import 'package:probot/bot_api/api_services.dart';
 
 class EmailGeneratorController extends GetxController {
   TextEditingController topicController = TextEditingController();
@@ -10,9 +11,23 @@ class EmailGeneratorController extends GetxController {
   int selectIndex = 0;
   double value = 0;
   bool isMailGenerated = false;
+  bool isLoader = false;
+  String? response = "";
 
   onGenerateMail() {
-    isMailGenerated = true;
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Write a ${selectIndex == 0 ? "Small" : selectIndex == 1 ? "Medium" : "Large"} mail to ${writeToController.text} from ${writeFromController.text} for ${topicController.text} in ${toneLists[selectIndex]} tone").then((value) {
+          response = value;
+          update();
+          isMailGenerated = true;
+          isLoader = false;
+          update();
+    });
+    topicController.clear();
+    writeFromController.clear();
+    writeToController.clear();
+    generatedMailController.clear();
     update();
   }
 
@@ -22,23 +37,18 @@ class EmailGeneratorController extends GetxController {
   }
 
   endEmailGeneratorDialog() {
-    Get.generalDialog(
-        pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(title: appFonts.endEmailWriter,subTitle: appFonts.areYouSureEndEmail,endOnTap: () {
-            isMailGenerated = false;
-            Get.back();
-            update();
-          });
-        },
-        transitionBuilder: (context, anim1, anim2, child) {
-          return SlideTransition(
-            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-                .animate(anim1),
-            child: child,
-          );
-        },
-        transitionDuration: const Duration(milliseconds: 300)
-    );
+    dialogLayout.endDialog(
+        title: appFonts.endEmailWriter,
+        subTitle: appFonts.areYouSureEndEmail,
+        onTap: () {
+          topicController.clear();
+          writeFromController.clear();
+          writeToController.clear();
+          generatedMailController.clear();
+          isMailGenerated = false;
+          Get.back();
+          update();
+        });
   }
 
   @override

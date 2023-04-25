@@ -1,7 +1,5 @@
-import 'package:probot/controllers/app_pages_controllers/social_media_controller.dart';
 
 import '../../../config.dart';
-import 'layouts/social_media_list_layout.dart';
 
 class SocialMediaScreen extends StatelessWidget {
   final socialMediaCtrl = Get.put(SocialMediaController());
@@ -16,7 +14,7 @@ class SocialMediaScreen extends StatelessWidget {
               appBar: AppAppBarCommon(
                   title: appFonts.socialMedia, leadingOnTap: () => Get.back()),
               body: Column(children: [
-                Text(appFonts.chooseOneOfThese,
+                Text(appFonts.chooseOneOfThese.tr,
                     style: AppCss.outfitSemiBold16
                         .textColor(appCtrl.appTheme.primary)),
                 const VSpace(Sizes.s15),

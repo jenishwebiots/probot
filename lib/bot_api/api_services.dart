@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:http/http.dart' as http;
 import 'package:probot/config.dart';
 
@@ -9,15 +10,18 @@ class ApiServices {
   static var client = http.Client();
 
   static Future<String> chatCompeletionResponse(String prompt) async {
+    final firebaseCtrl =
+    Get.isRegistered<SubscriptionFirebaseController>()
+        ? Get.find<SubscriptionFirebaseController>()
+        : Get.put(SubscriptionFirebaseController());
+    firebaseCtrl.removeBalance();
     var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
     final response = await http.post(
       url,
       headers: {
         'Content-Type': 'application/json',
-        //'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
-        'Authorization': 'Bearer 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',
-
+        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",
@@ -40,6 +44,8 @@ class ApiServices {
     Map<String, dynamic> newresponse =
         jsonDecode(utf8.decode(response.bodyBytes));
 
-    return response.statusCode == 200 ? newresponse['choices'][0]['message']['content'] :"";
+    return response.statusCode == 200
+        ? newresponse['choices'][0]['message']['content']
+        : "";
   }
 }

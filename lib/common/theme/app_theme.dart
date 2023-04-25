@@ -14,6 +14,8 @@ class AppTheme {
   Color primary;
   Color primaryLight;
   Color primaryLight1;
+  Color primaryLight2;
+  Color primaryLightBorder;
   Color primaryShadow;
   Color secondary;
   Color accentTxt;
@@ -46,6 +48,7 @@ class AppTheme {
   Color textField;
   Color greyLight;
   Color redColor;
+  Color yellowColor;
 
   /// Default constructor
   AppTheme({
@@ -54,6 +57,8 @@ class AppTheme {
     required this.primary,
     required this.primaryLight,
     required this.primaryLight1,
+    required this.primaryLight2,
+    required this.primaryLightBorder,
     required this.primaryShadow,
     required this.secondary,
     required this.accentTxt,
@@ -86,6 +91,7 @@ class AppTheme {
     required this.textField,
     required this.greyLight,
     required this.redColor,
+    required this.yellowColor,
   });
 
   /// fromType factory constructor
@@ -98,6 +104,8 @@ class AppTheme {
           primary: const Color(0xff35C1FF),
           primaryLight: const Color.fromRGBO(53, 193, 255, 0.1),
           primaryLight1: const Color.fromRGBO(53, 193, 255, 0.2),
+          primaryLight2: const Color(0xFFD7F3FF),
+          primaryLightBorder: const Color.fromRGBO(53, 193, 255, 0.4),
           primaryShadow: const Color.fromRGBO(53, 193, 255, 0.06),
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
@@ -130,6 +138,7 @@ class AppTheme {
           textField: const Color(0xffF5F5F6),
           greyLight: const Color.fromRGBO(50, 52, 68, 0.1),
           redColor: const Color(0XFFFE3D3D),
+          yellowColor: const Color(0XFFFFC700),
         );
 
       case ThemeType.dark:
@@ -139,6 +148,8 @@ class AppTheme {
           primary: const Color(0xff35C1FF),
           primaryLight: const Color.fromRGBO(53, 193, 255, 0.1),
           primaryLight1: const Color.fromRGBO(53, 193, 255, 0.2),
+          primaryLight2: const Color(0xFFD7F3FF),
+          primaryLightBorder: const Color.fromRGBO(53, 193, 255, 0.4),
           primaryShadow: const Color(0xFF323444),
           secondary: const Color(0xFF6EBAE7),
           accentTxt: const Color(0xFF001928),
@@ -176,6 +187,7 @@ class AppTheme {
           textField: const Color(0xff4D4F5D),
           greyLight: const Color.fromRGBO(50, 52, 68, 0.1),
           redColor: const Color(0XFFFE3D3D),
+          yellowColor: const Color(0XFFFFC700),
         );
     }
   }

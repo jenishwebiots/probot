@@ -103,12 +103,10 @@ class ContentWriterController extends GetxController {
         isLoading.value = false;
         update();
       });
-      if (appCtrl.envConfig["textCompletionCount"] != "unlimited") {
-        final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
-            ? Get.find<SubscriptionFirebaseController>()
-            : Get.put(SubscriptionFirebaseController());
-        await subscribeCtrl.addUpdateFirebaseData();
-      }
+      final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
+          ? Get.find<SubscriptionFirebaseController>()
+          : Get.put(SubscriptionFirebaseController());
+      await subscribeCtrl.removeBalance();
       contentController.clear();
       update();
     }

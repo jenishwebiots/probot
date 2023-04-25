@@ -1,17 +1,18 @@
 import 'dart:developer';
-
+import 'package:probot/bot_api/api_services.dart';
 import '../../config.dart';
 
 class BirthdayMessageController extends GetxController {
-
   TextEditingController birthdayMessagesGenController = TextEditingController();
   TextEditingController birthdayWishGenController = TextEditingController();
   TextEditingController nameGenController = TextEditingController();
 
   bool isBirthdayGenerated = false;
+  bool isLoader = false;
+  String? response = '';
 
   final FixedExtentScrollController? scrollController =
-  FixedExtentScrollController();
+      FixedExtentScrollController();
   int value = 0;
   String? selectItem;
   String? onSelect;
@@ -19,8 +20,20 @@ class BirthdayMessageController extends GetxController {
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
-  onTapWishesGenerate () {
-    isBirthdayGenerated = true;
+  onTapWishesGenerate() {
+    isLoader = true;
+    ApiServices.chatCompeletionResponse(
+        "Birthday wish message for ${birthdayWishGenController.text} with ${nameGenController.text} name in ${selectItem ?? "Hindi"}").then((value) {
+          response = value;
+          update();
+          isBirthdayGenerated = true;
+          isLoader = false;
+          update();
+    });
+    birthdayMessagesGenController.clear();
+    birthdayWishGenController.clear();
+    nameGenController.clear();
+    selectItem = "";
     update();
   }
 
@@ -29,6 +42,10 @@ class BirthdayMessageController extends GetxController {
         title: appFonts.endBirthdayMessage,
         subTitle: appFonts.areYouSureEndBirthday,
         onTap: () {
+          birthdayMessagesGenController.clear();
+          birthdayWishGenController.clear();
+          nameGenController.clear();
+          selectItem = "";
           isBirthdayGenerated = false;
           Get.back();
           update();
@@ -51,8 +68,8 @@ class BirthdayMessageController extends GetxController {
             },
             scrollController: birthdayCtrl.scrollController,
             onSuggestionSelected: (i) {
-              int index =
-              birthdayCtrl.langCtrl.translateLanguagesList.indexWhere((element) {
+              int index = birthdayCtrl.langCtrl.translateLanguagesList
+                  .indexWhere((element) {
                 return element == i;
               });
               birthdayCtrl.scrollController!.jumpToItem(index);
@@ -82,5 +99,4 @@ class BirthdayMessageController extends GetxController {
               topLeft: Radius.circular(AppRadius.r10))),
     );
   }
-
 }

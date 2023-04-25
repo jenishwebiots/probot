@@ -45,22 +45,51 @@ class PaymentList extends StatelessWidget {
                             appArray.paymentMethodList.asMap().entries.map((e) {
                         return e.value["title"] == "payPal"
                             ? appCtrl.firebaseConfigModel!.isPaypal!
-                                ? PaymentMethodList(index: e.key, data: e.value)
+                                ? PaymentMethodList(
+                                    index: e.key,
+                                    data: e.value,
+                                    selectIndexPayment: subscribeCtrl.selectIndexPayment,
+                                    onTap: () {
+                                      subscribeCtrl.selectIndexPayment = e.key;
+                                      subscribeCtrl.update();
+                                    })
                                 : Container()
                             : e.value["title"] == "razor"
                                 ? appCtrl.firebaseConfigModel!.isRazorPay!
                                     ? PaymentMethodList(
-                                        index: e.key, data: e.value)
+                                        index: e.key,
+                                        data: e.value,
+                                        selectIndexPayment: subscribeCtrl.selectIndexPayment,
+                                        onTap: () {
+                                          subscribeCtrl.selectIndexPayment =
+                                              e.key;
+                                          subscribeCtrl.update();
+                                        })
                                     : Container()
                                 : e.value["title"] == "stripe"
                                     ? appCtrl.firebaseConfigModel!.isStripe!
                                         ? PaymentMethodList(
-                                            index: e.key, data: e.value)
+                                            index: e.key,
+                                            data: e.value,
+                                            selectIndexPayment: subscribeCtrl.selectIndexPayment,
+                                            onTap: () {
+                                              subscribeCtrl.selectIndexPayment =
+                                                  e.key;
+                                              subscribeCtrl.update();
+                                            })
                                         : Container()
                                     : e.value["title"] == "inApp"
                                         ? appCtrl.firebaseConfigModel!.isInApp!
                                             ? PaymentMethodList(
-                                                index: e.key, data: e.value)
+                                                index: e.key,
+                                                data: e.value,
+                                                selectIndexPayment: subscribeCtrl.selectIndexPayment,
+                                                onTap: () {
+                                                  subscribeCtrl
+                                                          .selectIndexPayment =
+                                                      e.key;
+                                                  subscribeCtrl.update();
+                                                })
                                             : Container()
                                         : Container();
                       }).toList()),
@@ -102,7 +131,6 @@ class PaymentList extends StatelessWidget {
                                     Get.back();
                                   } else if (subscribeCtrl.selectIndexPayment ==
                                       3) {
-
                                     late PurchaseParam purchaseParam;
                                     final Map<String, PurchaseDetails>
                                         purchases = Map<String,
@@ -133,11 +161,11 @@ class PaymentList extends StatelessWidget {
 
                                       purchaseParam = GooglePlayPurchaseParam(
                                           productDetails:
-                                          subscribe!.type == "weekly"
-                                              ? inAppCtrl.products[1]
-                                              : subscribe!.type == "monthly"
-                                              ? inAppCtrl.products[0]
-                                              : inAppCtrl.products[2],
+                                              subscribe!.type == "weekly"
+                                                  ? inAppCtrl.products[1]
+                                                  : subscribe!.type == "monthly"
+                                                      ? inAppCtrl.products[0]
+                                                      : inAppCtrl.products[2],
                                           changeSubscriptionParam:
                                               (oldSubscription != null)
                                                   ? ChangeSubscriptionParam(
@@ -148,11 +176,11 @@ class PaymentList extends StatelessWidget {
                                     } else {
                                       purchaseParam = PurchaseParam(
                                           productDetails:
-                                          subscribe!.type == "weekly"
-                                              ? inAppCtrl.products[1]
-                                              : subscribe!.type == "monthly"
-                                              ? inAppCtrl.products[0]
-                                              : inAppCtrl.products[2]);
+                                              subscribe!.type == "weekly"
+                                                  ? inAppCtrl.products[1]
+                                                  : subscribe!.type == "monthly"
+                                                      ? inAppCtrl.products[0]
+                                                      : inAppCtrl.products[2]);
 
                                       log("IOS : $purchaseParam");
                                     }
@@ -186,7 +214,6 @@ class PaymentList extends StatelessWidget {
 
   GooglePlayPurchaseDetails? _getOldSubscription(
       ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
-
     GooglePlayPurchaseDetails? oldSubscription;
     return oldSubscription;
   }
