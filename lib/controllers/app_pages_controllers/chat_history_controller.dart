@@ -3,13 +3,21 @@ import 'package:probot/config.dart';
 class ChatHistoryController extends GetxController {
 
   List chatHistoryLists = [];
+  List historyTagLists = [];
   bool isLongPress = false;
   List selectedIndex = [];
   List selectedData = [];
+  int selectIndex = 0;
+
+  onHistoryTagChange (index) {
+    selectIndex = index;
+    update();
+  }
 
   @override
   void onReady() {
     chatHistoryLists = appArray.chatHistoryList;
+    historyTagLists = appArray.historyTagList;
     update();
     // TODO: implement onReady
     super.onReady();

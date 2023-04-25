@@ -1,9 +1,7 @@
 import 'dart:ui';
 import '../../../config.dart';
 import 'layout/filter_layout.dart';
-import 'layout/loader_layout.dart';
 import 'layout/page_and_grid_view.dart';
-import 'layout/top_layout.dart';
 
 class ImageGenerator extends StatelessWidget {
   final imageGeneratorCtrl = Get.put(ImageGeneratorController());

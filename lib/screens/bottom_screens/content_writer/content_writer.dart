@@ -15,16 +15,7 @@ class ContentWriterScreen extends StatelessWidget {
         backgroundColor: appCtrl.appTheme.bg1,
         key: contentCtrl.scaffoldKey,
         drawer: const CommonDrawer(),
-        appBar: AppBar(
-          leadingWidth: Sizes.s70,
-          leading: const CommonMenuIcon().inkWell(
-              onTap: () => contentCtrl.scaffoldKey.currentState!.openDrawer()),
-          automaticallyImplyLeading: false,
-          backgroundColor: appCtrl.appTheme.primary,
-          title: Text(appFonts.option3.tr,
-              style: AppCss.outfitExtraBold22
-                  .textColor(appCtrl.appTheme.sameWhite)),
-        ),
+        appBar: AppAppBarCommon(title: appFonts.option3,leadingOnTap: ()=> Get.back()),
         body: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
             overscroll.disallowIndicator();

@@ -372,6 +372,7 @@ class AppArray {
       "subtitle": appFonts.march23,
     },
   ];
+
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,
@@ -395,7 +396,7 @@ class AppArray {
     {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
     {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
     {"icon": eSvgAssets.essay, "title": appFonts.essayWriter},
-    {"icon": eSvgAssets.content, "title": appFonts.content}
+    {"icon": eSvgAssets.contentWriting, "title": appFonts.content}
   ];
 
   var  translateLanguages = [
@@ -702,7 +703,6 @@ class AppArray {
       "preBuildQuestions": [
         {"title": appFonts.developmentArchitecture},
         {"title": appFonts.helpMeFindMistakes},
-
         {"title": appFonts.iNeedToCreateARest},
       ]
     },{
@@ -718,16 +718,33 @@ class AppArray {
         {"title": appFonts.developmentArchitecture},
         {"title": appFonts.helpMeFindMistakes},
         {"title": appFonts.writingThisCode},
-
       ]
     },{
       "id":4,
       "preBuildQuestions": [
         {"title": appFonts.developmentArchitecture},
         {"title": appFonts.helpMeFindMistakes},
-
         {"title": appFonts.iNeedToCreateARest},
       ]
+    },
+  ];
+
+  var historyTagList = [
+    {"title":appFonts.all},
+    {"title": appFonts.chat},
+    {"title": appFonts.code},
+    {"title": appFonts.image},
+    {"title": appFonts.translation}
+  ];
+
+  var imageScannerList = [
+    {
+      "title": appFonts.scanFromCamera,
+      "image": eSvgAssets.cameraColor
+    },
+    {
+      "title": appFonts.uploadFromGallery,
+      "image": eSvgAssets.galleryColor
     },
   ];
 }
