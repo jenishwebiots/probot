@@ -1,7 +1,10 @@
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:ntp/ntp.dart';
 
 import '../../config.dart';
 
@@ -81,6 +84,7 @@ class SettingController extends GetxController {
           }
         });
       }
+
     } else if (data['title'] == "logout") {
       FirebaseAuth.instance.signOut();
       appCtrl.storage.erase();

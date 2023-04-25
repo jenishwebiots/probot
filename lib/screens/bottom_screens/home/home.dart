@@ -40,6 +40,23 @@ class Home extends StatelessWidget {
                                       Get.toNamed(routeName.quickAdvisor))
                         ]),
                     /* ...homeCtrl.homeOptionList.asMap().entries.map((e) {
+        child: GetBuilder<AppController>(
+          builder: (appCtrl) {
+            return Scaffold(
+              key: homeCtrl.scaffoldKey,
+              drawer: const CommonDrawer(),
+              body: Stack(alignment: Alignment.bottomCenter, children: [
+                SingleChildScrollView(
+                    child: Column(children: [
+                  HomeTopLayout(
+                      onTap: () => homeCtrl.scaffoldKey.currentState!.openDrawer()),
+                  const DottedLines(),
+                  Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const VSpace(Sizes.s20),
+                        ...homeCtrl.homeOptionList.asMap().entries.map((e) {
                           return ((appCtrl.firebaseConfigModel!.isChatShow! &&
                                       e.key == 0) ||
                                   (appCtrl.firebaseConfigModel!

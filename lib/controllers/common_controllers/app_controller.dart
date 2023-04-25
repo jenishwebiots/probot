@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:probot/widgets/balance_alert.dart';
 
 import '../../config.dart';
 
@@ -55,20 +56,21 @@ class AppController extends GetxController {
       dashboardCtrl.onBottomTap(2);
     } else if (data["title"] == "option3") {
       dashboardCtrl.onBottomTap(3);
-    }else if (data["title"] == "setting") {
+    } else if (data["title"] == "setting") {
       dashboardCtrl.onBottomTap(4);
     } else if (data["title"] == "chatHistory") {
-     if(appCtrl.isGuestLogin){
-       Get.toNamed(routeName.signInScreen);
-     }else{
-       Get.toNamed(routeName.chatHistory);
-     }
+      if (appCtrl.isGuestLogin) {
+        Get.toNamed(routeName.signInScreen);
+      } else {
+        Get.toNamed(routeName.chatHistory);
+      }
     }
     dashboardCtrl.update();
   }
 
   void createRewardedAd() {
-    appCtrl.firebaseConfigModel =  FirebaseConfigModel.fromJson(appCtrl.storage.read(session.firebaseConfig));
+    appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(
+        appCtrl.storage.read(session.firebaseConfig));
     RewardedAd.load(
         adUnitId: Platform.isAndroid
             ? appCtrl.firebaseConfigModel!.rewardAndroidId!
@@ -157,11 +159,24 @@ class AppController extends GetxController {
         });
   }
 
-  @override
-  void onReady() {
-    // TODO: implement onReady
-
-    super.onReady();
+  //balance top up
+  balanceTopUpSuccessDialog() {
+    Get.generalDialog(
+      pageBuilder: (context, anim1, anim2) {
+        return const Align(
+          alignment: Alignment.center,
+          child: BalanceAlertDialog(),
+        );
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
+              .animate(anim1),
+          child: child,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 300),
+    );
   }
 
   @override

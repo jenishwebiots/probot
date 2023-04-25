@@ -80,45 +80,16 @@ class _MyAppState extends State<MyApp> {
         stream: Connectivity().onConnectivityChanged,
         builder: (context, AsyncSnapshot<ConnectivityResult> statusSnapshot) {
           log("STATUS : ${statusSnapshot.data}");
-          return statusSnapshot.data != ConnectivityResult.none &&
-                  statusSnapshot.data != null
-              ? StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection("config")
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      appCtrl.firebaseConfigModel =
-                          FirebaseConfigModel.fromJson(
-                              snapshot.data!.docs[0].data());
-                      Stripe.publishableKey =
-                          appCtrl.firebaseConfigModel!.stripePublishKey!;
-                      appCtrl.storage.write(session.firebaseConfig,
-                          snapshot.data!.docs[0].data());
-                      appCtrl.update();
-                    }
-                    return GetMaterialApp(
-                        themeMode: ThemeService().theme,
-                        theme: AppTheme.fromType(ThemeType.light).themeData,
-                        darkTheme: AppTheme.fromType(ThemeType.dark).themeData,
-                        locale: const Locale('en', 'US'),
-                        translations: Language(),
-                        fallbackLocale: const Locale('en', 'US'),
-                        home: SplashScreen(),
-                        title: appFonts.proBot.tr,
-                        getPages: appRoute.getPages,
-                        debugShowCheckedModeBanner: false);
-                  })
-              : GetMaterialApp(
+          return  GetMaterialApp(
                   themeMode: ThemeService().theme,
                   theme: AppTheme.fromType(ThemeType.light).themeData,
                   darkTheme: AppTheme.fromType(ThemeType.dark).themeData,
                   locale: const Locale('en', 'US'),
                   translations: Language(),
                   fallbackLocale: const Locale('en', 'US'),
-                  home: NoInternet(
-                    connectionStatus: statusSnapshot.data,
-                  ),
+                  home:statusSnapshot.data != ConnectivityResult.none &&
+                      statusSnapshot.data != null
+                      ?const NoInternet() : SplashScreen(),
                   title: appFonts.proBot.tr,
                   getPages: appRoute.getPages,
                   debugShowCheckedModeBanner: false);

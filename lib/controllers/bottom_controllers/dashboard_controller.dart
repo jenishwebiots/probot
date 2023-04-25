@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:probot/config.dart';
 
 class DashboardController extends GetxController
@@ -63,7 +65,13 @@ class DashboardController extends GetxController
 
     if (selectedIndex == 1) {
       if (appCtrl.firebaseConfigModel!.isAddShow! && appCtrl.envConfig["chatTextCount"] != "unlimited") {
-        chatLayoutCtrl.showInterstitialAd();
+        if(appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
+          chatLayoutCtrl.showInterstitialAd();
+        }else{
+          log("FB");
+          chatLayoutCtrl.loadInterstitialAd();
+          //chatLayoutCtrl.showFbInterstitialAd();
+        }
 
       }
       chatLayoutCtrl.getChatId();

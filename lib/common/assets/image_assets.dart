@@ -44,6 +44,12 @@ class ImageAssets {
   final String voice = "assets/images/voice.png";
 
 
+  final String coins = "assets/images/coins.png";
+  final String cashOffer = "assets/images/cashOffer.png";
+  final String subscriptionTopBg = "assets/images/subscriptionTopBg.png";
+  final String subscriptionCrown = "assets/images/subscriptionCrown.png";
+
+
   // Icons
   final String google = "assets/images/icons/Google.png";
   final String english = "assets/images/icons/english.png";
