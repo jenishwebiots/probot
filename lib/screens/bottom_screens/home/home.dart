@@ -39,6 +39,7 @@ class Home extends StatelessWidget {
                                   onTap: () =>
                                       Get.toNamed(routeName.quickAdvisor))
                             ]),
+
                         const VSpace(Sizes.s18),
                         GridView.builder(
                             padding: EdgeInsets.zero,

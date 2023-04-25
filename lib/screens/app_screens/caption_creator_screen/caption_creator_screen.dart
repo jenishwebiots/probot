@@ -8,13 +8,13 @@ class CaptionCreatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
-      return Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: appCtrl.appTheme.bg1,
-          appBar: AppAppBarCommon(
-              title: appFonts.captionCreator, leadingOnTap: () => Get.back()),
-          body: Stack(
-            children: [
+      return DirectionalityRtl(
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: appCtrl.appTheme.bg1,
+            appBar: AppAppBarCommon(
+                title: appFonts.captionCreator, leadingOnTap: () => Get.back()),
+            body: Stack(children: [
               SingleChildScrollView(
                   child: socialMediaCtrl.isCaptionGenerated == true
                       ? Column(
@@ -32,15 +32,16 @@ class CaptionCreatorScreen extends StatelessWidget {
                                         title: appFonts.amazingCaption,
                                         color: appCtrl.appTheme.white,
                                         isMax: false,
-                                        isAnimated: socialMediaCtrl.isListening.value,
-                                        height: socialMediaCtrl.isListening.value
-                                            ? socialMediaCtrl.animation!.value
-                                            : Sizes.s20,
-                                        mircroPhoneTap: (){
+                                        mircroPhoneTap: () {
                                           Vibration.vibrate(duration: 200);
                                           socialMediaCtrl.speechToText();
                                         },
-controller: socialMediaCtrl.captionController,
+                                        isAnimated:
+                                            socialMediaCtrl.isListening.value,
+                                        height: socialMediaCtrl
+                                                .isListening.value
+                                            ? socialMediaCtrl.animation!.value
+                                            : Sizes.s20,
                                         responseText:
                                             socialMediaCtrl.captionResponse)
                                   ]),
@@ -53,8 +54,8 @@ controller: socialMediaCtrl.captionController,
                           vertical: Insets.i30, horizontal: Insets.i20)
                       : const WithoutCaptionLayout()),
               if (socialMediaCtrl.isLoader == true) const LoaderLayout()
-            ]
-          ));
+            ])),
+      );
     });
   }
 }

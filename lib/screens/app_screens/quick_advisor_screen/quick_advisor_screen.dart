@@ -11,24 +11,26 @@ class QuickAdvisorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<QuickAdvisorController>(
       builder: (quickAdvisorCtrl) {
-        return Scaffold(
-           appBar: AppAppBarCommon(title: appFonts.quickAdvice,leadingOnTap: ()=> Get.back()),
-          body:  GridView.builder(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: quickAdvisorCtrl.quickAdvisorLists.length,
-              gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 1,
-                  mainAxisSpacing: 15,
-                  mainAxisExtent: 105,
-                  crossAxisCount: 3),
-              itemBuilder: (context, index) {
-                return QuickAdvisorLayout(
-                    data: quickAdvisorCtrl.quickAdvisorLists[index]);
-              }).paddingAll(Insets.i20),
+        return DirectionalityRtl(
+          child: Scaffold(
+             appBar: AppAppBarCommon(title: appFonts.quickAdvice,leadingOnTap: ()=> Get.back()),
+            body:  GridView.builder(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: quickAdvisorCtrl.quickAdvisorLists.length,
+                gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 1,
+                    mainAxisSpacing: 15,
+                    mainAxisExtent: 105,
+                    crossAxisCount: 3),
+                itemBuilder: (context, index) {
+                  return QuickAdvisorLayout(
+                      data: quickAdvisorCtrl.quickAdvisorLists[index]);
+                }).paddingAll(Insets.i20),
+          ),
         );
       }
     );

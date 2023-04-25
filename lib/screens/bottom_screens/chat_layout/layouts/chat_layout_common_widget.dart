@@ -33,7 +33,7 @@ class ChatCommonWidget{
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-              image: AssetImage(image))));
+              image: NetworkImage(image))));
 
   // common svg icon
   Widget commonSvgIcon(icon,{GestureTapCallback? onTap}) =>  SvgPicture.asset(

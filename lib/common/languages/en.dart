@@ -382,7 +382,6 @@ final dynamic en = {
   'retry': "Retry",
   'noInternetDesc':
       "Couldn't connect to the internet.\nPlease check your internet connection settings.",
-
   'yes': "Yes",
   'no': "No",
   'alert': "Alert!",

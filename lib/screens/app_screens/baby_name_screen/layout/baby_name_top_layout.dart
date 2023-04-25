@@ -36,7 +36,7 @@ class BabyNameTopLayout extends StatelessWidget {
                             index: e.key,
                             selectIndex: babyCtrl.selectedNameIndex,
                             onTap: () => babyCtrl.onNameSuggestionChange(e.key))
-                        .paddingOnly(right: Insets.i50))
+                        .paddingOnly(right: appCtrl.isRTL ? 0 : Insets.i50,left: appCtrl.isRTL ? Insets.i50 : 0))
                     .toList()),
             const VSpace(Sizes.s5),
             babyCtrl.selectedNameIndex == 0

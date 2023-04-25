@@ -324,6 +324,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
         onTap: () {
           hashtagController.clear();
           isHashtagGenerated = false;
+          progressValue = 0.0;
           Get.back();
           update();
         });

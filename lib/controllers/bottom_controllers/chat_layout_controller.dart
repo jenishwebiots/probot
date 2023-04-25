@@ -7,10 +7,14 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/bot_api/api_services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:probot/models/quiestions_suggestion_model.dart';
 import '../../config.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../screens/bottom_screens/chat_layout/layouts/pre_build_questions_layout.dart';
+import '../../screens/bottom_screens/chat_layout/layouts/suggestion_layout.dart';
 
 class ChatLayoutController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -18,8 +22,11 @@ class ChatLayoutController extends GetxController
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   int index = 0;
+  int selectIndex = 0;
   bool isLongPress = false;
   List backgroundList = [];
+  List questionsSuggestionList = [];
+  List questionsLists = [];
   Rx<List<ChatListDateWise>> chatList = Rx<List<ChatListDateWise>>([]);
   final chatController = TextEditingController();
   ScrollController scrollController = ScrollController();
@@ -70,9 +77,18 @@ bool isInterstitialAdLoaded =false;
   BannerAd? bannerAd;
   bool bannerAdIsLoaded = false;
 
+  onSuggestionChange(data) {
+    selectIndex = data["id"];
+    update();
+  }
+
   @override
   void onReady() {
     // TODO: implement onReady
+    questionsSuggestionList = appArray.questionSuggestionList;
+    questionsLists = appArray.questionsList
+        .map((e) => QuestionSuggestionsModel.fromJson(e))
+        .toList();
     bannerAd = BannerAd(
         size: AdSize.banner,
         adUnitId: Platform.isAndroid
@@ -129,9 +145,9 @@ bool isInterstitialAdLoaded =false;
       ..addListener(() {
         update();
       });
+    update();
     super.onReady();
   }
-
 
   //clear data while go back
   clearData() {
@@ -150,7 +166,7 @@ bool isInterstitialAdLoaded =false;
     super.dispose();
     _interstitialAd?.dispose();
     bannerAd?.dispose();
-    bannerAd=null;
+    bannerAd = null;
   }
 
   Future<String?> _getId() async {
@@ -314,10 +330,91 @@ bool isInterstitialAdLoaded =false;
             Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
       }
     }else{
+      log("MESSAGE : ${appCtrl.selectedCharacter}");
+      bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin);
+      argImage = appCtrl.selectedCharacter["image"];
+      messages.value.add(
+        ChatMessage(
+            text: appCtrl.selectedCharacter["message"],
+            chatMessageType: ChatMessageType.bot,
+            time: DateTime.now().millisecondsSinceEpoch),
+      );
+      shareMessages.add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
+      selectedMessages.add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
+      itemCount.value = messages.value.length;
+      int createdDate = DateTime.now().millisecondsSinceEpoch;
+      update();
       chatId =  DateTime
           .now()
           .millisecondsSinceEpoch
           .toString();
+
+      if (!isGuestLogin) {
+        log("chatId : $chatId");
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection("chats")
+            .where("chatId", isEqualTo: chatId)
+            .limit(1)
+            .get()
+            .then((valueCheck) async {
+          if (valueCheck.docs.isEmpty) {
+            await FirebaseFirestore.instance
+                .collection("users")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection("chats")
+                .add({
+              'userId': FirebaseAuth.instance.currentUser!.uid,
+              'avatar': appCtrl.selectedCharacter["image"],
+              "characterId" :appCtrl.selectedCharacter["id"],
+              'message': appCtrl.selectedCharacter["message"],
+              'chatId': chatId,
+              "createdDate": createdDate,
+            }).then((add) async {
+              await FirebaseFirestore.instance
+                  .collection("chatHistory")
+                  .doc(chatId)
+                  .collection("chats")
+                  .add({
+                'userId': FirebaseAuth.instance.currentUser!.uid,
+                'avatar': appCtrl.selectedCharacter["image"],
+                "characterId" :appCtrl.selectedCharacter["id"],
+                'message': appCtrl.selectedCharacter["message"],
+                'chatId': chatId,
+                "createdDate": createdDate,
+                "messageType": ChatMessageType.bot.name
+              });
+            });
+          } else {
+            await FirebaseFirestore.instance
+                .collection("users")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection("chats")
+                .doc(valueCheck.docs[0].id)
+                .update({
+              'userId': FirebaseAuth.instance.currentUser!.uid,
+              'avatar': appCtrl.selectedCharacter["image"],
+              'message': appCtrl.selectedCharacter["message"],
+              'chatId': chatId,
+              "createdDate": createdDate,
+            }).then((values) async {
+              await FirebaseFirestore.instance
+                  .collection("chatHistory")
+                  .doc(chatId)
+                  .collection("chats")
+                  .add({
+                'userId': FirebaseAuth.instance.currentUser!.uid,
+                'avatar': appCtrl.selectedCharacter["image"],
+                'message': appCtrl.selectedCharacter["message"],
+                'chatId': chatId,
+                "createdDate": createdDate,
+                "messageType": ChatMessageType.bot.name
+              });
+            });
+          }
+        });
+      }
     }
     update();
   }
@@ -441,8 +538,7 @@ bool isInterstitialAdLoaded =false;
     scrollDown();
     update();
     await Future.delayed(const Duration(milliseconds: 3));
-    ApiServices.chatCompeletionResponse(textInput.value)
-        .then((value) async {
+    ApiServices.chatCompeletionResponse(textInput.value).then((value) async {
       log("RESPONSE : $value");
       if (value == "") {
         if (!isGuestLogin) {
@@ -685,4 +781,70 @@ bool isInterstitialAdLoaded =false;
       update();
     }
   }
+
+  onTapSuggestions() {
+    Get.bottomSheet(
+      isScrollControlled: true,
+      backgroundColor: appCtrl.appTheme.white,
+      StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        return GetBuilder<ChatLayoutController>(builder: (_) {
+          return SizedBox(
+                  child: SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(appFonts.questionSuggestion.tr,
+                          style: AppCss.outfitSemiBold20
+                              .textColor(appCtrl.appTheme.txt)),
+                      SvgPicture.asset(eSvgAssets.cross)
+                          .inkWell(onTap: () => Get.back())
+                    ]),
+                const DottedLines().paddingSymmetric(vertical: Insets.i20),
+                SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                        children: questionsSuggestionList
+                            .asMap()
+                            .entries
+                            .map((e) => SuggestionLayout(
+                                data: e.value,
+                                selectIndex: selectIndex,
+                                index: e.value["id"],
+                                onTap: () => onSuggestionChange(e.value)))
+                            .toList())),
+                const VSpace(Sizes.s20),
+                Text(appFonts.preBuildQuestions,
+                    style:
+                        AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
+                const VSpace(Sizes.s15),
+                ...questionsLists
+                    .asMap()
+                    .entries
+                    .map((e) => Column(
+                        children: e.value.preBuildQuestions
+                            .asMap()
+                            .entries
+                            .map<Widget>((s) => selectIndex == e.value.id
+                                ? PreBuildQuestionsLayout(data: s.value)
+                                : Container())
+                            .toList()))
+                    .toList()
+              ])))
+              .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i20);
+        });
+      }),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(AppRadius.r10),
+              topLeft: Radius.circular(AppRadius.r10))),
+    );
+  }
 }
+/* const VSpace(Sizes.s20),
+                                    Text(appFonts.preBuildQuestions,
+                                        style: AppCss.outfitMedium16
+                                            .textColor(appCtrl.appTheme.txt)),
+                                    const VSpace(Sizes.s15),*/

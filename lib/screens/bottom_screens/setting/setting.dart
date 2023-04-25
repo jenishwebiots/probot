@@ -41,10 +41,7 @@ class Setting extends StatelessWidget {
                       .textColor(appCtrl.appTheme.lightText))
             ])
           ]),
-          const VSpace(Sizes.s10),
-          if (appCtrl.isGuestLogin || settingCtrl.userName != null)
-            const CountLayout(),
-          if (appCtrl.isGuestLogin || settingCtrl.userName != null)
+
             const VSpace(Sizes.s20),
           ...settingCtrl.settingList
               .asMap()

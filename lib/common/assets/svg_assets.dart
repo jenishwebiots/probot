@@ -143,5 +143,10 @@ class SvgAssets {
   final String calender = "assets/svg/calender.svg";
   final String apiKey = "assets/svg/apiKey.svg";
   final String apiArrow = "assets/svg/apiArrow.svg";
+  final String suggestion = "assets/svg/suggestion.svg";
+  final String cameraColor = "assets/svg/cameraColor.svg";
+  final String cameraNav = "assets/svg/cameraNav.svg";
+  final String micNav = "assets/svg/micNav.svg";
+  final String micColor = "assets/svg/micColor.svg";
 
 }

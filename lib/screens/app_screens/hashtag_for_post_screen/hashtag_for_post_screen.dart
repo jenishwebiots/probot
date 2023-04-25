@@ -1,6 +1,4 @@
-import 'package:vibration/vibration.dart';
-
-import '../../../config.dart';
+import '../../../config.dart';import 'package:vibration/vibration.dart';
 
 class HashtagForPostScreen extends StatelessWidget {
   const HashtagForPostScreen({Key? key}) : super(key: key);
@@ -8,65 +6,79 @@ class HashtagForPostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
-      return Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppAppBarCommon(
-              title: appFonts.hashTagsForPost, leadingOnTap: () => Get.back()),
-          body: Stack(children: [
-            SingleChildScrollView(
-              child: Column(children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                  Text(appFonts.fillBelowToRight.tr,
-                      style: AppCss.outfitBold16
-                          .textColor(appCtrl.appTheme.primary)),
-                  const VSpace(Sizes.s15),
-                  Column(children: [
-                    InputLayout(
-                        hintText: appFonts.typeHere,
-                        title: appFonts.describeYourPost,
-                        isMax: true,
-                        isAnimated: socialMediaCtrl.isListening.value,
-                        height: socialMediaCtrl.isListening.value
-                            ? socialMediaCtrl.animation!.value
-                            : Sizes.s20,
-                        mircroPhoneTap: (){
-                          Vibration.vibrate(duration: 200);
-                          socialMediaCtrl.speechToText();
-                        },
-                        controller: socialMediaCtrl.hashtagController,
-                        onTap: () => socialMediaCtrl.hashtagController.clear())
-                  ])
-                      .paddingSymmetric(
-                          vertical: Insets.i20, horizontal: Insets.i15)
-                      .authBoxExtension(),
-                  const VSpace(Sizes.s30),
-                  if (socialMediaCtrl.isHashtagGenerated != true)
-                    ButtonCommon(
-                        title: appFonts.buildSomeMagic,
-                        onTap: () => socialMediaCtrl.onHashtagGenerate())
-                ]),
-                if (socialMediaCtrl.isHashtagGenerated == true)
+      return DirectionalityRtl(
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: AppAppBarCommon(
+                title: appFonts.hashTagsForPost, leadingOnTap: () => Get.back()),
+            body: Stack(children: [
+              SingleChildScrollView(
+                child: Column(children: [
                   Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InputLayout(
-                            hintText: appFonts.typeHere,
-                            title: appFonts.hashtagsForYou,
-                            isMax: false,
-                            color: appCtrl.appTheme.white,
-                            responseText: socialMediaCtrl.hashtagResponse),
+                        Text(appFonts.fillBelowToRight.tr,
+                            style: AppCss.outfitBold16
+                                .textColor(appCtrl.appTheme.primary)),
+                        const VSpace(Sizes.s15),
+                        Column(children: [
+                          InputLayout(
+                              hintText: appFonts.typeHere,
+                              title: appFonts.describeYourPost,
+                              mircroPhoneTap: () {
+                                Vibration.vibrate(duration: 200);
+                                socialMediaCtrl.speechToText();
+                              },
+                              isAnimated:
+                              socialMediaCtrl.isListening.value,
+                              height: socialMediaCtrl
+                                  .isListening.value
+                                  ? socialMediaCtrl.animation!.value
+                                  : Sizes.s20,
+                              isMax: true,
+                              controller: socialMediaCtrl.hashtagController,
+                              onTap: () => socialMediaCtrl.hashtagController.clear())
+                        ])
+                            .paddingSymmetric(
+                            vertical: Insets.i20, horizontal: Insets.i15)
+                            .authBoxExtension(),
                         const VSpace(Sizes.s30),
-                        ButtonCommon(
-                            title: appFonts.endHashtagBuilder,
-                            onTap: () => socialMediaCtrl.endHashtagGeneratorDialog())
-                      ])
-              ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20),
-            ),
-            if (socialMediaCtrl.isLoader == true)
-              LoaderScreen(value: socialMediaCtrl.progressValue)
-          ]));
+                        if (socialMediaCtrl.isHashtagGenerated != true)
+                          ButtonCommon(
+                              title: appFonts.buildSomeMagic,
+                              onTap: () => socialMediaCtrl.onHashtagGenerate())
+                      ]),
+                  if (socialMediaCtrl.isHashtagGenerated == true)
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InputLayout(
+                              hintText: appFonts.typeHere,
+                              title: appFonts.hashtagsForYou,
+                              isMax: false,
+                              mircroPhoneTap: () {
+                                Vibration.vibrate(duration: 200);
+                                socialMediaCtrl.speechToText();
+                              },
+                              isAnimated:
+                              socialMediaCtrl.isListening.value,
+                              height: socialMediaCtrl
+                                  .isListening.value
+                                  ? socialMediaCtrl.animation!.value
+                                  : Sizes.s20,
+                              color: appCtrl.appTheme.white,
+                              responseText: socialMediaCtrl.hashtagResponse),
+                          const VSpace(Sizes.s30),
+                          ButtonCommon(
+                              title: appFonts.endHashtagBuilder,
+                              onTap: () => socialMediaCtrl.endHashtagGeneratorDialog())
+                        ])
+                ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20),
+              ),
+              if (socialMediaCtrl.isLoader == true)
+                LoaderScreen(value: socialMediaCtrl.progressValue)
+            ])),
+      );
     });
   }
 }

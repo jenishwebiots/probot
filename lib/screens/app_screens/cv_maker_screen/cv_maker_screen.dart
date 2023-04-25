@@ -8,32 +8,34 @@ class CvMakerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CvMakerController>(
       builder: (_) {
-        return Scaffold(
-          backgroundColor: appCtrl.appTheme.bg1,
-          appBar: AppAppBarCommon(title: appFonts.cvMaker,leadingOnTap: ()=> Get.back()),
-          body: cvCtrl.isCvGenerate == false ? const CvMakerLayout()
-           : SingleChildScrollView(
-             child: Column(children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      textCommon.outfitSemiBoldPrimary16(
-                          text: appFonts.createACvThat),
-                      const VSpace(Sizes.s15),
-                      InputLayout(
-                          hintText: "",
-                          title: appFonts.professionalCv,
-                          color: appCtrl.appTheme.white,
-                          isMax: false,
-                          responseText: cvCtrl.response
-                          )
-                    ]),
-                const VSpace(Sizes.s20),
-                ButtonCommon(
-                    title: appFonts.endMyCv,
-                    onTap: () => cvCtrl.endCvMaker())
-              ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20),
-           )
+        return DirectionalityRtl(
+          child: Scaffold(
+            backgroundColor: appCtrl.appTheme.bg1,
+            appBar: AppAppBarCommon(title: appFonts.cvMaker,leadingOnTap: ()=> Get.back()),
+            body: cvCtrl.isCvGenerate == false ? const CvMakerLayout()
+             : SingleChildScrollView(
+               child: Column(children: [
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        textCommon.outfitSemiBoldPrimary16(
+                            text: appFonts.createACvThat),
+                        const VSpace(Sizes.s15),
+                        InputLayout(
+                            hintText: "",
+                            title: appFonts.professionalCv,
+                            color: appCtrl.appTheme.white,
+                            isMax: false,
+                            responseText: cvCtrl.response
+                            )
+                      ]),
+                  const VSpace(Sizes.s20),
+                  ButtonCommon(
+                      title: appFonts.endMyCv,
+                      onTap: () => cvCtrl.endCvMaker())
+                ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20),
+             )
+          ),
         );
       }
     );
