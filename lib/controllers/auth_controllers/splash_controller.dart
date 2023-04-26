@@ -145,6 +145,7 @@ class SplashController extends GetxController {
     Future.delayed(const Duration(seconds: 3), () {
       log("onBoard : $onBoard");
       if (onBoard) {
+
         if (isGuestLogin) {
           appCtrl.isGuestLogin = isGuestLogin;
           appCtrl.storage.write(session.isGuestLogin, isGuestLogin);

@@ -1,4 +1,5 @@
 import 'package:probot/screens/app_screens/add_api_key_screen/add_api_key_screen.dart';
+import 'package:probot/screens/app_screens/allow_notification_screen/allow_notification_screen.dart';
 import 'package:probot/widgets/common_web_view.dart';
 import 'package:probot/widgets/no_internet.dart';
 import 'package:probot/screens/app_screens/code_generator_screen/code_generator_screen.dart';
@@ -144,5 +145,7 @@ class AppRoute {
     GetPage(name: _routeName.manageApiKeyScreen, page: () => ManageApiKeyScreen()),
     GetPage(name: _routeName.addApiKeyScreen, page: () => AddApiKeyScreen()),
     GetPage(name: _routeName.contentWriterScreen, page: () => ContentWriterScreen()),
+    GetPage(name: _routeName.settingScreen, page: () => Setting()),
+    GetPage(name: _routeName.allowNotificationScreen, page: () => AllowNotificationScreen()),
   ];
 }

@@ -15,7 +15,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}'
+        'Authorization': 'Bearer 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'
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",

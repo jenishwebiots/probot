@@ -41,11 +41,19 @@ class ChatHistoryLayout extends StatelessWidget {
                       .textColor(appCtrl.appTheme.txt)
                       .textHeight(1.2)),
               const VSpace(Sizes.s5),
-              Text(
-                  DateFormat('hh:mm a').format(
-                      DateTime.fromMillisecondsSinceEpoch(int.parse(data["createdDate"].toString()))),
-                  style: AppCss.outfitMedium12
-                      .textColor(appCtrl.appTheme.lightText))
+              IntrinsicHeight(
+                child: Row(
+                  children: [
+                    Text("\u2022 Chat",style: AppCss.outfitSemiBold12.textColor(appCtrl.appTheme.primary)),
+                    VerticalDivider(thickness: 1.5,color: appCtrl.appTheme.lightText),
+                    Text(
+                        DateFormat('hh:mm a').format(
+                            DateTime.fromMillisecondsSinceEpoch(int.parse(data["createdDate"].toString()))),
+                        style: AppCss.outfitMedium12
+                            .textColor(appCtrl.appTheme.lightText)),
+                  ],
+                ),
+              )
             ]),
           )
         ])

@@ -62,5 +62,7 @@ class RouteName {
   final String manageApiKeyScreen = "/manageApiKeyScreen";
   final String addApiKeyScreen = "/addApiKeyScreen";
   final String contentWriterScreen = "/contentWriterScreen";
+  final String settingScreen = "/settingScreen";
+  final String allowNotificationScreen = "/allowNotificationScreen";
 
 }
