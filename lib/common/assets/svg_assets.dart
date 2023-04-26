@@ -148,5 +148,6 @@ class SvgAssets {
   final String cameraNav = "assets/svg/cameraNav.svg";
   final String micNav = "assets/svg/micNav.svg";
   final String micColor = "assets/svg/micColor.svg";
+  final String contentWriting = "assets/svg/contentWriting.svg";
 
 }

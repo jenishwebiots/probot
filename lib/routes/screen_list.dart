@@ -87,7 +87,6 @@ export '../screens/bottom_screens/content_writer/layouts/business_idea_drop_down
 export '../screens/bottom_screens/content_writer/layouts/content_description.dart';
 export '../screens/bottom_screens/content_writer/layouts/content_widget.dart';
 export '../screens/bottom_screens/content_writer/layouts/response_data.dart';
-
 export '../screens/bottom_screens/dashboard/dashboard.dart';
 export '../screens/bottom_screens/dashboard/layouts/bottom_bar.dart';
 export '../screens/bottom_screens/drawer/drawer.dart';
@@ -143,6 +142,7 @@ export '../screens/app_screens/travel_screen/travel_screen.dart';
 export '../screens/app_screens/valentine_day_screen/valentine_day_screen.dart';
 export '../screens/app_screens/wedding_wishes_screen/wedding_wishes_screen.dart';
 
+
 export '../screens/app_screens/new_baby_wishes_screen/layout/new_baby_wishes_layout.dart';
 export '../screens/app_screens/get_well_message_screen/layouts/get_well_message_layout.dart';
 export '../screens/app_screens/new_year_greeting_screen/layouts/new_year_greeting_layout.dart';
@@ -154,3 +154,6 @@ export '../screens/app_screens/farewell_message_screen/layouts/farewell_message_
 export '../screens/app_screens/wedding_wishes_screen/layouts/wedding_wishes_layout.dart';
 export '../screens/bottom_screens/image_generator/layout/loader_layout.dart';
 export '../screens/app_screens/password_generator_screen/layouts/password_layout.dart';
+export '../screens/bottom_screens/voice_screen/voice_screen.dart';
+export '../screens/bottom_screens/chat_layout/layouts/suggestion_layout.dart';
+export '../screens/bottom_screens/image_scanner_screen.dart';

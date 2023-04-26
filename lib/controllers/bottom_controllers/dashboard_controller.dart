@@ -25,8 +25,8 @@ class DashboardController extends GetxController
     Home(),
     const Text("CHAT"),
     ImageGenerator(),
-    ContentWriterScreen(),
-    Setting(),
+    VoiceScreen(),
+    ImageScannerScreen(),
   ];
 
   @override
@@ -64,15 +64,15 @@ class DashboardController extends GetxController
     update();
 
     if (selectedIndex == 1) {
-      if (appCtrl.firebaseConfigModel!.isAddShow! && appCtrl.envConfig["chatTextCount"] != "unlimited") {
-        if(appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
+      if (appCtrl.firebaseConfigModel!.isAddShow! &&
+          appCtrl.envConfig["chatTextCount"] != "unlimited") {
+        if (appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
           chatLayoutCtrl.showInterstitialAd();
-        }else{
+        } else {
           log("FB");
           chatLayoutCtrl.loadInterstitialAd();
           //chatLayoutCtrl.showFbInterstitialAd();
         }
-
       }
       chatLayoutCtrl.getChatId();
       chatLayoutCtrl.update();
@@ -102,7 +102,7 @@ class DashboardController extends GetxController
     );
   }
 
-  onSelectedIndex (index) {
+  onSelectedIndex(index) {
     selectedIndex = index;
     update();
   }

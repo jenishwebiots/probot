@@ -630,6 +630,16 @@ class AppFonts {
       "I need to create a REST API endpoint for my web application.";
   String voice = "Voice";
   String content = "Content";
+  String imageScanner = "Image scanner";
+  String selectOneOfThe = "Select one of the below option to continue :";
+  String scanFromCamera = "Scan from camera";
+  String uploadFromGallery = "Upload from gallery";
+  String byScanningAnImage = "By scanning an image, you can find the answer to any question.";
+  String pressTheButton = "Press the button while speaking your query to the bot for an intelligent, brilliant response.";
+  String all = "All";
+  String chat = "Chat";
+  String image = "Image";
+
 
 
   String lifeTimeAccessibility = "lifeTimeAccessibility";

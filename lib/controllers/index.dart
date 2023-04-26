@@ -48,4 +48,5 @@ export 'personal_advisor_controllers/baby_shower_controller.dart';
 export 'personal_advisor_controllers/farewell_message_controller.dart';
 export 'personal_advisor_controllers/wedding_wishes_controller.dart';
 export 'app_pages_controllers/add_api_key_controller.dart';
-
+export 'bottom_controllers/voice_controller.dart';
+export 'bottom_controllers/image_scanner_controller.dart';
