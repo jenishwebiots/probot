@@ -1,4 +1,4 @@
-import '../../../config.dart';
+import '../../../config.dart';import 'package:vibration/vibration.dart';
 
 class HashtagForPostScreen extends StatelessWidget {
   const HashtagForPostScreen({Key? key}) : super(key: key);
@@ -17,27 +17,37 @@ class HashtagForPostScreen extends StatelessWidget {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                    Text(appFonts.fillBelowToRight.tr,
-                        style: AppCss.outfitBold16
-                            .textColor(appCtrl.appTheme.primary)),
-                    const VSpace(Sizes.s15),
-                    Column(children: [
-                      InputLayout(
-                          hintText: appFonts.typeHere,
-                          title: appFonts.describeYourPost,
-                          isMax: true,
-                          controller: socialMediaCtrl.hashtagController,
-                          onTap: () => socialMediaCtrl.hashtagController.clear())
-                    ])
-                        .paddingSymmetric(
+                        Text(appFonts.fillBelowToRight.tr,
+                            style: AppCss.outfitBold16
+                                .textColor(appCtrl.appTheme.primary)),
+                        const VSpace(Sizes.s15),
+                        Column(children: [
+                          InputLayout(
+                              hintText: appFonts.typeHere,
+                              title: appFonts.describeYourPost,
+                              mircroPhoneTap: () {
+                                Vibration.vibrate(duration: 200);
+                                socialMediaCtrl.speechToText();
+                              },
+                              isAnimated:
+                              socialMediaCtrl.isListening.value,
+                              height: socialMediaCtrl
+                                  .isListening.value
+                                  ? socialMediaCtrl.animation!.value
+                                  : Sizes.s20,
+                              isMax: true,
+                              controller: socialMediaCtrl.hashtagController,
+                              onTap: () => socialMediaCtrl.hashtagController.clear())
+                        ])
+                            .paddingSymmetric(
                             vertical: Insets.i20, horizontal: Insets.i15)
-                        .authBoxExtension(),
-                    const VSpace(Sizes.s30),
-                    if (socialMediaCtrl.isHashtagGenerated != true)
-                      ButtonCommon(
-                          title: appFonts.buildSomeMagic,
-                          onTap: () => socialMediaCtrl.onHashtagGenerate())
-                  ]),
+                            .authBoxExtension(),
+                        const VSpace(Sizes.s30),
+                        if (socialMediaCtrl.isHashtagGenerated != true)
+                          ButtonCommon(
+                              title: appFonts.buildSomeMagic,
+                              onTap: () => socialMediaCtrl.onHashtagGenerate())
+                      ]),
                   if (socialMediaCtrl.isHashtagGenerated == true)
                     Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,6 +56,16 @@ class HashtagForPostScreen extends StatelessWidget {
                               hintText: appFonts.typeHere,
                               title: appFonts.hashtagsForYou,
                               isMax: false,
+                              mircroPhoneTap: () {
+                                Vibration.vibrate(duration: 200);
+                                socialMediaCtrl.speechToText();
+                              },
+                              isAnimated:
+                              socialMediaCtrl.isListening.value,
+                              height: socialMediaCtrl
+                                  .isListening.value
+                                  ? socialMediaCtrl.animation!.value
+                                  : Sizes.s20,
                               color: appCtrl.appTheme.white,
                               responseText: socialMediaCtrl.hashtagResponse),
                           const VSpace(Sizes.s30),

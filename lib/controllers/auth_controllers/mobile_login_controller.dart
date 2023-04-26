@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../config.dart';
+import '../../env.dart';
 import '../../screens/auth_screens/mobile_login/layouts/otp_layout.dart';
 
 class MobileLoginController extends GetxController {
@@ -151,6 +152,7 @@ class MobileLoginController extends GetxController {
                                             update();
                                             appCtrl.storage.write("number", mobileController.text);
                                             appCtrl.storage.write("id", phoneUser?.uid);
+                                            await checkData();
                                             Get.offAllNamed(
                                                 routeName.selectLanguageScreen);
                                           } catch (e) {
@@ -210,6 +212,35 @@ class MobileLoginController extends GetxController {
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     }
+  }
+
+  checkData() async {
+    await FirebaseFirestore.instance
+        .collection("userSubscribe")
+        .where("email", isEqualTo: appCtrl.storage.read("userName"))
+        .limit(1)
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        log("DATA : ${value.docs[0].data()}");
+        if(value.docs[0].data()["isSubscribe"] == false) {
+          appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+          appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+          appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+          appCtrl.storage.write(session.isSubscribe, false);
+          appCtrl.isSubscribe = false;
+        }else{
+          appCtrl.isSubscribe = true;
+          appCtrl.storage.write(session.isSubscribe, true);
+        }
+        appCtrl.storage.write(session.isAnySubscribe, true);
+      } else {
+        appCtrl.storage.write(session.isAnySubscribe, false);
+        appCtrl.envConfig = environment;
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+        appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+      }
+    });
   }
 
   final defaultPinTheme = PinTheme(

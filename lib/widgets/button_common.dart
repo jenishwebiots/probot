@@ -5,7 +5,7 @@ class ButtonCommon extends StatelessWidget {
   final double? padding, margin, radius, height, fontSize, width;
   final GestureTapCallback? onTap;
   final TextStyle? style;
-  final Color? color, fontColor,borderColor;
+  final Color? color, fontColor, borderColor;
   final Widget? icon;
   final FontWeight? fontWeight;
   final bool isGradient;
@@ -23,9 +23,9 @@ class ButtonCommon extends StatelessWidget {
       this.color,
       this.fontColor,
       this.icon,
-        this.borderColor,
+      this.borderColor,
       this.width,
-        this.isGradient = true,
+      this.isGradient = true,
       this.fontWeight = FontWeight.w700})
       : super(key: key);
 
@@ -36,13 +36,15 @@ class ButtonCommon extends StatelessWidget {
         height: height,
         margin: EdgeInsets.symmetric(horizontal: margin!),
         decoration: BoxDecoration(
-          border: Border.all(color: borderColor ?? appCtrl.appTheme.trans),
-            gradient: isGradient ? const LinearGradient(colors: [
-              Color(0xff35AAFF),
-              Color(0xff35E7FF),
-              Color(0xff35C1FF),
-            ], begin: Alignment(9, 2), end: Alignment(-2, -2)) : null,
-            color: color ?? appCtrl.appTheme.primary,
+            border: Border.all(color: borderColor ?? appCtrl.appTheme.trans),
+            gradient: isGradient
+                ? const LinearGradient(colors: [
+                    Color(0xff35AAFF),
+                    Color(0xff35E7FF),
+                    Color(0xff35C1FF),
+                  ], begin: Alignment(9, 2), end: Alignment(-2, -2))
+                : null,
+            color: color ,
             borderRadius: BorderRadius.circular(radius!)),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           if (icon != null)

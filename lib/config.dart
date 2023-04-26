@@ -18,6 +18,7 @@ export '../common/assets/index.dart';
 export '../common/extension/spacing.dart';
 export '../common/theme/theme_service.dart';
 export '../common/theme/app_theme.dart';
+
 // All models library
 
 
@@ -58,6 +59,7 @@ export '../widgets/scaffold_messenger.dart';
 export '../widgets/adviser_dialog_common.dart';
 export '../widgets/select_gender_layout.dart';
 export '../widgets/api_notes_layout.dart';
+export '../widgets/common_balance.dart';
 
 
 final appCtrl = Get.isRegistered<AppController>()

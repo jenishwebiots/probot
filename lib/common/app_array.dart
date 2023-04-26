@@ -116,7 +116,6 @@ class AppArray {
     {"title": "setting", "icon": eSvgAssets.setting},
   ];
 
-
   // notification list
   var notificationsList = [
     {
@@ -397,9 +396,10 @@ class AppArray {
     {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
     {"icon": eSvgAssets.essay, "title": appFonts.essayWriter},
     {"icon": eSvgAssets.contentWriting, "title": appFonts.content}
+
   ];
 
-  var  translateLanguages = [
+  var translateLanguages = [
     'Abkhaz',
     'Afar',
     'Afrikaans',
@@ -666,6 +666,7 @@ class AppArray {
     "letter",
   ];
 
+  //zodiac list
   var zodiacList = [
     'Aries',
     'Taurus',
@@ -681,52 +682,53 @@ class AppArray {
     'Pisces'
   ];
 
+  // top-up balance option
+  var topUpBalanceOption = [
+    {"icon": eSvgAssets.star1, "price": 15},
+    {"icon": eSvgAssets.crown, "price": 35},
+    {"icon": eSvgAssets.diamond, "price": 65},
+    {"icon": eSvgAssets.dollar1, "price": 0}
+  ];
+
   var questionSuggestionList = [
-    {
-      "id":1,
-      "title": appFonts.code
-    },{
-      "id":2,
-      "title": appFonts.translation
-    },{
-      "id":3,
-      "title": appFonts.socialMedia
-    },{
-      "id":4,
-      "title": appFonts.travel
-    }
+    {"id": 1, "title": appFonts.code},
+    {"id": 2, "title": appFonts.translation},
+    {"id": 3, "title": appFonts.socialMedia},
+    {"id": 4, "title": appFonts.travel}
   ];
 
   var questionsList = [
     {
-      "id":1,
-      "preBuildQuestions": [
-        {"title": appFonts.developmentArchitecture},
-        {"title": appFonts.helpMeFindMistakes},
-        {"title": appFonts.iNeedToCreateARest},
-      ]
-    },{
-      "id":2,
-      "preBuildQuestions": [
-
-        {"title": appFonts.writingThisCode},
-        {"title": appFonts.iNeedToCreateARest},
-      ]
-    },{
-      "id":3,
-      "preBuildQuestions": [
-        {"title": appFonts.developmentArchitecture},
-        {"title": appFonts.helpMeFindMistakes},
-        {"title": appFonts.writingThisCode},
-      ]
-    },{
-      "id":4,
+      "id": 1,
       "preBuildQuestions": [
         {"title": appFonts.developmentArchitecture},
         {"title": appFonts.helpMeFindMistakes},
         {"title": appFonts.iNeedToCreateARest},
       ]
     },
+    {
+      "id": 2,
+      "preBuildQuestions": [
+        {"title": appFonts.writingThisCode},
+        {"title": appFonts.iNeedToCreateARest},
+      ]
+    },
+    {
+      "id": 3,
+      "preBuildQuestions": [
+        {"title": appFonts.developmentArchitecture},
+        {"title": appFonts.helpMeFindMistakes},
+        {"title": appFonts.writingThisCode},
+      ]
+    },
+    {
+      "id": 4,
+      "preBuildQuestions": [
+        {"title": appFonts.developmentArchitecture},
+        {"title": appFonts.helpMeFindMistakes},
+        {"title": appFonts.iNeedToCreateARest},
+      ]
+    }
   ];
 
   var historyTagList = [

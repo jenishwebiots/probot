@@ -20,7 +20,11 @@ class ChatTextBox extends StatelessWidget {
             builder: (context, snapShot) {
               if (snapShot.hasData) {
                 if (snapShot.data!.docs.isNotEmpty) {
-                  return UnlimitedSubscribeTextBox(snapShot: snapShot);
+                  if(snapShot.data!.docs[0].data()["isSubscribe"] == true) {
+                    return const ChatLayoutTextBox();
+                  }else{
+                    return const SubscribeTextBox();
+                  }
                 } else {
                   return const SubscribeTextBox();
                 }

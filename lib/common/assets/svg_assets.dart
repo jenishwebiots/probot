@@ -61,9 +61,14 @@ class SvgAssets {
   final String copy = "assets/svg/copy.svg";
   final String edit = "assets/svg/edit.svg";
   final String search = "assets/svg/search.svg";
+  final String diamond = "assets/svg/diamond.svg";
+  final String dollar1 = "assets/svg/dollar1.svg";
 
   final String volume = "assets/svg/volume.svg";
   final String rotate = "assets/svg/rotate.svg";
+  final String offerTick = "assets/svg/offerTick.svg";
+  final String offerCancel = "assets/svg/offerCancel.svg";
+  final String singleTick = "assets/svg/singleTick.svg";
 
   //NEW
   final String mobile = "assets/svg/mobile.svg";
@@ -93,6 +98,8 @@ class SvgAssets {
   final String stockMarket = "assets/svg/stockMarket.svg";
   final String technology = "assets/svg/technology.svg";
   final String yoga = "assets/svg/yoga.svg";
+
+  final String coin = "assets/svg/coin.svg";
 
   final String askAnything = "assets/svg/askAnything.svg";
   final String codeGenerator = "assets/svg/codeGenerator.svg";

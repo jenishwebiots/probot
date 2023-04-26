@@ -6,35 +6,39 @@ import 'package:probot/config.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../consumable_store.dart';
-import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';// import for SKPaymentQueueDelegateWrapper
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart'; // import for SKPaymentQueueDelegateWrapper
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
-
 
 final bool kAutoConsume = Platform.isIOS || true;
 
 const String kConsumableId = 'basic_plan_9';
 const String kUpgradeId = 'advance_plan_19';
 const String kSilverSubscriptionId = 'standard_plan_29';
+const String topUp15 = 'top_up_15';
+const String topUp35 = 'top_up_35';
+const String topUp65 = 'top_up_65';
 const String basicSubPlan9 = 'basic_sub_plan_9';
 const String advanceSubPlan19 = 'advance_sub_plan_19';
 const List<String> _kProductIds = <String>[
   kConsumableId,
-   kUpgradeId,
-   kSilverSubscriptionId,
+  kUpgradeId,
+  kSilverSubscriptionId,
+  topUp15,
+  topUp35,
+  topUp65,
 ];
 
-class InAppController extends GetxController{
+class InAppController extends GetxController {
   final InAppPurchase inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> subscription;
   List<String> notFoundIds = <String>[];
   List<ProductDetails> products = <ProductDetails>[];
   List<PurchaseDetails> purchases = <PurchaseDetails>[];
-  List<String> consumablesVal= <String>[];
+  List<String> consumablesVal = <String>[];
   bool isAvailables = false;
   bool purchasePending = false;
   bool loading = true;
   String? queryProductError;
-
 
   @override
   void onReady() {
@@ -43,19 +47,17 @@ class InAppController extends GetxController{
         inAppPurchase.purchaseStream;
     subscription =
         purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-          log("LOSY purchaseDetailsList : #$purchaseDetailsList");
-          _listenToPurchaseUpdated(purchaseDetailsList);
-        }, onDone: () {
-          subscription.cancel();
-        }, onError: (Object error) {
-          // handle error here.
-        });
+      log("LOSY purchaseDetailsList : #$purchaseDetailsList");
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      subscription.cancel();
+    }, onError: (Object error) {
+      // handle error here.
+    });
     initStoreInfo();
     log("subscription : ${subscription.isPaused}");
     super.onReady();
   }
-
-
 
   Future<void> initStoreInfo() async {
     final bool isAvailable = await inAppPurchase.isAvailable();
@@ -85,12 +87,9 @@ class InAppController extends GetxController{
       await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
     }*/
 
-
-
     final ProductDetailsResponse productDetailResponse =
-    await inAppPurchase.queryProductDetails(_kProductIds.toSet());
+        await inAppPurchase.queryProductDetails(_kProductIds.toSet());
     if (productDetailResponse.error != null) {
-
       queryProductError = productDetailResponse.error!.message;
       log("========================================= ::$queryProductError");
       isAvailables = isAvailable;
@@ -108,7 +107,6 @@ class InAppController extends GetxController{
     log("productDetailResponse : #${productDetailResponse.productDetails.isEmpty}");
     log("productDetailResponse : #{purchases");
     if (productDetailResponse.productDetails.isEmpty) {
-
       queryProductError = null;
       isAvailables = isAvailable;
       products = productDetailResponse.productDetails;
@@ -202,13 +200,10 @@ class InAppController extends GetxController{
 
   @override
   void dispose() {
-
     subscription.cancel();
     super.dispose();
   }
-
 }
-
 
 class ExamplePaymentQueueDelegate implements SKPaymentQueueDelegateWrapper {
   @override

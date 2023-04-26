@@ -90,6 +90,9 @@ class SettingController extends GetxController {
       appCtrl.storage.erase();
       appCtrl.storage.remove(session.envConfig);
       appCtrl.storage.remove(session.isGuestLogin);
+      appCtrl.storage.remove("userName");
+      appCtrl.storage.remove("email");
+      appCtrl.storage.remove("id");
       appCtrl.update();
       Get.forceAppUpdate();
       Get.offAllNamed(routeName.signInScreen);

@@ -30,7 +30,7 @@ class ChatLayoutController extends GetxController
   Rx<List<ChatListDateWise>> chatList = Rx<List<ChatListDateWise>>([]);
   final chatController = TextEditingController();
   ScrollController scrollController = ScrollController();
-  String? time;
+  String? time,argImage;
   List selectedIndex = [];
   List selectedData = [];
   DateTime? receiverTime;
@@ -60,7 +60,7 @@ class ChatLayoutController extends GetxController
   );
   RxString textInput = ''.obs;
   final _isSpeechLoading = false.obs;
-bool _isInterstitialAdLoaded =false;
+bool isInterstitialAdLoaded =false;
   RxInt chatCount = 0.obs;
   RxString userInput = "".obs;
   RxString result = "".obs;
@@ -215,7 +215,7 @@ bool _isInterstitialAdLoaded =false;
   }
 
   showFbInterstitialAd() {
-    if (_isInterstitialAdLoaded == true) {
+    if (isInterstitialAdLoaded == true) {
       FacebookInterstitialAd.showInterstitialAd();
     } else {
       print("Interstial Ad not yet loaded!");
@@ -318,7 +318,104 @@ bool _isInterstitialAdLoaded =false;
   getChatId() {
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
-    chatId = Get.arguments ?? DateTime.now().millisecondsSinceEpoch.toString();
+    if(Get.arguments != null) {
+      chatId = Get.arguments["chatId"] ?? DateTime
+          .now()
+          .millisecondsSinceEpoch
+          .toString();
+      if (Get.arguments["avatar"].contains("assets")) {
+        argImage = appCtrl.selectedCharacter["image"];
+      } else {
+        argImage =
+            Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      }
+    }else{
+      log("MESSAGE : ${appCtrl.selectedCharacter}");
+      bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin);
+      argImage = appCtrl.selectedCharacter["image"];
+      messages.value.add(
+        ChatMessage(
+            text: appCtrl.selectedCharacter["message"],
+            chatMessageType: ChatMessageType.bot,
+            time: DateTime.now().millisecondsSinceEpoch),
+      );
+      shareMessages.add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
+      selectedMessages.add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
+      itemCount.value = messages.value.length;
+      int createdDate = DateTime.now().millisecondsSinceEpoch;
+      update();
+      chatId =  DateTime
+          .now()
+          .millisecondsSinceEpoch
+          .toString();
+
+      if (!isGuestLogin) {
+        log("chatId : $chatId");
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection("chats")
+            .where("chatId", isEqualTo: chatId)
+            .limit(1)
+            .get()
+            .then((valueCheck) async {
+          if (valueCheck.docs.isEmpty) {
+            await FirebaseFirestore.instance
+                .collection("users")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection("chats")
+                .add({
+              'userId': FirebaseAuth.instance.currentUser!.uid,
+              'avatar': appCtrl.selectedCharacter["image"],
+              "characterId" :appCtrl.selectedCharacter["id"],
+              'message': appCtrl.selectedCharacter["message"],
+              'chatId': chatId,
+              "createdDate": createdDate,
+            }).then((add) async {
+              await FirebaseFirestore.instance
+                  .collection("chatHistory")
+                  .doc(chatId)
+                  .collection("chats")
+                  .add({
+                'userId': FirebaseAuth.instance.currentUser!.uid,
+                'avatar': appCtrl.selectedCharacter["image"],
+                "characterId" :appCtrl.selectedCharacter["id"],
+                'message': appCtrl.selectedCharacter["message"],
+                'chatId': chatId,
+                "createdDate": createdDate,
+                "messageType": ChatMessageType.bot.name
+              });
+            });
+          } else {
+            await FirebaseFirestore.instance
+                .collection("users")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection("chats")
+                .doc(valueCheck.docs[0].id)
+                .update({
+              'userId': FirebaseAuth.instance.currentUser!.uid,
+              'avatar': appCtrl.selectedCharacter["image"],
+              'message': appCtrl.selectedCharacter["message"],
+              'chatId': chatId,
+              "createdDate": createdDate,
+            }).then((values) async {
+              await FirebaseFirestore.instance
+                  .collection("chatHistory")
+                  .doc(chatId)
+                  .collection("chats")
+                  .add({
+                'userId': FirebaseAuth.instance.currentUser!.uid,
+                'avatar': appCtrl.selectedCharacter["image"],
+                'message': appCtrl.selectedCharacter["message"],
+                'chatId': chatId,
+                "createdDate": createdDate,
+                "messageType": ChatMessageType.bot.name
+              });
+            });
+          }
+        });
+      }
+    }
     update();
   }
 
@@ -326,15 +423,6 @@ bool _isInterstitialAdLoaded =false;
   processChat() async {
     int createdDate = DateTime.now().millisecondsSinceEpoch;
     //chat, image and text completion count as per subscription or not
-    if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
-      int chatCount = int.parse(appCtrl.envConfig["chatTextCount"].toString());
-
-      chatCount = chatCount - 1;
-      log("chatCount : $chatCount");
-      appCtrl.envConfig["chatTextCount"] = chatCount.toString();
-      appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-    }
     appCtrl.update();
     FocusScope.of(Get.context!).requestFocus(FocusNode());
     speechStopMethod();
@@ -352,12 +440,6 @@ bool _isInterstitialAdLoaded =false;
     itemCount.value = messages.value.length;
     update();
     Get.forceAppUpdate();
-    if (appCtrl.envConfig["chatTextCount"] != "unlimited") {
-      final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
-          ? Get.find<SubscriptionFirebaseController>()
-          : Get.put(SubscriptionFirebaseController());
-      await subscribeCtrl.addUpdateFirebaseData();
-    }
     log("chatCount1 : ${appCtrl.envConfig}");
     int i = messages.value.indexWhere(
         (element) => element.chatMessageType == ChatMessageType.loading);
@@ -398,6 +480,7 @@ bool _isInterstitialAdLoaded =false;
               .add({
             'userId': FirebaseAuth.instance.currentUser!.uid,
             'avatar': appCtrl.selectedCharacter["image"],
+            "characterId" :appCtrl.selectedCharacter["id"],
             'message': textInput.value,
             'chatId': chatId,
             "createdDate": createdDate,
@@ -409,6 +492,7 @@ bool _isInterstitialAdLoaded =false;
                 .add({
               'userId': FirebaseAuth.instance.currentUser!.uid,
               'avatar': appCtrl.selectedCharacter["image"],
+              "characterId" :appCtrl.selectedCharacter["id"],
               'message': textInput.value,
               'chatId': chatId,
               "createdDate": createdDate,
@@ -524,6 +608,7 @@ bool _isInterstitialAdLoaded =false;
                     .add({
                   'userId': FirebaseAuth.instance.currentUser!.uid,
                   'avatar': appCtrl.selectedCharacter["image"],
+                  "characterId" :appCtrl.selectedCharacter["id"],
                   'message':
                       value.replaceFirst("\n", " ").replaceFirst("\n", " "),
                   'chatId': chatId,
@@ -569,6 +654,7 @@ bool _isInterstitialAdLoaded =false;
               .add({
             'userId': FirebaseAuth.instance.currentUser!.uid,
             'avatar': appCtrl.selectedCharacter["image"],
+            "characterId" :appCtrl.selectedCharacter["id"],
             'message': "",
             'chatId': chatId,
             "createdDate": DateTime.now().millisecondsSinceEpoch,
@@ -584,6 +670,7 @@ bool _isInterstitialAdLoaded =false;
             .add({
           'userId': FirebaseAuth.instance.currentUser!.uid,
           'avatar': appCtrl.selectedCharacter["image"],
+          "characterId" :appCtrl.selectedCharacter["id"],
           'message': "",
           'chatId': chatId,
           "createdDate": DateTime.now().millisecondsSinceEpoch,

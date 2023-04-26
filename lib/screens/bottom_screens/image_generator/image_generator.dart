@@ -19,11 +19,14 @@ class ImageGenerator extends StatelessWidget {
             appBar: AppBar(
                 backgroundColor: appCtrl.appTheme.primary,
                 elevation: 0,
-                toolbarHeight: 70,
+
                 leadingWidth: Sizes.s70,
                 leading: const CommonMenuIcon().inkWell(
                     onTap: () => imageGeneratorCtrl.scaffoldKey.currentState!.openDrawer()),
                 automaticallyImplyLeading: false,
+                actions: [
+                  const CommonBalance().marginOnly(right: Insets.i20,top: Insets.i10,bottom: Insets.i10)
+                ],
                 title: Text(appFonts.imageGenerator.tr,
                     style: AppCss.outfitSemiBold22
                         .textColor(appCtrl.appTheme.sameWhite))),

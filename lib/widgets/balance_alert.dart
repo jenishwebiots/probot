@@ -47,13 +47,19 @@ class BalanceAlertDialog extends StatelessWidget {
           const VSpace(Sizes.s12),
           Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             CommonAppWidgets().columnTitleAndValu(
-                appFonts.wantUnlimited, appFonts.viewSubscription.tr),
+               title: appFonts.wantUnlimited, appFonts.viewSubscription.tr),
             Text(appFonts.or.tr.toUpperCase(),
                     style: AppCss.outfitMedium14
                         .textColor(appCtrl.appTheme.lightText))
                 .marginSymmetric(vertical: Insets.i8),
             CommonAppWidgets().columnTitleAndValu(
-                appFonts.wantMoreCoins, appFonts.topUpBalance.tr)
+                title: appFonts.wantMoreCoins, appFonts.topUpBalance.tr),
+            Text(appFonts.or.tr.toUpperCase(),
+                    style: AppCss.outfitMedium14
+                        .textColor(appCtrl.appTheme.lightText))
+                .marginSymmetric(vertical: Insets.i8),
+            CommonAppWidgets().columnTitleAndValu(
+                title: appFonts.wantYourApi, appFonts.inputApi.tr)
           ]).alignment(Alignment.center),
           const VSpace(Sizes.s30),
           ButtonCommon(
@@ -82,7 +88,18 @@ class BalanceAlertDialog extends StatelessWidget {
           const VSpace(Sizes.s15),
           Text(appFonts.topBalance.tr,
                   style: AppCss.outfitRegular18
-                      .textColor(appCtrl.appTheme.primary))
+                      .textColor(appCtrl.appTheme.primary)).inkWell(onTap: (){
+                        Get.back();
+                        Get.toNamed(routeName.balanceTopUp);
+          })
+              .alignment(Alignment.center),
+          const VSpace(Sizes.s15),
+          Text(appFonts.inputApiKey.tr,
+                  style: AppCss.outfitRegular18
+                      .textColor(appCtrl.appTheme.primary)).inkWell(onTap: (){
+                        Get.back();
+                        Get.toNamed(routeName.manageApiKeyScreen);
+          })
               .alignment(Alignment.center),
           const VSpace(Sizes.s25)
         ],
