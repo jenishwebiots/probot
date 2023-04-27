@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../config.dart';
 
 class ImageScannerScreen extends StatelessWidget {
@@ -6,9 +8,8 @@ class ImageScannerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ImageScannerController>(
-      builder: (_) {
-        return Scaffold(
+    return GetBuilder<ImageScannerController>(builder: (_) {
+      return Scaffold(
           backgroundColor: appCtrl.appTheme.bg1,
           resizeToAvoidBottomInset: false,
           drawer: const CommonDrawer(),
@@ -19,27 +20,35 @@ class ImageScannerScreen extends StatelessWidget {
               toolbarHeight: 70,
               leadingWidth: Sizes.s70,
               leading: const CommonMenuIcon().inkWell(
-                  onTap: () => imageCtrl.scaffoldKey.currentState!.openDrawer()),
+                  onTap: () =>
+                      imageCtrl.scaffoldKey.currentState!.openDrawer()),
               automaticallyImplyLeading: false,
               title: Text(appFonts.imageScanner.tr,
                   style: AppCss.outfitSemiBold22
                       .textColor(appCtrl.appTheme.sameWhite))),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-                 Text(appFonts.selectOneOfThe,style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary)),
-              const VSpace(Sizes.s15),
-              Column(
-                children: imageCtrl.imageScannerList.asMap().entries.map((e) => SocialMediaListLayout(
-                    data: e.value,
-                    index: e.key,
-                    totalLength: imageCtrl.imageScannerList.length-1,
-                    onTap: ()=> imageCtrl.onScanFrom(e.value)),).toList()
-              ).paddingSymmetric(horizontal: Insets.i15,vertical: Insets.i20).authBoxExtension()
-            ]
-          ).paddingSymmetric(vertical: Insets.i30,horizontal: Insets.i20)
-        );
-      }
-    );
+          body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(appFonts.selectOneOfThe,
+                style:
+                    AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary)),
+            const VSpace(Sizes.s15),
+            Column(
+                    children: imageCtrl.imageScannerList
+                        .asMap()
+                        .entries
+                        .map(
+                          (e) => SocialMediaListLayout(
+                              data: e.value,
+                              index: e.key,
+                              totalLength:
+                                  imageCtrl.imageScannerList.length - 1,
+                              onTap: () => imageCtrl.onScanFrom(
+                                  e.key.toString(), context)),
+                        )
+                        .toList())
+                .paddingSymmetric(horizontal: Insets.i15, vertical: Insets.i20)
+                .authBoxExtension(),
+            imageCtrl.image(context)
+          ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20));
+    });
   }
 }

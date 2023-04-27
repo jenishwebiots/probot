@@ -1,3 +1,14 @@
+
+import 'package:probot/screens/app_screens/add_api_key_screen/add_api_key_screen.dart';
+import 'package:probot/screens/app_screens/allow_notification_screen/allow_notification_screen.dart';
+import 'package:probot/widgets/common_web_view.dart';
+import 'package:probot/widgets/no_internet.dart';
+import 'package:probot/screens/app_screens/code_generator_screen/code_generator_screen.dart';
+import 'package:probot/screens/app_screens/music_for_post_screen/music_for_post_screen.dart';
+import 'package:probot/screens/app_screens/personal_advisor_screen/personal_advisor_screen.dart';
+import 'package:probot/screens/app_screens/social_media_screen/social_media_screen.dart';
+
+
 import '../config.dart';
 
 RouteName _routeName = RouteName();
@@ -115,6 +126,9 @@ class AppRoute {
 
     GetPage(name: _routeName.viewSubscription, page: () =>const ViewSubscription()),
     GetPage(name: _routeName.contentWriterScreen, page: () => ContentWriterScreen()),
+
+    GetPage(name: _routeName.settingScreen, page: () => Setting()),
+    GetPage(name: _routeName.allowNotificationScreen, page: () => AllowNotificationScreen()),
 
   ];
 }

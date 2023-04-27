@@ -55,21 +55,29 @@ class ChatHistoryLayout extends StatelessWidget {
           ]),
           const HSpace(Sizes.s10),
           Expanded(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(data["message"].toString().tr,
+                  style: AppCss.outfitMedium14
+                      .textColor(appCtrl.appTheme.txt)
+                      .textHeight(1.2)),
+              const VSpace(Sizes.s5),
+              IntrinsicHeight(
+                child: Row(
                   children: [
-                Text(data["message"].toString().tr,
-                    style: AppCss.outfitMedium14
-                        .textColor(appCtrl.appTheme.txt)
-                        .textHeight(1.2)),
-                const VSpace(Sizes.s5),
-                Text(
-                    DateFormat('hh:mm a').format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                            int.parse(data["createdDate"].toString()))),
-                    style: AppCss.outfitMedium12
-                        .textColor(appCtrl.appTheme.lightText))
-              ]))
+                    Text("\u2022 Chat",style: AppCss.outfitSemiBold12.textColor(appCtrl.appTheme.primary)),
+                    VerticalDivider(thickness: 1.5,color: appCtrl.appTheme.lightText),
+                    Text(
+                        DateFormat('hh:mm a').format(
+                            DateTime.fromMillisecondsSinceEpoch(int.parse(data["createdDate"].toString()))),
+                        style: AppCss.outfitMedium12
+                            .textColor(appCtrl.appTheme.lightText)),
+                  ],
+                ),
+              )
+            ]),
+          )
+
         ])
             .padding(
                 horizontal: Insets.i15, top: Insets.i15, bottom: Insets.i12)
