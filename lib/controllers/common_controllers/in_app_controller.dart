@@ -14,11 +14,12 @@ final bool kAutoConsume = Platform.isIOS || true;
 const String kConsumableId = 'basic_plan_9';
 const String kUpgradeId = 'advance_plan_19';
 const String kSilverSubscriptionId = 'standard_plan_29';
-const String topUp15 = 'top_up_15';
+const String topUp15 = 'top_up_balance_15';
 const String topUp35 = 'top_up_35';
 const String topUp65 = 'top_up_65';
 const String basicSubPlan9 = 'basic_sub_plan_9';
 const String advanceSubPlan19 = 'advance_sub_plan_19';
+const String advanceSubPlan29 = 'limited_sub_plan299';
 const List<String> _kProductIds = <String>[
   kConsumableId,
   kUpgradeId,
@@ -26,6 +27,7 @@ const List<String> _kProductIds = <String>[
   topUp15,
   topUp35,
   topUp65,
+  basicSubPlan9,advanceSubPlan19,advanceSubPlan29
 ];
 
 class InAppController extends GetxController {

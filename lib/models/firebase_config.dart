@@ -1,4 +1,6 @@
-import 'dart:developer';
+
+
+import 'package:probot/common/assets/index.dart';
 
 class FirebaseConfigModel {
   String? bannerAddId,
@@ -17,11 +19,12 @@ class FirebaseConfigModel {
       privacyPolicyLink,
       rateAppAndroidId,
       rateAppIOSId,
-      refundLink;
+      refundLink,facebookAddAndroidId,facebookInterstitialAd,facebookRewardAd,logo;
   bool? isChatShow;
   bool? isImageGeneratorShow;
   int? balance;
   bool? isTextCompletionShow;
+  bool? isTheme;
   bool? isAddShow,
       isRazorPay,
       isStripe,
@@ -51,12 +54,17 @@ class FirebaseConfigModel {
       this.rewardIOSId,
       this.razorPayKey,
       this.razorPaySecret,
+      this.facebookAddAndroidId,
+      this.facebookInterstitialAd,
+      this.facebookRewardAd,
+      this.logo,
       this.isTextCompletionShow,
       this.isAddShow,
       this.isPaypal,
       this.isInApp,
       this.isRazorPay,
       this.isStripe,
+      this.isTheme,
       this.isChatHistory,
       this.isGuestLoginEnable,
       this.isGoogleAdmobEnable,
@@ -79,6 +87,10 @@ class FirebaseConfigModel {
     refundLink = json['refundLink'] ?? "";
     rateAppAndroidId = json['rateAppAndroidId'] ?? "";
     rateAppIOSId = json['rateAppIOSId'] ?? "";
+    facebookAddAndroidId = json['facebookAddAndroidId'] ?? "";
+    facebookInterstitialAd = json['facebookInterstitialAd'] ?? "";
+    logo = json['logo'] ?? eImageAssets.logo1;
+    facebookRewardAd = json['facebookRewardAd'] ?? "";
     isChatShow = json['isChatShow'] ?? true;
     isImageGeneratorShow = json['isImageGeneratorShow'] ?? true;
     isTextCompletionShow = json['isTextCompletionShow'] ?? true;
@@ -88,6 +100,7 @@ class FirebaseConfigModel {
     isPaypal = json['isPayPal'] ?? true;
     isStripe = json['isStripe'] ?? true;
     isInApp = json['isInApp'] ?? true;
+    isTheme = json['isTheme'] ?? false;
     isGuestLoginEnable = json['isGuestLoginEnable'] ?? true;
     isGoogleAdmobEnable = json['isGoogleAdmobEnable'] ?? true;
     razorPayKey = json['razorPayKey'] ?? "";
@@ -110,6 +123,10 @@ class FirebaseConfigModel {
     data['refundLink'] = refundLink;
     data['rateAppAndroidId'] = rateAppAndroidId;
     data['rateAppIOSId'] = rateAppIOSId;
+    data['facebookAddAndroidId'] = facebookAddAndroidId;
+    data['facebookInterstitialAd'] = facebookInterstitialAd;
+    data['facebookRewardAd'] = facebookRewardAd;
+    data['logo'] = logo;
     data['isChatShow'] = isChatShow;
     data['isImageGeneratorShow'] = isImageGeneratorShow;
     data['isTextCompletionShow'] = isTextCompletionShow;

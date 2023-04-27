@@ -18,54 +18,65 @@ class Home extends StatelessWidget {
           body: Stack(alignment: Alignment.bottomCenter, children: [
             SingleChildScrollView(
                 child: Column(children: [
-                  HomeTopLayout(
-                      onTap: () => homeCtrl.scaffoldKey.currentState!.openDrawer()),
-                  const DottedLines(),
-                  Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const VSpace(Sizes.s20),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(appFonts.quickAdvice.tr,
-                                  style: AppCss.outfitSemiBold16
-                                      .textColor(appCtrl.appTheme.txt)),
-                              Text(appFonts.viewAll.tr,
+              HomeTopLayout(
+                  onTap: () => homeCtrl.scaffoldKey.currentState!.openDrawer()),
+              const DottedLines(),
+              Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const VSpace(Sizes.s20),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(appFonts.quickAdvice.tr,
+                              style: AppCss.outfitSemiBold16
+                                  .textColor(appCtrl.appTheme.txt)),
+                          Text(appFonts.viewAll.tr,
                                   style: AppCss.outfitSemiBold12
                                       .textColor(appCtrl.appTheme.primary))
-                                  .inkWell(
+                              .inkWell(
                                   onTap: () =>
                                       Get.toNamed(routeName.quickAdvisor))
-                            ]),
-
-                        const VSpace(Sizes.s18),
-                        GridView.builder(
-                            padding: EdgeInsets.zero,
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: homeCtrl.quickAdvisorLists.length,
-                            gridDelegate:
+                        ]),
+                    const VSpace(Sizes.s18),
+                    GridView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: homeCtrl.quickAdvisorLists.length,
+                        gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisSpacing: 20,
                                 childAspectRatio: 1,
                                 mainAxisSpacing: 15,
                                 mainAxisExtent: 105,
                                 crossAxisCount: 3),
-                            itemBuilder: (context, index) {
-                              return QuickAdvisorLayout(
-                                  data: homeCtrl.quickAdvisorLists[index]);
-                            }),
-                        const VSpace(Sizes.s80),
-                      ]).marginSymmetric(horizontal: Sizes.s20)
-                ])),
+                        itemBuilder: (context, index) {
+                          return QuickAdvisorLayout(
+                              data: homeCtrl.quickAdvisorLists[index]);
+                        }),
+                    const VSpace(Sizes.s80),
+                  ]).marginSymmetric(horizontal: Sizes.s20)
+            ])),
+            if(!appCtrl.isSubscribe)
             if (appCtrl.firebaseConfigModel!.isAddShow!)
-              if (homeCtrl.bannerAd != null)
-                AdWidget(ad: homeCtrl.bannerAd!)
-                    .height(Sizes.s50)
-                    .paddingOnly(bottom: Insets.i10)
-                    .width(MediaQuery.of(context).size.width)
+              appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!
+                  ? (homeCtrl.bannerAd != null && homeCtrl.bannerAdIsLoaded)
+                      ? AdWidget(ad: homeCtrl.bannerAd!)
+                          .height(Sizes.s50)
+                          .paddingOnly(bottom: Insets.i10)
+                          .width(MediaQuery.of(context).size.width)
+                      : Container()
+                  : Container(
+                      alignment: Alignment.topCenter,
+                      child: homeCtrl.currentAd,
+                    )
+                      .paddingSymmetric(
+                        vertical: Insets.i10,
+                        horizontal: Insets.i20,
+                      )
+                      .width(MediaQuery.of(context).size.width)
           ]),
           backgroundColor: appCtrl.appTheme.bg1,
         ),

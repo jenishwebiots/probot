@@ -152,18 +152,18 @@ class PaymentList extends StatelessWidget {
                                       // inside the app may not be accurate.
                                       final GooglePlayPurchaseDetails?
                                           oldSubscription = _getOldSubscription(
-                                              subscribe!.type == "weekly"
+                                              subscribe!.planType!.toLowerCase() == "weekly"
                                                   ? inAppCtrl.products[1]
-                                                  : subscribe!.type == "monthly"
+                                                  : subscribe!.planType!.toLowerCase() == "monthly"
                                                       ? inAppCtrl.products[0]
                                                       : inAppCtrl.products[2],
                                               purchases);
 
                                       purchaseParam = GooglePlayPurchaseParam(
                                           productDetails:
-                                              subscribe!.type == "weekly"
+                                              subscribe!.planType!.toLowerCase() == "weekly"
                                                   ? inAppCtrl.products[1]
-                                                  : subscribe!.type == "monthly"
+                                                  : subscribe!.planType!.toLowerCase() == "monthly"
                                                       ? inAppCtrl.products[0]
                                                       : inAppCtrl.products[2],
                                           changeSubscriptionParam:
@@ -176,18 +176,18 @@ class PaymentList extends StatelessWidget {
                                     } else {
                                       purchaseParam = PurchaseParam(
                                           productDetails:
-                                              subscribe!.type == "weekly"
+                                              subscribe!.planType!.toLowerCase() == "weekly"
                                                   ? inAppCtrl.products[1]
-                                                  : subscribe!.type == "monthly"
+                                                  : subscribe!.planType!.toLowerCase() == "monthly"
                                                       ? inAppCtrl.products[0]
                                                       : inAppCtrl.products[2]);
 
                                       log("IOS : $purchaseParam");
                                     }
 
-                                    String id = subscribe!.type == "weekly"
+                                    String id = subscribe!.planType!.toLowerCase() == "weekly"
                                         ? inAppCtrl.products[1].id
-                                        : subscribe!.type == "monthly"
+                                        : subscribe!.planType!.toLowerCase() == "monthly"
                                             ? inAppCtrl.products[0].id
                                             : inAppCtrl.products[2].id;
 
@@ -198,6 +198,15 @@ class PaymentList extends StatelessWidget {
                                     } else {
                                       inAppCtrl.inAppPurchase.buyNonConsumable(
                                           purchaseParam: purchaseParam);
+                                    }
+                                    if(purchases[0]!.status == PurchaseStatus.purchased){
+
+                                      final firebaseCtrl =
+                                      Get.isRegistered<SubscriptionFirebaseController>()
+                                          ? Get.find<SubscriptionFirebaseController>()
+                                          : Get.put(SubscriptionFirebaseController());
+                                      firebaseCtrl.subscribePlan(
+                                          subscribeModel: subscribe, paymentMethod: "inApp");
                                     }
                                   }
                                 },
@@ -214,7 +223,21 @@ class PaymentList extends StatelessWidget {
 
   GooglePlayPurchaseDetails? _getOldSubscription(
       ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
+
     GooglePlayPurchaseDetails? oldSubscription;
+    if (productDetails.id == basicSubPlan9 &&
+        purchases[advanceSubPlan19] != null) {
+      oldSubscription =
+      purchases[advanceSubPlan19]! as GooglePlayPurchaseDetails;
+    } else if (productDetails.id == advanceSubPlan19 &&
+        purchases[basicSubPlan9] != null) {
+      oldSubscription =
+      purchases[basicSubPlan9]! as GooglePlayPurchaseDetails;
+    }else if (productDetails.id == advanceSubPlan29 &&
+        purchases[advanceSubPlan29] != null) {
+      oldSubscription =
+      purchases[advanceSubPlan29]! as GooglePlayPurchaseDetails;
+    }
     return oldSubscription;
   }
 }

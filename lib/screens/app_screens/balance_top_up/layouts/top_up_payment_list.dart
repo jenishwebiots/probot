@@ -217,6 +217,20 @@ class TopUpPaymentList extends StatelessWidget {
   GooglePlayPurchaseDetails? _getOldSubscription(
       ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
     GooglePlayPurchaseDetails? oldSubscription;
+
+    if (productDetails.id == kConsumableId &&
+        purchases[kConsumableId] != null) {
+      oldSubscription =
+      purchases[kConsumableId]! as GooglePlayPurchaseDetails;
+    } else if (productDetails.id == kUpgradeId &&
+        purchases[kUpgradeId] != null) {
+      oldSubscription =
+      purchases[kUpgradeId]! as GooglePlayPurchaseDetails;
+    }else if (productDetails.id == kSilverSubscriptionId &&
+        purchases[kSilverSubscriptionId] != null) {
+      oldSubscription =
+      purchases[kSilverSubscriptionId]! as GooglePlayPurchaseDetails;
+    }
     return oldSubscription;
   }
 }

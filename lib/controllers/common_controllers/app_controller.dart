@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/widgets/balance_alert.dart';
 import 'package:probot/widgets/top_up_dialog.dart';
@@ -18,6 +19,7 @@ class AppController extends GetxController {
   bool isRTL = false;
   bool isLanguage = false;
   bool isSubscribe = false;
+  bool isRewardedAdLoaded = false;
   bool isAnySubscribe = false;
   bool isCharacter = false;
   bool isBiometric = false;
@@ -159,6 +161,35 @@ class AppController extends GetxController {
               b1OnTap: () => Get.back(),
               crossOnTap: () => Get.back());
         });
+  }
+
+
+
+  void loadRewardedVideoAd() {
+    FacebookRewardedVideoAd.loadRewardedVideoAd(
+      placementId: appCtrl.firebaseConfigModel!.facebookRewardAd!,
+      listener: (result, value) {
+        log("Rewarded Ad: $result --> $value");
+        if (result == RewardedVideoAdResult.LOADED) isRewardedAdLoaded = true;
+        if (result == RewardedVideoAdResult.VIDEO_COMPLETE) {
+          /// Once a Rewarded Ad has been closed and becomes invalidated,
+          /// load a fresh Ad by calling this function.
+          if (result == RewardedVideoAdResult.VIDEO_CLOSED &&
+              (value == true || value["invalidated"] == true)) {
+            isRewardedAdLoaded = false;
+            loadRewardedVideoAd();
+          }
+        }
+      },
+    );
+  }
+
+  showFacebookRewardedAd() {
+    if (isRewardedAdLoaded == true) {
+      FacebookRewardedVideoAd.showRewardedVideoAd();
+    } else {
+      log("Rewarded Ad not yet loaded!");
+    }
   }
 
   //balance top up

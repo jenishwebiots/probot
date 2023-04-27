@@ -64,8 +64,8 @@ class DashboardController extends GetxController
     update();
 
     if (selectedIndex == 1) {
-      if (appCtrl.firebaseConfigModel!.isAddShow! &&
-          appCtrl.envConfig["chatTextCount"] != "unlimited") {
+      bool isSubscribe = appCtrl.storage.read(session.isSubscribe) ?? false;
+      if (appCtrl.firebaseConfigModel!.isAddShow! && isSubscribe == false) {
         if (appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
           chatLayoutCtrl.showInterstitialAd();
         } else {

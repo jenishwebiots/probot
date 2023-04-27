@@ -3,7 +3,7 @@ class SubscribeModel {
   String? type;
   int? price;
   int? balance;
-  String? priceTpe;
+  String? planType;
   String? icon;
   String? chatCount;
   String? imageCount;
@@ -15,7 +15,7 @@ class SubscribeModel {
         this.type,
         this.price,
         this.balance,
-        this.priceTpe,
+        this.planType,
         this.icon,
         this.chatCount,
         this.imageCount,
@@ -26,7 +26,7 @@ class SubscribeModel {
     title = json['title'];
     type = json['type'];
     price = json['price'];
-    priceTpe = json['priceTpe'];
+    planType = json['planType'];
     balance = json['balance'] ?? 5;
     icon = json['icon'];
     chatCount = json['chatCount'];
@@ -42,7 +42,7 @@ class SubscribeModel {
     data['title'] = title;
     data['type'] = type;
     data['price'] = price;
-    data['priceTpe'] = priceTpe;
+    data['planType'] = planType;
     data['balance'] = balance;
     data['icon'] = icon;
     data['chatCount'] = chatCount;

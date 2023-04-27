@@ -19,7 +19,7 @@ final bool _kAutoConsume = Platform.isIOS || true;
 
 const String _kConsumableId = 'basic_plan_9';
 const String _kUpgradeId = 'advance_plan_19';
-const String _kSilverSubscriptionId = 'subscription_silver';
+const String _kSilverSubscriptionId = 'standard_plan_29';
 const String _kGoldSubscriptionId = 'subscription_gold';
 const List<String> _kProductIds = <String>[
   _kConsumableId,

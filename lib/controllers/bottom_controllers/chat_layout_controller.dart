@@ -14,7 +14,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../screens/bottom_screens/chat_layout/layouts/pre_build_questions_layout.dart';
-import '../../screens/bottom_screens/chat_layout/layouts/suggestion_layout.dart';
 
 class ChatLayoutController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -30,14 +29,14 @@ class ChatLayoutController extends GetxController
   Rx<List<ChatListDateWise>> chatList = Rx<List<ChatListDateWise>>([]);
   final chatController = TextEditingController();
   ScrollController scrollController = ScrollController();
-  String? time,argImage;
+  String? time, argImage;
   List selectedIndex = [];
   List selectedData = [];
   DateTime? receiverTime;
   AnimationController? animationController;
   Animation? animation;
   String? chatId;
-
+  bool isRewardedAdLoaded = false;
   FocusNode focusNode = FocusNode();
   int count = 0;
   int receiverCount = 0;
@@ -60,7 +59,7 @@ class ChatLayoutController extends GetxController
   );
   RxString textInput = ''.obs;
   final _isSpeechLoading = false.obs;
-bool isInterstitialAdLoaded =false;
+  bool isInterstitialAdLoaded = false;
   RxInt chatCount = 0.obs;
   RxString userInput = "".obs;
   RxString result = "".obs;
@@ -111,7 +110,6 @@ bool isInterstitialAdLoaded =false;
       ..load();
     log("bannerAd : $bannerAd");
 
-
     _getId().then((id) {
       String? deviceId = id;
 
@@ -119,10 +117,8 @@ bool isInterstitialAdLoaded =false;
         testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
         iOSAdvertiserTrackingEnabled: true,
       );
-
     });
     _showBannerAd();
-
 
     data = appCtrl.storage.read(session.selectedCharacter);
 
@@ -149,6 +145,8 @@ bool isInterstitialAdLoaded =false;
     super.onReady();
   }
 
+
+
   //clear data while go back
   clearData() {
     speechStopMethod();
@@ -171,7 +169,8 @@ bool isInterstitialAdLoaded =false;
 
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) { // import 'dart:io'
+    if (Platform.isIOS) {
+      // import 'dart:io'
       var iosDeviceInfo = await deviceInfo.iosInfo;
       return iosDeviceInfo.identifierForVendor; // Unique ID on iOS
     } else {
@@ -184,7 +183,7 @@ bool isInterstitialAdLoaded =false;
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", //testid
+      placementId:appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
         print("Banner Ad: $result -->  $value");
@@ -201,7 +200,7 @@ bool isInterstitialAdLoaded =false;
     );
 
     FacebookInterstitialAd.loadInterstitialAd(
-      placementId: "IIMG_16_9_APP_INSTALL#1191601381370304_1191963614667414",
+      placementId: appCtrl.firebaseConfigModel!.facebookInterstitialAd!,
       listener: (result, value) {
         log("result : $result");
         log("result1 : ${result.name}");
@@ -211,7 +210,6 @@ bool isInterstitialAdLoaded =false;
         }
       },
     );
-
   }
 
   showFbInterstitialAd() {
@@ -221,7 +219,6 @@ bool isInterstitialAdLoaded =false;
       print("Interstial Ad not yet loaded!");
     }
   }
-
 
   //initialize interstitial add
   void _createInterstitialAd() {
@@ -318,18 +315,16 @@ bool isInterstitialAdLoaded =false;
   getChatId() {
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
-    if(Get.arguments != null) {
-      chatId = Get.arguments["chatId"] ?? DateTime
-          .now()
-          .millisecondsSinceEpoch
-          .toString();
+    if (Get.arguments != null) {
+      chatId = Get.arguments["chatId"] ??
+          DateTime.now().millisecondsSinceEpoch.toString();
       if (Get.arguments["avatar"].contains("assets")) {
         argImage = appCtrl.selectedCharacter["image"];
       } else {
         argImage =
             Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
       }
-    }else{
+    } else {
       log("MESSAGE : ${appCtrl.selectedCharacter}");
       bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin);
       argImage = appCtrl.selectedCharacter["image"];
@@ -339,15 +334,14 @@ bool isInterstitialAdLoaded =false;
             chatMessageType: ChatMessageType.bot,
             time: DateTime.now().millisecondsSinceEpoch),
       );
-      shareMessages.add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
-      selectedMessages.add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
+      shareMessages
+          .add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
+      selectedMessages
+          .add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
       itemCount.value = messages.value.length;
       int createdDate = DateTime.now().millisecondsSinceEpoch;
       update();
-      chatId =  DateTime
-          .now()
-          .millisecondsSinceEpoch
-          .toString();
+      chatId = DateTime.now().millisecondsSinceEpoch.toString();
 
       if (!isGuestLogin) {
         log("chatId : $chatId");
@@ -367,7 +361,7 @@ bool isInterstitialAdLoaded =false;
                 .add({
               'userId': FirebaseAuth.instance.currentUser!.uid,
               'avatar': appCtrl.selectedCharacter["image"],
-              "characterId" :appCtrl.selectedCharacter["id"],
+              "characterId": appCtrl.selectedCharacter["id"],
               'message': appCtrl.selectedCharacter["message"],
               'chatId': chatId,
               "createdDate": createdDate,
@@ -379,7 +373,7 @@ bool isInterstitialAdLoaded =false;
                   .add({
                 'userId': FirebaseAuth.instance.currentUser!.uid,
                 'avatar': appCtrl.selectedCharacter["image"],
-                "characterId" :appCtrl.selectedCharacter["id"],
+                "characterId": appCtrl.selectedCharacter["id"],
                 'message': appCtrl.selectedCharacter["message"],
                 'chatId': chatId,
                 "createdDate": createdDate,
@@ -480,7 +474,7 @@ bool isInterstitialAdLoaded =false;
               .add({
             'userId': FirebaseAuth.instance.currentUser!.uid,
             'avatar': appCtrl.selectedCharacter["image"],
-            "characterId" :appCtrl.selectedCharacter["id"],
+            "characterId": appCtrl.selectedCharacter["id"],
             'message': textInput.value,
             'chatId': chatId,
             "createdDate": createdDate,
@@ -492,7 +486,7 @@ bool isInterstitialAdLoaded =false;
                 .add({
               'userId': FirebaseAuth.instance.currentUser!.uid,
               'avatar': appCtrl.selectedCharacter["image"],
-              "characterId" :appCtrl.selectedCharacter["id"],
+              "characterId": appCtrl.selectedCharacter["id"],
               'message': textInput.value,
               'chatId': chatId,
               "createdDate": createdDate,
@@ -608,7 +602,7 @@ bool isInterstitialAdLoaded =false;
                     .add({
                   'userId': FirebaseAuth.instance.currentUser!.uid,
                   'avatar': appCtrl.selectedCharacter["image"],
-                  "characterId" :appCtrl.selectedCharacter["id"],
+                  "characterId": appCtrl.selectedCharacter["id"],
                   'message':
                       value.replaceFirst("\n", " ").replaceFirst("\n", " "),
                   'chatId': chatId,
@@ -654,7 +648,7 @@ bool isInterstitialAdLoaded =false;
               .add({
             'userId': FirebaseAuth.instance.currentUser!.uid,
             'avatar': appCtrl.selectedCharacter["image"],
-            "characterId" :appCtrl.selectedCharacter["id"],
+            "characterId": appCtrl.selectedCharacter["id"],
             'message': "",
             'chatId': chatId,
             "createdDate": DateTime.now().millisecondsSinceEpoch,
@@ -670,7 +664,7 @@ bool isInterstitialAdLoaded =false;
             .add({
           'userId': FirebaseAuth.instance.currentUser!.uid,
           'avatar': appCtrl.selectedCharacter["image"],
-          "characterId" :appCtrl.selectedCharacter["id"],
+          "characterId": appCtrl.selectedCharacter["id"],
           'message': "",
           'chatId': chatId,
           "createdDate": DateTime.now().millisecondsSinceEpoch,

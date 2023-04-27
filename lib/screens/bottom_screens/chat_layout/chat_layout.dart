@@ -49,33 +49,36 @@ class ChatLayout extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       const VSpace(Sizes.s10),
-                                      if (appCtrl
-                                          .firebaseConfigModel!.isAddShow!)
-                                        appCtrl.firebaseConfigModel!
-                                                .isGoogleAdmobEnable!
-                                            ? (chatCtrl.bannerAd != null &&
-                                                    chatCtrl.bannerAdIsLoaded)
-                                                ? AdWidget(
-                                                        ad: chatCtrl.bannerAd!)
-                                                    .height(Sizes.s50)
-                                                    .paddingOnly(
-                                                        bottom: Insets.i10)
-                                                    .width(
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width)
-                                                : Container()
-                                            : Container(
-                                                alignment: Alignment.topCenter,
-                                                child: chatCtrl.currentAd,
-                                              )
-                                                .paddingSymmetric(
-                                                  vertical: Insets.i10,
-                                                  horizontal: Insets.i20,
+                                      if (!appCtrl.isSubscribe)
+                                        if (appCtrl
+                                            .firebaseConfigModel!.isAddShow!)
+                                          appCtrl.firebaseConfigModel!
+                                                  .isGoogleAdmobEnable!
+                                              ? (chatCtrl.bannerAd != null &&
+                                                      chatCtrl.bannerAdIsLoaded)
+                                                  ? AdWidget(
+                                                          ad: chatCtrl
+                                                              .bannerAd!)
+                                                      .height(Sizes.s50)
+                                                      .paddingOnly(
+                                                          bottom: Insets.i10)
+                                                      .width(
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width)
+                                                  : Container()
+                                              : Container(
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  child: chatCtrl.currentAd,
                                                 )
-                                                .width(MediaQuery.of(context)
-                                                    .size
-                                                    .width),
+                                                  .paddingSymmetric(
+                                                    vertical: Insets.i10,
+                                                    horizontal: Insets.i20,
+                                                  )
+                                                  .width(MediaQuery.of(context)
+                                                      .size
+                                                      .width),
                                       Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
                                               style: AppCss.outfitMedium14
                                                   .textColor(

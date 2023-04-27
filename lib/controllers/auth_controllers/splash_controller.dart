@@ -20,10 +20,35 @@ class SplashController extends GetxController {
     appCtrl.isLanguage = isLanguageSaved;
     appCtrl.isBiometric = isBiometricSave;
     appCtrl.isLogin = isLoginSave;
-    appCtrl.selectedCharacter =
-        appCtrl.storage.read(session.selectedCharacter) ??
-            appArray.selectCharacterList[3];
-    appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
+
+
+
+    //select Character
+    if(appCtrl.isGuestLogin) {
+      await FirebaseFirestore.instance.collection("characters").get().then((value) {
+        if (value.docs.isNotEmpty) {
+          appCtrl.selectedCharacter = value.docs[3].data();
+          appCtrl.storage.write(session.characterIndex, 3);
+          appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
+          appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
+          appCtrl.update();
+        }
+      });
+    }else{
+      if(appCtrl.selectedCharacter == null){
+        await FirebaseFirestore.instance.collection("characters").get().then((value) {
+          if (value.docs.isNotEmpty) {
+            appCtrl.selectedCharacter = value.docs[3].data();
+            appCtrl.storage.write(session.characterIndex, 3);
+            appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
+            appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
+            appCtrl.update();
+          }
+        });
+      }
+    }
+
+
     log("isBiometricSave: $isBiometricSave");
     log("isLoginSave: $isLoginSave");
     // Language Save
@@ -103,6 +128,10 @@ class SplashController extends GetxController {
         appCtrl.firebaseConfigModel =
             FirebaseConfigModel.fromJson(value.docs[0].data());
         Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
+        appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;;
+        appCtrl.update();
+        ThemeService().switchTheme(appCtrl.isTheme);
+        Get.forceAppUpdate();
         appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
         appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
         appCtrl.update();

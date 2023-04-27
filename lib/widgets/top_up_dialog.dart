@@ -70,7 +70,13 @@ class TopUpDialog extends StatelessWidget {
           Text(appFonts.watchVideo.tr,
                   style: AppCss.outfitRegular18
                       .textColor(appCtrl.appTheme.primary))
-              .inkWell(onTap: () => appCtrl.showRewardedAd())
+              .inkWell(onTap: () {
+                if(appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!){
+                  appCtrl.showRewardedAd();
+                }else{
+                  appCtrl.showFacebookRewardedAd();
+                }
+          })
               .alignment(Alignment.center),
           const VSpace(Sizes.s25)
         ],

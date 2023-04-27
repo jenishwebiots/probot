@@ -25,7 +25,13 @@ class SubscribeTextBox extends StatelessWidget {
               ],
             ),
           if (appCtrl.envConfig["balance"] == 0)
-            LimitOverLayout(onTap: () => appCtrl.showRewardedAd()),
+            LimitOverLayout(onTap: () {
+              if(appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!){
+                appCtrl.showRewardedAd();
+              }else{
+                appCtrl.showFacebookRewardedAd();
+              }
+            }),
           if (appCtrl.envConfig["balance"] != 0)
             const ChatLayoutTextBox()
         ],

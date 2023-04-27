@@ -95,7 +95,7 @@ class HomeController extends GetxController {
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", //testid
+      placementId: appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
         print("Banner Ad: $result -->  $value");
@@ -161,10 +161,17 @@ class HomeController extends GetxController {
               b1OnTap: () {
                 Get.back();
                 Get.back();
-                if (appCtrl.rewardedAd == null) {
-                  appCtrl.createRewardedAd();
+                if(appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
+                  if (appCtrl.rewardedAd == null) {
+                    appCtrl.createRewardedAd();
+                  }
+                  appCtrl.showRewardedAd();
+                }else{
+                  if(appCtrl.isRewardedAdLoaded == false) {
+                    appCtrl.loadRewardedVideoAd();
+                  }
+                  appCtrl.showFacebookRewardedAd();
                 }
-                appCtrl.showRewardedAd();
               },
               crossOnTap: () => Get.back());
         });
