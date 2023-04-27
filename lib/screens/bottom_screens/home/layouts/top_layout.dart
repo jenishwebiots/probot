@@ -34,7 +34,7 @@ class HomeTopLayout extends StatelessWidget {
                 Image.asset(eImageAssets.logo1, width: Sizes.s106),
               ],
             ),
-            const CommonBalance()
+            const CommonBalance().marginOnly(right: Insets.i20)
           ],
         ).paddingSymmetric(vertical: Insets.i55)
       ],

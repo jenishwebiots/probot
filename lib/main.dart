@@ -32,6 +32,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+
   void initState() {
     super.initState();
 
@@ -45,11 +46,11 @@ class _MyAppState extends State<MyApp> {
     // or you can fetch the status and display your own dialog, or no dialog.
     const simpleBehavior = true;
 
-    // if (simpleBehavior == true) {
-    //   basicStatusCheck(newVersion);
-    // } else {
-    //   advancedStatusCheck(newVersion);
-    // }
+    if (simpleBehavior == true) {
+      basicStatusCheck(newVersion);
+    } else {
+      advancedStatusCheck(newVersion);
+    }
   }
 
   basicStatusCheck(NewVersion newVersion) {
@@ -74,6 +75,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+
   Widget build(BuildContext context) {
     lockScreenPortrait();
     return StreamBuilder(

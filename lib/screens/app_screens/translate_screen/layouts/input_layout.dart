@@ -6,22 +6,26 @@ import '../../../../config.dart';
 class InputLayout extends StatelessWidget {
   final String? title, hintText, responseText;
   final TextEditingController? controller;
-  final bool? isMax;
-  final GestureTapCallback? onTap;
+  final bool? isMax, isAnimated;
+  final GestureTapCallback? onTap, mircroPhoneTap;
   final Color? color, txtColor;
   final int? maxLine;
+  final double? height;
 
   const InputLayout(
       {Key? key,
       this.title,
       this.controller,
       this.isMax,
+      this.isAnimated = false,
       this.hintText,
       this.onTap,
+      this.mircroPhoneTap,
       this.color,
       this.txtColor,
       this.maxLine,
-      this.responseText})
+      this.responseText,
+      this.height})
       : super(key: key);
 
   @override
@@ -29,15 +33,23 @@ class InputLayout extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         SizedBox(
-          width: isMax == true ? Sizes.s250 : Sizes.s180,
-          child: Text(title!.toString().tr,overflow: TextOverflow.ellipsis,
-              style: AppCss.outfitSemiBold14
-                  .textColor(txtColor ?? appCtrl.appTheme.txt))
-        ),
-        if (isMax == true) SvgIconsCommon(icon: eSvgAssets.microphone),
+            width: isMax == true ? Sizes.s250 : Sizes.s180,
+            child: Text(title!.toString().tr,
+                overflow: TextOverflow.ellipsis,
+                style: AppCss.outfitSemiBold14
+                    .textColor(txtColor ?? appCtrl.appTheme.txt))),
+        if (isMax == true)
+          SvgIconsCommon(
+            icon: eSvgAssets.microphone,
+            onTap: mircroPhoneTap,
+            isAnimated: isAnimated!,
+            height: height,
+          ),
         if (isMax != true)
           Row(children: [
-            SvgIconsCommon(icon: eSvgAssets.volume,),
+            SvgIconsCommon(
+              icon: eSvgAssets.volume,
+            ),
             SvgIconsCommon(icon: eSvgAssets.share)
                 .paddingSymmetric(horizontal: Insets.i10),
             SvgIconsCommon(icon: eSvgAssets.copy)
@@ -46,21 +58,25 @@ class InputLayout extends StatelessWidget {
       const VSpace(Sizes.s10),
       Stack(alignment:appCtrl.isRTL ?  Alignment.bottomLeft : Alignment.bottomRight, children: [
         SizedBox(
-          width: double.infinity,
-          child: isMax == false ?  AnimatedTextKit(isRepeatingAnimation: false, animatedTexts: [
-            TyperAnimatedText(responseText!,
-                textStyle:
-                    AppCss.outfitMedium14.textColor(appCtrl.appTheme.txt).textHeight(1.3),
-                speed: const Duration(milliseconds: 50))
-          ]).paddingAll(Insets
-              .i15) : TextFieldCommon(
-                    controller: controller!,
-                    hintText: hintText ?? appFonts.writeAnything,
-                    minLines: 8,
-                    maxLines: maxLine ?? 100,
-                    fillColor: color ?? appCtrl.appTheme.textField,
-                    keyboardType: TextInputType.multiline)
-        ).authBoxExtension(),
+                width: double.infinity,
+                child: isMax == false
+                    ? AnimatedTextKit(
+                        isRepeatingAnimation: false,
+                        animatedTexts: [
+                            TyperAnimatedText(responseText!,
+                                textStyle: AppCss.outfitMedium14
+                                    .textColor(appCtrl.appTheme.txt)
+                                    .textHeight(1.3),
+                                speed: const Duration(milliseconds: 50))
+                          ]).paddingAll(Insets.i15)
+                    : TextFieldCommon(
+                        controller: controller!,
+                        hintText: hintText ?? appFonts.writeAnything,
+                        minLines: 8,
+                        maxLines: maxLine ?? 100,
+                        fillColor: color ?? appCtrl.appTheme.textField,
+                        keyboardType: TextInputType.multiline))
+            .authBoxExtension(),
         if (isMax == true)
           Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
             SvgPicture.asset(eSvgAssets.cancel,

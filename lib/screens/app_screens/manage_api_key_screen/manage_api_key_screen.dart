@@ -2,7 +2,8 @@ import '../../../config.dart';
 
 
 class ManageApiKeyScreen extends StatelessWidget {
-  const ManageApiKeyScreen({Key? key}) : super(key: key);
+  final apiCtrl = Get.put(AddApiKeyController());
+   ManageApiKeyScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

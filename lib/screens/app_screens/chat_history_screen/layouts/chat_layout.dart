@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
+
 import '../../../../config.dart';
 import 'package:intl/intl.dart';
 
@@ -7,6 +11,7 @@ class ChatHistoryLayout extends StatelessWidget {
   final GestureTapCallback? onTap;
   final bool? isLongPress;
   final int? index;
+
   const ChatHistoryLayout(
       {Key? key,
       this.data,
@@ -19,16 +24,32 @@ class ChatHistoryLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatHistoryController>(builder: (chatHistoryCtrl) {
+      log("HISTR L: ${data}");
       return SizedBox(
         child: Row(children: [
           Stack(alignment: Alignment.bottomRight, children: [
-            SizedBox(
+            CachedNetworkImage(
+                imageUrl: data["avatar"],
                 height: Sizes.s44,
                 width: Sizes.s50,
-                child: Column(children: [
-                  Image.asset(data["avatar"],
-                      height: Sizes.s40, width: Sizes.s40, fit: BoxFit.fill)
-                ])),
+                fit: BoxFit.fill,
+                imageBuilder: (context, imageProvider) => SizedBox(
+                    height: Sizes.s44,
+                    width: Sizes.s50,
+                    child: Column(children: [
+                      Image.network(
+                          data["avatar"].toString(),
+                          height: Sizes.s40,
+                          width: Sizes.s40,
+                          fit: BoxFit.fill)
+                    ])),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Image.network(
+                    appCtrl.selectedCharacter["image"].toString(),
+                    height: Sizes.s40,
+                    width: Sizes.s40,
+                    fit: BoxFit.fill)),
             if (chatHistoryCtrl.selectedIndex.contains(index))
               SvgPicture.asset(eSvgAssets.tick)
           ]),
@@ -56,13 +77,14 @@ class ChatHistoryLayout extends StatelessWidget {
               )
             ]),
           )
+
         ])
             .padding(
                 horizontal: Insets.i15, top: Insets.i15, bottom: Insets.i12)
             .inkWell(onTap: onTap),
       )
           .decorated(
-              color: chatHistoryCtrl.selectedIndex.contains(data.id)
+              color: chatHistoryCtrl.selectedIndex.contains(data["id"])
                   ? appCtrl.appTheme.primaryLight
                   : appCtrl.appTheme.boxBg,
               borderRadius:

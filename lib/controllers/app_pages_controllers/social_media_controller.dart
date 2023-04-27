@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:probot/bot_api/api_services.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 import '../../config.dart';
 
-class SocialMediaController extends GetxController {
+class SocialMediaController extends GetxController with GetSingleTickerProviderStateMixin  {
   TextEditingController captionController = TextEditingController();
   TextEditingController captionGeneratedController = TextEditingController();
   TextEditingController musicGeneratedController = TextEditingController();
@@ -16,7 +18,13 @@ class SocialMediaController extends GetxController {
   final FixedExtentScrollController? categoryScrollController =
       FixedExtentScrollController();
   double progressValue = 0;
+  AnimationController? animationController;
+  Animation? animation;
 
+  SpeechToText speech = SpeechToText();
+  final FlutterTts? flutterTts = FlutterTts();
+  final _isSpeech = false.obs;
+  final isListening = false.obs;
   final languageCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
@@ -71,6 +79,71 @@ class SocialMediaController extends GetxController {
     });
     update();
   }
+
+  //stop speech method
+  speechStopMethod() async {
+    _isSpeech.value = false;
+    await flutterTts!.stop();
+    update();
+  }
+
+  //speech to text
+  void speechToText() async {
+    speechStopMethod();
+    captionController.text = '';
+    hashtagController.text = '';
+    musicGeneratedController.text = '';
+
+    log("ISLISTEN : ${isListening.value}");
+    if (isListening.value == false) {
+      bool available = await speech.initialize(
+        onStatus: (val) {
+          debugPrint('*** onStatus: $val');
+          log("loo : ${val == "done"}");
+          if (val == "done" || val == "notListening") {
+            isListening.value = false;
+            update();
+          }
+          Get.forceAppUpdate();
+        },
+        onError: (val) {
+          debugPrint('### onError: $val');
+        },
+      );
+      log("available ; $available");
+      if (available) {
+        isListening.value = true;
+
+        speech.listen(
+          localeId: appCtrl.languageVal,
+          onResult: (val) {
+            log("VAL : $val");
+            captionController.text = val.recognizedWords.toString();
+            hashtagController.text = val.recognizedWords.toString();
+            musicGeneratedController.text = val.recognizedWords.toString();
+            update();
+          },
+          cancelOnError: true,
+        );
+
+        update();
+      } else {
+        log("NO");
+      }
+    } else {
+      isListening.value = false;
+      speechStopMethod();
+      update();
+    }
+  }
+
+  @override
+  void dispose() {
+
+    animationController!.dispose();
+    super.dispose();
+  }
+
 
   onMusicGenerate() {
     isLoader = true;
@@ -263,6 +336,14 @@ class SocialMediaController extends GetxController {
     captionCreatorLists = appArray.captionCreatorList;
     socialMediaLists = appArray.socialMediaList;
     captionToneLists = appArray.captionToneList;
+
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animationController!.repeat(reverse: true);
+    animation = Tween(begin: 15.0, end: 24.0).animate(animationController!)
+      ..addListener(() {
+        update();
+      });
     update();
     // TODO: implement onReady
     super.onReady();

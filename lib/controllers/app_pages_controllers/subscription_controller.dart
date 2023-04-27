@@ -15,13 +15,15 @@ import '../../screens/app_screens/subscription/layouts/razorpay_services.dart';
 class SubscriptionController extends GetxController {
   List<SubscribeModel> subscriptionLists = [];
   List currencyList = [];
-
+int selectedPrice =0;
   int selectIndex = 0;
+  int selectedPlan = 0;
   int selectIndexPayment = 0;
+  SubscribeModel? subscribeModel;
   List paymentMethods = [];
   Map<String, dynamic>? paymentIntentData;
-  bool isLoading = false;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  bool isLoading = false,isBack = true;
+
   String? checkoutUrl;
   String? executeUrl;
   String? accessToken;
@@ -81,6 +83,7 @@ class SubscriptionController extends GetxController {
     }
     update();
   }
+
 
   // Stripe Error handler
   displayPaymentSheet(subscribe, paymentMethod) async {
@@ -234,7 +237,7 @@ class SubscriptionController extends GetxController {
       log("RES: $res");
       log("checkoutUrl: $checkoutUrl");
       log("executeUrl: $executeUrl");
-      Get.to(() => PaypalPayment(subscribe: subscribe));
+      Get.to(() => PaypalPayment(subscribe: subscribe,amount: int.parse(amount),url: executeUrl,));
     } catch (e) {
       showDialog(
           barrierDismissible: false,
@@ -304,6 +307,7 @@ class SubscriptionController extends GetxController {
 
   @override
   void onReady() async {
+    isBack = Get.arguments ?? true;
     paymentMethods = appArray.paymentMethodList;
     subscriptionLists = appArray.subscriptionPlan
         .map((e) => SubscribeModel.fromJson(e))

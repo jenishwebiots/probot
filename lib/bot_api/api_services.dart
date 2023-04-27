@@ -9,13 +9,19 @@ class ApiServices {
   static var client = http.Client();
 
   static Future<String> chatCompeletionResponse(String prompt) async {
+    final firebaseCtrl =
+    Get.isRegistered<SubscriptionFirebaseController>()
+        ? Get.find<SubscriptionFirebaseController>()
+        : Get.put(SubscriptionFirebaseController());
+    firebaseCtrl.removeBalance();
     var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
     final response = await http.post(
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
+
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",

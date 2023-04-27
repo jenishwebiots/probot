@@ -14,7 +14,8 @@ class GuestReceiver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
+    return 
+    GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
       return Align(
           alignment: Alignment.centerLeft,
           child: Row(

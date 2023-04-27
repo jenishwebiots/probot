@@ -611,6 +611,19 @@ class AppFonts {
   String weWantToGiveYou = "We want to give you notifications from our app regarding alerts, new updates, and more.";
 
 
+
+  String lifeTimeAccessibility = "lifeTimeAccessibility";
+  String advantages = "advantages";
+  String free = "free";
+  String pro = "pro";
+  String choosePeriod = "choosePeriod";
+  String continueWithLimitedVersion = "continueWithLimitedVersion";
+  String purchaseCoinBalance = "purchaseCoinBalance";
+  String wantYourApi = "wantYourApi";
+  String inputApi = "inputApi";
+  String inputApiKey = "inputApiKey";
+  String planPeriod = "planPeriod";
+
   String thereAreAwardLeft(val) =>
       "thereAreAwardLeft".trParams({'awardLeft': val});
 

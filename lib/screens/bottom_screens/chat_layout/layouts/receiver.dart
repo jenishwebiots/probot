@@ -16,6 +16,7 @@ class Receiver extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
+
       return Align(
           alignment: Alignment.centerLeft,
           child: Row(

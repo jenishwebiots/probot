@@ -1,3 +1,5 @@
+import 'package:vibration/vibration.dart';
+
 import '../../../../config.dart';
 
 class WithoutCaptionLayout extends StatelessWidget {
@@ -37,6 +39,14 @@ class WithoutCaptionLayout extends StatelessWidget {
                   hintText: appFonts.typeHere,
                   title: appFonts.writeDetail,
                   isMax: true,
+                  isAnimated: socialMediaCtrl.isListening.value,
+                  height: socialMediaCtrl.isListening.value
+                      ? socialMediaCtrl.animation!.value
+                      : Sizes.s20,
+                  mircroPhoneTap: (){
+                    Vibration.vibrate(duration: 200);
+                    socialMediaCtrl.speechToText();
+                  },
                   controller: socialMediaCtrl.captionController,
                   onTap: () => socialMediaCtrl.captionController.clear()),
               const VSpace(Sizes.s20),

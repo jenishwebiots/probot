@@ -3,7 +3,7 @@ import '../config.dart';
 class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
   final GestureTapCallback? actionOnTap, leadingOnTap;
   final String? title, actionIcon;
-  final bool isAction;
+  final bool isAction,isBalanceShow;
 
   const AppAppBarCommon(
       {Key? key,
@@ -11,7 +11,8 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
         this.actionOnTap,
         this.actionIcon,
         this.leadingOnTap,
-        this.isAction = false})
+        this.isAction = false,
+        this.isBalanceShow = true})
       : super(key: key);
 
   @override
@@ -22,6 +23,7 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
         toolbarHeight: Sizes.s70,
         backgroundColor: appCtrl.appTheme.primary,
         actions: [
+          if (isBalanceShow)   const CommonBalance().marginOnly(right: Insets.i20,top: Insets.i10,bottom: Insets.i10),
           if (isAction)
             SvgPicture.asset(actionIcon!)
                 .paddingSymmetric(horizontal: Insets.i20)

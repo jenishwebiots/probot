@@ -11,22 +11,22 @@ class SubscribeTextBox extends StatelessWidget {
 
       return Column(
         children: [
-          if (int.parse(appCtrl.envConfig["chatTextCount"]) != 0)
+          if (appCtrl.envConfig["balance"] != 0)
             Column(
               children: [
                 Text(
                     appFonts
                         .thereAreAwardLeft(
-                            appCtrl.envConfig["chatTextCount"].toString())
+                            appCtrl.envConfig["balance"].toString())
                         .tr,
                     style: AppCss.outfitSemiBold14
                         .textColor(appCtrl.isTheme ? appCtrl.appTheme.lightText : appCtrl.appTheme.txt)),
                 const VSpace(Sizes.s10),
               ],
             ),
-          if (int.parse(appCtrl.envConfig["chatTextCount"]) == 0)
+          if (appCtrl.envConfig["balance"] == 0)
             LimitOverLayout(onTap: () => appCtrl.showRewardedAd()),
-          if (int.parse(appCtrl.envConfig["chatTextCount"]) != 0)
+          if (appCtrl.envConfig["balance"] != 0)
             const ChatLayoutTextBox()
         ],
       );

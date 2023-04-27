@@ -1,18 +1,30 @@
 import 'dart:developer';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+
 import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
-class TranslateController extends GetxController {
+class TranslateController extends GetxController with GetSingleTickerProviderStateMixin  {
   TextEditingController transController = TextEditingController();
   TextEditingController transCompleteController = TextEditingController();
   bool isTranslated = false;
+  final FlutterTts? flutterTts = FlutterTts();
   bool isLoader = false;
-  var selectItem;
-  var toSelectItem;
-  var onFromSelect;
-  var onToSelect;
+  dynamic selectItem;
+  dynamic toSelectItem;
+  dynamic onFromSelect;
+  dynamic onToSelect;
   String? response = '';
   int value = 0;
+
+  AnimationController? animationController;
+  Animation? animation;
+
+  SpeechToText speech = SpeechToText();
+
+  final _isSpeech = false.obs;
+  final isListening = false.obs;
   int toValue = 0;
   List<String> translateLanguagesList = [];
   final FixedExtentScrollController? fromScrollController =
@@ -25,10 +37,79 @@ class TranslateController extends GetxController {
   @override
   void onReady() {
     translateLanguagesList = appArray.translateLanguages;
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animationController!.repeat(reverse: true);
+    animation = Tween(begin: 15.0, end: 24.0).animate(animationController!)
+      ..addListener(() {
+        update();
+      });
     update();
     // TODO: implement onReady
     super.onReady();
   }
+
+
+  //stop speech method
+  speechStopMethod() async {
+    _isSpeech.value = false;
+    await flutterTts!.stop();
+    update();
+  }
+
+  //speech to text
+  void speechToText() async {
+    speechStopMethod();
+    transController.text = '';
+
+    log("ISLISTEN : ${isListening.value}");
+    if (isListening.value == false) {
+      bool available = await speech.initialize(
+        onStatus: (val) {
+          debugPrint('*** onStatus: $val');
+          log("loo : ${val == "done"}");
+          if (val == "done" || val == "notListening") {
+            isListening.value = false;
+            update();
+          }
+          Get.forceAppUpdate();
+        },
+        onError: (val) {
+          debugPrint('### onError: $val');
+        },
+      );
+      log("available ; $available");
+      if (available) {
+        isListening.value = true;
+
+        speech.listen(
+          localeId: appCtrl.languageVal,
+          onResult: (val) {
+            log("VAL : $val");
+            transController.text = val.recognizedWords.toString();
+            update();
+          },
+          cancelOnError: true,
+        );
+
+        update();
+      } else {
+        log("NO");
+      }
+    } else {
+      isListening.value = false;
+      speechStopMethod();
+      update();
+    }
+  }
+
+  @override
+  void dispose() {
+
+    animationController!.dispose();
+    super.dispose();
+  }
+
 
   onTranslate () {
     isLoader = true;

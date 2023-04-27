@@ -1,17 +1,26 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
 
 
-class CodeGeneratorController extends GetxController {
+class CodeGeneratorController extends GetxController with GetSingleTickerProviderStateMixin  {
   TextEditingController codeController = TextEditingController();
   final FixedExtentScrollController? scrollController = FixedExtentScrollController();
   bool isCodeGenerate = false;
   bool isLoader = false;
   List codingLanguages = [];
+  SpeechToText speech = SpeechToText();
+  final FlutterTts? flutterTts = FlutterTts();
+  final _isSpeech = false.obs;
+  final isListening = false.obs;
+
+  AnimationController? animationController;
+  Animation? animation;
 
   int value = 0;
   String? selectItem;
@@ -28,6 +37,13 @@ class CodeGeneratorController extends GetxController {
 @override
   void onReady() {
     readJson();
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animationController!.repeat(reverse: true);
+    animation = Tween(begin: 15.0, end: 24.0).animate(animationController!)
+      ..addListener(() {
+        update();
+      });
     update();
     // TODO: implement onReady
     super.onReady();
@@ -45,6 +61,7 @@ class CodeGeneratorController extends GetxController {
     codeController.clear();
     update();
   }
+
 
   endCodeGeneratorDialog() {
     dialogLayout.endDialog(
@@ -109,6 +126,66 @@ class CodeGeneratorController extends GetxController {
               topLeft: Radius.circular(AppRadius.r10))
       ),
     );
+  }
+
+  //stop speech method
+  speechStopMethod() async {
+    _isSpeech.value = false;
+    await flutterTts!.stop();
+    update();
+  }
+
+  //speech to text
+  void speechToText() async {
+    speechStopMethod();
+    codeController.text = '';
+
+    log("ISLISTEN : ${isListening.value}");
+    if (isListening.value == false) {
+      bool available = await speech.initialize(
+        onStatus: (val) {
+          debugPrint('*** onStatus: $val');
+          log("loo : ${val == "done"}");
+          if (val == "done" || val == "notListening") {
+            isListening.value = false;
+            update();
+          }
+          Get.forceAppUpdate();
+        },
+        onError: (val) {
+          debugPrint('### onError: $val');
+        },
+      );
+      log("available ; $available");
+      if (available) {
+        isListening.value = true;
+
+        speech.listen(
+          localeId: appCtrl.languageVal,
+          onResult: (val) {
+            log("VAL : $val");
+            codeController.text = val.recognizedWords.toString();
+            update();
+          },
+          cancelOnError: true,
+        );
+
+        update();
+      } else {
+        log("NO");
+      }
+    } else {
+      isListening.value = false;
+      speechStopMethod();
+      update();
+    }
+  }
+
+  @override
+  void dispose() {
+
+    animationController!.dispose();
+    super.dispose();
   }
 
 }

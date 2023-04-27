@@ -30,72 +30,77 @@ class SignInController extends GetxController {
 
   // SignIn With Google Method
   Future signInWithGoogle() async {
-    appCtrl.isGuestLogin = false;
-    appCtrl.storage.write(session.isGuestLogin, false);
-    log("message");
-    isLoading = true;
-    update();
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    try{
+      appCtrl.isGuestLogin = false;
+      appCtrl.storage.write(session.isGuestLogin, false);
+      log("message");
+      isLoading = true;
+      update();
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final GoogleSignIn googleSignIn = GoogleSignIn();
 
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount!.authentication;
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-    User? user = (await auth.signInWithCredential(credential)).user;
-    update();
-    userNameGoogle = user!.email;
-    isLoading = false;
-    update();
-    appCtrl.storage.write("userName", userNameGoogle);
-    appCtrl.storage.write("name", user.displayName);
+      final GoogleSignInAccount? googleSignInAccount =
+      await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      User? user = (await auth.signInWithCredential(credential)).user;
+      update();
+      userNameGoogle = user!.email;
+      isLoading = false;
+      update();
+      appCtrl.storage.write("userName", userNameGoogle);
+      appCtrl.storage.write("name", user.displayName);
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .where('id', isEqualTo: user.uid)
-        .limit(1)
-        .get()
-        .then((result)async {
-      if (result.docs.isEmpty) {
-        // Update data to server if new user
-        FirebaseMessaging.instance.getToken().then((token) async {
-          await FirebaseFirestore.instance
-              .collection('users')
-              .doc(user.uid)
-              .set({
-            'logintype': "Google",
-            'nickname': user.displayName,
-            'email': userNameGoogle,
-            'phone': user.phoneNumber,
-            'id': user.uid,
-            "balance": 5,
-            "fcmToken": token,
-            "isActive":true
+      await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: user.uid)
+          .limit(1)
+          .get()
+          .then((result) async {
+        if (result.docs.isEmpty) {
+          // Update data to server if new user
+          FirebaseMessaging.instance.getToken().then((token) async {
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(user.uid)
+                .set({
+              'logintype': "Google",
+              'nickname': user.displayName,
+              'email': userNameGoogle,
+              'phone': user.phoneNumber,
+              'id': user.uid,
+              "balance": 5,
+              "fcmToken": token,
+              "isActive": true
+            });
           });
-        });
 
-        appCtrl.envConfig["balance"] = 5;
-      } else {
-       await FirebaseMessaging.instance.getToken().then((token) async {
-          await FirebaseFirestore.instance
-              .collection('users')
-              .doc(user.uid)
-              .update({
-            "fcmToken": token,
-            "isActive":true
+          appCtrl.envConfig["balance"] = 5;
+        } else {
+          await FirebaseMessaging.instance.getToken().then((token) async {
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(user.uid)
+                .update({"fcmToken": token, "isActive": true});
           });
-        });
-        appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
-      }
-    });
+          appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
+        }
+      });
 
-    appCtrl.storage.write("id", user.uid);
-    await checkData();
-    Get.offAllNamed(routeName.selectLanguageScreen);
+      appCtrl.storage.write("id", user.uid);
+      await checkData();
+      Get.offAllNamed(routeName.selectLanguageScreen);
+    }catch(e){
+      isLoading = false;
+      update();
+    }finally{
+      isLoading = false;
+      update();
+    }
   }
 
   // Sign In With Email & Password Method
@@ -124,7 +129,7 @@ class SignInController extends GetxController {
               .where('id', isEqualTo: firebaseUser.user!.uid)
               .limit(1)
               .get()
-              .then((value) async{
+              .then((value) async {
             log("doc ${value.docs.isEmpty}");
             if (value.docs.isEmpty) {
               // Update data to server if new user
@@ -139,7 +144,7 @@ class SignInController extends GetxController {
                 'id': firebaseUser.user!.uid,
                 "balance": 5,
                 "fcmToken": token,
-                "isActive":true
+                "isActive": true
               });
               appCtrl.envConfig["balance"] = 5;
             } else {
@@ -147,10 +152,7 @@ class SignInController extends GetxController {
                 await FirebaseFirestore.instance
                     .collection('users')
                     .doc(firebaseUser.user!.uid)
-                    .update({
-                  "fcmToken": token,
-                  "isActive":true
-                });
+                    .update({"fcmToken": token, "isActive": true});
               });
               appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
             }
@@ -223,7 +225,7 @@ class SignInController extends GetxController {
               .where('id', isEqualTo: signIn.uid)
               .limit(1)
               .get()
-              .then((value)async {
+              .then((value) async {
             log("doc ${value.docs.isEmpty}");
             if (value.docs.isEmpty) {
               // Update data to server if new user
@@ -238,7 +240,7 @@ class SignInController extends GetxController {
                 'id': signIn.uid,
                 "balance": 5,
                 "fcmToken": token,
-                "isActive":true
+                "isActive": true
               });
               appCtrl.envConfig["balance"] = 5;
             } else {
@@ -246,10 +248,7 @@ class SignInController extends GetxController {
                 await FirebaseFirestore.instance
                     .collection('users')
                     .doc(signIn.uid)
-                    .update({
-                  "fcmToken": token,
-                  "isActive":true
-                });
+                    .update({"fcmToken": token, "isActive": true});
               });
               appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
             }
@@ -280,13 +279,20 @@ class SignInController extends GetxController {
         .get()
         .then((value) {
       if (value.docs.isNotEmpty) {
-        appCtrl.envConfig["chatTextCount"] = value.docs[0].data()["chatCount"];
-        appCtrl.envConfig["imageCount"] = value.docs[0].data()["imageCount"];
-        appCtrl.envConfig["textCompletionCount"] =
-            value.docs[0].data()["textCompletionCount"];
-        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-        appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+        log("DATA : ${value.docs[0].data()}");
+        if(value.docs[0].data()["isSubscribe"] == false) {
+          appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+          appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+          appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+          appCtrl.storage.write(session.isSubscribe, false);
+          appCtrl.isSubscribe = false;
+        }else{
+          appCtrl.isSubscribe = true;
+          appCtrl.storage.write(session.isSubscribe, true);
+        }
+        appCtrl.storage.write(session.isAnySubscribe, true);
       } else {
+        appCtrl.storage.write(session.isAnySubscribe, false);
         appCtrl.envConfig = environment;
         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);

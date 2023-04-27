@@ -111,6 +111,7 @@ class LanguagePickerLayout extends StatelessWidget {
                     SizedBox(
                         height: Sizes.s270,
                         child: CupertinoPicker(
+
                             scrollController: scrollController,
                             selectionOverlay:
                                 CupertinoPickerDefaultSelectionOverlay(

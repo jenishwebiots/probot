@@ -7,7 +7,11 @@ import '../../../../config.dart';
 
 class PaypalPayment extends StatefulWidget {
   final SubscribeModel? subscribe;
- const PaypalPayment({Key? key,this.subscribe}) : super(key: key);
+  final int? amount;
+  final String? url;
+  final bool isSubscribe;
+
+ const PaypalPayment({Key? key,this.subscribe,this.amount,this.url,this.isSubscribe= true}) : super(key: key);
 
   @override
   State<PaypalPayment> createState() => _PaypalPaymentState();
@@ -15,7 +19,7 @@ class PaypalPayment extends StatefulWidget {
 }
 
 class _PaypalPaymentState extends State<PaypalPayment> {
-
+  final subscribeCtrl = Get.isRegistered<SubscriptionController>() ? Get.find<SubscriptionController>() : Get.put(SubscriptionController());
 
   PaypalServices services = PaypalServices();
 
@@ -25,9 +29,10 @@ class _PaypalPaymentState extends State<PaypalPayment> {
   @override
   void initState() {
     super.initState();
+
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(subscribeCtrl.checkoutUrl!))
+      ..loadRequest(Uri.parse(widget.url!))
       ..setNavigationDelegate(
           NavigationDelegate(onNavigationRequest: (NavigationRequest request) {
 
@@ -57,7 +62,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
                       Get.isRegistered<SubscriptionFirebaseController>()
                           ? Get.find<SubscriptionFirebaseController>()
                           : Get.put(SubscriptionFirebaseController());
-                      firebaseCtrl.subscribePlan(subscribeModel: widget.subscribe,paymentMethod: "payPal");
+                      firebaseCtrl.subscribePlan(subscribeModel: widget.subscribe,paymentMethod: "payPal",amountBalance: widget.amount,isSubscribe: widget.isSubscribe);
                     },
                     crossOnTap: ()=> Get.back()
                 );
@@ -88,7 +93,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
       }));
     setState(() {});
   }
-  final subscribeCtrl = Get.put(SubscriptionController());
+
 
 
   @override
@@ -104,7 +109,7 @@ class _PaypalPaymentState extends State<PaypalPayment> {
       });
     } else {
       return Scaffold(
-          key: subscribeCtrl.scaffoldKey,
+
           appBar: AppBar(
               leading: const BackButton(),
               backgroundColor: appCtrl.appTheme.white,

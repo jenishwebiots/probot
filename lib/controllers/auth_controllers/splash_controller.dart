@@ -116,13 +116,17 @@ class SplashController extends GetxController {
           .limit(1)
           .get()
           .then((value) async {
-        if (value.docs.isNotEmpty ) {
-          if(value.docs[0].data()["isSubscribe"] == false){
+        if (value.docs.isNotEmpty) {
+          if (value.docs[0].data()["isSubscribe"] == false) {
             appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
             appCtrl.update();
             appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+            appCtrl.storage.write(session.isSubscribe, false);
+          }else{
+            appCtrl.storage.write(session.isSubscribe, true);
           }
-        }else{
+          appCtrl.storage.write(session.isAnySubscribe, true);
+        } else {
           await FirebaseFirestore.instance
               .collection("users")
               .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -137,6 +141,7 @@ class SplashController extends GetxController {
         }
       });
     } else {
+      appCtrl.storage.write(session.isAnySubscribe, false);
       log("appCtrl.envConfig : ${appCtrl.envConfig}");
       appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;
       appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
@@ -144,43 +149,50 @@ class SplashController extends GetxController {
     update();
     Future.delayed(const Duration(seconds: 3), () {
       log("onBoard : $onBoard");
+      final isSubscribe = appCtrl.storage.read(session.isAnySubscribe) ?? false;
+      appCtrl.isSubscribe = appCtrl.storage.read(session.isSubscribe) ?? false;
+
       if (onBoard) {
 
-        if (isGuestLogin) {
-          appCtrl.isGuestLogin = isGuestLogin;
-          appCtrl.storage.write(session.isGuestLogin, isGuestLogin);
-          Get.toNamed(routeName.dashboard);
-        } else {
-          log("onBoard : $onBoard");
-          appCtrl.isGuestLogin = false;
-          appCtrl.storage.write(session.isGuestLogin, false);
-
-          if (isLoginSave) {
-            if (isBiometricSave) {
-              Get.offAllNamed(routeName.addFingerprintScreen);
-            } else {
-              Get.toNamed(routeName.dashboard);
-            }
+        if (isSubscribe) {
+          if (isGuestLogin) {
+            appCtrl.isGuestLogin = isGuestLogin;
+            appCtrl.storage.write(session.isGuestLogin, isGuestLogin);
+            Get.toNamed(routeName.dashboard);
           } else {
-            if (name != null ||
-                userName != null ||
-                firebaseUser != null ||
-                number != null) {
-              if (isLanguageSaved) {
-                if (isBiometricSave) {
-                  Get.offAllNamed(routeName.addFingerprintScreen);
-                } else {
-                  Get.toNamed(routeName.dashboard);
-                }
+            log("onBoard : $onBoard");
+            appCtrl.isGuestLogin = false;
+            appCtrl.storage.write(session.isGuestLogin, false);
+
+            if (isLoginSave) {
+              if (isBiometricSave) {
+                Get.offAllNamed(routeName.addFingerprintScreen);
               } else {
-                Get.toNamed(routeName.selectLanguageScreen);
+                Get.toNamed(routeName.dashboard);
               }
             } else {
-              Get.toNamed(routeName.loginScreen);
+              if (name != null ||
+                  userName != null ||
+                  firebaseUser != null ||
+                  number != null) {
+                if (isLanguageSaved) {
+                  if (isBiometricSave) {
+                    Get.offAllNamed(routeName.addFingerprintScreen);
+                  } else {
+                    Get.toNamed(routeName.dashboard);
+                  }
+                } else {
+                  Get.toNamed(routeName.selectLanguageScreen);
+                }
+              } else {
+                Get.toNamed(routeName.loginScreen);
+              }
             }
           }
+        } else {
+          Get.toNamed(routeName.subscriptionPlanList,arguments: false);
         }
-      } else {
+      }else {
         Get.toNamed(routeName.onBoardingScreen);
       }
 

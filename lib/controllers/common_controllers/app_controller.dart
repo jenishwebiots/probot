@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/widgets/balance_alert.dart';
+import 'package:probot/widgets/top_up_dialog.dart';
 
 import '../../config.dart';
 
@@ -16,6 +17,8 @@ class AppController extends GetxController {
   bool isTheme = false;
   bool isRTL = false;
   bool isLanguage = false;
+  bool isSubscribe = false;
+  bool isAnySubscribe = false;
   bool isCharacter = false;
   bool isBiometric = false;
   bool isLogin = false;
@@ -116,9 +119,8 @@ class AppController extends GetxController {
       },
     );
 
-    int count = int.parse(envConfig["chatTextCount"].toString()) + 1;
-    envConfig["chatTextCount"] = count.toString();
-    log("NEW : ${envConfig["chatTextCount"]}");
+    int count = envConfig["balance"] + 1;
+    envConfig["balance"] = count;
     update();
     if (!appCtrl.isGuestLogin) {
       final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
@@ -135,7 +137,7 @@ class AppController extends GetxController {
       log('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
     });
     rewardedAd = null;
-    showNewCount(envConfig["chatTextCount"]);
+    showNewCount(envConfig["balance"]);
     update();
   }
 
@@ -160,7 +162,8 @@ class AppController extends GetxController {
   }
 
   //balance top up
-  balanceTopUpSuccessDialog() {
+  balanceTopUpDialog() {
+
     Get.generalDialog(
       pageBuilder: (context, anim1, anim2) {
         return const Align(
@@ -178,6 +181,77 @@ class AppController extends GetxController {
       transitionDuration: const Duration(milliseconds: 300),
     );
   }
+
+
+
+  // top up dialog
+  topUpDialog() {
+    Get.generalDialog(
+      pageBuilder: (context, anim1, anim2) {
+        return const Align(
+          alignment: Alignment.center,
+          child: TopUpDialog(),
+        );
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
+              .animate(anim1),
+          child: child,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 300),
+    );
+  }
+
+  splashDataCheck()async{
+    bool isLoginSave =
+        appCtrl.storage.read(session.isLogin) ?? false;
+    bool isGuestLogin =
+        appCtrl.storage.read(session.isGuestLogin) ?? false;
+    bool isBiometricSave =
+        appCtrl.storage.read(session.isBiometric) ?? false;
+    bool isLanguageSaved =
+        appCtrl.storage.read(session.isLanguage) ?? false;
+    var name = appCtrl.storage.read("name");
+    var userName = appCtrl.storage.read("userName");
+    var firebaseUser = appCtrl.storage.read("firebaseUser");
+    var number = appCtrl.storage.read("number");
+    if (isGuestLogin) {
+      appCtrl.isGuestLogin = isGuestLogin;
+      appCtrl.storage.write(session.isGuestLogin, isGuestLogin);
+      Get.offAllNamed(routeName.dashboard);
+    } else {
+      appCtrl.isGuestLogin = false;
+      appCtrl.storage.write(session.isGuestLogin, false);
+
+      if (isLoginSave) {
+        if (isBiometricSave) {
+          Get.offAllNamed(routeName.addFingerprintScreen);
+        } else {
+          Get.offAllNamed(routeName.dashboard);
+        }
+      } else {
+        if (name != null ||
+            userName != null ||
+            firebaseUser != null ||
+            number != null) {
+          if (isLanguageSaved) {
+            if (isBiometricSave) {
+              Get.offAllNamed(routeName.addFingerprintScreen);
+            } else {
+              Get.offAllNamed(routeName.dashboard);
+            }
+          } else {
+            Get.offAllNamed(routeName.selectLanguageScreen);
+          }
+        } else {
+          Get.offAllNamed(routeName.loginScreen);
+        }
+      }
+    }
+}
+
 
   @override
   void dispose() {
