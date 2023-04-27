@@ -37,6 +37,7 @@ class ImageAssets {
   final String rewardBanner = "assets/images/rewardBanner.png";
   final String reward = "assets/images/reward.png";
   final String quickAdvisorContainer = "assets/images/quickAdvisorContainer.png";
+  final String message = "assets/images/message.png";
 
   final String slider = "assets/images/slider.png";
   final String languageContainer = "assets/images/languageContainer.png";

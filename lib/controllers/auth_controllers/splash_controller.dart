@@ -153,6 +153,7 @@ class SplashController extends GetxController {
       appCtrl.isSubscribe = appCtrl.storage.read(session.isSubscribe) ?? false;
 
       if (onBoard) {
+
         if (isSubscribe) {
           if (isGuestLogin) {
             appCtrl.isGuestLogin = isGuestLogin;

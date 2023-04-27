@@ -60,7 +60,7 @@ class AppController extends GetxController {
     } else if (data["title"] == "option3") {
       dashboardCtrl.onBottomTap(3);
     } else if (data["title"] == "setting") {
-      dashboardCtrl.onBottomTap(4);
+      Get.toNamed(routeName.settingScreen);
     } else if (data["title"] == "chatHistory") {
       if (appCtrl.isGuestLogin) {
         Get.toNamed(routeName.signInScreen);

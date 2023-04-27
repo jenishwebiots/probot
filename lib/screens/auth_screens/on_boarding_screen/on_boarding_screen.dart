@@ -32,13 +32,13 @@ class OnBoardingScreen extends StatelessWidget {
                             data: e.value,
                             onTap: () {
                               if (onBoardingCtrl.selectIndex == 2) {
-                                Get.toNamed(routeName.loginScreen);
+                                Get.toNamed(routeName.allowNotificationScreen);
                               } else {
                                 onBoardingCtrl.pageCtrl.nextPage(
                                     duration: const Duration(microseconds: 500),
                                     curve: Curves.bounceInOut);
-                                appCtrl.isOnboard = true;
-                                appCtrl.storage.write("isOnboard", appCtrl.isOnboard);
+                                /*appCtrl.isOnboard = true;
+                                appCtrl.storage.write("isOnboard", appCtrl.isOnboard);*/
                               }
                             },
                           ))
