@@ -22,8 +22,7 @@ class SplashController extends GetxController {
     appCtrl.isLogin = isLoginSave;
 
 
-
-    //select Character
+    //select Character as per selected or guest
     if(appCtrl.isGuestLogin) {
       await FirebaseFirestore.instance.collection("characters").get().then((value) {
         if (value.docs.isNotEmpty) {
