@@ -614,6 +614,16 @@ class AppFonts {
   String shareApp = "Share app";
   String youtube = "YouTube";
   String linkedin = "LinkedIn";
+  String ecommerceDetail = "E-commerce details";
+  String choseOneOfThese = "Choose one of these to create a fantastic post :";
+  String amazonProductFeature = "Amazon product feature";
+  String amazonProductListing = "Amazon product listing";
+  String amazonProductReview = "Amazon product review";
+  String amazonProductTitle = "Amazon product title";
+  String onlineDesc = "One line description";
+  String productGen = "Product generator";
+  String reviewResponder = "Review responder";
+  String productRoadmap = "Product roadmap";
 
 
 

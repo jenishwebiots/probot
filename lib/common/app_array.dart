@@ -754,4 +754,32 @@ class AppArray {
       "image": eSvgAssets.galleryColor
     },
   ];
+
+  var ecommerceList = [
+    {
+      "title": appFonts.amazonProductFeature,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.amazonProductListing,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.amazonProductReview,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.amazonProductTitle,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.onlineDesc,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.productGen,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.reviewResponder,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.productRoadmap,
+      "image": eSvgAssets.anniversary
+    },
+  ];
 }
