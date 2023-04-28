@@ -20,7 +20,7 @@ class ApiServices {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer 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',
 
       },
       body: json.encode({

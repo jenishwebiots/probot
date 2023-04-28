@@ -612,6 +612,8 @@ class AppFonts {
   String otherQuickAdvisor = "Other quick advisor :";
   String favoriteQuickAdvisor = "Favorite quick advisor :";
   String shareApp = "Share app";
+  String youtube = "YouTube";
+  String linkedin = "LinkedIn";
 
 
 

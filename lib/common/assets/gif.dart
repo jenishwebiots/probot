@@ -9,4 +9,6 @@ class GifAssets {
   final String balance = "assets/gif/balance.gif";
   final String hashtagLoader = "assets/gif/hashtagLoader.gif";
   final String login = "assets/gif/login.gif";
+  final String speechStart = "assets/gif/speechStart.gif";
+  final String speechStartDark = "assets/gif/speechStartDark.gif";
 }

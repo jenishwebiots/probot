@@ -107,12 +107,17 @@ class ImageScannerController extends GetxController {
       final file = File(Pickfile);
       final inputImage = InputImage.fromFile(file);
       final recognizedText = await textRecognizer.processImage(inputImage);
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+        update();
+      } else {
       Get.toNamed(routeName.chatLayout,
           arguments: {"recText": recognizedText.text});
       final chatCtrl = Get.isRegistered<ChatLayoutController>()
           ? Get.find<ChatLayoutController>()
           : Get.put(ChatLayoutController());
-      chatCtrl.getChatId();
+      chatCtrl.getChatId();}
       /* ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(recognizedText.text),

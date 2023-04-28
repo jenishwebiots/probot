@@ -607,8 +607,11 @@ class AppArray {
 
   var captionCreatorList = [
     {"image": eSvgAssets.insta, "title": appFonts.insta},
+    {"image": eSvgAssets.linkedin, "title": appFonts.linkedin},
+    {"image": eSvgAssets.twitter, "title": appFonts.twitter},
+    {"image": eSvgAssets.youtube, "title": appFonts.youtube},
     {"image": eSvgAssets.fb, "title": appFonts.fbHalf},
-    {"image": eSvgAssets.twitter, "title": appFonts.twitter}
+
   ];
 
   var captionToneList = [

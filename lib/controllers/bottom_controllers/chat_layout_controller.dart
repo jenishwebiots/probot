@@ -325,22 +325,23 @@ class ChatLayoutController extends GetxController
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     if (Get.arguments != null) {
+
+
       chatId = Get.arguments["chatId"] ??
           DateTime.now().millisecondsSinceEpoch.toString();
       log("RICHTEXT : ${Get.arguments }");
       if(Get.arguments["recText"] != null ) {
-
         chatController.text = Get.arguments["recText"];
         update();
         processChat();
-      }else{
-        if (Get.arguments["avatar"].contains("assets")) {
-          argImage = appCtrl.selectedCharacter["image"];
-        } else {
-          argImage =
-              Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
-        }
+      }else if (Get.arguments["speechText"] != null) {
+
+        update();
+        processChat();
       }
+       argImage =
+          Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      update();
     } else {
       log("MESSAGE : ${appCtrl.selectedCharacter}");
 

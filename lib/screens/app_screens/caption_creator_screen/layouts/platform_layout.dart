@@ -12,6 +12,7 @@ class PlatformLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+            width: Sizes.s110,
             child: Row(children: [
       index == selectedIndex
           ? Icon(Icons.check_circle,
