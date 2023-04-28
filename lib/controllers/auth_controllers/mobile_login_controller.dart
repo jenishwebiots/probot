@@ -136,13 +136,18 @@ class MobileLoginController extends GetxController {
                                                 });
                                                 appCtrl.envConfig["balance"] = 5;
                                               } else {
+                                                if(value.docs[0].data()["balance"] == null){
+                                                  appCtrl.envConfig["balance"] = 5;
+                                                }
+                                                update();
                                                 await FirebaseMessaging.instance.getToken().then((token) async {
                                                   await FirebaseFirestore.instance
                                                       .collection('users')
                                                       .doc(phoneUser?.uid)
                                                       .update({
                                                     "fcmToken": token,
-                                                    "isActive":true
+                                                    "isActive":true,
+                                                    "balance": appCtrl.envConfig["balance"]
                                                   });
                                                 });
                                                 appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];

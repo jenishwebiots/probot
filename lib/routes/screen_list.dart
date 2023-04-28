@@ -156,4 +156,4 @@ export '../screens/bottom_screens/image_generator/layout/loader_layout.dart';
 export '../screens/app_screens/password_generator_screen/layouts/password_layout.dart';
 export '../screens/bottom_screens/voice_screen/voice_screen.dart';
 export '../screens/bottom_screens/chat_layout/layouts/suggestion_layout.dart';
-export '../screens/bottom_screens/image_scanner_screen.dart';
+export '../screens/bottom_screens/image_scanner/image_scanner_screen.dart';

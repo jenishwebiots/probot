@@ -49,8 +49,8 @@ class ImageAssets {
   final String subscriptionTopBg = "assets/images/subscriptionTopBg.png";
   final String subscriptionCrown = "assets/images/subscriptionCrown.png";
   final String topUpBg = "assets/images/topUpBg.png";
-  
   final String voice = "assets/images/voice.png";
+  final String voiceImage = "assets/images/voiceImage.png";
 
 
   // Icons

@@ -107,11 +107,18 @@ class ImageScannerController extends GetxController {
       final file = File(Pickfile);
       final inputImage = InputImage.fromFile(file);
       final recognizedText = await textRecognizer.processImage(inputImage);
-      ScaffoldMessenger.of(context).showSnackBar(
+      Get.toNamed(routeName.chatLayout,
+          arguments: {"recText": recognizedText.text});
+      final chatCtrl = Get.isRegistered<ChatLayoutController>()
+          ? Get.find<ChatLayoutController>()
+          : Get.put(ChatLayoutController());
+      chatCtrl.getChatId();
+      /* ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(recognizedText.text),
         ),
-      );
+      );*/
+      log("000000000000000000000000000000000000000${recognizedText.text}");
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '../../config.dart';
+import '../../../config.dart';
 
 class ImageScannerScreen extends StatelessWidget {
   final imageCtrl = Get.put(ImageScannerController());
@@ -47,7 +47,9 @@ class ImageScannerScreen extends StatelessWidget {
                         .toList())
                 .paddingSymmetric(horizontal: Insets.i15, vertical: Insets.i20)
                 .authBoxExtension(),
-            imageCtrl.image(context)
+            const VSpace(Sizes.s10),
+            Text(appFonts.byScanningAnImage,textAlign: TextAlign.center,style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText).textHeight(1.3))
+            /*imageCtrl.image(context)*/  
           ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20));
     });
   }

@@ -609,6 +609,10 @@ class AppFonts {
   String allowNotification = "Allow Notification";
   String allow = "Allow";
   String weWantToGiveYou = "We want to give you notifications from our app regarding alerts, new updates, and more.";
+  String otherQuickAdvisor = "Other quick advisor :";
+  String favoriteQuickAdvisor = "Favorite quick advisor :";
+  String shareApp = "Share app";
+
 
 
 

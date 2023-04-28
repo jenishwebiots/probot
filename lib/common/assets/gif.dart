@@ -8,4 +8,5 @@ class GifAssets {
   final String coin1 = "assets/gif/coin1.gif";
   final String balance = "assets/gif/balance.gif";
   final String hashtagLoader = "assets/gif/hashtagLoader.gif";
+  final String login = "assets/gif/login.gif";
 }

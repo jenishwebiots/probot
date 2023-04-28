@@ -89,7 +89,9 @@ class _MyAppState extends State<MyApp> {
                   locale: const Locale('en', 'US'),
                   translations: Language(),
                   fallbackLocale: const Locale('en', 'US'),
-                  home: SplashScreen(),
+                  home:statusSnapshot.data != ConnectivityResult.none ||
+                      statusSnapshot.data != null
+                      ?const NoInternet() : SplashScreen(),
                   title: appFonts.proBot.tr,
                   getPages: appRoute.getPages,
                   debugShowCheckedModeBanner: false);

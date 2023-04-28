@@ -33,12 +33,14 @@ class AllowNotificationScreen extends StatelessWidget {
               ),
               Column(
                 children: [
-                  ButtonCommon(title: appFonts.allow,onTap: ()=> Get.toNamed(routeName.onBoardingScreen)),
+                  ButtonCommon(title: appFonts.allow,onTap: ()=> allowNotificationCtrl.onTapAllow()),
                   const VSpace(Sizes.s10),
                   ButtonCommon(
                       title: appFonts.doItLater,
                       color: appCtrl.appTheme.trans,
-                      style: AppCss.outfitMedium18.textColor(appCtrl.appTheme.primary))
+                      style: AppCss.outfitMedium18.textColor(appCtrl.appTheme.primary),
+                     onTap: ()=> Get.offAllNamed(routeName.loginScreen)
+                  )
                 ],
               )
             ]).paddingAll(Insets.i40));

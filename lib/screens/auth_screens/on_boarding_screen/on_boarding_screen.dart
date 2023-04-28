@@ -37,8 +37,8 @@ class OnBoardingScreen extends StatelessWidget {
                                 onBoardingCtrl.pageCtrl.nextPage(
                                     duration: const Duration(microseconds: 500),
                                     curve: Curves.bounceInOut);
-                                /*appCtrl.isOnboard = true;
-                                appCtrl.storage.write("isOnboard", appCtrl.isOnboard);*/
+                                appCtrl.isOnboard = true;
+                                appCtrl.storage.write("isOnboard", appCtrl.isOnboard);
                               }
                             },
                           ))
