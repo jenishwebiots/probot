@@ -51,3 +51,5 @@ export 'app_pages_controllers/add_api_key_controller.dart';
 export 'bottom_controllers/voice_controller.dart';
 export 'bottom_controllers/image_scanner_controller.dart';
 export 'auth_controllers/notification_controller.dart';
+export 'ecommerce_controller/amazon_product_feature_controller.dart';
+export 'ecommerce_controller/ecommerce_controller.dart';

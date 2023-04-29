@@ -49,8 +49,8 @@ class ImageAssets {
   final String subscriptionTopBg = "assets/images/subscriptionTopBg.png";
   final String subscriptionCrown = "assets/images/subscriptionCrown.png";
   final String topUpBg = "assets/images/topUpBg.png";
-  
   final String voice = "assets/images/voice.png";
+  final String voiceImage = "assets/images/voiceImage.png";
 
 
   // Icons
@@ -70,6 +70,8 @@ class ImageAssets {
   final String informative = "assets/images/icons/informative.png";
   final String sad = "assets/images/icons/sad.png";
   final String serious = "assets/images/icons/serious.png";
+  final String linkedin = "assets/images/icons/linkedin.png";
+  final String youtube = "assets/images/icons/youtube.png";
 
   // chat
   final String chat1 = "assets/images/chat/chat1.png";

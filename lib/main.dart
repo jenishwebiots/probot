@@ -9,6 +9,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:new_version/new_version.dart';
 import 'package:probot/controllers/common_controllers/in_app_controller.dart';
+import 'package:probot/screens/app_screens/ecommerce_screen/ecommerce_screen.dart';
 
 import 'common/languages/index.dart';
 
@@ -89,7 +90,9 @@ class _MyAppState extends State<MyApp> {
                   locale: const Locale('en', 'US'),
                   translations: Language(),
                   fallbackLocale: const Locale('en', 'US'),
-                  home: SplashScreen(),
+                  home:/*statusSnapshot.data != ConnectivityResult.none ||
+                      statusSnapshot.data != null
+                      ?const NoInternet() :*/ EcommerceScreen(),
                   title: appFonts.proBot.tr,
                   getPages: appRoute.getPages,
                   debugShowCheckedModeBanner: false);

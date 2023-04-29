@@ -28,6 +28,10 @@ class HomeController extends GetxController {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final quickAdvisorCtrl = Get.isRegistered<QuickAdvisorController>()
+      ? Get.find<QuickAdvisorController>()
+      : Get.put(QuickAdvisorController());
+
   @override
   void onReady() {
     // TODO: implement onReady

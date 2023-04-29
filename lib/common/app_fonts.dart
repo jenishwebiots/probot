@@ -609,7 +609,40 @@ class AppFonts {
   String allowNotification = "Allow Notification";
   String allow = "Allow";
   String weWantToGiveYou = "We want to give you notifications from our app regarding alerts, new updates, and more.";
-
+  String otherQuickAdvisor = "Other quick advisor :";
+  String favoriteQuickAdvisor = "Favorite quick advisor :";
+  String shareApp = "Share app";
+  String youtube = "YouTube";
+  String linkedin = "LinkedIn";
+  String ecommerceDetail = "E-commerce details";
+  String choseOneOfThese = "Choose one of these to create a fantastic post :";
+  String amazonProductFeature = "Amazon product feature";
+  String amazonProductListing = "Amazon product listing";
+  String amazonProductReview = "Amazon product review";
+  String amazonProductTitle = "Amazon product title";
+  String onlineDesc = "One line description";
+  String productGen = "Product generator";
+  String reviewResponder = "Review responder";
+  String productRoadmap = "Product roadmap";
+  String describeYourProduct = "Describe your product's qualities in detail :";
+  String productName = "Product name";
+  String productDescription = "Product description";
+  String maxWord = "Max word";
+  String language = "Language";
+  String greatProduct = "Great product description :";
+  String productDetail = "Product detail";
+  String endProduct = "End product feature";
+  String areYouSureEndFeature = "Are you sure you want to end this product feature ?";
+  String entireProductDescriptions = "Entire product descriptions for good outcome :";
+  String useAppropriate = "Use appropriate product descriptions :";
+  String areYouSureEndListing = "Are you sure you want to end this Amazon product listing?";
+  String bringMeTheBestDetail = "Bring me the best detail";
+  String endProductList = "End product listing";
+  String giveAnOverview = "Give an overview of the product :";
+  String sendingYourFinest = "Sending your finest review to stand out :";
+  String productReview = "Product review";
+  String endProductReview = "End product review";
+  String areYouSureEndReview = "Are you sure you want to end this Amazon product review?";
 
 
   String lifeTimeAccessibility = "lifeTimeAccessibility";

@@ -84,6 +84,13 @@ class ChatLayoutController extends GetxController
   @override
   void onReady() {
     // TODO: implement onReady
+    /*var imageData = Get.arguments;
+    log("=+========+++++++=$imageData");*/
+    /*log("-----------------------------${Get.arguments}");
+    log("++++++++++++++++++++++++++++++${Get.arguments["recText"].toString()}");
+    chatController.text = Get.arguments["recText"].toString();
+    log("******************************${chatController.text}");
+    chatController.addListener(() {update();});*/
     questionsSuggestionList = appArray.questionSuggestionList;
     questionsLists = appArray.questionsList
         .map((e) => QuestionSuggestionsModel.fromJson(e))
@@ -313,20 +320,31 @@ class ChatLayoutController extends GetxController
   }
 
   getChatId() {
+    int createdDate = DateTime.now().millisecondsSinceEpoch;
+    bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin);
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     if (Get.arguments != null) {
+
+
       chatId = Get.arguments["chatId"] ??
           DateTime.now().millisecondsSinceEpoch.toString();
-      if (Get.arguments["avatar"].contains("assets")) {
-        argImage = appCtrl.selectedCharacter["image"];
-      } else {
-        argImage =
-            Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      log("RICHTEXT : ${Get.arguments }");
+      if(Get.arguments["recText"] != null ) {
+        chatController.text = Get.arguments["recText"];
+        update();
+        processChat();
+      }else if (Get.arguments["speechText"] != null) {
+
+        update();
+        processChat();
       }
+       argImage =
+          Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      update();
     } else {
       log("MESSAGE : ${appCtrl.selectedCharacter}");
-      bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin);
+
       argImage = appCtrl.selectedCharacter["image"];
       messages.value.add(
         ChatMessage(
@@ -339,7 +357,7 @@ class ChatLayoutController extends GetxController
       selectedMessages
           .add("${appCtrl.selectedCharacter["message"]} - By PROBOT\n");
       itemCount.value = messages.value.length;
-      int createdDate = DateTime.now().millisecondsSinceEpoch;
+
       update();
       chatId = DateTime.now().millisecondsSinceEpoch.toString();
 

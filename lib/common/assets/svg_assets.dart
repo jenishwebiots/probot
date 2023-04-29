@@ -149,5 +149,9 @@ class SvgAssets {
   final String micNav = "assets/svg/micNav.svg";
   final String micColor = "assets/svg/micColor.svg";
   final String contentWriting = "assets/svg/contentWriting.svg";
+  final String fillStar = "assets/svg/fillStar.svg";
+  final String unFillStar = "assets/svg/unFillStar.svg";
+  final String youtube = "assets/svg/youtube.svg";
+  final String linkedin = "assets/svg/linkedin.svg";
 
 }

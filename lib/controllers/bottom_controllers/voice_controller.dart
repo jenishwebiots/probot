@@ -1,30 +1,84 @@
+import 'dart:developer';
+
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+
 import '../../config.dart';
 
 class VoiceController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List selectLanguageLists = [];
-  String langValue = appFonts.english;
+  final isListening = false.obs;
+  SpeechToText speech = SpeechToText();
 
-  final items = [
-    {
-      "title": appFonts.english,
-      "jh": appFonts.english,
-    },{
-      "title": appFonts.hindi,
-    },{
-      "title": appFonts.german,
-    },{
-      "title": appFonts.japanese,
+
+  //speech to text
+  void speechToText() async {
+    int balance = appCtrl.envConfig["balance"];
+    log("BALANCE: $balance");
+    if (balance == 0) {
+      appCtrl.balanceTopUpDialog();
+      update();
+    } else {
+
+      log("ISLISTEN : ${isListening.value}");
+      if (isListening.value == false) {
+        bool available = await speech.initialize(
+          onStatus: (val) {
+            debugPrint('*** onStatus: $val');
+            log("loo : ${val == "done"}");
+            if (val == "done" || val == "notListening") {
+              /*ScaffoldMessenger.of(Get.context!).showSnackBar(
+              SnackBar(
+                content: Text("lkjhtuyuih"),
+              ),
+            );*/
+              isListening.value = false;
+              update();
+
+            }
+            Get.forceAppUpdate();
+          },
+          onError: (val) {
+            debugPrint('### onError: $val');
+          },
+        );
+        log("available ; $available");
+        if (available) {
+          isListening.value = true;
+          speech.listen(
+            localeId: appCtrl.languageVal,
+            onResult: (val) {
+              log("VAL : ${val.recognizedWords.toString()}");
+              if (val.recognizedWords.toString() != null) {
+                log("+++++++++++++++++++++++++++++++++${val.recognizedWords.toString()}");
+                Get.toNamed(routeName.chatLayout,
+                    arguments: {"speechText": val.recognizedWords.toString()});
+                final chatCtrl = Get.isRegistered<ChatLayoutController>()
+                    ? Get.find<ChatLayoutController>()
+                    : Get.put(ChatLayoutController());
+                chatCtrl.chatController.text = val.recognizedWords.toString();
+                chatCtrl.getChatId();
+                update();
+              }
+              update();
+            },
+            cancelOnError: true,
+          );
+
+          update();
+        } else {
+          log("NO");
+        }
+      } else {
+        isListening.value = false;
+        update();
+      }
     }
-  ];
+  }
 
   @override
   void onReady() {
-
-    selectLanguageLists = appArray.languagesList
-        .map((e) => SelectLanguageModel.fromJson(e))
-        .toList();
     update();
     // TODO: implement onReady
     super.onReady();

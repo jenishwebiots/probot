@@ -78,14 +78,21 @@ class SignInController extends GetxController {
               "isActive": true
             });
           });
-
           appCtrl.envConfig["balance"] = 5;
         } else {
+
+          log("BANCE :${result.docs[0].data()["balance"] == null}");
+          if(result.docs[0].data()["balance"] == null){
+            appCtrl.envConfig["balance"] = 5;
+          }else{
+            appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
+          }
+          update();
           await FirebaseMessaging.instance.getToken().then((token) async {
             await FirebaseFirestore.instance
                 .collection('users')
                 .doc(user.uid)
-                .update({"fcmToken": token, "isActive": true});
+                .update({"fcmToken": token, "isActive": true,"balance":appCtrl.envConfig["balance"]});
           });
           appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
         }
@@ -148,11 +155,18 @@ class SignInController extends GetxController {
               });
               appCtrl.envConfig["balance"] = 5;
             } else {
+              log("BANCE :${value.docs[0].data()["balance"] == null}");
+              if(value.docs[0].data()["balance"] == null){
+                appCtrl.envConfig["balance"] = 5;
+              }else{
+                appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+              }
+              update();
               await FirebaseMessaging.instance.getToken().then((token) async {
                 await FirebaseFirestore.instance
                     .collection('users')
                     .doc(firebaseUser.user!.uid)
-                    .update({"fcmToken": token, "isActive": true});
+                    .update({"fcmToken": token, "isActive": true,"balance":appCtrl.envConfig["balance"]});
               });
               appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
             }
@@ -244,11 +258,17 @@ class SignInController extends GetxController {
               });
               appCtrl.envConfig["balance"] = 5;
             } else {
+              log("BANCE :${value.docs[0].data()["balance"] == null}");
+              if(value.docs[0].data()["balance"] == null){
+                appCtrl.envConfig["balance"] = 5;
+              }else{
+                appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+              }
               await FirebaseMessaging.instance.getToken().then((token) async {
                 await FirebaseFirestore.instance
                     .collection('users')
                     .doc(signIn.uid)
-                    .update({"fcmToken": token, "isActive": true});
+                    .update({"fcmToken": token, "isActive": true,"balance": appCtrl.envConfig["balance"]});
               });
               appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
             }

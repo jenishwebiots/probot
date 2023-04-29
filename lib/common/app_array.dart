@@ -219,6 +219,7 @@ class AppArray {
     {"icon": eSvgAssets.apiKey, "title": "manageApiKey"},
     {"icon": eSvgAssets.translate, "title": "language"},
     {"icon": eSvgAssets.star, "title": "rateApp"},
+    {"icon": eSvgAssets.share, "title": "shareApp"},
     {"icon": eSvgAssets.security, "title": "privacyTerm"},
     {"icon": eSvgAssets.refund, "title": "refundPolicy"},
     {"icon": eSvgAssets.logout, "title": "logout"}
@@ -386,16 +387,17 @@ class AppArray {
   ];
 
   var quickAdvisor = [
-    {"icon": eSvgAssets.askAnything, "title": appFonts.askAnything},
-    {"icon": eSvgAssets.codeGenerator, "title": appFonts.codeGenerator},
-    {"icon": eSvgAssets.translateAnything, "title": appFonts.translateAnything},
-    {"icon": eSvgAssets.socialMedia, "title": appFonts.socialMedia},
-    {"icon": eSvgAssets.emailGenerator, "title": appFonts.emailGenerator},
-    {"icon": eSvgAssets.personalAdvice, "title": appFonts.personalAdvice},
-    {"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
-    {"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
-    {"icon": eSvgAssets.essay, "title": appFonts.essayWriter},
-    {"icon": eSvgAssets.contentWriting, "title": appFonts.content}
+
+    {"id": 0,"icon": eSvgAssets.askAnything, "title": appFonts.askAnything},
+    {"id": 1,"icon": eSvgAssets.codeGenerator, "title": appFonts.codeGenerator},
+    {"id": 2,"icon": eSvgAssets.translateAnything, "title": appFonts.translateAnything},
+    {"id": 3,"icon": eSvgAssets.socialMedia, "title": appFonts.socialMedia},
+    {"id": 4,"icon": eSvgAssets.emailGenerator, "title": appFonts.emailGenerator},
+    {"id": 5,"icon": eSvgAssets.personalAdvice, "title": appFonts.personalAdvice},
+    {"id": 6,"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
+    {"id": 7,"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
+    {"id": 8,"icon": eSvgAssets.essay, "title": appFonts.essayWriter},
+    {"id": 9,"icon": eSvgAssets.contentWriting, "title": appFonts.content}
 
   ];
 
@@ -605,8 +607,11 @@ class AppArray {
 
   var captionCreatorList = [
     {"image": eSvgAssets.insta, "title": appFonts.insta},
+    {"image": eSvgAssets.linkedin, "title": appFonts.linkedin},
+    {"image": eSvgAssets.twitter, "title": appFonts.twitter},
+    {"image": eSvgAssets.youtube, "title": appFonts.youtube},
     {"image": eSvgAssets.fb, "title": appFonts.fbHalf},
-    {"image": eSvgAssets.twitter, "title": appFonts.twitter}
+
   ];
 
   var captionToneList = [
@@ -747,6 +752,34 @@ class AppArray {
     {
       "title": appFonts.uploadFromGallery,
       "image": eSvgAssets.galleryColor
+    },
+  ];
+
+  var ecommerceList = [
+    {
+      "title": appFonts.amazonProductFeature,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.amazonProductListing,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.amazonProductReview,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.amazonProductTitle,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.onlineDesc,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.productGen,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.reviewResponder,
+      "image": eSvgAssets.anniversary
+    },{
+      "title": appFonts.productRoadmap,
+      "image": eSvgAssets.anniversary
     },
   ];
 }
