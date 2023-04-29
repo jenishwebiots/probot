@@ -157,3 +157,4 @@ export '../screens/app_screens/password_generator_screen/layouts/password_layout
 export '../screens/bottom_screens/voice_screen/voice_screen.dart';
 export '../screens/bottom_screens/chat_layout/layouts/suggestion_layout.dart';
 export '../screens/bottom_screens/image_scanner/image_scanner_screen.dart';
+export '../screens/app_screens/amazon_product_feature_screen/layouts/without_product_generate_layout.dart';

@@ -10,6 +10,8 @@ import 'package:probot/screens/app_screens/social_media_screen/social_media_scre
 
 
 import '../config.dart';
+import '../screens/app_screens/amazon_product_feature_screen/amazon_product_feature_screen.dart';
+import '../screens/app_screens/amazon_product_listing/amazon_product_listing.dart';
 
 RouteName _routeName = RouteName();
 
@@ -129,6 +131,8 @@ class AppRoute {
 
     GetPage(name: _routeName.settingScreen, page: () => Setting()),
     GetPage(name: _routeName.allowNotificationScreen, page: () => AllowNotificationScreen()),
+    GetPage(name: _routeName.amazonProductFeatureScreen, page: () => AmazonProductFeatureScreen()),
+    GetPage(name: _routeName.amazonProductListingScreen, page: () => AmazonProductListingScreen()),
 
   ];
 }

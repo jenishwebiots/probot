@@ -4,8 +4,10 @@ class EcommerceController extends GetxController {
   List ecommerceLists = [];
 
   onTapEcommerce(data) {
-   if(data["title"]) {
-
+   if(data["title"] == appFonts.amazonProductFeature) {
+          Get.toNamed(routeName.amazonProductFeatureScreen);
+   } else if (data["title"] == appFonts.amazonProductListing) {
+     Get.toNamed(routeName.amazonProductListingScreen);
    }
     update();
   }

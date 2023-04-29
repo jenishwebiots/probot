@@ -68,6 +68,8 @@ class RouteName {
   final String contentWriterScreen = "/contentWriterScreen";
   final String settingScreen = "/settingScreen";
   final String allowNotificationScreen = "/allowNotificationScreen";
+  final String amazonProductFeatureScreen = "/amazonProductFeatureScreen";
+  final String amazonProductListingScreen = "/amazonProductListingScreen";
 
 
 }

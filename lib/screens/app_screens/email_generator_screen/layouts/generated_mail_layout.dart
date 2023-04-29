@@ -1,7 +1,7 @@
 import '../../../../config.dart';
 
 class GeneratedMailLayout extends StatelessWidget {
-  const GeneratedMailLayout({Key? key}) : super(key: key);
+  const   GeneratedMailLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
