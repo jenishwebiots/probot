@@ -30,7 +30,7 @@ class SignInController extends GetxController {
 
   // SignIn With Google Method
   Future signInWithGoogle() async {
-    try{
+    try {
       appCtrl.isGuestLogin = false;
       appCtrl.storage.write(session.isGuestLogin, false);
       log("message");
@@ -40,9 +40,9 @@ class SignInController extends GetxController {
       final GoogleSignIn googleSignIn = GoogleSignIn();
 
       final GoogleSignInAccount? googleSignInAccount =
-      await googleSignIn.signIn();
+          await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount!.authentication;
+          await googleSignInAccount!.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
@@ -50,10 +50,6 @@ class SignInController extends GetxController {
       User? user = (await auth.signInWithCredential(credential)).user;
       update();
       userNameGoogle = user!.email;
-      isLoading = false;
-      update();
-      appCtrl.storage.write("userName", userNameGoogle);
-      appCtrl.storage.write("name", user.displayName);
 
       await FirebaseFirestore.instance
           .collection('users')
@@ -79,32 +75,55 @@ class SignInController extends GetxController {
             });
           });
           appCtrl.envConfig["balance"] = 5;
-        } else {
-
-          log("BANCE :${result.docs[0].data()["balance"] == null}");
-          if(result.docs[0].data()["balance"] == null){
-            appCtrl.envConfig["balance"] = 5;
-          }else{
-            appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
-          }
+          isLoading = false;
+          appCtrl.storage.write("id", user.uid);
+          await checkData();
+          Get.offAllNamed(routeName.selectLanguageScreen);
           update();
+          appCtrl.storage.write("userName", userNameGoogle);
+          appCtrl.storage.write("name", user.displayName);
+        } else {
           await FirebaseMessaging.instance.getToken().then((token) async {
-            await FirebaseFirestore.instance
-                .collection('users')
-                .doc(user.uid)
-                .update({"fcmToken": token, "isActive": true,"balance":appCtrl.envConfig["balance"]});
+            if (result.docs[0].data()["isActive"] == true) {
+              log("BANCE :${result.docs[0].data()["balance"] == null}");
+              if (result.docs[0].data()["balance"] == null) {
+                appCtrl.envConfig["balance"] = 5;
+              } else {
+                appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
+              }
+              update();
+
+              await FirebaseMessaging.instance.getToken().then((token) async {
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(user.uid)
+                    .update({
+                  "fcmToken": token,
+                  "isActive": true,
+                  "balance": appCtrl.envConfig["balance"]
+                });
+              });
+              isLoading = false;
+              appCtrl.storage.write("id", user.uid);
+              await checkData();
+              Get.offAllNamed(routeName.selectLanguageScreen);
+              update();
+              appCtrl.storage.write("userName", userNameGoogle);
+              appCtrl.storage.write("name", user.displayName);
+
+              appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
+            } else {
+              isLoading = false;
+              update();
+              showAlertDialog();
+            }
           });
-          appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
         }
       });
-
-      appCtrl.storage.write("id", user.uid);
-      await checkData();
-      Get.offAllNamed(routeName.selectLanguageScreen);
-    }catch(e){
+    } catch (e) {
       isLoading = false;
       update();
-    }finally{
+    } finally {
       isLoading = false;
       update();
     }
@@ -123,13 +142,7 @@ class SignInController extends GetxController {
                 email: emailController.text.toString(),
                 password: passwordController.text.toString());
         var signIn = FirebaseAuth.instance.currentUser;
-        userName = signIn!.email;
-        update();
-        isLoading = false;
-        appCtrl.storage.write("userName", userName);
-        appCtrl.storage.write("name", signIn.displayName);
-        await checkData();
-        Get.offAllNamed(routeName.selectLanguageScreen);
+
         FirebaseMessaging.instance.getToken().then((token) async {
           await FirebaseFirestore.instance
               .collection('users')
@@ -154,21 +167,47 @@ class SignInController extends GetxController {
                 "isActive": true
               });
               appCtrl.envConfig["balance"] = 5;
-            } else {
-              log("BANCE :${value.docs[0].data()["balance"] == null}");
-              if(value.docs[0].data()["balance"] == null){
-                appCtrl.envConfig["balance"] = 5;
-              }else{
-                appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
-              }
+              userName = signIn!.email;
+
+              isLoading = false;
+              appCtrl.storage.write("userName", userName);
+              appCtrl.storage.write("name", signIn.displayName);
               update();
-              await FirebaseMessaging.instance.getToken().then((token) async {
-                await FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(firebaseUser.user!.uid)
-                    .update({"fcmToken": token, "isActive": true,"balance":appCtrl.envConfig["balance"]});
-              });
-              appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+              await checkData();
+              Get.offAllNamed(routeName.selectLanguageScreen);
+            } else {
+              if (value.docs[0].data()["isActive"] == true) {
+                log("BANCE :${value.docs[0].data()["balance"] == null}");
+                if (value.docs[0].data()["balance"] == null) {
+                  appCtrl.envConfig["balance"] = 5;
+                } else {
+                  appCtrl.envConfig["balance"] =
+                      value.docs[0].data()["balance"];
+                }
+                userName = signIn!.email;
+
+                isLoading = false;
+                appCtrl.storage.write("userName", userName);
+                appCtrl.storage.write("name", signIn.displayName);
+                update();
+                await checkData();
+                Get.offAllNamed(routeName.selectLanguageScreen);
+                await FirebaseMessaging.instance.getToken().then((token) async {
+                  await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(firebaseUser.user!.uid)
+                      .update({
+                    "fcmToken": token,
+                    "isActive": true,
+                    "balance": appCtrl.envConfig["balance"]
+                  });
+                });
+                appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+              } else {
+                isLoading = false;
+                update();
+                showAlertDialog();
+              }
             }
           });
         });
@@ -225,14 +264,7 @@ class SignInController extends GetxController {
           .then((value) async {
         var signIn = FirebaseAuth.instance.currentUser;
         userName = signIn!.email;
-        isLoading = false;
-        update();
 
-        appCtrl.storage.write("userName", userName);
-        appCtrl.storage.write("name", signIn.displayName);
-
-        await checkData();
-        Get.offAllNamed(routeName.selectLanguageScreen);
         FirebaseMessaging.instance.getToken().then((token) async {
           await FirebaseFirestore.instance
               .collection('users')
@@ -257,24 +289,49 @@ class SignInController extends GetxController {
                 "isActive": true
               });
               appCtrl.envConfig["balance"] = 5;
+              isLoading = false;
+
+              appCtrl.storage.write("userName", userName);
+              appCtrl.storage.write("name", signIn.displayName);
+              update();
+              await checkData();
+              Get.offAllNamed(routeName.selectLanguageScreen);
             } else {
-              log("BANCE :${value.docs[0].data()["balance"] == null}");
-              if(value.docs[0].data()["balance"] == null){
-                appCtrl.envConfig["balance"] = 5;
-              }else{
+              if (value.docs[0].data()["isActive"] == true) {
+                log("BANCE :${value.docs[0].data()["balance"] == null}");
+                if (value.docs[0].data()["balance"] == null) {
+                  appCtrl.envConfig["balance"] = 5;
+                } else {
+                  appCtrl.envConfig["balance"] =
+                      value.docs[0].data()["balance"];
+                }
+                isLoading = false;
+
+                appCtrl.storage.write("userName", userName);
+                appCtrl.storage.write("name", signIn.displayName);
+                update();
+                await checkData();
+                Get.offAllNamed(routeName.selectLanguageScreen);
+                await FirebaseMessaging.instance.getToken().then((token) async {
+                  await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(signIn.uid)
+                      .update({
+                    "fcmToken": token,
+                    "isActive": true,
+                    "balance": appCtrl.envConfig["balance"]
+                  });
+                });
                 appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+              } else {
+                isLoading = false;
+                update();
+                showAlertDialog();
               }
-              await FirebaseMessaging.instance.getToken().then((token) async {
-                await FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(signIn.uid)
-                    .update({"fcmToken": token, "isActive": true,"balance": appCtrl.envConfig["balance"]});
-              });
-              appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
             }
           });
+          appCtrl.storage.write("id", signIn.uid);
         });
-        appCtrl.storage.write("id", signIn.uid);
       });
 
       update();
@@ -300,13 +357,13 @@ class SignInController extends GetxController {
         .then((value) {
       if (value.docs.isNotEmpty) {
         log("DATA : ${value.docs[0].data()}");
-        if(value.docs[0].data()["isSubscribe"] == false) {
+        if (value.docs[0].data()["isSubscribe"] == false) {
           appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
           appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
           appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
           appCtrl.storage.write(session.isSubscribe, false);
           appCtrl.isSubscribe = false;
-        }else{
+        } else {
           appCtrl.isSubscribe = true;
           appCtrl.storage.write(session.isSubscribe, true);
         }

@@ -49,7 +49,11 @@ class AddApiKeyScreen extends StatelessWidget {
                 const VSpace(Sizes.s30),
                 ButtonCommon(
                     title: appFonts.save,
-                    onTap: () => Get.offAllNamed(routeName.manageApiKeyScreen))
+                    onTap: () {
+                      appCtrl.storage.write(session.chatGPTKey, apiCtrl.apiController.text);
+                      appCtrl.update();
+                      Get.toNamed(routeName.manageApiKeyScreen);
+                    })
               ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i30)),
         ),
       );

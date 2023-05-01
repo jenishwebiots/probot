@@ -597,6 +597,7 @@ class AppFonts {
   String iNeedToCreateARest = "I need to create a REST API endpoint for my web application.";
   String voice = "Voice";
   String content = "Content";
+  String content1 = "content";
   String imageScanner = "Image scanner";
   String selectOneOfThe = "Select one of the below option to continue :";
   String scanFromCamera = "Scan from camera";
@@ -682,4 +683,7 @@ class AppFonts {
   String deleteUserSuccessfully = "deleteUserSuccessfully";
   String dataUploadSuccessfully = "dataUploadSuccessfully";
   String imageUploadSuccessfully = "imageUploadSuccessfully";
+
+  String asoExpert = "ASO Expert";
+  String marketingAds = "Marketing & Ads";
 }

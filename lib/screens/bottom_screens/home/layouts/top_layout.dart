@@ -1,4 +1,5 @@
-import 'package:probot/widgets/common_balance.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 import '../../../../config.dart';
 
@@ -12,7 +13,7 @@ class HomeTopLayout extends StatelessWidget {
     return Stack(
       children: [
         Container(
-            padding: const EdgeInsets.only(top: Insets.i100),
+            padding: const EdgeInsets.only(top: Insets.i120),
             decoration: BoxDecoration(
                 gradient: RadialGradient(
                     focalRadius: 1,
@@ -24,6 +25,7 @@ class HomeTopLayout extends StatelessWidget {
                 ])),
             child: Image.asset(
               eImageAssets.homeAppBar,
+
             ).paddingSymmetric(vertical: Insets.i20, horizontal: Insets.i35)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,12 +33,28 @@ class HomeTopLayout extends StatelessWidget {
             Row(
               children: [
                 const CommonMenuIcon().inkWell(onTap: onTap),
-                Image.asset(eImageAssets.logo1, width: Sizes.s106),
+                CachedNetworkImage(
+                    imageUrl: appCtrl.firebaseConfigModel!.homeLogo.toString(),
+
+                    width: Sizes.s106,
+                    imageBuilder: (context, imageProvider) => SizedBox(
+                        width: Sizes.s106,
+                        child: Column(children: [
+                          Image.network(
+                              appCtrl.firebaseConfigModel!.homeLogo.toString(),
+                              width: Sizes.s106,
+                              fit: BoxFit.fill)
+                        ])),
+                    placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Image.asset(
+                        eImageAssets.logo1,
+                        width:Sizes.s106))
               ],
             ),
-            const CommonBalance().marginOnly(right: Insets.i20)
+            const CommonBalance().marginSymmetric(horizontal: Insets.i20)
           ],
-        ).paddingSymmetric(vertical: Insets.i55)
+        ).paddingSymmetric(vertical: Insets.i50)
       ],
     );
   }

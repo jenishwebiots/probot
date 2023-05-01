@@ -34,6 +34,7 @@ class AllowNotificationScreen extends StatelessWidget {
               Column(
                 children: [
                   ButtonCommon(title: appFonts.allow,onTap: ()=> allowNotificationCtrl.onTapAllow()),
+
                   const VSpace(Sizes.s10),
                   ButtonCommon(
                       title: appFonts.doItLater,

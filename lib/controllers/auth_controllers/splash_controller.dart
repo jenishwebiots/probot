@@ -4,12 +4,96 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:probot/config.dart';
+import 'package:probot/models/category_access_model.dart';
 
 import '../../env.dart';
 
 class SplashController extends GetxController {
   @override
   void onReady() async {
+    bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
+    var name = appCtrl.storage.read("name");
+    var userName = appCtrl.storage.read("userName");
+    var firebaseUser = appCtrl.storage.read("firebaseUser");
+    var number = appCtrl.storage.read("number");
+    log("number : $number");
+    appCtrl.isOnboard = onBoard;
+    appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
+
+    update();
+    dynamic selectedImage =
+        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
+    appCtrl.storage.write("backgroundImage", selectedImage);
+    log("SPLASH BG : $selectedImage");
+    await FirebaseFirestore.instance.collection("config").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        appCtrl.firebaseConfigModel =
+            FirebaseConfigModel.fromJson(value.docs[0].data());
+        Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
+        appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;
+        appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;
+        appCtrl.storage.write(session.isRTL, appCtrl.isRTL);
+        appCtrl.update();
+        ThemeService().switchTheme(appCtrl.isTheme);
+        Get.forceAppUpdate();
+        appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
+        appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
+        appCtrl.update();
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      }
+    });
+
+    //category hide show
+    await FirebaseFirestore.instance
+        .collection("categoryAccess")
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        appCtrl.categoryAccessModel =
+            CategoryAccessModel.fromJson(value.docs[0].data());
+        appCtrl.update();
+        Get.forceAppUpdate();
+        appCtrl.storage.write(session.categoryConfig, value.docs[0].data());
+      }
+    });
+
+    if (!appCtrl.isGuestLogin && userName != null) {
+      await FirebaseFirestore.instance
+          .collection("userSubscribe")
+          .where("email", isEqualTo: appCtrl.storage.read("userName"))
+          .limit(1)
+          .get()
+          .then((value) async {
+        if (value.docs.isNotEmpty) {
+          if (value.docs[0].data()["isSubscribe"] == false) {
+            appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+            appCtrl.update();
+            appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+            appCtrl.storage.write(session.isSubscribe, false);
+          } else {
+            appCtrl.storage.write(session.isSubscribe, true);
+          }
+          appCtrl.storage.write(session.isAnySubscribe, true);
+        } else {
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .get()
+              .then((value) {
+            if (value.exists) {
+              appCtrl.envConfig["balance"] = value.data()!["balance"];
+              appCtrl.update();
+              appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+            }
+          });
+        }
+      });
+    } else {
+      appCtrl.storage.write(session.isAnySubscribe, false);
+      log("appCtrl.envConfig : ${appCtrl.envConfig}");
+      appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;
+      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+    }
     appCtrl.update();
     bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
     bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
@@ -21,32 +105,40 @@ class SplashController extends GetxController {
     appCtrl.isBiometric = isBiometricSave;
     appCtrl.isLogin = isLoginSave;
 
-
     //select Character as per selected or guest
-    if(appCtrl.isGuestLogin) {
-      await FirebaseFirestore.instance.collection("characters").get().then((value) {
+    if (appCtrl.isGuestLogin) {
+      await FirebaseFirestore.instance
+          .collection("characters")
+          .get()
+          .then((value) {
         if (value.docs.isNotEmpty) {
           appCtrl.selectedCharacter = value.docs[3].data();
           appCtrl.storage.write(session.characterIndex, 3);
-          appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
-          appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
+          appCtrl.characterIndex =
+              appCtrl.storage.read(session.characterIndex) ?? 3;
+          appCtrl.characterIndex =
+              appCtrl.storage.read(session.characterIndex) ?? 3;
           appCtrl.update();
         }
       });
-    }else{
-      if(appCtrl.selectedCharacter == null){
-        await FirebaseFirestore.instance.collection("characters").get().then((value) {
+    } else {
+      if (appCtrl.selectedCharacter == null) {
+        await FirebaseFirestore.instance
+            .collection("characters")
+            .get()
+            .then((value) {
           if (value.docs.isNotEmpty) {
             appCtrl.selectedCharacter = value.docs[3].data();
             appCtrl.storage.write(session.characterIndex, 3);
-            appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
-            appCtrl.characterIndex = appCtrl.storage.read(session.characterIndex) ?? 3;
+            appCtrl.characterIndex =
+                appCtrl.storage.read(session.characterIndex) ?? 3;
+            appCtrl.characterIndex =
+                appCtrl.storage.read(session.characterIndex) ?? 3;
             appCtrl.update();
           }
         });
       }
     }
-
 
     log("isBiometricSave: $isBiometricSave");
     log("isLoginSave: $isLoginSave");
@@ -107,73 +199,6 @@ class SplashController extends GetxController {
               .roundToDouble();
     }
 
-    bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
-    var name = appCtrl.storage.read("name");
-    var userName = appCtrl.storage.read("userName");
-    var firebaseUser = appCtrl.storage.read("firebaseUser");
-    var number = appCtrl.storage.read("number");
-    log("number : $number");
-    appCtrl.isOnboard = onBoard;
-    appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
-
-    update();
-    dynamic selectedImage =
-        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
-    appCtrl.storage.write("backgroundImage", selectedImage);
-
-    log("SPLASH BG : $selectedImage");
-    await FirebaseFirestore.instance.collection("config").get().then((value) {
-      if (value.docs.isNotEmpty) {
-        appCtrl.firebaseConfigModel =
-            FirebaseConfigModel.fromJson(value.docs[0].data());
-        Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
-        appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;;
-        appCtrl.update();
-        ThemeService().switchTheme(appCtrl.isTheme);
-        Get.forceAppUpdate();
-        appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
-        appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
-        appCtrl.update();
-        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-      }
-    });
-    if (!appCtrl.isGuestLogin && userName != null) {
-      await FirebaseFirestore.instance
-          .collection("userSubscribe")
-          .where("email", isEqualTo: appCtrl.storage.read("userName"))
-          .limit(1)
-          .get()
-          .then((value) async {
-        if (value.docs.isNotEmpty) {
-          if (value.docs[0].data()["isSubscribe"] == false) {
-            appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
-            appCtrl.update();
-            appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-            appCtrl.storage.write(session.isSubscribe, false);
-          }else{
-            appCtrl.storage.write(session.isSubscribe, true);
-          }
-          appCtrl.storage.write(session.isAnySubscribe, true);
-        } else {
-          await FirebaseFirestore.instance
-              .collection("users")
-              .doc(FirebaseAuth.instance.currentUser!.uid)
-              .get()
-              .then((value) {
-            if (value.exists) {
-              appCtrl.envConfig["balance"] = value.data()!["balance"];
-              appCtrl.update();
-              appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-            }
-          });
-        }
-      });
-    } else {
-      appCtrl.storage.write(session.isAnySubscribe, false);
-      log("appCtrl.envConfig : ${appCtrl.envConfig}");
-      appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;
-      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
-    }
     update();
     Future.delayed(const Duration(seconds: 3), () {
       log("onBoard : $onBoard");
@@ -217,9 +242,9 @@ class SplashController extends GetxController {
             }
           }
         } else {
-          Get.toNamed(routeName.subscriptionPlanList,arguments: false);
+          Get.toNamed(routeName.subscriptionPlanList, arguments: false);
         }
-      }else {
+      } else {
         Get.toNamed(routeName.onBoardingScreen);
       }
 

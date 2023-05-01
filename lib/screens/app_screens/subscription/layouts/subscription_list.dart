@@ -99,7 +99,7 @@ class SubscriptionList extends StatelessWidget {
                                                               .toString(),
                                                       style: AppCss.outfitBold18
                                                           .textColor(
-                                                          appCtrl.appTheme
+                                                       appCtrl.isTheme ? appCtrl.appTheme.sameBlack :   appCtrl.appTheme
                                                               .txt)),
                                                   const VSpace(Sizes.s5),
                                                   Text("/${e.value

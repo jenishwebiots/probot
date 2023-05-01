@@ -1,5 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:probot/widgets/no_internet.dart';
 
 import '../../../config.dart';
 import 'layouts/tab_common.dart';
@@ -29,14 +28,14 @@ class Dashboard extends StatelessWidget {
                                 .elementAt(dashboardCtrl.selectedIndex),
                             bottomNavigationBar: Container(
                                 height: Sizes.s50,
+                                margin:const EdgeInsets.only(bottom: Insets.i5),
                                 decoration: BoxDecoration(
                                     color: appCtrl.appTheme.boxBg,
-                                    boxShadow: const [
+                                    boxShadow:  [
                                       BoxShadow(
-                                          color: Color.fromRGBO(
-                                              53, 193, 255, 0.08),
+                                          color:appCtrl.appTheme.borderColor,
                                           blurRadius: 20,
-                                          offset: Offset(4, -1))
+                                          offset:const Offset(4, -1))
                                     ],
                                     borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(AppRadius.r10),
@@ -79,9 +78,7 @@ class Dashboard extends StatelessWidget {
                                           sImage: eSvgAssets.cameraColor,
                                           usImage: eSvgAssets.cameraNav,
                                           index: 4)
-                                    ])) /*dashboardCtrl.bottomList.isNotEmpty
-                    ? const BottomNavBarLayout()
-                    : Container()*/
+                                    ]))
                             );
                   })));
     });

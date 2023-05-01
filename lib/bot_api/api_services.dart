@@ -16,11 +16,20 @@ class ApiServices {
     firebaseCtrl.removeBalance();
     var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
+    String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
+    String apiKey = "";
+    if(localApi == ""){
+     // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+      apiKey = "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";
+    }else{
+      apiKey = localApi;
+    }
+
     final response = await http.post(
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer $apiKey',
 
       },
       body: json.encode({

@@ -153,5 +153,8 @@ class SvgAssets {
   final String unFillStar = "assets/svg/unFillStar.svg";
   final String youtube = "assets/svg/youtube.svg";
   final String linkedin = "assets/svg/linkedin.svg";
+  final String ecommerce = "assets/svg/ecommerce.svg";
+  final String asoExpert = "assets/svg/asoExpert.svg";
+  final String marketing = "assets/svg/marketing.svg";
 
 }
