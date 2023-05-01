@@ -10,7 +10,7 @@ class BabyShowerController extends GetxController {
   TextEditingController messageGeneratedController = TextEditingController();
   bool isMessageGenerate = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
 
   onWishesGenerate() {
     isLoader = true;

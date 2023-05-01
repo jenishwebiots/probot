@@ -30,6 +30,7 @@ class GetWellMessageScreen extends StatelessWidget {
                                       title: appFonts.healthyWishes,
                                       color: appCtrl.appTheme.white,
                                       isMax: false,
+                                      text: getCtrl.response,
                                       responseText: getCtrl.response)
                                 ]),
                             const VSpace(Sizes.s20),

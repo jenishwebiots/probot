@@ -9,7 +9,7 @@ class BirthdayMessageController extends GetxController {
 
   bool isBirthdayGenerated = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
 
   final FixedExtentScrollController? scrollController =
       FixedExtentScrollController();

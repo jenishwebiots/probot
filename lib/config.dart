@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
+import 'package:probot/controllers/common_controllers/text_to_speech_controller.dart';
 import 'package:probot/widgets/dialog_common.dart';
 import 'package:probot/widgets/text_common.dart';
 
 import 'common/app_array.dart';
 import 'common/app_fonts.dart';
 import 'common/session.dart';
+import 'controllers/common_controllers/ad_controller.dart';
 import 'controllers/common_controllers/app_controller.dart';
 import 'controllers/common_controllers/in_app_controller.dart';
 export '../controllers/index.dart';
@@ -68,6 +70,13 @@ final appCtrl = Get.isRegistered<AppController>()
 final inAppCtrl = Get.isRegistered<InAppController>()
     ? Get.find<InAppController>()
     : Get.put(InAppController());
+final addCtrl = Get.isRegistered<AdController>()
+    ? Get.find<AdController>()
+    : Get.put(AdController());
+final textToSpeechCtrl = Get.isRegistered<TextToSpeechController>()
+    ? Get.find<TextToSpeechController>()
+    : Get.put(TextToSpeechController());
+
 
 AppFonts appFonts = AppFonts();
 AppArray appArray = AppArray();

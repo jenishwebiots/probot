@@ -19,7 +19,7 @@ class WeddingWishesController extends GetxController {
   String? langSelectItem;
   String? onSelect;
   String? langOnSelect;
-  String response = "";
+  String? response;
   bool isWeddingWishGenerate = false;
   bool isLoader = false;
 

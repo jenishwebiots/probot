@@ -26,6 +26,7 @@ class CvMakerScreen extends StatelessWidget {
                             title: appFonts.professionalCv,
                             color: appCtrl.appTheme.white,
                             isMax: false,
+                            text: cvCtrl.response,
                             responseText: cvCtrl.response
                             )
                       ]),

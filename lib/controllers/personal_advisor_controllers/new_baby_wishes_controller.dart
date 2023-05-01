@@ -20,7 +20,7 @@ class NewBabyWishesController extends GetxController {
   int langValue = 0;
   String? langSelectItem;
   String? langOnSelect;
-  String? response = '';
+  String? response;
   bool isWishGenerate = false;
   bool isLoader = false;
 

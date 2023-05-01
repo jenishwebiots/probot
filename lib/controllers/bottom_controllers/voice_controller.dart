@@ -11,31 +11,81 @@ class VoiceController extends GetxController {
   final isListening = false.obs;
   SpeechToText speech = SpeechToText();
 
-
   //speech to text
   void speechToText() async {
-    int balance = appCtrl.envConfig["balance"];
-    log("BALANCE: $balance");
-    if (balance == 0) {
-      appCtrl.balanceTopUpDialog();
-      update();
-    } else {
+    if (appCtrl.isSubscribe == false) {
+      int balance = appCtrl.envConfig["balance"];
+      log("BALANCE: $balance");
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+        update();
+      } else {
+        log("ISLISTEN : ${isListening.value}");
+        if (isListening.value == false) {
+          bool available = await speech.initialize(
+            onStatus: (val) {
+              debugPrint('*** onStatus: $val');
+              log("loo : ${val == "done"}");
+              if (val == "done" || val == "notListening") {
+                /*ScaffoldMessenger.of(Get.context!).showSnackBar(
+              SnackBar(
+                content: Text("lkjhtuyuih"),
+              ),
+            );*/
+                isListening.value = false;
+                update();
+              }
+              Get.forceAppUpdate();
+            },
+            onError: (val) {
+              debugPrint('### onError: $val');
+            },
+          );
+          log("available ; $available");
+          if (available) {
+            isListening.value = true;
+            speech.listen(
+              localeId: appCtrl.languageVal,
+              onResult: (val) {
+                log("VAL : ${val.recognizedWords.toString()}");
+                if (isListening.value == false) {
+                  if (val.recognizedWords.toString() != null) {
+                    log("+++++++++++++++++++++++++++++++++${val.recognizedWords.toString()}");
+                    Get.toNamed(routeName.chatLayout, arguments: {
+                      "speechText": val.recognizedWords.toString()
+                    });
+                    final chatCtrl = Get.isRegistered<ChatLayoutController>()
+                        ? Get.find<ChatLayoutController>()
+                        : Get.put(ChatLayoutController());
+                    chatCtrl.chatController.text =
+                        val.recognizedWords.toString();
+                    chatCtrl.getChatId();
+                    update();
+                  }
+                  update();
+                }
+              },
+              cancelOnError: true,
+            );
 
-      log("ISLISTEN : ${isListening.value}");
+            update();
+          } else {
+            log("NO");
+          }
+        } else {
+          isListening.value = false;
+          update();
+        }
+      }
+    } else {
       if (isListening.value == false) {
         bool available = await speech.initialize(
           onStatus: (val) {
             debugPrint('*** onStatus: $val');
             log("loo : ${val == "done"}");
             if (val == "done" || val == "notListening") {
-              /*ScaffoldMessenger.of(Get.context!).showSnackBar(
-              SnackBar(
-                content: Text("lkjhtuyuih"),
-              ),
-            );*/
               isListening.value = false;
               update();
-
             }
             Get.forceAppUpdate();
           },
@@ -50,18 +100,21 @@ class VoiceController extends GetxController {
             localeId: appCtrl.languageVal,
             onResult: (val) {
               log("VAL : ${val.recognizedWords.toString()}");
-              if (val.recognizedWords.toString() != null) {
-                log("+++++++++++++++++++++++++++++++++${val.recognizedWords.toString()}");
-                Get.toNamed(routeName.chatLayout,
-                    arguments: {"speechText": val.recognizedWords.toString()});
-                final chatCtrl = Get.isRegistered<ChatLayoutController>()
-                    ? Get.find<ChatLayoutController>()
-                    : Get.put(ChatLayoutController());
-                chatCtrl.chatController.text = val.recognizedWords.toString();
-                chatCtrl.getChatId();
+              if (isListening.value == false) {
+                if (val.recognizedWords.toString() != null) {
+                  log("+++++++++++++++++++++++++++++++++${val.recognizedWords.toString()}");
+                  Get.toNamed(routeName.chatLayout, arguments: {
+                    "speechText": val.recognizedWords.toString()
+                  });
+                  final chatCtrl = Get.isRegistered<ChatLayoutController>()
+                      ? Get.find<ChatLayoutController>()
+                      : Get.put(ChatLayoutController());
+                  chatCtrl.chatController.text = val.recognizedWords.toString();
+                  chatCtrl.getChatId();
+                  update();
+                }
                 update();
               }
-              update();
             },
             cancelOnError: true,
           );

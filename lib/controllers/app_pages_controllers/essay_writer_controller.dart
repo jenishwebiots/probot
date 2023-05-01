@@ -8,7 +8,7 @@ class EssayWriterController extends GetxController {
   int selectedIndex = 0;
   bool isEssayGenerated = false;
   bool isLoader = false;
-  String? response = "";
+  String? response;
 
   onEssayGenerated() {
     isLoader = true;

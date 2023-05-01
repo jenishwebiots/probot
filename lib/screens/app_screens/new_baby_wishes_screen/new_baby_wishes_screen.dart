@@ -29,6 +29,7 @@ class NewBabyWishesScreen extends StatelessWidget {
                                       title: appFonts.goodWishes,
                                       color: appCtrl.appTheme.white,
                                       isMax: false,
+                                      text: newCtrl.response,
                                       responseText: newCtrl.response)
                                 ]),
                             const VSpace(Sizes.s20),

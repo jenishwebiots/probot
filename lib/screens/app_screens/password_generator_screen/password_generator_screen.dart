@@ -31,6 +31,7 @@ class PasswordGeneratorScreen extends StatelessWidget {
                           color: appCtrl.appTheme.white,
                           title: appFonts.generatedPassword,
                           isMax: false,
+                          text: passwordCtrl.response,
                           responseText: passwordCtrl.response),
                       const VSpace(Sizes.s20),
                       ButtonCommon(

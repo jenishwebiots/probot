@@ -33,6 +33,7 @@ class BabyNameScreen extends StatelessWidget {
                                     title: appFonts.babyName,
                                     color: appCtrl.appTheme.white,
                                     isMax: false,
+                                    text: babyCtrl.response,
                                     responseText: babyCtrl.response)
                               ]),
                           const VSpace(Sizes.s20),

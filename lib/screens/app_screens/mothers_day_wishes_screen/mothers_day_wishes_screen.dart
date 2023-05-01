@@ -32,6 +32,7 @@ class MothersDayWishesScreen extends StatelessWidget {
                                           title: appFonts.mothersDayWishes,
                                           color: appCtrl.appTheme.white,
                                           isMax: false,
+                                          text: motherDayCtrl.response,
                                           responseText: motherDayCtrl.response),
                                       const VSpace(Sizes.s20),
                                       ButtonCommon(

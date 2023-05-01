@@ -33,6 +33,7 @@ class FathersDayWishesScreen extends StatelessWidget {
                                           title: appFonts.fathersDayWishes,
                                           color: appCtrl.appTheme.white,
                                           isMax: false,
+                                          text: fatherCtrl.response,
                                           responseText: fatherCtrl.response),
                                       const VSpace(Sizes.s20),
                                       ButtonCommon(

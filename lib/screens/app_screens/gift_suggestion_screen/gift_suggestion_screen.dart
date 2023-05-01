@@ -30,6 +30,7 @@ class GiftSuggestionScreen extends StatelessWidget {
                                       title: appFonts.amazingGift,
                                       color: appCtrl.appTheme.white,
                                       isMax: false,
+                                      text: giftSuggestionCtrl.response,
                                       responseText: giftSuggestionCtrl.response)
                                 ]),
                             ButtonCommon(

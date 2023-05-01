@@ -166,6 +166,8 @@ class SplashController extends GetxController {
               appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
             }
           });
+          appCtrl.storage.write(session.isAnySubscribe, false);
+          appCtrl.storage.write(session.isSubscribe, false);
         }
       });
     } else {

@@ -36,6 +36,16 @@ class TranslateScreen extends StatelessWidget {
                           title: appFonts.englishTyping,
                           isMax: true,
                           controller: translateCtrl.transController,
+                          microPhoneTap: () {
+                            Vibration.vibrate(duration: 200);
+                            translateCtrl.speechToText();
+                          },
+                          isAnimated:
+                          translateCtrl.isListening.value,
+                          height: translateCtrl
+                              .isListening.value
+                              ? translateCtrl.animation!.value
+                              : Sizes.s20,
                           onTap: () => translateCtrl.transController.clear())
                     ])
                         .paddingSymmetric(
@@ -54,16 +64,7 @@ class TranslateScreen extends StatelessWidget {
                             txtColor: appCtrl.appTheme.primary,
                             responseText: translateCtrl.response,
                             isMax: false,
-                            mircroPhoneTap: () {
-                              Vibration.vibrate(duration: 200);
-                              translateCtrl.speechToText();
-                            },
-                            isAnimated:
-                            translateCtrl.isListening.value,
-                            height: translateCtrl
-                                .isListening.value
-                                ? translateCtrl.animation!.value
-                                : Sizes.s20,
+                            text: translateCtrl.response,
                             color: appCtrl.appTheme.white,
                             hintText: ''),
                         const VSpace(Sizes.s30),

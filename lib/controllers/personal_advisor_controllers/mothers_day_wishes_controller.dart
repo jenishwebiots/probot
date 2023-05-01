@@ -8,7 +8,7 @@ class MothersDayWishesController extends GetxController {
   TextEditingController wishGeneratedController = TextEditingController();
   bool isWishesGenerate = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
 
   onWishesGenerate() {
     isLoader = true;

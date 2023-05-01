@@ -35,6 +35,7 @@ class CodeGeneratorScreen extends StatelessWidget {
                                         color: appCtrl.appTheme.white,
                                         title: appFonts.generatedCode,
                                         isMax: false,
+                                        text: codeGeneratorCtrl.response,
                                         responseText:
                                             codeGeneratorCtrl.response)
                                   ]),
@@ -81,7 +82,7 @@ class CodeGeneratorScreen extends StatelessWidget {
                                     InputLayout(
                                         title: appFonts.writeStuff,
                                         isMax: true,
-                                        mircroPhoneTap: () {
+                                        microPhoneTap: () {
                                           Vibration.vibrate(duration: 200);
                                           codeGeneratorCtrl.speechToText();
                                         },

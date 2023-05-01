@@ -32,6 +32,7 @@ class NewYearGreetingScreen extends StatelessWidget {
                                           title: appFonts.newYearGreeting,
                                           color: appCtrl.appTheme.white,
                                           isMax: false,
+                                          text: newYearCtrl.response,
                                           responseText: newYearCtrl.response),
                                       const VSpace(Sizes.s20),
                                       ButtonCommon(

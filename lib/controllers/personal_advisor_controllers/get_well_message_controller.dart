@@ -10,7 +10,7 @@ class GetWellMessageController extends GetxController {
 
   bool isWellMessageGenerated = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
 
   onWellMessageGenerate() {
     isLoader = true;

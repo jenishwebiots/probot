@@ -43,7 +43,7 @@ class SubscribePlanUI extends StatelessWidget {
                   ClipSmoothRect(
                     child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: Insets.i28, vertical: Insets.i15),
+                            horizontal: Insets.i20, vertical: Insets.i15),
                         decoration: BoxDecoration(
                             color: appCtrl.appTheme.sameWhite,
                             borderRadius: const SmoothBorderRadius.only(

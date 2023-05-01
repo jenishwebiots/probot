@@ -1,5 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:probot/widgets/no_internet.dart';
 
 import '../../../config.dart';
 import 'layouts/tab_common.dart';

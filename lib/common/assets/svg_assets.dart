@@ -153,5 +153,13 @@ class SvgAssets {
   final String unFillStar = "assets/svg/unFillStar.svg";
   final String youtube = "assets/svg/youtube.svg";
   final String linkedin = "assets/svg/linkedin.svg";
+  final String asoExpert = "assets/svg/asoExpert.svg";
+  final String ecommerce = "assets/svg/ecommerce.svg";
+  final String marketing = "assets/svg/marketing.svg";
+  final String productListing = "assets/svg/productListing.svg";
+  final String productRoadmap = "assets/svg/productRoadmap.svg";
+  final String productTitle = "assets/svg/productTitle.svg";
+  final String reviewResponder = "assets/svg/reviewResponder.svg";
+  final String productGenerator = "assets/svg/productGenerator.svg";
 
 }

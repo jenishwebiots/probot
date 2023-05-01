@@ -41,7 +41,7 @@ class ChatLayoutTextBox extends StatelessWidget {
                    await Share.shareXFiles([XFile(image.path)],
                         subject: "Probot image");
                   }).catchError((onError) {
-                    print(onError);
+                    log(onError);
                   });
                 },
                 child: SvgPicture.asset(

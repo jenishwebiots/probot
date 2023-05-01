@@ -32,6 +32,7 @@ class PromotionWishesScreen extends StatelessWidget {
                                           title: appFonts.generatedWishes,
                                           color: appCtrl.appTheme.white,
                                           isMax: false,
+                                          text: promotionCtrl.response,
                                           responseText: promotionCtrl.response),
                                       const VSpace(Sizes.s20),
                                       ButtonCommon(

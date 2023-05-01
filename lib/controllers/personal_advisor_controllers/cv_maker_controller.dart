@@ -12,7 +12,7 @@ class CvMakerController extends GetxController {
   TextEditingController generatedCvController = TextEditingController();
 
   bool isCvGenerate = false;
-  String? response = '';
+  String? response;
   bool isLoader = false;
 
   onCvGenerate() {

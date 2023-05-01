@@ -30,6 +30,7 @@ class EssayWriterScreen extends StatelessWidget {
                               title: appFonts.essayWriting,
                               isMax: false,
                               color: appCtrl.appTheme.white,
+                              text: essayWriterCtrl.response,
                               responseText: essayWriterCtrl.response)
                         ]),
                         const VSpace(Sizes.s30),

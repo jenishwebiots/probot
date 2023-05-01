@@ -20,7 +20,7 @@ class BabyNameSuggestionController extends GetxController {
   int value = 0;
   String? selectItem;
   String? onSelect;
-  String response = '';
+  String? response;
 
   onGenderChange(index) {
     selectedIndex = index;

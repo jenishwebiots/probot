@@ -30,6 +30,7 @@ class WeddingWishesScreen extends StatelessWidget {
                                       title: appFonts.generatedWishes,
                                       color: appCtrl.appTheme.white,
                                       isMax: false,
+                                      text: weddingWishesCtrl.response,
                                       responseText: weddingWishesCtrl.response),
                                   const VSpace(Sizes.s20),
                                   ButtonCommon(

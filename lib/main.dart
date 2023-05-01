@@ -1,15 +1,14 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:new_version/new_version.dart';
+import 'package:probot/controllers/common_controllers/ad_controller.dart';
 import 'package:probot/controllers/common_controllers/in_app_controller.dart';
-import 'package:probot/screens/app_screens/ecommerce_screen/ecommerce_screen.dart';
+import 'package:probot/controllers/common_controllers/text_to_speech_controller.dart';
 
 import 'common/languages/index.dart';
 
@@ -21,6 +20,8 @@ void main() async {
   await Firebase.initializeApp();
   MobileAds.instance.initialize();
   Get.put(InAppController());
+  Get.put(AdController());
+  Get.put(TextToSpeechController());
   runApp(const MyApp());
 }
 
@@ -90,9 +91,9 @@ class _MyAppState extends State<MyApp> {
                   locale: const Locale('en', 'US'),
                   translations: Language(),
                   fallbackLocale: const Locale('en', 'US'),
-                  home:/*statusSnapshot.data != ConnectivityResult.none ||
+                  home:statusSnapshot.data != ConnectivityResult.none ||
                       statusSnapshot.data != null
-                      ?const NoInternet() :*/ EcommerceScreen(),
+                      ?const NoInternet() : SplashScreen(),
                   title: appFonts.proBot.tr,
                   getPages: appRoute.getPages,
                   debugShowCheckedModeBanner: false);

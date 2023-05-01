@@ -17,7 +17,7 @@ class ValentineDayController extends GetxController {
 
   String? selectItem;
   String? onSelectItem;
-  String? response = '';
+  String? response;
   int value = 0;
 
   bool isValentineGenerate = false;

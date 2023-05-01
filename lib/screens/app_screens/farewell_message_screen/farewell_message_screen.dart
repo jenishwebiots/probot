@@ -32,6 +32,7 @@ class FarewellMessageScreen extends StatelessWidget {
                                           title: appFonts.farewellMessage,
                                           color: appCtrl.appTheme.white,
                                           isMax: false,
+                                          text: farewellCtrl.response,
                                           responseText: farewellCtrl.response),
                                       const VSpace(Sizes.s20),
                                       ButtonCommon(

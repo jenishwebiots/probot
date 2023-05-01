@@ -82,6 +82,9 @@ class DashboardController extends GetxController
         update();
         Get.forceAppUpdate();
       });
+    } else if (selectedIndex == 2) {
+      addCtrl.onInterstitialAdShow();
+      update();
     }
   }
 

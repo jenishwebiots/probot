@@ -1,3 +1,5 @@
+import 'package:vibration/vibration.dart';
+
 import '../../../../config.dart';
 
 class EssayGenerateLayout extends StatelessWidget {
@@ -15,6 +17,14 @@ class EssayGenerateLayout extends StatelessWidget {
                 hintText: appFonts.writeTheEssay,
                 title: appFonts.subjectOfTheEssay,
                 isMax: true,
+                /*isAnimated: essayWriterCtrl.isListening.value,
+                height: essayWriterCtrl.isListening.value
+                    ? essayWriterCtrl.animation!.value
+                    : Sizes.s20,
+                microPhoneTap: (){
+                  Vibration.vibrate(duration: 200);
+                  essayWriterCtrl.speechToText();
+                },*/
                 controller: essayWriterCtrl.essayController,
                 onTap: () => essayWriterCtrl.essayController.clear()),
             const VSpace(Sizes.s20),

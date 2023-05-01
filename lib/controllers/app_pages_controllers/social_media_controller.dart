@@ -45,9 +45,9 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
   int categoryValue = 0;
   String? categorySelectItem;
   String? categoryOnSelect;
-  String? hashtagResponse = '';
-  String? captionResponse = '';
-  String? musicResponse = '';
+  String? hashtagResponse;
+  String? captionResponse;
+  String? musicResponse;
 
   SfRangeValues values = const SfRangeValues(30, 40);
 
@@ -149,6 +149,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
     isLoader = true;
     ApiServices.chatCompeletionResponse(
         "Please give me music Suggestion ${categorySelectItem ?? "Classic"} category and in ${selectItem ?? "Hindi"} for post").then((value) {
+          log("++++++++++++++++======$value");
           musicResponse = value;
           update();
           isMusicGenerated = true;

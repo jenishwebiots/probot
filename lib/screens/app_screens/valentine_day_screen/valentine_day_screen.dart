@@ -34,6 +34,7 @@ class ValentineDayScreen extends StatelessWidget {
                                             title: appFonts.valentineDay,
                                             color: appCtrl.appTheme.white,
                                             isMax: false,
+                                            text: valCtrl.response,
                                             responseText: valCtrl.response),
                                         const VSpace(Sizes.s20),
                                         ButtonCommon(

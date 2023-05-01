@@ -30,6 +30,7 @@ class MusicForPostScreen extends StatelessWidget {
                                   title: appFonts.musicSuggestion,
                                   isMax: false,
                                   color: appCtrl.appTheme.white,
+                                  text: socialMediaCtrl.musicResponse,
                                   responseText: socialMediaCtrl.musicResponse)
                             ]),
                         const VSpace(Sizes.s30),

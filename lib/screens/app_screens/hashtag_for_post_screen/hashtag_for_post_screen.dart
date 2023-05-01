@@ -25,7 +25,7 @@ class HashtagForPostScreen extends StatelessWidget {
                           InputLayout(
                               hintText: appFonts.typeHere,
                               title: appFonts.describeYourPost,
-                              mircroPhoneTap: () {
+                              microPhoneTap: () {
                                 Vibration.vibrate(duration: 200);
                                 socialMediaCtrl.speechToText();
                               },
@@ -56,16 +56,7 @@ class HashtagForPostScreen extends StatelessWidget {
                               hintText: appFonts.typeHere,
                               title: appFonts.hashtagsForYou,
                               isMax: false,
-                              mircroPhoneTap: () {
-                                Vibration.vibrate(duration: 200);
-                                socialMediaCtrl.speechToText();
-                              },
-                              isAnimated:
-                              socialMediaCtrl.isListening.value,
-                              height: socialMediaCtrl
-                                  .isListening.value
-                                  ? socialMediaCtrl.animation!.value
-                                  : Sizes.s20,
+                              text: socialMediaCtrl.hashtagResponse,
                               color: appCtrl.appTheme.white,
                               responseText: socialMediaCtrl.hashtagResponse),
                           const VSpace(Sizes.s30),

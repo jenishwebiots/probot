@@ -32,7 +32,8 @@ class EmailGeneratorScreen extends StatelessWidget {
                                   color: appCtrl.appTheme.white,
                                   title: appFonts.generatedMail,
                                   isMax: false,
-                                  responseText: emailGeneratorCtrl.response
+                                  responseText: emailGeneratorCtrl.response,
+                                text: emailGeneratorCtrl.response,
                               )
                             ]),
                         const VSpace(Sizes.s30),

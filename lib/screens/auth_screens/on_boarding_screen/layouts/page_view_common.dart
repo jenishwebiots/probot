@@ -5,8 +5,9 @@ import '../../../../config.dart';
 class PageViewCommon extends StatelessWidget {
   final dynamic data;
   final GestureTapCallback? onTap;
+  final String? title,description;
 
-  const PageViewCommon({Key? key, this.onTap, this.data}) : super(key: key);
+  const PageViewCommon({Key? key, this.onTap, this.data,this.title,this.description}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class PageViewCommon extends StatelessWidget {
                       width: MediaQuery.of(context).size.height < 534
                           ? MediaQuery.of(context).size.height * 0.3
                           : MediaQuery.of(context).size.height * 0.58,
-                      child: Image.asset(data["image"], fit: BoxFit.cover))
+                      child: Image.network(data, fit: BoxFit.cover))
                   .paddingOnly(top: Insets.i45),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 SizedBox(
@@ -111,7 +112,7 @@ class PageViewCommon extends StatelessWidget {
                               height: 200,
                               width: double.infinity),
                           Column(children: [
-                            Text(data["title"].toString().tr,
+                            Text(title!,
                                 style: AppCss.outfitMedium22
                                     .textColor(appCtrl.appTheme.txt)),
                             const VSpace(Sizes.s5),
@@ -124,7 +125,7 @@ class PageViewCommon extends StatelessWidget {
                             const VSpace(Sizes.s10),
                             SizedBox(
                                 width: Sizes.s292,
-                                child: Text(data["subtitle"].toString().tr,
+                                child: Text(description!,
                                     textAlign: TextAlign.center,
                                     style: AppCss.outfitMedium16
                                         .textColor(appCtrl.appTheme.lightText)

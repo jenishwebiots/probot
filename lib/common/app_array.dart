@@ -397,7 +397,10 @@ class AppArray {
     {"id": 6,"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
     {"id": 7,"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
     {"id": 8,"icon": eSvgAssets.essay, "title": appFonts.essayWriter},
-    {"id": 9,"icon": eSvgAssets.contentWriting, "title": appFonts.content}
+    {"id": 9,"icon": eSvgAssets.contentWriting, "title": appFonts.content},
+    {"id": 10,"icon": eSvgAssets.ecommerce, "title": appFonts.ecommerceDetail},
+    {"id": 11,"icon": eSvgAssets.asoExpert, "title": appFonts.asoExpert},
+    {"id": 12,"icon": eSvgAssets.marketing, "title": appFonts.marketingAds}
 
   ];
 
@@ -758,28 +761,28 @@ class AppArray {
   var ecommerceList = [
     {
       "title": appFonts.amazonProductFeature,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.ecommerce
     },{
       "title": appFonts.amazonProductListing,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.productListing
     },{
       "title": appFonts.amazonProductReview,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.fillStar
     },{
       "title": appFonts.amazonProductTitle,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.productTitle
     },{
       "title": appFonts.onlineDesc,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.essay
     },{
       "title": appFonts.productGen,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.productGenerator
     },{
       "title": appFonts.reviewResponder,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.reviewResponder
     },{
       "title": appFonts.productRoadmap,
-      "image": eSvgAssets.anniversary
+      "image": eSvgAssets.productRoadmap
     },
   ];
 }

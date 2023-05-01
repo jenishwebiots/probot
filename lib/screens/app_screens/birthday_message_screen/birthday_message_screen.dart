@@ -27,6 +27,7 @@ class BirthdayMessageScreen extends StatelessWidget {
                               title: appFonts.generatedWishes,
                               color: appCtrl.appTheme.white,
                               isMax: false,
+                              text: birthdayCtrl.response,
                               responseText: birthdayCtrl.response)
                         ]),
                     const VSpace(Sizes.s20),

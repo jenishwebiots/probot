@@ -13,7 +13,7 @@ class PasswordController extends GetxController {
   int selectedIndex = 0;
   bool isPasswordGenerated = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
 
   onChangePasswordType (index) {
     selectedIndex = index;

@@ -9,18 +9,19 @@ class ApiServices {
   static var client = http.Client();
 
   static Future<String> chatCompeletionResponse(String prompt) async {
-    final firebaseCtrl =
-    Get.isRegistered<SubscriptionFirebaseController>()
-        ? Get.find<SubscriptionFirebaseController>()
-        : Get.put(SubscriptionFirebaseController());
-    firebaseCtrl.removeBalance();
-    var url = Uri.https("api.openai.com", "/v1/chat/completions");
+    if(appCtrl.isSubscribe == false) {
+      final firebaseCtrl =
+      Get.isRegistered<SubscriptionFirebaseController>()
+          ? Get.find<SubscriptionFirebaseController>()
+          : Get.put(SubscriptionFirebaseController());
+      firebaseCtrl.removeBalance();
+    }var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
     final response = await http.post(
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer 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',
 
       },
       body: json.encode({

@@ -24,7 +24,7 @@ class AnniversaryMessageController extends GetxController {
   String? langOnSelect;
   bool isMessageGenerate = false;
   bool isLoader = false;
-  String response = '';
+  String? response;
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()

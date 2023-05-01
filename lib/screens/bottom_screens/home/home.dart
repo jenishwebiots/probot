@@ -40,71 +40,67 @@ class Home extends StatelessWidget {
                                       Get.toNamed(routeName.quickAdvisor))
                         ]),
                     const VSpace(Sizes.s18),
-                       GetBuilder<QuickAdvisorController>(
-                         builder: (quickCtrl) {
-                           return quickCtrl.favoriteDataList.isNotEmpty ? GridView.builder(
-                               padding: EdgeInsets.zero,
-                               physics:
-                               const NeverScrollableScrollPhysics(),
-                               shrinkWrap: true,
-                               itemCount: homeCtrl.quickAdvisorCtrl
-                                   .favoriteDataList.length,
-                               gridDelegate:
-                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                   crossAxisSpacing: 20,
-                                   childAspectRatio: 1,
-                                   mainAxisSpacing: 15,
-                                   mainAxisExtent: 105,
-                                   crossAxisCount: 3),
-                               itemBuilder: (context, index) {
-                                 return QuickAdvisorLayout(
-                                     index: index,
-                                     isFavorite: true,
-                                     selectIndex: homeCtrl.quickAdvisorCtrl
-                                         .selectedIndexRemove,
-                                     data: homeCtrl.quickAdvisorCtrl
-                                         .favoriteDataList[index],
-                                     onTap: () => homeCtrl.quickAdvisorCtrl
-                                         .onTapRemoveFavorite(index));
-                               }) : GridView.builder(
-                            padding: EdgeInsets.zero,
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: homeCtrl.quickAdvisorLists.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 20,
-                                    childAspectRatio: 1,
-                                    mainAxisSpacing: 15,
-                                    mainAxisExtent: 105,
-                                    crossAxisCount: 3),
-                            itemBuilder: (context, index) {
-                              return QuickAdvisorLayout(
-                                  data: homeCtrl.quickAdvisorLists[index]);
-                            });
-                         }
-                       ),
+                    GetBuilder<QuickAdvisorController>(builder: (quickCtrl) {
+                      return quickCtrl.favoriteDataList.isNotEmpty
+                          ? GridView.builder(
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: homeCtrl
+                                  .quickAdvisorCtrl.favoriteDataList.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisSpacing: 20,
+                                      childAspectRatio: 1,
+                                      mainAxisSpacing: 15,
+                                      mainAxisExtent: 105,
+                                      crossAxisCount: 3),
+                              itemBuilder: (context, index) {
+                                return QuickAdvisorLayout(
+                                    index: index,
+                                    isFavorite: true,
+                                    selectIndex: homeCtrl
+                                        .quickAdvisorCtrl.selectedIndexRemove,
+                                    data: homeCtrl.quickAdvisorCtrl
+                                        .favoriteDataList[index],
+                                    onTap: () => homeCtrl.quickAdvisorCtrl
+                                        .onTapRemoveFavorite(index));
+                              })
+                          : GridView.builder(
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: homeCtrl.quickAdvisorLists.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisSpacing: 20,
+                                      childAspectRatio: 1,
+                                      mainAxisSpacing: 15,
+                                      mainAxisExtent: 105,
+                                      crossAxisCount: 3),
+                              itemBuilder: (context, index) {
+                                return QuickAdvisorLayout(
+                                    data: homeCtrl.quickAdvisorLists[index]);
+                              });
+                    }),
                     const VSpace(Sizes.s80),
                   ]).marginSymmetric(horizontal: Sizes.s20)
             ])),
-            if(!appCtrl.isSubscribe)
-            if (appCtrl.firebaseConfigModel!.isAddShow!)
-              appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!
-                  ? (homeCtrl.bannerAd != null && homeCtrl.bannerAdIsLoaded)
-                      ? AdWidget(ad: homeCtrl.bannerAd!)
-                          .height(Sizes.s50)
-                          .paddingOnly(bottom: Insets.i10)
-                          .width(MediaQuery.of(context).size.width)
-                      : Container()
-                  : Container(
-                      alignment: Alignment.topCenter,
-                      child: homeCtrl.currentAd,
-                    )
-                      .paddingSymmetric(
-                        vertical: Insets.i10,
-                        horizontal: Insets.i20,
-                      )
-                      .width(MediaQuery.of(context).size.width)
+            if (!appCtrl.isSubscribe)
+              if (appCtrl.firebaseConfigModel!.isAddShow!)
+                appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!
+                    ? (homeCtrl.bannerAd != null && homeCtrl.bannerAdIsLoaded)
+                        ? AdWidget(ad: homeCtrl.bannerAd!)
+                            .height(Sizes.s50)
+                            .paddingOnly(bottom: Insets.i10)
+                            .width(MediaQuery.of(context).size.width)
+                        : Container()
+                    : Container(
+                            alignment: Alignment.bottomCenter,
+                            child: homeCtrl.currentAd)
+                        .paddingSymmetric(
+                            vertical: Insets.i10, horizontal: Insets.i20)
+                        .width(MediaQuery.of(context).size.width)
           ]),
           backgroundColor: appCtrl.appTheme.bg1,
         ),

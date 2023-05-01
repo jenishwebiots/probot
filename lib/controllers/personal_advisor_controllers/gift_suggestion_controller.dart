@@ -7,7 +7,7 @@ class GiftSuggestionController extends GetxController {
   TextEditingController generatedSuggestionController = TextEditingController();
   bool isGiftSuggestionGenerate = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
 
   onGiftSuggestionGenerate() {
     isLoader = true;

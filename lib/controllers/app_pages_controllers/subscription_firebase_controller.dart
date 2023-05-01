@@ -7,7 +7,7 @@ import 'package:probot/config.dart';
 class SubscriptionFirebaseController extends GetxController {
   //subscribe plan
   subscribePlan(
-      {SubscribeModel? subscribeModel, paymentMethod, isSubscribe = true,amountBalance}) async {
+      {SubscribeModel? subscribeModel, paymentMethod, isSubscribe = true,amountBalance,isBack}) async {
     DateTime now = DateTime.now();
     DateTime? expiryDate;
     if(isSubscribe == true) {
@@ -52,8 +52,7 @@ class SubscriptionFirebaseController extends GetxController {
           "balance": appCtrl.envConfig["balance"],
           "paymentMethod": paymentMethod,
         }).then((value) {
-          Get.back();
-          Get.back();
+          isBack ? Get.back() : appCtrl.splashDataCheck();
         });
       } else {
         await FirebaseFirestore.instance
@@ -69,8 +68,7 @@ class SubscriptionFirebaseController extends GetxController {
           "balance": appCtrl.envConfig["balance"],
           "paymentMethod": paymentMethod,
         }).then((value) {
-          Get.back();
-          Get.back();
+          isBack ? Get.back() : appCtrl.splashDataCheck();
         });
 
       }

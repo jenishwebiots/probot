@@ -34,6 +34,7 @@ class BabyShowerScreen extends StatelessWidget {
                                           title: appFonts.babyShowerWishes,
                                           color: appCtrl.appTheme.white,
                                           isMax: false,
+                                          text: babyShowerCtrl.response,
                                           responseText: babyShowerCtrl.response),
                                       const VSpace(Sizes.s20),
                                       ButtonCommon(
