@@ -33,11 +33,11 @@ class MusicForPostScreen extends StatelessWidget {
                                   text: socialMediaCtrl.musicResponse,
                                   responseText: socialMediaCtrl.musicResponse)
                             ]),
-                        const VSpace(Sizes.s30),
                         ButtonCommon(
                             title: appFonts.endMusicGeneration,
                             onTap: () =>
-                                socialMediaCtrl.endMusicGeneratorDialog())
+                                socialMediaCtrl.endMusicGeneratorDialog()),
+                        const VSpace(Sizes.s30),
                       ]).paddingSymmetric(
                       vertical: Insets.i30, horizontal: Insets.i20)
                       : Column(children: [
@@ -71,7 +71,8 @@ class MusicForPostScreen extends StatelessWidget {
                     const VSpace(Sizes.s30),
                     ButtonCommon(
                         title: appFonts.generateSuitableMusic,
-                        onTap: () => socialMediaCtrl.onMusicGenerate())
+                        onTap: () => socialMediaCtrl.onMusicGenerate()),
+
                   ]).paddingSymmetric(
                       vertical: Insets.i30, horizontal: Insets.i20),
                 ),

@@ -1,4 +1,5 @@
 import '../../../config.dart';
+
 import 'layouts/translation_layout.dart';
 import 'package:vibration/vibration.dart';
 
@@ -57,6 +58,8 @@ class TranslateScreen extends StatelessWidget {
                           title: appFonts.translate,
                           onTap: () => translateCtrl.onTranslate())
                           .paddingOnly(bottom: Insets.i25),
+                    const VSpace(Sizes.s30),
+                    AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                     if (translateCtrl.isTranslated == true)
                       Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                         InputLayout(
@@ -70,7 +73,9 @@ class TranslateScreen extends StatelessWidget {
                         const VSpace(Sizes.s30),
                         ButtonCommon(
                             title: appFonts.endTranslate,
-                            onTap: () => translateCtrl.endTranslationDialog())
+                            onTap: () => translateCtrl.endTranslationDialog()),
+                        const VSpace(Sizes.s30),
+                        AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                       ])
                   ]).paddingAll(Insets.i20)),
               if (translateCtrl.isLoader == true) const LoaderLayout()

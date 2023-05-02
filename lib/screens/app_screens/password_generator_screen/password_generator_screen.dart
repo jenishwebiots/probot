@@ -25,6 +25,8 @@ class PasswordGeneratorScreen extends StatelessWidget {
                     ButtonCommon(
                         title: appFonts.buildSomeMagic,
                         onTap: () => passwordCtrl.onPasswordGenerate()),
+                  const VSpace(Sizes.s30),
+                  const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                   if (passwordCtrl.isPasswordGenerated == true)
                     Column(children: [
                       InputLayout(
@@ -36,7 +38,9 @@ class PasswordGeneratorScreen extends StatelessWidget {
                       const VSpace(Sizes.s20),
                       ButtonCommon(
                           title: appFonts.endPasswordGenerator,
-                          onTap: () => passwordCtrl.endPasswordGeneratorDialog())
+                          onTap: () => passwordCtrl.endPasswordGeneratorDialog()),
+                      const VSpace(Sizes.s30),
+                      const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                     ])
                 ])
               ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20)),

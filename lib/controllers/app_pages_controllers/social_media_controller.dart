@@ -68,16 +68,28 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
   }
 
   onCaptionGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController.text} photo for ${values.start} to ${values.end} age targeted audience").then((value) {
-         captionResponse = value;
-         update();
-         isCaptionGenerated = true;
-         isLoader = false;
-         update();
-    });
-    update();
+    if(captionController.text.isNotEmpty ) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController
+                .text} photo for ${values.start} to ${values
+                .end} age targeted audience").then((value) {
+          captionResponse = value;
+          update();
+          isCaptionGenerated = true;
+          isLoader = false;
+          update();
+        });
+        update();
+      }
+    } else {
+      Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+    }
   }
 
   //stop speech method
@@ -146,17 +158,28 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
 
 
   onMusicGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Please give me music Suggestion ${categorySelectItem ?? "Classic"} category and in ${selectItem ?? "Hindi"} for post").then((value) {
+
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Please give me music Suggestion ${categorySelectItem ??
+                "Classic"} category and in ${selectItem ?? "Hindi"} for post")
+            .then((value) {
           log("++++++++++++++++======$value");
           musicResponse = value;
           update();
           isMusicGenerated = true;
           isLoader = false;
           update();
-    });
-    update();
+        });
+        update();
+      }
+
+
   }
 
   onCaptionToneChange(index) {
@@ -180,21 +203,32 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
   }
 
   onHashtagGenerate() {
-    const oneSec = Duration(seconds: 1);
-    Timer.periodic(oneSec, (Timer t) {
-      progressValue += 0.03;
-      update();
-    });
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Please give me Hashtag Suggestion for ${hashtagController.text} post").then((value) {
-      hashtagResponse = value;
-      isHashtagGenerated = true;
-      isLoader = false;
-      progressValue = 0.0;
-      update();
-    });
-    update();
+    if(musicGeneratedController.text.isNotEmpty ) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        const oneSec = Duration(seconds: 1);
+        Timer.periodic(oneSec, (Timer t) {
+          progressValue += 0.03;
+          update();
+        });
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Please give me Hashtag Suggestion for ${hashtagController
+                .text} post").then((value) {
+          hashtagResponse = value;
+          isHashtagGenerated = true;
+          isLoader = false;
+          progressValue = 0.0;
+          update();
+        });
+        update();
+      }
+    } else {
+      Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+    }
   }
 
   endCaptionGeneratorDialog() {
@@ -333,6 +367,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
 
   @override
   void onReady() {
+    addCtrl.onInterstitialAdShow();
     readJson();
     captionCreatorLists = appArray.captionCreatorList;
     socialMediaLists = appArray.socialMediaList;

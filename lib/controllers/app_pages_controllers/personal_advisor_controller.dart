@@ -39,6 +39,7 @@ class PersonalAdvisorController extends GetxController {
 
   @override
   void onReady() {
+    addCtrl.onInterstitialAdShow();
     personalAdvisorLists = appArray.personalAdvisorList;
     update();
     // TODO: implement onReady

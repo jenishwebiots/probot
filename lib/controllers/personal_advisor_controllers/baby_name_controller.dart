@@ -9,6 +9,7 @@ class BabyNameSuggestionController extends GetxController {
   TextEditingController generatedNameController = TextEditingController();
   final FixedExtentScrollController? scrollController =
       FixedExtentScrollController();
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   List genderLists = [];
   List nameSuggestionLists = [];
@@ -33,22 +34,32 @@ class BabyNameSuggestionController extends GetxController {
   }
 
   onNameGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(selectedNameIndex == 0
-            ? "Suggest a 10 ${genderLists[selectedIndex!]['title']} name with ${selectItem ?? "Capricorn"} Zodiac"
-            : "Suggest a 10 ${genderLists[selectedIndex!]['title']} name start with ${latterController.text}")
-        .then((value) {
-      response = value;
-      update();
-      isLoader = false;
-      selectedIndex = 0;
-      selectedNameIndex = 0;
-      selectItem = '';
-      latterController.text = '';
-      isNameGenerate = true;
-      update();
-    });
-    update();
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(selectedNameIndex == 0
+            ? "Suggest a 10 ${genderLists[selectedIndex!]['title']} name with ${selectItem ??
+            "Capricorn"} Zodiac"
+            : "Suggest a 10 ${genderLists[selectedIndex!]['title']} name start with ${latterController
+            .text}")
+            .then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          selectedIndex = 0;
+          selectedNameIndex = 0;
+          selectItem = '';
+          latterController.text = '';
+          isNameGenerate = true;
+          update();
+        });
+        update();
+      }
+    }
   }
 
   endNameSuggestion() {

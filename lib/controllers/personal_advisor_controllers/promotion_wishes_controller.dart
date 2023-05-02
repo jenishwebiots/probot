@@ -6,22 +6,32 @@ class PromotionWishesController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController relationController = TextEditingController();
   TextEditingController wishGeneratedController = TextEditingController();
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
   bool isWishesGenerate = false;
   bool isLoader = false;
   String? response;
 
   onWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a promotion wish message to ${nameController.text} from ${relationController.text}").then((value) {
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a promotion wish message to ${nameController
+                .text} from ${relationController.text}").then((value) {
           response = value;
           update();
           isLoader = false;
           isWishesGenerate = true;
-    });
-    relationController.clear();
-    nameController.clear();
-    update();
+        });
+        relationController.clear();
+        nameController.clear();
+        update();
+      }
+    }
   }
 
   endWishGenerator() {

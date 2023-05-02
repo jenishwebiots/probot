@@ -31,7 +31,9 @@ class WithoutGenerateResponseLayout extends StatelessWidget {
         ButtonCommon(
                 title: appFonts.generateTheBeautiful,
                 onTap: () => giftSuggestionCtrl.onGiftSuggestionGenerate())
-            .paddingOnly(top: Insets.i30)
+            .paddingOnly(top: Insets.i30),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20);
     });
   }

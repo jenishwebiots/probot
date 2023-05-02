@@ -36,7 +36,9 @@ class ValentineDayLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.generateGoodWishes,
-            onTap: () => valCtrl.onValWishesGenerate())
+            onTap: () => valCtrl.onValWishesGenerate()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20);
     });
   }

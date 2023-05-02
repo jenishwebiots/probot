@@ -9,19 +9,28 @@ class MothersDayWishesController extends GetxController {
   bool isWishesGenerate = false;
   bool isLoader = false;
   String? response;
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   onWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a Mother's day wish message to ${motherController.text} from ${relationController.text}").then((value) {
-         response = value;
-         update();
-         isLoader = false;
-         isWishesGenerate = true;
-    });
-    motherController.clear();
-    relationController.clear();
-    update();
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if(balance == 0){
+        appCtrl.balanceTopUpDialog();
+      }else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a Mother's day wish message to ${motherController
+                .text} from ${relationController.text}").then((value) {
+          response = value;
+          update();
+          isLoader = false;
+          isWishesGenerate = true;
+        });
+        motherController.clear();
+        relationController.clear();
+        update();
+      }}
   }
 
   endWishGenerator() {

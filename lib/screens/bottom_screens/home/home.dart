@@ -45,7 +45,6 @@ class Home extends StatelessWidget {
                                       Get.toNamed(routeName.quickAdvisor))
                         ]),
                     const VSpace(Sizes.s18),
-
                     StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("categoryAccess")
@@ -113,11 +112,10 @@ class Home extends StatelessWidget {
                         }
                       },
                     ),
-
                     const VSpace(Sizes.s80),
                   ]).marginSymmetric(horizontal: Sizes.s20)
             ])),
-            if (!appCtrl.isSubscribe)
+           /* if (!appCtrl.isSubscribe)
               if (appCtrl.firebaseConfigModel!.isAddShow!)
                 appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!
                     ? (homeCtrl.bannerAd != null && homeCtrl.bannerAdIsLoaded)
@@ -127,7 +125,6 @@ class Home extends StatelessWidget {
                             .width(MediaQuery.of(context).size.width)
                         : Container()
                     : Container(
-
                         alignment: Alignment.bottomCenter,
                         child: homeCtrl.currentAd,
                       )
@@ -135,8 +132,8 @@ class Home extends StatelessWidget {
                           vertical: Insets.i15,
                           horizontal: Insets.i20,
                         )
-
-                        .width(MediaQuery.of(context).size.width)
+                        .width(MediaQuery.of(context).size.width),*/
+            AdCommonLayout(),
           ]),
           backgroundColor: appCtrl.appTheme.bg1,
         ),

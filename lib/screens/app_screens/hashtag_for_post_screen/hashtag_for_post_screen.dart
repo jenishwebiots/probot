@@ -46,7 +46,8 @@ class HashtagForPostScreen extends StatelessWidget {
                         if (socialMediaCtrl.isHashtagGenerated != true)
                           ButtonCommon(
                               title: appFonts.buildSomeMagic,
-                              onTap: () => socialMediaCtrl.onHashtagGenerate())
+                              onTap: () => socialMediaCtrl.onHashtagGenerate()),
+                        const AdCommonLayout(),
                       ]),
                   if (socialMediaCtrl.isHashtagGenerated == true)
                     Column(
@@ -62,8 +63,11 @@ class HashtagForPostScreen extends StatelessWidget {
                           const VSpace(Sizes.s30),
                           ButtonCommon(
                               title: appFonts.endHashtagBuilder,
-                              onTap: () => socialMediaCtrl.endHashtagGeneratorDialog())
-                        ])
+                              onTap: () => socialMediaCtrl.endHashtagGeneratorDialog()),
+                          const VSpace(Sizes.s30),
+                          const AdCommonLayout(),
+                        ]),
+
                 ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20),
               ),
               if (socialMediaCtrl.isLoader == true)

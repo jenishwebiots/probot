@@ -693,6 +693,5 @@ class AppFonts {
   String dataUploadSuccessfully = "dataUploadSuccessfully";
   String imageUploadSuccessfully = "imageUploadSuccessfully";
 
-  String asoExpert = "ASO Expert";
-  String marketingAds = "Marketing & Ads";
+
 }

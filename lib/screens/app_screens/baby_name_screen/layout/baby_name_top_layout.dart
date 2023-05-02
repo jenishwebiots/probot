@@ -61,7 +61,9 @@ class BabyNameTopLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.suggestMeTheLovelyName,
-            onTap: () => babyCtrl.onNameGenerate())
+            onTap: () => babyCtrl.onNameGenerate()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]);
     });
   }

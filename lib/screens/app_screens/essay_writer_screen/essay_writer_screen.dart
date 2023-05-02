@@ -31,7 +31,9 @@ class EssayWriterScreen extends StatelessWidget {
                               isMax: false,
                               color: appCtrl.appTheme.white,
                               text: essayWriterCtrl.response,
-                              responseText: essayWriterCtrl.response)
+                              responseText: essayWriterCtrl.response),
+                          const VSpace(Sizes.s30),
+                          const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                         ]),
                         const VSpace(Sizes.s30),
                         ButtonCommon(

@@ -15,20 +15,33 @@ class EmailGeneratorController extends GetxController {
   String? response = "";
 
   onGenerateMail() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a ${selectIndex == 0 ? "Small" : selectIndex == 1 ? "Medium" : "Large"} mail to ${writeToController.text} from ${writeFromController.text} for ${topicController.text} in ${toneLists[selectIndex]} tone").then((value) {
+    if(topicController.text.isNotEmpty || writeFromController.text.isNotEmpty || writeToController.text.isNotEmpty) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a ${mailLengthLists[selectIndex]} mail to ${writeToController
+                .text} from ${writeFromController.text} for ${topicController
+                .text} in ${toneLists[selectIndex]} tone")
+            .then((value) {
           response = value;
           update();
           isMailGenerated = true;
           isLoader = false;
           update();
-    });
-    topicController.clear();
-    writeFromController.clear();
-    writeToController.clear();
-    generatedMailController.clear();
-    update();
+        });
+        topicController.clear();
+        writeFromController.clear();
+        writeToController.clear();
+        generatedMailController.clear();
+        update();
+      }
+    } else {
+      Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+    }
   }
 
   onToneChange(index) {
@@ -53,6 +66,7 @@ class EmailGeneratorController extends GetxController {
 
   @override
   void onReady() {
+    addCtrl.onInterstitialAdShow();
     toneLists = appArray.toneList;
     mailLengthLists = appArray.mailLengthList;
     update();

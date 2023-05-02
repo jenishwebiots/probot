@@ -9,7 +9,8 @@ class ApiServices {
   static var client = http.Client();
 
   static Future<String> chatCompeletionResponse(String prompt) async {
-    if(appCtrl.isSubscribe == false) {
+    bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
+    if(appCtrl.isSubscribe == false || isLocalChatApi == false) {
       final firebaseCtrl =
       Get.isRegistered<SubscriptionFirebaseController>()
           ? Get.find<SubscriptionFirebaseController>()
@@ -21,7 +22,7 @@ class ApiServices {
     String apiKey = "";
     if(localApi == ""){
      // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-      apiKey = "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";
+      apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
     }else{
       apiKey = localApi;
     }
@@ -31,8 +32,6 @@ class ApiServices {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $apiKey',
-
-
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",

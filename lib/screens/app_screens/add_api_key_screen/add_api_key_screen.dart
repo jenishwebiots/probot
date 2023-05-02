@@ -51,6 +51,7 @@ class AddApiKeyScreen extends StatelessWidget {
                     title: appFonts.save,
                     onTap: () {
                       appCtrl.storage.write(session.chatGPTKey, apiCtrl.apiController.text);
+                      appCtrl.storage.write(session.isChatGPTKey, true);
                       appCtrl.update();
                       Get.toNamed(routeName.manageApiKeyScreen);
                     })

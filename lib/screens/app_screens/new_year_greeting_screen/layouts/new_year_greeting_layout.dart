@@ -40,7 +40,9 @@ class NewYearGreetingLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.createSpectacular,
-            onTap: () => newYearCtrl.onNewYearWishesGenerate())
+            onTap: () => newYearCtrl.onNewYearWishesGenerate()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i30);
     });
   }

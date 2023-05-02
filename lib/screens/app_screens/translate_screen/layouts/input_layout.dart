@@ -72,6 +72,7 @@ class InputLayout extends StatelessWidget {
                         controller: controller!,
                         hintText: hintText ?? appFonts.writeAnything,
                         minLines: 8,
+                       validator:(value)=> Validation().commonValidation(value),
                         maxLines: maxLine ?? 100,
                         fillColor: color ?? appCtrl.appTheme.textField,
                         keyboardType: TextInputType.multiline))

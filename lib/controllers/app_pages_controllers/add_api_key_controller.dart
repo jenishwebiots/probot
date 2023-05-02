@@ -14,6 +14,7 @@ class AddApiKeyController extends GetxController {
           subtext: appFonts.yourApiKey,
           b1OnTap: (){
             appCtrl.storage.remove(session.chatGPTKey);
+            appCtrl.storage.write(session.isChatGPTKey, false);
             appCtrl.update();
           },
           crossOnTap: ()=> Get.toNamed(routeName.addApiKeyScreen)

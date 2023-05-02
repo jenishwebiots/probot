@@ -45,7 +45,9 @@ class GetWellMessageLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.generateHealthWishes,
-            onTap: () => getCtrl.onWellMessageGenerate())
+            onTap: () => getCtrl.onWellMessageGenerate()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20);
     });
   }

@@ -8,20 +8,29 @@ class GiftSuggestionController extends GetxController {
   bool isGiftSuggestionGenerate = false;
   bool isLoader = false;
   String? response;
-
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
   onGiftSuggestionGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "I want to gift ${sendGiftController.text} so please suggest gift for ${occasionController.text} occasion").then((value) {
-         response = value;
-         update();
-         isGiftSuggestionGenerate = true;
-         isLoader = false;
-         update();
-    });
-    sendGiftController.clear();
-    occasionController.clear();
-    update();
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if(balance == 0){
+        appCtrl.balanceTopUpDialog();
+      }else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "I want to gift ${sendGiftController
+                .text} so please suggest gift for ${occasionController
+                .text} occasion").then((value) {
+          response = value;
+          update();
+          isGiftSuggestionGenerate = true;
+          isLoader = false;
+          update();
+        });
+        sendGiftController.clear();
+        occasionController.clear();
+        update();
+      }}
   }
 
   endGiftSuggestion() {

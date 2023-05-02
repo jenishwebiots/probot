@@ -14,6 +14,7 @@ class ValentineDayController extends GetxController {
   TextEditingController wishForController = TextEditingController();
   final FixedExtentScrollController? scrollController =
       FixedExtentScrollController();
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   String? selectItem;
   String? onSelectItem;
@@ -24,20 +25,29 @@ class ValentineDayController extends GetxController {
   bool isLoader = false;
 
   onValWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a Valentine's day wish message for ${wishForController.text} from ${nameController.text} in ${selectItem ?? "English"}").then((value) {
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a Valentine's day wish message for ${wishForController
+                .text} from ${nameController.text} in ${selectItem ??
+                "English"}").then((value) {
           response = value;
           update();
           isLoader = false;
           isValentineGenerate = true;
           update();
-    });
-    valWishGenController.clear();
-    nameController.clear();
-    wishForController.clear();
-    selectItem = "";
+        });
+        valWishGenController.clear();
+        nameController.clear();
+        wishForController.clear();
+        selectItem = "";
         update();
+      }}
   }
 
   endValentine() {

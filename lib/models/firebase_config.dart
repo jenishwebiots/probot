@@ -21,10 +21,13 @@ class FirebaseConfigModel {
       facebookAddAndroidId,
       facebookInterstitialAd,
       facebookRewardAd,
+      facebookAddIOSId,
+      facebookInterstitialIOSAd,
+      facebookRewardIOSAd,
       splashLogo,
       drawerLogo,
       homeLogo;
-  bool? isChatShow,isCategorySuggestion,isVoiceEnable,isCameraEnable;
+  bool? isChatShow, isCategorySuggestion, isVoiceEnable, isCameraEnable;
   bool? isImageGeneratorShow;
   int? balance;
   bool? isTextCompletionShow;
@@ -40,44 +43,47 @@ class FirebaseConfigModel {
 
   FirebaseConfigModel(
       {this.bannerAddId,
-      this.bannerIOSId,
-      this.chatGPTKey,
-      this.interstitialAdIdAndroid,
-      this.interstitialAdIdIOS,
-      this.payPalClientId,
-      this.payPalSecret,
-      this.stripeKey,
-      this.stripePublishKey,
-      this.privacyPolicyLink,
-      this.refundLink,
-      this.rateAppAndroidId,
-      this.rateAppIOSId,
-      this.isChatShow,
-      this.isImageGeneratorShow,
-      this.rewardAndroidId,
-      this.rewardIOSId,
-      this.razorPayKey,
-      this.razorPaySecret,
-      this.facebookAddAndroidId,
-      this.facebookInterstitialAd,
-      this.facebookRewardAd,
-      this.splashLogo,
-      this.drawerLogo,
-      this.homeLogo,
-      this.isTextCompletionShow,
-      this.isAddShow,
-      this.isCategorySuggestion,
-      this.isVoiceEnable,
-      this.isCameraEnable,
-      this.isPaypal,
-      this.isInApp,
-      this.isRazorPay,
-      this.isStripe,
-      this.isTheme,
-      this.isChatHistory,
-      this.isGuestLoginEnable,
-      this.isGoogleAdmobEnable,
-      this.balance});
+        this.bannerIOSId,
+        this.chatGPTKey,
+        this.interstitialAdIdAndroid,
+        this.interstitialAdIdIOS,
+        this.payPalClientId,
+        this.payPalSecret,
+        this.stripeKey,
+        this.stripePublishKey,
+        this.privacyPolicyLink,
+        this.refundLink,
+        this.rateAppAndroidId,
+        this.rateAppIOSId,
+        this.isChatShow,
+        this.isImageGeneratorShow,
+        this.rewardAndroidId,
+        this.rewardIOSId,
+        this.razorPayKey,
+        this.razorPaySecret,
+        this.facebookAddAndroidId,
+        this.facebookInterstitialAd,
+        this.facebookRewardAd,
+        this.facebookAddIOSId,
+        this.facebookInterstitialIOSAd,
+        this.facebookRewardIOSAd,
+        this.splashLogo,
+        this.drawerLogo,
+        this.homeLogo,
+        this.isTextCompletionShow,
+        this.isAddShow,
+        this.isCategorySuggestion,
+        this.isVoiceEnable,
+        this.isCameraEnable,
+        this.isPaypal,
+        this.isInApp,
+        this.isRazorPay,
+        this.isStripe,
+        this.isTheme,
+        this.isChatHistory,
+        this.isGuestLoginEnable,
+        this.isGoogleAdmobEnable,
+        this.balance});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
     bannerAddId = json['bannerAddId'] ?? "";
@@ -97,10 +103,13 @@ class FirebaseConfigModel {
     rateAppIOSId = json['rateAppIOSId'] ?? "";
     facebookAddAndroidId = json['facebookAddAndroidId'] ?? "";
     facebookInterstitialAd = json['facebookInterstitialAd'] ?? "";
+    facebookRewardAd = json['facebookRewardAd'] ?? "";
+    facebookAddIOSId = json['facebookAddIOSId'] ?? "";
+    facebookInterstitialIOSAd = json['facebookInterstitialIOSAd'] ?? "";
+    facebookRewardIOSAd = json['facebookRewardIOSAd'] ?? "";
     splashLogo = json['splashLogo'] ?? eImageAssets.logo1;
     drawerLogo = json['drawerLogo'] ?? "";
     homeLogo = json['homeLogo'] ?? "";
-    facebookRewardAd = json['facebookRewardAd'] ?? "";
     isChatShow = json['isChatShow'] ?? true;
     isImageGeneratorShow = json['isImageGeneratorShow'] ?? true;
     isTextCompletionShow = json['isTextCompletionShow'] ?? true;
@@ -140,6 +149,9 @@ class FirebaseConfigModel {
     data['facebookAddAndroidId'] = facebookAddAndroidId;
     data['facebookInterstitialAd'] = facebookInterstitialAd;
     data['facebookRewardAd'] = facebookRewardAd;
+    data['facebookAddIOSId'] = facebookAddIOSId;
+    data['facebookInterstitialIOSAd'] = facebookInterstitialIOSAd;
+    data['facebookRewardIOSAd'] = facebookRewardIOSAd;
     data['splashLogo'] = splashLogo;
     data['drawerLogo'] = drawerLogo;
     data['homeLogo'] = homeLogo;

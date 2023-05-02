@@ -36,6 +36,7 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
 
 @override
   void onReady() {
+  addCtrl.onInterstitialAdShow();
     readJson();
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -50,16 +51,27 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
   }
 
   onCodeGenerate () {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a code for ${codeController.text} in ${onSelect ?? "C#"} language").then((value) {
+    if(codeController.text.isNotEmpty) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a code for ${codeController.text} in ${onSelect ??
+                "C#"} language").then((value) {
           response = value;
           isCodeGenerate = true;
           isLoader = false;
           update();
-    });
-    codeController.clear();
-    update();
+        });
+        codeController.clear();
+        update();
+      }
+    } else {
+      Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+    }
   }
 
 

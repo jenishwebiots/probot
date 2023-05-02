@@ -1,5 +1,4 @@
 import 'package:vibration/vibration.dart';
-
 import '../../../config.dart';
 
 class CodeGeneratorScreen extends StatelessWidget {
@@ -12,7 +11,7 @@ class CodeGeneratorScreen extends StatelessWidget {
     return GetBuilder<CodeGeneratorController>(builder: (_) {
       return DirectionalityRtl(
         child: Scaffold(
-            resizeToAvoidBottomInset: true,
+            resizeToAvoidBottomInset: false,
             backgroundColor: appCtrl.appTheme.bg1,
             appBar: AppAppBarCommon(
                 title: appFonts.codeGenerator, leadingOnTap: () => Get.back()),
@@ -43,7 +42,8 @@ class CodeGeneratorScreen extends StatelessWidget {
                               ButtonCommon(
                                   title: appFonts.endCodeGenerator,
                                   onTap: () => codeGeneratorCtrl
-                                      .endCodeGeneratorDialog())
+                                      .endCodeGeneratorDialog()),
+
                             ]).paddingSymmetric(
                           horizontal: Insets.i20, vertical: Insets.i30)
                       : SingleChildScrollView(
@@ -106,9 +106,11 @@ class CodeGeneratorScreen extends StatelessWidget {
                               ButtonCommon(
                                   title: appFonts.createMagicalCode,
                                   onTap: () =>
-                                      codeGeneratorCtrl.onCodeGenerate())
+                                      codeGeneratorCtrl.onCodeGenerate()),
+
                             ]).paddingSymmetric(
                               horizontal: Insets.i20, vertical: Insets.i30))),
+
               if (codeGeneratorCtrl.isLoader == true) const LoaderLayout()
             ])),
       );

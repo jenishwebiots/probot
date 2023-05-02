@@ -6,7 +6,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../config.dart';
 
 class AdController extends GetxController {
-
   BannerAd? bannerAd;
   bool bannerAdIsLoaded = false;
 
@@ -26,15 +25,14 @@ class AdController extends GetxController {
 
   bool isSubscribe = appCtrl.storage.read(session.isSubscribe) ?? false;
 
-  onInterstitialAdShow () {
-
+  onInterstitialAdShow() {
     if (appCtrl.firebaseConfigModel!.isAddShow! && isSubscribe == false) {
       if (appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
+        log("FB");
         showInterstitialAd();
       } else {
-        log("FB");
-        loadInterstitialAd();
 
+        loadInterstitialAd();
       }
     }
     update();
@@ -42,7 +40,8 @@ class AdController extends GetxController {
 
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) { // import 'dart:io'
+    if (Platform.isIOS) {
+      // import 'dart:io'
       var iosDeviceInfo = await deviceInfo.iosInfo;
       return iosDeviceInfo.identifierForVendor; // Unique ID on iOS
     } else {
@@ -55,7 +54,9 @@ class AdController extends GetxController {
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId: appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
+      placementId:  Platform.isAndroid
+          ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
+          : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
         print("Banner Ad: $result -->  $value");
@@ -89,19 +90,20 @@ class AdController extends GetxController {
     log("Home Banner AGAIn: $bannerAd");
   }
 
-
   void loadInterstitialAd() {
     FacebookAudienceNetwork.init(
-      testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+      testingId: Platform.isAndroid
+          ? appCtrl.firebaseConfigModel!.facebookInterstitialAd!
+          : appCtrl.firebaseConfigModel!.facebookInterstitialIOSAd!,
       iOSAdvertiserTrackingEnabled: true,
     );
 
     FacebookInterstitialAd.loadInterstitialAd(
       placementId: appCtrl.firebaseConfigModel!.facebookInterstitialAd!,
       listener: (result, value) {
-        log("result : $result");
-        log("result1 : ${result.name}");
-        log("result2 : $value");
+        log("resultAD : $result");
+        log("result1AD : ${result.name}");
+        log("resultAD2 : $value");
         if (result == InterstitialAdResult.LOADED) {
           FacebookInterstitialAd.showInterstitialAd(delay: 5000);
         }
@@ -148,7 +150,7 @@ class AdController extends GetxController {
   //show interstitial add
   void showInterstitialAd() {
     if (_interstitialAd == null) {
-      log('Warning: attempt to show interstitial before loaded.');
+      log('Warning: AD attempt to show interstitial before loaded.');
       return;
     }
     _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
@@ -170,10 +172,11 @@ class AdController extends GetxController {
     update();
   }
 
-
   @override
-  void onReady() {
-
+  void onInit() {
+    appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(
+        appCtrl.storage.read(session.firebaseConfig));
+log("BANNER: ${appCtrl.firebaseConfigModel!}");
     if (bannerAd == null) {
       bannerAd = BannerAd(
           size: AdSize.banner,
@@ -201,20 +204,22 @@ class AdController extends GetxController {
       buildBanner();
     }
 
-    _getId().then((id)  {
+    _getId().then((id) {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
         testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
         iOSAdvertiserTrackingEnabled: true,
       );
-
     });
     _showBannerAd();
+    if (appCtrl.firebaseConfigModel!.isAddShow! && appCtrl.isSubscribe == false) {
+      _createInterstitialAd();
+    }
+    loadInterstitialAd();
     update();
+    super.onInit();
 
-    // TODO: implement onReady
-    super.onReady();
   }
 
   @override
@@ -224,5 +229,4 @@ class AdController extends GetxController {
     bannerAd = null;
     super.dispose();
   }
-
 }

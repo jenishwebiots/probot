@@ -1,5 +1,3 @@
-
-
 import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
@@ -15,34 +13,45 @@ class PasswordController extends GetxController {
   bool isLoader = false;
   String? response;
 
-  onChangePasswordType (index) {
+  onChangePasswordType(index) {
     selectedIndex = index;
     update();
   }
 
-  onPasswordGenerate () {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Create password which length of ${value ?? "11"} and password type of ${selectedIndex == 0 ? "Only Character" : selectedIndex == 1 ? "Character and number" : "Character,number & symbol"} and password strength is ${strengthValue == 0 ? "Poor" : strengthValue == 1 ? "Average" : "Strong"} ").then((value) {
-      response = value;
-      isPasswordGenerated = true;
-      isLoader = false;
+  onPasswordGenerate() {
+    int balance = appCtrl.envConfig["balance"];
+    if(balance == 0){
+      appCtrl.balanceTopUpDialog();
+    }else {
+      addCtrl.onInterstitialAdShow();
+      isLoader = true;
+      ApiServices.chatCompeletionResponse(
+          "Create password which length of $value and password type of ${passwordTypeLists[selectedIndex]} and password strength is ${passwordStrengthLists[strengthValue
+              .toInt()]} ")
+          .then((value) {
+        response = value;
+        isPasswordGenerated = true;
+        isLoader = false;
+        update();
+      });
       update();
-    });
-    update();
+    }
   }
 
   endPasswordGeneratorDialog() {
     Get.generalDialog(
         pageBuilder: (context, anim1, anim2) {
-          return AdviserDialog(title: appFonts.endPasswordGenerator,subTitle: appFonts.areYouSureEndPasswordGenerator,endOnTap: () {
-            value = 11;
-            strengthValue = 0;
-            selectedIndex = 0;
-            isPasswordGenerated = false;
-            Get.back();
-            update();
-          });
+          return AdviserDialog(
+              title: appFonts.endPasswordGenerator,
+              subTitle: appFonts.areYouSureEndPasswordGenerator,
+              endOnTap: () {
+                value = 11;
+                strengthValue = 0;
+                selectedIndex = 0;
+                isPasswordGenerated = false;
+                Get.back();
+                update();
+              });
         },
         transitionBuilder: (context, anim1, anim2, child) {
           return SlideTransition(
@@ -51,18 +60,16 @@ class PasswordController extends GetxController {
             child: child,
           );
         },
-        transitionDuration: const Duration(milliseconds: 300)
-    );
+        transitionDuration: const Duration(milliseconds: 300));
   }
-
 
   @override
   void onReady() {
+    addCtrl.onInterstitialAdShow();
     passwordStrengthLists = appArray.passwordStrengthList;
     passwordTypeLists = appArray.passwordTypeList;
     update();
     // TODO: implement onReady
     super.onReady();
   }
-
 }

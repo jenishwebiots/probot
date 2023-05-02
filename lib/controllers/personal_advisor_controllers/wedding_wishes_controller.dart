@@ -26,23 +26,33 @@ class WeddingWishesController extends GetxController {
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   onMessageGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "I want to wish ${nameController.text} for wedding to ${relationController.text} in ${selectItem ?? "English"}").then((value) {
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "I want to wish ${nameController
+                .text} for wedding to ${relationController
+                .text} in ${selectItem ?? "English"}").then((value) {
           response = value;
           update();
           isLoader = false;
           isWeddingWishGenerate = true;
           update();
-    });
-    wishGenController.clear();
-    relationController.clear();
-    nameController.clear();
-    selectItem = '';
-    langSelectItem = '';
-    update();
+        });
+        wishGenController.clear();
+        relationController.clear();
+        nameController.clear();
+        selectItem = '';
+        langSelectItem = '';
+        update();
+      }}
   }
 
   endWeddingWishes() {

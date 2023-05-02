@@ -15,4 +15,5 @@ class Session {
   String firebaseConfig = 'firebaseConfig';
   String categoryConfig = 'categoryConfig';
   String chatGPTKey = 'chatGPTKey';
+  String isChatGPTKey = 'isChatGPTKey';
 }

@@ -14,6 +14,7 @@ class TravelController extends GetxController {
 
   @override
   void onReady() {
+    addCtrl.onInterstitialAdShow();
     travelList = appArray.travelHangoutList;
     update();
     // TODO: implement onReady

@@ -31,22 +31,37 @@ class ImageGeneratorController extends GetxController {
   Future getGPTImage(
       {String? imageText, String? size = "256x256"}) async {
     log("imageText: $imageText");
+
     try {
-      int imageCount = int.parse(appCtrl.envConfig["imageCount"].toString());
-      if (imageCount == 0) {
-        Get.snackbar(appFonts.attention.tr, appFonts.yourImageGenerator.tr);
-      } else {
-        imageCount = imageCount - 1;
+      int balance = appCtrl.envConfig["balance"];
+      if(balance == 0){
+        appCtrl.balanceTopUpDialog();
+      }else {
         Get.snackbar(appFonts.generated.tr, appFonts.pleaseWaitFor.tr);
-        appCtrl.envConfig["imageCount"] = imageCount.toString();
-        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
-        appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+        bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ??
+            false;
+        if (appCtrl.isSubscribe == false || isLocalChatApi == false) {
+          final firebaseCtrl =
+          Get.isRegistered<SubscriptionFirebaseController>()
+              ? Get.find<SubscriptionFirebaseController>()
+              : Get.put(SubscriptionFirebaseController());
+          firebaseCtrl.removeBalance();
+        }
+        String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
+        String apiKey = "";
+        if (localApi == "") {
+          // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+          apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+        } else {
+          apiKey = localApi;
+        }
+        log("API $apiKey");
         update();
         var request = await http.post(
           url,
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${appCtrl.firebaseConfigModel!.chatGPTKey}',
+            'Authorization': 'Bearer $apiKey',
           },
           body: jsonEncode(
             {
@@ -65,11 +80,6 @@ class ImageGeneratorController extends GetxController {
         } else {
           debugPrint(jsonDecode(request.body));
         }
-        final subscribeCtrl =
-        Get.isRegistered<SubscriptionFirebaseController>()
-            ? Get.find<SubscriptionFirebaseController>()
-            : Get.put(SubscriptionFirebaseController());
-        await subscribeCtrl.removeBalance();
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -88,6 +98,7 @@ class ImageGeneratorController extends GetxController {
 
   // on tap method
   onTabMethod() async {
+    addCtrl.onInterstitialAdShow();
     isLoader = true;
     FocusScope.of(Get.context!).unfocus();
     await getGPTImage(imageText: imageTextController.text.trim());

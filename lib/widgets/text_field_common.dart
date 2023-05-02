@@ -38,7 +38,7 @@ class TextFieldCommon extends StatelessWidget {
       focusNode: focusNode,
         obscureText: obscureText,
         keyboardType: keyboardType,
-        validator: validator,
+        validator:(value)=> Validation().commonValidation(value) ?? validator,
         controller: controller,
         onChanged: onChanged,
         minLines: minLines,

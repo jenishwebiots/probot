@@ -17,14 +17,14 @@ class EssayGenerateLayout extends StatelessWidget {
                 hintText: appFonts.writeTheEssay,
                 title: appFonts.subjectOfTheEssay,
                 isMax: true,
-                /*isAnimated: essayWriterCtrl.isListening.value,
+                isAnimated: essayWriterCtrl.isListening.value,
                 height: essayWriterCtrl.isListening.value
                     ? essayWriterCtrl.animation!.value
                     : Sizes.s20,
                 microPhoneTap: (){
                   Vibration.vibrate(duration: 200);
                   essayWriterCtrl.speechToText();
-                },*/
+                },
                 controller: essayWriterCtrl.essayController,
                 onTap: () => essayWriterCtrl.essayController.clear()),
             const VSpace(Sizes.s20),
@@ -48,7 +48,9 @@ class EssayGenerateLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.startEssayWriting,
-            onTap: () => essayWriterCtrl.onEssayGenerated())
+            onTap: () => essayWriterCtrl.onEssayGenerated()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i30);
     });
   }

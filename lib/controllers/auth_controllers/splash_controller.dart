@@ -200,19 +200,13 @@ class SplashController extends GetxController {
     }
 
 
-    bool onBoard = appCtrl.storage.read("isOnboard") ?? false;
-    var name = appCtrl.storage.read("name");
-    var userName = appCtrl.storage.read("userName");
-    var firebaseUser = appCtrl.storage.read("firebaseUser");
-    var number = appCtrl.storage.read("number");
+
     log("number : $number");
     appCtrl.isOnboard = onBoard;
     appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
 
     update();
-    dynamic selectedImage =
-        appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
-    appCtrl.storage.write("backgroundImage", selectedImage);
+
 
     log("SPLASH BG : $selectedImage");
     await FirebaseFirestore.instance.collection("config").get().then((value) {

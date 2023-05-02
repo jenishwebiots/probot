@@ -36,6 +36,7 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
 
   @override
   void onReady() {
+    addCtrl.onInterstitialAdShow();
     translateLanguagesList = appArray.translateLanguages;
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -112,16 +113,28 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
 
 
   onTranslate () {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Translate ${transController.text} from ${onFromSelect ?? appFonts.english} to ${onToSelect ?? appFonts.hindi} language").then((value) {
+    if(transController.text.isNotEmpty) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Translate ${transController.text} from ${onFromSelect ??
+                appFonts.english} to ${onToSelect ?? appFonts.hindi} language")
+            .then((value) {
           response = value;
           update();
           isTranslated = true;
           isLoader = false;
           update();
-    });
-    update();
+        });
+        update();
+      }
+    } else {
+      Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+    }
   }
 
   endTranslationDialog() {
