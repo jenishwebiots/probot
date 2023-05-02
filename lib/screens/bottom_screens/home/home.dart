@@ -133,7 +133,7 @@ class Home extends StatelessWidget {
                           horizontal: Insets.i20,
                         )
                         .width(MediaQuery.of(context).size.width),*/
-            AdCommonLayout(),
+            const AdCommonLayout(),
           ]),
           backgroundColor: appCtrl.appTheme.bg1,
         ),

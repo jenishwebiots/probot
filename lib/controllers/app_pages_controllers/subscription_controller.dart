@@ -104,7 +104,7 @@ int selectedPrice =0;
                           ? Get.find<SubscriptionFirebaseController>()
                           : Get.put(SubscriptionFirebaseController());
                   firebaseCtrl.subscribePlan(
-                      subscribeModel: subscribe, paymentMethod: paymentMethod);
+                      subscribeModel: subscribe, paymentMethod: paymentMethod,isBack: isBack);
                 },
                 crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
           });
