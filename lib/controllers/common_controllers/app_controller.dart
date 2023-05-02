@@ -1,8 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:probot/models/category_access_model.dart';
 import 'package:probot/widgets/balance_alert.dart';
 import 'package:probot/widgets/top_up_dialog.dart';
 
@@ -43,6 +45,7 @@ class AppController extends GetxController {
     nonPersonalizedAds: true,
   );
   FirebaseConfigModel? firebaseConfigModel;
+  CategoryAccessModel? categoryAccessModel;
 
   //update theme
   updateTheme(theme) {
@@ -163,8 +166,6 @@ class AppController extends GetxController {
         });
   }
 
-
-
   void loadRewardedVideoAd() {
     FacebookRewardedVideoAd.loadRewardedVideoAd(
       placementId: appCtrl.firebaseConfigModel!.facebookRewardAd!,
@@ -194,7 +195,6 @@ class AppController extends GetxController {
 
   //balance top up
   balanceTopUpDialog() {
-
     Get.generalDialog(
       pageBuilder: (context, anim1, anim2) {
         return const Align(
@@ -212,8 +212,6 @@ class AppController extends GetxController {
       transitionDuration: const Duration(milliseconds: 300),
     );
   }
-
-
 
   // top up dialog
   topUpDialog() {
@@ -235,15 +233,11 @@ class AppController extends GetxController {
     );
   }
 
-  splashDataCheck()async{
-    bool isLoginSave =
-        appCtrl.storage.read(session.isLogin) ?? false;
-    bool isGuestLogin =
-        appCtrl.storage.read(session.isGuestLogin) ?? false;
-    bool isBiometricSave =
-        appCtrl.storage.read(session.isBiometric) ?? false;
-    bool isLanguageSaved =
-        appCtrl.storage.read(session.isLanguage) ?? false;
+  splashDataCheck() async {
+    bool isLoginSave = appCtrl.storage.read(session.isLogin) ?? false;
+    bool isGuestLogin = appCtrl.storage.read(session.isGuestLogin) ?? false;
+    bool isBiometricSave = appCtrl.storage.read(session.isBiometric) ?? false;
+    bool isLanguageSaved = appCtrl.storage.read(session.isLanguage) ?? false;
     var name = appCtrl.storage.read("name");
     var userName = appCtrl.storage.read("userName");
     var firebaseUser = appCtrl.storage.read("firebaseUser");
@@ -281,8 +275,35 @@ class AppController extends GetxController {
         }
       }
     }
-}
+  }
 
+  commonThemeChange()async{
+    await FirebaseFirestore.instance.collection("config").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        appCtrl.firebaseConfigModel =
+            FirebaseConfigModel.fromJson(value.docs[0].data());
+        if(appCtrl.firebaseConfigModel!.isTheme! !=  appCtrl.isTheme) {
+          appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;
+          appCtrl.update();
+          ThemeService().switchTheme(appCtrl.isTheme);
+          Get.forceAppUpdate();
+          appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
+          appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
+          appCtrl.update();
+          appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+        }
+        if( appCtrl.isRTL != appCtrl.firebaseConfigModel!.isRTL!) {
+          appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;
+          log("appCtrl.isRTL : ${appCtrl.isRTL}");
+          appCtrl.storage
+              .write(session.isRTL, appCtrl.isRTL);
+          appCtrl.update();
+          Get.forceAppUpdate();
+        }
+      }
+
+    });
+  }
 
   @override
   void dispose() {

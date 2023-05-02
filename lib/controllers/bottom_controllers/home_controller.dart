@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -39,6 +40,7 @@ class HomeController extends GetxController {
         .toList();
     drawerList = appArray.drawerList;
     quickAdvisorLists = appArray.quickAdvisor.getRange(0, 6).toList();
+
     update();
 
     if (bannerAd == null) {
@@ -75,17 +77,135 @@ class HomeController extends GetxController {
         testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
         iOSAdvertiserTrackingEnabled: true,
       );
-
     });
     _showBannerAd();
     update();
     super.onReady();
   }
 
+  getQuickData() async {
+    quickAdvisorLists = [];
+    List quickLists = appArray.quickAdvisor.getRange(0, 6).toList();
+    quickLists.asMap().entries.forEach((element) {
+      if (element.value["title"] == "askAnything") {
+        if (appCtrl.firebaseConfigModel!.isChatShow!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "codeGenerator") {
+        if (appCtrl.categoryAccessModel!.isCodeGeneratorEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "translateAnything") {
+        if (appCtrl.categoryAccessModel!.isTranslateAnythingEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "socialMedia") {
+        if (appCtrl.categoryAccessModel!.isSocialMediaEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "emailGenerator") {
+        if (appCtrl.categoryAccessModel!.isEmailGeneratorEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "personalAdvice") {
+        if (appCtrl.categoryAccessModel!.isPersonalAdvisorEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "passwordGenerator") {
+        if (appCtrl.categoryAccessModel!.isPasswordGeneratorEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "travelHangout") {
+        if (appCtrl.categoryAccessModel!.isTravelEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "essayWriter") {
+        if (appCtrl.categoryAccessModel!.isEssayWriterEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+      if (element.value["title"] == "content") {
+        if (appCtrl.categoryAccessModel!.isContentWritingEnable!) {
+          quickAdvisorLists.add(element.value);
+        }
+      }
+    });
+  }
+
+  getFavData() async {
+    List<dynamic> favList = appCtrl.storage.read("favList") ?? [];
+    log("FAVE : $favList");
+    if (favList.isNotEmpty) {
+      favList.asMap().entries.forEach((element) {
+        if (element.value["title"] == "askAnything") {
+          if (!appCtrl.firebaseConfigModel!.isChatShow!) {
+            quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "codeGenerator") {
+          if (!appCtrl.categoryAccessModel!.isCodeGeneratorEnable!) {
+            quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "translateAnything") {
+          if (!appCtrl.categoryAccessModel!.isTranslateAnythingEnable!) {
+            quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "socialMedia") {
+          if (!appCtrl.categoryAccessModel!.isSocialMediaEnable!) {
+            quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "emailGenerator") {
+          if (!appCtrl.categoryAccessModel!.isEmailGeneratorEnable!) {
+            quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "personalAdvice") {
+          if (!appCtrl.categoryAccessModel!.isPersonalAdvisorEnable!) {
+           quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "passwordGenerator") {
+          if (!appCtrl.categoryAccessModel!.isPasswordGeneratorEnable!) {
+           quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "travelHangout") {
+          if (!appCtrl.categoryAccessModel!.isTravelEnable!) {
+           quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "essayWriter") {
+          if (!appCtrl.categoryAccessModel!.isEssayWriterEnable!) {
+           quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+        if (element.value["title"] == "content" ||
+            element.value["title"] == "Content") {
+          if (!appCtrl.categoryAccessModel!.isContentWritingEnable!) {
+           quickAdvisorCtrl.onTapRemoveFavorite(element.key);
+          }
+        }
+
+        appCtrl.storage.write("removeFav", element.key);
+      });
+    }
+  }
 
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) { // import 'dart:io'
+    if (Platform.isIOS) {
+      // import 'dart:io'
       var iosDeviceInfo = await deviceInfo.iosInfo;
       return iosDeviceInfo.identifierForVendor; // Unique ID on iOS
     } else {
@@ -164,13 +284,13 @@ class HomeController extends GetxController {
               b1OnTap: () {
                 Get.back();
                 Get.back();
-                if(appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
+                if (appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!) {
                   if (appCtrl.rewardedAd == null) {
                     appCtrl.createRewardedAd();
                   }
                   appCtrl.showRewardedAd();
-                }else{
-                  if(appCtrl.isRewardedAdLoaded == false) {
+                } else {
+                  if (appCtrl.isRewardedAdLoaded == false) {
                     appCtrl.loadRewardedVideoAd();
                   }
                   appCtrl.showFacebookRewardedAd();

@@ -152,8 +152,6 @@ class ChatLayoutController extends GetxController
     super.onReady();
   }
 
-
-
   //clear data while go back
   clearData() {
     speechStopMethod();
@@ -190,7 +188,7 @@ class ChatLayoutController extends GetxController
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId:appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
+      placementId: appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
         print("Banner Ad: $result -->  $value");
@@ -325,22 +323,106 @@ class ChatLayoutController extends GetxController
     selectedImage =
         appCtrl.storage.read("backgroundImage") ?? appArray.backgroundList[0];
     if (Get.arguments != null) {
-
-
       chatId = Get.arguments["chatId"] ??
           DateTime.now().millisecondsSinceEpoch.toString();
-      log("RICHTEXT : ${Get.arguments }");
-      if(Get.arguments["recText"] != null ) {
+      log("RICHTEXT : ${Get.arguments}");
+      if (Get.arguments["recText"] != null) {
         chatController.text = Get.arguments["recText"];
         update();
         processChat();
-      }else if (Get.arguments["speechText"] != null) {
-
+      } else if (Get.arguments["speechText"] != null) {
         update();
         processChat();
+
+        if (Get.arguments["recText"] != null) {
+          messages.value.add(
+            ChatMessage(
+                text: Get.arguments["recText"],
+                chatMessageType: ChatMessageType.user,
+                time: DateTime.now().millisecondsSinceEpoch),
+          );
+          shareMessages.add("${Get.arguments["recText"]} - By PROBOT\n");
+          selectedMessages.add("${Get.arguments["recText"]} - By PROBOT\n");
+          itemCount.value = messages.value.length;
+
+          chatId = DateTime.now().millisecondsSinceEpoch.toString();
+          update();
+          if (!isGuestLogin) {
+            log("chatId : $chatId");
+            FirebaseFirestore.instance
+                .collection("users")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection("chats")
+                .where("chatId", isEqualTo: chatId)
+                .limit(1)
+                .get()
+                .then((valueCheck) async {
+              if (valueCheck.docs.isEmpty) {
+                await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection("chats")
+                    .add({
+                  'userId': FirebaseAuth.instance.currentUser!.uid,
+                  'avatar': appCtrl.selectedCharacter["image"],
+                  "characterId": appCtrl.selectedCharacter["id"],
+                  'message': Get.arguments["recText"],
+                  'chatId': chatId,
+                  "createdDate": createdDate,
+                }).then((add) async {
+                  await FirebaseFirestore.instance
+                      .collection("chatHistory")
+                      .doc(chatId)
+                      .collection("chats")
+                      .add({
+                    'userId': FirebaseAuth.instance.currentUser!.uid,
+                    'avatar': appCtrl.selectedCharacter["image"],
+                    "characterId": appCtrl.selectedCharacter["id"],
+                    'message': Get.arguments["recText"],
+                    'chatId': chatId,
+                    "createdDate": createdDate,
+                    "messageType": ChatMessageType.user.name
+                  });
+                });
+              } else {
+                await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection("chats")
+                    .doc(valueCheck.docs[0].id)
+                    .update({
+                  'userId': FirebaseAuth.instance.currentUser!.uid,
+                  'avatar': appCtrl.selectedCharacter["image"],
+                  'message': Get.arguments["recText"],
+                  'chatId': chatId,
+                  "createdDate": createdDate,
+                }).then((values) async {
+                  await FirebaseFirestore.instance
+                      .collection("chatHistory")
+                      .doc(chatId)
+                      .collection("chats")
+                      .add({
+                    'userId': FirebaseAuth.instance.currentUser!.uid,
+                    'avatar': appCtrl.selectedCharacter["image"],
+                    'message': Get.arguments["recText"],
+                    'chatId': chatId,
+                    "createdDate": createdDate,
+                    "messageType": ChatMessageType.user.name
+                  });
+                });
+              }
+            });
+          }
+        }
+      } else {
+        if (Get.arguments["avatar"].contains("assets")) {
+          argImage = appCtrl.selectedCharacter["image"];
+        } else {
+          argImage =
+              Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+        }
       }
-       argImage =
-          Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      argImage = Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
       update();
     } else {
       log("MESSAGE : ${appCtrl.selectedCharacter}");
@@ -855,8 +937,3 @@ class ChatLayoutController extends GetxController
     );
   }
 }
-/* const VSpace(Sizes.s20),
-                                    Text(appFonts.preBuildQuestions,
-                                        style: AppCss.outfitMedium16
-                                            .textColor(appCtrl.appTheme.txt)),
-                                    const VSpace(Sizes.s15),*/

@@ -12,7 +12,10 @@ class AddApiKeyController extends GetxController {
           bText1: appFonts.okay,
           title: appFonts.apiKeyRemoved,
           subtext: appFonts.yourApiKey,
-          b1OnTap: ()=> Get.toNamed(routeName.addApiKeyScreen),
+          b1OnTap: (){
+            appCtrl.storage.remove(session.chatGPTKey);
+            appCtrl.update();
+          },
           crossOnTap: ()=> Get.toNamed(routeName.addApiKeyScreen)
       );
     });

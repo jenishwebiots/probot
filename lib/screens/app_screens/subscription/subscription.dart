@@ -9,11 +9,15 @@ class Subscription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SubscriptionController>(builder: (_) {
+
       return WillPopScope(
         onWillPop: () async{
           subscribeCtrl.isBack ? Get.back() : appCtrl.splashDataCheck();
           return true;
         },
+
+      return DirectionalityRtl(
+
         child: Scaffold(
             backgroundColor: appCtrl.appTheme.bg1,
             appBar: AppAppBarCommon(

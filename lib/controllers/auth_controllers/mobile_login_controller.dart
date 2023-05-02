@@ -34,7 +34,6 @@ class MobileLoginController extends GetxController {
 
           userName = phoneUser?.phoneNumber;
 
-
           showDialog(
               barrierDismissible: false,
               context: Get.context!,
@@ -112,54 +111,89 @@ class MobileLoginController extends GetxController {
                                             update();
                                             await FirebaseFirestore.instance
                                                 .collection('users')
-                                                .where('id', isEqualTo: phoneUser?.uid)
+                                                .where('id',
+                                                    isEqualTo: phoneUser?.uid)
                                                 .limit(1)
                                                 .get()
-                                                .then((value)async {
+                                                .then((value) async {
                                               log("doc ${value.docs.isEmpty}");
                                               if (value.docs.isEmpty) {
-                                                FirebaseMessaging.instance.getToken().then((token) async {
+                                                FirebaseMessaging.instance
+                                                    .getToken()
+                                                    .then((token) async {
                                                   // Update data to server if new user
-                                                  await   FirebaseFirestore.instance
+                                                  await FirebaseFirestore
+                                                      .instance
                                                       .collection('users')
                                                       .doc(phoneUser?.uid)
                                                       .set({
                                                     'logintype': "Email",
-                                                    'nickname': phoneUser?.displayName,
+                                                    'nickname':
+                                                        phoneUser?.displayName,
                                                     'email': phoneUser?.email,
-                                                    'phone': phoneUser?.phoneNumber,
+                                                    'phone':
+                                                        phoneUser?.phoneNumber,
                                                     'id': phoneUser?.uid,
                                                     "balance": 5,
                                                     "fcmToken": token,
-                                                    "isActive":true
+                                                    "isActive": true
                                                   });
                                                 });
-                                                appCtrl.envConfig["balance"] = 5;
-                                              } else {
-                                                if(value.docs[0].data()["balance"] == null){
-                                                  appCtrl.envConfig["balance"] = 5;
-                                                }
+                                                appCtrl.envConfig["balance"] =
+                                                    5;
+                                                isLoading = false;
                                                 update();
-                                                await FirebaseMessaging.instance.getToken().then((token) async {
-                                                  await FirebaseFirestore.instance
-                                                      .collection('users')
-                                                      .doc(phoneUser?.uid)
-                                                      .update({
-                                                    "fcmToken": token,
-                                                    "isActive":true,
-                                                    "balance": appCtrl.envConfig["balance"]
+                                                appCtrl.storage.write("number",
+                                                    mobileController.text);
+                                                appCtrl.storage.write(
+                                                    "id", phoneUser?.uid);
+                                                await checkData();
+                                                Get.offAllNamed(routeName
+                                                    .selectLanguageScreen);
+                                              } else {
+
+                                                if (value.docs[0]
+                                                        .data()["isActive"] ==
+                                                    true) {
+                                                  if (value.docs[0]
+                                                      .data()["balance"] ==
+                                                      null) {
+                                                    appCtrl.envConfig["balance"] =
+                                                    5;
+                                                  }
+                                                  isLoading = false;
+                                                  update();
+                                                  appCtrl.storage.write("number",
+                                                      mobileController.text);
+                                                  appCtrl.storage.write(
+                                                      "id", phoneUser?.uid);
+                                                  await checkData();
+                                                  Get.offAllNamed(routeName
+                                                      .selectLanguageScreen);
+                                                  update();
+                                                  await FirebaseMessaging
+                                                      .instance
+                                                      .getToken()
+                                                      .then((token) async {
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('users')
+                                                        .doc(phoneUser?.uid)
+                                                        .update({
+                                                      "fcmToken": token,
+                                                      "isActive": true,
+                                                      "balance": appCtrl
+                                                          .envConfig["balance"]
+                                                    });
                                                   });
-                                                });
-                                                appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+                                                  appCtrl.envConfig["balance"] =
+                                                      value.docs[0]
+                                                          .data()["balance"];
+                                                } else {
+                                                  showAlertDialog();
+                                                }
                                               }
                                             });
-                                            isLoading = false;
-                                            update();
-                                            appCtrl.storage.write("number", mobileController.text);
-                                            appCtrl.storage.write("id", phoneUser?.uid);
-                                            await checkData();
-                                            Get.offAllNamed(
-                                                routeName.selectLanguageScreen);
                                           } catch (e) {
                                             isLoading = false;
                                             update();
@@ -228,13 +262,13 @@ class MobileLoginController extends GetxController {
         .then((value) {
       if (value.docs.isNotEmpty) {
         log("DATA : ${value.docs[0].data()}");
-        if(value.docs[0].data()["isSubscribe"] == false) {
+        if (value.docs[0].data()["isSubscribe"] == false) {
           appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
           appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
           appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
           appCtrl.storage.write(session.isSubscribe, false);
           appCtrl.isSubscribe = false;
-        }else{
+        } else {
           appCtrl.isSubscribe = true;
           appCtrl.storage.write(session.isSubscribe, true);
         }

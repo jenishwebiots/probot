@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
+
 import '../../../../../config.dart';
 import 'layouts/bottom_layout.dart';
 import 'layouts/drawer_list_common.dart';
@@ -20,11 +22,28 @@ class CommonDrawer extends StatelessWidget {
                   bottomRight: Radius.circular(Insets.i20))),
           child: Stack(alignment: Alignment.bottomCenter, children: [
             Column(children: [
-              Image.asset(eImageAssets.proBot).marginOnly(
-                  left: Insets.i45,
-                  top: Insets.i20,
-                  bottom: Insets.i30,
-                  right: Insets.i45),
+              CachedNetworkImage(
+                  imageUrl: appCtrl.firebaseConfigModel!.drawerLogo.toString(),
+                  height: Sizes.s40,
+                  width: Sizes.s40,
+                  fit: BoxFit.fill,
+                  imageBuilder: (context, imageProvider) => SizedBox(
+                      height: Sizes.s40,
+                      width: Sizes.s40,
+                      child: Column(children: [
+                        Image.network(
+                            appCtrl.firebaseConfigModel!.drawerLogo.toString(),
+                            height: Sizes.s40,
+                            width: Sizes.s40,
+                            fit: BoxFit.fill)
+                      ])),
+                  placeholder: (context, url) =>
+                  const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Image.asset(
+                      eImageAssets.proBot,
+                      height: Sizes.s40,
+                      width: Sizes.s40,
+                      fit: BoxFit.fill)),
               DottedLine(
                       direction: Axis.horizontal,
                       lineLength: double.infinity,

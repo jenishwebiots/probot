@@ -117,6 +117,7 @@ class SubscriptionFirebaseController extends GetxController {
   }
 
   removeBalance() {
+
     int balance = appCtrl.envConfig["balance"];
     if(balance == 0){
       appCtrl.balanceTopUpDialog();

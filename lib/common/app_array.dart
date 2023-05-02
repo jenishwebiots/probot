@@ -397,10 +397,10 @@ class AppArray {
     {"id": 6,"icon": eSvgAssets.passwordGenerator, "title": appFonts.passwordGenerator},
     {"id": 7,"icon": eSvgAssets.travel, "title": appFonts.travelHangout},
     {"id": 8,"icon": eSvgAssets.essay, "title": appFonts.essayWriter},
-    {"id": 9,"icon": eSvgAssets.contentWriting, "title": appFonts.content},
-    {"id": 10,"icon": eSvgAssets.ecommerce, "title": appFonts.ecommerceDetail},
+    {"id": 9,"icon": eSvgAssets.contentWriting, "title": appFonts.content1},
+  /*  {"id": 10,"icon": eSvgAssets.ecommerce, "title": appFonts.ecommerceDetail},
     {"id": 11,"icon": eSvgAssets.asoExpert, "title": appFonts.asoExpert},
-    {"id": 12,"icon": eSvgAssets.marketing, "title": appFonts.marketingAds}
+    {"id": 12,"icon": eSvgAssets.marketing, "title": appFonts.marketingAds}*/
 
   ];
 

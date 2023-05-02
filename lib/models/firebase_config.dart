@@ -1,5 +1,3 @@
-
-
 import 'package:probot/common/assets/index.dart';
 
 class FirebaseConfigModel {
@@ -19,12 +17,18 @@ class FirebaseConfigModel {
       privacyPolicyLink,
       rateAppAndroidId,
       rateAppIOSId,
-      refundLink,facebookAddAndroidId,facebookInterstitialAd,facebookRewardAd,logo;
-  bool? isChatShow;
+      refundLink,
+      facebookAddAndroidId,
+      facebookInterstitialAd,
+      facebookRewardAd,
+      splashLogo,
+      drawerLogo,
+      homeLogo;
+  bool? isChatShow,isCategorySuggestion,isVoiceEnable,isCameraEnable;
   bool? isImageGeneratorShow;
   int? balance;
   bool? isTextCompletionShow;
-  bool? isTheme;
+  bool? isTheme, isRTL;
   bool? isAddShow,
       isRazorPay,
       isStripe,
@@ -57,9 +61,14 @@ class FirebaseConfigModel {
       this.facebookAddAndroidId,
       this.facebookInterstitialAd,
       this.facebookRewardAd,
-      this.logo,
+      this.splashLogo,
+      this.drawerLogo,
+      this.homeLogo,
       this.isTextCompletionShow,
       this.isAddShow,
+      this.isCategorySuggestion,
+      this.isVoiceEnable,
+      this.isCameraEnable,
       this.isPaypal,
       this.isInApp,
       this.isRazorPay,
@@ -71,7 +80,6 @@ class FirebaseConfigModel {
       this.balance});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
-
     bannerAddId = json['bannerAddId'] ?? "";
     bannerIOSId = json['bannerIOSId'] ?? "";
     rewardAndroidId = json['rewardAndroidId'] ?? "true";
@@ -89,13 +97,19 @@ class FirebaseConfigModel {
     rateAppIOSId = json['rateAppIOSId'] ?? "";
     facebookAddAndroidId = json['facebookAddAndroidId'] ?? "";
     facebookInterstitialAd = json['facebookInterstitialAd'] ?? "";
-    logo = json['logo'] ?? eImageAssets.logo1;
+    splashLogo = json['splashLogo'] ?? eImageAssets.logo1;
+    drawerLogo = json['drawerLogo'] ?? "";
+    homeLogo = json['homeLogo'] ?? "";
     facebookRewardAd = json['facebookRewardAd'] ?? "";
     isChatShow = json['isChatShow'] ?? true;
     isImageGeneratorShow = json['isImageGeneratorShow'] ?? true;
     isTextCompletionShow = json['isTextCompletionShow'] ?? true;
     isChatHistory = json['isChatHistory'] ?? true;
     isAddShow = json['isAddShow'] ?? true;
+    isCategorySuggestion = json['isCategorySuggestion'] ?? true;
+    isVoiceEnable = json['isVoiceEnable'] ?? true;
+    isCameraEnable = json['isCameraEnable'] ?? true;
+    isRTL = json['isRTL'] ?? false;
     isRazorPay = json['isRazorPay'] ?? true;
     isPaypal = json['isPayPal'] ?? true;
     isStripe = json['isStripe'] ?? true;
@@ -126,7 +140,9 @@ class FirebaseConfigModel {
     data['facebookAddAndroidId'] = facebookAddAndroidId;
     data['facebookInterstitialAd'] = facebookInterstitialAd;
     data['facebookRewardAd'] = facebookRewardAd;
-    data['logo'] = logo;
+    data['splashLogo'] = splashLogo;
+    data['drawerLogo'] = drawerLogo;
+    data['homeLogo'] = homeLogo;
     data['isChatShow'] = isChatShow;
     data['isImageGeneratorShow'] = isImageGeneratorShow;
     data['isTextCompletionShow'] = isTextCompletionShow;
@@ -139,7 +155,11 @@ class FirebaseConfigModel {
     data['razorPayKey'] = razorPayKey;
     data['razorPaySecret'] = razorPaySecret;
     data['isChatHistory'] = isChatHistory;
+    data['isRTL'] = isRTL;
     data['isInApp'] = isInApp;
+    data['isCategorySuggestion'] = isCategorySuggestion;
+    data['isVoiceEnable'] = isVoiceEnable;
+    data['isCameraEnable'] = isCameraEnable;
     data['isGuestLoginEnable'] = isGuestLoginEnable;
     data['isGoogleAdmobEnable'] = isGoogleAdmobEnable;
     data['balance'] = balance;
