@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
@@ -18,6 +17,11 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
   final FlutterTts? flutterTts = FlutterTts();
   final _isSpeech = false.obs;
   final isListening = false.obs;
+  BannerAd? bannerAd;
+  bool bannerAdIsLoaded = false;
+
+  AdManagerBannerAd? adManagerBannerAd;
+  bool adManagerBannerAdIsLoaded = false;
 
   AnimationController? animationController;
   Animation? animation;
@@ -25,7 +29,11 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
   int value = 0;
   String? selectItem;
   String? onSelect;
-  String? response = "";
+  String? response;
+  Widget currentAd = const SizedBox(
+    width: 0.0,
+    height: 0.0,
+  );
 
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('json_class/languages.json');
@@ -34,8 +42,102 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
     update();
   }
 
+  Future<String?> _getId() async {
+    var deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      // import 'dart:io'
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor; // Unique ID on iOS
+    } else {
+      var androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.id; // Unique ID on Android
+    }
+  }
+
+  _showBannerAd() {
+    log("SHOW BANNER");
+    currentAd = FacebookBannerAd(
+      // placementId: "YOUR_PLACEMENT_ID",
+      placementId:  Platform.isAndroid
+          ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
+          : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
+      bannerSize: BannerSize.STANDARD,
+      listener: (result, value) {
+        print("Banner Ad: $result -->  $value");
+      },
+    );
+    update();
+    log("_currentAd : $currentAd");
+  }
+
+  buildBanner() async {
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: Platform.isAndroid
+            ? appCtrl.firebaseConfigModel!.bannerAddId!
+            : appCtrl.firebaseConfigModel!.bannerIOSId!,
+        listener: BannerAdListener(
+          onAdLoaded: (Ad ad) {
+            log('$BannerAd loaded.');
+            bannerAdIsLoaded = true;
+            update();
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            log('$BannerAd failedToLoad: $error');
+            ad.dispose();
+          },
+          onAdOpened: (Ad ad) => log('$BannerAd onAdOpened.'),
+          onAdClosed: (Ad ad) => log('$BannerAd onAdClosed.'),
+        ),
+        request: const AdRequest())
+      ..load();
+    log("Home Banner AGAIn: $bannerAd");
+  }
+
 @override
   void onReady() {
+
+  appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(
+      appCtrl.storage.read(session.firebaseConfig));
+  log("BANNER: ${appCtrl.firebaseConfigModel!}");
+  if (bannerAd == null) {
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: Platform.isAndroid
+            ? appCtrl.firebaseConfigModel!.bannerAddId!
+            : appCtrl.firebaseConfigModel!.bannerIOSId!,
+        listener: BannerAdListener(
+          onAdLoaded: (Ad ad) {
+            log('$BannerAd loaded.');
+            bannerAdIsLoaded = true;
+            update();
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            log('$BannerAd failedToLoad: $error');
+            ad.dispose();
+          },
+          onAdOpened: (Ad ad) => log('$BannerAd onAdOpened.'),
+          onAdClosed: (Ad ad) => log('$BannerAd onAdClosed.'),
+        ),
+        request: const AdRequest())
+      ..load();
+    log("Home Banner : $bannerAd");
+  } else {
+    bannerAd!.dispose();
+    buildBanner();
+  }
+
+  _getId().then((id) {
+    String? deviceId = id;
+
+    FacebookAudienceNetwork.init(
+      testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+      iOSAdvertiserTrackingEnabled: true,
+    );
+  });
+  _showBannerAd();
+
+  addCtrl.onInterstitialAdShow();
     readJson();
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -50,16 +152,27 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
   }
 
   onCodeGenerate () {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a code for ${codeController.text} in ${onSelect ?? "C#"} language").then((value) {
+    if(codeController.text.isNotEmpty) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a code for ${codeController.text} in ${onSelect ??
+                "C#"} language").then((value) {
           response = value;
           isCodeGenerate = true;
           isLoader = false;
           update();
-    });
-    codeController.clear();
-    update();
+        });
+        codeController.clear();
+        update();
+      }
+    } else {
+      Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+    }
   }
 
 

@@ -25,7 +25,7 @@ class HashtagForPostScreen extends StatelessWidget {
                           InputLayout(
                               hintText: appFonts.typeHere,
                               title: appFonts.describeYourPost,
-                              mircroPhoneTap: () {
+                              microPhoneTap: () {
                                 Vibration.vibrate(duration: 200);
                                 socialMediaCtrl.speechToText();
                               },
@@ -46,7 +46,8 @@ class HashtagForPostScreen extends StatelessWidget {
                         if (socialMediaCtrl.isHashtagGenerated != true)
                           ButtonCommon(
                               title: appFonts.buildSomeMagic,
-                              onTap: () => socialMediaCtrl.onHashtagGenerate())
+                              onTap: () => socialMediaCtrl.onHashtagGenerate()),
+                        const AdCommonLayout(),
                       ]),
                   if (socialMediaCtrl.isHashtagGenerated == true)
                     Column(
@@ -56,23 +57,17 @@ class HashtagForPostScreen extends StatelessWidget {
                               hintText: appFonts.typeHere,
                               title: appFonts.hashtagsForYou,
                               isMax: false,
-                              mircroPhoneTap: () {
-                                Vibration.vibrate(duration: 200);
-                                socialMediaCtrl.speechToText();
-                              },
-                              isAnimated:
-                              socialMediaCtrl.isListening.value,
-                              height: socialMediaCtrl
-                                  .isListening.value
-                                  ? socialMediaCtrl.animation!.value
-                                  : Sizes.s20,
+                              text: socialMediaCtrl.hashtagResponse,
                               color: appCtrl.appTheme.white,
                               responseText: socialMediaCtrl.hashtagResponse),
                           const VSpace(Sizes.s30),
                           ButtonCommon(
                               title: appFonts.endHashtagBuilder,
-                              onTap: () => socialMediaCtrl.endHashtagGeneratorDialog())
-                        ])
+                              onTap: () => socialMediaCtrl.endHashtagGeneratorDialog()),
+                          const VSpace(Sizes.s30),
+                          const AdCommonLayout(),
+                        ]),
+
                 ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20),
               ),
               if (socialMediaCtrl.isLoader == true)

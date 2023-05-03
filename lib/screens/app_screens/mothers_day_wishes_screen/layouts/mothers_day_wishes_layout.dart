@@ -31,7 +31,9 @@ class MothersDayWishesLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.generateBeautifulWish,
-            onTap: () => motherDayCtrl.onWishesGenerate())
+            onTap: () => motherDayCtrl.onWishesGenerate()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20);
     });
   }

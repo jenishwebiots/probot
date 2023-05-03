@@ -30,7 +30,9 @@ class BabyShowerLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.generateLovelyMessage,
-            onTap: () => babyShowerCtrl.onWishesGenerate())
+            onTap: () => babyShowerCtrl.onWishesGenerate()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20);
     });
   }

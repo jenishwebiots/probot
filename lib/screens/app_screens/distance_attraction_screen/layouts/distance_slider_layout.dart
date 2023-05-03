@@ -8,6 +8,7 @@ class DistanceSliderLayout extends StatelessWidget {
     return GetBuilder<DistanceAttractionController>(builder: (distanceCtrl) {
       return SfRangeSliderTheme(
           data: SfRangeSliderThemeData(
+              overlayRadius: 0,
               activeTrackHeight: 3,
               inactiveTrackHeight: 3,
               inactiveLabelStyle:

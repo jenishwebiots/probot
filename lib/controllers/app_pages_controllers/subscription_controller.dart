@@ -104,9 +104,9 @@ int selectedPrice =0;
                           ? Get.find<SubscriptionFirebaseController>()
                           : Get.put(SubscriptionFirebaseController());
                   firebaseCtrl.subscribePlan(
-                      subscribeModel: subscribe, paymentMethod: paymentMethod);
+                      subscribeModel: subscribe, paymentMethod: paymentMethod,isBack: isBack);
                 },
-                crossOnTap: () => Get.back());
+                crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
           });
     } on Exception {
       showDialog(
@@ -118,8 +118,8 @@ int selectedPrice =0;
                 bText1: appFonts.tryAgain,
                 title: appFonts.paymentFailed,
                 subtext: appFonts.oppsDueTo,
-                b1OnTap: () => Get.back(),
-                crossOnTap: () => Get.back());
+                b1OnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck(),
+                crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
           });
     }
     update();
@@ -237,7 +237,7 @@ int selectedPrice =0;
       log("RES: $res");
       log("checkoutUrl: $checkoutUrl");
       log("executeUrl: $executeUrl");
-      Get.to(() => PaypalPayment(subscribe: subscribe,amount: int.parse(amount),url: executeUrl,));
+      Get.to(() => PaypalPayment(subscribe: subscribe,amount: int.parse(amount),url: checkoutUrl));
     } catch (e) {
       showDialog(
           barrierDismissible: false,
@@ -248,8 +248,8 @@ int selectedPrice =0;
                 bText1: appFonts.tryAgain,
                 title: appFonts.paymentFailed,
                 subtext: appFonts.oppsDueTo,
-                b1OnTap: () => Get.back(),
-                crossOnTap: () => Get.back());
+                b1OnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck(),
+                crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
           });
     }
 
@@ -277,8 +277,8 @@ int selectedPrice =0;
               bText1: appFonts.tryAgain,
               title: appFonts.paymentFailed,
               subtext: appFonts.oppsDueTo,
-              b1OnTap: () => Get.back(),
-              crossOnTap: () => Get.back());
+              b1OnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck(),
+              crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
         });
   }
 
@@ -299,9 +299,9 @@ int selectedPrice =0;
                     ? Get.find<SubscriptionFirebaseController>()
                     : Get.put(SubscriptionFirebaseController());
                 firebaseCtrl.subscribePlan(
-                    subscribeModel: subscribeModel, paymentMethod: "razor");
+                    subscribeModel: subscribeModel, paymentMethod: "razor",isBack:isBack);
               },
-              crossOnTap: () => Get.back());
+              crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
         });
   }
 
@@ -342,11 +342,6 @@ int selectedPrice =0;
   }
 
   final Razorpay _razorpay = Razorpay(); //Instance of razor pay
-  /*initRazorPay() {
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
-    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
-
-  }*/
 
   openSession({SubscribeModel? subscribe}) {
     createOrder().then((orderId) {
@@ -375,7 +370,7 @@ int selectedPrice =0;
         _razorpay.open(options);
         razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
         razorpay.on(
-            Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse(subscribeModel: subscribe));
+            Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
       } else {
         log("EERRR");
       }

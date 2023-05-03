@@ -1,7 +1,5 @@
 import 'dart:developer';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-
+import 'dart:io';
 import '../../bot_api/api_services.dart';
 import '../../config.dart';
 
@@ -22,6 +20,14 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
   Animation? animation;
 
   SpeechToText speech = SpeechToText();
+  BannerAd? bannerAd;
+  bool bannerAdIsLoaded = false;
+  Widget currentAd = const SizedBox(
+    width: 0.0,
+    height: 0.0,
+  );
+  AdManagerBannerAd? adManagerBannerAd;
+  bool adManagerBannerAdIsLoaded = false;
 
   final _isSpeech = false.obs;
   final isListening = false.obs;
@@ -34,8 +40,100 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
   final ScrollController? thumbScrollController =
       ScrollController(initialScrollOffset: 50.0);
 
+  Future<String?> _getId() async {
+    var deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      // import 'dart:io'
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor; // Unique ID on iOS
+    } else {
+      var androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.id; // Unique ID on Android
+    }
+  }
+
+  _showBannerAd() {
+    log("SHOW BANNER");
+    currentAd = FacebookBannerAd(
+      // placementId: "YOUR_PLACEMENT_ID",
+      placementId:  Platform.isAndroid
+          ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
+          : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
+      bannerSize: BannerSize.STANDARD,
+      listener: (result, value) {
+        print("Banner Ad: $result -->  $value");
+      },
+    );
+    update();
+    log("_currentAd : $currentAd");
+  }
+
+  buildBanner() async {
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: Platform.isAndroid
+            ? appCtrl.firebaseConfigModel!.bannerAddId!
+            : appCtrl.firebaseConfigModel!.bannerIOSId!,
+        listener: BannerAdListener(
+          onAdLoaded: (Ad ad) {
+            log('$BannerAd loaded.');
+            bannerAdIsLoaded = true;
+            update();
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            log('$BannerAd failedToLoad: $error');
+            ad.dispose();
+          },
+          onAdOpened: (Ad ad) => log('$BannerAd onAdOpened.'),
+          onAdClosed: (Ad ad) => log('$BannerAd onAdClosed.'),
+        ),
+        request: const AdRequest())
+      ..load();
+    log("Home Banner AGAIn: $bannerAd");
+  }
+
   @override
   void onReady() {
+
+    appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(
+        appCtrl.storage.read(session.firebaseConfig));
+    log("BANNER: ${appCtrl.firebaseConfigModel!}");
+    if (bannerAd == null) {
+      bannerAd = BannerAd(
+          size: AdSize.banner,
+          adUnitId: Platform.isAndroid
+              ? appCtrl.firebaseConfigModel!.bannerAddId!
+              : appCtrl.firebaseConfigModel!.bannerIOSId!,
+          listener: BannerAdListener(
+            onAdLoaded: (Ad ad) {
+              log('$BannerAd loaded.');
+              bannerAdIsLoaded = true;
+              update();
+            },
+            onAdFailedToLoad: (Ad ad, LoadAdError error) {
+              log('$BannerAd failedToLoad: $error');
+              ad.dispose();
+            },
+            onAdOpened: (Ad ad) => log('$BannerAd onAdOpened.'),
+            onAdClosed: (Ad ad) => log('$BannerAd onAdClosed.'),
+          ),
+          request: const AdRequest())
+        ..load();
+      log("Home Banner : $bannerAd");
+    } else {
+      bannerAd!.dispose();
+      buildBanner();
+    }
+    _getId().then((id) {
+      String? deviceId = id;
+      FacebookAudienceNetwork.init(
+        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        iOSAdvertiserTrackingEnabled: true,
+      );
+    });
+    _showBannerAd();
+
+    addCtrl.onInterstitialAdShow();
     translateLanguagesList = appArray.translateLanguages;
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -112,16 +210,28 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
 
 
   onTranslate () {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Translate ${transController.text} from ${onFromSelect ?? appFonts.english} to ${onToSelect ?? appFonts.hindi} language").then((value) {
+    if(transController.text.isNotEmpty) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Translate ${transController.text} from ${onFromSelect ??
+                appFonts.english} to ${onToSelect ?? appFonts.hindi} language")
+            .then((value) {
           response = value;
           update();
           isTranslated = true;
           isLoader = false;
           update();
-    });
-    update();
+        });
+        update();
+      }
+    } else {
+      Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+    }
   }
 
   endTranslationDialog() {
@@ -230,5 +340,11 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
             topLeft: Radius.circular(AppRadius.r10)),
       ),
     );
+  }
+  @override
+  void onClose() {
+    animationController!.dispose();
+    // TODO: implement onClose
+    super.onClose();
   }
 }

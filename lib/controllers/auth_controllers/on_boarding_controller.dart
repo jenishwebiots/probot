@@ -22,6 +22,8 @@ class OnBoardingController extends GetxController {
        appCtrl.languageVal = "it";
      }else if (data.code == "ge") {
        appCtrl.languageVal = "ge";
+     }else if (data.code == "ja") {
+       appCtrl.languageVal = "ja";
      }
 
      appCtrl.update();

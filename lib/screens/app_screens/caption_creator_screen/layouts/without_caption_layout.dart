@@ -45,7 +45,7 @@ class WithoutCaptionLayout extends StatelessWidget {
               height: socialMediaCtrl.isListening.value
                   ? socialMediaCtrl.animation!.value
                   : Sizes.s20,
-              mircroPhoneTap: (){
+              microPhoneTap: (){
                 Vibration.vibrate(duration: 200);
                 socialMediaCtrl.speechToText();
               },

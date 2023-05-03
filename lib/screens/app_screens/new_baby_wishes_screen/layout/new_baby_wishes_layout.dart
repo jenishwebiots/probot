@@ -52,7 +52,9 @@ class NewBabyWishesLayout extends StatelessWidget {
           const VSpace(Sizes.s30),
           ButtonCommon(
               title: appFonts.goodWishesPlease,
-              onTap: () => newCtrl.onWishesGenerate())
+              onTap: () => newCtrl.onWishesGenerate()),
+          const VSpace(Sizes.s30),
+          const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
         ],
       ).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i30);
     });

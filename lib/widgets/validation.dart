@@ -60,4 +60,11 @@ class Validation {
     return null;
   }
 
+  // Common field validation
+ commonValidation(value){
+   if (value!.isEmpty) {
+     return appFonts.pleaseEnterValue.tr;
+   }
+ }
+
 }

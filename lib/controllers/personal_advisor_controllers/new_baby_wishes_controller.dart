@@ -10,6 +10,7 @@ class NewBabyWishesController extends GetxController {
   TextEditingController wishGenController = TextEditingController();
   TextEditingController babyController = TextEditingController();
   TextEditingController relationGenController = TextEditingController();
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
@@ -20,24 +21,33 @@ class NewBabyWishesController extends GetxController {
   int langValue = 0;
   String? langSelectItem;
   String? langOnSelect;
-  String? response = '';
+  String? response;
   bool isWishGenerate = false;
   bool isLoader = false;
 
   onWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "suggest new born baby ${genderLists[selectIndex]['title']} ${babyController.text} message from ${relationGenController.text} in $langOnSelect").then((value) {
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if(balance == 0){
+        appCtrl.balanceTopUpDialog();
+      }else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "suggest new born baby ${genderLists[selectIndex]['title']} ${babyController
+                .text} message from ${relationGenController
+                .text} in $langOnSelect").then((value) {
           response = value;
           update();
           isWishGenerate = true;
           isLoader = false;
           update();
-    });
-    babyController.clear();
-    relationGenController.clear();
-    langSelectItem = '';
-    update();
+        });
+        babyController.clear();
+        relationGenController.clear();
+        langSelectItem = '';
+        update();
+      }}
   }
 
   onGenderChange(index) {

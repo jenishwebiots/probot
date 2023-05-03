@@ -7,6 +7,7 @@ import 'package:probot/config.dart';
 import 'package:probot/models/category_access_model.dart';
 
 import '../../env.dart';
+import '../common_controllers/ad_controller.dart';
 
 class SplashController extends GetxController {
   @override
@@ -26,6 +27,7 @@ class SplashController extends GetxController {
     appCtrl.storage.write("backgroundImage", selectedImage);
     log("SPLASH BG : $selectedImage");
     await FirebaseFirestore.instance.collection("config").get().then((value) {
+      log("SPLASH DATA ${value.docs.isNotEmpty}");
       if (value.docs.isNotEmpty) {
         appCtrl.firebaseConfigModel =
             FirebaseConfigModel.fromJson(value.docs[0].data());
@@ -100,6 +102,7 @@ class SplashController extends GetxController {
     bool isBiometricSave = appCtrl.storage.read(session.isBiometric) ?? false;
     bool isLanguageSaved = appCtrl.storage.read(session.isLanguage) ?? false;
     bool isCharacterSaved = appCtrl.storage.read(session.isCharacter) ?? false;
+     appCtrl.isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
     appCtrl.isCharacter = isCharacterSaved;
     appCtrl.isLanguage = isLanguageSaved;
     appCtrl.isBiometric = isBiometricSave;
@@ -197,6 +200,71 @@ class SplashController extends GetxController {
       appCtrl.currencyVal =
           double.parse(appArray.currencyList[0]["POU"].toString())
               .roundToDouble();
+    }
+
+
+
+    log("number : $number");
+    appCtrl.isOnboard = onBoard;
+    appCtrl.envConfig = appCtrl.storage.read(session.envConfig) ?? environment;
+
+    update();
+
+
+    log("SPLASH BG : $selectedImage");
+    await FirebaseFirestore.instance.collection("config").get().then((value) {
+      if (value.docs.isNotEmpty) {
+        appCtrl.firebaseConfigModel =
+            FirebaseConfigModel.fromJson(value.docs[0].data());
+        Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
+        appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;;
+        appCtrl.update();
+        ThemeService().switchTheme(appCtrl.isTheme);
+        Get.forceAppUpdate();
+        appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
+        appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
+        appCtrl.update();
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+      }
+    });
+    if (!appCtrl.isGuestLogin && userName != null) {
+      await FirebaseFirestore.instance
+          .collection("userSubscribe")
+          .where("email", isEqualTo: appCtrl.storage.read("userName"))
+          .limit(1)
+          .get()
+          .then((value) async {
+        if (value.docs.isNotEmpty) {
+          if (value.docs[0].data()["isSubscribe"] == false) {
+            appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+            appCtrl.update();
+            appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+            appCtrl.storage.write(session.isSubscribe, false);
+          }else{
+            appCtrl.storage.write(session.isSubscribe, true);
+          }
+          appCtrl.storage.write(session.isAnySubscribe, true);
+        } else {
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .get()
+              .then((value) {
+            if (value.exists) {
+              appCtrl.envConfig["balance"] = value.data()!["balance"];
+              appCtrl.update();
+              appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+            }
+          });
+          appCtrl.storage.write(session.isAnySubscribe, false);
+          appCtrl.storage.write(session.isSubscribe, false);
+        }
+      });
+    } else {
+      appCtrl.storage.write(session.isAnySubscribe, false);
+      log("appCtrl.envConfig : ${appCtrl.envConfig}");
+      appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;
+      appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
     }
 
     update();

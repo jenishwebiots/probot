@@ -6,10 +6,10 @@ class BirthdayMessageController extends GetxController {
   TextEditingController birthdayMessagesGenController = TextEditingController();
   TextEditingController birthdayWishGenController = TextEditingController();
   TextEditingController nameGenController = TextEditingController();
-
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
   bool isBirthdayGenerated = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
 
   final FixedExtentScrollController? scrollController =
       FixedExtentScrollController();
@@ -21,20 +21,30 @@ class BirthdayMessageController extends GetxController {
       : Get.put(TranslateController());
 
   onTapWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Birthday wish message for ${birthdayWishGenController.text} with ${nameGenController.text} name in ${selectItem ?? "Hindi"}").then((value) {
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Birthday wish message for ${birthdayWishGenController
+                .text} with ${nameGenController.text} name in ${selectItem ??
+                "Hindi"}").then((value) {
           response = value;
           update();
           isBirthdayGenerated = true;
           isLoader = false;
           update();
-    });
-    birthdayMessagesGenController.clear();
-    birthdayWishGenController.clear();
-    nameGenController.clear();
-    selectItem = "";
-    update();
+        });
+        birthdayMessagesGenController.clear();
+        birthdayWishGenController.clear();
+        nameGenController.clear();
+        selectItem = "";
+        update();
+      }
+    }
   }
 
   endNameSuggestion() {

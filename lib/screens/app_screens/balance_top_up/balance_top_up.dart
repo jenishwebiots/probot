@@ -113,7 +113,7 @@ class BalanceTopUp extends StatelessWidget {
                                       ? RichText(
                                           text: TextSpan(
                                               text:
-                                                  "${appCtrl.priceSymbol}${(appCtrl.currencyVal * double.parse(e.value["price"].toString()))} - ",
+                                                  "${appCtrl.priceSymbol}${appCtrl.priceSymbol == "₹" ? (appCtrl.currencyVal * double.parse(e.value["price"].toString())) : (appCtrl.currencyVal * double.parse(e.value["price"].toString())).toStringAsFixed(2)} - ",
                                               style: AppCss.outfitSemiBold16
                                                   .textColor(
                                                       appCtrl.appTheme.txt),
@@ -214,10 +214,9 @@ class BalanceTopUp extends StatelessWidget {
                 ]),
             const VSpace(Sizes.s28),
             ButtonCommon(
-              onTap: (){
-                topUpCtrl.paymentDialog(
-                    topUpCtrl.selectedPrice.toString());
-              },
+                onTap: () {
+                  topUpCtrl.paymentDialog(topUpCtrl.selectedPrice.toString());
+                },
                 title: topUpCtrl.selectedPrice == 0
                     ? "Pay"
                     : "Pay ${topUpCtrl.selectedPrice}")

@@ -39,7 +39,9 @@ class WeddingWishesLayout extends StatelessWidget {
         const VSpace(Sizes.s30),
         ButtonCommon(
             title: appFonts.generateLovelyWishes,
-            onTap: () => weddingWishesCtrl.onMessageGenerate())
+            onTap: () => weddingWishesCtrl.onMessageGenerate()),
+        const VSpace(Sizes.s30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
       ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20);
     });
   }

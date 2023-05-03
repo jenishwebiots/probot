@@ -61,7 +61,7 @@ class SubscriptionList extends StatelessWidget {
                                           child: Container(
                                               padding: const EdgeInsets
                                                   .symmetric(
-                                                  horizontal: Insets.i28,
+                                                  horizontal: Insets.i25,
                                                   vertical: Insets.i15),
                                               decoration: BoxDecoration(
                                                   color: e.key ==

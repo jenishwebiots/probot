@@ -32,16 +32,7 @@ class CaptionCreatorScreen extends StatelessWidget {
                                         title: appFonts.amazingCaption,
                                         color: appCtrl.appTheme.white,
                                         isMax: false,
-                                        mircroPhoneTap: () {
-                                          Vibration.vibrate(duration: 200);
-                                          socialMediaCtrl.speechToText();
-                                        },
-                                        isAnimated:
-                                            socialMediaCtrl.isListening.value,
-                                        height: socialMediaCtrl
-                                                .isListening.value
-                                            ? socialMediaCtrl.animation!.value
-                                            : Sizes.s20,
+                                        text: socialMediaCtrl.captionResponse,
                                         responseText:
                                             socialMediaCtrl.captionResponse)
                                   ]),
@@ -49,7 +40,9 @@ class CaptionCreatorScreen extends StatelessWidget {
                               ButtonCommon(
                                   title: appFonts.endCaptionCreator,
                                   onTap: () => socialMediaCtrl
-                                      .endCaptionGeneratorDialog())
+                                      .endCaptionGeneratorDialog()),
+                            const VSpace(Sizes.s30),
+                            const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                             ]).paddingSymmetric(
                           vertical: Insets.i30, horizontal: Insets.i20)
                       : const WithoutCaptionLayout()),

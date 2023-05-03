@@ -9,18 +9,20 @@ class ApiServices {
   static var client = http.Client();
 
   static Future<String> chatCompeletionResponse(String prompt) async {
-    final firebaseCtrl =
-    Get.isRegistered<SubscriptionFirebaseController>()
-        ? Get.find<SubscriptionFirebaseController>()
-        : Get.put(SubscriptionFirebaseController());
-    firebaseCtrl.removeBalance();
-    var url = Uri.https("api.openai.com", "/v1/chat/completions");
+    bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
+    if(appCtrl.isSubscribe == false || isLocalChatApi == false) {
+      final firebaseCtrl =
+      Get.isRegistered<SubscriptionFirebaseController>()
+          ? Get.find<SubscriptionFirebaseController>()
+          : Get.put(SubscriptionFirebaseController());
+      firebaseCtrl.removeBalance();
+    }var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
     String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
     String apiKey = "";
     if(localApi == ""){
      // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-      apiKey = "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";
+      apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
     }else{
       apiKey = localApi;
     }
@@ -30,7 +32,6 @@ class ApiServices {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $apiKey',
-
       },
       body: json.encode({
         "model": "gpt-3.5-turbo",

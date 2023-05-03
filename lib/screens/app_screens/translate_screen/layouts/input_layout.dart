@@ -1,13 +1,15 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/services.dart';
 import 'package:probot/screens/app_screens/translate_screen/layouts/svg_icon_common.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../config.dart';
 
 class InputLayout extends StatelessWidget {
-  final String? title, hintText, responseText;
+  final String? title, hintText, responseText,text;
   final TextEditingController? controller;
   final bool? isMax, isAnimated;
-  final GestureTapCallback? onTap, mircroPhoneTap;
+  final GestureTapCallback? onTap, microPhoneTap;
   final Color? color, txtColor;
   final int? maxLine;
   final double? height;
@@ -20,12 +22,12 @@ class InputLayout extends StatelessWidget {
       this.isAnimated = false,
       this.hintText,
       this.onTap,
-      this.mircroPhoneTap,
+      this.microPhoneTap,
       this.color,
       this.txtColor,
       this.maxLine,
       this.responseText,
-      this.height})
+      this.height,this.text})
       : super(key: key);
 
   @override
@@ -41,18 +43,15 @@ class InputLayout extends StatelessWidget {
         if (isMax == true)
           SvgIconsCommon(
             icon: eSvgAssets.microphone,
-            onTap: mircroPhoneTap,
+            onTap: microPhoneTap,
             isAnimated: isAnimated!,
             height: height,
           ),
         if (isMax != true)
           Row(children: [
-            SvgIconsCommon(
-              icon: eSvgAssets.volume,
-            ),
-            SvgIconsCommon(icon: eSvgAssets.share)
-                .paddingSymmetric(horizontal: Insets.i10),
-            SvgIconsCommon(icon: eSvgAssets.copy)
+            SvgIconsCommon(icon: eSvgAssets.volume).inkWell(onTap: ()=> textToSpeechCtrl.speechMethod(text!)),
+            SvgIconsCommon(icon: eSvgAssets.share).paddingSymmetric(horizontal: Insets.i10).inkWell(onTap: ()=> Share.share(text!)),
+            SvgIconsCommon(icon: eSvgAssets.copy).inkWell(onTap: ()=> Clipboard.setData(ClipboardData(text: text!))),
           ])
       ]),
       const VSpace(Sizes.s10),
@@ -73,6 +72,7 @@ class InputLayout extends StatelessWidget {
                         controller: controller!,
                         hintText: hintText ?? appFonts.writeAnything,
                         minLines: 8,
+                       validator:(value)=> Validation().commonValidation(value),
                         maxLines: maxLine ?? 100,
                         fillColor: color ?? appCtrl.appTheme.textField,
                         keyboardType: TextInputType.multiline))

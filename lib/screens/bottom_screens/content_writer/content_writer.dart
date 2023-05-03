@@ -55,10 +55,8 @@ class ContentWriterScreen extends StatelessWidget {
                         FocusScope.of(context).unfocus();
                         if (contentCtrl.contentController.text.isNotEmpty) {
                           contentCtrl.processContentWrite();
-
                         } else {
-
-                          log("write something");
+                          Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
                         }
                       }).marginSymmetric(vertical: Insets.i40)
                 ],

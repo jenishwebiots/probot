@@ -8,21 +8,31 @@ class FathersDayWishesController extends GetxController {
   TextEditingController wishGeneratedController = TextEditingController();
   bool isWishesGenerate = false;
   bool isLoader = false;
-  String? response = '';
+  String? response;
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   onWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a Father's day wish message to ${fatherController.text} from ${relationController.text}").then((value) {
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a Father's day wish message to ${fatherController
+                .text} from ${relationController.text}").then((value) {
           response = value;
           update();
           isLoader = false;
           isWishesGenerate = true;
           update();
-    });
-    fatherController.clear();
-    relationController.clear();
-    update();
+        });
+        fatherController.clear();
+        relationController.clear();
+        update();
+      }
+    }
   }
 
   endWishGenerator() {

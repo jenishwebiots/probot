@@ -25,7 +25,6 @@ class MyAccountScreen extends StatelessWidget {
                     child: Column(children: [
                       const VSpace(Sizes.s10),
                       UserImage(
-
                               name: snapshot.data!.docs[0].data()["email"],
                               image: snapshot.data!.docs[0].data()["image"],
                               isLoading: myAccountCtrl.isLoading)

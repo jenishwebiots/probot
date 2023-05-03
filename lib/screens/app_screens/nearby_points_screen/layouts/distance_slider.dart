@@ -8,6 +8,7 @@ class DistanceSlider extends StatelessWidget {
     return GetBuilder<NearbyPointsController>(builder: (nearbyPointCtrl) {
       return SfRangeSliderTheme(
           data: SfRangeSliderThemeData(
+              overlayRadius: 0,
               activeTrackHeight: 3,
               inactiveTrackHeight: 3,
               inactiveLabelStyle:
@@ -16,7 +17,10 @@ class DistanceSlider extends StatelessWidget {
                   AppCss.outfitSemiBold12.textColor(appCtrl.appTheme.primary),
               tooltipBackgroundColor: appCtrl.appTheme.primary,
               inactiveTickColor: appCtrl.appTheme.textField,
+              activeMinorTickColor: appCtrl.appTheme.textField,
               inactiveTrackColor: appCtrl.appTheme.textField,
+              inactiveMinorTickColor: appCtrl.appTheme.textField,
+              activeTickColor: appCtrl.appTheme.lightText,
               thumbColor: appCtrl.appTheme.trans),
           child: SfRangeSlider(
               min: 0,
@@ -27,7 +31,7 @@ class DistanceSlider extends StatelessWidget {
               values: nearbyPointCtrl.values,
               interval: 5,
               shouldAlwaysShowTooltip: true,
-              minorTicksPerInterval: 7,
+              minorTicksPerInterval: 3,
               showLabels: true,
               onChanged: (SfRangeValues value) {
                 nearbyPointCtrl.values = value;

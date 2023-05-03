@@ -13,6 +13,7 @@ class NewYearGreetingController extends GetxController {
   TextEditingController sendWishesController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController newYearWishGenController = TextEditingController();
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   int value = 0;
   String? selectItem;
@@ -24,21 +25,30 @@ class NewYearGreetingController extends GetxController {
       : Get.put(TranslateController());
 
   onNewYearWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Happy new year ${yearController.text} message for ${nameController.text} from ${sendWishesController.text} in ${selectItem ?? "English"}").then((value) {
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if(balance == 0){
+        appCtrl.balanceTopUpDialog();
+      }else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Happy new year ${yearController.text} message for ${nameController
+                .text} from ${sendWishesController.text} in ${selectItem ??
+                "English"}").then((value) {
           response = value;
           update();
           isLoader = false;
           isGreetingGenerate = true;
           update();
-    });
-    yearController.clear();
-    sendWishesController.clear();
-    nameController.clear();
-    newYearWishGenController.clear();
-    selectItem = '';
-    update();
+        });
+        yearController.clear();
+        sendWishesController.clear();
+        nameController.clear();
+        newYearWishGenController.clear();
+        selectItem = '';
+        update();
+      }}
   }
 
   onLanguageSheet() {

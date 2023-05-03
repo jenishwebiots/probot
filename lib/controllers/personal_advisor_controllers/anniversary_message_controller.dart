@@ -15,6 +15,7 @@ class AnniversaryMessageController extends GetxController {
   TextEditingController relationController = TextEditingController();
   TextEditingController typeOfAnniController = TextEditingController();
   TextEditingController messageSendController = TextEditingController();
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   int value = 0;
   int langValue = 0;
@@ -24,30 +25,43 @@ class AnniversaryMessageController extends GetxController {
   String? langOnSelect;
   bool isMessageGenerate = false;
   bool isLoader = false;
-  String response = '';
+  String? response;
 
   final langCtrl = Get.isRegistered<TranslateController>()
       ? Get.find<TranslateController>()
       : Get.put(TranslateController());
 
   onMessageGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-            "I want to write ${typeOfAnniController.text} anniversary wish to ${messageSendController.text}  for ${selectItem ?? "10"} years of togetherness in ${relationController.text}")
-        .then((value)  {
-              response = value;
-              update();
-              isMessageGenerate = true;
-              isLoader = false;
-              update();
-            });
-    wishGenController.clear();
-    relationController.clear();
-    typeOfAnniController.clear();
-    messageSendController.clear();
-    selectItem = "";
-    langSelectItem = '';
-    update();
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if (balance == 0) {
+        appCtrl.balanceTopUpDialog();
+      } else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "I want to write ${typeOfAnniController
+                .text} anniversary wish to ${messageSendController
+                .text}  for ${selectItem ??
+                "10"} years of togetherness in ${relationController.text}")
+            .then((value) {
+          response = value;
+          update();
+          isMessageGenerate = true;
+          isLoader = false;
+          update();
+        });
+        wishGenController.clear();
+        relationController.clear();
+        typeOfAnniController.clear();
+        messageSendController.clear();
+        selectItem = "";
+        langSelectItem = '';
+        update();
+      }
+    } else {
+      log("LOGGGGG");
+    }
   }
 
   endNameSuggestion() {

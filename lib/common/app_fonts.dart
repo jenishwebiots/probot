@@ -644,6 +644,17 @@ class AppFonts {
   String productReview = "Product review";
   String endProductReview = "End product review";
   String areYouSureEndReview = "Are you sure you want to end this Amazon product review?";
+  String asoExpert = "ASO Expert";
+  String marketingAds = "Marketing & Ads";
+  String giveYourProduct = "Give your product the finest name possible :";
+  String enterKeyword = "Enter Keyword";
+  String productNameThat = "Product name that identifies you from rivals :";
+  String bringMe = "Bring me the best name";
+  String productTitle = "Product title";
+  String endProductTitle = "End product title";
+  String areYouSureEndTitle = "Are you sure you want to end this Amazon product title?";
+  String somethingWentWrong = "Something went wrong, please try again";
+  String refreshing = "Refreshing...";
 
 
   String lifeTimeAccessibility = "lifeTimeAccessibility";
@@ -684,6 +695,5 @@ class AppFonts {
   String dataUploadSuccessfully = "dataUploadSuccessfully";
   String imageUploadSuccessfully = "imageUploadSuccessfully";
 
-  String asoExpert = "ASO Expert";
-  String marketingAds = "Marketing & Ads";
+
 }

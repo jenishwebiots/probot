@@ -9,21 +9,31 @@ class FarewellMessageController extends GetxController {
   TextEditingController messageGeneratedController = TextEditingController();
   bool isMessageGenerate = false;
   bool isLoader = false;
-  String? response = "";
+  String? response;
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
 
   onWishesGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a farewell message to name is ${nameController.text} and relation is ${relationController.text} ").then((value) {
-         response = value;
-         update();
-         isMessageGenerate = true;
-         isLoader = false;
-         update();
-    });
-    nameController.clear();
-    relationController.clear();
-    update();
+    if(scaffoldKey.currentState!.validate()) {
+      int balance = appCtrl.envConfig["balance"];
+      if(balance == 0){
+        appCtrl.balanceTopUpDialog();
+      }else {
+        addCtrl.onInterstitialAdShow();
+        isLoader = true;
+        ApiServices.chatCompeletionResponse(
+            "Write a farewell message to name is ${nameController
+                .text} and relation is ${relationController.text} ").then((
+            value) {
+          response = value;
+          update();
+          isMessageGenerate = true;
+          isLoader = false;
+          update();
+        });
+        nameController.clear();
+        relationController.clear();
+        update();
+      }}
   }
 
   endWishGenerator() {

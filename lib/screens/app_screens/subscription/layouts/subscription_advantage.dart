@@ -37,7 +37,7 @@ class SubscriptionAdvantage extends StatelessWidget {
                                 horizontal: Insets.i20, vertical: Insets.i14),
                         Text(appFonts.free.tr,
                                 textAlign: TextAlign.center,
-                                style: AppCss.outfitMedium16
+                                style: AppCss.outfitMedium14
                                     .textColor(appCtrl.appTheme.primary))
                             .paddingSymmetric(
                                 horizontal: Insets.i18, vertical: Insets.i14)

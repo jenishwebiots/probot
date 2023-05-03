@@ -9,7 +9,14 @@ class Subscription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SubscriptionController>(builder: (_) {
+
       return DirectionalityRtl(
+        child: WillPopScope(
+          onWillPop: () async{
+            subscribeCtrl.isBack ? Get.back() : appCtrl.splashDataCheck();
+            return true;
+          },
+
         child: Scaffold(
             backgroundColor: appCtrl.appTheme.bg1,
             appBar: AppAppBarCommon(
@@ -62,7 +69,8 @@ class Subscription extends StatelessWidget {
                             .textColor(appCtrl.appTheme.primary))
                     .inkWell(onTap: () => appCtrl.splashDataCheck()).alignment(Alignment.center)
               ]).marginSymmetric(vertical: Insets.i25),
-            )),
+            ))
+        ),
       );
     });
   }

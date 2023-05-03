@@ -49,7 +49,7 @@ class ChatLayout extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       const VSpace(Sizes.s10),
-                                      if (!appCtrl.isSubscribe)
+                                     /* if (!appCtrl.isSubscribe)
                                         if (appCtrl
                                             .firebaseConfigModel!.isAddShow!)
                                           appCtrl.firebaseConfigModel!
@@ -78,7 +78,8 @@ class ChatLayout extends StatelessWidget {
                                                   )
                                                   .width(MediaQuery.of(context)
                                                       .size
-                                                      .width),
+                                                      .width),*/
+                                      AdCommonLayout(),
                                       Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
                                               style: AppCss.outfitMedium14
                                                   .textColor(

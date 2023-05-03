@@ -41,6 +41,7 @@ class ImageAssets {
 
   final String slider = "assets/images/slider.png";
   final String languageContainer = "assets/images/languageContainer.png";
+  final String homeBanner = "assets/images/homeBanner.png";
 
   final String noInternet = "assets/images/noInternet.png";
   final String wires = "assets/images/wires.png";

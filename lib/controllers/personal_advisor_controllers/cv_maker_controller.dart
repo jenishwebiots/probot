@@ -10,29 +10,42 @@ class CvMakerController extends GetxController {
   TextEditingController jobController = TextEditingController();
   TextEditingController customController = TextEditingController();
   TextEditingController generatedCvController = TextEditingController();
-
+  final GlobalKey<FormState> scaffoldKey = GlobalKey<FormState>();
   bool isCvGenerate = false;
-  String? response = '';
+  String? response;
   bool isLoader = false;
 
   onCvGenerate() {
-    isLoader = true;
-    ApiServices.chatCompeletionResponse(
-        "Write a CV with name ${nameController.text} ,phone number ${phoneController.text} ,email ${mailController.text} ,position looking for ${positionController.text} ,experience ${experienceController.text} and want job for ${jobController.text} also want to add ${customController.text}").then((value) {
-          response = value;
-          update();
-          isCvGenerate = true;
-          isLoader = false;
-          update();
-    });
-    nameController.clear();
-    phoneController.clear();
-    mailController.clear();
-    positionController.clear();
-    experienceController.clear();
-    jobController.clear();
-    customController.clear();
-    update();
+    if(scaffoldKey.currentState!.validate()) {
+    int balance = appCtrl.envConfig["balance"];
+    if(balance == 0){
+      appCtrl.balanceTopUpDialog();
+    }else {
+      addCtrl.onInterstitialAdShow();
+      isLoader = true;
+      ApiServices.chatCompeletionResponse(
+          "Write a CV with name ${nameController
+              .text} ,phone number ${phoneController
+              .text} ,email ${mailController
+              .text} ,position looking for ${positionController
+              .text} ,experience ${experienceController
+              .text} and want job for ${jobController
+              .text} also want to add ${customController.text}").then((value) {
+        response = value;
+        update();
+        isCvGenerate = true;
+        isLoader = false;
+        update();
+      });
+      nameController.clear();
+      phoneController.clear();
+      mailController.clear();
+      positionController.clear();
+      experienceController.clear();
+      jobController.clear();
+      customController.clear();
+      update();
+    }}
   }
 
   endCvMaker() {
