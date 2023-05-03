@@ -30,6 +30,10 @@ flutter_ios_podfile_setup
 target 'Runner' do
  use_frameworks!
 use_modular_headers!
+pod 'GoogleMLKit/TextRecognitionChinese', '~> 4.0.0'
+pod 'GoogleMLKit/TextRecognitionDevanagari', '~> 4.0.0'
+pod 'GoogleMLKit/TextRecognitionJapanese', '~> 4.0.0'
+pod 'GoogleMLKit/TextRecognitionKorean', '~> 4.0.0'
 
 flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end

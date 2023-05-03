@@ -35,9 +35,7 @@ class _MyAppState extends State<MyApp> {
     return StreamBuilder(
         stream: Connectivity().onConnectivityChanged,
         builder: (context, AsyncSnapshot<ConnectivityResult> statusSnapshot) {
-          log("STATUS : ${statusSnapshot.data}");
-
-          return GetMaterialApp(
+         return GetMaterialApp(
               themeMode: ThemeService().theme,
               theme: AppTheme.fromType(ThemeType.light).themeData,
               darkTheme: AppTheme.fromType(ThemeType.dark).themeData,
@@ -48,7 +46,6 @@ class _MyAppState extends State<MyApp> {
               title: appFonts.proBot.tr,
               getPages: appRoute.getPages,
               debugShowCheckedModeBanner: false);
-
         });
   }
 
