@@ -98,7 +98,7 @@ class BalanceAlertDialog extends StatelessWidget {
                   style: AppCss.outfitRegular18
                       .textColor(appCtrl.appTheme.primary)).inkWell(onTap: (){
                         Get.back();
-                        Get.toNamed(routeName.manageApiKeyScreen);
+                        Get.toNamed(routeName.addApiKeyScreen);
           })
               .alignment(Alignment.center),
           const VSpace(Sizes.s25)

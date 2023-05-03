@@ -708,7 +708,9 @@ class AppArray {
   var questionsList = [
     {
       "id": 1,
+      "title": appFonts.code,
       "preBuildQuestions": [
+
         {"title": appFonts.developmentArchitecture},
         {"title": appFonts.helpMeFindMistakes},
         {"title": appFonts.iNeedToCreateARest},
@@ -716,7 +718,9 @@ class AppArray {
     },
     {
       "id": 2,
+      "title": appFonts.code,
       "preBuildQuestions": [
+
         {"title": appFonts.writingThisCode},
         {"title": appFonts.iNeedToCreateARest},
       ]

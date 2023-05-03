@@ -694,6 +694,7 @@ class AppFonts {
   String deleteUserSuccessfully = "deleteUserSuccessfully";
   String dataUploadSuccessfully = "dataUploadSuccessfully";
   String imageUploadSuccessfully = "imageUploadSuccessfully";
+  String invalidApiKey = "invalidApiKey";
 
 
 }

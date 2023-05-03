@@ -65,8 +65,7 @@ class ChatHistoryLayout extends StatelessWidget {
               IntrinsicHeight(
                 child: Row(
                   children: [
-                    Text("\u2022 Chat",style: AppCss.outfitSemiBold12.textColor(appCtrl.appTheme.primary)),
-                    VerticalDivider(thickness: 1.5,color: appCtrl.appTheme.lightText),
+
                     Text(
                         DateFormat('hh:mm a').format(
                             DateTime.fromMillisecondsSinceEpoch(int.parse(data["createdDate"].toString()))),
