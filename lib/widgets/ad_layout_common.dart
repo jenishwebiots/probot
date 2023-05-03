@@ -6,8 +6,10 @@ import '../config.dart';
 
 class AdCommonLayout extends StatelessWidget {
   final AlignmentGeometry? alignment;
-
-  const AdCommonLayout({Key? key, this.alignment}) : super(key: key);
+ final BannerAd? bannerAd;
+ final bool bannerAdIsLoaded;
+ final Widget? currentAd;
+  const AdCommonLayout({Key? key, this.alignment,this.bannerAdIsLoaded = false,this.bannerAd,this.currentAd }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +21,15 @@ class AdCommonLayout extends StatelessWidget {
             if (!appCtrl.isSubscribe)
               if (appCtrl.firebaseConfigModel!.isAddShow!)
                 appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!
-                    ? (addCtrl.bannerAd != null && addCtrl.bannerAdIsLoaded)
-                        ? AdWidget(ad: addCtrl.bannerAd!)
+                    ? (bannerAd != null && bannerAdIsLoaded)
+                        ? AdWidget(ad: bannerAd!)
                             .height(Sizes.s50)
                             .paddingOnly(bottom: Insets.i10)
                             .width(MediaQuery.of(context).size.width)
                         : Container()
                     : Container(
                             alignment: Alignment.bottomCenter,
-                            child: addCtrl.currentAd)
+                            child:currentAd)
                         .paddingSymmetric(
                             vertical: Insets.i10, horizontal: Insets.i20)
                         .width(MediaQuery.of(context).size.width)

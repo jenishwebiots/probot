@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 
-
 import '../../../../config.dart';
 
 class HomeTopLayout extends StatelessWidget {
@@ -13,7 +12,8 @@ class HomeTopLayout extends StatelessWidget {
     return Stack(
       children: [
         Container(
-            padding: const EdgeInsets.only(top: Insets.i120),
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.only(top: Insets.i80),
             decoration: BoxDecoration(
                 gradient: RadialGradient(
                     focalRadius: 1,
@@ -23,10 +23,9 @@ class HomeTopLayout extends StatelessWidget {
                   appCtrl.appTheme.primary,
                   appCtrl.appTheme.radialGradient
                 ])),
-            child: Image.asset(
-              eImageAssets.homeAppBar,
-
-            ).paddingSymmetric(vertical: Insets.i20, horizontal: Insets.i35)),
+            child: Image.asset(eImageAssets.homeAppBar, height: Sizes.s170)
+                .paddingSymmetric(
+                    vertical: Insets.i20, horizontal: Insets.i35)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -35,7 +34,6 @@ class HomeTopLayout extends StatelessWidget {
                 const CommonMenuIcon().inkWell(onTap: onTap),
                 CachedNetworkImage(
                     imageUrl: appCtrl.firebaseConfigModel!.homeLogo.toString(),
-
                     width: Sizes.s106,
                     imageBuilder: (context, imageProvider) => SizedBox(
                         width: Sizes.s106,
@@ -46,10 +44,9 @@ class HomeTopLayout extends StatelessWidget {
                               fit: BoxFit.fill)
                         ])),
                     placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Image.asset(
-                        eImageAssets.logo1,
-                        width:Sizes.s106))
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        Image.asset(eImageAssets.logo1, width: Sizes.s106))
               ],
             ),
             const CommonBalance().marginSymmetric(horizontal: Insets.i20)

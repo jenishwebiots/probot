@@ -16,9 +16,9 @@ class EssayWriterScreen extends StatelessWidget {
                 title: appFonts.essayWriting, leadingOnTap: () => Get.back()),
             body: Stack(
               children: [
-                SingleChildScrollView(
-                  child: essayWriterCtrl.isEssayGenerated == true
-                      ? Column(
+                essayWriterCtrl.isEssayGenerated == true
+                    ? SingleChildScrollView(
+                      child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(children: [
@@ -40,9 +40,14 @@ class EssayWriterScreen extends StatelessWidget {
                             title: appFonts.endEssayWriting,
                             onTap: () => essayWriterCtrl.endEssayWriterDialog())
                       ]).paddingSymmetric(
-                      horizontal: Insets.i20, vertical: Insets.i30)
-                      : const EssayGenerateLayout(),
-                ),
+                      horizontal: Insets.i20, vertical: Insets.i30),
+                    )
+                    : const EssayGenerateLayout(),
+                if(essayWriterCtrl.isEssayGenerated == false)
+                AdCommonLayout(
+                    bannerAd: essayWriterCtrl.bannerAd,
+                    bannerAdIsLoaded: essayWriterCtrl.bannerAdIsLoaded,
+                    currentAd: essayWriterCtrl.currentAd),
                 if(essayWriterCtrl.isLoader == true) const LoaderLayout()
               ],
             )),

@@ -40,4 +40,17 @@ class TextToSpeechController extends GetxController {
     update();
   }
 
+  onStopTTS() {
+    flutterTts!.stop();
+    update();
+  }
+
+  @override
+  void dispose() {
+    flutterTts!.stop();
+    update();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
 }

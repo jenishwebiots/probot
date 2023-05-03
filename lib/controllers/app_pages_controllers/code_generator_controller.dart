@@ -1,12 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 import '../../bot_api/api_services.dart';
 import '../../config.dart';
 

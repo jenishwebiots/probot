@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:probot/widgets/something_went_wrong.dart';
 
 import '../config.dart';
 
@@ -16,16 +17,18 @@ class CommonStream extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection("config").snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            appCtrl.commonThemeChange();
-            appCtrl.firebaseConfigModel =
-                FirebaseConfigModel.fromJson(snapshot.data!.docs[0].data());
-            Stripe.publishableKey =
-                appCtrl.firebaseConfigModel!.stripePublishKey!;
+            if (snapshot.data != null) {
+              appCtrl.commonThemeChange();
+              appCtrl.firebaseConfigModel =
+                  FirebaseConfigModel.fromJson(snapshot.data!.docs[0].data());
+              Stripe.publishableKey =
+              appCtrl.firebaseConfigModel!.stripePublishKey!;
 
-            appCtrl.storage
-                .write(session.firebaseConfig, snapshot.data!.docs[0].data());
+              appCtrl.storage
+                  .write(session.firebaseConfig, snapshot.data!.docs[0].data());
+            }
           }
-          return child!;
+          return snapshot.data != null ? child! : const SomethingWentWrong();
         });
   }
 }

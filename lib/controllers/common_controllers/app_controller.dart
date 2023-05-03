@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:probot/env.dart';
 import 'package:probot/models/category_access_model.dart';
 import 'package:probot/widgets/balance_alert.dart';
 import 'package:probot/widgets/top_up_dialog.dart';
@@ -20,7 +21,7 @@ class AppController extends GetxController {
   bool isTheme = false;
   bool isRTL = false;
   bool isLanguage = false;
-  bool isSubscribe = false;
+  bool isSubscribe = false,isLocalChatApi = false;
   bool isRewardedAdLoaded = false;
   bool isAnySubscribe = false;
   bool isCharacter = false;
@@ -37,7 +38,7 @@ class AppController extends GetxController {
   bool isGuestLogin = false;
   bool isNumber = false;
   dynamic currency;
-  dynamic envConfig;
+  dynamic envConfig = environment;
   int characterIndex = 3;
   AdRequest request = const AdRequest(
     keywords: <String>['foo', 'bar'],

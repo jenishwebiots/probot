@@ -7,6 +7,7 @@ import 'package:probot/config.dart';
 import 'package:probot/models/category_access_model.dart';
 
 import '../../env.dart';
+import '../common_controllers/ad_controller.dart';
 
 class SplashController extends GetxController {
   @override
@@ -26,6 +27,7 @@ class SplashController extends GetxController {
     appCtrl.storage.write("backgroundImage", selectedImage);
     log("SPLASH BG : $selectedImage");
     await FirebaseFirestore.instance.collection("config").get().then((value) {
+      log("SPLASH DATA ${value.docs.isNotEmpty}");
       if (value.docs.isNotEmpty) {
         appCtrl.firebaseConfigModel =
             FirebaseConfigModel.fromJson(value.docs[0].data());
@@ -100,6 +102,7 @@ class SplashController extends GetxController {
     bool isBiometricSave = appCtrl.storage.read(session.isBiometric) ?? false;
     bool isLanguageSaved = appCtrl.storage.read(session.isLanguage) ?? false;
     bool isCharacterSaved = appCtrl.storage.read(session.isCharacter) ?? false;
+     appCtrl.isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
     appCtrl.isCharacter = isCharacterSaved;
     appCtrl.isLanguage = isLanguageSaved;
     appCtrl.isBiometric = isBiometricSave;

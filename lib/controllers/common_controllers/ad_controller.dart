@@ -1,8 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import '../../config.dart';
 
 class AdController extends GetxController {
@@ -17,7 +16,7 @@ class AdController extends GetxController {
 
   NativeAd? nativeAd;
 
-  Widget currentAd = const SizedBox(
+  Widget  currentAd = const SizedBox(
     width: 0.0,
     height: 0.0,
   );
@@ -172,12 +171,10 @@ class AdController extends GetxController {
     update();
   }
 
-  @override
-  void onInit() {
+  onBannerAds () {
     appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(
         appCtrl.storage.read(session.firebaseConfig));
-log("BANNER: ${appCtrl.firebaseConfigModel!}");
-    if (bannerAd == null) {
+    if (bannerAd == null && bannerAdIsLoaded == false) {
       bannerAd = BannerAd(
           size: AdSize.banner,
           adUnitId: Platform.isAndroid
@@ -203,7 +200,37 @@ log("BANNER: ${appCtrl.firebaseConfigModel!}");
       bannerAd!.dispose();
       buildBanner();
     }
+  }
 
+  @override
+  void onInit() async{
+    log("ENVCONFIG : ${appCtrl.storage.read(session.firebaseConfig)}");
+    log("FIREBASE : ${ appCtrl.firebaseConfigModel}");
+    if (appCtrl.storage.read(session.firebaseConfig) == null ) {
+      await FirebaseFirestore.instance.collection("config").get().then((value) {
+        log("VALUE: ${value.docs.isNotEmpty}");
+        if (value.docs.isNotEmpty) {
+          appCtrl.firebaseConfigModel =
+              FirebaseConfigModel.fromJson(value.docs[0].data());
+          Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
+          appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;
+          appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;
+          appCtrl.storage.write(session.isRTL, appCtrl.isRTL);
+          appCtrl.update();
+          ThemeService().switchTheme(appCtrl.isTheme);
+          Get.forceAppUpdate();
+          appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
+          appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
+          appCtrl.update();
+          appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+          log("FIREBASE INNN : ${ appCtrl.firebaseConfigModel}");
+        }
+      } ).then((value) => onBannerAds ());
+    } else {
+      onBannerAds ();
+    }
+
+log("BANNER: ${appCtrl.firebaseConfigModel!}");
     _getId().then((id) {
       String? deviceId = id;
 

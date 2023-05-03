@@ -167,6 +167,7 @@ class ChatLayoutController extends GetxController
   @override
   void dispose() {
     super.dispose();
+    animationController!.dispose();
     _interstitialAd?.dispose();
     bannerAd?.dispose();
     bannerAd = null;

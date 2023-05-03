@@ -14,30 +14,31 @@ class DistanceAttractionScreen extends StatelessWidget {
             appBar: AppAppBarCommon(
                 title: appFonts.distanceAttraction,
                 leadingOnTap: () => Get.back()),
-            body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            body:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               distanceCtrl.isDistanceGenerated == false
                   ? Column(children: [
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             textCommon.outfitSemiBoldPrimary16(
-                                text:
-                                    appFonts.visitWonderfulLocationsAroundWorld),
+                                text: appFonts
+                                    .visitWonderfulLocationsAroundWorld),
                             const VSpace(Sizes.s15),
                             Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                   MusicCategoryLayout(
-                                    title: appFonts.iAmLooking,
-                                    category: /*socialMediaCtrl.categoryOnSelect ?? */
-                                        "Restaurant", /*onTap: () => socialMediaCtrl.onSelectMusicCategorySheet() */
-                                  ),
+                                      title: appFonts.iAmLooking,
+                                      category: distanceCtrl.placeOnSelect ??
+                                          "Restaurant",
+                                      onTap: () => distanceCtrl.onPlaceSheet()),
                                   const VSpace(Sizes.s20),
                                   MusicCategoryLayout(
-                                    title: appFonts.theLocationYou,
-                                    category: /* socialMediaCtrl.categoryOnSelect ?? */
-                                        "Surat", /*onTap: () => socialMediaCtrl.onSelectMusicCategorySheet() */
-                                  ),
+                                      title: appFonts.theLocationYou,
+                                      category:
+                                          distanceCtrl.onSelect ?? "Surat",
+                                      onTap: () => distanceCtrl.onCitySheet()),
                                   const VSpace(Sizes.s20),
                                   textCommon.outfitSemiBoldTxt14(
                                       text: appFonts.budgetOfTravelling),
@@ -45,7 +46,8 @@ class DistanceAttractionScreen extends StatelessWidget {
                                   const DistanceSliderLayout()
                                 ])
                                 .paddingSymmetric(
-                                    vertical: Insets.i20, horizontal: Insets.i15)
+                                    vertical: Insets.i20,
+                                    horizontal: Insets.i15)
                                 .authBoxExtension()
                           ]),
                       const VSpace(Sizes.s30),

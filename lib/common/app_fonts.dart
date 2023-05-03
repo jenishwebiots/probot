@@ -653,6 +653,8 @@ class AppFonts {
   String productTitle = "Product title";
   String endProductTitle = "End product title";
   String areYouSureEndTitle = "Are you sure you want to end this Amazon product title?";
+  String somethingWentWrong = "Something went wrong, please try again";
+  String refreshing = "Refreshing...";
 
 
   String lifeTimeAccessibility = "lifeTimeAccessibility";
