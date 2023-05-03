@@ -47,6 +47,11 @@ class NewYearGreetingScreen extends StatelessWidget {
                                 ]).paddingSymmetric(
                               horizontal: Insets.i20, vertical: Insets.i30)
                           : const NewYearGreetingLayout()),
+                  if(newYearCtrl.isGreetingGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: newYearCtrl.bannerAd,
+                        bannerAdIsLoaded: newYearCtrl.bannerAdIsLoaded,
+                        currentAd: newYearCtrl.currentAd),
                   if(newYearCtrl.isLoader == true) const LoaderLayout()
                 ],
               )),

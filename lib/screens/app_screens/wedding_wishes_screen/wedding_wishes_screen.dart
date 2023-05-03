@@ -45,6 +45,11 @@ class WeddingWishesScreen extends StatelessWidget {
                             ]).paddingSymmetric(
                               vertical: Insets.i30, horizontal: Insets.i20)
                           : const WeddingWishesLayout()),
+                  if(weddingWishesCtrl.isWeddingWishGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: weddingWishesCtrl.bannerAd,
+                        bannerAdIsLoaded: weddingWishesCtrl.bannerAdIsLoaded,
+                        currentAd: weddingWishesCtrl.currentAd),
                   if(weddingWishesCtrl.isLoader == true) const LoaderLayout()
                 ],
               )),

@@ -47,6 +47,11 @@ class PromotionWishesScreen extends StatelessWidget {
                                 ]).paddingSymmetric(
                               horizontal: Insets.i20, vertical: Insets.i30)
                           : const PromotionWishesLayout()),
+                  if(promotionCtrl.isWishesGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: promotionCtrl.bannerAd,
+                        bannerAdIsLoaded: promotionCtrl.bannerAdIsLoaded,
+                        currentAd: promotionCtrl.currentAd),
                   if(promotionCtrl.isLoader == true) const LoaderLayout()
                 ],
               )),

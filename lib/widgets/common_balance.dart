@@ -7,8 +7,7 @@ class CommonBalance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return appCtrl.isSubscribe
+    return appCtrl.isSubscribe || appCtrl.isLocalChatApi
         ? Container()
         : IntrinsicHeight(
             child: Row(children: [

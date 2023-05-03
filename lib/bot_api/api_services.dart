@@ -8,7 +8,7 @@ import 'package:probot/config.dart';
 class ApiServices {
   static var client = http.Client();
 
-  static Future<String> chatCompeletionResponse(String prompt) async {
+  static Future<String> chatCompeletionResponse(String prompt,{addApiKey}) async {
     bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
     if(appCtrl.isSubscribe == false || isLocalChatApi == false) {
       final firebaseCtrl =
@@ -18,13 +18,19 @@ class ApiServices {
       firebaseCtrl.removeBalance();
     }var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
+
     String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
+    log("API: $localApi");
     String apiKey = "";
-    if(localApi == ""){
-     // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-      apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-    }else{
-      apiKey = localApi;
+    if(addApiKey != null){
+      apiKey = addApiKey;
+    }else {
+      if (localApi == "") {
+        // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+        apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+      } else {
+        apiKey = localApi;
+      }
     }
 
     final response = await http.post(

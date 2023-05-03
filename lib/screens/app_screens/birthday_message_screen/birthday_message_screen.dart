@@ -16,8 +16,11 @@ class BirthdayMessageScreen extends StatelessWidget {
               resizeToAvoidBottomInset: false,
               appBar: AppAppBarCommon(
                   title: appFonts.birthdayMessage, leadingOnTap: () => Get.back()),
-              body: birthdayCtrl.isBirthdayGenerated == true
-                  ? Column(children: [
+              body: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: birthdayCtrl.isBirthdayGenerated == true
+                        ? Column(children: [
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -36,22 +39,20 @@ class BirthdayMessageScreen extends StatelessWidget {
                       ButtonCommon(
                           title: appFonts.endBirthdayMessage,
                           onTap: () => birthdayCtrl.endNameSuggestion()),
-                const VSpace(Sizes.s30),
-                const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
+                      const VSpace(Sizes.s30),
+                      const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                     ]).paddingSymmetric(
-                      vertical: Insets.i30, horizontal: Insets.i20)
-                  : Stack(
-                    children: [
-                      Column(children: [
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                        vertical: Insets.i30, horizontal: Insets.i20)
+                        : Column(children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             textCommon.outfitSemiBoldPrimary16(
                                 text: appFonts.aSpecialDay),
                             const VSpace(Sizes.s15),
                             Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
                                   textCommon.outfitSemiBoldTxt14(
                                       text: appFonts.sendBirthdayWishes),
                                   const VSpace(Sizes.s10),
@@ -73,20 +74,27 @@ class BirthdayMessageScreen extends StatelessWidget {
                                       onTap: () => birthdayCtrl.onLanguageSheet())
                                 ])
                                 .paddingSymmetric(
-                                    vertical: Insets.i20, horizontal: Insets.i15)
+                                vertical: Insets.i20, horizontal: Insets.i15)
                                 .authBoxExtension(),
                             const VSpace(Sizes.s30),
                             ButtonCommon(
                                 title: appFonts.generateGoodWishes,
                                 onTap: () => birthdayCtrl.onTapWishesGenerate()),
-                                const VSpace(Sizes.s30),
-                                const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
+                            const VSpace(Sizes.s30),
+                            const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
                           ])
-                        ]).paddingSymmetric(
-                          vertical: Insets.i30, horizontal: Insets.i20),
-                      if(birthdayCtrl.isLoader == true) const LoaderLayout()
-                    ]
-                  )),
+                    ]).paddingSymmetric(
+                        vertical: Insets.i30, horizontal: Insets.i20),
+                  ),
+                  if(birthdayCtrl.isBirthdayGenerated == false)
+                    AdCommonLayout(
+                        bannerAd: birthdayCtrl.bannerAd,
+                        bannerAdIsLoaded: birthdayCtrl.bannerAdIsLoaded,
+                        currentAd: birthdayCtrl.currentAd),
+                  if(birthdayCtrl.isLoader == true) const LoaderLayout()
+                ],
+
+              )),
         ),
       );
     });

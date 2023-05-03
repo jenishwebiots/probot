@@ -20,6 +20,7 @@ class AddApiKeyController extends GetxController {
                 appCtrl.storage.remove(session.chatGPTKey);
                 appCtrl.storage.write(session.isChatGPTKey, false);
                 appCtrl.isLocalChatApi = false;
+                Get.back();
                 appCtrl.update();
               },
               crossOnTap: () {
@@ -27,20 +28,19 @@ class AddApiKeyController extends GetxController {
                 appCtrl.storage.write(session.isChatGPTKey, false);
                 appCtrl.isLocalChatApi = false;
                 appCtrl.update();
-                Get.toNamed(routeName.addApiKeyScreen);
+                Get.back();
               });
         });
   }
 
   addApiKeyInLocal() {
-    ApiServices.chatCompeletionResponse("ChatGpt").then((value) {
+    ApiServices.chatCompeletionResponse("ChatGpt",addApiKey: apiController.text).then((value) {
       if (value != "") {
         appCtrl.storage.write(session.chatGPTKey, apiController.text);
         appCtrl.storage.write(session.isChatGPTKey, true);
         appCtrl.isLocalChatApi = true;
         appCtrl.update();
         Get.toNamed(routeName.manageApiKeyScreen);
-
       } else {
         snackBarMessengers(
           message: appFonts.invalidApiKey.tr,

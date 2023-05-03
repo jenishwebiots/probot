@@ -47,6 +47,11 @@ class FarewellMessageScreen extends StatelessWidget {
                                 ]).paddingSymmetric(
                               horizontal: Insets.i20, vertical: Insets.i30)
                           : const FarewellMessageLayout()),
+                  if(farewellCtrl.isMessageGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: farewellCtrl.bannerAd,
+                        bannerAdIsLoaded: farewellCtrl.bannerAdIsLoaded,
+                        currentAd: farewellCtrl.currentAd),
                   if(farewellCtrl.isLoader == true) const LoaderLayout()
                 ],
               )),

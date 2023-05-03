@@ -44,6 +44,11 @@ class GetWellMessageScreen extends StatelessWidget {
                             ]).paddingSymmetric(
                               vertical: Insets.i30, horizontal: Insets.i20)
                           : const GetWellMessageLayout()),
+                  if(getCtrl.isWellMessageGenerated == false)
+                    AdCommonLayout(
+                        bannerAd: getCtrl.bannerAd,
+                        bannerAdIsLoaded: getCtrl.bannerAdIsLoaded,
+                        currentAd: getCtrl.currentAd),
                   if(getCtrl.isLoader == true) const LoaderLayout()
                 ]
               )),

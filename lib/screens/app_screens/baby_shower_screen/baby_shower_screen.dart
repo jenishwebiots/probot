@@ -49,6 +49,11 @@ class BabyShowerScreen extends StatelessWidget {
                                 ]).paddingSymmetric(
                               horizontal: Insets.i20, vertical: Insets.i30)
                           : const BabyShowerLayout()),
+                  if(babyShowerCtrl.isMessageGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: babyShowerCtrl.bannerAd,
+                        bannerAdIsLoaded: babyShowerCtrl.bannerAdIsLoaded,
+                        currentAd: babyShowerCtrl.currentAd),
                   if(babyShowerCtrl.isLoader == true) const LoaderLayout()
                 ],
               )),

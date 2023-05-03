@@ -47,6 +47,11 @@ class FathersDayWishesScreen extends StatelessWidget {
                                 ]).paddingSymmetric(
                               horizontal: Insets.i20, vertical: Insets.i30)
                           : const FathersDayWishesLayout()),
+                  if(fatherCtrl.isWishesGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: fatherCtrl.bannerAd,
+                        bannerAdIsLoaded: fatherCtrl.bannerAdIsLoaded,
+                        currentAd: fatherCtrl.currentAd),
                   if(fatherCtrl.isLoader == true) const LoaderLayout()
                 ],
               )),

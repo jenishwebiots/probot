@@ -47,10 +47,15 @@ class MothersDayWishesScreen extends StatelessWidget {
                                 ]).paddingSymmetric(
                               horizontal: Insets.i20, vertical: Insets.i30)
                           : const MothersDayWishesLayout()),
+                  if(motherDayCtrl.isWishesGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: motherDayCtrl.bannerAd,
+                        bannerAdIsLoaded: motherDayCtrl.bannerAdIsLoaded,
+                        currentAd: motherDayCtrl.currentAd),
                   if(motherDayCtrl.isLoader == true) const LoaderLayout()
-                ],
-              )),
-        ),
+                ]
+              ))
+        )
       );
     });
   }

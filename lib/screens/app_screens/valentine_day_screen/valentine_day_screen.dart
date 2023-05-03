@@ -49,6 +49,11 @@ class ValentineDayScreen extends StatelessWidget {
                             ]).paddingSymmetric(
                               vertical: Insets.i30, horizontal: Insets.i20)
                           : const ValentineDayLayout()),
+                  if(valCtrl.isValentineGenerate == false)
+                    AdCommonLayout(
+                        bannerAd: valCtrl.bannerAd,
+                        bannerAdIsLoaded: valCtrl.bannerAdIsLoaded,
+                        currentAd: valCtrl.currentAd),
                   if(valCtrl.isLoader == true) const LoaderLayout()
                 ],
               )),
