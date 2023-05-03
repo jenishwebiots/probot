@@ -31,7 +31,7 @@ class SplashController extends GetxController {
       if (value.docs.isNotEmpty) {
         appCtrl.firebaseConfigModel =
             FirebaseConfigModel.fromJson(value.docs[0].data());
-        Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
+        //Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
         appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;
         appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;
         appCtrl.storage.write(session.isRTL, appCtrl.isRTL);
@@ -93,7 +93,7 @@ class SplashController extends GetxController {
     } else {
       appCtrl.storage.write(session.isAnySubscribe, false);
       log("appCtrl.envConfig : ${appCtrl.envConfig}");
-      appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;
+      /*appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;*/
       appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
     }
     appCtrl.update();

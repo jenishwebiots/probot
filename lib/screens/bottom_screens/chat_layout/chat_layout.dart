@@ -79,7 +79,11 @@ class ChatLayout extends StatelessWidget {
                                                   .width(MediaQuery.of(context)
                                                       .size
                                                       .width),*/
-                                      AdCommonLayout(),
+                                      AdCommonLayout(
+                                          bannerAd: chatCtrl.bannerAd,
+                                          bannerAdIsLoaded:
+                                          chatCtrl.bannerAdIsLoaded,
+                                          currentAd: chatCtrl.currentAd),
                                       Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
                                               style: AppCss.outfitMedium14
                                                   .textColor(

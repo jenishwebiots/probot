@@ -6,6 +6,7 @@ import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/bot_api/api_services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:probot/screens/bottom_screens/chat_layout/layouts/suggestion_list.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:probot/models/quiestions_suggestion_model.dart';
 import '../../config.dart';
@@ -18,6 +19,7 @@ import '../../screens/bottom_screens/chat_layout/layouts/pre_build_questions_lay
 class ChatLayoutController extends GetxController
     with GetSingleTickerProviderStateMixin {
   dynamic data;
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   int index = 0;
@@ -423,7 +425,15 @@ class ChatLayoutController extends GetxController
               Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
         }
       }
-      argImage = Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      log("ARG : ${Get.arguments["avatar"]}");
+      if (Get.arguments["avatar"].contains("assets")) {
+        argImage = appCtrl.selectedCharacter["image"];
+        log("ARG : $argImage}");
+      } else {
+        argImage =
+            Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      }
+      log("argImage : $argImage");
       update();
     } else {
       log("MESSAGE : ${appCtrl.selectedCharacter}");
@@ -513,6 +523,7 @@ class ChatLayoutController extends GetxController
     }
     update();
   }
+
 
   //process for chat
   processChat() async {
@@ -883,52 +894,7 @@ class ChatLayoutController extends GetxController
       backgroundColor: appCtrl.appTheme.white,
       StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         return GetBuilder<ChatLayoutController>(builder: (_) {
-          return SizedBox(
-                  child: SingleChildScrollView(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(appFonts.questionSuggestion.tr,
-                          style: AppCss.outfitSemiBold20
-                              .textColor(appCtrl.appTheme.txt)),
-                      SvgPicture.asset(eSvgAssets.cross)
-                          .inkWell(onTap: () => Get.back())
-                    ]),
-                const DottedLines().paddingSymmetric(vertical: Insets.i20),
-                SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                        children: questionsSuggestionList
-                            .asMap()
-                            .entries
-                            .map((e) => SuggestionLayout(
-                                data: e.value,
-                                selectIndex: selectIndex,
-                                index: e.value["id"],
-                                onTap: () => onSuggestionChange(e.value)))
-                            .toList())),
-                const VSpace(Sizes.s20),
-                Text(appFonts.preBuildQuestions,
-                    style:
-                        AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
-                const VSpace(Sizes.s15),
-                ...questionsLists
-                    .asMap()
-                    .entries
-                    .map((e) => Column(
-                        children: e.value.preBuildQuestions
-                            .asMap()
-                            .entries
-                            .map<Widget>((s) => selectIndex == e.value.id
-                                ? PreBuildQuestionsLayout(data: s.value)
-                                : Container())
-                            .toList()))
-                    .toList()
-              ])))
-              .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i20);
+          return const SuggestionList();
         });
       }),
       shape: const RoundedRectangleBorder(

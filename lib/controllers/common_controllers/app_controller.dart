@@ -169,7 +169,7 @@ class AppController extends GetxController {
 
   void loadRewardedVideoAd() {
     FacebookRewardedVideoAd.loadRewardedVideoAd(
-      placementId: appCtrl.firebaseConfigModel!.facebookRewardAd!,
+      placementId: Platform.isAndroid ? appCtrl.firebaseConfigModel!.facebookRewardAd! : appCtrl.firebaseConfigModel!.facebookRewardIOSAd!,
       listener: (result, value) {
         log("Rewarded Ad: $result --> $value");
         if (result == RewardedVideoAdResult.LOADED) isRewardedAdLoaded = true;
@@ -196,22 +196,28 @@ class AppController extends GetxController {
 
   //balance top up
   balanceTopUpDialog() {
-    Get.generalDialog(
-      pageBuilder: (context, anim1, anim2) {
-        return const Align(
-          alignment: Alignment.center,
-          child: BalanceAlertDialog(),
-        );
-      },
-      transitionBuilder: (context, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 300),
-    );
+
+    bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
+    if(isLocalChatApi == false) {
+      Get.generalDialog(
+        pageBuilder: (context, anim1, anim2) {
+          return const Align(
+            alignment: Alignment.center,
+            child: BalanceAlertDialog(),
+          );
+        },
+        transitionBuilder: (context, anim1, anim2, child) {
+          return SlideTransition(
+            position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
+                .animate(anim1),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 300),
+      );
+    }else{
+
+    }
   }
 
   // top up dialog

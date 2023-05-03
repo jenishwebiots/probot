@@ -8,7 +8,7 @@ class PreBuildQuestionsLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        child: Text(data.title.toString().tr,
+        child: Text(data,
             style: AppCss.outfitMedium14
                 .textColor(appCtrl.appTheme.txt))
             .paddingSymmetric(
