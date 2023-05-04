@@ -58,6 +58,7 @@ class EmailGeneratorController extends GetxController {
           writeFromController.clear();
           writeToController.clear();
           generatedMailController.clear();
+          textToSpeechCtrl.onStopTTS();
           isMailGenerated = false;
           Get.back();
           update();
@@ -73,4 +74,15 @@ class EmailGeneratorController extends GetxController {
     // TODO: implement onReady
     super.onReady();
   }
+  @override
+  void dispose() {
+    topicController.clear();
+    writeFromController.clear();
+    writeToController.clear();
+    generatedMailController.clear();
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
 }

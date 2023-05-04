@@ -27,7 +27,7 @@ class ApiServices {
     }else {
       if (localApi == "") {
         // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-        apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+        apiKey = "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";
       } else {
         apiKey = localApi;
       }

@@ -122,6 +122,7 @@ class WeddingWishesController extends GetxController {
           wishGenController.clear();
           relationController.clear();
           nameController.clear();
+          textToSpeechCtrl.onStopTTS();
           selectItem = '';
           langSelectItem = '';
           isWeddingWishGenerate = false;
@@ -269,6 +270,18 @@ class WeddingWishesController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    wishGenController.clear();
+    relationController.clear();
+    nameController.clear();
+    textToSpeechCtrl.onStopTTS();
+    selectItem = '';
+    langSelectItem = '';
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

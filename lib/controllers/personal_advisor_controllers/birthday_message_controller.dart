@@ -117,6 +117,7 @@ class BirthdayMessageController extends GetxController {
           birthdayMessagesGenController.clear();
           birthdayWishGenController.clear();
           nameGenController.clear();
+          textToSpeechCtrl.onStopTTS();
           selectItem = "";
           isBirthdayGenerated = false;
           Get.back();
@@ -216,6 +217,15 @@ class BirthdayMessageController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    birthdayMessagesGenController.clear();
+    birthdayWishGenController.clear();
+    nameGenController.clear();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

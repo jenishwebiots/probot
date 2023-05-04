@@ -119,6 +119,7 @@ class ValentineDayController extends GetxController {
           nameController.clear();
           wishForController.clear();
           selectItem = "";
+          textToSpeechCtrl.onStopTTS();
           isValentineGenerate = false;
           Get.back();
           update();
@@ -218,6 +219,17 @@ class ValentineDayController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    valWishGenController.clear();
+    nameController.clear();
+    wishForController.clear();
+    selectItem = "";
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

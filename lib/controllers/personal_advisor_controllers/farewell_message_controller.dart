@@ -104,6 +104,7 @@ class FarewellMessageController extends GetxController {
         onTap: () {
           nameController.clear();
           relationController.clear();
+          textToSpeechCtrl.onStopTTS();
           isMessageGenerate = false;
           Get.back();
           update();
@@ -154,6 +155,15 @@ class FarewellMessageController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    nameController.clear();
+    relationController.clear();
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

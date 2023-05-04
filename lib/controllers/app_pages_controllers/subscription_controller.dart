@@ -106,7 +106,14 @@ int selectedPrice =0;
                   firebaseCtrl.subscribePlan(
                       subscribeModel: subscribe, paymentMethod: paymentMethod,isBack: isBack);
                 },
-                crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
+                crossOnTap: isBack ? () {
+                  final firebaseCtrl =
+                  Get.isRegistered<SubscriptionFirebaseController>()
+                      ? Get.find<SubscriptionFirebaseController>()
+                      : Get.put(SubscriptionFirebaseController());
+                  firebaseCtrl.subscribePlan(
+                      subscribeModel: subscribe, paymentMethod: paymentMethod,isBack: isBack);
+                } : () => appCtrl.splashDataCheck());
           });
     } on Exception {
       showDialog(
@@ -237,7 +244,7 @@ int selectedPrice =0;
       log("RES: $res");
       log("checkoutUrl: $checkoutUrl");
       log("executeUrl: $executeUrl");
-      Get.to(() => PaypalPayment(subscribe: subscribe,amount: int.parse(amount),url: checkoutUrl));
+      Get.to(() => PaypalPayment(subscribe: subscribe,amount: int.parse(amount),url: checkoutUrl,exUrl: executeUrl,));
     } catch (e) {
       showDialog(
           barrierDismissible: false,
@@ -301,7 +308,14 @@ int selectedPrice =0;
                 firebaseCtrl.subscribePlan(
                     subscribeModel: subscribeModel, paymentMethod: "razor",isBack:isBack);
               },
-              crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
+              crossOnTap: isBack ? () {
+                final firebaseCtrl =
+                Get.isRegistered<SubscriptionFirebaseController>()
+                    ? Get.find<SubscriptionFirebaseController>()
+                    : Get.put(SubscriptionFirebaseController());
+                firebaseCtrl.subscribePlan(
+                    subscribeModel: subscribeModel, paymentMethod: "razor",isBack:isBack);
+              }  : () =>  appCtrl.splashDataCheck());
         });
   }
 

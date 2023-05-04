@@ -222,4 +222,16 @@ class NewYearGreetingController extends GetxController {
     super.onReady();
   }
 
+  @override
+  void dispose() {
+    yearController.clear();
+    sendWishesController.clear();
+    nameController.clear();
+    newYearWishGenController.clear();
+    selectItem = '';
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
 }

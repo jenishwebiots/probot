@@ -31,11 +31,11 @@ class BalanceTopUp extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text("Coin Balance :",
+                Text(appFonts.coinBalance.tr,
                     style: AppCss.outfitMedium14
                         .textColor(appCtrl.appTheme.sameWhite)),
                 Row(children: [
-                  Text("${appCtrl.envConfig["balance"]} Coins",
+                  Text("${appCtrl.envConfig["balance"]} ${appFonts.coin.tr}",
                       style: AppCss.outfitSemiBold16
                           .textColor(appCtrl.appTheme.sameWhite)),
                   const HSpace(Sizes.s6),
@@ -56,7 +56,7 @@ class BalanceTopUp extends StatelessWidget {
                             color: appCtrl.appTheme.primary, size: Sizes.s5),
                         const HSpace(Sizes.s5),
                         Text(
-                          "Get coin accordance to your payment.",
+                          appFonts.getCoinAccordance.tr,
                           style: AppCss.outfitRegular14
                               .textColor(appCtrl.appTheme.primary),
                         )
@@ -68,7 +68,7 @@ class BalanceTopUp extends StatelessWidget {
                           color: appCtrl.appTheme.primary, size: Sizes.s5),
                       const HSpace(Sizes.s5),
                       Text(
-                        "Ex. If you add \$15, you’ll get 15 coins to chat.",
+                        appFonts.exIfYouAdd.tr,
                         style: AppCss.outfitRegular14
                             .textColor(appCtrl.appTheme.primary),
                       )
@@ -87,7 +87,7 @@ class BalanceTopUp extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const VSpace(Sizes.s15),
-                    Text("Select amount :",
+                    Text(appFonts.selectAmount.tr,
                         style: AppCss.outfitSemiBold16
                             .textColor(appCtrl.appTheme.txt)
                             .letterSpace(.4)),
@@ -120,12 +120,12 @@ class BalanceTopUp extends StatelessWidget {
                                               children: <TextSpan>[
                                               TextSpan(
                                                   text:
-                                                      "Get ${e.value["price"]} coins to chat",
+                                                      appFonts.getCoins(e.value["price"].toString()).tr,
                                                   style: AppCss.outfitMedium14
                                                       .textColor(appCtrl
                                                           .appTheme.lightText)),
                                             ]))
-                                      : Text("Add amount manually",
+                                      : Text(appFonts.addAmountManually.tr,
                                           style: AppCss.outfitSemiBold16
                                               .textColor(
                                                   appCtrl.appTheme.primary)),
@@ -165,7 +165,7 @@ class BalanceTopUp extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Add amount",
+                            appFonts.addAmount.tr,
                             style: AppCss.outfitSemiBold16
                                 .textColor(appCtrl.appTheme.txt),
                           ),
@@ -218,8 +218,8 @@ class BalanceTopUp extends StatelessWidget {
                   topUpCtrl.paymentDialog(topUpCtrl.selectedPrice.toString());
                 },
                 title: topUpCtrl.selectedPrice == 0
-                    ? "Pay"
-                    : "Pay ${topUpCtrl.selectedPrice}")
+                    ? appFonts.pay.tr
+                    : "${appFonts.pay.tr} ${topUpCtrl.selectedPrice}")
           ],
         ).marginAll(Insets.i20)),
       );

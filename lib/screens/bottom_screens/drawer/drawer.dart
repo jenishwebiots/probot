@@ -24,26 +24,19 @@ class CommonDrawer extends StatelessWidget {
             Column(children: [
               CachedNetworkImage(
                   imageUrl: appCtrl.firebaseConfigModel!.drawerLogo.toString(),
-                  height: Sizes.s40,
-                  width: Sizes.s40,
-                  fit: BoxFit.fill,
                   imageBuilder: (context, imageProvider) => SizedBox(
-                      height: Sizes.s40,
-                      width: Sizes.s40,
-                      child: Column(children: [
+                          child: Column(children: [
                         Image.network(
-                            appCtrl.firebaseConfigModel!.drawerLogo.toString(),
-                            height: Sizes.s40,
-                            width: Sizes.s40,
-                            fit: BoxFit.fill)
+                            appCtrl.firebaseConfigModel!.drawerLogo.toString())
                       ])),
                   placeholder: (context, url) =>
-                  const CircularProgressIndicator(),
+                      const CircularProgressIndicator(),
                   errorWidget: (context, url, error) => Image.asset(
                       eImageAssets.proBot,
                       height: Sizes.s40,
                       width: Sizes.s40,
-                      fit: BoxFit.fill)),
+                      fit: BoxFit.fill)).paddingSymmetric(
+                  horizontal: Insets.i40, vertical: Insets.i20),
               DottedLine(
                       direction: Axis.horizontal,
                       lineLength: double.infinity,
@@ -51,7 +44,6 @@ class CommonDrawer extends StatelessWidget {
                       dashLength: 3,
                       dashColor: appCtrl.appTheme.txt.withOpacity(.2))
                   .marginSymmetric(horizontal: Insets.i20),
-
               ...homeCtrl.drawerList.asMap().entries.map((e) {
                 log("guest: ${appCtrl.isGuestLogin}");
                 return e.value["title"] == "chatBot"

@@ -63,6 +63,7 @@ class NewBabyWishesController extends GetxController {
           babyController.clear();
           relationGenController.clear();
           langSelectItem = '';
+          textToSpeechCtrl.onStopTTS();
           isWishGenerate = false;
           Get.back();
           update();
@@ -123,5 +124,16 @@ class NewBabyWishesController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    babyController.clear();
+    relationGenController.clear();
+    langSelectItem = '';
+    textToSpeechCtrl.onStopTTS();
+    isWishGenerate = false;
+    // TODO: implement dispose
+    super.dispose();
   }
 }

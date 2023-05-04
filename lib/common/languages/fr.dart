@@ -792,4 +792,12 @@ final dynamic fr = {
   'inputApiKey': "Saisir la clé API",
   'planPeriod': "Période du forfait :",
   'balanceNote': "Après avoir ajouté votre clé API, vous ne pouvez pas accéder au solde dans toute l'application",
+  'getCoins': "Obtenez des pièces @totalCoins pour discuter",
+  'coinBalance': "Solde en pièces :",
+  'coin': "Pièces de monnaie",
+  'getCoinAccordance': "Obtenez des pièces conformément à votre paiement.",
+  'exIfYouAdd': "Ex. Si vous ajoutez \$15, vous obtiendrez 15 pièces pour discuter.",
+  'selectAmount': "Sélectionnez le montant :",
+  'addAmountManually': "Ajouter le montant manuellement",
+  'addAmount': "Ajouter un montant",
 };

@@ -156,7 +156,10 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
 
   @override
   void dispose() {
-
+    captionController.clear();
+    musicGeneratedController.clear();
+    hashtagController.clear();
+    textToSpeechCtrl.onStopTTS();
     animationController!.dispose();
     super.dispose();
   }
@@ -242,6 +245,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
         subTitle: appFonts.areYouSureEndCodeGenerator,
         onTap: () {
           captionController.clear();
+          textToSpeechCtrl.onStopTTS();
           isCaptionGenerated = false;
           Get.back();
           update();
@@ -351,6 +355,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
         subTitle: appFonts.areYouSureEndMusic,
         onTap: () {
           musicGeneratedController.clear();
+          textToSpeechCtrl.onStopTTS();
           isMusicGenerated = false;
           Get.back();
           update();
@@ -364,6 +369,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
         onTap: () {
           hashtagController.clear();
           isHashtagGenerated = false;
+          textToSpeechCtrl.onStopTTS();
           progressValue = 0.0;
           Get.back();
           update();
@@ -483,11 +489,6 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
     super.onReady();
   }
 
-  @override
-  void onClose() {
-    animationController!.dispose();
-    // TODO: implement onClose
-    super.onClose();
-  }
+
 
 }

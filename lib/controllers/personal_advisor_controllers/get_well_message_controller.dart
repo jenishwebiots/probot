@@ -109,6 +109,7 @@ class GetWellMessageController extends GetxController {
           wellWishesGenController.clear();
           relationGenController.clear();
           whatHappenController.clear();
+          textToSpeechCtrl.onStopTTS();
               isWellMessageGenerated = false;
           Get.back();
           update();
@@ -159,6 +160,16 @@ class GetWellMessageController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    wellGenController.clear();
+    wellWishesGenController.clear();
+    relationGenController.clear();
+    whatHappenController.clear();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

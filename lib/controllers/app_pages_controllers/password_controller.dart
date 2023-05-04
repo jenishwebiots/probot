@@ -57,6 +57,8 @@ class PasswordController extends GetxController {
                 value = 11;
                 strengthValue = 0;
                 selectedIndex = 0;
+                textToSpeechCtrl.onStopTTS();
+                passwordController.clear();
                 isPasswordGenerated = false;
                 Get.back();
                 update();
@@ -169,5 +171,15 @@ class PasswordController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    value = 11;
+    strengthValue = 0;
+    selectedIndex = 0;
+    passwordController.clear();
+    // TODO: implement dispose
+    super.dispose();
   }
 }

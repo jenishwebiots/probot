@@ -104,6 +104,7 @@ class BabyShowerController extends GetxController {
         onTap: () {
           coupleController.clear();
           relationController.clear();
+          textToSpeechCtrl.onStopTTS();
           isMessageGenerate = false;
           Get.back();
           update();
@@ -154,6 +155,15 @@ class BabyShowerController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    coupleController.clear();
+    relationController.clear();
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

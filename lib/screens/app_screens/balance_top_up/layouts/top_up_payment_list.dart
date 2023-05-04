@@ -201,6 +201,47 @@ class TopUpPaymentList extends StatelessWidget {
                                       inAppCtrl.inAppPurchase.buyNonConsumable(
                                           purchaseParam: purchaseParam);
                                     }
+                                    final Stream<List<PurchaseDetails>>
+                                        purchaseUpdated =
+                                        inAppCtrl.inAppPurchase.purchaseStream;
+                                    inAppCtrl.subscription = purchaseUpdated
+                                        .listen((List<PurchaseDetails>
+                                            purchaseDetailsList) async {
+                                      for (final PurchaseDetails purchaseDetails
+                                          in purchaseDetailsList) {
+                                        if (purchaseDetails.status ==
+                                            PurchaseStatus.pending) {
+                                          inAppCtrl.showPendingUI();
+                                        } else {
+                                          if (purchaseDetails.status ==
+                                              PurchaseStatus.error) {
+                                            inAppCtrl.handleError(
+                                                purchaseDetails.error!);
+                                          } else if (purchaseDetails.status ==
+                                                  PurchaseStatus.purchased ||
+                                              purchaseDetails.status ==
+                                                  PurchaseStatus.restored) {
+                                            final bool valid =
+                                                await inAppCtrl.verifyPurchase(
+                                                    purchaseDetails);
+                                            if (valid) {
+                                              inAppCtrl.deliverProduct(
+                                                  purchaseDetails,
+                                                  amount: data,
+                                                  isSubscribe: false);
+                                            } else {
+                                              inAppCtrl.handleInvalidPurchase(
+                                                  purchaseDetails);
+                                              return;
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }, onDone: () {
+                                      inAppCtrl.subscription.cancel();
+                                    }, onError: (Object error) {
+                                      // handle error here.
+                                    });
                                   }
                                 },
                                 title: appFonts.apply))
@@ -220,16 +261,14 @@ class TopUpPaymentList extends StatelessWidget {
 
     if (productDetails.id == kConsumableId &&
         purchases[kConsumableId] != null) {
-      oldSubscription =
-      purchases[kConsumableId]! as GooglePlayPurchaseDetails;
+      oldSubscription = purchases[kConsumableId]! as GooglePlayPurchaseDetails;
     } else if (productDetails.id == kUpgradeId &&
         purchases[kUpgradeId] != null) {
-      oldSubscription =
-      purchases[kUpgradeId]! as GooglePlayPurchaseDetails;
-    }else if (productDetails.id == kSilverSubscriptionId &&
+      oldSubscription = purchases[kUpgradeId]! as GooglePlayPurchaseDetails;
+    } else if (productDetails.id == kSilverSubscriptionId &&
         purchases[kSilverSubscriptionId] != null) {
       oldSubscription =
-      purchases[kSilverSubscriptionId]! as GooglePlayPurchaseDetails;
+          purchases[kSilverSubscriptionId]! as GooglePlayPurchaseDetails;
     }
     return oldSubscription;
   }

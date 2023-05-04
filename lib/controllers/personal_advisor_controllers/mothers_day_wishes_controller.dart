@@ -101,6 +101,7 @@ class MothersDayWishesController extends GetxController {
         onTap: () {
           motherController.clear();
           relationController.clear();
+          textToSpeechCtrl.onStopTTS();
           isWishesGenerate = false;
           Get.back();
           update();
@@ -151,6 +152,15 @@ class MothersDayWishesController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    motherController.clear();
+    relationController.clear();
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

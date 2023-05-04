@@ -102,6 +102,7 @@ class PromotionWishesController extends GetxController {
         onTap: () {
           relationController.clear();
           nameController.clear();
+          textToSpeechCtrl.onStopTTS();
           isWishesGenerate = false;
           Get.back();
           update();
@@ -152,6 +153,15 @@ class PromotionWishesController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    relationController.clear();
+    nameController.clear();
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

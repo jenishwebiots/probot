@@ -6,6 +6,8 @@ class AddApiKeyController extends GetxController {
   TextEditingController apiController = TextEditingController();
   GlobalKey<FormState> addApiGlobalKey = GlobalKey<FormState>();
 
+
+
   onRemoveKey() {
     showDialog(
         barrierDismissible: false,
@@ -40,7 +42,7 @@ class AddApiKeyController extends GetxController {
         appCtrl.storage.write(session.isChatGPTKey, true);
         appCtrl.isLocalChatApi = true;
         appCtrl.update();
-        Get.toNamed(routeName.manageApiKeyScreen);
+        Get.toNamed(routeName.manageApiKeyScreen,arguments: false);
       } else {
         snackBarMessengers(
           message: appFonts.invalidApiKey.tr,

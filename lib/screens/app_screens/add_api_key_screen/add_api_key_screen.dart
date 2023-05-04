@@ -2,6 +2,7 @@ import '../../../config.dart';
 
 class AddApiKeyScreen extends StatelessWidget {
   final apiCtrl = Get.put(AddApiKeyController());
+ final GlobalKey<ScaffoldState> apiScaffoldKey = GlobalKey<ScaffoldState>();
 
   AddApiKeyScreen({Key? key}) : super(key: key);
 
@@ -15,6 +16,7 @@ class AddApiKeyScreen extends StatelessWidget {
         },
         child: DirectionalityRtl(
           child: Scaffold(
+            key: apiScaffoldKey,
               backgroundColor: appCtrl.appTheme.bg1,
               appBar: AppAppBarCommon(
                   title: appFonts.addApiKey, leadingOnTap: () => Get.toNamed(routeName.dashboard)),
@@ -43,9 +45,11 @@ class AddApiKeyScreen extends StatelessWidget {
                               style: AppCss.outfitMedium16
                                   .textColor(appCtrl.appTheme.primary)),
                           const VSpace(Sizes.s15),
-                          ApiNotesLayout(title: appFonts.yourMobileDevices),
+                          ApiNotesLayout(title: appFonts.yourMobileDevices.tr),
                           const VSpace(Sizes.s25),
-                          ApiNotesLayout(title: appFonts.youCanKeep)
+                          ApiNotesLayout(title: appFonts.youCanKeep.tr),
+                          const VSpace(Sizes.s25),
+                          ApiNotesLayout(title: appFonts.balanceNote.tr)
                         ],
                       ).paddingSymmetric(horizontal: Insets.i15)
                     ]).paddingSymmetric(vertical: Insets.i20).authBoxExtension(),

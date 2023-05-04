@@ -97,6 +97,7 @@ class NearbyPointsController extends GetxController {
           update();
           nearbyController.text = '';
           isLoader = false;
+
           isNearbyPointsGenerated = true;
           update();
         });
@@ -209,6 +210,7 @@ class NearbyPointsController extends GetxController {
               subTitle: appFonts.areYouSureEndTravelling,
               endOnTap: () {
                 nearbyController.clear();
+                textToSpeechCtrl.onStopTTS();
                 isNearbyPointsGenerated = false;
                 Get.back();
                 update();
@@ -271,5 +273,13 @@ class NearbyPointsController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    nearbyController.clear();
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 }

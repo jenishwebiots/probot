@@ -183,6 +183,7 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
         onTap: () {
           codeController.clear();
           onSelect = 'C#';
+          textToSpeechCtrl.onStopTTS();
           isCodeGenerate = false;
           Get.back();
           update();
@@ -296,7 +297,8 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
 
   @override
   void dispose() {
-
+    codeController.clear();
+    textToSpeechCtrl.onStopTTS();
     animationController!.dispose();
     super.dispose();
   }

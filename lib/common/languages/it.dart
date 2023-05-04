@@ -738,5 +738,13 @@ final dynamic it = {
   'inputApiKey': "Immettere la chiave API",
   'planPeriod': "Periodo del piano:",
   'balanceNote': "Dopo aver aggiunto la tua chiave API non puoi accedere al saldo nell'intera app",
+  'getCoins': "Ottieni monete @totalCoins per chattare",
+  'coinBalance': "Saldo monete:",
+  'coin': "Monete",
+  'getCoinAccordance': "Ottieni monete conformi al tuo pagamento.",
+  'exIfYouAdd': "Ex. Se aggiungi \$15, otterrai 15 monete per chattare.",
+  'selectAmount': "Seleziona l'importo:",
+  'addAmountManually': "Aggiungi l'importo manualmente",
+  'addAmount': "Aggiungi importo",
 
 };

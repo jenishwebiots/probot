@@ -103,6 +103,7 @@ class FathersDayWishesController extends GetxController {
         onTap: () {
           fatherController.clear();
           relationController.clear();
+          textToSpeechCtrl.onStopTTS();
           isWishesGenerate = false;
           Get.back();
           update();
@@ -153,6 +154,15 @@ class FathersDayWishesController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    fatherController.clear();
+    relationController.clear();
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 
 }

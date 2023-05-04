@@ -8,46 +8,55 @@ class CaptionCreatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
-      return DirectionalityRtl(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: appCtrl.appTheme.bg1,
-            appBar: AppAppBarCommon(
-                title: appFonts.captionCreator, leadingOnTap: () => Get.back()),
-            body: Stack(children: [
-              SingleChildScrollView(
-                  child: socialMediaCtrl.isCaptionGenerated == true
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(appFonts.fantasticSuggestion.tr,
-                                        style: AppCss.outfitBold16.textColor(
-                                            appCtrl.appTheme.primary)),
-                                    const VSpace(Sizes.s15),
-                                    InputLayout(
-                                        hintText: appFonts.typeHere,
-                                        title: appFonts.amazingCaption,
-                                        color: appCtrl.appTheme.white,
-                                        isMax: false,
-                                        text: socialMediaCtrl.captionResponse,
-                                        responseText:
-                                            socialMediaCtrl.captionResponse)
-                                  ]),
-                              const VSpace(Sizes.s30),
-                              ButtonCommon(
-                                  title: appFonts.endCaptionCreator,
-                                  onTap: () => socialMediaCtrl
-                                      .endCaptionGeneratorDialog()),
-                            const VSpace(Sizes.s30),
-                            const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
-                            ]).paddingSymmetric(
-                          vertical: Insets.i30, horizontal: Insets.i20)
-                      : const WithoutCaptionLayout()),
-              if (socialMediaCtrl.isLoader == true) const LoaderLayout()
-            ])),
+      return WillPopScope(
+        onWillPop: () => textToSpeechCtrl.onStopTTS(),
+        child: DirectionalityRtl(
+          child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              backgroundColor: appCtrl.appTheme.bg1,
+              appBar: AppAppBarCommon(
+                  title: appFonts.captionCreator,
+                  leadingOnTap: () {
+                    textToSpeechCtrl.onStopTTS();
+                    Get.back();
+                  }),
+              body: Stack(children: [
+                SingleChildScrollView(
+                    child: socialMediaCtrl.isCaptionGenerated == true
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(appFonts.fantasticSuggestion.tr,
+                                          style: AppCss.outfitBold16.textColor(
+                                              appCtrl.appTheme.primary)),
+                                      const VSpace(Sizes.s15),
+                                      InputLayout(
+                                          hintText: appFonts.typeHere,
+                                          title: appFonts.amazingCaption,
+                                          color: appCtrl.appTheme.white,
+                                          isMax: false,
+                                          text: socialMediaCtrl.captionResponse,
+                                          responseText:
+                                              socialMediaCtrl.captionResponse)
+                                    ]),
+                                const VSpace(Sizes.s30),
+                                ButtonCommon(
+                                    title: appFonts.endCaptionCreator,
+                                    onTap: () => socialMediaCtrl
+                                        .endCaptionGeneratorDialog()),
+                                const VSpace(Sizes.s30),
+                                const AdCommonLayout()
+                                    .backgroundColor(appCtrl.appTheme.error),
+                              ]).paddingSymmetric(
+                            vertical: Insets.i30, horizontal: Insets.i20)
+                        : const WithoutCaptionLayout()),
+                if (socialMediaCtrl.isLoader == true) const LoaderLayout()
+              ])),
+        ),
       );
     });
   }

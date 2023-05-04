@@ -112,6 +112,7 @@ class DistanceAttractionController extends GetxController {
         onTap: () {
           controller.clear();
           isDistanceGenerated = false;
+          textToSpeechCtrl.onStopTTS();
           Get.back();
           update();
         });
@@ -261,5 +262,12 @@ class DistanceAttractionController extends GetxController {
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    controller.clear();
+    // TODO: implement dispose
+    super.dispose();
   }
 }

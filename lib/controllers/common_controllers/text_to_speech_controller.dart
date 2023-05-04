@@ -42,6 +42,7 @@ class TextToSpeechController extends GetxController {
 
   onStopTTS() {
     flutterTts!.stop();
+    Get.back();
     update();
   }
 

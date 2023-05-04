@@ -50,7 +50,7 @@ class InputLayout extends StatelessWidget {
         if (isMax != true)
           Row(children: [
             SvgIconsCommon(icon: eSvgAssets.volume).inkWell(onTap: ()=> textToSpeechCtrl.speechMethod(text!)),
-            SvgIconsCommon(icon: eSvgAssets.share).paddingSymmetric(horizontal: Insets.i10).inkWell(onTap: ()=> Share.share(text!)),
+            SvgIconsCommon(icon: eSvgAssets.share).paddingSymmetric(horizontal: Insets.i10).inkWell(onTap: text!.isNotEmpty ? ()=> Share.share(text!) : () {}),
             SvgIconsCommon(icon: eSvgAssets.copy).inkWell(onTap: ()=> Clipboard.setData(ClipboardData(text: text!))),
           ])
       ]),

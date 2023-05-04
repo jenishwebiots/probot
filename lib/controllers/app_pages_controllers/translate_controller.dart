@@ -203,7 +203,8 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
 
   @override
   void dispose() {
-
+    transController.clear();
+    textToSpeechCtrl.onStopTTS();
     animationController!.dispose();
     super.dispose();
   }
@@ -240,6 +241,7 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
         subTitle: appFonts.areYouSure,
         onTap: () {
           transController.clear();
+          textToSpeechCtrl.onStopTTS();
           isTranslated = false;
           Get.back();
           update();

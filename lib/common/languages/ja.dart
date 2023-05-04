@@ -717,4 +717,12 @@ final dynamic ja = {
   'inputApiKey': "入力 API キー",
   'planPeriod': "計画期間：",
   'balanceNote': "API キーを追加すると、アプリ全体の残高にアクセスできなくなります",
+  'getCoins': "チャットで @totalCoins コインを獲得",
+  'coinBalance': "コイン残高 :",
+  'coin': "コイン",
+  'getCoinAccordance': "あなたの支払いに応じてコインを入手してください。",
+  'exIfYouAdd': "元。 15 ドルを追加すると、チャットで 15 コインを獲得できます。",
+  'selectAmount': "金額を選択 :",
+  'addAmountManually': "金額を手動で追加",
+  'addAmount': "金額を追加",
 };
