@@ -797,4 +797,12 @@ final dynamic ge = {
   'inputApiKey': "Geben Sie den API-Schlüssel ein",
   'planPeriod': "Planzeitraum:",
   'balanceNote': "Nachdem Sie Ihren API-Schlüssel hinzugefügt haben, können Sie nicht auf das Guthaben in der gesamten App zugreifen",
+  'getCoins': "Holen Sie sich @totalCoins-Münzen zum Chatten",
+  'coinBalance': "Coin-Guthaben:",
+  'coin': "Münzen",
+  'getCoinAccordance': "Holen Sie sich Münzübereinstimmung zu Ihrer Zahlung.",
+  'exIfYouAdd': "Ex. Wenn Sie \$15 hinzufügen, erhalten Sie 15 Münzen zum Chatten.",
+  'selectAmount': "Betrag auswählen :",
+  'addAmountManually': "Betrag manuell hinzufügen",
+  'addAmount': "Betrag hinzufügen",
 };

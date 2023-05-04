@@ -45,9 +45,11 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
                 .inkWell(onTap: leadingOnTap),
           ),
           const HSpace(Sizes.s17),
-          Text(title!.tr,
-              style:
-              AppCss.outfitSemiBold22.textColor(appCtrl.appTheme.sameWhite))
+          Expanded(
+            child: Text(title!.tr,overflow: TextOverflow.clip,
+                style:
+                AppCss.outfitSemiBold22.textColor(appCtrl.appTheme.sameWhite))
+          )
         ]));
   }
 

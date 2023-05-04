@@ -171,6 +171,7 @@ class EssayWriterController extends GetxController with GetSingleTickerProviderS
               endOnTap: () {
                 essayController.clear();
                 selectedIndex = 0;
+                textToSpeechCtrl.onStopTTS();
                 isEssayGenerated = false;
                 Get.back();
                 update();
@@ -230,5 +231,14 @@ class EssayWriterController extends GetxController with GetSingleTickerProviderS
     update();
     // TODO: implement onReady
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    essayController.clear();
+    selectedIndex = 0;
+    textToSpeechCtrl.onStopTTS();
+    // TODO: implement dispose
+    super.dispose();
   }
 }

@@ -73,6 +73,7 @@ class AnniversaryMessageController extends GetxController {
           relationController.clear();
           typeOfAnniController.clear();
           messageSendController.clear();
+          textToSpeechCtrl.onStopTTS();
           selectItem = "";
           langSelectItem = '';
           isMessageGenerate = false;
@@ -175,4 +176,17 @@ class AnniversaryMessageController extends GetxController {
               topLeft: Radius.circular(AppRadius.r10))),
     );
   }
+
+  @override
+  void dispose() {
+    wishGenController.clear();
+    relationController.clear();
+    typeOfAnniController.clear();
+    messageSendController.clear();
+    selectItem = "";
+    langSelectItem = '';
+    // TODO: implement dispose
+    super.dispose();
+  }
+
 }

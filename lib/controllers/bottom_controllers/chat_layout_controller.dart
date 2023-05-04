@@ -329,6 +329,10 @@ class ChatLayoutController extends GetxController
       chatId = Get.arguments["chatId"] ??
           DateTime.now().millisecondsSinceEpoch.toString();
       log("RICHTEXT : ${Get.arguments}");
+      argImage =
+          Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      log("ARGS$argImage");
+      update();
       if (Get.arguments["recText"] != null) {
         chatController.text = Get.arguments["recText"];
         update();

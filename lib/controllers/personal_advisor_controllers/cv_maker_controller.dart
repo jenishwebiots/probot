@@ -15,6 +15,17 @@ class CvMakerController extends GetxController {
   String? response;
   bool isLoader = false;
 
+  onClearCv () {
+    nameController.clear();
+    phoneController.clear();
+    mailController.clear();
+    positionController.clear();
+    experienceController.clear();
+    jobController.clear();
+    customController.clear();
+    textToSpeechCtrl.onStopTTS();
+  }
+
   onCvGenerate() {
     if(scaffoldKey.currentState!.validate()) {
     int balance = appCtrl.envConfig["balance"];
@@ -60,9 +71,25 @@ class CvMakerController extends GetxController {
           experienceController.clear();
           jobController.clear();
           customController.clear();
+          textToSpeechCtrl.onStopTTS();
           isCvGenerate = false;
           Get.back();
           update();
         });
   }
+
+  @override
+  void dispose() {
+    nameController.clear();
+    phoneController.clear();
+    mailController.clear();
+    positionController.clear();
+    experienceController.clear();
+    jobController.clear();
+    customController.clear();
+
+    // TODO: implement dispose
+    super.dispose();
+  }
+
 }

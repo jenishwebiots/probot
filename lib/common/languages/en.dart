@@ -738,7 +738,7 @@ final dynamic en = {
   'productName': "Product name",
   'productDescription': "Product description",
   'maxWord': "Max word",
-  'language': "Language",
+
   'greatProduct': "Great product description :",
   'productDetail': "Product detail",
   'endProduct': "End product feature",
@@ -768,5 +768,14 @@ final dynamic en = {
   'somethingWentWrong': "Something went wrong, please try again",
   'refreshing': "Refreshing...",
   'invalidApiKey': "Invalid API Key",
-  'balanceNote': "After adding your API key you cannot access balance in whole app",
+  'balanceNote':
+      "After adding your API key you cannot access balance in whole app",
+  'getCoins': "Get @totalCoins coins to chat",
+  'coinBalance': "Coin Balance :",
+  'coin': "Coins",
+  'getCoinAccordance': "Get coin accordance to your payment.",
+  'exIfYouAdd': "Ex. If you add \$15, you’ll get 15 coins to chat.",
+  'selectAmount': "Select amount :",
+  'addAmountManually': "Add amount manually",
+  'addAmount': "Add amount",
 };

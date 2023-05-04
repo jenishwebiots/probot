@@ -27,7 +27,9 @@ const List<String> _kProductIds = <String>[
   topUp15,
   topUp35,
   topUp65,
-  basicSubPlan9,advanceSubPlan19,advanceSubPlan29
+  basicSubPlan9,
+  advanceSubPlan19,
+  advanceSubPlan29
 ];
 
 class InAppController extends GetxController {
@@ -49,13 +51,13 @@ class InAppController extends GetxController {
         inAppPurchase.purchaseStream;
     subscription =
         purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-      log("LOSY purchaseDetailsList : #$purchaseDetailsList");
-      _listenToPurchaseUpdated(purchaseDetailsList);
-    }, onDone: () {
-      subscription.cancel();
-    }, onError: (Object error) {
-      // handle error here.
-    });
+          log("LOSY purchaseDetailsList : #$purchaseDetailsList");
+          listenToPurchaseUpdated(purchaseDetailsList);
+        }, onDone: () {
+          subscription.cancel();
+        }, onError: (Object error) {
+          // handle error here.
+        });
     initStoreInfo();
     log("subscription : ${subscription.isPaused}");
     super.onReady();
@@ -90,7 +92,7 @@ class InAppController extends GetxController {
     }*/
 
     final ProductDetailsResponse productDetailResponse =
-        await inAppPurchase.queryProductDetails(_kProductIds.toSet());
+    await inAppPurchase.queryProductDetails(_kProductIds.toSet());
     if (productDetailResponse.error != null) {
       queryProductError = productDetailResponse.error!.message;
       log("========================================= ::$queryProductError");
@@ -143,28 +145,58 @@ class InAppController extends GetxController {
     update();
   }
 
-  Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) {
+  Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) {
     // IMPORTANT!! Always verify a purchase before delivering the product.
     // For the purpose of an example, we directly return true.
     return Future<bool>.value(true);
   }
 
-  void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
+  void handleInvalidPurchase(PurchaseDetails purchaseDetails) {
     // handle invalid purchase here if  _verifyPurchase` failed.
   }
 
-  Future<void> deliverProduct(PurchaseDetails purchaseDetails) async {
-    if (purchaseDetails.productID == kConsumableId) {
-      await ConsumableStore.save(purchaseDetails.purchaseID!);
-      final List<String> consumables = await ConsumableStore.load();
-      purchasePending = false;
-      consumablesVal = consumables;
-      update();
+  Future<void> deliverProduct(PurchaseDetails purchaseDetails,
+      {subscribe, isSubscribe = true, amount = 0}) async {
+    if (isSubscribe == true) {
+      if (purchaseDetails.productID == kConsumableId) {
+        await ConsumableStore.save(purchaseDetails.purchaseID!);
+        final List<String> consumables = await ConsumableStore.load();
+        purchasePending = false;
+        consumablesVal = consumables;
+        update();
+      } else if (purchaseDetails.productID == kUpgradeId) {
+        await ConsumableStore.save(purchaseDetails.purchaseID!);
+        final List<String> consumables = await ConsumableStore.load();
+        purchasePending = false;
+        consumablesVal = consumables;
+        update();
+      } else {
+        purchases.add(purchaseDetails);
+        purchasePending = false;
+        update();
+      }
     } else {
-      purchases.add(purchaseDetails);
-      purchasePending = false;
-      update();
+      if (purchaseDetails.productID == topUp15) {
+        await ConsumableStore.save(purchaseDetails.purchaseID!);
+        final List<String> consumables = await ConsumableStore.load();
+        purchasePending = false;
+        consumablesVal = consumables;
+        update();
+      } else if (purchaseDetails.productID == topUp35) {
+        await ConsumableStore.save(purchaseDetails.purchaseID!);
+        final List<String> consumables = await ConsumableStore.load();
+        purchasePending = false;
+        consumablesVal = consumables;
+        update();
+      } else if (purchaseDetails.productID == topUp65) {
+        purchases.add(purchaseDetails);
+        purchasePending = false;
+        update();
+      }
     }
+
+    showSuccessPayment(subscribe, true,
+        isSubscribe: isSubscribe, amount: amount);
     purchases.add(purchaseDetails);
 
     log("purchases : ${purchases.length}");
@@ -172,7 +204,41 @@ class InAppController extends GetxController {
     purchasePending = false;
   }
 
-  Future<void> _listenToPurchaseUpdated(
+  showSuccessPayment(subscribeModel, isBack,
+      {isSubscribe = true, amount}) async {
+    showDialog(
+        barrierDismissible: false,
+        context: Get.context!,
+        builder: (context) {
+          return AlertDialogCommon(
+              image: eImageAssets.paymentSuccess,
+              bText1: appFonts.okay,
+              title: appFonts.paymentSuccess,
+              subtext: appFonts.congratulation,
+              b1OnTap: () {
+                final firebaseCtrl =
+                Get.isRegistered<SubscriptionFirebaseController>()
+                    ? Get.find<SubscriptionFirebaseController>()
+                    : Get.put(SubscriptionFirebaseController());
+                if (isSubscribe) {
+                  firebaseCtrl.subscribePlan(
+                      subscribeModel: subscribeModel,
+                      paymentMethod: "inApp",
+                      isBack: isBack);
+                } else {
+                  firebaseCtrl.subscribePlan(
+                      amountBalance: amount,
+                      isSubscribe: isSubscribe,
+                      paymentMethod: "inApp",
+                      isBack: isBack);
+                }
+              },
+              crossOnTap: () =>
+              isBack ? Get.back() : appCtrl.splashDataCheck());
+        });
+  }
+
+  Future<void> listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     log("purchaseDetailsList : $purchaseDetailsList");
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
@@ -184,11 +250,11 @@ class InAppController extends GetxController {
           handleError(purchaseDetails.error!);
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
             purchaseDetails.status == PurchaseStatus.restored) {
-          final bool valid = await _verifyPurchase(purchaseDetails);
+          final bool valid = await verifyPurchase(purchaseDetails);
           if (valid) {
             deliverProduct(purchaseDetails);
           } else {
-            _handleInvalidPurchase(purchaseDetails);
+            handleInvalidPurchase(purchaseDetails);
             return;
           }
         }

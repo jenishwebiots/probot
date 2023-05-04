@@ -11,7 +11,7 @@ class SubscribeTextBox extends StatelessWidget {
 
       return Column(
         children: [
-          if (appCtrl.envConfig["balance"] != 0)
+          if (appCtrl.envConfig["balance"] != 0 || appCtrl.isLocalChatApi == false || appCtrl.isSubscribe == false )
             Column(
               children: [
                 Text(

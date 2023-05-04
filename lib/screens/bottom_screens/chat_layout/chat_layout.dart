@@ -46,57 +46,24 @@ class ChatLayout extends StatelessWidget {
                                     overscroll.disallowIndicator();
                                     return true;
                                   },
-                                  child: Column(
-                                    children: [
-                                      const VSpace(Sizes.s10),
-                                     /* if (!appCtrl.isSubscribe)
-                                        if (appCtrl
-                                            .firebaseConfigModel!.isAddShow!)
-                                          appCtrl.firebaseConfigModel!
-                                                  .isGoogleAdmobEnable!
-                                              ? (chatCtrl.bannerAd != null &&
-                                                      chatCtrl.bannerAdIsLoaded)
-                                                  ? AdWidget(
-                                                          ad: chatCtrl
-                                                              .bannerAd!)
-                                                      .height(Sizes.s50)
-                                                      .paddingOnly(
-                                                          bottom: Insets.i10)
-                                                      .width(
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width)
-                                                  : Container()
-                                              : Container(
-                                                  alignment:
-                                                      Alignment.topCenter,
-                                                  child: chatCtrl.currentAd,
-                                                )
-                                                  .paddingSymmetric(
-                                                    vertical: Insets.i10,
-                                                    horizontal: Insets.i20,
-                                                  )
-                                                  .width(MediaQuery.of(context)
-                                                      .size
-                                                      .width),*/
-                                      AdCommonLayout(
-                                          bannerAd: chatCtrl.bannerAd,
-                                          bannerAdIsLoaded:
-                                          chatCtrl.bannerAdIsLoaded,
-                                          currentAd: chatCtrl.currentAd),
-                                      Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
-                                              style: AppCss.outfitMedium14
-                                                  .textColor(
-                                                      appCtrl.appTheme.txt))
-                                          .marginOnly(top: Insets.i5),
-                                      const VSpace(Sizes.s13),
-                                      const Expanded(
-                                          flex: 5, child: ChatList()),
-                                      Container(),
-                                      const Expanded(
-                                          flex: 0, child: ChatTextBox()),
-                                    ],
-                                  ).backgroundImage(DecorationImage(
+                                  child: Column(children: [
+                                    const VSpace(Sizes.s10),
+                                    AdCommonLayout(
+                                        bannerAd: chatCtrl.bannerAd,
+                                        bannerAdIsLoaded:
+                                            chatCtrl.bannerAdIsLoaded,
+                                        currentAd: chatCtrl.currentAd),
+                                    Text("Today, ${DateFormat("hh:mm a").format(DateTime.now())}",
+                                            style: AppCss.outfitMedium14
+                                                .textColor(
+                                                    appCtrl.appTheme.txt))
+                                        .marginOnly(top: Insets.i5),
+                                    const VSpace(Sizes.s13),
+                                    const Expanded(flex: 5, child: ChatList()),
+                                    Container(),
+                                    const Expanded(
+                                        flex: 0, child: ChatTextBox())
+                                  ]).backgroundImage(DecorationImage(
                                       image: AssetImage(appCtrl.isTheme
                                           ? chatCtrl.selectedImage == null
                                               ? eImageAssets.dBg1

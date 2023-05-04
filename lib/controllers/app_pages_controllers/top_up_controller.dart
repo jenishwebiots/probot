@@ -106,9 +106,16 @@ class TopUpController extends GetxController {
                           ? Get.find<SubscriptionFirebaseController>()
                           : Get.put(SubscriptionFirebaseController());
                   firebaseCtrl.subscribePlan(
-                      subscribeModel: subscribe, paymentMethod: paymentMethod,isSubscribe: false,amountBalance: amount);
+                      subscribeModel: subscribe, paymentMethod: paymentMethod,isSubscribe: false,amountBalance: amount,isBack: true);
                 },
-                crossOnTap: () => Get.back());
+                crossOnTap: () async {
+                  final firebaseCtrl =
+                  Get.isRegistered<SubscriptionFirebaseController>()
+                      ? Get.find<SubscriptionFirebaseController>()
+                      : Get.put(SubscriptionFirebaseController());
+                  firebaseCtrl.subscribePlan(
+                      subscribeModel: subscribe, paymentMethod: paymentMethod,isSubscribe: false,amountBalance: amount,isBack: true);
+                },);
           });
     } on Exception {
       showDialog(
@@ -241,7 +248,7 @@ class TopUpController extends GetxController {
       log("RES: $res");
       log("checkoutUrl: $checkoutUrl");
       log("executeUrl: $executeUrl");
-      Get.to(() => PaypalPayment(subscribe: subscribe,url: checkoutUrl,amount: int.parse(amount),isSubscribe: false,));
+      Get.to(() => PaypalPayment(subscribe: subscribe,url: checkoutUrl,amount: int.parse(amount),isSubscribe: false,exUrl: executeUrl,));
     } catch (e) {
       showDialog(
           barrierDismissible: false,
@@ -302,9 +309,16 @@ class TopUpController extends GetxController {
                         ? Get.find<SubscriptionFirebaseController>()
                         : Get.put(SubscriptionFirebaseController());
                 firebaseCtrl.subscribePlan(
-                    subscribeModel: subscribeModel, paymentMethod: "razor",isSubscribe: false,amountBalance: txtAmount);
+                    subscribeModel: subscribeModel, paymentMethod: "razor",isSubscribe: false,amountBalance: txtAmount,isBack: true);
               },
-              crossOnTap: () => Get.back());
+              crossOnTap: () {
+                final firebaseCtrl =
+                Get.isRegistered<SubscriptionFirebaseController>()
+                    ? Get.find<SubscriptionFirebaseController>()
+                    : Get.put(SubscriptionFirebaseController());
+                firebaseCtrl.subscribePlan(
+                    subscribeModel: subscribeModel, paymentMethod: "razor",isSubscribe: false,amountBalance: txtAmount,isBack: true);
+              },);
         });
   }
 

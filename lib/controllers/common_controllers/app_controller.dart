@@ -2,8 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/env.dart';
 import 'package:probot/models/category_access_model.dart';
 import 'package:probot/widgets/balance_alert.dart';
@@ -197,8 +195,6 @@ class AppController extends GetxController {
   //balance top up
   balanceTopUpDialog() {
 
-    bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
-    if(isLocalChatApi == false) {
       Get.generalDialog(
         pageBuilder: (context, anim1, anim2) {
           return const Align(
@@ -215,9 +211,7 @@ class AppController extends GetxController {
         },
         transitionDuration: const Duration(milliseconds: 300),
       );
-    }else{
 
-    }
   }
 
   // top up dialog

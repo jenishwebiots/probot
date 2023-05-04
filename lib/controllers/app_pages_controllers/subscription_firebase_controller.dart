@@ -7,10 +7,14 @@ import 'package:probot/config.dart';
 class SubscriptionFirebaseController extends GetxController {
   //subscribe plan
   subscribePlan(
-      {SubscribeModel? subscribeModel, paymentMethod, isSubscribe = true,amountBalance,isBack}) async {
+      {SubscribeModel? subscribeModel,
+      paymentMethod,
+      isSubscribe = true,
+      amountBalance,
+      isBack}) async {
     DateTime now = DateTime.now();
     DateTime? expiryDate;
-    if(isSubscribe == true) {
+    if (isSubscribe == true) {
       if (subscribeModel!.type == "weekly") {
         expiryDate = DateTime(now.year, now.month, now.day + 7);
       } else if (subscribeModel.type == "monthly") {
@@ -18,7 +22,7 @@ class SubscriptionFirebaseController extends GetxController {
       } else {
         expiryDate = DateTime(now.year + 1, now.month, now.day);
       }
-    }else{
+    } else {
       int balance = appCtrl.envConfig["balance"];
       balance = (amountBalance + balance);
       appCtrl.envConfig["balance"] = balance;
@@ -43,12 +47,12 @@ class SubscriptionFirebaseController extends GetxController {
             .set({
           "email": userName,
           "userId": FirebaseAuth.instance.currentUser!.uid,
-          "subscriptionType": subscribeModel!.type,
+          "subscriptionType": isSubscribe ? subscribeModel!.type :"",
           "isExpiry": false,
           "isSubscribe": isSubscribe,
           "createdDate": DateTime.now().millisecondsSinceEpoch,
           "expiryDate": expiryDate,
-          "price": subscribeModel.price!,
+          "price": isSubscribe ? 0 : amountBalance,
           "balance": appCtrl.envConfig["balance"],
           "paymentMethod": paymentMethod,
         }).then((value) {
@@ -63,14 +67,13 @@ class SubscriptionFirebaseController extends GetxController {
           "userId": FirebaseAuth.instance.currentUser!.uid,
           "createdDate": DateTime.now().millisecondsSinceEpoch,
           "expiryDate": expiryDate,
-          "price": isSubscribe ? 0 : subscribeModel!.price!,
-          "isSubscribe":isSubscribe,
+          "price": isSubscribe ? 0 : amountBalance,
+          "isSubscribe": isSubscribe,
           "balance": appCtrl.envConfig["balance"],
           "paymentMethod": paymentMethod,
         }).then((value) {
           isBack ? Get.back() : appCtrl.splashDataCheck();
         });
-
       }
     });
   }
@@ -104,6 +107,7 @@ class SubscriptionFirebaseController extends GetxController {
               }
             });
           });
+          update();
         }
       } else {
         FirebaseFirestore.instance
@@ -111,17 +115,29 @@ class SubscriptionFirebaseController extends GetxController {
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .update({
           "balance": appCtrl.envConfig["balance"],
+        }).then((value) async {
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .get()
+              .then((userVal) {
+            if (userVal.exists) {
+              appCtrl.envConfig["balance"] = userVal.data()!["balance"];
+              appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+              appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
+              update();
+            }
+          });
         });
       }
     });
   }
 
   removeBalance() {
-
     int balance = appCtrl.envConfig["balance"];
-    if(balance == 0){
+    if (balance == 0) {
       appCtrl.balanceTopUpDialog();
-    }else {
+    } else {
       balance = balance - 1;
       appCtrl.envConfig["balance"] = balance;
       log("BALANCE : ${appCtrl.envConfig["balance"]}");

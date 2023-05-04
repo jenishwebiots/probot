@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
                       onTap: () =>
                           homeCtrl.scaffoldKey.currentState!.openDrawer()),
                   const DottedLines(),
-                  if (appCtrl.isSubscribe)
+                  if (appCtrl.isSubscribe == false)
                     Image.asset(eImageAssets.homeBanner)
                         .padding(horizontal: Insets.i20, top: Insets.i15),
                   Expanded(

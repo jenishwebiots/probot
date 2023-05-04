@@ -8,16 +8,21 @@ class GetWellMessageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GetWellMessageController>(builder: (_) {
-      return DirectionalityRtl(
-        child: Form(
-          key: getCtrl.scaffoldKey,
-          child: Scaffold(
-              backgroundColor: appCtrl.appTheme.bg1,
-              resizeToAvoidBottomInset: false,
-              appBar: AppAppBarCommon(
-                  title: appFonts.getWellMessage, leadingOnTap: () => Get.back()),
-              body: Stack(
-                children: [
+      return WillPopScope(
+        onWillPop: () => textToSpeechCtrl.onStopTTS(),
+        child: DirectionalityRtl(
+          child: Form(
+            key: getCtrl.scaffoldKey,
+            child: Scaffold(
+                backgroundColor: appCtrl.appTheme.bg1,
+                resizeToAvoidBottomInset: false,
+                appBar: AppAppBarCommon(
+                    title: appFonts.getWellMessage,
+                    leadingOnTap: () {
+                      textToSpeechCtrl.onStopTTS();
+                      Get.back();
+                    }),
+                body: Stack(children: [
                   SingleChildScrollView(
                       child: getCtrl.isWellMessageGenerated == true
                           ? Column(children: [
@@ -39,14 +44,20 @@ class GetWellMessageScreen extends StatelessWidget {
                               ButtonCommon(
                                   title: appFonts.endWellWishes,
                                   onTap: () => getCtrl.endWellWishes()),
-                        const VSpace(Sizes.s30),
-                        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
+                              const VSpace(Sizes.s30),
+                              const AdCommonLayout()
+                                  .backgroundColor(appCtrl.appTheme.error),
                             ]).paddingSymmetric(
                               vertical: Insets.i30, horizontal: Insets.i20)
                           : const GetWellMessageLayout()),
-                  if(getCtrl.isLoader == true) const LoaderLayout()
-                ]
-              )),
+                  if (getCtrl.isWellMessageGenerated == false)
+                    AdCommonLayout(
+                        bannerAd: getCtrl.bannerAd,
+                        bannerAdIsLoaded: getCtrl.bannerAdIsLoaded,
+                        currentAd: getCtrl.currentAd),
+                  if (getCtrl.isLoader == true) const LoaderLayout()
+                ])),
+          ),
         ),
       );
     });
