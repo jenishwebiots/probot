@@ -51,7 +51,7 @@ class WeddingWishesController extends GetxController {
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -99,11 +99,17 @@ class WeddingWishesController extends GetxController {
             "I want to wish ${nameController
                 .text} for wedding to ${relationController
                 .text} in ${selectItem ?? "English"}").then((value) {
-          response = value;
-          update();
-          isLoader = false;
-          isWeddingWishGenerate = true;
-          update();
+                  if (value != "") {
+                    response = value;
+                    update();
+                    isLoader = false;
+                    isWeddingWishGenerate = true;
+                    update();
+                  } else {
+                    isLoader = false;
+                    snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                    update();
+                  }
         });
         wishGenController.clear();
         relationController.clear();
@@ -262,7 +268,7 @@ class WeddingWishesController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });

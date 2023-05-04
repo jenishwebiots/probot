@@ -1,5 +1,7 @@
 
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../config.dart';
@@ -11,7 +13,7 @@ class ChatTextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ChatLayoutController>(builder: (chatCtrl) {
       return GetBuilder<AppController>(builder: (appCtrl) {
-        return StreamBuilder(
+        return   appCtrl.isGuestLogin == true ?const SubscribeTextBox() : StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("userSubscribe")
                 .where("email", isEqualTo: appCtrl.storage.read("userName"))
@@ -21,6 +23,7 @@ class ChatTextBox extends StatelessWidget {
               if (snapShot.hasData) {
                 if (snapShot.data!.docs.isNotEmpty) {
                   if(snapShot.data!.docs[0].data()["isSubscribe"] == true) {
+
                     return const ChatLayoutTextBox();
                   }else{
                     return const SubscribeTextBox();

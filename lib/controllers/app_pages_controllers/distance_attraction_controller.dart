@@ -51,7 +51,7 @@ class DistanceAttractionController extends GetxController {
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -93,12 +93,18 @@ class DistanceAttractionController extends GetxController {
         ApiServices.chatCompeletionResponse(
                 "I m looking place for ${onSelect ?? "Surat"} in ${placeOnSelect ?? "Restaurant"} with Budget of travelling/hangout between ${values.start }thousand to ${values.end }thousand")
             .then((value) {
-          response = value;
-          update();
-          controller.text = '';
-          isLoader = false;
-          isDistanceGenerated = true;
-          update();
+              if (value != "") {
+                response = value;
+                update();
+                controller.text = '';
+                isLoader = false;
+                isDistanceGenerated = true;
+                update();
+              } else {
+                isLoader = false;
+                snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                update();
+              }
         });
         update();
       }
@@ -251,7 +257,7 @@ class DistanceAttractionController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });

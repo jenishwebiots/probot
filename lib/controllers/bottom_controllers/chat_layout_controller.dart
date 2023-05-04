@@ -1,20 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/bot_api/api_services.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:probot/screens/bottom_screens/chat_layout/layouts/suggestion_list.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:probot/models/quiestions_suggestion_model.dart';
 import '../../config.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../screens/bottom_screens/chat_layout/layouts/pre_build_questions_layout.dart';
 
 class ChatLayoutController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -123,7 +116,7 @@ class ChatLayoutController extends GetxController
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
@@ -165,7 +158,12 @@ class ChatLayoutController extends GetxController
     itemCount = 0.obs;
     update();
   }
-
+@override
+  void onClose() {
+  animationController!.dispose();
+    // TODO: implement onClose
+    super.onClose();
+  }
   @override
   void dispose() {
     super.dispose();
@@ -194,18 +192,16 @@ class ChatLayoutController extends GetxController
       placementId: appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
     log("_currentAd : $currentAd");
   }
 
+
   void loadInterstitialAd() {
-    FacebookAudienceNetwork.init(
-      testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
-      iOSAdvertiserTrackingEnabled: true,
-    );
+
 
     FacebookInterstitialAd.loadInterstitialAd(
       placementId: appCtrl.firebaseConfigModel!.facebookInterstitialAd!,
@@ -224,7 +220,7 @@ class ChatLayoutController extends GetxController
     if (isInterstitialAdLoaded == true) {
       FacebookInterstitialAd.showInterstitialAd();
     } else {
-      print("Interstial Ad not yet loaded!");
+      log("Interstial Ad not yet loaded!");
     }
   }
 
@@ -422,6 +418,7 @@ class ChatLayoutController extends GetxController
           }
         }
       } else {
+        log("NO IMAGE FOUND");
         if (Get.arguments["avatar"].contains("assets")) {
           argImage = appCtrl.selectedCharacter["image"];
         } else {

@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/config.dart';
 import 'package:probot/models/category_access_model.dart';
 
@@ -28,7 +25,7 @@ class Home extends StatelessWidget {
                           homeCtrl.scaffoldKey.currentState!.openDrawer()),
                   const DottedLines(),
                   if (appCtrl.isSubscribe == false)
-                    Image.asset(eImageAssets.homeBanner)
+                    Image.asset(eImageAssets.homeBanner).inkWell(onTap: ()=> Get.toNamed(routeName.subscriptionPlanList))
                         .padding(horizontal: Insets.i20, top: Insets.i15),
                   Expanded(
                       child: SingleChildScrollView(
@@ -120,27 +117,9 @@ class Home extends StatelessWidget {
                                 return Container();
                               }
                             }),
-                        const VSpace(Sizes.s50)
+                        const VSpace(Sizes.s70)
                       ]).marginSymmetric(horizontal: Sizes.s20)))
                 ]),
-                /* if (!appCtrl.isSubscribe)
-              if (appCtrl.firebaseConfigModel!.isAddShow!)
-                appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!
-                    ? (homeCtrl.bannerAd != null && homeCtrl.bannerAdIsLoaded)
-                        ? AdWidget(ad: homeCtrl.bannerAd!)
-                            .height(Sizes.s50)
-                            .paddingOnly(bottom: Insets.i10)
-                            .width(MediaQuery.of(context).size.width)
-                        : Container()
-                    : Container(
-                        alignment: Alignment.bottomCenter,
-                        child: homeCtrl.currentAd,
-                      )
-                        .paddingSymmetric(
-                          vertical: Insets.i15,
-                          horizontal: Insets.i20,
-                        )
-                        .width(MediaQuery.of(context).size.width),*/
                 AdCommonLayout(bannerAdIsLoaded: homeCtrl.bannerAdIsLoaded,bannerAd: homeCtrl.bannerAd,currentAd: homeCtrl.currentAd),
               ]),
               backgroundColor: appCtrl.appTheme.bg1));

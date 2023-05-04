@@ -14,7 +14,7 @@ class SomethingWentWrong extends StatelessWidget {
               Image.asset(eImageAssets.notification,
                   height: Sizes.s200, width: Sizes.s200, fit: BoxFit.contain),
               const VSpace(Sizes.s20),
-              Text(appFonts.somethingWentWrong,
+              Text(appFonts.somethingWentWrong.tr,
                   style:
                       AppCss.outfitSemiBold16.textColor(appCtrl.appTheme.txt)),
               const VSpace(Sizes.s20),

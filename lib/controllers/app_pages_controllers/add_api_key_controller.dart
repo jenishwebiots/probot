@@ -4,36 +4,7 @@ import '../../config.dart';
 
 class AddApiKeyController extends GetxController {
   TextEditingController apiController = TextEditingController();
-  GlobalKey<FormState> addApiGlobalKey = GlobalKey<FormState>();
 
-
-
-  onRemoveKey() {
-    showDialog(
-        barrierDismissible: false,
-        context: Get.context!,
-        builder: (context) {
-          return AlertDialogCommon(
-              image: eImageAssets.success,
-              bText1: appFonts.okay,
-              title: appFonts.apiKeyRemoved,
-              subtext: appFonts.yourApiKey,
-              b1OnTap: () {
-                appCtrl.storage.remove(session.chatGPTKey);
-                appCtrl.storage.write(session.isChatGPTKey, false);
-                appCtrl.isLocalChatApi = false;
-                Get.back();
-                appCtrl.update();
-              },
-              crossOnTap: () {
-                appCtrl.storage.remove(session.chatGPTKey);
-                appCtrl.storage.write(session.isChatGPTKey, false);
-                appCtrl.isLocalChatApi = false;
-                appCtrl.update();
-                Get.back();
-              });
-        });
-  }
 
   addApiKeyInLocal() {
     ApiServices.chatCompeletionResponse("ChatGpt",addApiKey: apiController.text).then((value) {
@@ -42,7 +13,7 @@ class AddApiKeyController extends GetxController {
         appCtrl.storage.write(session.isChatGPTKey, true);
         appCtrl.isLocalChatApi = true;
         appCtrl.update();
-        Get.toNamed(routeName.manageApiKeyScreen,arguments: false);
+        Get.back();
       } else {
         snackBarMessengers(
           message: appFonts.invalidApiKey.tr,
@@ -50,4 +21,12 @@ class AddApiKeyController extends GetxController {
       }
     });
   }
+
+  @override
+  void onReady() {
+    update();
+    // TODO: implement onReady
+    super.onReady();
+  }
+
 }

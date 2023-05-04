@@ -14,10 +14,9 @@ class PasswordGeneratorScreen extends StatelessWidget {
           child: Scaffold(
               appBar: AppAppBarCommon(
                   title: appFonts.passwordGenerator,
-                  leadingOnTap: () {
-                    textToSpeechCtrl.onStopTTS();
-                    Get.back();
-                  }),
+                  leadingOnTap: ()=>
+                    textToSpeechCtrl.onStopTTS()
+                   ),
               body: Stack(children: [
                 SingleChildScrollView(
                   child: Column(children: [

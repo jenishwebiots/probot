@@ -48,12 +48,12 @@ class ValentineDayController extends GetxController {
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId:  Platform.isAndroid
+      placementId: Platform.isAndroid
           ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -85,7 +85,7 @@ class ValentineDayController extends GetxController {
   }
 
   onValWishesGenerate() {
-    if(scaffoldKey.currentState!.validate()) {
+    if (scaffoldKey.currentState!.validate()) {
       int balance = appCtrl.envConfig["balance"];
       if (balance == 0) {
         appCtrl.balanceTopUpDialog();
@@ -93,21 +93,27 @@ class ValentineDayController extends GetxController {
         addCtrl.onInterstitialAdShow();
         isLoader = true;
         ApiServices.chatCompeletionResponse(
-            "Write a Valentine's day wish message for ${wishForController
-                .text} from ${nameController.text} in ${selectItem ??
-                "English"}").then((value) {
-          response = value;
-          update();
-          isLoader = false;
-          isValentineGenerate = true;
-          update();
+                "Write a Valentine's day wish message for ${wishForController.text} from ${nameController.text} in ${selectItem ?? "English"}")
+            .then((value) {
+          if (value != "") {
+            response = value;
+            update();
+            isLoader = false;
+            isValentineGenerate = true;
+            update();
+          } else {
+            isLoader = false;
+            snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+            update();
+          }
         });
         valWishGenController.clear();
         nameController.clear();
         wishForController.clear();
         selectItem = "";
         update();
-      }}
+      }
+    }
   }
 
   endValentine() {
@@ -211,7 +217,7 @@ class ValentineDayController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
@@ -231,5 +237,4 @@ class ValentineDayController extends GetxController {
     // TODO: implement dispose
     super.dispose();
   }
-
 }

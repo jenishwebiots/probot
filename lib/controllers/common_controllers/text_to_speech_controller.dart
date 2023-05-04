@@ -1,6 +1,3 @@
-import 'package:flutter_tts/flutter_tts.dart';
-
-
 import '../../config.dart';
 
 class TextToSpeechController extends GetxController {

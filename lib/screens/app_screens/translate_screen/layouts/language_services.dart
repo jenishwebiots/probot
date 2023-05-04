@@ -1,4 +1,3 @@
-import 'package:probot/common/app_array.dart';
 
 class StateService {
 

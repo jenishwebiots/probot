@@ -42,11 +42,17 @@ class CvMakerController extends GetxController {
               .text} ,experience ${experienceController
               .text} and want job for ${jobController
               .text} also want to add ${customController.text}").then((value) {
-        response = value;
-        update();
-        isCvGenerate = true;
-        isLoader = false;
-        update();
+                if (value != "") {
+                  response = value;
+                  update();
+                  isCvGenerate = true;
+                  isLoader = false;
+                  update();
+                } else {
+                  isLoader = false;
+                  snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                  update();
+                }
       });
       nameController.clear();
       phoneController.clear();

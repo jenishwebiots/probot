@@ -18,10 +18,9 @@ class CvMakerScreen extends StatelessWidget {
               key: cvCtrl.scaffoldKey,
               child: Scaffold(
                 backgroundColor: appCtrl.appTheme.bg1,
-                appBar: AppAppBarCommon(title: appFonts.cvMaker,leadingOnTap: (){
-                  textToSpeechCtrl.onStopTTS();
-                  Get.back();
-                }),
+                appBar: AppAppBarCommon(title: appFonts.cvMaker,leadingOnTap: ()=>
+                  textToSpeechCtrl.onStopTTS()
+                 ),
                 body: cvCtrl.isCvGenerate == false ? const CvMakerLayout()
                  : SingleChildScrollView(
                    child: Column(children: [

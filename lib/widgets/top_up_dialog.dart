@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:probot/widgets/common_app_widget.dart';
 
 import '../config.dart';

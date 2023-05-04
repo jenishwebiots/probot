@@ -16,10 +16,9 @@ class EmailGeneratorScreen extends StatelessWidget {
               resizeToAvoidBottomInset: false,
               appBar: AppAppBarCommon(
                   title: appFonts.emailWriter,
-                  leadingOnTap: () {
-                    textToSpeechCtrl.onStopTTS();
-                    Get.back();
-                  }),
+                  leadingOnTap: ()=>
+                    textToSpeechCtrl.onStopTTS()
+                   ),
               body: Stack(
                 children: [
                   SingleChildScrollView(

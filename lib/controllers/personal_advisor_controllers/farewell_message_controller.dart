@@ -1,9 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:get/get.dart';
 import 'package:probot/bot_api/api_services.dart';
-
 import '../../config.dart';
 
 class FarewellMessageController extends GetxController {
@@ -37,12 +34,12 @@ class FarewellMessageController extends GetxController {
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId:  Platform.isAndroid
+      placementId: Platform.isAndroid
           ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -74,27 +71,33 @@ class FarewellMessageController extends GetxController {
   }
 
   onWishesGenerate() {
-    if(scaffoldKey.currentState!.validate()) {
+    if (scaffoldKey.currentState!.validate()) {
       int balance = appCtrl.envConfig["balance"];
-      if(balance == 0){
+      if (balance == 0) {
         appCtrl.balanceTopUpDialog();
-      }else {
+      } else {
         addCtrl.onInterstitialAdShow();
         isLoader = true;
         ApiServices.chatCompeletionResponse(
-            "Write a farewell message to name is ${nameController
-                .text} and relation is ${relationController.text} ").then((
-            value) {
-          response = value;
-          update();
-          isMessageGenerate = true;
-          isLoader = false;
-          update();
+                "Write a farewell message to name is ${nameController.text} and relation is ${relationController.text} ")
+            .then((value) {
+          if (value != "") {
+            response = value;
+            update();
+            isMessageGenerate = true;
+            isLoader = false;
+            update();
+          } else {
+            isLoader = false;
+            snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+            update();
+          }
         });
         nameController.clear();
         relationController.clear();
         update();
-      }}
+      }
+    }
   }
 
   endWishGenerator() {
@@ -147,7 +150,7 @@ class FarewellMessageController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
@@ -165,5 +168,4 @@ class FarewellMessageController extends GetxController {
     // TODO: implement dispose
     super.dispose();
   }
-
 }

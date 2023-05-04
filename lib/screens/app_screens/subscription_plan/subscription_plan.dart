@@ -5,7 +5,6 @@ import '../../../config.dart';
 import '../subscription/layouts/subscription_advantage.dart';
 
 
-DateTime? _myTime;
 class SubscriptionPlan extends StatelessWidget {
   final subscriptionCtrl = Get.isRegistered<SubscriptionController>()
       ? Get.find<SubscriptionController>()

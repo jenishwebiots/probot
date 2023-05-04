@@ -18,10 +18,9 @@ class GetWellMessageScreen extends StatelessWidget {
                 resizeToAvoidBottomInset: false,
                 appBar: AppAppBarCommon(
                     title: appFonts.getWellMessage,
-                    leadingOnTap: () {
-                      textToSpeechCtrl.onStopTTS();
-                      Get.back();
-                    }),
+                    leadingOnTap: ()=>
+                      textToSpeechCtrl.onStopTTS()
+                      ),
                 body: Stack(children: [
                   SingleChildScrollView(
                       child: getCtrl.isWellMessageGenerated == true

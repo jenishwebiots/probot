@@ -61,7 +61,7 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -127,7 +127,7 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
     _getId().then((id) {
       String? deviceId = id;
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
@@ -222,11 +222,19 @@ class TranslateController extends GetxController with GetSingleTickerProviderSta
             "Translate ${transController.text} from ${onFromSelect ??
                 appFonts.english} to ${onToSelect ?? appFonts.hindi} language")
             .then((value) {
-          response = value;
-          update();
-          isTranslated = true;
-          isLoader = false;
-          update();
+              if (value != "") {
+                response = value;
+                update();
+                isTranslated = true;
+                isLoader = false;
+                update();
+              } else {
+                isLoader = false;
+                snackBarMessengers(
+                  message: appFonts.somethingWentWrong.tr
+                );
+                update();
+              }
         });
         update();
       }

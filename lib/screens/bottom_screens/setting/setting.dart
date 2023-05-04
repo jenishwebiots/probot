@@ -1,6 +1,5 @@
 
 import 'package:probot/config.dart';
-import 'package:probot/screens/bottom_screens/setting/layouts/count_layout.dart';
 import 'package:probot/screens/bottom_screens/setting/layouts/setting_user.dart';
 
 class Setting extends StatelessWidget {

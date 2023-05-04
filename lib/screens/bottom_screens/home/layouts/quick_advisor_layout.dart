@@ -63,6 +63,12 @@ class QuickAdvisorLayout extends StatelessWidget {
             Get.toNamed(routeName.personalAdvisorScreen);
           } else if (data["title"] == appFonts.content1) {
             Get.toNamed(routeName.contentWriterScreen);
+          } else {
+            Get.toNamed(routeName.chatLayout);
+            final chatCtrl = Get.isRegistered<ChatLayoutController>()
+                ? Get.find<ChatLayoutController>()
+                : Get.put(ChatLayoutController());
+            chatCtrl.getChatId();
           }
         }),
         SvgPicture.asset(isFavorite ? eSvgAssets.fillStar : selectIndex != null ? selectIndex == index

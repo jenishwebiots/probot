@@ -24,10 +24,9 @@ class BabyNameScreen extends StatelessWidget {
                       appBar: AppAppBarCommon(
                           title: appFonts.babyNameSuggestion,
                           leadingOnTap: () {
-                            textToSpeechCtrl.onStopTTS();
                             babyCtrl.latterController.clear();
                             babyCtrl.generatedNameController.clear();
-                            Get.back();
+                            textToSpeechCtrl.onStopTTS();
                             babyCtrl.update();
                           }),
                       body: Stack(children: [

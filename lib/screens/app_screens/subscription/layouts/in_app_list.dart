@@ -29,6 +29,8 @@ const List<String> _kProductIds = <String>[
 ];
 
 class InAppList extends StatefulWidget {
+  const InAppList({super.key});
+
   @override
   State<InAppList> createState() => InAppListState();
 }

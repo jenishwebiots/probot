@@ -18,10 +18,9 @@ class AnniversaryMessageScreen extends StatelessWidget {
                 resizeToAvoidBottomInset: false,
                 appBar: AppAppBarCommon(
                     title: appFonts.anniversaryMessage,
-                    leadingOnTap: (){
-                      textToSpeechCtrl.onStopTTS();
-                      Get.back();
-                    }),
+                    leadingOnTap: ()=>
+                      textToSpeechCtrl.onStopTTS()
+                      ),
                 body: Stack(
                   children: [
                     SingleChildScrollView(

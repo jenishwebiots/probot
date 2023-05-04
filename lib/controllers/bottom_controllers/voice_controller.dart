@@ -1,8 +1,4 @@
 import 'dart:developer';
-
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-
 import '../../config.dart';
 
 class VoiceController extends GetxController {
@@ -49,7 +45,7 @@ class VoiceController extends GetxController {
               onResult: (val) {
                 log("VAL : ${val.recognizedWords.toString()}");
                 if (isListening.value == false) {
-                  if (val.recognizedWords.toString() != null) {
+                  if (val.recognizedWords.isNotEmpty) {
                     log("+++++++++++++++++++++++++++++++++${val.recognizedWords.toString()}");
                     Get.toNamed(routeName.chatLayout, arguments: {
                       "speechText": val.recognizedWords.toString()
@@ -101,7 +97,7 @@ class VoiceController extends GetxController {
             onResult: (val) {
               log("VAL : ${val.recognizedWords.toString()}");
               if (isListening.value == false) {
-                if (val.recognizedWords.toString() != null) {
+                if (val.recognizedWords.isNotEmpty) {
                   log("+++++++++++++++++++++++++++++++++${val.recognizedWords.toString()}");
                   Get.toNamed(routeName.chatLayout, arguments: {
                     "speechText": val.recognizedWords.toString()

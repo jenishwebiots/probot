@@ -10,7 +10,7 @@ class ApiServices {
 
   static Future<String> chatCompeletionResponse(String prompt,{addApiKey}) async {
     bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
-    if(appCtrl.isSubscribe == false || isLocalChatApi == false) {
+    if(appCtrl.isSubscribe == false || isLocalChatApi == false ) {
       final firebaseCtrl =
       Get.isRegistered<SubscriptionFirebaseController>()
           ? Get.find<SubscriptionFirebaseController>()
@@ -27,7 +27,7 @@ class ApiServices {
     }else {
       if (localApi == "") {
         // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-        apiKey = "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";
+        apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
       } else {
         apiKey = localApi;
       }

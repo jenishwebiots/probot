@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -28,7 +27,7 @@ class CommonStream extends StatelessWidget {
                   .write(session.firebaseConfig, snapshot.data!.docs[0].data());
             }
           }
-          return snapshot.data != null ? child! : const SomethingWentWrong();
+          return child!;
         });
   }
 }

@@ -16,4 +16,6 @@ class Session {
   String categoryConfig = 'categoryConfig';
   String chatGPTKey = 'chatGPTKey';
   String isChatGPTKey = 'isChatGPTKey';
+  String isUserTheme = 'isUserTheme';
+  String isUserThemeChange = 'isUserThemeChange';
 }

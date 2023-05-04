@@ -45,11 +45,17 @@ class AnniversaryMessageController extends GetxController {
                 .text}  for ${selectItem ??
                 "10"} years of togetherness in ${relationController.text}")
             .then((value) {
-          response = value;
-          update();
-          isMessageGenerate = true;
-          isLoader = false;
-          update();
+              if (value != "") {
+                response = value;
+                update();
+                isMessageGenerate = true;
+                isLoader = false;
+                update();
+              } else {
+                isLoader = false;
+                snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                update();
+              }
         });
         wishGenController.clear();
         relationController.clear();

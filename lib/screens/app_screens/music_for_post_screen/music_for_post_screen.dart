@@ -13,10 +13,9 @@ class MusicForPostScreen extends StatelessWidget {
               resizeToAvoidBottomInset: false,
               appBar: AppAppBarCommon(
                   title: appFonts.musicForPost,
-                  leadingOnTap: () {
-                    textToSpeechCtrl.onStopTTS();
-                    Get.back();
-                  }),
+                  leadingOnTap: ()=>
+                    textToSpeechCtrl.onStopTTS()
+                  ),
               body: Stack(children: [
                 SingleChildScrollView(
                   child: socialMediaCtrl.isMusicGenerated == true

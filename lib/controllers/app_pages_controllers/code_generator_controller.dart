@@ -63,7 +63,7 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -131,7 +131,7 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
     String? deviceId = id;
 
     FacebookAudienceNetwork.init(
-      testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+      testingId: deviceId,
       iOSAdvertiserTrackingEnabled: true,
     );
   });
@@ -162,10 +162,18 @@ class CodeGeneratorController extends GetxController with GetSingleTickerProvide
         ApiServices.chatCompeletionResponse(
             "Write a code for ${codeController.text} in ${onSelect ??
                 "C#"} language").then((value) {
-          response = value;
-          isCodeGenerate = true;
-          isLoader = false;
-          update();
+                  if (value != "") {
+                  response = value;
+                  isCodeGenerate = true;
+                  isLoader = false;
+                  update();
+                  } else {
+                    isLoader = false;
+                    snackBarMessengers(
+                      message: appFonts.somethingWentWrong.tr
+                    );
+                    update();
+                  }
         });
         codeController.clear();
         update();

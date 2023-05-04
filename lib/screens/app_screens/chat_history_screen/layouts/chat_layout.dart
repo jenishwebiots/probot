@@ -24,7 +24,7 @@ class ChatHistoryLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatHistoryController>(builder: (chatHistoryCtrl) {
-      log("HISTR L: ${data}");
+      log("HISTR L: $data");
       return SizedBox(
         child: Row(children: [
           Stack(alignment: Alignment.bottomRight, children: [

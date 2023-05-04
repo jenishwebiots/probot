@@ -37,11 +37,17 @@ class NewBabyWishesController extends GetxController {
             "suggest new born baby ${genderLists[selectIndex]['title']} ${babyController
                 .text} message from ${relationGenController
                 .text} in $langOnSelect").then((value) {
-          response = value;
-          update();
-          isWishGenerate = true;
-          isLoader = false;
-          update();
+                  if (value != "") {
+                    response = value;
+                    update();
+                    isWishGenerate = true;
+                    isLoader = false;
+                    update();
+                  } else {
+                    isLoader = false;
+                    snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                    update();
+                  }
         });
         babyController.clear();
         relationGenController.clear();

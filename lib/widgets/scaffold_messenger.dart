@@ -27,7 +27,7 @@ showAlertDialog() {
           ],
 
           content:
-              Text("Your account status is In-Active. Please contact to admin"),
+              const Text("Your account status is In-Active. Please contact to admin"),
         );
       });
 }
