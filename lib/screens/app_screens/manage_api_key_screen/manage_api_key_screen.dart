@@ -1,15 +1,16 @@
 import '../../../config.dart';
+import '../../../controllers/app_pages_controllers/manage_api_controller.dart';
 
 
 class ManageApiKeyScreen extends StatelessWidget {
-  final apiCtrl = Get.put(AddApiKeyController());
+  final manageApiCtrl = Get.put(ManageApiController());
  final GlobalKey<ScaffoldState> manageScaffoldKey = GlobalKey<ScaffoldState>();
    ManageApiKeyScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AddApiKeyController>(
-      builder: (apiCtrl) {
+    return GetBuilder<ManageApiController>(
+      builder: (_) {
         return DirectionalityRtl(
           child: Scaffold(
             key: manageScaffoldKey,
@@ -24,14 +25,14 @@ class ManageApiKeyScreen extends StatelessWidget {
                           const VSpace(Sizes.s10),
                           TextFieldCommon(
                               hintText: appFonts.enterYourApi,
-                              controller: apiCtrl.apiController)
+                              controller: manageApiCtrl.manageApiController)
                         ]).paddingSymmetric(horizontal: Insets.i15),
                         DottedLines(color: appCtrl.appTheme.txt.withOpacity(0.10))
                             .paddingSymmetric(vertical: Insets.i15),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(appFonts.note,
+                            Text(appFonts.note.tr,
                                 style: AppCss.outfitMedium16
                                     .textColor(appCtrl.appTheme.primary)),
                             const VSpace(Sizes.s15),
@@ -42,7 +43,7 @@ class ManageApiKeyScreen extends StatelessWidget {
                       ],
                     ).paddingSymmetric(vertical: Insets.i20).authBoxExtension(),
                 const VSpace(Sizes.s30),
-                ButtonCommon(title: appFonts.removeApiKey,onTap: ()=> apiCtrl.onRemoveKey())
+                ButtonCommon(title: appFonts.removeApiKey,onTap: ()=> manageApiCtrl.onRemoveKey())
               ],
             ).paddingSymmetric(vertical: Insets.i30,horizontal: Insets.i20),
           ),

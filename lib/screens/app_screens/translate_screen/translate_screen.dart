@@ -19,10 +19,7 @@ class TranslateScreen extends StatelessWidget {
               backgroundColor: appCtrl.appTheme.bg1,
               appBar: AppAppBarCommon(
                   title: appFonts.translateAnything,
-                  leadingOnTap: () {
-                    textToSpeechCtrl.onStopTTS();
-                    Get.back();
-                  }),
+                  leadingOnTap: () => textToSpeechCtrl.onStopTTS()),
               body: Stack(children: [
                 Column(children: [
                   Text(appFonts.selectLanguageAnd.tr,

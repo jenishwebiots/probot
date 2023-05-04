@@ -16,10 +16,9 @@ class EssayWriterScreen extends StatelessWidget {
               resizeToAvoidBottomInset: false,
               appBar: AppAppBarCommon(
                   title: appFonts.essayWriting,
-                  leadingOnTap: () {
-                    textToSpeechCtrl.onStopTTS();
-                    Get.back();
-                  }),
+                  leadingOnTap: ()=>
+                    textToSpeechCtrl.onStopTTS()
+                   ),
               body: Stack(
                 children: [
                   essayWriterCtrl.isEssayGenerated == true

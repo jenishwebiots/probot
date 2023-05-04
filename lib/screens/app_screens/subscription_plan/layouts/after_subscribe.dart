@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:figma_squircle/figma_squircle.dart';
-import 'package:intl/intl.dart';
 import 'package:probot/screens/app_screens/subscription_plan/layouts/after_subscribe_ui.dart';
 
 import '../../../../config.dart';

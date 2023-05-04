@@ -58,7 +58,7 @@ class AdController extends GetxController {
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -114,7 +114,7 @@ class AdController extends GetxController {
     if (isInterstitialAdLoaded == true) {
       FacebookInterstitialAd.showInterstitialAd();
     } else {
-      print("Interstial Ad not yet loaded!");
+      log("Interstitial Ad not yet loaded!");
     }
   }
 
@@ -235,7 +235,7 @@ log("BANNER: ${appCtrl.firebaseConfigModel!}");
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });

@@ -1,4 +1,3 @@
-import 'package:vibration/vibration.dart';
 
 import '../../../config.dart';
 
@@ -16,10 +15,9 @@ class CaptionCreatorScreen extends StatelessWidget {
               backgroundColor: appCtrl.appTheme.bg1,
               appBar: AppAppBarCommon(
                   title: appFonts.captionCreator,
-                  leadingOnTap: () {
-                    textToSpeechCtrl.onStopTTS();
-                    Get.back();
-                  }),
+                  leadingOnTap: ()=>
+                    textToSpeechCtrl.onStopTTS()
+                   ),
               body: Stack(children: [
                 SingleChildScrollView(
                     child: socialMediaCtrl.isCaptionGenerated == true

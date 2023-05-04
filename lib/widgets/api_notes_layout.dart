@@ -11,7 +11,7 @@ class ApiNotesLayout extends StatelessWidget {
       const HSpace(Sizes.s12),
       Expanded(
           child: SizedBox(
-              child: Text(title!,
+              child: Text(title!.toString().tr,
                   style: AppCss.outfitMedium14
                       .textColor(appCtrl.appTheme.txt)
                       .textHeight(1.3))))

@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:probot/controllers/common_controllers/ad_controller.dart';
 import '../config.dart';
 

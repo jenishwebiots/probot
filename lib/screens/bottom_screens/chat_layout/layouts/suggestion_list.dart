@@ -15,7 +15,7 @@ class SuggestionList extends StatelessWidget {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List categoryList = snapshot.data!.docs;
+
               return SizedBox(
                   child: SingleChildScrollView(
                       child: Column(

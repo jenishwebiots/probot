@@ -1,10 +1,8 @@
 
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:launch_review/launch_review.dart';
-import 'package:ntp/ntp.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../config.dart';
@@ -98,7 +96,11 @@ class SettingController extends GetxController {
       Get.forceAppUpdate();
       Get.offAllNamed(routeName.signInScreen);
     } else if (data['title'] == "manageApiKey") {
-      Get.toNamed(routeName.addApiKeyScreen);
+   if(appCtrl.isLocalChatApi) {
+     Get.toNamed(routeName.manageApiKeyScreen);
+   } else {
+     Get.toNamed(routeName.addApiKeyScreen);
+   }
     } else if (data['title'] == "shareApp") {
       await Share.share("https://play.google.com/store/apps/details?id=com.webiots.probotgpt");
       update();

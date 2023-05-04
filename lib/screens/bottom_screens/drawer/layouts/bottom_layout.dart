@@ -19,17 +19,29 @@ class BottomLayout extends StatelessWidget {
             style:
             AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
         FlutterSwitch(
-            value: appCtrl.isTheme,
+            value: appCtrl.isUserThemeChange ? appCtrl.isUserTheme : appCtrl.isTheme,
             padding: 4,
             height: Sizes.s20,
             toggleSize: 12,
             inactiveColor: appCtrl.appTheme.txt.withOpacity(.1),
             width: Sizes.s32,
-            onToggle: (val) {
-              appCtrl.isTheme = val;
-              appCtrl.update();
-              ThemeService().switchTheme(appCtrl.isTheme);
-              Get.forceAppUpdate();
+            onToggle: (val) async {
+              appCtrl.storage.write(session.isUserThemeChange, true);
+              appCtrl.isUserThemeChange = true;
+              if(appCtrl.isUserThemeChange ){
+                appCtrl.isUserTheme = val;
+
+                appCtrl.update();
+                ThemeService().switchTheme(appCtrl.isUserTheme);
+                Get.forceAppUpdate();
+              }else {
+                appCtrl.isTheme = val;
+
+                appCtrl.update();
+                ThemeService().switchTheme(appCtrl.isTheme);
+                Get.forceAppUpdate();
+              }
+
             })
       ])
     ]).marginOnly(

@@ -1,14 +1,4 @@
-
-import 'package:probot/screens/app_screens/add_api_key_screen/add_api_key_screen.dart';
 import 'package:probot/screens/app_screens/allow_notification_screen/allow_notification_screen.dart';
-import 'package:probot/widgets/common_web_view.dart';
-import 'package:probot/widgets/no_internet.dart';
-import 'package:probot/screens/app_screens/code_generator_screen/code_generator_screen.dart';
-import 'package:probot/screens/app_screens/music_for_post_screen/music_for_post_screen.dart';
-import 'package:probot/screens/app_screens/personal_advisor_screen/personal_advisor_screen.dart';
-import 'package:probot/screens/app_screens/social_media_screen/social_media_screen.dart';
-
-
 import '../config.dart';
 import '../screens/app_screens/amazon_product_feature_screen/amazon_product_feature_screen.dart';
 import '../screens/app_screens/amazon_product_listing/amazon_product_listing.dart';
@@ -60,7 +50,7 @@ class AppRoute {
         name: _routeName.subscriptionPlan,
         page: () =>  SubscriptionPlan()),
     GetPage(name: _routeName.chatHistory, page: () => ChatHistoryScreen()),
-    GetPage(name: _routeName.inAppList, page: () => InAppList()),
+    GetPage(name: _routeName.inAppList, page: () => const InAppList()),
     GetPage(name: _routeName.quickAdvisor, page: () => QuickAdvisorScreen()),
     GetPage(name: _routeName.translateScreen, page: () =>  TranslateScreen()),
     GetPage(name: _routeName.commonWebView, page: () => const CommonWebView()),
@@ -76,12 +66,12 @@ class AppRoute {
         name: _routeName.socialMediaScreen, page: () => SocialMediaScreen()),
     GetPage(
         name: _routeName.captionCreatorScreen,
-        page: () => CaptionCreatorScreen()),
+        page: () => const CaptionCreatorScreen()),
     GetPage(
-        name: _routeName.musicForPostScreen, page: () => MusicForPostScreen()),
+        name: _routeName.musicForPostScreen, page: () => const MusicForPostScreen()),
     GetPage(
         name: _routeName.hashtagForPostScreen,
-        page: () => HashtagForPostScreen()),
+        page: () => const HashtagForPostScreen()),
     GetPage(
         name: _routeName.passwordGeneratorScreen,
         page: () => PasswordGeneratorScreen()),

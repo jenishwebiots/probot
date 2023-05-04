@@ -11,7 +11,6 @@ import '../../config.dart';
 
 import '../../screens/app_screens/subscription/layouts/paypal_payment.dart';
 import '../../screens/app_screens/subscription/layouts/paypal_services.dart';
-import '../../screens/app_screens/subscription/layouts/razorpay_services.dart';
 
 class TopUpController extends GetxController {
   List<SubscribeModel> subscriptionLists = [];
@@ -405,9 +404,6 @@ class TopUpController extends GetxController {
 
   //currency list
   currencyListDialog() {
-    final subCtrl = Get.isRegistered<SubscriptionController>()
-        ? Get.find<SubscriptionController>()
-        : Get.put(SubscriptionController());
     Get.generalDialog(
       pageBuilder: (context, anim1, anim2) {
         return  Align(

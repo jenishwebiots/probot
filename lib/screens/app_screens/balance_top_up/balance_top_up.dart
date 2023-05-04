@@ -177,6 +177,7 @@ class BalanceTopUp extends StatelessWidget {
                                   topUpCtrl.selectedPrice = 0;
                                 }
                                 topUpCtrl.update();
+                                return null;
                               },
                               onChanged: (val) {
                                 if (val.isNotEmpty) {

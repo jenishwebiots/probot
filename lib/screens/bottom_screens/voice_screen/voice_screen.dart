@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:vibration/vibration.dart';
 
@@ -45,7 +44,7 @@ class VoiceScreen extends StatelessWidget {
                     children: [
                       Image.asset(eImageAssets.voiceImage,
                           height: 260, width: 280, alignment: Alignment.center),
-                      Text(appFonts.pressTheButton,
+                      Text(appFonts.pressTheButton.tr,
                               textAlign: TextAlign.center,
                               style: AppCss.outfitMedium14
                                   .textColor(appCtrl.appTheme.lightText)

@@ -3,7 +3,7 @@ import '../../../config.dart';
 class AddApiKeyScreen extends StatelessWidget {
   final apiCtrl = Get.put(AddApiKeyController());
  final GlobalKey<ScaffoldState> apiScaffoldKey = GlobalKey<ScaffoldState>();
-
+ final GlobalKey<FormState> addApiGlobalKey = GlobalKey<FormState>();
   AddApiKeyScreen({Key? key}) : super(key: key);
 
   @override
@@ -19,14 +19,14 @@ class AddApiKeyScreen extends StatelessWidget {
             key: apiScaffoldKey,
               backgroundColor: appCtrl.appTheme.bg1,
               appBar: AppAppBarCommon(
-                  title: appFonts.addApiKey, leadingOnTap: () => Get.toNamed(routeName.dashboard)),
+                  title: appFonts.addApiKey, leadingOnTap: () => Get.back()),
               body: SingleChildScrollView(
                 child: Form(
-                  key: apiCtrl.addApiGlobalKey,
+                  key: addApiGlobalKey,
                   child: Column(children: [
                     Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(appFonts.addKey,
+                        Text(appFonts.addKey.tr,
                             style: AppCss.outfitMedium18
                                 .textColor(appCtrl.appTheme.primary)),
                         const VSpace(Sizes.s15),
@@ -57,7 +57,7 @@ class AddApiKeyScreen extends StatelessWidget {
                     ButtonCommon(
                         title: appFonts.save,
                         onTap: () {
-                          if(apiCtrl.addApiGlobalKey.currentState!.validate()){
+                          if(addApiGlobalKey.currentState!.validate()){
                             apiCtrl.addApiKeyInLocal();
                           }
                         })

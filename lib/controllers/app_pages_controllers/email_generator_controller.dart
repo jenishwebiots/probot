@@ -27,11 +27,17 @@ class EmailGeneratorController extends GetxController {
                 .text} from ${writeFromController.text} for ${topicController
                 .text} in ${toneLists[selectIndex]} tone")
             .then((value) {
-          response = value;
-          update();
-          isMailGenerated = true;
-          isLoader = false;
-          update();
+              if (value != "") {
+                response = value;
+                update();
+                isMailGenerated = true;
+                isLoader = false;
+                update();
+              } else {
+                isLoader = false;
+                snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                update();
+              }
         });
         topicController.clear();
         writeFromController.clear();

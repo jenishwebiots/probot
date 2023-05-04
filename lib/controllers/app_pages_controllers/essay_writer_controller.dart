@@ -45,7 +45,7 @@ class EssayWriterController extends GetxController with GetSingleTickerProviderS
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -143,10 +143,16 @@ class EssayWriterController extends GetxController with GetSingleTickerProviderS
                 .text} in tone of ${selectedIndex == 0
                 ? "Informative"
                 : selectedIndex == 1 ? "Persuade" : "Analyze"} ").then((value) {
-          response = value;
-          isEssayGenerated = true;
-          isLoader = false;
-          update();
+                  if (value != "") {
+                    response = value;
+                    isEssayGenerated = true;
+                    isLoader = false;
+                    update();
+                  } else {
+                    isLoader = false;
+                    snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                    update();
+                  }
         });
         essayController.clear();
         selectedIndex = 0;
@@ -221,7 +227,7 @@ class EssayWriterController extends GetxController with GetSingleTickerProviderS
     _getId().then((id) {
       String? deviceId = id;
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });

@@ -36,12 +36,12 @@ class BabyShowerController extends GetxController {
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId:  Platform.isAndroid
+      placementId: Platform.isAndroid
           ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -73,7 +73,7 @@ class BabyShowerController extends GetxController {
   }
 
   onWishesGenerate() {
-    if(scaffoldKey.currentState!.validate()) {
+    if (scaffoldKey.currentState!.validate()) {
       int balance = appCtrl.envConfig["balance"];
       if (balance == 0) {
         appCtrl.balanceTopUpDialog();
@@ -81,14 +81,19 @@ class BabyShowerController extends GetxController {
         addCtrl.onInterstitialAdShow();
         isLoader = true;
         ApiServices.chatCompeletionResponse(
-            "Write a baby shower message to ${coupleController
-                .text} from ${relationController.text}")
+                "Write a baby shower message to ${coupleController.text} from ${relationController.text}")
             .then((value) {
-          response = value;
-          update();
-          isLoader = false;
-          isMessageGenerate = true;
-          update();
+          if (value != "") {
+            response = value;
+            update();
+            isLoader = false;
+            isMessageGenerate = true;
+            update();
+          } else {
+            isLoader = false;
+            snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+            update();
+          }
         });
         coupleController.clear();
         relationController.clear();
@@ -147,7 +152,7 @@ class BabyShowerController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
@@ -165,5 +170,4 @@ class BabyShowerController extends GetxController {
     // TODO: implement dispose
     super.dispose();
   }
-
 }

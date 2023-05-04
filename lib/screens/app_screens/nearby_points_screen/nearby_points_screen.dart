@@ -18,10 +18,9 @@ class NearbyPointsScreen extends StatelessWidget {
                   backgroundColor: appCtrl.appTheme.bg1,
                   appBar: AppAppBarCommon(
                       title: appFonts.nearbyPoints,
-                      leadingOnTap: () {
-                        textToSpeechCtrl.onStopTTS();
-                        Get.back();
-                      }),
+                      leadingOnTap: ()=>
+                        textToSpeechCtrl.onStopTTS()
+                       ),
                   body: Stack(children: [
                     SingleChildScrollView(
                         child: nearbyPointCtrl.isNearbyPointsGenerated == false

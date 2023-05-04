@@ -43,7 +43,7 @@ class GetWellMessageController extends GetxController {
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -86,11 +86,17 @@ class GetWellMessageController extends GetxController {
             "get well soon message to ${relationGenController
                 .text} ${wellWishesGenController
                 .text} for ${whatHappenController.text}").then((value) {
-          response = value;
-          update();
-          isLoader = false;
-          isWellMessageGenerated = true;
-          update();
+                  if (value != "") {
+                    response = value;
+                    update();
+                    isLoader = false;
+                    isWellMessageGenerated = true;
+                    update();
+                  } else {
+                    isLoader = false;
+                    snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                    update();
+                  }
         });
         wellGenController.clear();
         wellWishesGenController.clear();
@@ -152,7 +158,7 @@ class GetWellMessageController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });

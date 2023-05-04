@@ -15,10 +15,9 @@ class DistanceAttractionScreen extends StatelessWidget {
               backgroundColor: appCtrl.appTheme.bg1,
               appBar: AppAppBarCommon(
                   title: appFonts.distanceAttraction,
-                  leadingOnTap: () {
-                    textToSpeechCtrl.onStopTTS();
-                    Get.back();
-                  }),
+                  leadingOnTap: ()=>
+                    textToSpeechCtrl.onStopTTS()
+                   ),
               body: Stack(
                 children: [
                   SingleChildScrollView(

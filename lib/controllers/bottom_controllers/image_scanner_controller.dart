@@ -39,7 +39,7 @@ class ImageScannerController extends GetxController {
 
   Widget image(context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+
     if (croppedFile != null) {
       final path = croppedFile!.path;
       return ConstrainedBox(
@@ -95,16 +95,14 @@ class ImageScannerController extends GetxController {
         ],
       );
       scanImage(croppedFileNew!.path, context);
-      if (croppedFileNew != null) {
-        croppedFile = croppedFileNew;
-      }
+      croppedFile = croppedFileNew;
       update();
     }
   }
 
-  Future<void> scanImage(Pickfile, context) async {
+  Future<void> scanImage(pickFile, context) async {
     try {
-      final file = File(Pickfile);
+      final file = File(pickFile);
       final inputImage = InputImage.fromFile(file);
       final recognizedText = await textRecognizer.processImage(inputImage);
       int balance = appCtrl.envConfig["balance"];

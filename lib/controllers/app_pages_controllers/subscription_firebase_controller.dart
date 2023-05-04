@@ -141,9 +141,15 @@ class SubscriptionFirebaseController extends GetxController {
       balance = balance - 1;
       appCtrl.envConfig["balance"] = balance;
       log("BALANCE : ${appCtrl.envConfig["balance"]}");
+
       update();
       if (!appCtrl.isGuestLogin) {
         addUpdateFirebaseData();
+      }else{
+        log("BALANCE : ${appCtrl.envConfig["balance"]}");
+
+        appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+        appCtrl.update();
       }
     }
   }

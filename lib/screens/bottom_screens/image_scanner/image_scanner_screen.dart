@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import '../../../config.dart';
 
@@ -27,7 +26,7 @@ class ImageScannerScreen extends StatelessWidget {
                   style: AppCss.outfitSemiBold22
                       .textColor(appCtrl.appTheme.sameWhite))),
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(appFonts.selectOneOfThe,
+            Text(appFonts.selectOneOfThe.tr,
                 style:
                     AppCss.outfitMedium16.textColor(appCtrl.appTheme.primary)),
             const VSpace(Sizes.s15),
@@ -48,7 +47,7 @@ class ImageScannerScreen extends StatelessWidget {
                 .paddingSymmetric(horizontal: Insets.i15, vertical: Insets.i20)
                 .authBoxExtension(),
             const VSpace(Sizes.s10),
-            Text(appFonts.byScanningAnImage,textAlign: TextAlign.center,style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText).textHeight(1.3))
+            Text(appFonts.byScanningAnImage.tr,textAlign: TextAlign.center,style: AppCss.outfitMedium14.textColor(appCtrl.appTheme.lightText).textHeight(1.3))
             /*imageCtrl.image(context)*/  
           ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20));
     });

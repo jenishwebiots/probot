@@ -50,7 +50,7 @@ class BirthdayMessageController extends GetxController {
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -94,11 +94,17 @@ class BirthdayMessageController extends GetxController {
             "Birthday wish message for ${birthdayWishGenController
                 .text} with ${nameGenController.text} name in ${selectItem ??
                 "Hindi"}").then((value) {
-          response = value;
-          update();
-          isBirthdayGenerated = true;
-          isLoader = false;
-          update();
+                  if (value != "") {
+                    response = value;
+                    update();
+                    isBirthdayGenerated = true;
+                    isLoader = false;
+                    update();
+                  } else {
+                    isLoader = false;
+                    snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                    update();
+                  }
         });
         birthdayMessagesGenController.clear();
         birthdayWishGenController.clear();
@@ -209,7 +215,7 @@ class BirthdayMessageController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });

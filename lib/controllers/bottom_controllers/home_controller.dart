@@ -1,11 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 import '../../config.dart';
 
 class HomeController extends GetxController {
@@ -74,7 +68,7 @@ class HomeController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
@@ -221,7 +215,7 @@ class HomeController extends GetxController {
       placementId: appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();

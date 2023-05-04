@@ -17,10 +17,9 @@ class NewBabyWishesScreen extends StatelessWidget {
                 backgroundColor: appCtrl.appTheme.bg1,
                 appBar: AppAppBarCommon(
                     title: appFonts.newBabyWishes,
-                    leadingOnTap: () {
-                      textToSpeechCtrl.onStopTTS();
-                      Get.back();
-                    }),
+                    leadingOnTap: ()=>
+                      textToSpeechCtrl.onStopTTS()
+                      ),
                 body: Stack(
                   children: [
                     SingleChildScrollView(

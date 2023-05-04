@@ -18,10 +18,9 @@ class PromotionWishesScreen extends StatelessWidget {
                 resizeToAvoidBottomInset: false,
                 appBar: AppAppBarCommon(
                     title: appFonts.promotionWishes,
-                    leadingOnTap: () {
-                      textToSpeechCtrl.onStopTTS();
-                      Get.back();
-                    }),
+                    leadingOnTap: ()=>
+                      textToSpeechCtrl.onStopTTS()
+                     ),
                 body: Stack(
                   children: [
                     SingleChildScrollView(

@@ -26,6 +26,8 @@ class AppController extends GetxController {
   bool isBiometric = false;
   bool isLogin = false;
   bool isChatting = false;
+  bool isUserThemeChange = false;
+  bool isUserTheme = false;
   String languageVal = "en";
   dynamic selectedCharacter;
   final storage = GetStorage();
@@ -36,7 +38,7 @@ class AppController extends GetxController {
   bool isGuestLogin = false;
   bool isNumber = false;
   dynamic currency;
-  dynamic envConfig = environment;
+  dynamic envConfig;
   int characterIndex = 3;
   AdRequest request = const AdRequest(
     keywords: <String>['foo', 'bar'],
@@ -283,15 +285,22 @@ class AppController extends GetxController {
       if (value.docs.isNotEmpty) {
         appCtrl.firebaseConfigModel =
             FirebaseConfigModel.fromJson(value.docs[0].data());
-        if(appCtrl.firebaseConfigModel!.isTheme! !=  appCtrl.isTheme) {
-          appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;
-          appCtrl.update();
-          ThemeService().switchTheme(appCtrl.isTheme);
-          Get.forceAppUpdate();
-          appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
-          appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance;
-          appCtrl.update();
-          appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+
+        if(isUserThemeChange == false) {
+
+          if (appCtrl.firebaseConfigModel!.isTheme! != appCtrl.isTheme) {
+            appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;
+            appCtrl.update();
+            ThemeService().switchTheme(appCtrl.isTheme);
+            Get.forceAppUpdate();
+            appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
+            if(!appCtrl.isGuestLogin) {
+              appCtrl.envConfig["balance"] =
+                  appCtrl.firebaseConfigModel!.balance;
+            }
+            appCtrl.update();
+            appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
+          }
         }
         if( appCtrl.isRTL != appCtrl.firebaseConfigModel!.isRTL!) {
           appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;

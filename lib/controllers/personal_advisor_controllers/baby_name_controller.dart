@@ -51,7 +51,7 @@ class BabyNameSuggestionController extends GetxController {
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -106,15 +106,21 @@ class BabyNameSuggestionController extends GetxController {
             : "Suggest a 10 ${genderLists[selectedIndex!]['title']} name start with ${latterController
             .text}")
             .then((value) {
-          response = value;
-          update();
-          isLoader = false;
-          selectedIndex = 0;
-          selectedNameIndex = 0;
-          selectItem = '';
-          latterController.text = '';
-          isNameGenerate = true;
-          update();
+              if (value != "") {
+                response = value;
+                update();
+                isLoader = false;
+                selectedIndex = 0;
+                selectedNameIndex = 0;
+                selectItem = '';
+                latterController.text = '';
+                isNameGenerate = true;
+                update();
+              } else {
+                isLoader = false;
+                snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+                update();
+              }
         });
         update();
       }
@@ -218,7 +224,7 @@ class BabyNameSuggestionController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });

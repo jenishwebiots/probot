@@ -4,9 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'package:new_version/new_version.dart';
 import 'package:probot/controllers/common_controllers/ad_controller.dart';
 
 import 'package:probot/controllers/common_controllers/in_app_controller.dart';
@@ -50,9 +48,7 @@ class _MyAppState extends State<MyApp> {
                   locale: const Locale('en', 'US'),
                   translations: Language(),
                   fallbackLocale: const Locale('en', 'US'),
-                  home:statusSnapshot.data != ConnectivityResult.none ||
-                      statusSnapshot.data != null
-                      ?const NoInternet() : SplashScreen(),
+                  home:SplashScreen(),
                   title: appFonts.proBot.tr,
                   getPages: appRoute.getPages,
                   debugShowCheckedModeBanner: false);

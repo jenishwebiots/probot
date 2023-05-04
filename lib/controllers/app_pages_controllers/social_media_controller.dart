@@ -6,7 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:probot/bot_api/api_services.dart';
 import '../../config.dart';
 
-class SocialMediaController extends GetxController with GetSingleTickerProviderStateMixin  {
+class SocialMediaController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   TextEditingController captionController = TextEditingController();
   TextEditingController captionGeneratedController = TextEditingController();
   TextEditingController musicGeneratedController = TextEditingController();
@@ -73,7 +74,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
   }
 
   onCaptionGenerate() {
-    if(captionController.text.isNotEmpty ) {
+    if (captionController.text.isNotEmpty) {
       int balance = appCtrl.envConfig["balance"];
       if (balance == 0) {
         appCtrl.balanceTopUpDialog();
@@ -81,14 +82,18 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
         addCtrl.onInterstitialAdShow();
         isLoader = true;
         ApiServices.chatCompeletionResponse(
-            "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController
-                .text} photo for ${values.start} to ${values
-                .end} age targeted audience").then((value) {
-          captionResponse = value;
-          update();
-          isCaptionGenerated = true;
-          isLoader = false;
-          update();
+                "Please give me best ${captionToneLists[selectedIndexTone]['title']} caption Suggestion for ${captionCreatorLists[selectedIndex]['title']} platform for ${captionController.text} photo for ${values.start} to ${values.end} age targeted audience")
+            .then((value) {
+          if (value != "") {
+            captionResponse = value;
+            isCaptionGenerated = true;
+            isLoader = false;
+            update();
+          } else {
+            isLoader = false;
+            snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+            update();
+          }
         });
         update();
       }
@@ -164,30 +169,31 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
     super.dispose();
   }
 
-
   onMusicGenerate() {
-
-      int balance = appCtrl.envConfig["balance"];
-      if (balance == 0) {
-        appCtrl.balanceTopUpDialog();
-      } else {
-        addCtrl.onInterstitialAdShow();
-        isLoader = true;
-        ApiServices.chatCompeletionResponse(
-            "Please give me music Suggestion ${categorySelectItem ??
-                "Classic"} category and in ${selectItem ?? "Hindi"} for post")
-            .then((value) {
-          log("++++++++++++++++======$value");
+    int balance = appCtrl.envConfig["balance"];
+    if (balance == 0) {
+      appCtrl.balanceTopUpDialog();
+    } else {
+      addCtrl.onInterstitialAdShow();
+      isLoader = true;
+      ApiServices.chatCompeletionResponse(
+              "Please give me music Suggestion ${categorySelectItem ?? "Classic"} category and in ${selectItem ?? "Hindi"} for post")
+          .then((value) {
+        log("++++++++++++++++======$value");
+        if (value != "") {
           musicResponse = value;
           update();
           isMusicGenerated = true;
           isLoader = false;
           update();
-        });
-        update();
-      }
-
-
+        } else {
+          isLoader = false;
+          snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+          update();
+        }
+      });
+      update();
+    }
   }
 
   onCaptionToneChange(index) {
@@ -211,7 +217,7 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
   }
 
   onHashtagGenerate() {
-    if(musicGeneratedController.text.isNotEmpty ) {
+    if (musicGeneratedController.text.isNotEmpty) {
       int balance = appCtrl.envConfig["balance"];
       if (balance == 0) {
         appCtrl.balanceTopUpDialog();
@@ -224,13 +230,19 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
         });
         isLoader = true;
         ApiServices.chatCompeletionResponse(
-            "Please give me Hashtag Suggestion for ${hashtagController
-                .text} post").then((value) {
-          hashtagResponse = value;
-          isHashtagGenerated = true;
-          isLoader = false;
-          progressValue = 0.0;
-          update();
+                "Please give me Hashtag Suggestion for ${hashtagController.text} post")
+            .then((value) {
+          if (value != "") {
+            hashtagResponse = value;
+            isHashtagGenerated = true;
+            isLoader = false;
+            progressValue = 0.0;
+            update();
+          } else {
+            isLoader = false;
+            snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+            update();
+          }
         });
         update();
       }
@@ -392,12 +404,12 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId:  Platform.isAndroid
+      placementId: Platform.isAndroid
           ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -428,10 +440,8 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
     log("Home Banner AGAIn: $bannerAd");
   }
 
-
   @override
   void onReady() {
-
     appCtrl.firebaseConfigModel = FirebaseConfigModel.fromJson(
         appCtrl.storage.read(session.firebaseConfig));
     log("BANNER: ${appCtrl.firebaseConfigModel!}");
@@ -464,12 +474,11 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
     _getId().then((id) {
       String? deviceId = id;
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
     _showBannerAd();
-
 
     addCtrl.onInterstitialAdShow();
     readJson();
@@ -488,7 +497,4 @@ class SocialMediaController extends GetxController with GetSingleTickerProviderS
     // TODO: implement onReady
     super.onReady();
   }
-
-
-
 }

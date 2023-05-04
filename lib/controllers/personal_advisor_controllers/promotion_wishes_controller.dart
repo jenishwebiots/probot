@@ -36,12 +36,12 @@ class PromotionWishesController extends GetxController {
     log("SHOW BANNER");
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
-      placementId:  Platform.isAndroid
+      placementId: Platform.isAndroid
           ? appCtrl.firebaseConfigModel!.facebookAddAndroidId!
           : appCtrl.firebaseConfigModel!.facebookAddIOSId!,
       bannerSize: BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        log("Banner Ad: $result -->  $value");
       },
     );
     update();
@@ -73,7 +73,7 @@ class PromotionWishesController extends GetxController {
   }
 
   onWishesGenerate() {
-    if(scaffoldKey.currentState!.validate()) {
+    if (scaffoldKey.currentState!.validate()) {
       int balance = appCtrl.envConfig["balance"];
       if (balance == 0) {
         appCtrl.balanceTopUpDialog();
@@ -81,12 +81,18 @@ class PromotionWishesController extends GetxController {
         addCtrl.onInterstitialAdShow();
         isLoader = true;
         ApiServices.chatCompeletionResponse(
-            "Write a promotion wish message to ${nameController
-                .text} from ${relationController.text}").then((value) {
-          response = value;
-          update();
-          isLoader = false;
-          isWishesGenerate = true;
+                "Write a promotion wish message to ${nameController.text} from ${relationController.text}")
+            .then((value) {
+          if (value != "") {
+            response = value;
+            update();
+            isLoader = false;
+            isWishesGenerate = true;
+          } else {
+            isLoader = false;
+            snackBarMessengers(message: appFonts.somethingWentWrong.tr);
+            update();
+          }
         });
         relationController.clear();
         nameController.clear();
@@ -145,7 +151,7 @@ class PromotionWishesController extends GetxController {
       String? deviceId = id;
 
       FacebookAudienceNetwork.init(
-        testingId: "1b24a79a-1b2a-447d-82dc-7759ef992604",
+        testingId: deviceId,
         iOSAdvertiserTrackingEnabled: true,
       );
     });
@@ -163,5 +169,4 @@ class PromotionWishesController extends GetxController {
     // TODO: implement dispose
     super.dispose();
   }
-
 }

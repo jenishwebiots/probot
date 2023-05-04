@@ -17,10 +17,9 @@ class BirthdayMessageScreen extends StatelessWidget {
                 backgroundColor: appCtrl.appTheme.bg1,
                 resizeToAvoidBottomInset: false,
                 appBar: AppAppBarCommon(
-                    title: appFonts.birthdayMessage, leadingOnTap: () {
-                  textToSpeechCtrl.onStopTTS();
-                  Get.back();
-                }),
+                    title: appFonts.birthdayMessage, leadingOnTap: ()=>
+                  textToSpeechCtrl.onStopTTS()
+                 ),
                 body: Stack(
                   children: [
                     SingleChildScrollView(
