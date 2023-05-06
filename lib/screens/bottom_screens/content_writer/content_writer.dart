@@ -58,15 +58,15 @@ class ContentWriterScreen extends StatelessWidget {
                           Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
                         }
                       }).marginSymmetric(vertical: Insets.i40)
-                ],
+                ]
               ).marginAll(Insets.i25),
               if(contentCtrl.htmlData != null)
                 const ContentDescription().paddingAll(Insets.i20).decorated(
                     color: appCtrl.appTheme.white,
                     borderRadius: BorderRadius.circular(AppRadius.r8))
-            ],
-          ),
-        ),
+            ]
+          )
+        )
       );
     });
   }

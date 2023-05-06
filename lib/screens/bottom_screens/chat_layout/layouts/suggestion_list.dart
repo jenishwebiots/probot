@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:probot/screens/bottom_screens/chat_layout/layouts/pre_build_questions_layout.dart';
-
 import '../../../../config.dart';
 
 class SuggestionList extends StatelessWidget {
@@ -15,7 +12,6 @@ class SuggestionList extends StatelessWidget {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-
               return SizedBox(
                   child: SingleChildScrollView(
                       child: Column(
@@ -55,16 +51,20 @@ class SuggestionList extends StatelessWidget {
                         .data()["suggestionList"]
                         .asMap()
                         .entries
-                        .map((e) => PreBuildQuestionsLayout(data: e.value,onTap: (){
-                          chatCtrl.chatController.text = e.value;
-                          chatCtrl.update();
-                          Get.back();
-                    },))
+                        .map((e) => PreBuildQuestionsLayout(
+                            data: e.value,
+                            onTap: () {
+                              chatCtrl.chatController.text = e.value;
+                              chatCtrl.update();
+                              Get.back();
+                            }))
                         .toList()
                   ]))).paddingSymmetric(
                   horizontal: Insets.i20, vertical: Insets.i20);
             } else {
-              return Container();
+              return Column(mainAxisSize: MainAxisSize.min, children: [
+                const CircularProgressIndicator().paddingAll(Insets.i20)
+              ]);
             }
           });
     });

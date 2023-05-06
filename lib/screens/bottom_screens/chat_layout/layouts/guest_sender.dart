@@ -35,9 +35,9 @@ class GuestSender extends StatelessWidget {
                                     .textColor(appCtrl.appTheme.sameWhite),
                               ),
                               CommonVolume(message: chatListModel!.text!)
-                            ],
-                          ),
-                        )
+                            ]
+                          )
+                        ).inkWell(onTap: ()=> chatCtrl.onTapUnselect())
                       : CommonContent(
                           text: chatListModel!.text!,
                           index: index,
@@ -51,15 +51,20 @@ class GuestSender extends StatelessWidget {
                                         int.parse(
                                             chatListModel!.time!.toString()))),
                                 style: AppCss.outfitMedium12
-                                    .textColor(appCtrl.appTheme.sameWhite),
+                                    .textColor(appCtrl.appTheme.sameWhite)
                               ),
                               const HSpace(Sizes.s15),
                               CommonVolume(message: chatListModel!.text!)
-                            ],
-                          )),
-                  const VSpace(Sizes.s3),
-                ],
+                            ]
+                          )).inkWell(onTap: ()=> chatCtrl.onTapUnselect()),
+                  const VSpace(Sizes.s3)
+                ]
               ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5))
+          .backgroundColor(chatCtrl.isLongPress == true
+              ? chatCtrl.selectedIndex.contains(index)
+                  ? appCtrl.appTheme.primaryLight
+                  : appCtrl.appTheme.trans
+              : appCtrl.appTheme.trans)
           .onLongPressTap(onLongPress: () {
         chatCtrl.isLongPress = true;
         if (!chatCtrl.selectedIndex.contains(index)) {

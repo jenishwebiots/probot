@@ -1,7 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:probot/widgets/something_went_wrong.dart';
 
 import '../config.dart';
 

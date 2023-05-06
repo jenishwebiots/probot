@@ -1,7 +1,7 @@
 import '../../../../config.dart';
 
 class GeneratedMailLayout extends StatelessWidget {
-  const   GeneratedMailLayout({Key? key}) : super(key: key);
+  const GeneratedMailLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +9,7 @@ class GeneratedMailLayout extends StatelessWidget {
       return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(appFonts.toGetTheExcellent.tr,
                   style: AppCss.outfitSemiBold16
                       .textColor(appCtrl.appTheme.primary)),

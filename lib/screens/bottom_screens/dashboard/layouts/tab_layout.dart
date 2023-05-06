@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:probot/utils/general_utils.dart';
-
 import '../../../../../../config.dart';
 
 class BlogTabLayout extends StatelessWidget {
@@ -18,13 +16,12 @@ class BlogTabLayout extends StatelessWidget {
         builder: (BuildContext context, Widget? child) {
           final child = Tab(
             icon: SvgPicture.asset(
-              dashboardCtrl.selectedIndex == index
-                  ? data['iconSelected'].toString()
-                  : data['icon'].toString(),
-              height: Sizes.s20,
-              width: Sizes.s20,
-              fit: BoxFit.fill,
-            ),
+                dashboardCtrl.selectedIndex == index
+                    ? data['iconSelected'].toString()
+                    : data['icon'].toString(),
+                height: Sizes.s20,
+                width: Sizes.s20,
+                fit: BoxFit.fill),
             iconMargin: const EdgeInsets.only(bottom: Insets.i5),
             child: Text(trans(data['title']),
                 style: AppCss.outfitRegular14.textColor(

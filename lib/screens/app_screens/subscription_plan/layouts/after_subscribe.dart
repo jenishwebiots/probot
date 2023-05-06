@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer';
 import 'package:probot/screens/app_screens/subscription_plan/layouts/after_subscribe_ui.dart';
 
 import '../../../../config.dart';
@@ -24,6 +24,8 @@ class AfterSubscribe extends StatelessWidget {
               builder: (context, snapShot) {
                 if (snapShot.hasData) {
                   if(snapshot.hasData) {
+                    log("CHEK : ${snapshot.hasData}");
+                    log("CHEK : ${snapShot.hasData}");
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

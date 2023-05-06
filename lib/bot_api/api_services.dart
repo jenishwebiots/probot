@@ -7,10 +7,11 @@ import 'package:probot/config.dart';
 
 class ApiServices {
   static var client = http.Client();
-
+  static List<Map<String, String>> conversationHistory = [];
   static Future<String> chatCompeletionResponse(String prompt,{addApiKey}) async {
     bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
-    if(appCtrl.isSubscribe == false || isLocalChatApi == false ) {
+    if(appCtrl.isSubscribe == false || isLocalChatApi == false || addApiKey == null ) {
+
       final firebaseCtrl =
       Get.isRegistered<SubscriptionFirebaseController>()
           ? Get.find<SubscriptionFirebaseController>()
@@ -46,20 +47,22 @@ class ApiServices {
         'top_p': 1,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0,
-        "messages": [
-          {"role": "user", "content": prompt}
-        ]
+        "messages": conversationHistory
       }),
     );
 
-    print("hello chat");
-    print(
-        "Chat respons   =======${jsonDecode(utf8.decode(response.bodyBytes))}");
-    log("STATUS : ${response.statusCode}");
     // Do something with the response
     Map<String, dynamic> newresponse =
-        jsonDecode(utf8.decode(response.bodyBytes));
+    jsonDecode(utf8.decode(response.bodyBytes));
 
+    log("RES ${newresponse['choices']}");
+
+    conversationHistory.add({
+      "role": "assistant",
+      "content": newresponse['choices'][0]['message']['content']
+    });
+
+log("STATUSCODE ${response.statusCode}");
     return response.statusCode == 200
         ? newresponse['choices'][0]['message']['content']
         : "";

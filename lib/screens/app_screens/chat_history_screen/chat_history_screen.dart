@@ -1,9 +1,7 @@
 import 'dart:developer';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../config.dart';
 import 'layouts/chat_history_app_bar.dart';
 import 'layouts/chat_layout.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatHistoryScreen extends StatelessWidget {
   final chatHistoryCtrl = Get.put(ChatHistoryController());
@@ -21,7 +19,7 @@ class ChatHistoryScreen extends StatelessWidget {
                 FirebaseFirestore.instance
                     .collection("users")
                     .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .collection("chats")
+                    .collection("chats").orderBy("createdDate",descending: true)
                     .get()
                     .then((value) {
                   value

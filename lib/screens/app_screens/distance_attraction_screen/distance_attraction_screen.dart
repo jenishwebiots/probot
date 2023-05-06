@@ -9,21 +9,18 @@ class DistanceAttractionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DistanceAttractionController>(builder: (distanceCtrl) {
       return WillPopScope(
-        onWillPop: () => textToSpeechCtrl.onStopTTS(),
-        child: DirectionalityRtl(
-          child: Scaffold(
-              backgroundColor: appCtrl.appTheme.bg1,
-              appBar: AppAppBarCommon(
-                  title: appFonts.distanceAttraction,
-                  leadingOnTap: ()=>
-                    textToSpeechCtrl.onStopTTS()
-                   ),
-              body: Stack(
-                children: [
-                  SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+          onWillPop: () => textToSpeechCtrl.onStopTTS(),
+          child: DirectionalityRtl(
+              child: Scaffold(
+                  backgroundColor: appCtrl.appTheme.bg1,
+                  appBar: AppAppBarCommon(
+                      title: appFonts.distanceAttraction,
+                      leadingOnTap: () => textToSpeechCtrl.onStopTTS()),
+                  body: Stack(children: [
+                    SingleChildScrollView(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                           distanceCtrl.isDistanceGenerated == false
                               ? Column(children: [
                                   Column(
@@ -74,18 +71,14 @@ class DistanceAttractionScreen extends StatelessWidget {
                                 ])
                               : const DistanceGeneratedLayout()
                         ]).paddingSymmetric(
-                        vertical: Insets.i30, horizontal: Insets.i20),
-                  ),
-                  if (distanceCtrl.isDistanceGenerated == false)
-                    AdCommonLayout(
-                        bannerAd: distanceCtrl.bannerAd,
-                        bannerAdIsLoaded: distanceCtrl.bannerAdIsLoaded,
-                        currentAd: distanceCtrl.currentAd),
-                  if (distanceCtrl.isLoader == true) const LoaderLayout()
-                ],
-              )),
-        ),
-      );
+                            vertical: Insets.i30, horizontal: Insets.i20)),
+                    if (distanceCtrl.isDistanceGenerated == false)
+                      AdCommonLayout(
+                          bannerAd: distanceCtrl.bannerAd,
+                          bannerAdIsLoaded: distanceCtrl.bannerAdIsLoaded,
+                          currentAd: distanceCtrl.currentAd),
+                    if (distanceCtrl.isLoader == true) const LoaderLayout()
+                  ]))));
     });
   }
 }

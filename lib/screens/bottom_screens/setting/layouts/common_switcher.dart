@@ -1,3 +1,4 @@
+
 import 'package:flutter_switch/flutter_switch.dart';
 
 import '../../../../config.dart';
@@ -15,11 +16,23 @@ class CommonSwitcher extends StatelessWidget {
         toggleSize: 12,
         inactiveColor: appCtrl.appTheme.txt.withOpacity(.1),
         width: Sizes.s32,
-        value: appCtrl.isRTL,
+        value: appCtrl.isUserRTLChange ? appCtrl.isUserRTL : appCtrl.isRTL,
         onToggle: (val) {
-          appCtrl.isRTL = !appCtrl.isRTL;
-          appCtrl.update();
-          Get.forceAppUpdate();
+          appCtrl.storage.write(session.isUserChangeRTL, true);
+          appCtrl.isUserRTLChange = true;
+          if (appCtrl.isUserRTLChange) {
+            appCtrl.isUserRTL = val;
+            appCtrl.storage.write(session.isUserRTL, appCtrl.isUserRTL);
+            appCtrl.update();
+            Get.forceAppUpdate();
+
+
+          } else {
+
+            appCtrl.isRTL = !appCtrl.isRTL;
+            appCtrl.update();
+            Get.forceAppUpdate();
+          }
         });
   }
 }

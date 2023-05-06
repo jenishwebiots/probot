@@ -52,6 +52,7 @@ class PaymentList extends StatelessWidget {
                                         subscribeCtrl.selectIndexPayment,
                                     onTap: () {
                                       subscribeCtrl.selectIndexPayment = e.key;
+                                      subscribeCtrl.subscribeModel =subscribe;
                                       subscribeCtrl.update();
                                     })
                                 : Container()
@@ -65,6 +66,7 @@ class PaymentList extends StatelessWidget {
                                         onTap: () {
                                           subscribeCtrl.selectIndexPayment =
                                               e.key;
+                                          subscribeCtrl.subscribeModel =subscribe;
                                           subscribeCtrl.update();
                                         })
                                     : Container()
@@ -78,6 +80,7 @@ class PaymentList extends StatelessWidget {
                                             onTap: () {
                                               subscribeCtrl.selectIndexPayment =
                                                   e.key;
+                                              subscribeCtrl.subscribeModel =subscribe;
                                               subscribeCtrl.update();
                                             })
                                         : Container()
@@ -93,6 +96,7 @@ class PaymentList extends StatelessWidget {
                                                   subscribeCtrl
                                                           .selectIndexPayment =
                                                       e.key;
+                                                  subscribeCtrl.subscribeModel =subscribe;
                                                   subscribeCtrl.update();
                                                 })
                                             : Container()
@@ -124,6 +128,7 @@ class PaymentList extends StatelessWidget {
                                     Get.back();
                                   } else if (subscribeCtrl.selectIndexPayment ==
                                       1) {
+                                    log("SUBSCRIBE $subscribe");
                                     subscribeCtrl.stripePayment(
                                         amount: data!,
                                         currency: 'INR',
@@ -150,9 +155,7 @@ class PaymentList extends StatelessWidget {
                                       return MapEntry<String, PurchaseDetails>(
                                           purchase.productID, purchase);
                                     }));
-                                    log("SUBSCRIPTION : ${subscribe!.planType!.toLowerCase() == "weekly"}");
-                                    log("SUBSCRIPTION 1: ${subscribe!.planType!.toLowerCase() == "monthly"}");
-                                    log("SUBSCRIPTION 1: ${subscribe!.planType!.toLowerCase() == "weekly"}");
+
                                     if (Platform.isAndroid) {
                                       // NOTE: If you are making a subscription purchase/upgrade/downgrade, we recommend you to
                                       // verify the latest status of you your subscription by using server side receipt validation
@@ -163,24 +166,24 @@ class PaymentList extends StatelessWidget {
                                               subscribe!.planType!
                                                           .toLowerCase() ==
                                                       "weekly"
-                                                  ? inAppCtrl.products[1]
+                                                  ? inAppCtrl.products[7]
                                                   : subscribe!.planType!
                                                               .toLowerCase() ==
                                                           "monthly"
-                                                      ? inAppCtrl.products[0]
-                                                      : inAppCtrl.products[2],
+                                                      ? inAppCtrl.products[6]
+                                                      : inAppCtrl.products[8],
                                               purchases);
 
                                       purchaseParam = GooglePlayPurchaseParam(
                                           productDetails: subscribe!.planType!
                                                       .toLowerCase() ==
                                                   "weekly"
-                                              ? inAppCtrl.products[1]
+                                              ? inAppCtrl.products[7]
                                               : subscribe!.planType!
                                                           .toLowerCase() ==
                                                       "monthly"
-                                                  ? inAppCtrl.products[0]
-                                                  : inAppCtrl.products[2],
+                                                  ? inAppCtrl.products[6]
+                                                  : inAppCtrl.products[8],
                                           changeSubscriptionParam:
                                               (oldSubscription != null)
                                                   ? ChangeSubscriptionParam(
@@ -193,12 +196,12 @@ class PaymentList extends StatelessWidget {
                                           productDetails: subscribe!.planType!
                                                       .toLowerCase() ==
                                                   "weekly"
-                                              ? inAppCtrl.products[1]
+                                              ? inAppCtrl.products[7]
                                               : subscribe!.planType!
                                                           .toLowerCase() ==
                                                       "monthly"
-                                                  ? inAppCtrl.products[0]
-                                                  : inAppCtrl.products[2]);
+                                                  ? inAppCtrl.products[6]
+                                                  : inAppCtrl.products[8]);
 
                                       log("IOS : $purchaseParam");
                                     }
@@ -206,20 +209,15 @@ class PaymentList extends StatelessWidget {
                                     String id = subscribe!.planType!
                                                 .toLowerCase() ==
                                             "weekly"
-                                        ? inAppCtrl.products[1].id
+                                        ? inAppCtrl.products[7].id
                                         : subscribe!.planType!.toLowerCase() ==
                                                 "monthly"
-                                            ? inAppCtrl.products[0].id
-                                            : inAppCtrl.products[2].id;
+                                            ? inAppCtrl.products[6].id
+                                            : inAppCtrl.products[8].id;
                                     log("id : $id");
-                                    if (id == kConsumableId) {
-                                      inAppCtrl.inAppPurchase.buyConsumable(
-                                          purchaseParam: purchaseParam,
-                                          autoConsume: kAutoConsume);
-                                    } else {
-                                      inAppCtrl.inAppPurchase.buyNonConsumable(
-                                          purchaseParam: purchaseParam);
-                                    }
+                                    inAppCtrl.inAppPurchase.buyConsumable(
+                                        purchaseParam: purchaseParam,
+                                        autoConsume: kAutoConsume);
                                     final Stream<List<PurchaseDetails>>
                                         purchaseUpdated =
                                         inAppCtrl.inAppPurchase.purchaseStream;

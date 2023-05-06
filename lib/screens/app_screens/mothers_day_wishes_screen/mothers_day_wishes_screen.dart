@@ -18,9 +18,7 @@ class MothersDayWishesScreen extends StatelessWidget {
                     resizeToAvoidBottomInset: false,
                     appBar: AppAppBarCommon(
                         title: appFonts.mothersDayWishes,
-                        leadingOnTap: ()=>
-                          textToSpeechCtrl.onStopTTS()
-                          ),
+                        leadingOnTap: () => textToSpeechCtrl.onStopTTS()),
                     body: Stack(children: [
                       SingleChildScrollView(
                           child: motherDayCtrl.isWishesGenerate == true

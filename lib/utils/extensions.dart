@@ -34,9 +34,30 @@ extension ProbotExtensions on Widget {
                 offset: const Offset(0, 10),
                 blurRadius: 20)
           ]);
+
+  Widget chatBgExtension(dynamic image) =>
+      Container(child: this).backgroundImage(DecorationImage(
+          image: AssetImage(image == null
+              ? appCtrl.isUserThemeChange
+                  ? appCtrl.isUserTheme
+                      ? eImageAssets.dBg1
+                      : eImageAssets.background1
+                  : appCtrl.isTheme
+                      ? eImageAssets.dBg1
+                      : eImageAssets.background1
+              : appCtrl.isUserThemeChange
+                  ? appCtrl.isUserTheme
+                      ? image["darkImage"]
+                      : image["image"]
+                  : appCtrl.isTheme
+                      ? image["darkImage"]
+                      : image["image"]),
+          fit: BoxFit.fill));
 }
 
-removeAllKey(){
+
+
+removeAllKey() {
   appCtrl.storage.remove(session.envConfig);
   appCtrl.storage.remove(session.isGuestLogin);
   appCtrl.storage.remove(session.selectedCharacter);

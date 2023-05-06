@@ -13,16 +13,14 @@ class SignUpField extends StatelessWidget {
         Text(appFonts.fillTheBelow.tr,
             style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.lightText)),
         const DottedLines().paddingOnly(top: Insets.i20, bottom: Insets.i15),
-        Text(appFonts.email.tr,
-            style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
+        textCommon.outfitMediumTxt16(text: appFonts.email.tr),
         const VSpace(Sizes.s10),
         TextFieldCommon(
             validator: (email) => Validation().emailValidation(email),
             controller: signUpCtrl.emailController,
             hintText: appFonts.enterEmail.tr),
         const VSpace(Sizes.s15),
-        Text(appFonts.password.tr,
-            style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
+        textCommon.outfitMediumTxt16(text: appFonts.password.tr),
         const VSpace(Sizes.s10),
         TextFieldCommon(
             suffixIcon: SvgPicture.asset(
@@ -36,8 +34,7 @@ class SignUpField extends StatelessWidget {
             controller: signUpCtrl.passwordController,
             hintText: appFonts.enterPassword.tr),
         const VSpace(Sizes.s15),
-        Text(appFonts.confirmPassword.tr,
-            style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
+        textCommon.outfitMediumTxt16(text: appFonts.confirmPassword.tr),
         const VSpace(Sizes.s10),
         TextFieldCommon(
             suffixIcon: SvgPicture.asset(
@@ -63,19 +60,7 @@ class SignUpField extends StatelessWidget {
         ButtonCommon(
             title: appFonts.signUp, onTap: () => signUpCtrl.signUpMethod()),
         const VSpace(Sizes.s15),
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          RichText(
-              text: TextSpan(
-                  text: appFonts.alreadyHaveAnAccount.tr,
-                  style: AppCss.outfitMedium16
-                      .textColor(appCtrl.appTheme.lightText),
-                  children: [
-                TextSpan(
-                    text: appFonts.signIn.tr,
-                    style:
-                        AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt))
-              ])).inkWell(onTap: () => Get.back())
-        ])
+        const AlreadyHaveAccount(),
       ]).paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25);
     });
   }

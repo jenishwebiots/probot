@@ -21,7 +21,7 @@ class TopUpDialog extends StatelessWidget {
                     .textDecoration(TextDecoration.none)),
             InkWell(
                 onTap: () => Get.back(),
-                child: SvgPicture.asset(eSvgAssets.cancel, height: Sizes.s24))
+                child: SvgPicture.asset(eSvgAssets.cancel, height: Sizes.s24,colorFilter: ColorFilter.mode(appCtrl.appTheme.black, BlendMode.srcIn)))
           ]).paddingAll(Insets.i20),
           DottedLine(
               direction: Axis.horizontal,

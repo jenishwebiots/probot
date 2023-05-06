@@ -62,10 +62,10 @@ class FathersDayWishesScreen extends StatelessWidget {
                           bannerAdIsLoaded: fatherCtrl.bannerAdIsLoaded,
                           currentAd: fatherCtrl.currentAd),
                     if (fatherCtrl.isLoader == true) const LoaderLayout()
-                  ],
-                )),
-          ),
-        ),
+                  ]
+                ))
+          )
+        )
       );
     });
   }

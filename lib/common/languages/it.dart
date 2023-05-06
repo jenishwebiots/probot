@@ -746,5 +746,9 @@ final dynamic it = {
   'selectAmount': "Seleziona l'importo:",
   'addAmountManually': "Aggiungi l'importo manualmente",
   'addAmount': "Aggiungi importo",
-
+  'addFingerprint' : "Aggiungi l'impronta digitale",
+  'placeYourFinger' : "Posiziona il dito sul sensore",
+  'pressTheSensor' : "Premi il sensore e sollevalo quando senti la vibrazione",
+  'yourFingerprintHasBeen' : "La tua impronta digitale è stata aggiunta correttamente.",
+  'done' : "Fatto",
 };

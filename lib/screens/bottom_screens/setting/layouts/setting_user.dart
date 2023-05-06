@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'dart:developer';
 import '../../../../config.dart';
 
 class SettingUser extends StatelessWidget {
@@ -8,6 +6,7 @@ class SettingUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return FirebaseAuth.instance.currentUser != null
         ? StreamBuilder(
             stream: FirebaseFirestore.instance
@@ -17,6 +16,7 @@ class SettingUser extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                log("message : ${snapshot.data!.docs}");
                 return snapshot.data!.docs[0].data()["image"] != null
                     ? Container(
                         margin: const EdgeInsets.only(top: Insets.i10),
@@ -30,7 +30,7 @@ class SettingUser extends StatelessWidget {
                                     snapshot.data!.docs[0].data()["image"]))),
                       )
                     : Text(
-                            snapshot.data!.docs[0].data()["email"] != null
+                            snapshot.data!.docs[0].data()["email"] != null && snapshot.data!.docs[0].data()["email"] != ""
                                 ? snapshot.data!.docs[0].data()["email"]![0]
                                 : "S",
                             style: AppCss.outfitExtraBold30

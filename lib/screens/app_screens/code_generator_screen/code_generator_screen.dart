@@ -1,4 +1,3 @@
-import 'package:vibration/vibration.dart';
 import '../../../config.dart';
 
 class CodeGeneratorScreen extends StatelessWidget {
@@ -111,30 +110,14 @@ class CodeGeneratorScreen extends StatelessWidget {
                                     codeGeneratorCtrl.onCodeGenerate()),
                           ]).paddingSymmetric(
                         horizontal: Insets.i20, vertical: Insets.i30),
-                /*if (!appCtrl.isSubscribe)
-                  if (appCtrl.firebaseConfigModel!.isAddShow!)
-                    appCtrl.firebaseConfigModel!.isGoogleAdmobEnable!
-                        ? (codeGeneratorCtrl.bannerAd != null &&
-                                codeGeneratorCtrl.bannerAdIsLoaded)
-                            ? AdWidget(ad: codeGeneratorCtrl.bannerAd!)
-                                .height(Sizes.s50)
-                                .paddingOnly(bottom: Insets.i10)
-                                .width(MediaQuery.of(context).size.width)
-                            : Container()
-                        : Container(
-                                alignment: Alignment.bottomCenter,
-                                child: codeGeneratorCtrl.currentAd)
-                            .paddingSymmetric(
-                                vertical: Insets.i15, horizontal: Insets.i20)
-                            .width(MediaQuery.of(context).size.width),*/
                 if (codeGeneratorCtrl.isCodeGenerate == false)
                   AdCommonLayout(
                       bannerAd: codeGeneratorCtrl.bannerAd,
                       bannerAdIsLoaded: codeGeneratorCtrl.bannerAdIsLoaded,
                       currentAd: codeGeneratorCtrl.currentAd),
                 if (codeGeneratorCtrl.isLoader == true) const LoaderLayout()
-              ])),
-        ),
+              ]))
+        )
       );
     });
   }

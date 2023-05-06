@@ -53,8 +53,8 @@ class VoiceController extends GetxController {
                     final chatCtrl = Get.isRegistered<ChatLayoutController>()
                         ? Get.find<ChatLayoutController>()
                         : Get.put(ChatLayoutController());
-                    chatCtrl.chatController.text =
-                        val.recognizedWords.toString();
+                    chatCtrl.chatController.text = val.recognizedWords.toString();
+                    chatCtrl.textInput.value = val.recognizedWords.toString();
                     chatCtrl.getChatId();
                     update();
                   }
@@ -106,6 +106,7 @@ class VoiceController extends GetxController {
                       ? Get.find<ChatLayoutController>()
                       : Get.put(ChatLayoutController());
                   chatCtrl.chatController.text = val.recognizedWords.toString();
+                  chatCtrl.textInput.value = val.recognizedWords.toString();
                   chatCtrl.getChatId();
                   update();
                 }

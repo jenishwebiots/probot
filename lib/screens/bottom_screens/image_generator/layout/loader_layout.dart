@@ -12,7 +12,15 @@ class LoaderLayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(eGifAssets.loader, height: Sizes.s80),
+              Image.asset(
+                  appCtrl.isUserThemeChange
+                      ? appCtrl.isUserTheme
+                          ? eGifAssets.loaderDark
+                          : eGifAssets.loader
+                      : appCtrl.isTheme
+                          ? eGifAssets.loaderDark
+                          : eGifAssets.loader,
+                  height: Sizes.s80),
               const VSpace(Sizes.s5),
               Text(appFonts.loading.tr,
                       style: AppCss.outfitSemiBold14

@@ -1,8 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:probot/env.dart';
 import 'package:probot/models/category_access_model.dart';
 import 'package:probot/widgets/balance_alert.dart';
 import 'package:probot/widgets/top_up_dialog.dart';
@@ -28,6 +26,8 @@ class AppController extends GetxController {
   bool isChatting = false;
   bool isUserThemeChange = false;
   bool isUserTheme = false;
+  bool isUserRTLChange = false;
+  bool isUserRTL = false;
   String languageVal = "en";
   dynamic selectedCharacter;
   final storage = GetStorage();
@@ -64,7 +64,7 @@ class AppController extends GetxController {
     } else if (data["title"] == "option2") {
       dashboardCtrl.onBottomTap(2);
     } else if (data["title"] == "option3") {
-      dashboardCtrl.onBottomTap(3);
+      Get.toNamed(routeName.contentWriterScreen);
     } else if (data["title"] == "setting") {
       Get.toNamed(routeName.settingScreen);
     } else if (data["title"] == "chatHistory") {
@@ -125,7 +125,7 @@ class AppController extends GetxController {
       },
     );
 
-    int count = envConfig["balance"] + 1;
+    int count = envConfig["balance"] +  appCtrl.firebaseConfigModel!.rewardPoint;
     envConfig["balance"] = count;
     update();
     if (!appCtrl.isGuestLogin) {
@@ -186,9 +186,22 @@ class AppController extends GetxController {
     );
   }
 
-  showFacebookRewardedAd() {
+  showFacebookRewardedAd() async{
     if (isRewardedAdLoaded == true) {
       FacebookRewardedVideoAd.showRewardedVideoAd();
+      int count = envConfig["balance"] + appCtrl.firebaseConfigModel!.rewardPoint;
+      envConfig["balance"] = count;
+      update();
+      if (!appCtrl.isGuestLogin) {
+        final subscribeCtrl = Get.isRegistered<SubscriptionFirebaseController>()
+            ? Get.find<SubscriptionFirebaseController>()
+            : Get.put(SubscriptionFirebaseController());
+        await subscribeCtrl.addUpdateFirebaseData();
+      }
+      storage.write(session.envConfig, envConfig);
+      envConfig = storage.read(session.envConfig);
+      update();
+      showNewCount(envConfig["balance"]);
     } else {
       log("Rewarded Ad not yet loaded!");
     }
@@ -302,14 +315,17 @@ class AppController extends GetxController {
             appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
           }
         }
-        if( appCtrl.isRTL != appCtrl.firebaseConfigModel!.isRTL!) {
-          appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;
-          log("appCtrl.isRTL : ${appCtrl.isRTL}");
-          appCtrl.storage
-              .write(session.isRTL, appCtrl.isRTL);
-          appCtrl.update();
-          Get.forceAppUpdate();
+        if(isUserRTLChange == false) {
+          if( appCtrl.isRTL != appCtrl.firebaseConfigModel!.isRTL!) {
+            appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;
+            log("appCtrl.isRTL : ${appCtrl.isRTL}");
+            appCtrl.storage
+                .write(session.isRTL, appCtrl.isRTL);
+            appCtrl.update();
+            Get.forceAppUpdate();
+          }
         }
+
       }
 
     });

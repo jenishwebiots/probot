@@ -21,10 +21,10 @@ class AllowNotificationScreen extends StatelessWidget {
                 children: [
                   Image.asset(eImageAssets.message, height: Sizes.s300),
                   const VSpace(Sizes.s40),
-                  Text(appFonts.allowNotification,
+                  Text(appFonts.allowNotification.tr,
                       style: AppCss.outfitSemiBold20.textColor(appCtrl.appTheme.txt)),
                   const VSpace(Sizes.s10),
-                  Text(appFonts.weWantToGiveYou,
+                  Text(appFonts.weWantToGiveYou.tr,
                       textAlign: TextAlign.center,
                       style: AppCss.outfitMedium16
                           .textColor(appCtrl.appTheme.lightText)
@@ -40,7 +40,7 @@ class AllowNotificationScreen extends StatelessWidget {
                       title: appFonts.doItLater,
                       color: appCtrl.appTheme.trans,
                       style: AppCss.outfitMedium18.textColor(appCtrl.appTheme.primary),
-                     onTap: ()=> Get.offAllNamed(routeName.loginScreen)
+                     onTap: ()=> Get.toNamed(routeName.subscriptionPlanList, arguments: false)
                   )
                 ],
               )

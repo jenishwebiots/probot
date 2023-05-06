@@ -42,6 +42,7 @@ class ImagePreviewController extends GetxController {
           quality: 60,
           name: "probot");
       isLoading = false;
+      update();
       Get.snackbar('Success', "Image Downloaded Successfully",
           backgroundColor: appCtrl.appTheme.icon,
           colorText: appCtrl.appTheme.sameWhite);

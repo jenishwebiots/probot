@@ -18,4 +18,3 @@ class Language extends Translations {
     'ge_GE': ge,
   };
 }
-

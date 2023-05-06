@@ -88,7 +88,6 @@ export '../screens/bottom_screens/content_writer/layouts/content_description.dar
 export '../screens/bottom_screens/content_writer/layouts/content_widget.dart';
 export '../screens/bottom_screens/content_writer/layouts/response_data.dart';
 export '../screens/bottom_screens/dashboard/dashboard.dart';
-export '../screens/bottom_screens/dashboard/layouts/bottom_bar.dart';
 export '../screens/bottom_screens/drawer/drawer.dart';
 export '../screens/bottom_screens/home/home.dart';
 export '../screens/bottom_screens/home/layouts/option_layout_card.dart';
@@ -158,4 +157,14 @@ export '../screens/bottom_screens/voice_screen/voice_screen.dart';
 export '../screens/bottom_screens/chat_layout/layouts/suggestion_layout.dart';
 export '../screens/bottom_screens/image_scanner/image_scanner_screen.dart';
 export '../screens/app_screens/amazon_product_feature_screen/layouts/without_product_generate_layout.dart';
-
+export '../screens/auth_screens/sign_in_screen/layouts/dont_have_account_common.dart';
+export '../screens/auth_screens/sign_up_screen/layouts/already_have_account_layout.dart';
+export '../screens/auth_screens/on_boarding_screen/layouts/bottom_layout.dart';
+export '../screens/auth_screens/on_boarding_screen/layouts/language_drop_down_layout.dart';
+export '../screens/auth_screens/mobile_login/layouts/country_list_layout.dart';
+export '../../screens/auth_screens/mobile_login/layouts/otp_layout.dart';
+export '../screens/bottom_screens/chat_layout/layouts/guest_receiver.dart';
+export '../screens/bottom_screens/chat_layout/layouts/guest_sender.dart';
+export '../screens/bottom_screens/chat_layout/layouts/guest_chat_list.dart';
+export '../screens/bottom_screens/chat_layout/layouts/cached_network_image_layout.dart';
+export '../screens/bottom_screens/chat_layout/layouts/pre_build_questions_layout.dart';

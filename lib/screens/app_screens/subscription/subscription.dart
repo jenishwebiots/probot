@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:probot/screens/app_screens/subscription/layouts/subscription_advantage.dart';
 import '../../../config.dart';
 
@@ -59,9 +61,15 @@ class Subscription extends StatelessWidget {
                     margin: Insets.i20,
                     title: appFonts.selectPlan.tr,
                     onTap: () {
-                      subscribeCtrl.paymentDialog(
-                          subscribeCtrl.selectedPrice.toString(),
-                          subscribeCtrl.subscribeModel);
+                      log("CHECKKKK : ${subscribeCtrl.selectedPrice}");
+                      var userName = appCtrl.storage.read("userName");
+                      if(userName != null) {
+                        subscribeCtrl.paymentDialog(
+                            subscribeCtrl.selectedPrice,
+                            subscribeCtrl.subscribeModel);
+                      }else{
+                        Get.offAllNamed(routeName.loginScreen);
+                      }
                     }),
                 const VSpace(Sizes.s15),
                 Text(appFonts.continueWithLimitedVersion.tr,

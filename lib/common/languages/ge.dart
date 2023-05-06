@@ -805,4 +805,9 @@ final dynamic ge = {
   'selectAmount': "Betrag auswählen :",
   'addAmountManually': "Betrag manuell hinzufügen",
   'addAmount': "Betrag hinzufügen",
+  'addFingerprint' : "Fingerabdruck hinzufügen",
+  'placeYourFinger' : "Legen Sie Ihren Finger auf den Sensor",
+  'pressTheSensor' : "Drücken Sie auf den Sensor und heben Sie ihn an, wenn Sie Vibrationen spüren",
+  'yourFingerprintHasBeen' : "Ihr Fingerabdruck wurde erfolgreich hinzugefügt.",
+  'done' : "Erledigt",
 };

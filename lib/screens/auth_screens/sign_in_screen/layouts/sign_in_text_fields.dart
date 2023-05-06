@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:probot/widgets/common_social_login.dart';
-
 import '../../../../config.dart';
 
 class SignInTextField extends StatelessWidget {
@@ -17,22 +14,22 @@ class SignInTextField extends StatelessWidget {
         Text(appFonts.fillTheBelow.tr,
             style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.lightText)),
         const DottedLines().paddingOnly(top: Insets.i20, bottom: Insets.i15),
-        Text(appFonts.email.tr,
-            style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
+        textCommon.outfitMediumTxt16(text: appFonts.email.tr),
         const VSpace(Sizes.s10),
         TextFieldCommon(
             validator: (email) => Validation().emailValidation(email),
             controller: signInCtrl.emailController,
             hintText: appFonts.enterEmail.tr),
         const VSpace(Sizes.s15),
-        Text(appFonts.password.tr,
-            style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt)),
+        textCommon.outfitMediumTxt16(text: appFonts.password.tr),
         const VSpace(Sizes.s10),
         TextFieldCommon(
             suffixIcon: SvgPicture.asset(
-              signInCtrl.obscureText ? eSvgAssets.eyeSlash : eSvgAssets.eye,
-              fit: BoxFit.scaleDown,
-            ).inkWell(onTap: () => signInCtrl.onObscure()),
+                    signInCtrl.obscureText
+                        ? eSvgAssets.eyeSlash
+                        : eSvgAssets.eye,
+                    fit: BoxFit.scaleDown)
+                .inkWell(onTap: () => signInCtrl.onObscure()),
             obscureText: signInCtrl.obscureText,
             validator: (password) => Validation().passValidation(password),
             controller: signInCtrl.passwordController,
@@ -48,45 +45,23 @@ class SignInTextField extends StatelessWidget {
         ButtonCommon(
             title: appFonts.signIn, onTap: () => signInCtrl.signInMethod()),
         const VSpace(Sizes.s15),
-        Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: RichText(
-                  overflow: TextOverflow.clip,
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                        text: appFonts.dontHaveAnAccount.tr,
-                        style: AppCss.outfitMedium16
-                            .textColor(appCtrl.appTheme.lightText).textHeight(1.3),
-                        children: [
-                      TextSpan(
-                          text: appFonts.signUp.tr,
-                          style: AppCss.outfitMedium16
-                              .textColor(appCtrl.appTheme.txt).textHeight(1.3))
-                    ])).inkWell(onTap: () => Get.to(const SignUpScreen())),
-              )
-            ]),
+        const DonHaveAccountLayout(),
         const OrLayout().alignment(Alignment.center),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          CommonSocialLogin(
+              image: eSvgAssets.google,
+              name: appFonts.google,
+              onTap: () => signInCtrl.signInWithGoogle()),
+          CommonSocialLogin(
+              image: eSvgAssets.mobile,
+              name: appFonts.phone,
+              onTap: () => Get.toNamed(routeName.mobileLogin)),
+          if (Platform.isIOS)
             CommonSocialLogin(
-                image: eSvgAssets.google,
-                name: appFonts.google,
-                onTap: () => signInCtrl.signInWithGoogle()),
-            CommonSocialLogin(
-                image: eSvgAssets.mobile,
-                name: appFonts.phone,
-                onTap: () => Get.toNamed(routeName.mobileLogin)),
-            if (Platform.isIOS)
-              CommonSocialLogin(
-                  image: eSvgAssets.apple,
-                  name: appFonts.apple,
-                  onTap: () => signInCtrl.signInWithApple()),
-          ],
-        )
+                image: eSvgAssets.apple,
+                name: appFonts.apple,
+                onTap: () => signInCtrl.signInWithApple())
+        ])
       ])
           .paddingSymmetric(horizontal: Insets.i20, vertical: Insets.i25)
           .authBoxExtension();

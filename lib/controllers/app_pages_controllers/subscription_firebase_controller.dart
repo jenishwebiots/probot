@@ -15,6 +15,8 @@ class SubscriptionFirebaseController extends GetxController {
     DateTime now = DateTime.now();
     DateTime? expiryDate;
     if (isSubscribe == true) {
+      appCtrl.isSubscribe = true;
+      appCtrl.storage.write(session.isSubscribe, true);
       if (subscribeModel!.type == "weekly") {
         expiryDate = DateTime(now.year, now.month, now.day + 7);
       } else if (subscribeModel.type == "monthly") {
@@ -23,17 +25,22 @@ class SubscriptionFirebaseController extends GetxController {
         expiryDate = DateTime(now.year + 1, now.month, now.day);
       }
     } else {
+      log("AMOUIJT : ${appCtrl.envConfig["balance"]}");
       int balance = appCtrl.envConfig["balance"];
-      balance = (amountBalance + balance);
+      balance = int.parse(amountBalance.toString()) + balance;
+      log("amountBalance : $balance");
       appCtrl.envConfig["balance"] = balance;
     }
+    appCtrl.isAnySubscribe = true;
+    appCtrl.storage.write(session.isAnySubscribe, true);
     log("EXPIER : $expiryDate");
     log("subscribeModel : #$subscribeModel");
     String? userName;
     userName = appCtrl.storage.read("userName");
     int id = DateTime.now().millisecondsSinceEpoch;
     log("appCtrl.envConfig: ${appCtrl.envConfig}");
-
+    appCtrl.update();
+    Get.forceAppUpdate();
     await FirebaseFirestore.instance
         .collection("userSubscribe")
         .where("email", isEqualTo: appCtrl.storage.read("userName"))
@@ -47,7 +54,7 @@ class SubscriptionFirebaseController extends GetxController {
             .set({
           "email": userName,
           "userId": FirebaseAuth.instance.currentUser!.uid,
-          "subscriptionType": isSubscribe ? subscribeModel!.type :"",
+          "subscriptionType": isSubscribe ? subscribeModel!.type : "",
           "isExpiry": false,
           "isSubscribe": isSubscribe,
           "createdDate": DateTime.now().millisecondsSinceEpoch,
@@ -145,7 +152,7 @@ class SubscriptionFirebaseController extends GetxController {
       update();
       if (!appCtrl.isGuestLogin) {
         addUpdateFirebaseData();
-      }else{
+      } else {
         log("BALANCE : ${appCtrl.envConfig["balance"]}");
 
         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);

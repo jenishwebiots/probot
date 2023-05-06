@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import '../config.dart';
 
 class CommonBalance extends StatelessWidget {
@@ -6,7 +8,8 @@ class CommonBalance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return appCtrl.isSubscribe || appCtrl.isLocalChatApi
+    log("LOCAL API : ${appCtrl.isSubscribe }");
+    return appCtrl.isSubscribe == true || appCtrl.isLocalChatApi  == true
         ? Container()
         : GetBuilder<AppController>(
           builder: (appCtrl) {

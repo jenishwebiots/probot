@@ -21,7 +21,7 @@ class BackgroundList extends StatelessWidget {
               crossAxisCount: 2),
           itemBuilder: (context, index) {
             return Image.asset(
-             appCtrl.isTheme ? chatCtrl.backgroundList[index]["darkImage"] : chatCtrl.backgroundList[index]["image"],
+              appCtrl.isUserThemeChange ? appCtrl.isUserTheme ? chatCtrl.backgroundList[index]["darkImage"] : chatCtrl.backgroundList[index]["image"] :  appCtrl.isTheme ? chatCtrl.backgroundList[index]["darkImage"] : chatCtrl.backgroundList[index]["image"],
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.fill,
               height: Sizes.s216,

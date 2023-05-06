@@ -2,8 +2,7 @@ import '../../../../config.dart';
 import 'icon_creation.dart';
 
 class ImagePickerLayout extends StatelessWidget {
-  final GestureTapCallback? cameraTap,galleryTap;
-  const ImagePickerLayout({Key? key,this.cameraTap,this.galleryTap}) : super(key: key);
+  final GestureTapCallback? cameraTap, galleryTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +19,32 @@ class ImagePickerLayout extends StatelessWidget {
           children: [
             IconCreation(
                 icons: Icons.camera,
-                color: appCtrl.isTheme ?appCtrl.appTheme.white :  appCtrl.appTheme.primary,
+                color: appCtrl.isUserThemeChange
+                    ? appCtrl.isUserTheme
+                        ? appCtrl.appTheme.white
+                        : appCtrl.appTheme.primary
+                    : appCtrl.isTheme
+                        ? appCtrl.appTheme.white
+                        : appCtrl.appTheme.primary,
                 text: appFonts.camera.tr,
                 onTap: cameraTap),
             IconCreation(
                 icons: Icons.image,
-                color:appCtrl.isTheme ?appCtrl.appTheme.white :  appCtrl.appTheme.primary,
+                color: appCtrl.isUserThemeChange
+                    ? appCtrl.isUserTheme
+                        ? appCtrl.appTheme.white
+                        : appCtrl.appTheme.primary
+                    : appCtrl.isTheme
+                        ? appCtrl.appTheme.white
+                        : appCtrl.appTheme.primary,
                 text: appFonts.gallery.tr,
-                onTap:galleryTap),
-
+                onTap: galleryTap),
           ],
         ),
       ]),
     );
   }
+
+  const ImagePickerLayout({Key? key, this.cameraTap, this.galleryTap})
+      : super(key: key);
 }

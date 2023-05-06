@@ -22,13 +22,13 @@ final GestureTapCallback? onTap;
                     .data()["subscriptionType"]
                     .toString()
                     .toLowerCase() ==
-                data["planType"].toString().toLowerCase()),
+                data["type"].toString().toLowerCase()),
         const VSpace(Sizes.s20),
         snapShot!.data!.docs[0]
                     .data()["subscriptionType"]
                     .toString()
                     .toLowerCase() ==
-                data["planType"].toString().toLowerCase()
+                data["type"].toString().toLowerCase()
             ? Column(
                 children: [
                   Row(
@@ -132,7 +132,7 @@ final GestureTapCallback? onTap;
                 .data()["subscriptionType"]
                 .toString()
                 .toLowerCase() !=
-            data["planType"].toString().toLowerCase())
+            data["type"].toString().toLowerCase())
           ButtonCommon(
               title: "Select this Plan",
               isGradient: false,

@@ -66,7 +66,7 @@ class SignInController extends GetxController {
                 .set({
               'logintype': "Google",
               'nickname': user.displayName,
-              'email': userNameGoogle,
+              'email': user.email,
               'phone': user.phoneNumber,
               'id': user.uid,
               "balance": 5,
@@ -84,7 +84,8 @@ class SignInController extends GetxController {
           appCtrl.storage.write("name", user.displayName);
         } else {
           await FirebaseMessaging.instance.getToken().then((token) async {
-            if (result.docs[0].data()["isActive"] == true) {
+            bool isResult  =result.docs[0].data()["isActive"] ?? true;
+            if (isResult) {
               log("BANCE :${result.docs[0].data()["balance"] == null}");
               if (result.docs[0].data()["balance"] == null) {
                 appCtrl.envConfig["balance"] = 5;
@@ -159,7 +160,7 @@ class SignInController extends GetxController {
                   .set({
                 'logintype': "Email",
                 'nickname': firebaseUser.user!.displayName,
-                'email': userName,
+                'email': firebaseUser.user!.email,
                 'phone': firebaseUser.user!.phoneNumber,
                 'id': firebaseUser.user!.uid,
                 "balance": 5,
@@ -176,7 +177,8 @@ class SignInController extends GetxController {
               await checkData();
               Get.offAllNamed(routeName.selectLanguageScreen);
             } else {
-              if (value.docs[0].data()["isActive"] == true) {
+              bool isResult  =value.docs[0].data()["isActive"] ?? true;
+              if (isResult) {
                 log("BANCE :${value.docs[0].data()["balance"] == null}");
                 if (value.docs[0].data()["balance"] == null) {
                   appCtrl.envConfig["balance"] = 5;
@@ -297,7 +299,8 @@ class SignInController extends GetxController {
               await checkData();
               Get.offAllNamed(routeName.selectLanguageScreen);
             } else {
-              if (value.docs[0].data()["isActive"] == true) {
+              bool isResult  =value.docs[0].data()["isActive"] ?? true;
+              if (isResult) {
                 log("BANCE :${value.docs[0].data()["balance"] == null}");
                 if (value.docs[0].data()["balance"] == null) {
                   appCtrl.envConfig["balance"] = 5;

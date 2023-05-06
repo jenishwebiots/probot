@@ -67,12 +67,14 @@ class Dashboard extends StatelessWidget {
                                             usImage: eSvgAssets.gallery,
                                             index: 2),
                                       if (appCtrl.firebaseConfigModel!
-                                          .isTextCompletionShow!)
+                                          .isVoiceEnable!)
                                         TabCommon(
                                             title: "voice",
                                             sImage: eSvgAssets.micColor,
                                             usImage: eSvgAssets.micNav,
                                             index: 3),
+                                      if (appCtrl.firebaseConfigModel!
+                                          .isCameraEnable!)
                                       TabCommon(
                                           title: "camera",
                                           sImage: eSvgAssets.cameraColor,

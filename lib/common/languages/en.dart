@@ -778,4 +778,10 @@ final dynamic en = {
   'selectAmount': "Select amount :",
   'addAmountManually': "Add amount manually",
   'addAmount': "Add amount",
+
+'addFingerprint' : "Add fingerprint",
+'placeYourFinger' : "Place your finger on the sensor",
+'pressTheSensor' : "Press the sensor and lift when you feel vibration",
+'yourFingerprintHasBeen' : "Your fingerprint has been added successfully.",
+'done' : "Done",
 };

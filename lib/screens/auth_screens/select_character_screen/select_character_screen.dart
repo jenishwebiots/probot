@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../../config.dart';
 
 class SelectCharacterScreen extends StatelessWidget {
@@ -33,37 +31,42 @@ class SelectCharacterScreen extends StatelessWidget {
                                       .paddingOnly(top: Insets.i20),
                                   const VSpace(Sizes.s20),
                                   StreamBuilder(
-                                    stream: FirebaseFirestore.instance
-                                        .collection("characters").where("isActive",isEqualTo: true)
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return GridView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: snapshot.data!.docs.length,
-                                          gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisSpacing: 15,
-                                                  mainAxisExtent: 110,
-                                                  mainAxisSpacing: 10,
-                                                  crossAxisCount: 3),
-                                          itemBuilder: (context, index) {
-                                            return CharacterLayout(
-                                                onTap: () => selectCharacterCtrl
-                                                    .onCharacterChange(
-                                                        index,
-                                                    snapshot.data!.docs[index].data()),
-                                                selectIndex:
-                                                    appCtrl.characterIndex,
-                                                index: index,
-                                                data: snapshot.data!.docs[index].data());
-                                          },
-                                        );
-                                      } else {
-                                        return Container();
-                                      }
-                                    },
-                                  )
+                                      stream: FirebaseFirestore.instance
+                                          .collection("characters")
+                                          .where("isActive", isEqualTo: true)
+                                          .snapshots(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return GridView.builder(
+                                              shrinkWrap: true,
+                                              itemCount:
+                                                  snapshot.data!.docs.length,
+                                              gridDelegate:
+                                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisSpacing: 15,
+                                                      mainAxisExtent: 110,
+                                                      mainAxisSpacing: 10,
+                                                      crossAxisCount: 3),
+                                              itemBuilder: (context, index) {
+                                                return CharacterLayout(
+                                                    onTap: () =>
+                                                        selectCharacterCtrl
+                                                            .onCharacterChange(
+                                                                index,
+                                                                snapshot.data!
+                                                                    .docs[index]
+                                                                    .data()),
+                                                    selectIndex:
+                                                        appCtrl.characterIndex,
+                                                    index: index,
+                                                    data: snapshot
+                                                        .data!.docs[index]
+                                                        .data());
+                                              });
+                                        } else {
+                                          return Container();
+                                        }
+                                      })
                                 ]).paddingSymmetric(
                                 horizontal: Insets.i20, vertical: Insets.i25))
                         .authBoxExtension(),
