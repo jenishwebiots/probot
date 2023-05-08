@@ -1,10 +1,5 @@
 import 'dart:developer';
-
-import 'package:cached_network_image/cached_network_image.dart';
-
 import '../../../../../config.dart';
-import 'layouts/bottom_layout.dart';
-import 'layouts/drawer_list_common.dart';
 
 class CommonDrawer extends StatelessWidget {
   const CommonDrawer({Key? key}) : super(key: key);

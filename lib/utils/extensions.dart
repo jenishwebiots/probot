@@ -53,6 +53,22 @@ extension ProbotExtensions on Widget {
                       ? image["darkImage"]
                       : image["image"]),
           fit: BoxFit.fill));
+
+  Widget bottomNavExtension()=> Container(child: this).decorated(
+
+          color: appCtrl.appTheme.boxBg,
+          boxShadow:  [
+            BoxShadow(
+                color:appCtrl.appTheme.borderColor,
+                blurRadius: 20,
+                offset:const Offset(4, -1))
+          ],
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(AppRadius.r10),
+              topRight:
+              Radius.circular(AppRadius.r10))
+  );
+
 }
 
 

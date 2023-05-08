@@ -30,6 +30,10 @@ class QuickAdvisorController extends GetxController {
     update();
   }
 
+  final homeCtrl = Get.isRegistered<Home>()
+      ? Get.find<AppController>()
+      : Get.put(AppController());
+
   @override
   void onReady() {
     List<dynamic> list = appCtrl.storage.read("quickList") ?? [];

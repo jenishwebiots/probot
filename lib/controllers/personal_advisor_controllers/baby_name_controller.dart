@@ -1,8 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:probot/bot_api/api_services.dart';
-
 import '../../config.dart';
 
 class BabyNameSuggestionController extends GetxController {
@@ -186,6 +184,13 @@ class BabyNameSuggestionController extends GetxController {
               topRight: Radius.circular(AppRadius.r10),
               topLeft: Radius.circular(AppRadius.r10))),
     );
+  }
+
+  onTapClearCtrlTTS() {
+    textToSpeechCtrl.onStopTTS();
+    latterController.clear();
+    generatedNameController.clear();
+    update();
   }
 
   @override

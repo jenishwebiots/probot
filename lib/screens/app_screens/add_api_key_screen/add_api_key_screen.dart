@@ -1,16 +1,9 @@
 import '../../../config.dart';
 
-class AddApiKeyScreen extends StatefulWidget {
-  const AddApiKeyScreen({Key? key}) : super(key: key);
+class AddApiKeyScreen extends StatelessWidget {
+  AddApiKeyScreen({Key? key}) : super(key: key);
 
-  @override
-  State<AddApiKeyScreen> createState() => _AddApiKeyScreenState();
-}
-
-class _AddApiKeyScreenState extends State<AddApiKeyScreen> {
   final apiCtrl = Get.put(AddApiKeyController());
-
-  final GlobalKey<FormState> addApiGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +22,7 @@ class _AddApiKeyScreenState extends State<AddApiKeyScreen> {
                   body: Stack(children: [
                     SingleChildScrollView(
                         child: Form(
-                            key: addApiGlobalKey,
+                            key: apiCtrl.addApiGlobalKey,
                             child: Column(children: [
                               Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,26 +48,7 @@ class _AddApiKeyScreenState extends State<AddApiKeyScreen> {
                                             color: appCtrl.appTheme.txt
                                                 .withOpacity(0.10))
                                         .paddingSymmetric(vertical: Insets.i15),
-                                    Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(appFonts.note,
-                                              style: AppCss.outfitMedium16
-                                                  .textColor(appCtrl
-                                                      .appTheme.primary)),
-                                          const VSpace(Sizes.s15),
-                                          ApiNotesLayout(
-                                              title: appFonts
-                                                  .yourMobileDevices.tr),
-                                          const VSpace(Sizes.s25),
-                                          ApiNotesLayout(
-                                              title: appFonts.youCanKeep.tr),
-                                          const VSpace(Sizes.s25),
-                                          ApiNotesLayout(
-                                              title: appFonts.balanceNote.tr)
-                                        ]).paddingSymmetric(
-                                        horizontal: Insets.i15)
+                                    const NoteLayout()
                                   ])
                                   .paddingSymmetric(vertical: Insets.i20)
                                   .authBoxExtension(),
@@ -82,7 +56,7 @@ class _AddApiKeyScreenState extends State<AddApiKeyScreen> {
                               ButtonCommon(
                                   title: appFonts.save,
                                   onTap: () {
-                                    if (addApiGlobalKey.currentState!
+                                    if (apiCtrl.addApiGlobalKey.currentState!
                                         .validate()) {
                                       apiCtrl.addApiKeyInLocal();
                                     }

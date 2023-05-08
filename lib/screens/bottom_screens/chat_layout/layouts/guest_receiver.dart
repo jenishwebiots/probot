@@ -1,6 +1,5 @@
 import 'dart:developer';
 import '../../../../config.dart';
-import '../../../../widgets/chat_loader_common.dart';
 
 class GuestReceiver extends StatelessWidget {
   final ChatMessage? chatListModel;

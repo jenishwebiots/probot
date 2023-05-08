@@ -719,7 +719,7 @@ final dynamic en = {
   'allow': "Allow",
   'weWantToGiveYou':
       "We want to give you notifications from our app regarding alerts, new updates, and more.",
-  'otherQuickAdvisor': "Other quick advisor :",
+  'otherQuickAdvisor': "Quick advisor :",
   'favoriteQuickAdvisor': "Favorite quick advisor :",
   'shareApp': "Share app",
   'youtube': "YouTube",

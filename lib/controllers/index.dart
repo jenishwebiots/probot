@@ -55,3 +55,4 @@ export 'ecommerce_controller/amazon_product_feature_controller.dart';
 export 'ecommerce_controller/ecommerce_controller.dart';
 export 'ecommerce_controller/amazon_product_review_controller.dart';
 export 'ecommerce_controller/amazon_product_title_controller.dart';
+export 'app_pages_controllers/top_up_controller.dart';

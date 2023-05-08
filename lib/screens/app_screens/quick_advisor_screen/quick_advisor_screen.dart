@@ -1,8 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:probot/models/category_access_model.dart';
-
 import '../../../config.dart';
-import '../../bottom_screens/home/layouts/quick_advisor_layout.dart';
 
 class QuickAdvisorScreen extends StatelessWidget {
   final quickAdvisorCtrl = Get.put(QuickAdvisorController());
@@ -22,92 +18,41 @@ class QuickAdvisorScreen extends StatelessWidget {
                       stream: FirebaseFirestore.instance
                           .collection("categoryAccess")
                           .snapshots(),
-                    builder: (context,snapShot) {
-
-                      if(snapShot.hasData){
-                        appCtrl.categoryAccessModel =
-                            CategoryAccessModel.fromJson(
-                                snapShot.data!.docs[0].data());
-                        appCtrl.storage.write(session.categoryConfig,
-                            appCtrl.categoryAccessModel);
-                        quickAdvisorCtrl.getQuickData();
-                        return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              quickAdvisorCtrl.favoriteDataList.isNotEmpty
-                                  ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(appFonts.favoriteQuickAdvisor,
-                                        style: AppCss.outfitSemiBold16
-                                            .textColor(
-                                            appCtrl.appTheme.txt))
-                                        .paddingOnly(bottom: Insets.i15),
-                                    GridView.builder(
-                                        padding: EdgeInsets.zero,
-                                        physics:
-                                        const NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount: quickAdvisorCtrl
-                                            .favoriteDataList.length,
-                                        gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisSpacing: 20,
-                                            childAspectRatio: 1,
-                                            mainAxisSpacing: 15,
-                                            mainAxisExtent: 105,
-                                            crossAxisCount: 3),
-                                        itemBuilder: (context, index) {
-                                          return QuickAdvisorLayout(
-                                              index: index,
-                                              isFavorite: true,
-                                              selectIndex: quickAdvisorCtrl
-                                                  .selectedIndexRemove,
-                                              data: quickAdvisorCtrl
-                                                  .favoriteDataList[index],
-                                              onTap: () => quickAdvisorCtrl
-                                                  .onTapRemoveFavorite(index));
-                                        })
-                                  ]).paddingOnly(bottom: Insets.i30)
-                                  : Container(),
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(appFonts.otherQuickAdvisor,
-                                        style: AppCss.outfitSemiBold16
-                                            .textColor(appCtrl.appTheme.txt))
-                                        .paddingOnly(bottom: Insets.i15),
-                                    GridView.builder(
-                                        padding: EdgeInsets.zero,
-                                        physics: const NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount:
-                                        quickAdvisorCtrl.quickAdvisorLists.length,
-                                        gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisSpacing: 20,
-                                            childAspectRatio: 1,
-                                            mainAxisSpacing: 15,
-                                            mainAxisExtent: 105,
-                                            crossAxisCount: 3),
-                                        itemBuilder: (context, index) {
-                                          return QuickAdvisorLayout(
-                                              index: index,
-                                              isFavorite: false,
-                                              selectIndex:
-                                              quickAdvisorCtrl.selectedIndex,
-                                              data: quickAdvisorCtrl
-                                                  .quickAdvisorLists[index],
-                                              onTap: () => quickAdvisorCtrl
-                                                  .onTapAddFavorite(index));
-                                        })
-                                  ])
-                            ]).paddingAll(Insets.i20);
-                      }else{
-                        return Container();
-                      }
-                    }
-                  ))));
+                      builder: (context, snapShot) {
+                        if (snapShot.hasData) {
+                          appCtrl.categoryAccessModel =
+                              CategoryAccessModel.fromJson(
+                                  snapShot.data!.docs[0].data());
+                          appCtrl.storage.write(session.categoryConfig,
+                              appCtrl.categoryAccessModel);
+                          quickAdvisorCtrl.getQuickData();
+                          return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                quickAdvisorCtrl.favoriteDataList.isNotEmpty
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                            Text(
+                                                    appFonts
+                                                        .favoriteQuickAdvisor
+                                                        .tr,
+                                                    style: AppCss
+                                                        .outfitSemiBold16
+                                                        .textColor(appCtrl
+                                                            .appTheme.txt))
+                                                .paddingOnly(
+                                                    bottom: Insets.i15),
+                                            const FavoriteList()
+                                          ]).paddingOnly(bottom: Insets.i30)
+                                    : Container(),
+                                const QuickAdvisorListCommon()
+                              ]).paddingAll(Insets.i20);
+                        } else {
+                          return Container();
+                        }
+                      }))));
     });
   }
 }

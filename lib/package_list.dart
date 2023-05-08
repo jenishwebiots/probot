@@ -22,3 +22,6 @@ export 'package:path_provider/path_provider.dart';
 export 'package:share_plus/share_plus.dart';
 export 'package:vibration/vibration.dart';
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
+export 'package:flutter_switch/flutter_switch.dart';
+export 'package:in_app_purchase/in_app_purchase.dart';

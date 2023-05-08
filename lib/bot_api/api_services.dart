@@ -20,6 +20,8 @@ class ApiServices {
     }var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
 
+    conversationHistory.add({"role": "user", "content": prompt});
+
     String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
     log("API: $localApi");
     String apiKey = "";
@@ -28,7 +30,7 @@ class ApiServices {
     }else {
       if (localApi == "") {
         // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-        apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+        apiKey = "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";
       } else {
         apiKey = localApi;
       }
@@ -55,7 +57,7 @@ class ApiServices {
     Map<String, dynamic> newresponse =
     jsonDecode(utf8.decode(response.bodyBytes));
 
-    log("RES ${newresponse['choices']}");
+    log("RES ${newresponse}");
 
     conversationHistory.add({
       "role": "assistant",
