@@ -9,12 +9,7 @@ class BabyNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<BabyNameSuggestionController>(builder: (_) {
       return WillPopScope(
-          onWillPop: () async {
-            textToSpeechCtrl.onStopTTS();
-            babyCtrl.latterController.clear();
-            babyCtrl.generatedNameController.clear();
-            return true;
-          },
+          onWillPop: () => babyCtrl.onTapClearCtrlTTS(),
           child: DirectionalityRtl(
               child: Form(
                   key: babyCtrl.scaffoldKey,

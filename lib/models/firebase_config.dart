@@ -29,7 +29,7 @@ class FirebaseConfigModel {
       homeLogo;
   bool? isChatShow, isCategorySuggestion, isVoiceEnable, isCameraEnable;
   bool? isImageGeneratorShow;
-  int? balance;
+  int? balance,rewardPoint;
   bool? isTextCompletionShow;
   bool? isTheme, isRTL;
   bool? isAddShow,
@@ -84,7 +84,7 @@ class FirebaseConfigModel {
       this.isChatHistory,
       this.isGuestLoginEnable,
       this.isGoogleAdmobEnable,
-      this.balance});
+      this.balance,this.rewardPoint});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
     bannerAddId = json['bannerAddId'] ?? "";
@@ -130,6 +130,7 @@ class FirebaseConfigModel {
     razorPayKey = json['razorPayKey'] ?? "";
     razorPaySecret = json['razorPaySecret'] ?? "";
     balance = json['balance'] ?? 5;
+    rewardPoint = json['rewardPoint'] ?? 1;
   }
 
   Map<String, dynamic> toJson() {
@@ -176,6 +177,7 @@ class FirebaseConfigModel {
     data['isGuestLoginEnable'] = isGuestLoginEnable;
     data['isGoogleAdmobEnable'] = isGoogleAdmobEnable;
     data['balance'] = balance;
+    data['rewardPoint'] = rewardPoint;
     return data;
   }
 }

@@ -63,6 +63,11 @@ export '../widgets/select_gender_layout.dart';
 export '../widgets/api_notes_layout.dart';
 export '../widgets/common_balance.dart';
 export '../../../widgets/ad_layout_common.dart';
+export '../../../widgets/common_social_login.dart';
+export '../../../widgets/chat_loader_common.dart';
+export '../../../widgets/favorite_list.dart';
+export '../../../widgets/quick_advice_list.dart';
+export '../models/category_access_model.dart';
 
 
 final appCtrl = Get.isRegistered<AppController>()

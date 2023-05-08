@@ -1,8 +1,4 @@
 import 'dart:io';
-
-import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:probot/controllers/app_pages_controllers/top_up_controller.dart';
-import 'package:probot/screens/app_screens/subscription/layouts/payment_method_list.dart';
 import '../../../../config.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
@@ -187,20 +183,10 @@ class TopUpPaymentList extends StatelessWidget {
                                                   : inAppCtrl.products[5]);
                                     }
 
-                                    String id = data == "15"
-                                        ? inAppCtrl.products[1].id
-                                        : data == "35"
-                                            ? inAppCtrl.products[0].id
-                                            : inAppCtrl.products[2].id;
 
-                                    if (id == topUp15) {
-                                      inAppCtrl.inAppPurchase.buyConsumable(
-                                          purchaseParam: purchaseParam,
-                                          autoConsume: kAutoConsume);
-                                    } else {
-                                      inAppCtrl.inAppPurchase.buyNonConsumable(
-                                          purchaseParam: purchaseParam);
-                                    }
+
+                                    inAppCtrl.inAppPurchase.buyNonConsumable(
+                                      purchaseParam: purchaseParam,);
                                     final Stream<List<PurchaseDetails>>
                                         purchaseUpdated =
                                         inAppCtrl.inAppPurchase.purchaseStream;
@@ -259,16 +245,16 @@ class TopUpPaymentList extends StatelessWidget {
       ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
     GooglePlayPurchaseDetails? oldSubscription;
 
-    if (productDetails.id == kConsumableId &&
-        purchases[kConsumableId] != null) {
-      oldSubscription = purchases[kConsumableId]! as GooglePlayPurchaseDetails;
-    } else if (productDetails.id == kUpgradeId &&
-        purchases[kUpgradeId] != null) {
-      oldSubscription = purchases[kUpgradeId]! as GooglePlayPurchaseDetails;
-    } else if (productDetails.id == kSilverSubscriptionId &&
-        purchases[kSilverSubscriptionId] != null) {
+    if (productDetails.id == topUp15 &&
+        purchases[topUp15] != null) {
+      oldSubscription = purchases[topUp15]! as GooglePlayPurchaseDetails;
+    } else if (productDetails.id == topUp35 &&
+        purchases[topUp35] != null) {
+      oldSubscription = purchases[topUp35]! as GooglePlayPurchaseDetails;
+    } else if (productDetails.id == topUp65 &&
+        purchases[topUp65] != null) {
       oldSubscription =
-          purchases[kSilverSubscriptionId]! as GooglePlayPurchaseDetails;
+          purchases[topUp65]! as GooglePlayPurchaseDetails;
     }
     return oldSubscription;
   }

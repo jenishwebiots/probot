@@ -404,12 +404,16 @@ class TopUpController extends GetxController {
 
   //currency list
   currencyListDialog() {
+    final subsCtrl = Get.isRegistered<SubscriptionController>()
+        ? Get.find<SubscriptionController>()
+        : Get.put(SubscriptionController());
+    log("SUBS : ${subsCtrl.selectedPrice}");
     Get.generalDialog(
       pageBuilder: (context, anim1, anim2) {
         return  Align(
           alignment: Alignment.center,
           child: GetBuilder<SubscriptionController>(
-            builder: (subCtrl) {
+            builder: (subsCtrl) {
               return const CurrencyList();
             }
           ),

@@ -35,9 +35,6 @@ class SplashController extends GetxController {
         appCtrl.firebaseConfigModel =
             FirebaseConfigModel.fromJson(value.docs[0].data());
         //Stripe.publishableKey = appCtrl.firebaseConfigModel!.stripePublishKey!;
-        appCtrl.isTheme = appCtrl.firebaseConfigModel!.isTheme!;
-        appCtrl.isRTL = appCtrl.firebaseConfigModel!.isRTL!;
-        appCtrl.storage.write(session.isRTL, appCtrl.isRTL);
         appCtrl.update();
         ThemeService().switchTheme(appCtrl.isTheme);
         Get.forceAppUpdate();
@@ -77,11 +74,18 @@ class SplashController extends GetxController {
             appCtrl.update();
             appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
             appCtrl.storage.write(session.isSubscribe, false);
+            appCtrl.isSubscribe = false;
           } else {
+            appCtrl.isSubscribe = true;
             appCtrl.storage.write(session.isSubscribe, true);
           }
+          appCtrl.isAnySubscribe = true;
           appCtrl.storage.write(session.isAnySubscribe, true);
         } else {
+          appCtrl.isSubscribe = false;
+          appCtrl.isAnySubscribe = false;
+          appCtrl.storage.write(session.isAnySubscribe, false);
+          appCtrl.storage.write(session.isSubscribe, false);
           await FirebaseFirestore.instance
               .collection("users")
               .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -96,6 +100,10 @@ class SplashController extends GetxController {
         }
       });
     } else {
+      appCtrl.isSubscribe = false;
+      appCtrl.isAnySubscribe = false;
+      appCtrl.storage.write(session.isAnySubscribe, false);
+      appCtrl.storage.write(session.isSubscribe, false);
       appCtrl.storage.write(session.isAnySubscribe, false);
       log("appCtrl.envConfig : ${appCtrl.envConfig}");
       /*appCtrl.envConfig["balance"] = appCtrl.firebaseConfigModel!.balance ?? 5;*/
@@ -109,6 +117,8 @@ class SplashController extends GetxController {
     bool isCharacterSaved = appCtrl.storage.read(session.isCharacter) ?? false;
     bool isUserThemeChange =
         appCtrl.storage.read(session.isUserThemeChange) ?? false;
+    bool isUserRTLChange =
+        appCtrl.storage.read(session.isUserChangeRTL) ?? false;
     appCtrl.isLocalChatApi =
         appCtrl.storage.read(session.isChatGPTKey) ?? false;
     appCtrl.isCharacter = isCharacterSaved;
@@ -116,6 +126,7 @@ class SplashController extends GetxController {
     appCtrl.isBiometric = isBiometricSave;
     appCtrl.isLogin = isLoginSave;
 
+    log("isUserRTLChange : $isUserRTLChange");
     //select Character as per selected or guest
     if (appCtrl.isGuestLogin) {
       await FirebaseFirestore.instance
@@ -133,6 +144,7 @@ class SplashController extends GetxController {
         }
       });
     } else {
+      appCtrl.selectedCharacter = appCtrl.storage.read(session.selectedCharacter);
       if (appCtrl.selectedCharacter == null) {
         await FirebaseFirestore.instance
             .collection("characters")
@@ -148,6 +160,9 @@ class SplashController extends GetxController {
             appCtrl.update();
           }
         });
+      } else {
+        appCtrl.selectedCharacter = appCtrl.storage.read(session.selectedCharacter);
+        appCtrl.update();
       }
     }
 
@@ -186,6 +201,8 @@ class SplashController extends GetxController {
     Get.updateLocale(locale);
     appCtrl.update();
     Get.forceAppUpdate();
+
+    log("CURRENCY : :${appCtrl.storage.read("currency")}");
 
     //currency
     appCtrl.currency =
@@ -239,6 +256,24 @@ class SplashController extends GetxController {
           ThemeService().switchTheme(appCtrl.isTheme);
           Get.forceAppUpdate();
         }
+
+//RTL
+        if (isUserRTLChange) {
+          bool isUserRtl = appCtrl.storage.read(session.isUserRTL) ?? false;
+          log("isUSERR : $isUserRtl");
+          appCtrl.storage.write(session.isUserRTL, isUserRtl);
+          appCtrl.isUserRTL = isUserRtl;
+          appCtrl.isUserRTLChange = true;
+          appCtrl.update();
+          Get.forceAppUpdate();
+        } else {
+          appCtrl.isUserRTLChange = false;
+          appCtrl.isUserRTL = false;
+          appCtrl.storage.write(session.isUserChangeRTL, false);
+          appCtrl.storage.write(session.isUserRTL, false);
+          appCtrl.update();
+          Get.forceAppUpdate();
+        }
         appCtrl.update();
 
         appCtrl.storage.write(session.firebaseConfig, value.docs[0].data());
@@ -263,11 +298,18 @@ class SplashController extends GetxController {
             appCtrl.update();
             appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
             appCtrl.storage.write(session.isSubscribe, false);
+            appCtrl.isSubscribe =false;
           } else {
+            appCtrl.isSubscribe = true;
             appCtrl.storage.write(session.isSubscribe, true);
           }
+          appCtrl.isAnySubscribe = true;
           appCtrl.storage.write(session.isAnySubscribe, true);
         } else {
+          appCtrl.isSubscribe = false;
+          appCtrl.isAnySubscribe = false;
+          appCtrl.storage.write(session.isAnySubscribe, false);
+          appCtrl.storage.write(session.isSubscribe, false);
           await FirebaseFirestore.instance
               .collection("users")
               .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -284,6 +326,10 @@ class SplashController extends GetxController {
         }
       });
     } else {
+      appCtrl.isSubscribe = false;
+      appCtrl.isAnySubscribe = false;
+      appCtrl.storage.write(session.isAnySubscribe, false);
+      appCtrl.storage.write(session.isSubscribe, false);
       appCtrl.storage.write(session.isAnySubscribe, false);
       log("appCtrl.envConfig : ${appCtrl.storage.read(session.envConfig)["balance"]}");
       int balance = appCtrl.storage.read(session.envConfig)["balance"];
@@ -297,7 +343,8 @@ class SplashController extends GetxController {
       log("dfrdfkugh : ${appCtrl.envConfig["balance"] }");
       final isSubscribe = appCtrl.storage.read(session.isAnySubscribe) ?? false;
       appCtrl.isSubscribe = appCtrl.storage.read(session.isSubscribe) ?? false;
-
+      Get.offAndToNamed(routeName.subscriptionPlanList) ;
+      update();
       if (onBoard) {
         if (isSubscribe) {
           if (isGuestLogin) {
@@ -340,7 +387,6 @@ class SplashController extends GetxController {
       } else {
         Get.toNamed(routeName.onBoardingScreen);
       }
-
       update();
     });
   }

@@ -745,5 +745,10 @@ final dynamic hi = {
   'selectAmount': "राशि का चयन करें :",
   'addAmountManually': "राशि मैन्युअल रूप से जोड़ें",
   'addAmount': "राशि जोड़ें",
+  'addFingerprint' : "फ़िंगरप्रिंट जोड़ें",
+  'placeYourFinger' : "अपनी उंगली सेंसर पर रखें",
+  'pressTheSensor' : "कंपन महसूस होने पर सेंसर को दबाएं और उठाएं",
+  'yourFingerprintHasBeen' : "आपका फ़िंगरप्रिंट सफलतापूर्वक जोड़ दिया गया है।",
+  'done' : "पूर्ण",
 
 };

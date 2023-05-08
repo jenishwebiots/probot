@@ -725,4 +725,9 @@ final dynamic ja = {
   'selectAmount': "金額を選択 :",
   'addAmountManually': "金額を手動で追加",
   'addAmount': "金額を追加",
+  'addFingerprint' : "指紋を追加",
+  'placeYourFinger' : "センサーに指を置く",
+  'pressTheSensor' : "振動を感じたらセンサーを押し上げます",
+  'yourFingerprintHasBeen' : "指紋が正常に追加されました。",
+  'done' : "終わり",
 };

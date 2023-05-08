@@ -11,4 +11,6 @@ class GifAssets {
   final String login = "assets/gif/login.gif";
   final String speechStart = "assets/gif/speechStart.gif";
   final String speechStartDark = "assets/gif/speechStartDark.gif";
+  final String loaderDark = "assets/gif/loaderDark.gif";
+  final String darkFingerprint = "assets/gif/darkFingerprint.gif";
 }

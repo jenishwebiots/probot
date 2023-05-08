@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import '../../../config.dart';
-import 'layouts/country_list_layout.dart';
 
 class MobileLogin extends StatelessWidget {
   final mobileCtrl = Get.put(MobileLoginController());
@@ -11,9 +8,8 @@ class MobileLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MobileLoginController>(builder: (_) {
-      log("prog: ${mobileCtrl.isLoading}");
       return Scaffold(
-        resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: false,
           appBar: const AppBarCommon(isArrow: false),
           body: Stack(alignment: Alignment.center, children: [
             Column(
@@ -35,30 +31,27 @@ class MobileLogin extends StatelessWidget {
                                             appCtrl.appTheme.lightText)),
                                     const DottedLines().paddingOnly(
                                         top: Insets.i20, bottom: Insets.i15),
-                                    Text(appFonts.phone.tr,
-                                        style: AppCss.outfitMedium16
-                                            .textColor(appCtrl.appTheme.txt)),
+                                    textCommon.outfitMediumTxt16(
+                                        text: appFonts.phone.tr),
                                     const VSpace(Sizes.s10),
-                                    Row(
-                                      children: [
-                                        const CountryListLayout(),
-                                        const HSpace(Sizes.s10),
-                                        Expanded(
+                                    Row(children: [
+                                      const CountryListLayout(),
+                                      const HSpace(Sizes.s10),
+                                      Expanded(
                                           child: TextFieldCommon(
-                                            keyboardType: TextInputType.number,
-
-                                              validator: (phone) =>
-                                                  Validation().phoneValidation(phone),
-                                              controller: mobileCtrl.mobileController,
-                                              hintText: appFonts.enterPhoneNo.tr),
-                                        ),
-                                      ],
-                                    ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              validator: (phone) => Validation()
+                                                  .phoneValidation(phone),
+                                              controller:
+                                                  mobileCtrl.mobileController,
+                                              hintText:
+                                                  appFonts.enterPhoneNo.tr))
+                                    ]),
                                     const VSpace(Sizes.s40),
                                     ButtonCommon(
-                                      title: appFonts.getOTP,
-                                      onTap: () => mobileCtrl.onTapOtp(),
-                                    )
+                                        title: appFonts.getOTP,
+                                        onTap: () => mobileCtrl.onTapOtp())
                                   ]).paddingSymmetric(
                                   horizontal: Insets.i20, vertical: Insets.i25))
                           .authBoxExtension()),

@@ -1,6 +1,3 @@
-
-import 'package:vibration/vibration.dart';
-
 import '../../../config.dart';
 
 class VoiceScreen extends StatelessWidget {
@@ -23,13 +20,8 @@ class VoiceScreen extends StatelessWidget {
               automaticallyImplyLeading: false,
               backgroundColor: appCtrl.appTheme.primary,
               actions: [
-                SvgPicture.asset(eSvgAssets.more).paddingOnly(
-                    right: appCtrl.isRTL || appCtrl.languageVal == "ar"
-                        ? 0
-                        : Insets.i15,
-                    left: appCtrl.isRTL || appCtrl.languageVal == "ar"
-                        ? Insets.i15
-                        : 0)
+                const CommonBalance().marginOnly(
+                    right: Insets.i20, top: Insets.i10, bottom: Insets.i10)
               ],
               title: Text(appFonts.voice.tr,
                   style: AppCss.outfitExtraBold22
@@ -43,7 +35,9 @@ class VoiceScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(eImageAssets.voiceImage,
-                          height: 260, width: 280, alignment: Alignment.center),
+                          height: Sizes.s260,
+                          width: Sizes.s280,
+                          alignment: Alignment.center),
                       Text(appFonts.pressTheButton.tr,
                               textAlign: TextAlign.center,
                               style: AppCss.outfitMedium14

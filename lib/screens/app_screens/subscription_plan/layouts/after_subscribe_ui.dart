@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +13,7 @@ class SubscribePlanUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(
       alignment: Alignment.topRight,
       children: [
@@ -25,7 +27,7 @@ class SubscribePlanUI extends StatelessWidget {
                               .data()["subscriptionType"]
                               .toString()
                               .toLowerCase() ==
-                          data["planType"].toString().toLowerCase()
+                          data["type"].toString().toLowerCase()
                       ? appCtrl.appTheme.yellowColor
                       : appCtrl.appTheme.primaryLight,
                   border: Border.all(
@@ -33,7 +35,7 @@ class SubscribePlanUI extends StatelessWidget {
                                   .data()["subscriptionType"]
                                   .toString()
                                   .toLowerCase() ==
-                              data["planType"].toString().toLowerCase()
+                              data["type"].toString().toLowerCase()
                           ? appCtrl.appTheme.yellowColor
                           : appCtrl.appTheme.primaryLight1),
                   borderRadius:
@@ -61,11 +63,11 @@ class SubscribePlanUI extends StatelessWidget {
                                         .data()["subscriptionType"]
                                         .toString()
                                         .toLowerCase() ==
-                                    data["planType"].toString().toLowerCase()
+                                    data["type"].toString().toLowerCase()
                                 ? Text("PURCHASED",
                                     style: AppCss.outfitMedium10
                                         .textColor(appCtrl.appTheme.lightText))
-                                : Text(data["planType"],
+                                : Text(data["type"],
                                     style: AppCss.outfitMedium14
                                         .textColor(appCtrl.appTheme.primary)),
                             const VSpace(Sizes.s10),
@@ -75,7 +77,7 @@ class SubscribePlanUI extends StatelessWidget {
                                         .toStringAsFixed(0)
                                         .toString(),
                                 style: AppCss.outfitBold18
-                                    .textColor(appCtrl.appTheme.txt)),
+                                    .textColor(appCtrl.appTheme.sameBlack)),
                             const VSpace(Sizes.s5),
                             Text("/${data["type"]}",
                                 style: AppCss.outfitRegular12
@@ -87,7 +89,7 @@ class SubscribePlanUI extends StatelessWidget {
                               .data()["subscriptionType"]
                               .toString()
                               .toLowerCase() ==
-                          data["planType"].toString().toLowerCase())
+                          data["type"].toString().toLowerCase())
                       ? Column(
                           children: [
                             Text("Renews",
@@ -120,7 +122,7 @@ class SubscribePlanUI extends StatelessWidget {
                 .data()["subscriptionType"]
                 .toString()
                 .toLowerCase() ==
-            data["planType"].toString().toLowerCase())
+            data["type"].toString().toLowerCase())
           SvgPicture.asset(
             eSvgAssets.crown,
             colorFilter:

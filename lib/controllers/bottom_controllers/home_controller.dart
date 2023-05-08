@@ -294,6 +294,36 @@ class HomeController extends GetxController {
         });
   }
 
+  onTapGoOtherPage (data) {
+      if (data["title"] == appFonts.translateAnything) {
+        Get.toNamed(routeName.translateScreen);
+      } else if (data["title"] == appFonts.codeGenerator) {
+        Get.toNamed(routeName.codeGeneratorScreen);
+      } else if (data["title"] == appFonts.emailGenerator) {
+        Get.toNamed(routeName.emailWriterScreen);
+      } else if (data["title"] == appFonts.socialMedia) {
+        Get.toNamed(routeName.socialMediaScreen);
+      } else if (data["title"] == appFonts.passwordGenerator) {
+        Get.toNamed(routeName.passwordGeneratorScreen);
+      } else if (data["title"] == appFonts.essayWriter) {
+        Get.toNamed(routeName.essayWriterScreen);
+      } else if (data["title"] == appFonts.travelHangout) {
+        Get.toNamed(routeName.travelScreen);
+      } else if (data["title"] == appFonts.personalAdvice) {
+        Get.toNamed(routeName.personalAdvisorScreen);
+      } else if (data["title"] == appFonts.content1) {
+        Get.toNamed(routeName.contentWriterScreen);
+      } else {
+        Get.toNamed(routeName.chatLayout);
+        final chatCtrl = Get.isRegistered<ChatLayoutController>()
+            ? Get.find<ChatLayoutController>()
+            : Get.put(ChatLayoutController());
+        chatCtrl.getChatId();
+        update();
+      }
+  }
+
+
   @override
   void dispose() {
     // TODO: Dispose a BannerAd object

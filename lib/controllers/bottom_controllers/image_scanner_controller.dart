@@ -106,33 +106,38 @@ class ImageScannerController extends GetxController {
       final inputImage = InputImage.fromFile(file);
       final recognizedText = await textRecognizer.processImage(inputImage);
       int balance = appCtrl.envConfig["balance"];
-      if (appCtrl.isSubscribe == false) {
-        if (balance == 0) {
-          appCtrl.balanceTopUpDialog();
-          update();
+      if (recognizedText.text.isNotEmpty) {
+        if (appCtrl.isSubscribe == false) {
+          if (balance == 0) {
+            appCtrl.balanceTopUpDialog();
+            update();
+          } else {
+            Get.toNamed(routeName.chatLayout,
+                arguments: {"recText": recognizedText.text});
+            final chatCtrl = Get.isRegistered<ChatLayoutController>()
+                ? Get.find<ChatLayoutController>()
+                : Get.put(ChatLayoutController());
+            chatCtrl.getChatId();
+          }
         } else {
           Get.toNamed(routeName.chatLayout,
               arguments: {"recText": recognizedText.text});
           final chatCtrl = Get.isRegistered<ChatLayoutController>()
               ? Get.find<ChatLayoutController>()
               : Get.put(ChatLayoutController());
+          chatCtrl.chatController.text = recognizedText.text;
+          chatCtrl.textInput.value = recognizedText.text;
           chatCtrl.getChatId();
         }
       } else {
-        Get.toNamed(routeName.chatLayout,
-            arguments: {"recText": recognizedText.text});
-        final chatCtrl = Get.isRegistered<ChatLayoutController>()
-            ? Get.find<ChatLayoutController>()
-            : Get.put(ChatLayoutController());
-        chatCtrl.getChatId();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('An error occurred when scanning text'),
+          ),
+        );
       }
-      log("000000000000000000000000000000000000000${recognizedText.text}");
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('An error occurred when scanning text'),
-        ),
-      );
+        log("$e");
     }
   }
 

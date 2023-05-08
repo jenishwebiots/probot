@@ -18,6 +18,10 @@ class ImageScannerScreen extends StatelessWidget {
               elevation: 0,
               toolbarHeight: 70,
               leadingWidth: Sizes.s70,
+              actions: [
+
+                const CommonBalance().marginOnly(right: Insets.i20,top: Insets.i10,bottom: Insets.i10)
+              ],
               leading: const CommonMenuIcon().inkWell(
                   onTap: () =>
                       imageCtrl.scaffoldKey.currentState!.openDrawer()),

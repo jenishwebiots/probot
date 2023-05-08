@@ -15,7 +15,9 @@ class ImagePreview extends StatelessWidget {
           SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child:imagePreviewCtrl.image != null ? Image.network(imagePreviewCtrl.image, fit: BoxFit.cover) : const CircularProgressIndicator()),
+              child: imagePreviewCtrl.image != null
+                  ? Image.network(imagePreviewCtrl.image, fit: BoxFit.cover)
+                  : const CircularProgressIndicator()),
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(children: [
               SvgPicture.asset(eSvgAssets.leftArrow,
@@ -30,10 +32,9 @@ class ImagePreview extends StatelessWidget {
             Row(children: [
               Expanded(
                   child: ButtonCommon(
-                title: appFonts.share,
-                onTap: () => Share.share(imagePreviewCtrl.image,
-                    subject: "Probot image")
-              )),
+                      title: appFonts.share,
+                      onTap: () => Share.share(imagePreviewCtrl.image,
+                          subject: "Probot image"))),
               const HSpace(Sizes.s15),
               Expanded(
                   child: ButtonCommon(

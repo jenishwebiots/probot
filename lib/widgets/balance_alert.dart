@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer';
 import 'package:probot/widgets/common_app_widget.dart';
-
 import '../config.dart';
 
 class BalanceAlertDialog extends StatelessWidget {
@@ -22,7 +21,7 @@ class BalanceAlertDialog extends StatelessWidget {
                     .textDecoration(TextDecoration.none)),
             InkWell(
                 onTap: () => Get.back(),
-                child: SvgPicture.asset(eSvgAssets.cancel, height: Sizes.s24))
+                child: SvgPicture.asset(eSvgAssets.cancel, height: Sizes.s24,colorFilter: ColorFilter.mode(appCtrl.appTheme.black, BlendMode.srcIn),))
           ]).paddingAll(Insets.i20),
           DottedLine(
               direction: Axis.horizontal,
@@ -71,21 +70,29 @@ class BalanceAlertDialog extends StatelessWidget {
                 if (appCtrl.isGuestLogin) {
                   Get.toNamed(routeName.signInScreen);
                 } else {
-                  FirebaseFirestore.instance
-                      .collection("userSubscribe")
-                      .where("email", isEqualTo: appCtrl.storage.read("userName"))
-                      .limit(1)
-                      .get()
-                      .then((value) {
-                    if (value.docs.isNotEmpty) {
-                      Get.toNamed(routeName.subscriptionPlan);
-                    } else {
-                      Get.toNamed(routeName.subscriptionPlanList);
-                    }
-                  });
+                  log("USERNAME : ${appCtrl.storage.read("userName")}");
+                  if(appCtrl.storage.read("userName") == null){
+                    Get.toNamed(routeName.subscriptionPlanList);
+                  }else {
+                    FirebaseFirestore.instance
+                        .collection("userSubscribe")
+                        .where(
+                        "email", isEqualTo: appCtrl.storage.read("userName"))
+                        .limit(1)
+                        .get()
+                        .then((value) {
+                      log("DAA : ${value.docs[0].exists}");
+                      if (value.docs.isNotEmpty) {
+                        Get.toNamed(routeName.subscriptionPlan);
+                      } else {
+                        Get.toNamed(routeName.subscriptionPlanList);
+                      }
+                    });
+                  }
                 }
               }),
           const VSpace(Sizes.s15),
+          if(appCtrl.isSubscribe == false)
           Text(appFonts.topBalance.tr,
                   style: AppCss.outfitRegular18
                       .textColor(appCtrl.appTheme.primary)).inkWell(onTap: (){
@@ -93,7 +100,7 @@ class BalanceAlertDialog extends StatelessWidget {
                         Get.toNamed(routeName.balanceTopUp);
           })
               .alignment(Alignment.center),
-          const VSpace(Sizes.s15),
+          if(appCtrl.isSubscribe == false)          const VSpace(Sizes.s15),
           Text(appFonts.inputApiKey.tr,
                   style: AppCss.outfitRegular18
                       .textColor(appCtrl.appTheme.primary)).inkWell(onTap: (){

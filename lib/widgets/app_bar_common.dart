@@ -37,9 +37,7 @@ class AppAppBarCommon extends StatelessWidget with PreferredSizeWidget {
             child: SvgPicture.asset(appCtrl.isRTL || appCtrl.languageVal == "ar" ? eSvgAssets.rightArrow1 : eSvgAssets.leftArrow,
                 height: 10,
                 colorFilter: ColorFilter.mode(
-                    appCtrl.isTheme
-                        ? appCtrl.appTheme.sameWhite
-                        : appCtrl.appTheme.white,
+                    appCtrl.appTheme.sameWhite,
                     BlendMode.srcIn))
 
                 .inkWell(onTap: leadingOnTap),

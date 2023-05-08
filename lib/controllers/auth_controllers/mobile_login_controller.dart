@@ -4,7 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:pinput/pinput.dart';
+import 'package:probot/screens/auth_screens/mobile_login/layouts/otp_screen.dart';
 
 import '../../config.dart';
 import '../../env.dart';
@@ -15,7 +17,7 @@ class MobileLoginController extends GetxController {
   GlobalKey<FormState> otpGlobalKey = GlobalKey<FormState>();
   TextEditingController mobileController = TextEditingController();
   TextEditingController otpController = TextEditingController();
-  String? userName;
+  String? userName,verificationCode;
   FirebaseAuth auth = FirebaseAuth.instance;
   bool isLoading = false;
 
@@ -29,223 +31,23 @@ class MobileLoginController extends GetxController {
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException e) {},
         codeSent: (String verificationId, int? resendToken) async {
-          verificationId = verificationId;
+          verificationCode = verificationId;
           var phoneUser = FirebaseAuth.instance.currentUser;
 
           userName = phoneUser?.phoneNumber;
-
+          isLoading = false;
+          update();
           showDialog(
               barrierDismissible: false,
               context: Get.context!,
               builder: (context) {
-                return AlertDialog(
-                    contentPadding: EdgeInsets.zero,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(AppRadius.r14))),
-                    backgroundColor: appCtrl.appTheme.white,
-                    content: Stack(
-                      children: [
-                        Stack(alignment: Alignment.topRight, children: [
-                          Form(
-                            key: otpGlobalKey,
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const VSpace(Sizes.s55),
-                                  Text(appFonts.weHaveSentTheCode.tr,
-                                      textAlign: TextAlign.center,
-                                      style: AppCss.outfitMedium16
-                                          .textColor(appCtrl.appTheme.txt)
-                                          .textHeight(1.2)),
-
-                                  const VSpace(Sizes.s18),
-                                  // Number
-                                  Text("“${mobileController.text}“",
-                                          style: AppCss.outfitSemiBold16
-                                              .textColor(appCtrl.appTheme.txt))
-                                      .paddingSymmetric(horizontal: Insets.i5),
-                                  const VSpace(Sizes.s25),
-                                  OtpLayout(
-                                      controller: otpController,
-                                      validator: (value) =>
-                                          Validation().otpValidation(value),
-                                      onSubmitted: (val) {
-                                        otpController.text = val;
-                                      },
-                                      defaultPinTheme: defaultPinTheme,
-                                      errorPinTheme: defaultPinTheme.copyWith(
-                                          decoration: BoxDecoration(
-                                              color: appCtrl.appTheme.error,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      AppRadius.r5))),
-                                      focusedPinTheme: defaultPinTheme.copyWith(
-                                          height: Sizes.s48,
-                                          width: Sizes.s55,
-                                          decoration: defaultPinTheme
-                                              .decoration!
-                                              .copyWith(
-                                                  color: appCtrl
-                                                      .appTheme.textField,
-                                                  border: Border.all(
-                                                      color: appCtrl
-                                                          .appTheme.primary)))),
-                                  const VSpace(Sizes.s25),
-                                  ButtonCommon(
-                                      onTap: () async {
-                                        if (otpGlobalKey.currentState!
-                                            .validate()) {
-                                          try {
-                                            isLoading = true;
-                                            update();
-                                            PhoneAuthCredential credential =
-                                                PhoneAuthProvider.credential(
-                                                    verificationId:
-                                                        verificationId,
-                                                    smsCode: otpController.text
-                                                        .toString());
-                                            await auth.signInWithCredential(
-                                                credential);
-                                            isLoading = false;
-                                            update();
-                                            await FirebaseFirestore.instance
-                                                .collection('users')
-                                                .where('id',
-                                                    isEqualTo: phoneUser?.uid)
-                                                .limit(1)
-                                                .get()
-                                                .then((value) async {
-                                              log("doc ${value.docs.isEmpty}");
-                                              if (value.docs.isEmpty) {
-                                                FirebaseMessaging.instance
-                                                    .getToken()
-                                                    .then((token) async {
-                                                  // Update data to server if new user
-                                                  await FirebaseFirestore
-                                                      .instance
-                                                      .collection('users')
-                                                      .doc(phoneUser?.uid)
-                                                      .set({
-                                                    'logintype': "Email",
-                                                    'nickname':
-                                                        phoneUser?.displayName,
-                                                    'email': phoneUser?.email,
-                                                    'phone':
-                                                        phoneUser?.phoneNumber,
-                                                    'id': phoneUser?.uid,
-                                                    "balance": 5,
-                                                    "fcmToken": token,
-                                                    "isActive": true
-                                                  });
-                                                });
-                                                appCtrl.envConfig["balance"] =
-                                                    5;
-                                                isLoading = false;
-                                                update();
-                                                appCtrl.storage.write("number",
-                                                    mobileController.text);
-                                                appCtrl.storage.write(
-                                                    "id", phoneUser?.uid);
-                                                await checkData();
-                                                Get.offAllNamed(routeName
-                                                    .selectLanguageScreen);
-                                              } else {
-
-                                                if (value.docs[0]
-                                                        .data()["isActive"] ==
-                                                    true) {
-                                                  if (value.docs[0]
-                                                      .data()["balance"] ==
-                                                      null) {
-                                                    appCtrl.envConfig["balance"] =
-                                                    5;
-                                                  }
-                                                  isLoading = false;
-                                                  update();
-                                                  appCtrl.storage.write("number",
-                                                      mobileController.text);
-                                                  appCtrl.storage.write(
-                                                      "id", phoneUser?.uid);
-                                                  await checkData();
-                                                  Get.offAllNamed(routeName
-                                                      .selectLanguageScreen);
-                                                  update();
-                                                  await FirebaseMessaging
-                                                      .instance
-                                                      .getToken()
-                                                      .then((token) async {
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection('users')
-                                                        .doc(phoneUser?.uid)
-                                                        .update({
-                                                      "fcmToken": token,
-                                                      "isActive": true,
-                                                      "balance": appCtrl
-                                                          .envConfig["balance"]
-                                                    });
-                                                  });
-                                                  appCtrl.envConfig["balance"] =
-                                                      value.docs[0]
-                                                          .data()["balance"];
-                                                } else {
-                                                  showAlertDialog();
-                                                }
-                                              }
-                                            });
-                                          } catch (e) {
-                                            isLoading = false;
-                                            update();
-                                            snackBarMessengers(
-                                                message: 'Invalid code');
-                                          }
-                                        }
-                                      },
-                                      title: appFonts.verifyProceed),
-                                  const VSpace(Sizes.s15),
-                                  RichText(
-                                      text: TextSpan(
-                                          text: appFonts.dontReciveOtp.tr,
-                                          style: AppCss.outfitMedium14
-                                              .textColor(
-                                                  appCtrl.appTheme.lightText),
-                                          children: [
-                                        TextSpan(
-                                            text: appFonts.resendIt.tr,
-                                            style: AppCss.outfitMedium14
-                                                .textColor(
-                                                    appCtrl.appTheme.primary))
-                                      ]))
-                                ]).paddingSymmetric(
-                                horizontal: Insets.i20, vertical: Insets.i20),
-                          ),
-                          Column(mainAxisSize: MainAxisSize.min, children: [
-                            const VSpace(Sizes.s5),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Title
-                                  Text(appFonts.otpVerification,
-                                          style: AppCss.outfitSemiBold20
-                                              .textColor(appCtrl.appTheme.txt))
-                                      .paddingSymmetric(horizontal: Insets.i20),
-                                  IconButton(
-                                      onPressed: () => Get.back(),
-                                      icon: Icon(CupertinoIcons.multiply,
-                                          size: Sizes.s20,
-                                          color: appCtrl.appTheme.lightText))
-                                ]),
-                            const VSpace(Sizes.s5),
-                            DottedLines(
-                                width: MediaQuery.of(context).size.width)
-                          ])
-                        ]),
-                        if (isLoading == true)
-                          const Center(child: CircularProgressIndicator())
-                      ],
-                    ));
+                return StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) {
+                      return GetBuilder<MobileLoginController>(
+                          builder: (mobileCtrl) {
+                            return OtpScreen(user: phoneUser,id: verificationCode);
+                          });
+                    });
               });
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
@@ -271,10 +73,13 @@ class MobileLoginController extends GetxController {
         } else {
           appCtrl.isSubscribe = true;
           appCtrl.storage.write(session.isSubscribe, true);
-        }
+        }    appCtrl.isAnySubscribe = false;
         appCtrl.storage.write(session.isAnySubscribe, true);
       } else {
+        appCtrl.isSubscribe = false;
+        appCtrl.isAnySubscribe = false;
         appCtrl.storage.write(session.isAnySubscribe, false);
+        appCtrl.storage.write(session.isSubscribe, false);
         appCtrl.envConfig = environment;
         appCtrl.storage.write(session.envConfig, appCtrl.envConfig);
         appCtrl.envConfig = appCtrl.storage.read(session.envConfig);
@@ -290,4 +95,122 @@ class MobileLoginController extends GetxController {
           color: appCtrl.appTheme.textField,
           borderRadius: BorderRadius.circular(AppRadius.r5),
           border: Border.all(color: appCtrl.appTheme.trans)));
+
+  //on verify code
+  void onVerifyCode() {
+    isLoading = true;
+    update();
+
+    verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {}
+
+    verificationFailed(FirebaseAuthException authException) {}
+
+    codeSent(String verificationId, int? resendToken) async {
+      verificationCode = verificationId;
+      var phoneUser = FirebaseAuth.instance.currentUser;
+      userName = phoneUser?.phoneNumber;
+      isLoading = false;
+      update();
+    }
+
+    auth.verifyPhoneNumber(
+      phoneNumber: "+91${mobileController.text.toString()}",
+      timeout: const Duration(seconds: 60),
+      verificationCompleted: verificationCompleted,
+      verificationFailed: verificationFailed,
+      codeSent: codeSent,
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+    isLoading = false;
+    update();
+  }
+
+  onTapValidateOtp({id, pUser}) async {
+    if (otpGlobalKey.currentState!.validate()) {
+      try {
+        isLoading = true;
+        update();
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+            verificationId: id, smsCode: otpController.text.toString());
+        await auth.signInWithCredential(credential);
+        isLoading = false;
+        update();
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('id', isEqualTo: auth.currentUser!.uid)
+            .limit(1)
+            .get()
+            .then((value) async {
+          log("doc ${value.docs.isEmpty}");
+          if (value.docs.isEmpty) {
+            FirebaseMessaging.instance.getToken().then((token) async {
+              // Update data to server if new user
+              await FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(auth.currentUser!.uid)
+                  .set({
+                'logintype': "Phone",
+                'nickname': pUser?.displayName,
+                'email': pUser?.email,
+                'phone': pUser?.phoneNumber,
+                'id': auth.currentUser!.uid,
+                "balance": 5,
+                "fcmToken": token,
+                "isActive": true
+              });
+            });
+            appCtrl.envConfig["balance"] = 5;
+            isLoading = false;
+            update();
+            appCtrl.isSubscribe = false;
+            appCtrl.isAnySubscribe = false;
+            appCtrl.storage.write("number", mobileController.text);
+            appCtrl.storage.write("id", auth.currentUser!.uid);
+            appCtrl.storage.write(session.isSubscribe, false);
+            appCtrl.storage.write(session.isAnySubscribe, false);
+            await checkData();
+            Get.offAllNamed(routeName.selectLanguageScreen);
+          } else {
+            bool isResult = value.docs[0].data()["isActive"] ?? true;
+            if (isResult) {
+              if (value.docs[0].data()["balance"] == null) {
+                appCtrl.envConfig["balance"] = 5;
+              }
+              isLoading = false;
+              update();
+              appCtrl.isSubscribe = false;
+              appCtrl.isAnySubscribe = false;
+              appCtrl.storage.write(session.isSubscribe, false);
+              appCtrl.storage.write(session.isAnySubscribe, false);
+              appCtrl.storage.write("number", mobileController.text);
+              appCtrl.storage.write("id", auth.currentUser!.uid);
+              appCtrl.update();
+              await checkData();
+              Get.offAllNamed(routeName.selectLanguageScreen);
+              update();
+              await FirebaseMessaging.instance.getToken().then((token) async {
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(auth.currentUser!.uid)
+                    .update({
+                  "fcmToken": token,
+                  "isActive": true,
+                  "balance": appCtrl.envConfig["balance"]
+                });
+              });
+              appCtrl.envConfig["balance"] = value.docs[0].data()["balance"];
+            } else {
+              showAlertDialog();
+            }
+          }
+        });
+      } catch (e) {
+        isLoading = false;
+        update();
+        snackBarMessengers(message: 'Invalid code');
+      }
+    }
+  }
+
 }

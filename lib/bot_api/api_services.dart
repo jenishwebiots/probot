@@ -7,10 +7,11 @@ import 'package:probot/config.dart';
 
 class ApiServices {
   static var client = http.Client();
-
+  static List<Map<String, String>> conversationHistory = [];
   static Future<String> chatCompeletionResponse(String prompt,{addApiKey}) async {
     bool isLocalChatApi = appCtrl.storage.read(session.isChatGPTKey) ?? false;
-    if(appCtrl.isSubscribe == false || isLocalChatApi == false ) {
+    if(appCtrl.isSubscribe == false || isLocalChatApi == false || addApiKey == null ) {
+
       final firebaseCtrl =
       Get.isRegistered<SubscriptionFirebaseController>()
           ? Get.find<SubscriptionFirebaseController>()
@@ -18,6 +19,8 @@ class ApiServices {
       firebaseCtrl.removeBalance();
     }var url = Uri.https("api.openai.com", "/v1/chat/completions");
     log("prompt : $prompt");
+
+    conversationHistory.add({"role": "user", "content": prompt});
 
     String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
     log("API: $localApi");
@@ -27,7 +30,7 @@ class ApiServices {
     }else {
       if (localApi == "") {
         // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-        apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
+        apiKey = "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";
       } else {
         apiKey = localApi;
       }
@@ -46,20 +49,22 @@ class ApiServices {
         'top_p': 1,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0,
-        "messages": [
-          {"role": "user", "content": prompt}
-        ]
+        "messages": conversationHistory
       }),
     );
 
-    print("hello chat");
-    print(
-        "Chat respons   =======${jsonDecode(utf8.decode(response.bodyBytes))}");
-    log("STATUS : ${response.statusCode}");
     // Do something with the response
     Map<String, dynamic> newresponse =
-        jsonDecode(utf8.decode(response.bodyBytes));
+    jsonDecode(utf8.decode(response.bodyBytes));
 
+    log("RES ${newresponse}");
+
+    conversationHistory.add({
+      "role": "assistant",
+      "content": newresponse['choices'][0]['message']['content']
+    });
+
+log("STATUSCODE ${response.statusCode}");
     return response.statusCode == 200
         ? newresponse['choices'][0]['message']['content']
         : "";

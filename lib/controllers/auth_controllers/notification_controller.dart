@@ -5,7 +5,7 @@ import 'package:probot/config.dart';
 class AllowNotificationController extends GetxController {
 
   onTapAllow() {
-    openAppSettings().then((value)=> Get.offAllNamed(routeName.loginScreen));
+    openAppSettings().then((value)=>  Get.offAllNamed(routeName.subscriptionPlanList, arguments: false));
     update();
   }
 
@@ -14,7 +14,7 @@ class AllowNotificationController extends GetxController {
     PermissionStatus status = await Permission.notification.request();
     if (status.isGranted) {
       log("GRANTED PERMISSION");
-      Get.toNamed(routeName.loginScreen);
+      Get.offAllNamed(routeName.subscriptionPlanList, arguments: false);
     }
     else {
       log("NO PERMISSION");

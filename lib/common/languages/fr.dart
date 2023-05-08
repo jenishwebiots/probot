@@ -800,4 +800,9 @@ final dynamic fr = {
   'selectAmount': "Sélectionnez le montant :",
   'addAmountManually': "Ajouter le montant manuellement",
   'addAmount': "Ajouter un montant",
+  'addFingerprint' : "Ajouter une empreinte digitale",
+  'placeYourFinger' : "Placez votre doigt sur le capteur",
+  'pressTheSensor' : "Appuyez sur le capteur et soulevez-le lorsque vous ressentez des vibrations",
+  'yourFingerprintHasBeen' : "Votre empreinte digitale a été ajoutée avec succès.",
+  'done' : "Fait",
 };

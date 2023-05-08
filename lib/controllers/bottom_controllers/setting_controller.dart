@@ -86,12 +86,19 @@ class SettingController extends GetxController {
 
     } else if (data['title'] == "logout") {
       FirebaseAuth.instance.signOut();
-      appCtrl.storage.erase();
+
       appCtrl.storage.remove(session.envConfig);
       appCtrl.storage.remove(session.isGuestLogin);
       appCtrl.storage.remove("userName");
       appCtrl.storage.remove("email");
       appCtrl.storage.remove("id");
+      appCtrl.storage.remove("number");
+      appCtrl.storage.remove(session.isUserTheme);
+      appCtrl.storage.remove(session.isUserThemeChange);
+      appCtrl.storage.remove(session.isUserChangeRTL);
+      appCtrl.storage.remove(session.isUserRTL);
+      appCtrl.storage.remove(session.isSubscribe);
+      appCtrl.storage.remove(session.isAnySubscribe);
       appCtrl.update();
       Get.forceAppUpdate();
       Get.offAllNamed(routeName.signInScreen);

@@ -1,8 +1,5 @@
-
-
 import 'package:intl/intl.dart';
 import 'package:probot/widgets/common_volume.dart';
-
 import '../../../../config.dart';
 
 class Sender extends StatelessWidget {
@@ -33,11 +30,11 @@ class Sender extends StatelessWidget {
                                           int.parse(chatListModel["createdDate"]
                                               .toString()))),
                                   style: AppCss.outfitMedium12
-                                      .textColor(appCtrl.appTheme.sameWhite),
+                                      .textColor(appCtrl.appTheme.sameWhite)
                                 ),
                                 CommonVolume(message: chatListModel["message"])
                               ]),
-                        )
+                        ).inkWell(onTap: ()=> chatCtrl.onTapUnselect())
                       : CommonContent(
                           text: chatListModel["message"],
                           index: index,
@@ -51,15 +48,19 @@ class Sender extends StatelessWidget {
                                         int.parse(chatListModel["createdDate"]
                                             .toString()))),
                                 style: AppCss.outfitMedium12
-                                    .textColor(appCtrl.appTheme.sameWhite),
+                                    .textColor(appCtrl.appTheme.sameWhite)
                               ),
                               const HSpace(Sizes.s15),
                               CommonVolume(message: chatListModel["message"])
                             ],
-                          )),
-                  const VSpace(Sizes.s3),
+                          )).inkWell(onTap: ()=> chatCtrl.onTapUnselect()),
+                  const VSpace(Sizes.s3)
                 ],
-              ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5))
+              ).marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5)).backgroundColor(chatCtrl.isLongPress == true
+          ? chatCtrl.selectedIndex.contains(index)
+          ? appCtrl.appTheme.primaryLight
+          : appCtrl.appTheme.trans
+          : appCtrl.appTheme.trans)
           .onLongPressTap(onLongPress: () {
         chatCtrl.isLongPress = true;
         if (!chatCtrl.selectedIndex.contains(index)) {

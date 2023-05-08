@@ -394,7 +394,9 @@ int selectedPrice =0;
   // payments list
   paymentDialog(data, subscribe) {
     log("appCtrl.isGuestLogin : ${appCtrl.isGuestLogin}");
-    if (appCtrl.isGuestLogin) {
+    log("appCtrl.isGuestLogin : $subscribe");
+    log("appCtrl.isGuestLogin : ${data!.toString()}");
+    if (appCtrl.isGuestLogin  ) {
       Get.offAllNamed(routeName.signInScreen);
     } else {
       Get.generalDialog(
@@ -403,7 +405,7 @@ int selectedPrice =0;
           return Align(
             alignment: Alignment.center,
             child: PaymentList(
-              data: data!,
+              data: data!.toString(),
               subscribe: subscribe,
             ),
           );

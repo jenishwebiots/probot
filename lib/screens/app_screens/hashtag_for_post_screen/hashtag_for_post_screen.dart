@@ -1,5 +1,4 @@
 import '../../../config.dart';
-import 'package:vibration/vibration.dart';
 
 class HashtagForPostScreen extends StatelessWidget {
   const HashtagForPostScreen({Key? key}) : super(key: key);

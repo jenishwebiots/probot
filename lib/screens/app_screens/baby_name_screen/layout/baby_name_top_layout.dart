@@ -36,7 +36,9 @@ class BabyNameTopLayout extends StatelessWidget {
                             index: e.key,
                             selectIndex: babyCtrl.selectedNameIndex,
                             onTap: () => babyCtrl.onNameSuggestionChange(e.key))
-                        .paddingOnly(right: appCtrl.isRTL ? 0 : Insets.i50,left: appCtrl.isRTL ? Insets.i50 : 0))
+                        .paddingOnly(
+                            right: appCtrl.isRTL ? 0 : Insets.i50,
+                            left: appCtrl.isRTL ? Insets.i50 : 0))
                     .toList()),
             const VSpace(Sizes.s5),
             babyCtrl.selectedNameIndex == 0
@@ -58,12 +60,11 @@ class BabyNameTopLayout extends StatelessWidget {
               .paddingSymmetric(vertical: Insets.i20, horizontal: Insets.i15)
               .authBoxExtension()
         ]),
-        const VSpace(Sizes.s30),
         ButtonCommon(
-            title: appFonts.suggestMeTheLovelyName,
-            onTap: () => babyCtrl.onNameGenerate()),
-        const VSpace(Sizes.s30),
-        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
+                title: appFonts.suggestMeTheLovelyName,
+                onTap: () => babyCtrl.onNameGenerate())
+            .paddingSymmetric(vertical: Insets.i30),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error)
       ]);
     });
   }

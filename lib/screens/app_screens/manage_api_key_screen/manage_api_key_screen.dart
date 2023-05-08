@@ -4,7 +4,6 @@ import '../../../controllers/app_pages_controllers/manage_api_controller.dart';
 
 class ManageApiKeyScreen extends StatelessWidget {
   final manageApiCtrl = Get.put(ManageApiController());
- final GlobalKey<ScaffoldState> manageScaffoldKey = GlobalKey<ScaffoldState>();
    ManageApiKeyScreen({Key? key}) : super(key: key);
 
   @override
@@ -13,7 +12,7 @@ class ManageApiKeyScreen extends StatelessWidget {
       builder: (_) {
         return DirectionalityRtl(
           child: Scaffold(
-            key: manageScaffoldKey,
+
             backgroundColor: appCtrl.appTheme.bg1,
             appBar: AppAppBarCommon(title: appFonts.manageApiKey,leadingOnTap: ()=> Get.offAllNamed(routeName.addApiKeyScreen)),
             body: Column(

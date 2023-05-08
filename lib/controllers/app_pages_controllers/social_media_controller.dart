@@ -217,7 +217,7 @@ class SocialMediaController extends GetxController
   }
 
   onHashtagGenerate() {
-    if (musicGeneratedController.text.isNotEmpty) {
+    if (hashtagController.text.isNotEmpty) {
       int balance = appCtrl.envConfig["balance"];
       if (balance == 0) {
         appCtrl.balanceTopUpDialog();

@@ -1,5 +1,3 @@
-import 'package:pinput/pinput.dart';
-
 import '../../../../config.dart';
 
 class OtpLayout extends StatelessWidget {
@@ -7,7 +5,16 @@ class OtpLayout extends StatelessWidget {
   final ValueChanged<String>? onSubmitted;
   final TextEditingController? controller;
   final PinTheme? errorPinTheme, defaultPinTheme, focusedPinTheme;
-  const OtpLayout({Key? key,this.validator, this.controller, this.onSubmitted,this.defaultPinTheme,this.errorPinTheme,this.focusedPinTheme}) : super(key: key);
+
+  const OtpLayout(
+      {Key? key,
+      this.validator,
+      this.controller,
+      this.onSubmitted,
+      this.defaultPinTheme,
+      this.errorPinTheme,
+      this.focusedPinTheme})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,6 @@ class OtpLayout extends StatelessWidget {
             defaultPinTheme: defaultPinTheme,
             onCompleted: (pin) {},
             focusedPinTheme: focusedPinTheme,
-            errorPinTheme: errorPinTheme)
-            );
+            errorPinTheme: errorPinTheme));
   }
 }

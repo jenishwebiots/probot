@@ -2021,4 +2021,15 @@ class AppArray {
     "Pharmacies"
   ];
 
+  var apiNoteList = [
+    {
+      "title": appFonts.note,
+      "note": [
+        {'title':appFonts.yourMobileDevices},
+        {'title':appFonts.youCanKeep},
+        {'title':appFonts.balanceNote}
+      ]
+    }
+  ];
+
 }

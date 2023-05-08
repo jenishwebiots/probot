@@ -99,8 +99,8 @@ class SubscriptionList extends StatelessWidget {
                                                               .toString(),
                                                       style: AppCss.outfitBold18
                                                           .textColor(
-                                                       appCtrl.isTheme ? appCtrl.appTheme.sameBlack :   appCtrl.appTheme
-                                                              .txt)),
+                                                      appCtrl.appTheme
+                                                              .sameBlack)),
                                                   const VSpace(Sizes.s5),
                                                   Text("/${e.value
                                                       .data()["type"]}",
@@ -147,6 +147,8 @@ class SubscriptionList extends StatelessWidget {
                       ],
                     ).marginSymmetric(horizontal: Insets.i10);
                   } else {
+                    subscribeCtrl.subscribeModel = SubscribeModel.fromJson(snapshot.data!.docs[0].data());
+                    subscribeCtrl.selectedPrice = subscribeCtrl.subscribeModel!.price!;
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -223,7 +225,7 @@ class SubscriptionList extends StatelessWidget {
                                                       style: AppCss.outfitBold18
                                                           .textColor(
                                                           appCtrl.appTheme
-                                                              .txt)),
+                                                              .sameBlack)),
                                                   const VSpace(Sizes.s5),
                                                   Text("/${e.value
                                                       .data()["type"]}",

@@ -1,7 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-
 import '../../../config.dart';
-import 'layouts/tab_common.dart';
 
 class Dashboard extends StatelessWidget {
   final dashboardCtrl = Get.put(DashboardController());
@@ -28,19 +25,8 @@ class Dashboard extends StatelessWidget {
                                 .elementAt(dashboardCtrl.selectedIndex),
                             bottomNavigationBar: Container(
                                 height: Sizes.s50,
-                                margin:const EdgeInsets.only(bottom: Insets.i5),
-                                decoration: BoxDecoration(
-                                    color: appCtrl.appTheme.boxBg,
-                                    boxShadow:  [
-                                      BoxShadow(
-                                          color:appCtrl.appTheme.borderColor,
-                                          blurRadius: 20,
-                                          offset:const Offset(4, -1))
-                                    ],
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(AppRadius.r10),
-                                        topRight:
-                                            Radius.circular(AppRadius.r10))),
+                                margin:
+                                    const EdgeInsets.only(bottom: Insets.i5),
                                 width: double.maxFinite,
                                 child: Row(
                                     mainAxisAlignment:
@@ -66,20 +52,21 @@ class Dashboard extends StatelessWidget {
                                             sImage: eSvgAssets.galleryColor,
                                             usImage: eSvgAssets.gallery,
                                             index: 2),
-                                      if (appCtrl.firebaseConfigModel!
-                                          .isTextCompletionShow!)
+                                      if (appCtrl
+                                          .firebaseConfigModel!.isVoiceEnable!)
                                         TabCommon(
                                             title: "voice",
                                             sImage: eSvgAssets.micColor,
                                             usImage: eSvgAssets.micNav,
                                             index: 3),
-                                      TabCommon(
-                                          title: "camera",
-                                          sImage: eSvgAssets.cameraColor,
-                                          usImage: eSvgAssets.cameraNav,
-                                          index: 4)
-                                    ]))
-                            );
+                                      if (appCtrl
+                                          .firebaseConfigModel!.isCameraEnable!)
+                                        TabCommon(
+                                            title: "camera",
+                                            sImage: eSvgAssets.cameraColor,
+                                            usImage: eSvgAssets.cameraNav,
+                                            index: 4)
+                                    ])).bottomNavExtension());
                   })));
     });
   }

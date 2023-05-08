@@ -28,14 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: SignInTextField()))
                     .paddingSymmetric(
                         horizontal: Insets.i20, vertical: Insets.i15),
-                Text(appFonts.simplyUseThis.tr,
-                        textAlign: TextAlign.center,
-                        style: AppCss.outfitMedium16
-                            .textColor(appCtrl.appTheme.lightText)
-                            .textHeight(1.3))
-                    .alignment(Alignment.bottomCenter)
-                    .paddingSymmetric(
-                        vertical: Insets.i40, horizontal: Insets.i20),
+                textCommon.simplyUseTextAuth(),
               ]).height(MediaQuery.of(context).size.height),
               if (signInCtrl.isLoading == true)
                 const Center(child: CircularProgressIndicator())

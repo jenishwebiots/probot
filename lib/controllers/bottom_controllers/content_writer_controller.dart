@@ -115,4 +115,15 @@ class ContentWriterController extends GetxController {
       }
     }
   }
+
+  onTapContentGenerate() {
+    FocusScope.of(Get.context!).unfocus();
+    if (contentController.text.isNotEmpty) {
+       processContentWrite();
+    } else {
+      Get.snackbar(appFonts.attention.tr,
+          appFonts.enterTextBoxValue.tr);
+    }
+  }
+
 }

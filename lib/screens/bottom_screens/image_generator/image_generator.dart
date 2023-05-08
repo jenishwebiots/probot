@@ -1,7 +1,5 @@
 import 'dart:ui';
 import '../../../config.dart';
-import 'layout/filter_layout.dart';
-import 'layout/page_and_grid_view.dart';
 
 class ImageGenerator extends StatelessWidget {
   final imageGeneratorCtrl = Get.put(ImageGeneratorController());
@@ -19,13 +17,14 @@ class ImageGenerator extends StatelessWidget {
             appBar: AppBar(
                 backgroundColor: appCtrl.appTheme.primary,
                 elevation: 0,
-
                 leadingWidth: Sizes.s70,
                 leading: const CommonMenuIcon().inkWell(
-                    onTap: () => imageGeneratorCtrl.scaffoldKey.currentState!.openDrawer()),
+                    onTap: () => imageGeneratorCtrl.scaffoldKey.currentState!
+                        .openDrawer()),
                 automaticallyImplyLeading: false,
                 actions: [
-                  const CommonBalance().marginOnly(right: Insets.i20,top: Insets.i10,bottom: Insets.i10)
+                  const CommonBalance().marginOnly(
+                      right: Insets.i20, top: Insets.i10, bottom: Insets.i10)
                 ],
                 title: Text(appFonts.imageGenerator.tr,
                     style: AppCss.outfitSemiBold22
@@ -48,9 +47,12 @@ class ImageGenerator extends StatelessWidget {
                       horizontal: Insets.i20, vertical: Insets.i20),
                 )).height(MediaQuery.of(context).size.height),
                 ButtonCommon(
-                  title: appFonts.generateImage,
-                  onTap: () => imageGeneratorCtrl.imageTextController.text.isNotEmpty ? imageGeneratorCtrl.onTabMethod() : Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr)
-                ).paddingOnly(
+                    title: appFonts.generateImage,
+                    onTap: () =>
+                        imageGeneratorCtrl.imageTextController.text.isNotEmpty
+                            ? imageGeneratorCtrl.onTabMethod()
+                            : Get.snackbar(appFonts.attention.tr,
+                                appFonts.enterTextBoxValue.tr)).paddingOnly(
                     bottom: Insets.i15, right: Insets.i20, left: Insets.i20)
               ]),
               if (imageGeneratorCtrl.isLoader) const LoaderLayout()
@@ -58,7 +60,8 @@ class ImageGenerator extends StatelessWidget {
         if (imageGeneratorCtrl.isFilter)
           BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-              child: Container(color: appCtrl.appTheme.sameWhite.withOpacity(0.6))),
+              child: Container(
+                  color: appCtrl.appTheme.sameWhite.withOpacity(0.6))),
         if (imageGeneratorCtrl.isFilter) const FilterLayout()
       ]);
     });

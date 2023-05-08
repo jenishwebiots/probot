@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:probot/bot_api/api_services.dart';
 import 'package:probot/screens/bottom_screens/chat_layout/layouts/suggestion_list.dart';
 import 'package:screenshot/screenshot.dart';
@@ -7,7 +8,6 @@ import 'package:probot/models/quiestions_suggestion_model.dart';
 import '../../config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class ChatLayoutController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -148,7 +148,34 @@ class ChatLayoutController extends GetxController
   }
 
   //clear data while go back
-  clearData() {
+  clearData() async {
+    if (messages.value.length == 1) {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("chats")
+          .where("chatId", isEqualTo: chatId)
+          .limit(1)
+          .get()
+          .then((value) {
+        log("ISDAA : ${value.docs[0].exists}");
+        if (value.docs[0].exists) {
+          FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection("chats")
+              .doc(value.docs[0].id)
+              .delete()
+              .then((value) async {
+            await FirebaseFirestore.instance
+                .collection("chatHistory")
+                .doc(chatId)
+                .delete();
+          });
+        }
+      });
+    }
+
     speechStopMethod();
     isLongPress = false;
     selectedData = [];
@@ -158,12 +185,14 @@ class ChatLayoutController extends GetxController
     itemCount = 0.obs;
     update();
   }
-@override
+
+  @override
   void onClose() {
-  animationController!.dispose();
+    animationController!.dispose();
     // TODO: implement onClose
     super.onClose();
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -199,10 +228,7 @@ class ChatLayoutController extends GetxController
     log("_currentAd : $currentAd");
   }
 
-
   void loadInterstitialAd() {
-
-
     FacebookInterstitialAd.loadInterstitialAd(
       placementId: appCtrl.firebaseConfigModel!.facebookInterstitialAd!,
       listener: (result, value) {
@@ -325,8 +351,7 @@ class ChatLayoutController extends GetxController
       chatId = Get.arguments["chatId"] ??
           DateTime.now().millisecondsSinceEpoch.toString();
       log("RICHTEXT : ${Get.arguments}");
-      argImage =
-          Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
+      argImage = Get.arguments["avatar"] ?? appCtrl.selectedCharacter["image"];
       log("ARGS$argImage");
       update();
       if (Get.arguments["recText"] != null) {
@@ -336,87 +361,6 @@ class ChatLayoutController extends GetxController
       } else if (Get.arguments["speechText"] != null) {
         update();
         processChat();
-
-        if (Get.arguments["recText"] != null) {
-          messages.value.add(
-            ChatMessage(
-                text: Get.arguments["recText"],
-                chatMessageType: ChatMessageType.user,
-                time: DateTime.now().millisecondsSinceEpoch),
-          );
-          shareMessages.add("${Get.arguments["recText"]} - By PROBOT\n");
-          selectedMessages.add("${Get.arguments["recText"]} - By PROBOT\n");
-          itemCount.value = messages.value.length;
-
-          chatId = DateTime.now().millisecondsSinceEpoch.toString();
-          update();
-          if (!isGuestLogin) {
-            log("chatId : $chatId");
-            FirebaseFirestore.instance
-                .collection("users")
-                .doc(FirebaseAuth.instance.currentUser!.uid)
-                .collection("chats")
-                .where("chatId", isEqualTo: chatId)
-                .limit(1)
-                .get()
-                .then((valueCheck) async {
-              if (valueCheck.docs.isEmpty) {
-                await FirebaseFirestore.instance
-                    .collection("users")
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .collection("chats")
-                    .add({
-                  'userId': FirebaseAuth.instance.currentUser!.uid,
-                  'avatar': appCtrl.selectedCharacter["image"],
-                  "characterId": appCtrl.selectedCharacter["id"],
-                  'message': Get.arguments["recText"],
-                  'chatId': chatId,
-                  "createdDate": createdDate,
-                }).then((add) async {
-                  await FirebaseFirestore.instance
-                      .collection("chatHistory")
-                      .doc(chatId)
-                      .collection("chats")
-                      .add({
-                    'userId': FirebaseAuth.instance.currentUser!.uid,
-                    'avatar': appCtrl.selectedCharacter["image"],
-                    "characterId": appCtrl.selectedCharacter["id"],
-                    'message': Get.arguments["recText"],
-                    'chatId': chatId,
-                    "createdDate": createdDate,
-                    "messageType": ChatMessageType.user.name
-                  });
-                });
-              } else {
-                await FirebaseFirestore.instance
-                    .collection("users")
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .collection("chats")
-                    .doc(valueCheck.docs[0].id)
-                    .update({
-                  'userId': FirebaseAuth.instance.currentUser!.uid,
-                  'avatar': appCtrl.selectedCharacter["image"],
-                  'message': Get.arguments["recText"],
-                  'chatId': chatId,
-                  "createdDate": createdDate,
-                }).then((values) async {
-                  await FirebaseFirestore.instance
-                      .collection("chatHistory")
-                      .doc(chatId)
-                      .collection("chats")
-                      .add({
-                    'userId': FirebaseAuth.instance.currentUser!.uid,
-                    'avatar': appCtrl.selectedCharacter["image"],
-                    'message': Get.arguments["recText"],
-                    'chatId': chatId,
-                    "createdDate": createdDate,
-                    "messageType": ChatMessageType.user.name
-                  });
-                });
-              }
-            });
-          }
-        }
       } else {
         log("NO IMAGE FOUND");
         if (Get.arguments["avatar"].contains("assets")) {
@@ -524,7 +468,6 @@ class ChatLayoutController extends GetxController
     }
     update();
   }
-
 
   //process for chat
   processChat() async {
@@ -904,4 +847,71 @@ class ChatLayoutController extends GetxController
               topLeft: Radius.circular(AppRadius.r10))),
     );
   }
+
+  onTapChat() => chatController.text.isNotEmpty
+      ? processChat()
+      : Get.snackbar(appFonts.attention.tr, appFonts.enterTextBoxValue.tr);
+
+  onStartSpeech() {
+    Vibration.vibrate(duration: 200);
+    speechToText();
+    update();
+  }
+
+  onListClear() {
+    isLongPress = false;
+    selectedData = [];
+    selectedIndex = [];
+    update();
+  }
+
+  onTapRegenerateResponse() {
+    int index = selectedIndex[0];
+    chatController.text = messages.value[index].text!;
+    processChat();
+    isLongPress = false;
+    selectedIndex = [];
+    update();
+  }
+
+  onTapCopy() {
+    Clipboard.setData(ClipboardData(text: selectedData.toString()));
+    update();
+  }
+
+  onTapShare() {
+    Share.share(selectedData.toString(),
+        subject: "I'm sharing Conversation with PROBOT");
+    update();
+  }
+
+  onTapRemoveSelectedList() {
+    isLongPress = false;
+    selectedIndex = [];
+    update();
+  }
+
+  onTapUnselect() {
+    if (isLongPress) {
+      if (!selectedIndex.contains(index)) {
+       selectedIndex.add(index);
+        selectedData
+            .add(selectedMessages[index]);
+        update();
+      } else {
+        if (selectedIndex.contains(index)) {
+          selectedIndex.remove(index);
+          selectedData.remove(
+              selectedMessages[index]);
+          update();
+        }
+      }
+    }
+
+    if (selectedIndex.isEmpty) {
+      isLongPress = false;
+      update();
+    }
+  }
+
 }
