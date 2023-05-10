@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../../../config.dart';
 
 class ContentDescription extends StatelessWidget {

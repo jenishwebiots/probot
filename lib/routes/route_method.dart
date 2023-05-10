@@ -50,7 +50,6 @@ class AppRoute {
         name: _routeName.subscriptionPlan,
         page: () =>  SubscriptionPlan()),
     GetPage(name: _routeName.chatHistory, page: () => ChatHistoryScreen()),
-    GetPage(name: _routeName.inAppList, page: () => const InAppList()),
     GetPage(name: _routeName.quickAdvisor, page: () => QuickAdvisorScreen()),
     GetPage(name: _routeName.translateScreen, page: () =>  TranslateScreen()),
     GetPage(name: _routeName.commonWebView, page: () => const CommonWebView()),

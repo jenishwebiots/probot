@@ -3,9 +3,10 @@ import '../../../../config.dart';
 class SocialMediaListLayout extends StatelessWidget {
   final dynamic data;
   final GestureTapCallback? onTap;
-  final int? index,totalLength;
+  final int? index, totalLength;
 
-  const SocialMediaListLayout({Key? key, this.data, this.onTap, this.index,this.totalLength})
+  const SocialMediaListLayout(
+      {Key? key, this.data, this.onTap, this.index, this.totalLength})
       : super(key: key);
 
   @override
@@ -14,13 +15,16 @@ class SocialMediaListLayout extends StatelessWidget {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Row(children: [
           SizedBox(
-            height: Sizes.s52,
-            width: Sizes.s52,
-            child: SvgPicture.asset(data["image"],colorFilter: ColorFilter.mode(appCtrl.appTheme.sameWhite, BlendMode.srcIn)).paddingAll(Insets.i15).decorated(
-                color: appCtrl.appTheme.primary,
-                borderRadius:
-                    const BorderRadius.all(Radius.circular(AppRadius.r8))),
-          ),
+              height: Sizes.s52,
+              width: Sizes.s52,
+              child: SvgPicture.asset(data["image"],
+                      colorFilter: ColorFilter.mode(
+                          appCtrl.appTheme.sameWhite, BlendMode.srcIn))
+                  .paddingAll(Insets.i15)
+                  .decorated(
+                      color: appCtrl.appTheme.primary,
+                      borderRadius: const BorderRadius.all(
+                          Radius.circular(AppRadius.r8)))),
           const HSpace(Sizes.s12),
           Text(data["title"]!.toString().tr,
               style: AppCss.outfitMedium16.textColor(appCtrl.appTheme.txt))

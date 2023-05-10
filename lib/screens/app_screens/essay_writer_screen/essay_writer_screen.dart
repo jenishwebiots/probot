@@ -9,23 +9,21 @@ class EssayWriterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<EssayWriterController>(builder: (essayWriterCtrl) {
       return WillPopScope(
-        onWillPop: () => textToSpeechCtrl.onStopTTS(),
-        child: DirectionalityRtl(
-          child: Scaffold(
-              backgroundColor: appCtrl.appTheme.bg1,
-              resizeToAvoidBottomInset: false,
-              appBar: AppAppBarCommon(
-                  title: appFonts.essayWriting,
-                  leadingOnTap: ()=>
-                    textToSpeechCtrl.onStopTTS()
-                   ),
-              body: Stack(
-                children: [
-                  essayWriterCtrl.isEssayGenerated == true
-                      ? SingleChildScrollView(
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
+          onWillPop: () => textToSpeechCtrl.onStopTTS(),
+          child: DirectionalityRtl(
+              child: Scaffold(
+                  backgroundColor: appCtrl.appTheme.bg1,
+                  resizeToAvoidBottomInset: false,
+                  appBar: AppAppBarCommon(
+                      title: appFonts.essayWriting,
+                      leadingOnTap: () => textToSpeechCtrl.onStopTTS()),
+                  body: Stack(children: [
+                    essayWriterCtrl.isEssayGenerated == true
+                        ? SingleChildScrollView(
+                            child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
                                 Column(children: [
                                   textCommon.outfitSemiBoldPrimary16(
                                       text: appFonts.outExpertHave),
@@ -39,7 +37,7 @@ class EssayWriterScreen extends StatelessWidget {
                                       responseText: essayWriterCtrl.response),
                                   const VSpace(Sizes.s30),
                                   const AdCommonLayout()
-                                      .backgroundColor(appCtrl.appTheme.error),
+                                      .backgroundColor(appCtrl.appTheme.error)
                                 ]),
                                 const VSpace(Sizes.s30),
                                 ButtonCommon(
@@ -47,19 +45,15 @@ class EssayWriterScreen extends StatelessWidget {
                                     onTap: () =>
                                         essayWriterCtrl.endEssayWriterDialog())
                               ]).paddingSymmetric(
-                              horizontal: Insets.i20, vertical: Insets.i30),
-                        )
-                      : const EssayGenerateLayout(),
-                  if (essayWriterCtrl.isEssayGenerated == false)
-                    AdCommonLayout(
-                        bannerAd: essayWriterCtrl.bannerAd,
-                        bannerAdIsLoaded: essayWriterCtrl.bannerAdIsLoaded,
-                        currentAd: essayWriterCtrl.currentAd),
-                  if (essayWriterCtrl.isLoader == true) const LoaderLayout()
-                ],
-              )),
-        ),
-      );
+                                horizontal: Insets.i20, vertical: Insets.i30))
+                        : const EssayGenerateLayout(),
+                    if (essayWriterCtrl.isEssayGenerated == false)
+                      AdCommonLayout(
+                          bannerAd: essayWriterCtrl.bannerAd,
+                          bannerAdIsLoaded: essayWriterCtrl.bannerAdIsLoaded,
+                          currentAd: essayWriterCtrl.currentAd),
+                    if (essayWriterCtrl.isLoader == true) const LoaderLayout()
+                  ]))));
     });
   }
 }

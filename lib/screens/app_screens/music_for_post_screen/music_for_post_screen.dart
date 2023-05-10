@@ -7,13 +7,13 @@ class MusicForPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SocialMediaController>(builder: (socialMediaCtrl) {
       return WillPopScope(
-          onWillPop: () => textToSpeechCtrl.onStopTTS(),
+          onWillPop: () => socialMediaCtrl.onClear(),
           child: DirectionalityRtl(
               child: Scaffold(
                   resizeToAvoidBottomInset: false,
                   appBar: AppAppBarCommon(
                       title: appFonts.musicForPost,
-                      leadingOnTap: () => textToSpeechCtrl.onStopTTS()),
+                      leadingOnTap: () => socialMediaCtrl.onClear()),
                   body: Stack(children: [
                     SingleChildScrollView(
                         child: socialMediaCtrl.isMusicGenerated == true
@@ -40,55 +40,15 @@ class MusicForPostScreen extends StatelessWidget {
                                               responseText:
                                                   socialMediaCtrl.musicResponse)
                                         ]),
+                                    const VSpace(Sizes.s30),
                                     ButtonCommon(
                                         title: appFonts.endMusicGeneration,
                                         onTap: () => socialMediaCtrl
                                             .endMusicGeneratorDialog()),
-                                    const VSpace(Sizes.s30),
+                                    const VSpace(Sizes.s30)
                                   ]).paddingSymmetric(
                                 vertical: Insets.i30, horizontal: Insets.i20)
-                            : Column(children: [
-                                Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(appFonts.acquireTheRight.tr,
-                                          style: AppCss.outfitBold16.textColor(
-                                              appCtrl.appTheme.primary)),
-                                      const VSpace(Sizes.s15),
-                                      Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                            MusicCategoryLayout(
-                                                title: appFonts
-                                                    .selectMusicCategory,
-                                                category: socialMediaCtrl
-                                                        .categoryOnSelect ??
-                                                    "Classic",
-                                                onTap: () => socialMediaCtrl
-                                                    .onSelectMusicCategorySheet()),
-                                            const VSpace(Sizes.s20),
-                                            MusicCategoryLayout(
-                                                title: appFonts.selectLanguage,
-                                                category:
-                                                    socialMediaCtrl.onSelect ??
-                                                        "Hindi",
-                                                onTap: () => socialMediaCtrl
-                                                    .onSelectLanguageSheet())
-                                          ])
-                                          .paddingSymmetric(
-                                              vertical: Insets.i20,
-                                              horizontal: Insets.i15)
-                                          .authBoxExtension()
-                                    ]),
-                                const VSpace(Sizes.s30),
-                                ButtonCommon(
-                                    title: appFonts.generateSuitableMusic,
-                                    onTap: () =>
-                                        socialMediaCtrl.onMusicGenerate()),
-                              ]).paddingSymmetric(
-                                vertical: Insets.i30, horizontal: Insets.i20)),
+                            : const MusicForPostLayout()),
                     if (socialMediaCtrl.isLoader == true) const LoaderLayout()
                   ]))));
     });

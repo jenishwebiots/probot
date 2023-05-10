@@ -22,54 +22,28 @@ class DistanceAttractionScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                           distanceCtrl.isDistanceGenerated == false
-                              ? Column(children: [
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        textCommon.outfitSemiBoldPrimary16(
-                                            text: appFonts
-                                                .visitWonderfulLocationsAroundWorld),
-                                        const VSpace(Sizes.s15),
-                                        Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                              MusicCategoryLayout(
-                                                  title: appFonts.iAmLooking,
-                                                  category: distanceCtrl
-                                                          .placeOnSelect ??
-                                                      "Restaurant",
-                                                  onTap: () => distanceCtrl
-                                                      .onPlaceSheet()),
-                                              const VSpace(Sizes.s20),
-                                              MusicCategoryLayout(
-                                                  title:
-                                                      appFonts.theLocationYou,
-                                                  category:
-                                                      distanceCtrl.onSelect ??
-                                                          "Surat",
-                                                  onTap: () => distanceCtrl
-                                                      .onCitySheet()),
-                                              const VSpace(Sizes.s20),
-                                              textCommon.outfitSemiBoldTxt14(
-                                                  text: appFonts
-                                                      .budgetOfTravelling),
-                                              const VSpace(Sizes.s60),
-                                              const DistanceSliderLayout()
-                                            ])
-                                            .paddingSymmetric(
-                                                vertical: Insets.i20,
-                                                horizontal: Insets.i15)
-                                            .authBoxExtension()
-                                      ]),
-                                  const VSpace(Sizes.s30),
-                                  ButtonCommon(
-                                      title: appFonts.takeMeTo,
-                                      onTap: () =>
-                                          distanceCtrl.onDistanceGenerate())
-                                ])
-                              : const DistanceGeneratedLayout()
+                              ? const DistanceGeneratedLayout()
+                              : Column(children: [
+                            Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  textCommon.outfitSemiBoldPrimary16(
+                                      text:
+                                      appFonts.visitWonderfulLocationsAroundWorld),
+                                  const VSpace(Sizes.s15),
+                                  InputLayout(
+                                      hintText: "",
+                                      title: appFonts.distanceAttraction,
+                                      color: appCtrl.appTheme.white,
+                                      isMax: false,
+                                      text: distanceCtrl.response,
+                                      responseText: distanceCtrl.response)
+                                ]),
+                            const VSpace(Sizes.s20),
+                            ButtonCommon(
+                                title: appFonts.endTraveling,
+                                onTap: () => distanceCtrl.endDistanceGenerator())
+                          ])
                         ]).paddingSymmetric(
                             vertical: Insets.i30, horizontal: Insets.i20)),
                     if (distanceCtrl.isDistanceGenerated == false)

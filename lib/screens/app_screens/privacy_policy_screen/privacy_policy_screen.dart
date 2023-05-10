@@ -1,6 +1,4 @@
-import 'package:probot/controllers/app_pages_controllers/privacy_policy_controller.dart';
 import '../../../config.dart';
-import 'layouts/expansion_tile_common.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   final privacyPolicyCtrl = Get.put(PrivacyPolicyController());

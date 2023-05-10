@@ -1,16 +1,7 @@
 import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
-import 'package:pinput/pinput.dart';
 import 'package:probot/screens/auth_screens/mobile_login/layouts/otp_screen.dart';
-
 import '../../config.dart';
 import '../../env.dart';
-import '../../screens/auth_screens/mobile_login/layouts/otp_layout.dart';
 
 class MobileLoginController extends GetxController {
   GlobalKey<FormState> mobileGlobalKey = GlobalKey<FormState>();
@@ -155,12 +146,12 @@ class MobileLoginController extends GetxController {
                 'email': pUser?.email,
                 'phone': pUser?.phoneNumber,
                 'id': auth.currentUser!.uid,
-                "balance": 5,
+                "balance":  appCtrl.firebaseConfigModel!.balance,
                 "fcmToken": token,
                 "isActive": true
               });
             });
-            appCtrl.envConfig["balance"] = 5;
+            appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
             isLoading = false;
             update();
             appCtrl.isSubscribe = false;
@@ -175,7 +166,7 @@ class MobileLoginController extends GetxController {
             bool isResult = value.docs[0].data()["isActive"] ?? true;
             if (isResult) {
               if (value.docs[0].data()["balance"] == null) {
-                appCtrl.envConfig["balance"] = 5;
+                appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
               }
               isLoading = false;
               update();

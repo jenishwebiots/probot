@@ -1,11 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:probot/screens/app_screens/subscription/layouts/payment_method_list.dart';
 import '../../../../config.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-
 import '../../../../controllers/common_controllers/in_app_controller.dart';
 
 class PaymentList extends StatelessWidget {
@@ -111,7 +107,7 @@ class PaymentList extends StatelessWidget {
                     : Row(children: [
                         Expanded(
                             child: ButtonCommon(
-                                onTap: () {},
+                                onTap: ()=> Get.back(),
                                 title: appFonts.cancel,
                                 isGradient: false,
                                 style: AppCss.outfitMedium16

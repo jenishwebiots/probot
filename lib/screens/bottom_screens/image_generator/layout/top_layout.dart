@@ -16,19 +16,7 @@ class TopLayout extends StatelessWidget {
             prefixIcon:
                 SvgPicture.asset(eSvgAssets.search, fit: BoxFit.scaleDown)
                     .inkWell(onTap: () {}),
-            /*suffixIcon: SizedBox(
-                height: 10,
-                width: 5,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const VerticalDivider(
-                          width: 1, thickness: 2, indent: 10, endIndent: 10),
-                      SvgPicture.asset(eSvgAssets.filter)
-                          .inkWell(
-                              onTap: () => imageGeneratorCtrl.onTapFilter())
-                          .paddingSymmetric(horizontal: Insets.i10)
-                    ]))*/).authBoxExtension(),
+           ).authBoxExtension(),
         const VSpace(Sizes.s10),
         SizedBox(
                 child: Row(
@@ -74,3 +62,16 @@ class TopLayout extends StatelessWidget {
     });
   }
 }
+/*suffixIcon: SizedBox(
+                height: 10,
+                width: 5,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const VerticalDivider(
+                          width: 1, thickness: 2, indent: 10, endIndent: 10),
+                      SvgPicture.asset(eSvgAssets.filter)
+                          .inkWell(
+                              onTap: () => imageGeneratorCtrl.onTapFilter())
+                          .paddingSymmetric(horizontal: Insets.i10)
+                    ]))*/

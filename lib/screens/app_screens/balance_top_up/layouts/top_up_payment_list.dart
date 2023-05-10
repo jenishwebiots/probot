@@ -116,16 +116,12 @@ class TopUpPaymentList extends StatelessWidget {
                             child: ButtonCommon(
                                 onTap: () {
                                   if (topUpCtrl.selectIndexPayment == 0) {
-                                    topUpCtrl.onPaypalPayment(
-                                      amount: data!,
-                                    );
+                                    topUpCtrl.onPaypalPayment(amount: data!);
                                     Get.back();
                                   } else if (topUpCtrl.selectIndexPayment ==
                                       1) {
                                     topUpCtrl.stripePayment(
-                                      amount: data!,
-                                      currency: 'INR',
-                                    );
+                                        amount: data!, currency: 'INR');
                                     Get.back();
                                   } else if (topUpCtrl.selectIndexPayment ==
                                       2) {
@@ -183,10 +179,9 @@ class TopUpPaymentList extends StatelessWidget {
                                                   : inAppCtrl.products[5]);
                                     }
 
-
-
                                     inAppCtrl.inAppPurchase.buyNonConsumable(
-                                      purchaseParam: purchaseParam,);
+                                      purchaseParam: purchaseParam,
+                                    );
                                     final Stream<List<PurchaseDetails>>
                                         purchaseUpdated =
                                         inAppCtrl.inAppPurchase.purchaseStream;
@@ -245,16 +240,12 @@ class TopUpPaymentList extends StatelessWidget {
       ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
     GooglePlayPurchaseDetails? oldSubscription;
 
-    if (productDetails.id == topUp15 &&
-        purchases[topUp15] != null) {
+    if (productDetails.id == topUp15 && purchases[topUp15] != null) {
       oldSubscription = purchases[topUp15]! as GooglePlayPurchaseDetails;
-    } else if (productDetails.id == topUp35 &&
-        purchases[topUp35] != null) {
+    } else if (productDetails.id == topUp35 && purchases[topUp35] != null) {
       oldSubscription = purchases[topUp35]! as GooglePlayPurchaseDetails;
-    } else if (productDetails.id == topUp65 &&
-        purchases[topUp65] != null) {
-      oldSubscription =
-          purchases[topUp65]! as GooglePlayPurchaseDetails;
+    } else if (productDetails.id == topUp65 && purchases[topUp65] != null) {
+      oldSubscription = purchases[topUp65]! as GooglePlayPurchaseDetails;
     }
     return oldSubscription;
   }

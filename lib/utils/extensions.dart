@@ -69,6 +69,19 @@ extension ProbotExtensions on Widget {
               Radius.circular(AppRadius.r10))
   );
 
+  Widget selectAmountExtension()=> Container(child: this).decorated(
+      color: appCtrl.appTheme.white,
+      borderRadius: BorderRadius.circular(AppRadius.r10),
+      border: Border.all(color: appCtrl.appTheme.primaryLight1),
+      boxShadow: [
+        BoxShadow(
+            color: appCtrl.isTheme
+                ? appCtrl.appTheme.trans
+                : appCtrl.appTheme.primary.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4)
+      ]);
+
 }
 
 

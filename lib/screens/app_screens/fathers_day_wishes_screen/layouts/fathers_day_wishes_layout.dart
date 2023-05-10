@@ -31,7 +31,7 @@ class FathersDayWishesLayout extends StatelessWidget {
             title: appFonts.generateBeautifulWish,
             onTap: () => fatherCtrl.onWishesGenerate()),
         const VSpace(Sizes.s30),
-        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error),
+        const AdCommonLayout().backgroundColor(appCtrl.appTheme.error)
       ]).paddingSymmetric(vertical: Insets.i30, horizontal: Insets.i20);
     });
   }

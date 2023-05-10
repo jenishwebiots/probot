@@ -35,10 +35,7 @@ class EmailGeneratorTopLayout extends StatelessWidget {
         Text(sTitle!.tr,
             style: AppCss.outfitSemiBold14.textColor(appCtrl.appTheme.txt)),
         const VSpace(Sizes.s10),
-        TextFieldCommon(
-          hintText: sHint!.tr,
-          controller: sController!,
-        )
+        TextFieldCommon(hintText: sHint!.tr, controller: sController!)
       ]))
     ]);
   }
