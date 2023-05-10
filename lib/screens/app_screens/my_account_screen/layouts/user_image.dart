@@ -11,10 +11,10 @@ class UserImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.bottomRight, children: [
       isLoading!
-          ? CircularProgressIndicator(
-              color: appCtrl.appTheme.sameWhite,
-            ).paddingAll(Insets.i40).decorated(
-              shape: BoxShape.circle, color: appCtrl.appTheme.primary)
+          ? CircularProgressIndicator(color: appCtrl.appTheme.sameWhite)
+              .paddingAll(Insets.i40)
+              .decorated(
+                  shape: BoxShape.circle, color: appCtrl.appTheme.primary)
           : image != null
               ? Container(
                   margin: const EdgeInsets.only(top: Insets.i10),
@@ -29,8 +29,7 @@ class UserImage extends StatelessWidget {
                             blurRadius: 3)
                       ],
                       image: DecorationImage(
-                          fit: BoxFit.fill, image: NetworkImage(image!))),
-                )
+                          fit: BoxFit.fill, image: NetworkImage(image!))))
               : Text(name != null ? name![0] : "S",
                       style: AppCss.outfitExtraBold40
                           .textColor(appCtrl.appTheme.sameWhite))

@@ -21,7 +21,7 @@ class EssayGenerateLayout extends StatelessWidget {
                 height: essayWriterCtrl.isListening.value
                     ? essayWriterCtrl.animation!.value
                     : Sizes.s20,
-                microPhoneTap: (){
+                microPhoneTap: () {
                   Vibration.vibrate(duration: 200);
                   essayWriterCtrl.speechToText();
                 },

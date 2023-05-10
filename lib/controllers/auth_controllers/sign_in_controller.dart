@@ -69,12 +69,12 @@ class SignInController extends GetxController {
               'email': user.email,
               'phone': user.phoneNumber,
               'id': user.uid,
-              "balance": 5,
+              "balance": appCtrl.firebaseConfigModel!.balance,
               "fcmToken": token,
               "isActive": true
             });
           });
-          appCtrl.envConfig["balance"] = 5;
+          appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
           isLoading = false;
           appCtrl.storage.write("id", user.uid);
           await checkData();
@@ -88,7 +88,7 @@ class SignInController extends GetxController {
             if (isResult) {
               log("BANCE :${result.docs[0].data()["balance"] == null}");
               if (result.docs[0].data()["balance"] == null) {
-                appCtrl.envConfig["balance"] = 5;
+                appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
               } else {
                 appCtrl.envConfig["balance"] = result.docs[0].data()["balance"];
               }
@@ -163,11 +163,11 @@ class SignInController extends GetxController {
                 'email': firebaseUser.user!.email,
                 'phone': firebaseUser.user!.phoneNumber,
                 'id': firebaseUser.user!.uid,
-                "balance": 5,
+                "balance": appCtrl.firebaseConfigModel!.balance,
                 "fcmToken": token,
                 "isActive": true
               });
-              appCtrl.envConfig["balance"] = 5;
+              appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
               userName = signIn!.email;
 
               isLoading = false;
@@ -181,7 +181,7 @@ class SignInController extends GetxController {
               if (isResult) {
                 log("BANCE :${value.docs[0].data()["balance"] == null}");
                 if (value.docs[0].data()["balance"] == null) {
-                  appCtrl.envConfig["balance"] = 5;
+                  appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
                 } else {
                   appCtrl.envConfig["balance"] =
                       value.docs[0].data()["balance"];
@@ -286,11 +286,11 @@ class SignInController extends GetxController {
                 'email': signIn.email,
                 'phone': signIn.phoneNumber,
                 'id': signIn.uid,
-                "balance": 5,
+                "balance":  appCtrl.firebaseConfigModel!.balance,
                 "fcmToken": token,
                 "isActive": true
               });
-              appCtrl.envConfig["balance"] = 5;
+              appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
               isLoading = false;
 
               appCtrl.storage.write("userName", userName);
@@ -303,7 +303,7 @@ class SignInController extends GetxController {
               if (isResult) {
                 log("BANCE :${value.docs[0].data()["balance"] == null}");
                 if (value.docs[0].data()["balance"] == null) {
-                  appCtrl.envConfig["balance"] = 5;
+                  appCtrl.envConfig["balance"] =  appCtrl.firebaseConfigModel!.balance;
                 } else {
                   appCtrl.envConfig["balance"] =
                       value.docs[0].data()["balance"];

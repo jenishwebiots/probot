@@ -10,9 +10,8 @@ class GeneratedMailLayout extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(appFonts.toGetTheExcellent.tr,
-                  style: AppCss.outfitSemiBold16
-                      .textColor(appCtrl.appTheme.primary)),
+              textCommon.outfitSemiBoldPrimary16(
+                  text: appFonts.toGetTheExcellent.tr),
               const VSpace(Sizes.s15),
               SizedBox(
                       child: Column(
@@ -26,9 +25,7 @@ class GeneratedMailLayout extends StatelessWidget {
                         sHint: appFonts.enterValue,
                         sController: emailGeneratorCtrl.writeToController),
                     const VSpace(Sizes.s20),
-                    Text(appFonts.topic.tr,
-                        style: AppCss.outfitSemiBold14
-                            .textColor(appCtrl.appTheme.txt)),
+                    textCommon.outfitSemiBoldTxt14(text: appFonts.topic.tr),
                     const VSpace(Sizes.s10),
                     TextFieldCommon(
                         controller: emailGeneratorCtrl.topicController,
@@ -38,9 +35,7 @@ class GeneratedMailLayout extends StatelessWidget {
                         fillColor: appCtrl.appTheme.textField,
                         keyboardType: TextInputType.multiline),
                     const VSpace(Sizes.s20),
-                    Text(appFonts.tone.tr,
-                        style: AppCss.outfitSemiBold14
-                            .textColor(appCtrl.appTheme.txt)),
+                    textCommon.outfitSemiBoldTxt14(text: appFonts.tone.tr),
                     Wrap(
                         children: emailGeneratorCtrl.toneLists
                             .asMap()
@@ -54,23 +49,12 @@ class GeneratedMailLayout extends StatelessWidget {
                                 top: Insets.i10, right: Insets.i10))
                             .toList()),
                     const VSpace(Sizes.s20),
-                    Text(appFonts.mailLength.tr,
-                        style: AppCss.outfitSemiBold14
-                            .textColor(appCtrl.appTheme.txt)),
+                    textCommon.outfitSemiBoldTxt14(
+                        text: appFonts.mailLength.tr),
                     const VSpace(Sizes.s20),
                     const SliderLayout(),
                     const VSpace(Sizes.s20),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: emailGeneratorCtrl.mailLengthLists
-                            .asMap()
-                            .entries
-                            .map((e) => Text(e.value.toString().tr,
-                                style: AppCss.outfitSemiBold14.textColor(
-                                    emailGeneratorCtrl.value >= e.key
-                                        ? appCtrl.appTheme.primary
-                                        : appCtrl.appTheme.lightText)))
-                            .toList())
+                    const MailLengthLayout()
                   ]))
                   .paddingSymmetric(
                       horizontal: Insets.i15, vertical: Insets.i20)

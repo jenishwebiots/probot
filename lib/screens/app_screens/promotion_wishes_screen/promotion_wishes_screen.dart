@@ -51,7 +51,7 @@ class PromotionWishesScreen extends StatelessWidget {
                                               const VSpace(Sizes.s30),
                                               const AdCommonLayout()
                                                   .backgroundColor(
-                                                      appCtrl.appTheme.error),
+                                                      appCtrl.appTheme.error)
                                             ])
                                       ]).paddingSymmetric(
                                     horizontal: Insets.i20,

@@ -32,33 +32,20 @@ class GuestReceiver extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       chatListModel!.text!.length > 40
-                                          ? ReceiverWidthText(width: Sizes.s250,text: chatListModel!.text,time: chatListModel!.time)
-                                          : ReceiverWidthText(width: Sizes.s200,text: chatListModel!.text,time: chatListModel!.time),
+                                          ? ReceiverWidthText(
+                                              width: Sizes.s250,
+                                              text: chatListModel!.text,
+                                              time: chatListModel!.time)
+                                          : ReceiverWidthText(
+                                              width: Sizes.s200,
+                                              text: chatListModel!.text,
+                                              time: chatListModel!.time),
                                       const HSpace(Sizes.s5)
                                     ]),
                                 const VSpace(Sizes.s3),
-                              ]).inkWell(onTap: () {
-                            if (chatCtrl.isLongPress) {
-                              if (!chatCtrl.selectedIndex.contains(index)) {
-                                chatCtrl.selectedIndex.add(index);
-                                chatCtrl.selectedData
-                                    .add(chatCtrl.selectedMessages[index!]);
-                                chatCtrl.update();
-                              } else {
-                                if (chatCtrl.selectedIndex.contains(index)) {
-                                  chatCtrl.selectedIndex.remove(index);
-                                  chatCtrl.selectedData.remove(
-                                      chatCtrl.selectedMessages[index!]);
-                                  chatCtrl.update();
-                                }
-                              }
-                            }
-
-                            if (chatCtrl.selectedIndex.isEmpty) {
-                              chatCtrl.isLongPress = false;
-                              chatCtrl.update();
-                            }
-                          })
+                              ]).inkWell(
+                            onTap: () => chatCtrl.onTapUnselect(),
+                          )
                   ])
                   .marginSymmetric(horizontal: Insets.i20, vertical: Insets.i5))
           .backgroundColor(chatCtrl.isLongPress == true

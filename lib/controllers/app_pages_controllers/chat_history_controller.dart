@@ -59,5 +59,82 @@ class ChatHistoryController extends GetxController {
     );
   }
 
+  onTapChat (id,data) {
+
+    if (isLongPress) {
+      if (!selectedIndex
+          .contains(id)) {
+       selectedIndex
+            .add(id);
+        update();
+      } else {
+        if (selectedIndex
+            .contains(id)) {
+        selectedIndex
+              .remove(id);
+          update();
+        }
+      }
+    } else {
+      Get.toNamed(
+          routeName.chatLayout,
+          arguments:
+         data);
+      final chatCtrl = Get.isRegistered<ChatLayoutController>() ? Get.find<ChatLayoutController>() : Get.put(ChatLayoutController());
+      chatCtrl.getChatId();
+    }
+
+    if (selectedIndex.isEmpty) {
+   isLongPress =
+      false;
+
+      update();
+      Get.forceAppUpdate();
+    }
+  }
+
+  onLogPressChat(id) {
+    isLongPress =
+    true;
+    if (!selectedIndex
+        .contains(id)) {
+      selectedIndex
+          .add(id);
+      update();
+    }
+    update();
+  }
+
+  onTapDeleteHistory() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("chats")
+        .orderBy("createdDate", descending: true)
+        .get()
+        .then((value) {
+      value.docs.asMap().entries.forEach((element) {
+        if (selectedIndex
+            .contains(element.value.id)) {
+          FirebaseFirestore.instance
+              .collection("chatHistory")
+              .doc(element.value.id)
+              .delete()
+              .then((value) {
+            FirebaseFirestore.instance
+                .collection("users")
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection("chats")
+                .doc(element.value.id)
+                .delete();
+            selectedIndex.removeWhere(
+                    (elements) => elements == element.value.id);
+            update();
+          });
+        }
+      });
+    });
+    update();
+  }
 
 }

@@ -1,15 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
-
 import '../../config.dart';
-import '../../screens/app_screens/my_account_screen/layouts/delete_account_alert.dart';
-import '../../screens/app_screens/my_account_screen/layouts/image_picker.dart';
 
 class MyAccountController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -61,8 +52,11 @@ class MyAccountController extends GetxController {
 
 
   //delete chat layout
-  Widget buildPopupDialog() {
-    return const DeleteAlert();
+   buildPopupDialog() {
+    return showDialog(
+        context: Get.context!,
+        builder: (BuildContext context) =>
+            const DeleteAlert());/*const */
   }
 
   onUpdate() {

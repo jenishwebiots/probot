@@ -57,6 +57,17 @@ class SocialMediaController extends GetxController
 
   SfRangeValues values = const SfRangeValues(30, 40);
 
+  onClear() {
+    captionController.clear();
+    musicGeneratedController.clear();
+    hashtagController.clear();
+    isCaptionGenerated = false;
+    isMusicGenerated = false;
+    isHashtagGenerated = false;
+    isLoader = false;
+    textToSpeechCtrl.onStopTTS();
+  }
+
   void updateProgress() {
     const oneSec = Duration(seconds: 1);
     Timer.periodic(oneSec, (Timer t) {
@@ -439,6 +450,14 @@ class SocialMediaController extends GetxController
       ..load();
     log("Home Banner AGAIn: $bannerAd");
   }
+
+
+  onStopSTT() {
+    Vibration.vibrate(duration: 200);
+    speechToText();
+    update();
+  }
+
 
   @override
   void onReady() {

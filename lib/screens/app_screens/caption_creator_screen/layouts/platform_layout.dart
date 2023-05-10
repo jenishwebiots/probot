@@ -14,17 +14,18 @@ class PlatformLayout extends StatelessWidget {
     return SizedBox(
             width: Sizes.s110,
             child: Row(children: [
-      index == selectedIndex
-          ? Icon(Icons.check_circle,
-              color: appCtrl.appTheme.sameWhite, size: Sizes.s20)
-          : SvgPicture.asset(data["image"]!,
-              height: Sizes.s20, fit: BoxFit.scaleDown),
-      const HSpace(Sizes.s8),
-      Text(data["title"]!.toString().tr,
-          style: AppCss.outfitSemiBold14.textColor(index == selectedIndex
-              ? appCtrl.appTheme.sameWhite
-              : appCtrl.appTheme.txt))
-    ]))
+              index == selectedIndex
+                  ? Icon(Icons.check_circle,
+                      color: appCtrl.appTheme.sameWhite, size: Sizes.s20)
+                  : SvgPicture.asset(data["image"]!,
+                      height: Sizes.s20, fit: BoxFit.scaleDown),
+              const HSpace(Sizes.s8),
+              Text(data["title"]!.toString().tr,
+                  style: AppCss.outfitSemiBold14.textColor(
+                      index == selectedIndex
+                          ? appCtrl.appTheme.sameWhite
+                          : appCtrl.appTheme.txt))
+            ]))
         .paddingSymmetric(vertical: Insets.i8, horizontal: Insets.i8)
         .decorated(
             color: index == selectedIndex

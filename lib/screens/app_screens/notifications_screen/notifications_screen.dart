@@ -15,22 +15,19 @@ class NotificationsScreen extends StatelessWidget {
               actionIcon: eSvgAssets.delete,
               leadingOnTap: () => Get.back()),
           body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(),
-              Column(
-                children: [
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(),
+                Column(children: [
                   Image.asset(eImageAssets.notification, height: Sizes.s180),
                   const VSpace(Sizes.s20),
                   Text(appFonts.youDontHave,
                       textAlign: TextAlign.center,
                       style: AppCss.outfitMedium14
-                          .textColor(appCtrl.appTheme.lightText)),
-                ],
-              ),
-              ButtonCommon(title: appFonts.refresh)
-            ],
-          ).paddingSymmetric(
+                          .textColor(appCtrl.appTheme.lightText))
+                ]),
+                ButtonCommon(title: appFonts.refresh)
+              ]).paddingSymmetric(
               horizontal: Insets.i20,
               vertical: Insets
                   .i40) /*SingleChildScrollView(
