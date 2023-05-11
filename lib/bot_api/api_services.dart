@@ -30,7 +30,7 @@ class ApiServices {
     }else {
       if (localApi == "") {
         // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-        apiKey = "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";
+        apiKey = "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";
       } else {
         apiKey = localApi;
       }

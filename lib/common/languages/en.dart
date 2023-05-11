@@ -784,4 +784,16 @@ final dynamic en = {
 'pressTheSensor' : "Press the sensor and lift when you feel vibration",
 'yourFingerprintHasBeen' : "Your fingerprint has been added successfully.",
 'done' : "Done",
+
+'paidAmount' : "Paid amount :",
+'including' : "Including :",
+'unlimitedChatImage' : "Unlimited chat, images, & content",
+'expiryDate' : "Expiry Date :",
+'unlimitedChatForMonth' : "Unlimited chat for a month",
+'unlimitedImage' : "Unlimited Image generating for a month",
+'unlimitedContent' : "Unlimited content writing for a month",
+'selectThisPlan' : "Select this Plan",
+'youCanTopUp' : "You can top-up your balance either\nwatching video",
+'youCanPurchase' : "You can purchase as many coins\nas you wish.",
+
 };
