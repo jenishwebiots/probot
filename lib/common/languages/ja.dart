@@ -741,5 +741,7 @@ final dynamic ja = {
   'selectThisPlan' : "このプランを選択してください",
   'youCanTopUp' : "残高は\nビデオを視聴することで補充できます",
   'youCanPurchase' : "必要なだけコインを\n購入できます。",
+  'flutterWave': "フラッターウェーブ",
+  'payStack': "給与スタック",
 
 };

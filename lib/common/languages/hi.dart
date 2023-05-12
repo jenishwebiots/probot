@@ -761,4 +761,6 @@ final dynamic hi = {
   'selectThisPlan' : "इस योजना का चयन करें",
   'youCanTopUp' : "आप वीडियो देखकर\nअपना बैलेंस टॉप-अप कर सकते हैं",
   'youCanPurchase' : "आप जितने चाहें उतने सिक्के\na खरीद सकते हैं।",
+  'flutterWave': "फ्लटर वेव",
+  'payStack': "पेस्टैक",
 };

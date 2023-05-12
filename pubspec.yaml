@@ -66,7 +66,7 @@ dependencies:
   cloud_firestore: ^4.4.5
   flutter_stripe: ^9.0.0+1
   http_auth: ^1.0.1
-  webview_flutter: any
+  webview_flutter:
   firebase_storage: ^11.0.16
   vibration: ^1.7.6
   in_app_purchase: ^3.1.5
@@ -91,6 +91,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   google_mlkit_text_recognition: ^0.4.0
   image_cropper: ^3.0.3
+  flutterwave_standard:
 
 
 dev_dependencies:

@@ -816,5 +816,7 @@ final dynamic fr = {
   'selectThisPlan' : "Sélectionnez ce forfait",
   'youCanTopUp' : "Vous pouvez recharger votre solde soit\nen regardant la vidéo",
   'youCanPurchase' : "Vous pouvez acheter autant de pièces\n que vous le souhaitez.",
+  'flutterWave': "Vague flottante",
+  'payStack': "Pile de paie",
 
 };

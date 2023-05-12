@@ -718,6 +718,7 @@ class AppFonts {
   String selectThisPlan = "selectThisPlan";
   String youCanTopUp = "youCanTopUp";
   String youCanPurchase = "youCanPurchase";
-  String flutterWave = "Flutter wave";
+  String flutterWave = "flutterWave";
+  String payStack = "payStack";
 
 }

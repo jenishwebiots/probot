@@ -821,5 +821,6 @@ final dynamic ge = {
   'selectThisPlan' : "Wählen Sie diesen Plan aus",
   'youCanTopUp' : "Sie können Ihr Guthaben entweder\naufladen, indem Sie sich ein Video ansehen",
   'youCanPurchase' : "Sie können so viele Münzen kaufen\n wie Sie möchten.",
-
+  'flutterWave': "Flatterwelle",
+  'payStack': "Gehaltsstapel",
 };

@@ -762,5 +762,6 @@ final dynamic it = {
   'selectThisPlan' : "Seleziona questo piano",
   'youCanTopUp' : "Puoi ricaricare il tuo saldo sia\nguardando un video",
   'youCanPurchase' : "Puoi acquistare tutte le monete\nche desideri.",
-
+  'flutterWave': "Onda svolazzante",
+  'payStack': "Pacco paga",
 };

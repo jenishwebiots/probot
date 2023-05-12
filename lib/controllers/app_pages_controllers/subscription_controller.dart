@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutterwave_standard/flutterwave.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -39,6 +40,80 @@ class SubscriptionController extends GetxController {
   String itemName = 'PROBOT SUBSCRIPTION';
   int quantity = 1;
   Function? onFinish;
+
+// Flutter wave payment
+  flutterWavePayment({required String amount,
+    required String currency,
+    SubscribeModel? subscribe}) async {
+    int id = DateTime.now().millisecondsSinceEpoch;
+    final Customer customer = Customer(
+        name: "Flutterwave Developer",
+        phoneNumber: "1234566677777",
+        email: "customer@customer.com");
+    final Flutterwave flutterWave = Flutterwave(
+        context: Get.context!,
+        publicKey: "${appCtrl.firebaseConfigModel!.flutterWavePublicKey}",
+        currency: currency,
+        redirectUrl: "https://www.google.com/",
+        txRef: id.toString(),
+        amount: amount,
+        customer: customer,
+        paymentOptions: "card",
+        customization: Customization(title: "My Payment"),
+        isTestMode: true);
+    update();
+    final ChargeResponse response = await flutterWave.charge();
+    if (response.success == true) {
+      showDialog(
+          barrierDismissible: false,
+          context: Get.context!,
+          builder: (context) {
+            return AlertDialogCommon(
+                image: eImageAssets.paymentSuccess,
+                bText1: appFonts.okay,
+                title: appFonts.paymentSuccess,
+                subtext: appFonts.congratulation,
+                b1OnTap: () async {
+                  final firebaseCtrl =
+                  Get.isRegistered<SubscriptionFirebaseController>()
+                      ? Get.find<SubscriptionFirebaseController>()
+                      : Get.put(SubscriptionFirebaseController());
+                  firebaseCtrl.subscribePlan(
+                      subscribeModel: subscribe,
+                      paymentMethod: "Flutterwave",
+                      isBack: isBack);
+                },
+                crossOnTap: isBack
+                    ? () {
+                  final firebaseCtrl =
+                  Get.isRegistered<SubscriptionFirebaseController>()
+                      ? Get.find<SubscriptionFirebaseController>()
+                      : Get.put(SubscriptionFirebaseController());
+                  firebaseCtrl.subscribePlan(
+                      subscribeModel: subscribe,
+                      paymentMethod: Flutterwave,
+                      isBack: isBack);
+                }
+                    : () => appCtrl.splashDataCheck());
+          });
+    } else {
+      showDialog(
+          barrierDismissible: false,
+          context: Get.context!,
+          builder: (context) {
+            return AlertDialogCommon(
+                image: eImageAssets.paymentFailed,
+                bText1: appFonts.tryAgain,
+                title: appFonts.paymentFailed,
+                subtext: appFonts.oppsDueTo,
+                b1OnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck(),
+                crossOnTap: () =>
+                isBack ? Get.back() : appCtrl.splashDataCheck());
+          });
+    }
+    update();
+  }
+
 
   // Stripe Payment Method
   Future<void> stripePayment(
