@@ -34,8 +34,7 @@ class PaymentList extends StatelessWidget {
                       (appCtrl.firebaseConfigModel!.isPaypal! == false &&
                               appCtrl.firebaseConfigModel!.isRazorPay! == false &&
                               appCtrl.firebaseConfigModel!.isStripe! == false &&
-                              appCtrl.firebaseConfigModel!.isInApp! == false &&
-                              appCtrl.firebaseConfigModel!.isFlutterWave! == false)
+                              appCtrl.firebaseConfigModel!.isInApp! == false )
                           ? Text(appFonts.noPaymentMethod.tr,
                                   style: AppCss.outfitSemiBold16
                                       .textColor(appCtrl.appTheme.error))
@@ -103,33 +102,15 @@ class PaymentList extends StatelessWidget {
                                                         subscribeCtrl.update();
                                                       })
                                                   : Container()
-                                              : e.value["title"] == "flutterWave"
-                                                  ? appCtrl.firebaseConfigModel!
-                                                          .isFlutterWave!
-                                                      ? PaymentMethodList(
-                                                          index: e.key,
-                                                          data: e.value,
-                                                          selectIndexPayment:
-                                                              subscribeCtrl
-                                                                  .selectIndexPayment,
-                                                          onTap: () {
-                                                            subscribeCtrl
-                                                                    .selectIndexPayment =
-                                                                e.key;
-                                                            subscribeCtrl
-                                                                    .subscribeModel =
-                                                                subscribe;
-                                                            subscribeCtrl.update();
-                                                          })
-                                                      : Container()
+
                                                   : Container();
                             }).toList()),
                       const VSpace(Sizes.s35),
                       (appCtrl.firebaseConfigModel!.isPaypal! == false &&
                               appCtrl.firebaseConfigModel!.isRazorPay! == false &&
                               appCtrl.firebaseConfigModel!.isStripe! == false &&
-                              appCtrl.firebaseConfigModel!.isInApp! == false &&
-                              appCtrl.firebaseConfigModel!.isFlutterWave! == false)
+                              appCtrl.firebaseConfigModel!.isInApp! == false
+                             )
                           ? Container()
                           : Row(children: [
                               Expanded(
@@ -283,11 +264,6 @@ class PaymentList extends StatelessWidget {
                                           }, onError: (Object error) {
                                             // handle error here.
                                           });
-                                        } else if (subscribeCtrl.selectIndexPayment ==
-                                            4) {
-                                                 subscribeCtrl.flutterWavePayment(amount: data!, currency: "USD",subscribe: subscribe);
-                                                 subscribeCtrl.update();
-                                                 Get.back();
                                         }
                                       },
                                       title: appFonts.apply))

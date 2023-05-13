@@ -26,7 +26,7 @@ class FirebaseConfigModel {
       facebookRewardIOSAd,
       splashLogo,
       drawerLogo,
-      homeLogo,flutterWavePublicKey;
+      homeLogo,flutterWavePublicKey,paystackPublicKey;
   bool? isChatShow, isCategorySuggestion, isVoiceEnable, isCameraEnable;
   bool? isImageGeneratorShow;
   int? balance,rewardPoint;
@@ -39,7 +39,7 @@ class FirebaseConfigModel {
       isInApp,
       isChatHistory,
       isGuestLoginEnable,
-      isGoogleAdmobEnable,isFlutterWave;
+      isGoogleAdmobEnable,isFlutterWave,isPaystack;
 
   FirebaseConfigModel(
       {this.bannerAddId,
@@ -84,7 +84,7 @@ class FirebaseConfigModel {
       this.isChatHistory,
       this.isGuestLoginEnable,
       this.isGoogleAdmobEnable,
-      this.balance,this.rewardPoint,this.flutterWavePublicKey,this.isFlutterWave});
+      this.balance,this.rewardPoint,this.flutterWavePublicKey,this.isFlutterWave,this.paystackPublicKey,this.isPaystack});
 
   FirebaseConfigModel.fromJson(Map<String, dynamic> json) {
     bannerAddId = json['bannerAddId'] ?? "";
@@ -98,6 +98,7 @@ class FirebaseConfigModel {
     payPalSecret = json['payPalSecret'] ?? "";
     stripeKey = json['stripeKey'] ?? "";
     flutterWavePublicKey = json['flutterWavePublicKey'] ?? "";
+    paystackPublicKey = json['paystackPublicKey'] ?? "";
     stripePublishKey = json['stripePublishKey'] ?? "";
     privacyPolicyLink = json['privacyPolicyLink'] ?? "";
     refundLink = json['refundLink'] ?? "";
@@ -122,6 +123,7 @@ class FirebaseConfigModel {
     isCameraEnable = json['isCameraEnable'] ?? true;
     isRTL = json['isRTL'] ?? false;
     isRazorPay = json['isRazorPay'] ?? true;
+    isPaystack = json['isPaystack'] ?? true;
     isPaypal = json['isPayPal'] ?? true;
     isStripe = json['isStripe'] ?? true;
     isFlutterWave = json['isFlutterWave'] ?? true;
@@ -145,6 +147,7 @@ class FirebaseConfigModel {
     data['payPalClientId'] = payPalClientId;
     data['payPalSecret'] = payPalSecret;
     data['flutterWavePublicKey'] = flutterWavePublicKey;
+    data['paystackPublicKey'] = paystackPublicKey;
     data['stripeKey'] = stripeKey;
     data['stripePublishKey'] = stripePublishKey;
     data['privacyPolicyLink'] = privacyPolicyLink;
@@ -168,6 +171,7 @@ class FirebaseConfigModel {
     data['isPayPal'] = isPaypal;
     data['isFlutterWave'] = isFlutterWave;
     data['isRazorPay'] = isRazorPay;
+    data['isPaystack'] = isPaystack;
     data['rewardIOSId'] = rewardIOSId;
     data['rewardAndroidId'] = rewardAndroidId;
     data['razorPayKey'] = razorPayKey;
