@@ -68,6 +68,7 @@ export '../../../widgets/chat_loader_common.dart';
 export '../../../widgets/favorite_list.dart';
 export '../../../widgets/quick_advice_list.dart';
 export '../models/category_access_model.dart';
+export '../../widgets/common_app_widget.dart';
 
 
 final appCtrl = Get.isRegistered<AppController>()

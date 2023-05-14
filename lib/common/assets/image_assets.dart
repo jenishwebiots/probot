@@ -73,6 +73,8 @@ class ImageAssets {
   final String serious = "assets/images/icons/serious.png";
   final String linkedin = "assets/images/icons/linkedin.png";
   final String youtube = "assets/images/icons/youtube.png";
+  final String flutterWave = "assets/images/icons/flutterWave.png";
+  final String paystack = "assets/images/icons/paystack.png";
 
   // chat
   final String chat1 = "assets/images/chat/chat1.png";

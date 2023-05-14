@@ -376,11 +376,11 @@ class AppArray {
   var paymentMethodList = [
     {
       "icon": eImageAssets.paypal,
-      "title": appFonts.payPal,
+      "title": appFonts.payPal
     },
     {
       "icon": eImageAssets.stripe,
-      "title": appFonts.stripe,
+      "title": appFonts.stripe
     },
     {"icon": eImageAssets.razor, "title": appFonts.razor},
     {"icon": eImageAssets.inApp, "title": appFonts.inApp},
@@ -2030,6 +2030,21 @@ class AppArray {
         {'title':appFonts.balanceNote}
       ]
     }
+  ];
+
+  var topUpPaymentList = [
+    {
+      "icon": eImageAssets.paypal,
+      "title": appFonts.payPal
+    },
+    {
+      "icon": eImageAssets.stripe,
+      "title": appFonts.stripe
+    },
+    {"icon": eImageAssets.razor, "title": appFonts.razor},
+    {"icon": eImageAssets.inApp, "title": appFonts.inApp},
+    {"icon": eImageAssets.flutterWave, "title": appFonts.flutterWave},
+    {"icon": eImageAssets.paystack, "title": appFonts.payStack},
   ];
 
 }

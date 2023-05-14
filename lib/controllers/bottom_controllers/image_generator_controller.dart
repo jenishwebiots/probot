@@ -50,7 +50,6 @@ class ImageGeneratorController extends GetxController {
         String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
         String apiKey = "";
         if (localApi == "") {
-          // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
           apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
         } else {
           apiKey = localApi;

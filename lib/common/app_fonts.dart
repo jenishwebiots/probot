@@ -708,5 +708,17 @@ class AppFonts {
   String imageUploadSuccessfully = "imageUploadSuccessfully";
   String invalidApiKey = "invalidApiKey";
 
+  String paidAmount = "paidAmount";
+  String including = "including";
+  String unlimitedChatImage = "unlimitedChatImage";
+  String expiryDate = "expiryDate";
+  String unlimitedChatForMonth = "unlimitedChatForMonth";
+  String unlimitedImage = "unlimitedImage";
+  String unlimitedContent = "unlimitedContent";
+  String selectThisPlan = "selectThisPlan";
+  String youCanTopUp = "youCanTopUp";
+  String youCanPurchase = "youCanPurchase";
+  String flutterWave = "flutterWave";
+  String payStack = "payStack";
 
 }

@@ -24,18 +24,18 @@ class ApiServices {
 
     String localApi = appCtrl.storage.read(session.chatGPTKey) ?? "";
     log("API: $localApi");
+    log("APIIIII $addApiKey");
     String apiKey = "";
     if(addApiKey != null){
       apiKey = addApiKey;
     }else {
       if (localApi == "") {
-        // apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
-        apiKey = "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";
+        apiKey = appCtrl.firebaseConfigModel!.chatGPTKey!;
       } else {
         apiKey = localApi;
       }
     }
-
+log("OIII $apiKey");
     final response = await http.post(
       url,
       headers: {
@@ -59,14 +59,17 @@ class ApiServices {
 
     log("RES ${newresponse}");
 
-    conversationHistory.add({
-      "role": "assistant",
-      "content": newresponse['choices'][0]['message']['content']
-    });
+    if(response.statusCode == 200) {
+      conversationHistory.add({
+        "role": "assistant",
+        "content": newresponse['choices'][0]['message']['content']
+      });
 
-log("STATUSCODE ${response.statusCode}");
-    return response.statusCode == 200
-        ? newresponse['choices'][0]['message']['content']
-        : "";
+      return response.statusCode == 200
+          ? newresponse['choices'][0]['message']['content']
+          : "";
+    }else{
+      return "";
+    }
   }
 }

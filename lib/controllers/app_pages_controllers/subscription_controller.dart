@@ -5,24 +5,22 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import '../../config.dart';
 
 import '../../screens/app_screens/subscription/layouts/paypal_payment.dart';
-import '../../screens/app_screens/subscription/layouts/paypal_services.dart';
 import '../../screens/app_screens/subscription/layouts/razorpay_services.dart';
 
 class SubscriptionController extends GetxController {
   List<SubscribeModel> subscriptionLists = [];
   List currencyList = [];
-int selectedPrice =0;
+  int selectedPrice = 0;
   int selectIndex = 0;
   int selectedPlan = 0;
   int selectIndexPayment = 0;
   SubscribeModel? subscribeModel;
   List paymentMethods = [];
   Map<String, dynamic>? paymentIntentData;
-  bool isLoading = false,isBack = true;
+  bool isLoading = false, isBack = true;
 
   String? checkoutUrl;
   String? executeUrl;
@@ -41,6 +39,8 @@ int selectedPrice =0;
   String itemName = 'PROBOT SUBSCRIPTION';
   int quantity = 1;
   Function? onFinish;
+
+
 
   // Stripe Payment Method
   Future<void> stripePayment(
@@ -84,7 +84,6 @@ int selectedPrice =0;
     update();
   }
 
-
   // Stripe Error handler
   displayPaymentSheet(subscribe, paymentMethod) async {
     try {
@@ -104,16 +103,22 @@ int selectedPrice =0;
                           ? Get.find<SubscriptionFirebaseController>()
                           : Get.put(SubscriptionFirebaseController());
                   firebaseCtrl.subscribePlan(
-                      subscribeModel: subscribe, paymentMethod: paymentMethod,isBack: isBack);
+                      subscribeModel: subscribe,
+                      paymentMethod: paymentMethod,
+                      isBack: isBack);
                 },
-                crossOnTap: isBack ? () {
-                  final firebaseCtrl =
-                  Get.isRegistered<SubscriptionFirebaseController>()
-                      ? Get.find<SubscriptionFirebaseController>()
-                      : Get.put(SubscriptionFirebaseController());
-                  firebaseCtrl.subscribePlan(
-                      subscribeModel: subscribe, paymentMethod: paymentMethod,isBack: isBack);
-                } : () => appCtrl.splashDataCheck());
+                crossOnTap: isBack
+                    ? () {
+                        final firebaseCtrl =
+                            Get.isRegistered<SubscriptionFirebaseController>()
+                                ? Get.find<SubscriptionFirebaseController>()
+                                : Get.put(SubscriptionFirebaseController());
+                        firebaseCtrl.subscribePlan(
+                            subscribeModel: subscribe,
+                            paymentMethod: paymentMethod,
+                            isBack: isBack);
+                      }
+                    : () => appCtrl.splashDataCheck());
           });
     } on Exception {
       showDialog(
@@ -126,7 +131,8 @@ int selectedPrice =0;
                 title: appFonts.paymentFailed,
                 subtext: appFonts.oppsDueTo,
                 b1OnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck(),
-                crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
+                crossOnTap: () =>
+                    isBack ? Get.back() : appCtrl.splashDataCheck());
           });
     }
     update();
@@ -244,7 +250,12 @@ int selectedPrice =0;
       log("RES: $res");
       log("checkoutUrl: $checkoutUrl");
       log("executeUrl: $executeUrl");
-      Get.to(() => PaypalPayment(subscribe: subscribe,amount: int.parse(amount),url: checkoutUrl,exUrl: executeUrl,));
+      Get.to(() => PaypalPayment(
+            subscribe: subscribe,
+            amount: int.parse(amount),
+            url: checkoutUrl,
+            exUrl: executeUrl,
+          ));
     } catch (e) {
       showDialog(
           barrierDismissible: false,
@@ -256,14 +267,15 @@ int selectedPrice =0;
                 title: appFonts.paymentFailed,
                 subtext: appFonts.oppsDueTo,
                 b1OnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck(),
-                crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
+                crossOnTap: () =>
+                    isBack ? Get.back() : appCtrl.splashDataCheck());
           });
     }
 
     update();
   }
 
-   initPayment() {
+  initPayment() {
     /// Test payment gateway
     razorpay = Razorpay();
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
@@ -271,7 +283,6 @@ int selectedPrice =0;
 
     ///
   }
-
 
   // Razorpay error response
   void handlePaymentErrorResponse() {
@@ -285,7 +296,8 @@ int selectedPrice =0;
               title: appFonts.paymentFailed,
               subtext: appFonts.oppsDueTo,
               b1OnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck(),
-              crossOnTap: () => isBack ? Get.back() : appCtrl.splashDataCheck());
+              crossOnTap: () =>
+                  isBack ? Get.back() : appCtrl.splashDataCheck());
         });
   }
 
@@ -302,21 +314,52 @@ int selectedPrice =0;
               subtext: appFonts.congratulation,
               b1OnTap: () {
                 final firebaseCtrl =
-                Get.isRegistered<SubscriptionFirebaseController>()
-                    ? Get.find<SubscriptionFirebaseController>()
-                    : Get.put(SubscriptionFirebaseController());
+                    Get.isRegistered<SubscriptionFirebaseController>()
+                        ? Get.find<SubscriptionFirebaseController>()
+                        : Get.put(SubscriptionFirebaseController());
                 firebaseCtrl.subscribePlan(
-                    subscribeModel: subscribeModel, paymentMethod: "razor",isBack:isBack);
+                    subscribeModel: subscribeModel,
+                    paymentMethod: "razor",
+                    isBack: isBack);
               },
-              crossOnTap: isBack ? () {
-                final firebaseCtrl =
-                Get.isRegistered<SubscriptionFirebaseController>()
-                    ? Get.find<SubscriptionFirebaseController>()
-                    : Get.put(SubscriptionFirebaseController());
-                firebaseCtrl.subscribePlan(
-                    subscribeModel: subscribeModel, paymentMethod: "razor",isBack:isBack);
-              }  : () =>  appCtrl.splashDataCheck());
+              crossOnTap: isBack
+                  ? () {
+                      final firebaseCtrl =
+                          Get.isRegistered<SubscriptionFirebaseController>()
+                              ? Get.find<SubscriptionFirebaseController>()
+                              : Get.put(SubscriptionFirebaseController());
+                      firebaseCtrl.subscribePlan(
+                          subscribeModel: subscribeModel,
+                          paymentMethod: "razor",
+                          isBack: isBack);
+                    }
+                  : () => appCtrl.splashDataCheck());
         });
+  }
+
+  onPayPlan() {
+    var userName = appCtrl.storage.read("userName");
+    if (userName != null) {
+      paymentDialog(selectedPrice, subscribeModel);
+      update();
+    } else {
+      Get.offAllNamed(routeName.loginScreen);
+    }
+    update();
+  }
+
+  onSelectPlan(key, value) {
+    selectedPlan = key;
+    selectedPrice = value.data()["price"];
+    subscribeModel = SubscribeModel.fromJson(value.data());
+    update();
+  }
+
+  onTapPlan(value) {
+    selectedPrice = value.data()["price"];
+    subscribeModel = SubscribeModel.fromJson(value.data());
+    paymentDialog(selectedPrice.toString(), subscribeModel);
+    update();
   }
 
   @override
@@ -393,10 +436,7 @@ int selectedPrice =0;
 
   // payments list
   paymentDialog(data, subscribe) {
-    log("appCtrl.isGuestLogin : ${appCtrl.isGuestLogin}");
-    log("appCtrl.isGuestLogin : $subscribe");
-    log("appCtrl.isGuestLogin : ${data!.toString()}");
-    if (appCtrl.isGuestLogin  ) {
+    if (appCtrl.isGuestLogin) {
       Get.offAllNamed(routeName.signInScreen);
     } else {
       Get.generalDialog(
