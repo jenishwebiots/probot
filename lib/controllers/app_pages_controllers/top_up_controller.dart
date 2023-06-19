@@ -167,7 +167,19 @@ class TopUpController extends GetxController {
 
   // Stripe amount calculate
   calculateAmount(String amount) {
-    final a = (int.parse(amount)) * 100;
+    double? convertPrice;
+    if (appCtrl.priceSymbol == "\$") {
+      convertPrice = (82.55 * double.parse(amount));
+    }else if(appCtrl.priceSymbol == "€"){
+      convertPrice = (88.69 * double.parse(amount));
+    }else if(appCtrl.priceSymbol == "₹"){
+      convertPrice = (1 * double.parse(amount));
+    }else if(appCtrl.priceSymbol == "£"){
+      convertPrice = (103.02 * double.parse(amount));
+    }
+    log("convertPrice : ${int.parse(convertPrice!.floor().toString()) * 100}");
+    final a = (int.parse(convertPrice.floor().toString()) * 100);
+    log("a :n$a");
     return a.toString();
   }
 

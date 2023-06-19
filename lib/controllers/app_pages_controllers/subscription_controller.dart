@@ -51,7 +51,7 @@ class SubscriptionController extends GetxController {
       isLoading = true;
       paymentIntentData = await createPaymentIntent(amount, currency);
 
-      log("paymentIntentData: ${paymentIntentData!.entries.first}");
+     log("STRIPE $paymentIntentData");
       if (paymentIntentData != null) {
         await Stripe.instance.initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
@@ -74,7 +74,7 @@ class SubscriptionController extends GetxController {
                     paymentIntentData!['ephemeralKey']));
 
         isLoading = false;
-        log("SR : $subscribe");
+
         displayPaymentSheet(subscribe, "stripe");
         update();
       }
@@ -140,9 +140,11 @@ class SubscriptionController extends GetxController {
 
   // Stripe Create payment Method
   createPaymentIntent(String amount, String currency) async {
+
+
     try {
       Map<String, dynamic> body = {
-        'amount': calculateAmount(amount),
+        'amount':  calculateAmount(amount),
         'currency': currency,
         'payment_method_types[]': 'card',
       };
@@ -154,7 +156,7 @@ class SubscriptionController extends GetxController {
             'Content-Type': 'application/x-www-form-urlencoded'
           });
 
-      log("jsonDecode(response.body) : ${jsonDecode(response.body)}");
+   log("RES STRIPE ${jsonDecode(response.body)}");
       return jsonDecode(response.body);
     } catch (e) {
       throw Exception("");
@@ -163,7 +165,19 @@ class SubscriptionController extends GetxController {
 
   // Stripe amount calculate
   calculateAmount(String amount) {
-    final a = (int.parse(amount)) * 100;
+    double? convertPrice;
+    if (appCtrl.priceSymbol == "\$") {
+      convertPrice = (82.55 * double.parse(amount));
+    }else if(appCtrl.priceSymbol == "€"){
+      convertPrice = (88.69 * double.parse(amount));
+    }else if(appCtrl.priceSymbol == "₹"){
+      convertPrice = (1 * double.parse(amount));
+    }else if(appCtrl.priceSymbol == "£"){
+      convertPrice = (103.02 * double.parse(amount));
+    }
+    log("convertPrice : ${int.parse(convertPrice!.floor().toString()) * 100}");
+    final a = (int.parse(convertPrice.floor().toString()) * 100);
+    log("a :n$a");
     return a.toString();
   }
 
@@ -241,15 +255,13 @@ class SubscriptionController extends GetxController {
   onPaypalPayment({required String amount, SubscribeModel? subscribe}) async {
     try {
       final transactions = getOrderParams(amount);
-      log("transactions: $transactions");
+
       final res = await services.createPaypalPayment(transactions, accessToken);
-      log("res : #$res");
+
       checkoutUrl = res["approvalUrl"];
       executeUrl = res["executeUrl"];
       update();
-      log("RES: $res");
-      log("checkoutUrl: $checkoutUrl");
-      log("executeUrl: $executeUrl");
+
       Get.to(() => PaypalPayment(
             subscribe: subscribe,
             amount: int.parse(amount),
@@ -385,7 +397,6 @@ class SubscriptionController extends GetxController {
       // Paypal Payment Method
       try {
         accessToken = await services.getAccessToken();
-        log("accessToken: $accessToken");
       } catch (e) {
         throw Exception("exception: $e");
       }
@@ -402,7 +413,6 @@ class SubscriptionController extends GetxController {
 
   openSession({SubscribeModel? subscribe}) {
     createOrder().then((orderId) {
-      log("orderId: $orderId");
       if (orderId.toString().isNotEmpty) {
         var options = {
           'key': appCtrl.firebaseConfigModel!.razorPayKey!,

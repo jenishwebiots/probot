@@ -77,6 +77,7 @@ class SubscriptionFirebaseController extends GetxController {
           "expiryDate": expiryDate,
           "price": isSubscribe ? 0 : amountBalance,
           "isSubscribe": isSubscribe,
+          "subscriptionType": isSubscribe ? subscribeModel!.type : "",
           "balance": appCtrl.envConfig["balance"],
           "paymentMethod": paymentMethod,
         }).then((value) {

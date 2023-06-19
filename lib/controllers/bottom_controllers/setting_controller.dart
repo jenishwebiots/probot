@@ -1,10 +1,4 @@
-
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:launch_review/launch_review.dart';
-import 'package:share_plus/share_plus.dart';
-
 import '../../config.dart';
 
 class SettingController extends GetxController {

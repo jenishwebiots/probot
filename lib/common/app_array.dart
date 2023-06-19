@@ -22,13 +22,13 @@ class AppArray {
 
 //Select character list
   var selectCharacterList = [
-    {"image": eImageAssets.sc1, "title": appFonts.dino},
-    {"image": eImageAssets.sc2, "title": appFonts.king},
-    {"image": eImageAssets.sc3, "title": appFonts.dolly},
-    {"image": eImageAssets.sc4, "title": appFonts.kettie},
-    {"image": eImageAssets.sc5, "title": appFonts.marvel},
-    {"image": eImageAssets.sc6, "title": appFonts.henny},
-    {"image": eImageAssets.sc7, "title": appFonts.sophie}
+    {"image": eImageAssets.sc1, "title": appFonts.dino,"message":""},
+    {"image": eImageAssets.sc2, "title": appFonts.king,"message":""},
+    {"image": eImageAssets.sc3, "title": appFonts.dolly,"message":""},
+    {"image": eImageAssets.sc4, "title": appFonts.kettie,"message":""},
+    {"image": eImageAssets.sc5, "title": appFonts.marvel,"message":""},
+    {"image": eImageAssets.sc6, "title": appFonts.henny,"message":""},
+    {"image": eImageAssets.sc7, "title": appFonts.sophie,"message":""}
   ];
 
 // Languages list

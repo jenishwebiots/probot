@@ -3,11 +3,9 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:probot/bot_api/api_services.dart';
 import 'package:probot/screens/bottom_screens/chat_layout/layouts/suggestion_list.dart';
-import 'package:screenshot/screenshot.dart';
 import 'package:probot/models/quiestions_suggestion_model.dart';
 import '../../config.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 class ChatLayoutController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -79,13 +77,7 @@ class ChatLayoutController extends GetxController
   @override
   void onReady() {
     // TODO: implement onReady
-    /*var imageData = Get.arguments;
-    log("=+========+++++++=$imageData");*/
-    /*log("-----------------------------${Get.arguments}");
-    log("++++++++++++++++++++++++++++++${Get.arguments["recText"].toString()}");
-    chatController.text = Get.arguments["recText"].toString();
-    log("******************************${chatController.text}");
-    chatController.addListener(() {update();});*/
+
     questionsSuggestionList = appArray.questionSuggestionList;
     questionsLists = appArray.questionsList
         .map((e) => QuestionSuggestionsModel.fromJson(e))
@@ -97,7 +89,7 @@ class ChatLayoutController extends GetxController
             : appCtrl.firebaseConfigModel!.bannerIOSId!,
         listener: BannerAdListener(
           onAdLoaded: (Ad ad) {
-            log('$BannerAd loaded.');
+
             bannerAdIsLoaded = true;
             update();
           },
@@ -110,7 +102,7 @@ class ChatLayoutController extends GetxController
         ),
         request: const AdRequest())
       ..load();
-    log("bannerAd : $bannerAd");
+
 
     _getId().then((id) {
       String? deviceId = id;
@@ -173,9 +165,9 @@ class ChatLayoutController extends GetxController
                 .delete();
           });
         }
-      });
+      })
+;
     }
-
     speechStopMethod();
     isLongPress = false;
     selectedData = [];
@@ -215,7 +207,7 @@ class ChatLayoutController extends GetxController
   }
 
   _showBannerAd() {
-    log("SHOW BANNER");
+
     currentAd = FacebookBannerAd(
       // placementId: "YOUR_PLACEMENT_ID",
       placementId: appCtrl.firebaseConfigModel!.facebookAddAndroidId!,
@@ -225,7 +217,7 @@ class ChatLayoutController extends GetxController
       },
     );
     update();
-    log("_currentAd : $currentAd");
+
   }
 
   void loadInterstitialAd() {
@@ -259,7 +251,7 @@ class ChatLayoutController extends GetxController
         request: appCtrl.request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
-            log('$ad loaded');
+
             _interstitialAd = ad;
             _numInterstitialLoadAttempts = 0;
             _interstitialAd!.setImmersiveMode(true);
@@ -383,7 +375,7 @@ class ChatLayoutController extends GetxController
       log("argImage : $argImage");
       update();
     } else {
-      log("MESSAGE : ${appCtrl.selectedCharacter}");
+      log("MESSAGE : ${appCtrl.selectedCharacter["message"]}");
 
       argImage = appCtrl.selectedCharacter["image"];
       messages.value.add(
@@ -615,7 +607,7 @@ class ChatLayoutController extends GetxController
         }
       } else {
         // isLoading.value = false
-        log("valuevalue : $value");
+
         messages.value.removeWhere(
             (element) => element.chatMessageType == ChatMessageType.loading);
 
@@ -644,7 +636,6 @@ class ChatLayoutController extends GetxController
               .limit(1)
               .get()
               .then((loadVal) {
-            log("LOAD DATA : ${loadVal.docs[0]}");
             if (loadVal.docs.isNotEmpty) {
               FirebaseFirestore.instance
                   .collection("chatHistory")
@@ -681,7 +672,7 @@ class ChatLayoutController extends GetxController
   }
 
   deleteLoading() async {
-    log("DELETE");
+
     FirebaseFirestore.instance
         .collection("chatHistory")
         .doc(chatId)
@@ -691,7 +682,7 @@ class ChatLayoutController extends GetxController
         .get()
         .then((loadVal) {
       if (loadVal.docs.isNotEmpty) {
-        log("DELETE1");
+
         FirebaseFirestore.instance
             .collection("chatHistory")
             .doc(chatId)
@@ -714,7 +705,7 @@ class ChatLayoutController extends GetxController
           });
         });
       } else {
-        log("DELETE2");
+
         FirebaseFirestore.instance
             .collection("chatHistory")
             .doc(chatId)
@@ -792,7 +783,7 @@ class ChatLayoutController extends GetxController
     chatController.text = '';
     result.value = '';
     userInput.value = '';
-    log("ISLISTEN : ${isListening.value}");
+
     if (isListening.value == false) {
       bool available = await speech.initialize(
         onStatus: (val) {
@@ -808,14 +799,14 @@ class ChatLayoutController extends GetxController
           debugPrint('### onError: $val');
         },
       );
-      log("available ; $available");
+
       if (available) {
         isListening.value = true;
 
         speech.listen(
           localeId: appCtrl.languageVal,
           onResult: (val) {
-            log("VAL : $val");
+
             chatController.text = val.recognizedWords.toString();
             userInput.value = val.recognizedWords.toString();
             update();
